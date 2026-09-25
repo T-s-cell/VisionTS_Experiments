@@ -1,0 +1,49 @@
+[PASS] mask: left 5 cols visible
+[PASS] mask: right 9 cols masked
+[PASS] mask: visible count 70
+[PASS] mask_ratio == 9/14 (float32 tol) | 0.6428571343421936
+[PASS] ETTm1: num_patch_input == 5
+[PASS] Weather: num_patch_input == 5
+[PASS] Electricity: num_patch_input == 5
+[PASS] mask identical ETTm1 vs Weather
+[PASS] mask_ratio identical ETTm1 vs Weather
+[PASS] mask identical ETTm1 vs Electricity
+[PASS] mask_ratio identical ETTm1 vs Electricity
+[PASS] ETTm1: equiv config seq_len/periodicity | seq_len=2304, periodicity=96
+[PASS] ETTm1: production forward captured input
+[PASS] ETTm1: build_ts_image == production image_input | max_abs_diff=0.000e+00
+[PASS] Weather: equiv config seq_len/periodicity | seq_len=4032, periodicity=144
+[PASS] Weather: production forward captured input
+[PASS] Weather: build_ts_image == production image_input | max_abs_diff=0.000e+00
+[PASS] Electricity: equiv config seq_len/periodicity | seq_len=2880, periodicity=24
+[PASS] Electricity: production forward captured input
+[PASS] Electricity: build_ts_image == production image_input | max_abs_diff=0.000e+00
+[PASS] ImageNet: image shape | (8, 3, 224, 224)
+[PASS] ImageNet: encoder out shape | (8, 71, 768)
+[PASS] ImageNet: flat dim | 54528
+[PASS] ImageNet: finite
+[PASS] ImageNet: ids_keep == ref
+[PASS] ETTm1: encode config seq_len/periodicity | seq_len=2304, periodicity=96
+[PASS] ETTm1: image shape | (8, 3, 224, 224)
+[PASS] ETTm1: encoder out shape | (8, 71, 768)
+[PASS] ETTm1: flat dim | 54528
+[PASS] ETTm1: finite
+[PASS] ETTm1: ids_keep == ref
+[PASS] Weather: encode config seq_len/periodicity | seq_len=4032, periodicity=144
+[PASS] Weather: image shape | (8, 3, 224, 224)
+[PASS] Weather: encoder out shape | (8, 71, 768)
+[PASS] Weather: flat dim | 54528
+[PASS] Weather: finite
+[PASS] Weather: ids_keep == ref
+[PASS] Electricity: encode config seq_len/periodicity | seq_len=2880, periodicity=24
+[PASS] Electricity: image shape | (8, 3, 224, 224)
+[PASS] Electricity: encoder out shape | (8, 71, 768)
+[PASS] Electricity: flat dim | 54528
+[PASS] Electricity: finite
+[PASS] Electricity: ids_keep == ref
+[PASS] ids_keep stable across batches
+[PASS] Weather: raw csv last column is OT (reorder identity) | OT
+[PASS] Weather: variable names == raw csv feature order
+[PASS] Electricity: raw csv last column is OT (reorder identity) | OT
+[PASS] Electricity: variable names == raw csv feature order
+[PASS] ETTm1: 7 variables | ['HUFL', 'HULL', 'MUFL', 'MULL', 'LUFL', 'LULL', 'OT']

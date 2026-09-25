@@ -1,0 +1,33 @@
+{
+  "seed": 2021,
+  "method": "np.random.default_rng(2021).choice(pool, k, replace=False), single rng consumed sequentially in group order ImageNet->ETTm1->Weather->Electricity",
+  "numpy": "2.4.4",
+  "pandas": "2.3.3",
+  "sklearn": "1.9.1",
+  "pred_len": 96,
+  "supplementary_note": "pred_len=96, reusing zero-shot configs for Fig.7, and the resulting left-5-column mask are supplementary settings of this reproduction, NOT specified by the paper.",
+  "groups": {
+    "ImageNet": {
+      "pool": 50000,
+      "n": 1000
+    },
+    "ETTm1": {
+      "pool": 79975,
+      "n": 300,
+      "channels": 7,
+      "test_windows": 11425
+    },
+    "Weather": {
+      "pool": 219324,
+      "n": 300,
+      "channels": 21,
+      "test_windows": 10444
+    },
+    "Electricity": {
+      "pool": 1657965,
+      "n": 300,
+      "channels": 321,
+      "test_windows": 5165
+    }
+  }
+}

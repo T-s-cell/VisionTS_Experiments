@@ -1,0 +1,4 @@
+[14:28:03] features (1900, 54528), dtype=float32, groups=['ETTm1', 'Electricity', 'ImageNet', 'Weather']
+[14:28:03] running TSNE with {'n_components': 2, 'perplexity': 30, 'learning_rate': 200.0, 'init': 'pca', 'early_exaggeration': 12.0, 'max_iter': 1000, 'random_state': 2021, 'metric': 'euclidean'}
+[14:28:14] TSNE done in 0.2 min, coords shape (1900, 2)
+[14:28:14] saved tsne_coords_1900x2.npy + tsne_params.json

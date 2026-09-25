@@ -1,0 +1,52 @@
+[14:23:52] ImageNet: 1000 samples, num_patch_input=5, mask_ratio=0.642857
+[14:23:53] ImageNet: 32 / done-batch 0-32
+[14:23:54] ImageNet: 192 / done-batch 160-192
+[14:23:55] ImageNet: 352 / done-batch 320-352
+[14:23:57] ImageNet: 512 / done-batch 480-512
+[14:23:58] ImageNet: 672 / done-batch 640-672
+[14:23:59] ImageNet: 832 / done-batch 800-832
+[14:24:01] ImageNet: 992 / done-batch 960-992
+[14:24:01] ImageNet: DONE (1000 total)
+[14:24:01] ETTm1: 300 samples, num_patch_input=5, mask_ratio=0.642857
+test 11425
+[14:24:02] ETTm1: 1032 / done-batch 0-32
+test 11425
+test 11425
+test 11425
+test 11425
+test 11425
+[14:24:03] ETTm1: 1192 / done-batch 160-192
+test 11425
+test 11425
+test 11425
+test 11425
+[14:24:03] ETTm1: DONE (1300 total)
+[14:24:03] Weather: 300 samples, num_patch_input=5, mask_ratio=0.642857
+test 219324
+[14:24:04] Weather: 1332 / done-batch 0-32
+test 219324
+test 219324
+test 219324
+test 219324
+test 219324
+[14:24:04] Weather: 1492 / done-batch 160-192
+test 219324
+test 219324
+test 219324
+test 219324
+[14:24:05] Weather: DONE (1600 total)
+[14:24:05] Electricity: 300 samples, num_patch_input=5, mask_ratio=0.642857
+test 1657965
+[14:24:06] Electricity: 1632 / done-batch 0-32
+test 1657965
+test 1657965
+test 1657965
+test 1657965
+test 1657965
+[14:24:13] Electricity: 1792 / done-batch 160-192
+test 1657965
+test 1657965
+test 1657965
+test 1657965
+[14:24:18] Electricity: DONE (1900 total)
+[14:24:20] ALL DONE: 1900 features -> outputs/features_1900x54528.npy

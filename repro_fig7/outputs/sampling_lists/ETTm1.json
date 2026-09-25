@@ -1,0 +1,3015 @@
+{
+  "group": "ETTm1",
+  "data": "ETTm1",
+  "seq_len": 2304,
+  "periodicity": 96,
+  "pred_len": 96,
+  "channels": 7,
+  "test_windows": 11425,
+  "pool": 79975,
+  "n": 300,
+  "test_border1": 43776,
+  "scaler": "StandardScaler fit on the train segment only (inside the Dataset class)",
+  "samples": [
+    {
+      "k": 29,
+      "window_idx": 4,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 43780,
+      "abs_row_end": 46083,
+      "t_start": "2017-09-30 01:00:00",
+      "t_end": "2017-10-24 00:45:00"
+    },
+    {
+      "k": 611,
+      "window_idx": 87,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 43863,
+      "abs_row_end": 46166,
+      "t_start": "2017-09-30 21:45:00",
+      "t_end": "2017-10-24 21:30:00"
+    },
+    {
+      "k": 1504,
+      "window_idx": 214,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 43990,
+      "abs_row_end": 46293,
+      "t_start": "2017-10-02 05:30:00",
+      "t_end": "2017-10-26 05:15:00"
+    },
+    {
+      "k": 1643,
+      "window_idx": 234,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 44010,
+      "abs_row_end": 46313,
+      "t_start": "2017-10-02 10:30:00",
+      "t_end": "2017-10-26 10:15:00"
+    },
+    {
+      "k": 1818,
+      "window_idx": 259,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 44035,
+      "abs_row_end": 46338,
+      "t_start": "2017-10-02 16:45:00",
+      "t_end": "2017-10-26 16:30:00"
+    },
+    {
+      "k": 1957,
+      "window_idx": 279,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 44055,
+      "abs_row_end": 46358,
+      "t_start": "2017-10-02 21:45:00",
+      "t_end": "2017-10-26 21:30:00"
+    },
+    {
+      "k": 2045,
+      "window_idx": 292,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 44068,
+      "abs_row_end": 46371,
+      "t_start": "2017-10-03 01:00:00",
+      "t_end": "2017-10-27 00:45:00"
+    },
+    {
+      "k": 2413,
+      "window_idx": 344,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 44120,
+      "abs_row_end": 46423,
+      "t_start": "2017-10-03 14:00:00",
+      "t_end": "2017-10-27 13:45:00"
+    },
+    {
+      "k": 2527,
+      "window_idx": 361,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 44137,
+      "abs_row_end": 46440,
+      "t_start": "2017-10-03 18:15:00",
+      "t_end": "2017-10-27 18:00:00"
+    },
+    {
+      "k": 2980,
+      "window_idx": 425,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 44201,
+      "abs_row_end": 46504,
+      "t_start": "2017-10-04 10:15:00",
+      "t_end": "2017-10-28 10:00:00"
+    },
+    {
+      "k": 3028,
+      "window_idx": 432,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 44208,
+      "abs_row_end": 46511,
+      "t_start": "2017-10-04 12:00:00",
+      "t_end": "2017-10-28 11:45:00"
+    },
+    {
+      "k": 3346,
+      "window_idx": 478,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 44254,
+      "abs_row_end": 46557,
+      "t_start": "2017-10-04 23:30:00",
+      "t_end": "2017-10-28 23:15:00"
+    },
+    {
+      "k": 4276,
+      "window_idx": 610,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 44386,
+      "abs_row_end": 46689,
+      "t_start": "2017-10-06 08:30:00",
+      "t_end": "2017-10-30 08:15:00"
+    },
+    {
+      "k": 4362,
+      "window_idx": 623,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 44399,
+      "abs_row_end": 46702,
+      "t_start": "2017-10-06 11:45:00",
+      "t_end": "2017-10-30 11:30:00"
+    },
+    {
+      "k": 4521,
+      "window_idx": 645,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 44421,
+      "abs_row_end": 46724,
+      "t_start": "2017-10-06 17:15:00",
+      "t_end": "2017-10-30 17:00:00"
+    },
+    {
+      "k": 4941,
+      "window_idx": 705,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 44481,
+      "abs_row_end": 46784,
+      "t_start": "2017-10-07 08:15:00",
+      "t_end": "2017-10-31 08:00:00"
+    },
+    {
+      "k": 4983,
+      "window_idx": 711,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 44487,
+      "abs_row_end": 46790,
+      "t_start": "2017-10-07 09:45:00",
+      "t_end": "2017-10-31 09:30:00"
+    },
+    {
+      "k": 5104,
+      "window_idx": 729,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 44505,
+      "abs_row_end": 46808,
+      "t_start": "2017-10-07 14:15:00",
+      "t_end": "2017-10-31 14:00:00"
+    },
+    {
+      "k": 5362,
+      "window_idx": 766,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 44542,
+      "abs_row_end": 46845,
+      "t_start": "2017-10-07 23:30:00",
+      "t_end": "2017-10-31 23:15:00"
+    },
+    {
+      "k": 6118,
+      "window_idx": 874,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 44650,
+      "abs_row_end": 46953,
+      "t_start": "2017-10-09 02:30:00",
+      "t_end": "2017-11-02 02:15:00"
+    },
+    {
+      "k": 6295,
+      "window_idx": 899,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 44675,
+      "abs_row_end": 46978,
+      "t_start": "2017-10-09 08:45:00",
+      "t_end": "2017-11-02 08:30:00"
+    },
+    {
+      "k": 6437,
+      "window_idx": 919,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 44695,
+      "abs_row_end": 46998,
+      "t_start": "2017-10-09 13:45:00",
+      "t_end": "2017-11-02 13:30:00"
+    },
+    {
+      "k": 6785,
+      "window_idx": 969,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 44745,
+      "abs_row_end": 47048,
+      "t_start": "2017-10-10 02:15:00",
+      "t_end": "2017-11-03 02:00:00"
+    },
+    {
+      "k": 6848,
+      "window_idx": 978,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 44754,
+      "abs_row_end": 47057,
+      "t_start": "2017-10-10 04:30:00",
+      "t_end": "2017-11-03 04:15:00"
+    },
+    {
+      "k": 7374,
+      "window_idx": 1053,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 44829,
+      "abs_row_end": 47132,
+      "t_start": "2017-10-10 23:15:00",
+      "t_end": "2017-11-03 23:00:00"
+    },
+    {
+      "k": 7542,
+      "window_idx": 1077,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 44853,
+      "abs_row_end": 47156,
+      "t_start": "2017-10-11 05:15:00",
+      "t_end": "2017-11-04 05:00:00"
+    },
+    {
+      "k": 7681,
+      "window_idx": 1097,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 44873,
+      "abs_row_end": 47176,
+      "t_start": "2017-10-11 10:15:00",
+      "t_end": "2017-11-04 10:00:00"
+    },
+    {
+      "k": 7711,
+      "window_idx": 1101,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 44877,
+      "abs_row_end": 47180,
+      "t_start": "2017-10-11 11:15:00",
+      "t_end": "2017-11-04 11:00:00"
+    },
+    {
+      "k": 7798,
+      "window_idx": 1114,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 44890,
+      "abs_row_end": 47193,
+      "t_start": "2017-10-11 14:30:00",
+      "t_end": "2017-11-04 14:15:00"
+    },
+    {
+      "k": 7842,
+      "window_idx": 1120,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 44896,
+      "abs_row_end": 47199,
+      "t_start": "2017-10-11 16:00:00",
+      "t_end": "2017-11-04 15:45:00"
+    },
+    {
+      "k": 7862,
+      "window_idx": 1123,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 44899,
+      "abs_row_end": 47202,
+      "t_start": "2017-10-11 16:45:00",
+      "t_end": "2017-11-04 16:30:00"
+    },
+    {
+      "k": 7959,
+      "window_idx": 1137,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 44913,
+      "abs_row_end": 47216,
+      "t_start": "2017-10-11 20:15:00",
+      "t_end": "2017-11-04 20:00:00"
+    },
+    {
+      "k": 7986,
+      "window_idx": 1140,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 44916,
+      "abs_row_end": 47219,
+      "t_start": "2017-10-11 21:00:00",
+      "t_end": "2017-11-04 20:45:00"
+    },
+    {
+      "k": 8028,
+      "window_idx": 1146,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 44922,
+      "abs_row_end": 47225,
+      "t_start": "2017-10-11 22:30:00",
+      "t_end": "2017-11-04 22:15:00"
+    },
+    {
+      "k": 8046,
+      "window_idx": 1149,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 44925,
+      "abs_row_end": 47228,
+      "t_start": "2017-10-11 23:15:00",
+      "t_end": "2017-11-04 23:00:00"
+    },
+    {
+      "k": 8207,
+      "window_idx": 1172,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 44948,
+      "abs_row_end": 47251,
+      "t_start": "2017-10-12 05:00:00",
+      "t_end": "2017-11-05 04:45:00"
+    },
+    {
+      "k": 8491,
+      "window_idx": 1213,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 44989,
+      "abs_row_end": 47292,
+      "t_start": "2017-10-12 15:15:00",
+      "t_end": "2017-11-05 15:00:00"
+    },
+    {
+      "k": 8601,
+      "window_idx": 1228,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 45004,
+      "abs_row_end": 47307,
+      "t_start": "2017-10-12 19:00:00",
+      "t_end": "2017-11-05 18:45:00"
+    },
+    {
+      "k": 8604,
+      "window_idx": 1229,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 45005,
+      "abs_row_end": 47308,
+      "t_start": "2017-10-12 19:15:00",
+      "t_end": "2017-11-05 19:00:00"
+    },
+    {
+      "k": 8883,
+      "window_idx": 1269,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 45045,
+      "abs_row_end": 47348,
+      "t_start": "2017-10-13 05:15:00",
+      "t_end": "2017-11-06 05:00:00"
+    },
+    {
+      "k": 9265,
+      "window_idx": 1323,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 45099,
+      "abs_row_end": 47402,
+      "t_start": "2017-10-13 18:45:00",
+      "t_end": "2017-11-06 18:30:00"
+    },
+    {
+      "k": 9342,
+      "window_idx": 1334,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 45110,
+      "abs_row_end": 47413,
+      "t_start": "2017-10-13 21:30:00",
+      "t_end": "2017-11-06 21:15:00"
+    },
+    {
+      "k": 9937,
+      "window_idx": 1419,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 45195,
+      "abs_row_end": 47498,
+      "t_start": "2017-10-14 18:45:00",
+      "t_end": "2017-11-07 18:30:00"
+    },
+    {
+      "k": 9972,
+      "window_idx": 1424,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 45200,
+      "abs_row_end": 47503,
+      "t_start": "2017-10-14 20:00:00",
+      "t_end": "2017-11-07 19:45:00"
+    },
+    {
+      "k": 10112,
+      "window_idx": 1444,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 45220,
+      "abs_row_end": 47523,
+      "t_start": "2017-10-15 01:00:00",
+      "t_end": "2017-11-08 00:45:00"
+    },
+    {
+      "k": 10163,
+      "window_idx": 1451,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 45227,
+      "abs_row_end": 47530,
+      "t_start": "2017-10-15 02:45:00",
+      "t_end": "2017-11-08 02:30:00"
+    },
+    {
+      "k": 10562,
+      "window_idx": 1508,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 45284,
+      "abs_row_end": 47587,
+      "t_start": "2017-10-15 17:00:00",
+      "t_end": "2017-11-08 16:45:00"
+    },
+    {
+      "k": 11042,
+      "window_idx": 1577,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 45353,
+      "abs_row_end": 47656,
+      "t_start": "2017-10-16 10:15:00",
+      "t_end": "2017-11-09 10:00:00"
+    },
+    {
+      "k": 11647,
+      "window_idx": 1663,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 45439,
+      "abs_row_end": 47742,
+      "t_start": "2017-10-17 07:45:00",
+      "t_end": "2017-11-10 07:30:00"
+    },
+    {
+      "k": 11838,
+      "window_idx": 1691,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 45467,
+      "abs_row_end": 47770,
+      "t_start": "2017-10-17 14:45:00",
+      "t_end": "2017-11-10 14:30:00"
+    },
+    {
+      "k": 11984,
+      "window_idx": 1712,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 45488,
+      "abs_row_end": 47791,
+      "t_start": "2017-10-17 20:00:00",
+      "t_end": "2017-11-10 19:45:00"
+    },
+    {
+      "k": 12223,
+      "window_idx": 1746,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 45522,
+      "abs_row_end": 47825,
+      "t_start": "2017-10-18 04:30:00",
+      "t_end": "2017-11-11 04:15:00"
+    },
+    {
+      "k": 12419,
+      "window_idx": 1774,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 45550,
+      "abs_row_end": 47853,
+      "t_start": "2017-10-18 11:30:00",
+      "t_end": "2017-11-11 11:15:00"
+    },
+    {
+      "k": 12648,
+      "window_idx": 1806,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 45582,
+      "abs_row_end": 47885,
+      "t_start": "2017-10-18 19:30:00",
+      "t_end": "2017-11-11 19:15:00"
+    },
+    {
+      "k": 12727,
+      "window_idx": 1818,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 45594,
+      "abs_row_end": 47897,
+      "t_start": "2017-10-18 22:30:00",
+      "t_end": "2017-11-11 22:15:00"
+    },
+    {
+      "k": 13126,
+      "window_idx": 1875,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 45651,
+      "abs_row_end": 47954,
+      "t_start": "2017-10-19 12:45:00",
+      "t_end": "2017-11-12 12:30:00"
+    },
+    {
+      "k": 13928,
+      "window_idx": 1989,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 45765,
+      "abs_row_end": 48068,
+      "t_start": "2017-10-20 17:15:00",
+      "t_end": "2017-11-13 17:00:00"
+    },
+    {
+      "k": 14048,
+      "window_idx": 2006,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 45782,
+      "abs_row_end": 48085,
+      "t_start": "2017-10-20 21:30:00",
+      "t_end": "2017-11-13 21:15:00"
+    },
+    {
+      "k": 14143,
+      "window_idx": 2020,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 45796,
+      "abs_row_end": 48099,
+      "t_start": "2017-10-21 01:00:00",
+      "t_end": "2017-11-14 00:45:00"
+    },
+    {
+      "k": 14205,
+      "window_idx": 2029,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 45805,
+      "abs_row_end": 48108,
+      "t_start": "2017-10-21 03:15:00",
+      "t_end": "2017-11-14 03:00:00"
+    },
+    {
+      "k": 14368,
+      "window_idx": 2052,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 45828,
+      "abs_row_end": 48131,
+      "t_start": "2017-10-21 09:00:00",
+      "t_end": "2017-11-14 08:45:00"
+    },
+    {
+      "k": 14795,
+      "window_idx": 2113,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 45889,
+      "abs_row_end": 48192,
+      "t_start": "2017-10-22 00:15:00",
+      "t_end": "2017-11-15 00:00:00"
+    },
+    {
+      "k": 15809,
+      "window_idx": 2258,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 46034,
+      "abs_row_end": 48337,
+      "t_start": "2017-10-23 12:30:00",
+      "t_end": "2017-11-16 12:15:00"
+    },
+    {
+      "k": 15841,
+      "window_idx": 2263,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 46039,
+      "abs_row_end": 48342,
+      "t_start": "2017-10-23 13:45:00",
+      "t_end": "2017-11-16 13:30:00"
+    },
+    {
+      "k": 15944,
+      "window_idx": 2277,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 46053,
+      "abs_row_end": 48356,
+      "t_start": "2017-10-23 17:15:00",
+      "t_end": "2017-11-16 17:00:00"
+    },
+    {
+      "k": 15951,
+      "window_idx": 2278,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 46054,
+      "abs_row_end": 48357,
+      "t_start": "2017-10-23 17:30:00",
+      "t_end": "2017-11-16 17:15:00"
+    },
+    {
+      "k": 16411,
+      "window_idx": 2344,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 46120,
+      "abs_row_end": 48423,
+      "t_start": "2017-10-24 10:00:00",
+      "t_end": "2017-11-17 09:45:00"
+    },
+    {
+      "k": 16840,
+      "window_idx": 2405,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 46181,
+      "abs_row_end": 48484,
+      "t_start": "2017-10-25 01:15:00",
+      "t_end": "2017-11-18 01:00:00"
+    },
+    {
+      "k": 17039,
+      "window_idx": 2434,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 46210,
+      "abs_row_end": 48513,
+      "t_start": "2017-10-25 08:30:00",
+      "t_end": "2017-11-18 08:15:00"
+    },
+    {
+      "k": 17260,
+      "window_idx": 2465,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 46241,
+      "abs_row_end": 48544,
+      "t_start": "2017-10-25 16:15:00",
+      "t_end": "2017-11-18 16:00:00"
+    },
+    {
+      "k": 17567,
+      "window_idx": 2509,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 46285,
+      "abs_row_end": 48588,
+      "t_start": "2017-10-26 03:15:00",
+      "t_end": "2017-11-19 03:00:00"
+    },
+    {
+      "k": 17821,
+      "window_idx": 2545,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 46321,
+      "abs_row_end": 48624,
+      "t_start": "2017-10-26 12:15:00",
+      "t_end": "2017-11-19 12:00:00"
+    },
+    {
+      "k": 17946,
+      "window_idx": 2563,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 46339,
+      "abs_row_end": 48642,
+      "t_start": "2017-10-26 16:45:00",
+      "t_end": "2017-11-19 16:30:00"
+    },
+    {
+      "k": 18125,
+      "window_idx": 2589,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 46365,
+      "abs_row_end": 48668,
+      "t_start": "2017-10-26 23:15:00",
+      "t_end": "2017-11-19 23:00:00"
+    },
+    {
+      "k": 18226,
+      "window_idx": 2603,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 46379,
+      "abs_row_end": 48682,
+      "t_start": "2017-10-27 02:45:00",
+      "t_end": "2017-11-20 02:30:00"
+    },
+    {
+      "k": 18290,
+      "window_idx": 2612,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 46388,
+      "abs_row_end": 48691,
+      "t_start": "2017-10-27 05:00:00",
+      "t_end": "2017-11-20 04:45:00"
+    },
+    {
+      "k": 18305,
+      "window_idx": 2615,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 46391,
+      "abs_row_end": 48694,
+      "t_start": "2017-10-27 05:45:00",
+      "t_end": "2017-11-20 05:30:00"
+    },
+    {
+      "k": 18549,
+      "window_idx": 2649,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 46425,
+      "abs_row_end": 48728,
+      "t_start": "2017-10-27 14:15:00",
+      "t_end": "2017-11-20 14:00:00"
+    },
+    {
+      "k": 18647,
+      "window_idx": 2663,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 46439,
+      "abs_row_end": 48742,
+      "t_start": "2017-10-27 17:45:00",
+      "t_end": "2017-11-20 17:30:00"
+    },
+    {
+      "k": 18781,
+      "window_idx": 2683,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 46459,
+      "abs_row_end": 48762,
+      "t_start": "2017-10-27 22:45:00",
+      "t_end": "2017-11-20 22:30:00"
+    },
+    {
+      "k": 18925,
+      "window_idx": 2703,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 46479,
+      "abs_row_end": 48782,
+      "t_start": "2017-10-28 03:45:00",
+      "t_end": "2017-11-21 03:30:00"
+    },
+    {
+      "k": 19028,
+      "window_idx": 2718,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 46494,
+      "abs_row_end": 48797,
+      "t_start": "2017-10-28 07:30:00",
+      "t_end": "2017-11-21 07:15:00"
+    },
+    {
+      "k": 19534,
+      "window_idx": 2790,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 46566,
+      "abs_row_end": 48869,
+      "t_start": "2017-10-29 01:30:00",
+      "t_end": "2017-11-22 01:15:00"
+    },
+    {
+      "k": 20197,
+      "window_idx": 2885,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 46661,
+      "abs_row_end": 48964,
+      "t_start": "2017-10-30 01:15:00",
+      "t_end": "2017-11-23 01:00:00"
+    },
+    {
+      "k": 20408,
+      "window_idx": 2915,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 46691,
+      "abs_row_end": 48994,
+      "t_start": "2017-10-30 08:45:00",
+      "t_end": "2017-11-23 08:30:00"
+    },
+    {
+      "k": 20450,
+      "window_idx": 2921,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 46697,
+      "abs_row_end": 49000,
+      "t_start": "2017-10-30 10:15:00",
+      "t_end": "2017-11-23 10:00:00"
+    },
+    {
+      "k": 21054,
+      "window_idx": 3007,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 46783,
+      "abs_row_end": 49086,
+      "t_start": "2017-10-31 07:45:00",
+      "t_end": "2017-11-24 07:30:00"
+    },
+    {
+      "k": 21056,
+      "window_idx": 3008,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 46784,
+      "abs_row_end": 49087,
+      "t_start": "2017-10-31 08:00:00",
+      "t_end": "2017-11-24 07:45:00"
+    },
+    {
+      "k": 21152,
+      "window_idx": 3021,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 46797,
+      "abs_row_end": 49100,
+      "t_start": "2017-10-31 11:15:00",
+      "t_end": "2017-11-24 11:00:00"
+    },
+    {
+      "k": 21790,
+      "window_idx": 3112,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 46888,
+      "abs_row_end": 49191,
+      "t_start": "2017-11-01 10:00:00",
+      "t_end": "2017-11-25 09:45:00"
+    },
+    {
+      "k": 21956,
+      "window_idx": 3136,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 46912,
+      "abs_row_end": 49215,
+      "t_start": "2017-11-01 16:00:00",
+      "t_end": "2017-11-25 15:45:00"
+    },
+    {
+      "k": 22134,
+      "window_idx": 3162,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 46938,
+      "abs_row_end": 49241,
+      "t_start": "2017-11-01 22:30:00",
+      "t_end": "2017-11-25 22:15:00"
+    },
+    {
+      "k": 22332,
+      "window_idx": 3190,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 46966,
+      "abs_row_end": 49269,
+      "t_start": "2017-11-02 05:30:00",
+      "t_end": "2017-11-26 05:15:00"
+    },
+    {
+      "k": 22838,
+      "window_idx": 3262,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 47038,
+      "abs_row_end": 49341,
+      "t_start": "2017-11-02 23:30:00",
+      "t_end": "2017-11-26 23:15:00"
+    },
+    {
+      "k": 23303,
+      "window_idx": 3329,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 47105,
+      "abs_row_end": 49408,
+      "t_start": "2017-11-03 16:15:00",
+      "t_end": "2017-11-27 16:00:00"
+    },
+    {
+      "k": 23455,
+      "window_idx": 3350,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 47126,
+      "abs_row_end": 49429,
+      "t_start": "2017-11-03 21:30:00",
+      "t_end": "2017-11-27 21:15:00"
+    },
+    {
+      "k": 23596,
+      "window_idx": 3370,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 47146,
+      "abs_row_end": 49449,
+      "t_start": "2017-11-04 02:30:00",
+      "t_end": "2017-11-28 02:15:00"
+    },
+    {
+      "k": 23612,
+      "window_idx": 3373,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 47149,
+      "abs_row_end": 49452,
+      "t_start": "2017-11-04 03:15:00",
+      "t_end": "2017-11-28 03:00:00"
+    },
+    {
+      "k": 24189,
+      "window_idx": 3455,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 47231,
+      "abs_row_end": 49534,
+      "t_start": "2017-11-04 23:45:00",
+      "t_end": "2017-11-28 23:30:00"
+    },
+    {
+      "k": 24195,
+      "window_idx": 3456,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 47232,
+      "abs_row_end": 49535,
+      "t_start": "2017-11-05 00:00:00",
+      "t_end": "2017-11-28 23:45:00"
+    },
+    {
+      "k": 24317,
+      "window_idx": 3473,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 47249,
+      "abs_row_end": 49552,
+      "t_start": "2017-11-05 04:15:00",
+      "t_end": "2017-11-29 04:00:00"
+    },
+    {
+      "k": 24846,
+      "window_idx": 3549,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 47325,
+      "abs_row_end": 49628,
+      "t_start": "2017-11-05 23:15:00",
+      "t_end": "2017-11-29 23:00:00"
+    },
+    {
+      "k": 24867,
+      "window_idx": 3552,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 47328,
+      "abs_row_end": 49631,
+      "t_start": "2017-11-06 00:00:00",
+      "t_end": "2017-11-29 23:45:00"
+    },
+    {
+      "k": 25009,
+      "window_idx": 3572,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 47348,
+      "abs_row_end": 49651,
+      "t_start": "2017-11-06 05:00:00",
+      "t_end": "2017-11-30 04:45:00"
+    },
+    {
+      "k": 26261,
+      "window_idx": 3751,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 47527,
+      "abs_row_end": 49830,
+      "t_start": "2017-11-08 01:45:00",
+      "t_end": "2017-12-02 01:30:00"
+    },
+    {
+      "k": 26306,
+      "window_idx": 3758,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 47534,
+      "abs_row_end": 49837,
+      "t_start": "2017-11-08 03:30:00",
+      "t_end": "2017-12-02 03:15:00"
+    },
+    {
+      "k": 26545,
+      "window_idx": 3792,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 47568,
+      "abs_row_end": 49871,
+      "t_start": "2017-11-08 12:00:00",
+      "t_end": "2017-12-02 11:45:00"
+    },
+    {
+      "k": 26550,
+      "window_idx": 3792,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 47568,
+      "abs_row_end": 49871,
+      "t_start": "2017-11-08 12:00:00",
+      "t_end": "2017-12-02 11:45:00"
+    },
+    {
+      "k": 26574,
+      "window_idx": 3796,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 47572,
+      "abs_row_end": 49875,
+      "t_start": "2017-11-08 13:00:00",
+      "t_end": "2017-12-02 12:45:00"
+    },
+    {
+      "k": 26617,
+      "window_idx": 3802,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 47578,
+      "abs_row_end": 49881,
+      "t_start": "2017-11-08 14:30:00",
+      "t_end": "2017-12-02 14:15:00"
+    },
+    {
+      "k": 26659,
+      "window_idx": 3808,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 47584,
+      "abs_row_end": 49887,
+      "t_start": "2017-11-08 16:00:00",
+      "t_end": "2017-12-02 15:45:00"
+    },
+    {
+      "k": 26899,
+      "window_idx": 3842,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 47618,
+      "abs_row_end": 49921,
+      "t_start": "2017-11-09 00:30:00",
+      "t_end": "2017-12-03 00:15:00"
+    },
+    {
+      "k": 27025,
+      "window_idx": 3860,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 47636,
+      "abs_row_end": 49939,
+      "t_start": "2017-11-09 05:00:00",
+      "t_end": "2017-12-03 04:45:00"
+    },
+    {
+      "k": 27557,
+      "window_idx": 3936,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 47712,
+      "abs_row_end": 50015,
+      "t_start": "2017-11-10 00:00:00",
+      "t_end": "2017-12-03 23:45:00"
+    },
+    {
+      "k": 28171,
+      "window_idx": 4024,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 47800,
+      "abs_row_end": 50103,
+      "t_start": "2017-11-10 22:00:00",
+      "t_end": "2017-12-04 21:45:00"
+    },
+    {
+      "k": 28621,
+      "window_idx": 4088,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 47864,
+      "abs_row_end": 50167,
+      "t_start": "2017-11-11 14:00:00",
+      "t_end": "2017-12-05 13:45:00"
+    },
+    {
+      "k": 28657,
+      "window_idx": 4093,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 47869,
+      "abs_row_end": 50172,
+      "t_start": "2017-11-11 15:15:00",
+      "t_end": "2017-12-05 15:00:00"
+    },
+    {
+      "k": 29093,
+      "window_idx": 4156,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 47932,
+      "abs_row_end": 50235,
+      "t_start": "2017-11-12 07:00:00",
+      "t_end": "2017-12-06 06:45:00"
+    },
+    {
+      "k": 29169,
+      "window_idx": 4167,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 47943,
+      "abs_row_end": 50246,
+      "t_start": "2017-11-12 09:45:00",
+      "t_end": "2017-12-06 09:30:00"
+    },
+    {
+      "k": 29217,
+      "window_idx": 4173,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 47949,
+      "abs_row_end": 50252,
+      "t_start": "2017-11-12 11:15:00",
+      "t_end": "2017-12-06 11:00:00"
+    },
+    {
+      "k": 29259,
+      "window_idx": 4179,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 47955,
+      "abs_row_end": 50258,
+      "t_start": "2017-11-12 12:45:00",
+      "t_end": "2017-12-06 12:30:00"
+    },
+    {
+      "k": 29288,
+      "window_idx": 4184,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 47960,
+      "abs_row_end": 50263,
+      "t_start": "2017-11-12 14:00:00",
+      "t_end": "2017-12-06 13:45:00"
+    },
+    {
+      "k": 29387,
+      "window_idx": 4198,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 47974,
+      "abs_row_end": 50277,
+      "t_start": "2017-11-12 17:30:00",
+      "t_end": "2017-12-06 17:15:00"
+    },
+    {
+      "k": 29652,
+      "window_idx": 4236,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 48012,
+      "abs_row_end": 50315,
+      "t_start": "2017-11-13 03:00:00",
+      "t_end": "2017-12-07 02:45:00"
+    },
+    {
+      "k": 29807,
+      "window_idx": 4258,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 48034,
+      "abs_row_end": 50337,
+      "t_start": "2017-11-13 08:30:00",
+      "t_end": "2017-12-07 08:15:00"
+    },
+    {
+      "k": 30432,
+      "window_idx": 4347,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 48123,
+      "abs_row_end": 50426,
+      "t_start": "2017-11-14 06:45:00",
+      "t_end": "2017-12-08 06:30:00"
+    },
+    {
+      "k": 30563,
+      "window_idx": 4366,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 48142,
+      "abs_row_end": 50445,
+      "t_start": "2017-11-14 11:30:00",
+      "t_end": "2017-12-08 11:15:00"
+    },
+    {
+      "k": 30952,
+      "window_idx": 4421,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 48197,
+      "abs_row_end": 50500,
+      "t_start": "2017-11-15 01:15:00",
+      "t_end": "2017-12-09 01:00:00"
+    },
+    {
+      "k": 32965,
+      "window_idx": 4709,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 48485,
+      "abs_row_end": 50788,
+      "t_start": "2017-11-18 01:15:00",
+      "t_end": "2017-12-12 01:00:00"
+    },
+    {
+      "k": 33280,
+      "window_idx": 4754,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 48530,
+      "abs_row_end": 50833,
+      "t_start": "2017-11-18 12:30:00",
+      "t_end": "2017-12-12 12:15:00"
+    },
+    {
+      "k": 33857,
+      "window_idx": 4836,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 48612,
+      "abs_row_end": 50915,
+      "t_start": "2017-11-19 09:00:00",
+      "t_end": "2017-12-13 08:45:00"
+    },
+    {
+      "k": 34765,
+      "window_idx": 4966,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 48742,
+      "abs_row_end": 51045,
+      "t_start": "2017-11-20 17:30:00",
+      "t_end": "2017-12-14 17:15:00"
+    },
+    {
+      "k": 34909,
+      "window_idx": 4987,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 48763,
+      "abs_row_end": 51066,
+      "t_start": "2017-11-20 22:45:00",
+      "t_end": "2017-12-14 22:30:00"
+    },
+    {
+      "k": 35156,
+      "window_idx": 5022,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 48798,
+      "abs_row_end": 51101,
+      "t_start": "2017-11-21 07:30:00",
+      "t_end": "2017-12-15 07:15:00"
+    },
+    {
+      "k": 35461,
+      "window_idx": 5065,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 48841,
+      "abs_row_end": 51144,
+      "t_start": "2017-11-21 18:15:00",
+      "t_end": "2017-12-15 18:00:00"
+    },
+    {
+      "k": 35693,
+      "window_idx": 5099,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 48875,
+      "abs_row_end": 51178,
+      "t_start": "2017-11-22 02:45:00",
+      "t_end": "2017-12-16 02:30:00"
+    },
+    {
+      "k": 36217,
+      "window_idx": 5173,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 48949,
+      "abs_row_end": 51252,
+      "t_start": "2017-11-22 21:15:00",
+      "t_end": "2017-12-16 21:00:00"
+    },
+    {
+      "k": 36491,
+      "window_idx": 5213,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 48989,
+      "abs_row_end": 51292,
+      "t_start": "2017-11-23 07:15:00",
+      "t_end": "2017-12-17 07:00:00"
+    },
+    {
+      "k": 36606,
+      "window_idx": 5229,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 49005,
+      "abs_row_end": 51308,
+      "t_start": "2017-11-23 11:15:00",
+      "t_end": "2017-12-17 11:00:00"
+    },
+    {
+      "k": 36724,
+      "window_idx": 5246,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 49022,
+      "abs_row_end": 51325,
+      "t_start": "2017-11-23 15:30:00",
+      "t_end": "2017-12-17 15:15:00"
+    },
+    {
+      "k": 36766,
+      "window_idx": 5252,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 49028,
+      "abs_row_end": 51331,
+      "t_start": "2017-11-23 17:00:00",
+      "t_end": "2017-12-17 16:45:00"
+    },
+    {
+      "k": 37142,
+      "window_idx": 5306,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 49082,
+      "abs_row_end": 51385,
+      "t_start": "2017-11-24 06:30:00",
+      "t_end": "2017-12-18 06:15:00"
+    },
+    {
+      "k": 37528,
+      "window_idx": 5361,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 49137,
+      "abs_row_end": 51440,
+      "t_start": "2017-11-24 20:15:00",
+      "t_end": "2017-12-18 20:00:00"
+    },
+    {
+      "k": 37709,
+      "window_idx": 5387,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 49163,
+      "abs_row_end": 51466,
+      "t_start": "2017-11-25 02:45:00",
+      "t_end": "2017-12-19 02:30:00"
+    },
+    {
+      "k": 37765,
+      "window_idx": 5395,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 49171,
+      "abs_row_end": 51474,
+      "t_start": "2017-11-25 04:45:00",
+      "t_end": "2017-12-19 04:30:00"
+    },
+    {
+      "k": 37820,
+      "window_idx": 5402,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 49178,
+      "abs_row_end": 51481,
+      "t_start": "2017-11-25 06:30:00",
+      "t_end": "2017-12-19 06:15:00"
+    },
+    {
+      "k": 38669,
+      "window_idx": 5524,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 49300,
+      "abs_row_end": 51603,
+      "t_start": "2017-11-26 13:00:00",
+      "t_end": "2017-12-20 12:45:00"
+    },
+    {
+      "k": 38921,
+      "window_idx": 5560,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 49336,
+      "abs_row_end": 51639,
+      "t_start": "2017-11-26 22:00:00",
+      "t_end": "2017-12-20 21:45:00"
+    },
+    {
+      "k": 39129,
+      "window_idx": 5589,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 49365,
+      "abs_row_end": 51668,
+      "t_start": "2017-11-27 05:15:00",
+      "t_end": "2017-12-21 05:00:00"
+    },
+    {
+      "k": 39182,
+      "window_idx": 5597,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 49373,
+      "abs_row_end": 51676,
+      "t_start": "2017-11-27 07:15:00",
+      "t_end": "2017-12-21 07:00:00"
+    },
+    {
+      "k": 39610,
+      "window_idx": 5658,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 49434,
+      "abs_row_end": 51737,
+      "t_start": "2017-11-27 22:30:00",
+      "t_end": "2017-12-21 22:15:00"
+    },
+    {
+      "k": 39925,
+      "window_idx": 5703,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 49479,
+      "abs_row_end": 51782,
+      "t_start": "2017-11-28 09:45:00",
+      "t_end": "2017-12-22 09:30:00"
+    },
+    {
+      "k": 40023,
+      "window_idx": 5717,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 49493,
+      "abs_row_end": 51796,
+      "t_start": "2017-11-28 13:15:00",
+      "t_end": "2017-12-22 13:00:00"
+    },
+    {
+      "k": 40342,
+      "window_idx": 5763,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 49539,
+      "abs_row_end": 51842,
+      "t_start": "2017-11-29 00:45:00",
+      "t_end": "2017-12-23 00:30:00"
+    },
+    {
+      "k": 40526,
+      "window_idx": 5789,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 49565,
+      "abs_row_end": 51868,
+      "t_start": "2017-11-29 07:15:00",
+      "t_end": "2017-12-23 07:00:00"
+    },
+    {
+      "k": 41362,
+      "window_idx": 5908,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 49684,
+      "abs_row_end": 51987,
+      "t_start": "2017-11-30 13:00:00",
+      "t_end": "2017-12-24 12:45:00"
+    },
+    {
+      "k": 41464,
+      "window_idx": 5923,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 49699,
+      "abs_row_end": 52002,
+      "t_start": "2017-11-30 16:45:00",
+      "t_end": "2017-12-24 16:30:00"
+    },
+    {
+      "k": 41904,
+      "window_idx": 5986,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 49762,
+      "abs_row_end": 52065,
+      "t_start": "2017-12-01 08:30:00",
+      "t_end": "2017-12-25 08:15:00"
+    },
+    {
+      "k": 41922,
+      "window_idx": 5988,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 49764,
+      "abs_row_end": 52067,
+      "t_start": "2017-12-01 09:00:00",
+      "t_end": "2017-12-25 08:45:00"
+    },
+    {
+      "k": 42647,
+      "window_idx": 6092,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 49868,
+      "abs_row_end": 52171,
+      "t_start": "2017-12-02 11:00:00",
+      "t_end": "2017-12-26 10:45:00"
+    },
+    {
+      "k": 42651,
+      "window_idx": 6093,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 49869,
+      "abs_row_end": 52172,
+      "t_start": "2017-12-02 11:15:00",
+      "t_end": "2017-12-26 11:00:00"
+    },
+    {
+      "k": 43122,
+      "window_idx": 6160,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 49936,
+      "abs_row_end": 52239,
+      "t_start": "2017-12-03 04:00:00",
+      "t_end": "2017-12-27 03:45:00"
+    },
+    {
+      "k": 43214,
+      "window_idx": 6173,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 49949,
+      "abs_row_end": 52252,
+      "t_start": "2017-12-03 07:15:00",
+      "t_end": "2017-12-27 07:00:00"
+    },
+    {
+      "k": 44016,
+      "window_idx": 6288,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 50064,
+      "abs_row_end": 52367,
+      "t_start": "2017-12-04 12:00:00",
+      "t_end": "2017-12-28 11:45:00"
+    },
+    {
+      "k": 44039,
+      "window_idx": 6291,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 50067,
+      "abs_row_end": 52370,
+      "t_start": "2017-12-04 12:45:00",
+      "t_end": "2017-12-28 12:30:00"
+    },
+    {
+      "k": 44163,
+      "window_idx": 6309,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 50085,
+      "abs_row_end": 52388,
+      "t_start": "2017-12-04 17:15:00",
+      "t_end": "2017-12-28 17:00:00"
+    },
+    {
+      "k": 44559,
+      "window_idx": 6365,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 50141,
+      "abs_row_end": 52444,
+      "t_start": "2017-12-05 07:15:00",
+      "t_end": "2017-12-29 07:00:00"
+    },
+    {
+      "k": 44850,
+      "window_idx": 6407,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 50183,
+      "abs_row_end": 52486,
+      "t_start": "2017-12-05 17:45:00",
+      "t_end": "2017-12-29 17:30:00"
+    },
+    {
+      "k": 45207,
+      "window_idx": 6458,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 50234,
+      "abs_row_end": 52537,
+      "t_start": "2017-12-06 06:30:00",
+      "t_end": "2017-12-30 06:15:00"
+    },
+    {
+      "k": 45437,
+      "window_idx": 6491,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 50267,
+      "abs_row_end": 52570,
+      "t_start": "2017-12-06 14:45:00",
+      "t_end": "2017-12-30 14:30:00"
+    },
+    {
+      "k": 45532,
+      "window_idx": 6504,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 50280,
+      "abs_row_end": 52583,
+      "t_start": "2017-12-06 18:00:00",
+      "t_end": "2017-12-30 17:45:00"
+    },
+    {
+      "k": 45994,
+      "window_idx": 6570,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 50346,
+      "abs_row_end": 52649,
+      "t_start": "2017-12-07 10:30:00",
+      "t_end": "2017-12-31 10:15:00"
+    },
+    {
+      "k": 46443,
+      "window_idx": 6634,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 50410,
+      "abs_row_end": 52713,
+      "t_start": "2017-12-08 02:30:00",
+      "t_end": "2018-01-01 02:15:00"
+    },
+    {
+      "k": 46560,
+      "window_idx": 6651,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 50427,
+      "abs_row_end": 52730,
+      "t_start": "2017-12-08 06:45:00",
+      "t_end": "2018-01-01 06:30:00"
+    },
+    {
+      "k": 46897,
+      "window_idx": 6699,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 50475,
+      "abs_row_end": 52778,
+      "t_start": "2017-12-08 18:45:00",
+      "t_end": "2018-01-01 18:30:00"
+    },
+    {
+      "k": 47055,
+      "window_idx": 6722,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 50498,
+      "abs_row_end": 52801,
+      "t_start": "2017-12-09 00:30:00",
+      "t_end": "2018-01-02 00:15:00"
+    },
+    {
+      "k": 47103,
+      "window_idx": 6729,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 50505,
+      "abs_row_end": 52808,
+      "t_start": "2017-12-09 02:15:00",
+      "t_end": "2018-01-02 02:00:00"
+    },
+    {
+      "k": 47607,
+      "window_idx": 6801,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 50577,
+      "abs_row_end": 52880,
+      "t_start": "2017-12-09 20:15:00",
+      "t_end": "2018-01-02 20:00:00"
+    },
+    {
+      "k": 47810,
+      "window_idx": 6830,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 50606,
+      "abs_row_end": 52909,
+      "t_start": "2017-12-10 03:30:00",
+      "t_end": "2018-01-03 03:15:00"
+    },
+    {
+      "k": 47856,
+      "window_idx": 6836,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 50612,
+      "abs_row_end": 52915,
+      "t_start": "2017-12-10 05:00:00",
+      "t_end": "2018-01-03 04:45:00"
+    },
+    {
+      "k": 47876,
+      "window_idx": 6839,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 50615,
+      "abs_row_end": 52918,
+      "t_start": "2017-12-10 05:45:00",
+      "t_end": "2018-01-03 05:30:00"
+    },
+    {
+      "k": 48470,
+      "window_idx": 6924,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 50700,
+      "abs_row_end": 53003,
+      "t_start": "2017-12-11 03:00:00",
+      "t_end": "2018-01-04 02:45:00"
+    },
+    {
+      "k": 49046,
+      "window_idx": 7006,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 50782,
+      "abs_row_end": 53085,
+      "t_start": "2017-12-11 23:30:00",
+      "t_end": "2018-01-04 23:15:00"
+    },
+    {
+      "k": 49166,
+      "window_idx": 7023,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 50799,
+      "abs_row_end": 53102,
+      "t_start": "2017-12-12 03:45:00",
+      "t_end": "2018-01-05 03:30:00"
+    },
+    {
+      "k": 49684,
+      "window_idx": 7097,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 50873,
+      "abs_row_end": 53176,
+      "t_start": "2017-12-12 22:15:00",
+      "t_end": "2018-01-05 22:00:00"
+    },
+    {
+      "k": 50154,
+      "window_idx": 7164,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 50940,
+      "abs_row_end": 53243,
+      "t_start": "2017-12-13 15:00:00",
+      "t_end": "2018-01-06 14:45:00"
+    },
+    {
+      "k": 51719,
+      "window_idx": 7388,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 51164,
+      "abs_row_end": 53467,
+      "t_start": "2017-12-15 23:00:00",
+      "t_end": "2018-01-08 22:45:00"
+    },
+    {
+      "k": 51763,
+      "window_idx": 7394,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 51170,
+      "abs_row_end": 53473,
+      "t_start": "2017-12-16 00:30:00",
+      "t_end": "2018-01-09 00:15:00"
+    },
+    {
+      "k": 51794,
+      "window_idx": 7399,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 51175,
+      "abs_row_end": 53478,
+      "t_start": "2017-12-16 01:45:00",
+      "t_end": "2018-01-09 01:30:00"
+    },
+    {
+      "k": 51854,
+      "window_idx": 7407,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 51183,
+      "abs_row_end": 53486,
+      "t_start": "2017-12-16 03:45:00",
+      "t_end": "2018-01-09 03:30:00"
+    },
+    {
+      "k": 52039,
+      "window_idx": 7434,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 51210,
+      "abs_row_end": 53513,
+      "t_start": "2017-12-16 10:30:00",
+      "t_end": "2018-01-09 10:15:00"
+    },
+    {
+      "k": 52048,
+      "window_idx": 7435,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 51211,
+      "abs_row_end": 53514,
+      "t_start": "2017-12-16 10:45:00",
+      "t_end": "2018-01-09 10:30:00"
+    },
+    {
+      "k": 52078,
+      "window_idx": 7439,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 51215,
+      "abs_row_end": 53518,
+      "t_start": "2017-12-16 11:45:00",
+      "t_end": "2018-01-09 11:30:00"
+    },
+    {
+      "k": 52268,
+      "window_idx": 7466,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 51242,
+      "abs_row_end": 53545,
+      "t_start": "2017-12-16 18:30:00",
+      "t_end": "2018-01-09 18:15:00"
+    },
+    {
+      "k": 52287,
+      "window_idx": 7469,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 51245,
+      "abs_row_end": 53548,
+      "t_start": "2017-12-16 19:15:00",
+      "t_end": "2018-01-09 19:00:00"
+    },
+    {
+      "k": 52408,
+      "window_idx": 7486,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 51262,
+      "abs_row_end": 53565,
+      "t_start": "2017-12-16 23:30:00",
+      "t_end": "2018-01-09 23:15:00"
+    },
+    {
+      "k": 52439,
+      "window_idx": 7491,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 51267,
+      "abs_row_end": 53570,
+      "t_start": "2017-12-17 00:45:00",
+      "t_end": "2018-01-10 00:30:00"
+    },
+    {
+      "k": 52680,
+      "window_idx": 7525,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 51301,
+      "abs_row_end": 53604,
+      "t_start": "2017-12-17 09:15:00",
+      "t_end": "2018-01-10 09:00:00"
+    },
+    {
+      "k": 52945,
+      "window_idx": 7563,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 51339,
+      "abs_row_end": 53642,
+      "t_start": "2017-12-17 18:45:00",
+      "t_end": "2018-01-10 18:30:00"
+    },
+    {
+      "k": 53080,
+      "window_idx": 7582,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 51358,
+      "abs_row_end": 53661,
+      "t_start": "2017-12-17 23:30:00",
+      "t_end": "2018-01-10 23:15:00"
+    },
+    {
+      "k": 53158,
+      "window_idx": 7594,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 51370,
+      "abs_row_end": 53673,
+      "t_start": "2017-12-18 02:30:00",
+      "t_end": "2018-01-11 02:15:00"
+    },
+    {
+      "k": 53266,
+      "window_idx": 7609,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 51385,
+      "abs_row_end": 53688,
+      "t_start": "2017-12-18 06:15:00",
+      "t_end": "2018-01-11 06:00:00"
+    },
+    {
+      "k": 53660,
+      "window_idx": 7665,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 51441,
+      "abs_row_end": 53744,
+      "t_start": "2017-12-18 20:15:00",
+      "t_end": "2018-01-11 20:00:00"
+    },
+    {
+      "k": 53778,
+      "window_idx": 7682,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 51458,
+      "abs_row_end": 53761,
+      "t_start": "2017-12-19 00:30:00",
+      "t_end": "2018-01-12 00:15:00"
+    },
+    {
+      "k": 53899,
+      "window_idx": 7699,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 51475,
+      "abs_row_end": 53778,
+      "t_start": "2017-12-19 04:45:00",
+      "t_end": "2018-01-12 04:30:00"
+    },
+    {
+      "k": 54355,
+      "window_idx": 7765,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 51541,
+      "abs_row_end": 53844,
+      "t_start": "2017-12-19 21:15:00",
+      "t_end": "2018-01-12 21:00:00"
+    },
+    {
+      "k": 55102,
+      "window_idx": 7871,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 51647,
+      "abs_row_end": 53950,
+      "t_start": "2017-12-20 23:45:00",
+      "t_end": "2018-01-13 23:30:00"
+    },
+    {
+      "k": 55230,
+      "window_idx": 7890,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 51666,
+      "abs_row_end": 53969,
+      "t_start": "2017-12-21 04:30:00",
+      "t_end": "2018-01-14 04:15:00"
+    },
+    {
+      "k": 55315,
+      "window_idx": 7902,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 51678,
+      "abs_row_end": 53981,
+      "t_start": "2017-12-21 07:30:00",
+      "t_end": "2018-01-14 07:15:00"
+    },
+    {
+      "k": 55439,
+      "window_idx": 7919,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 51695,
+      "abs_row_end": 53998,
+      "t_start": "2017-12-21 11:45:00",
+      "t_end": "2018-01-14 11:30:00"
+    },
+    {
+      "k": 55701,
+      "window_idx": 7957,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 51733,
+      "abs_row_end": 54036,
+      "t_start": "2017-12-21 21:15:00",
+      "t_end": "2018-01-14 21:00:00"
+    },
+    {
+      "k": 55812,
+      "window_idx": 7973,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 51749,
+      "abs_row_end": 54052,
+      "t_start": "2017-12-22 01:15:00",
+      "t_end": "2018-01-15 01:00:00"
+    },
+    {
+      "k": 56084,
+      "window_idx": 8012,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 51788,
+      "abs_row_end": 54091,
+      "t_start": "2017-12-22 11:00:00",
+      "t_end": "2018-01-15 10:45:00"
+    },
+    {
+      "k": 56247,
+      "window_idx": 8035,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 51811,
+      "abs_row_end": 54114,
+      "t_start": "2017-12-22 16:45:00",
+      "t_end": "2018-01-15 16:30:00"
+    },
+    {
+      "k": 56989,
+      "window_idx": 8141,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 51917,
+      "abs_row_end": 54220,
+      "t_start": "2017-12-23 19:15:00",
+      "t_end": "2018-01-16 19:00:00"
+    },
+    {
+      "k": 57776,
+      "window_idx": 8253,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 52029,
+      "abs_row_end": 54332,
+      "t_start": "2017-12-24 23:15:00",
+      "t_end": "2018-01-17 23:00:00"
+    },
+    {
+      "k": 58352,
+      "window_idx": 8336,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 52112,
+      "abs_row_end": 54415,
+      "t_start": "2017-12-25 20:00:00",
+      "t_end": "2018-01-18 19:45:00"
+    },
+    {
+      "k": 58529,
+      "window_idx": 8361,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 52137,
+      "abs_row_end": 54440,
+      "t_start": "2017-12-26 02:15:00",
+      "t_end": "2018-01-19 02:00:00"
+    },
+    {
+      "k": 58714,
+      "window_idx": 8387,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 52163,
+      "abs_row_end": 54466,
+      "t_start": "2017-12-26 08:45:00",
+      "t_end": "2018-01-19 08:30:00"
+    },
+    {
+      "k": 59573,
+      "window_idx": 8510,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 52286,
+      "abs_row_end": 54589,
+      "t_start": "2017-12-27 15:30:00",
+      "t_end": "2018-01-20 15:15:00"
+    },
+    {
+      "k": 59734,
+      "window_idx": 8533,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 52309,
+      "abs_row_end": 54612,
+      "t_start": "2017-12-27 21:15:00",
+      "t_end": "2018-01-20 21:00:00"
+    },
+    {
+      "k": 59795,
+      "window_idx": 8542,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 52318,
+      "abs_row_end": 54621,
+      "t_start": "2017-12-27 23:30:00",
+      "t_end": "2018-01-20 23:15:00"
+    },
+    {
+      "k": 59949,
+      "window_idx": 8564,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 52340,
+      "abs_row_end": 54643,
+      "t_start": "2017-12-28 05:00:00",
+      "t_end": "2018-01-21 04:45:00"
+    },
+    {
+      "k": 60086,
+      "window_idx": 8583,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 52359,
+      "abs_row_end": 54662,
+      "t_start": "2017-12-28 09:45:00",
+      "t_end": "2018-01-21 09:30:00"
+    },
+    {
+      "k": 60548,
+      "window_idx": 8649,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 52425,
+      "abs_row_end": 54728,
+      "t_start": "2017-12-29 02:15:00",
+      "t_end": "2018-01-22 02:00:00"
+    },
+    {
+      "k": 61378,
+      "window_idx": 8768,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 52544,
+      "abs_row_end": 54847,
+      "t_start": "2017-12-30 08:00:00",
+      "t_end": "2018-01-23 07:45:00"
+    },
+    {
+      "k": 61456,
+      "window_idx": 8779,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 52555,
+      "abs_row_end": 54858,
+      "t_start": "2017-12-30 10:45:00",
+      "t_end": "2018-01-23 10:30:00"
+    },
+    {
+      "k": 61571,
+      "window_idx": 8795,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 52571,
+      "abs_row_end": 54874,
+      "t_start": "2017-12-30 14:45:00",
+      "t_end": "2018-01-23 14:30:00"
+    },
+    {
+      "k": 61687,
+      "window_idx": 8812,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 52588,
+      "abs_row_end": 54891,
+      "t_start": "2017-12-30 19:00:00",
+      "t_end": "2018-01-23 18:45:00"
+    },
+    {
+      "k": 62234,
+      "window_idx": 8890,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 52666,
+      "abs_row_end": 54969,
+      "t_start": "2017-12-31 14:30:00",
+      "t_end": "2018-01-24 14:15:00"
+    },
+    {
+      "k": 63149,
+      "window_idx": 9021,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 52797,
+      "abs_row_end": 55100,
+      "t_start": "2018-01-01 23:15:00",
+      "t_end": "2018-01-25 23:00:00"
+    },
+    {
+      "k": 63306,
+      "window_idx": 9043,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 52819,
+      "abs_row_end": 55122,
+      "t_start": "2018-01-02 04:45:00",
+      "t_end": "2018-01-26 04:30:00"
+    },
+    {
+      "k": 63340,
+      "window_idx": 9048,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 52824,
+      "abs_row_end": 55127,
+      "t_start": "2018-01-02 06:00:00",
+      "t_end": "2018-01-26 05:45:00"
+    },
+    {
+      "k": 63660,
+      "window_idx": 9094,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 52870,
+      "abs_row_end": 55173,
+      "t_start": "2018-01-02 17:30:00",
+      "t_end": "2018-01-26 17:15:00"
+    },
+    {
+      "k": 63798,
+      "window_idx": 9114,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 52890,
+      "abs_row_end": 55193,
+      "t_start": "2018-01-02 22:30:00",
+      "t_end": "2018-01-26 22:15:00"
+    },
+    {
+      "k": 63889,
+      "window_idx": 9127,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 52903,
+      "abs_row_end": 55206,
+      "t_start": "2018-01-03 01:45:00",
+      "t_end": "2018-01-27 01:30:00"
+    },
+    {
+      "k": 64355,
+      "window_idx": 9193,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 52969,
+      "abs_row_end": 55272,
+      "t_start": "2018-01-03 18:15:00",
+      "t_end": "2018-01-27 18:00:00"
+    },
+    {
+      "k": 64665,
+      "window_idx": 9237,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 53013,
+      "abs_row_end": 55316,
+      "t_start": "2018-01-04 05:15:00",
+      "t_end": "2018-01-28 05:00:00"
+    },
+    {
+      "k": 65005,
+      "window_idx": 9286,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 53062,
+      "abs_row_end": 55365,
+      "t_start": "2018-01-04 17:30:00",
+      "t_end": "2018-01-28 17:15:00"
+    },
+    {
+      "k": 65279,
+      "window_idx": 9325,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 53101,
+      "abs_row_end": 55404,
+      "t_start": "2018-01-05 03:15:00",
+      "t_end": "2018-01-29 03:00:00"
+    },
+    {
+      "k": 65599,
+      "window_idx": 9371,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 53147,
+      "abs_row_end": 55450,
+      "t_start": "2018-01-05 14:45:00",
+      "t_end": "2018-01-29 14:30:00"
+    },
+    {
+      "k": 65874,
+      "window_idx": 9410,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 53186,
+      "abs_row_end": 55489,
+      "t_start": "2018-01-06 00:30:00",
+      "t_end": "2018-01-30 00:15:00"
+    },
+    {
+      "k": 65973,
+      "window_idx": 9424,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 53200,
+      "abs_row_end": 55503,
+      "t_start": "2018-01-06 04:00:00",
+      "t_end": "2018-01-30 03:45:00"
+    },
+    {
+      "k": 66476,
+      "window_idx": 9496,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 53272,
+      "abs_row_end": 55575,
+      "t_start": "2018-01-06 22:00:00",
+      "t_end": "2018-01-30 21:45:00"
+    },
+    {
+      "k": 66742,
+      "window_idx": 9534,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 53310,
+      "abs_row_end": 55613,
+      "t_start": "2018-01-07 07:30:00",
+      "t_end": "2018-01-31 07:15:00"
+    },
+    {
+      "k": 67008,
+      "window_idx": 9572,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 53348,
+      "abs_row_end": 55651,
+      "t_start": "2018-01-07 17:00:00",
+      "t_end": "2018-01-31 16:45:00"
+    },
+    {
+      "k": 67045,
+      "window_idx": 9577,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 53353,
+      "abs_row_end": 55656,
+      "t_start": "2018-01-07 18:15:00",
+      "t_end": "2018-01-31 18:00:00"
+    },
+    {
+      "k": 67084,
+      "window_idx": 9583,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 53359,
+      "abs_row_end": 55662,
+      "t_start": "2018-01-07 19:45:00",
+      "t_end": "2018-01-31 19:30:00"
+    },
+    {
+      "k": 67258,
+      "window_idx": 9608,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 53384,
+      "abs_row_end": 55687,
+      "t_start": "2018-01-08 02:00:00",
+      "t_end": "2018-02-01 01:45:00"
+    },
+    {
+      "k": 67321,
+      "window_idx": 9617,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 53393,
+      "abs_row_end": 55696,
+      "t_start": "2018-01-08 04:15:00",
+      "t_end": "2018-02-01 04:00:00"
+    },
+    {
+      "k": 67669,
+      "window_idx": 9667,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 53443,
+      "abs_row_end": 55746,
+      "t_start": "2018-01-08 16:45:00",
+      "t_end": "2018-02-01 16:30:00"
+    },
+    {
+      "k": 68223,
+      "window_idx": 9746,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 53522,
+      "abs_row_end": 55825,
+      "t_start": "2018-01-09 12:30:00",
+      "t_end": "2018-02-02 12:15:00"
+    },
+    {
+      "k": 68738,
+      "window_idx": 9819,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 53595,
+      "abs_row_end": 55898,
+      "t_start": "2018-01-10 06:45:00",
+      "t_end": "2018-02-03 06:30:00"
+    },
+    {
+      "k": 69113,
+      "window_idx": 9873,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 53649,
+      "abs_row_end": 55952,
+      "t_start": "2018-01-10 20:15:00",
+      "t_end": "2018-02-03 20:00:00"
+    },
+    {
+      "k": 69385,
+      "window_idx": 9912,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 53688,
+      "abs_row_end": 55991,
+      "t_start": "2018-01-11 06:00:00",
+      "t_end": "2018-02-04 05:45:00"
+    },
+    {
+      "k": 69645,
+      "window_idx": 9949,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 53725,
+      "abs_row_end": 56028,
+      "t_start": "2018-01-11 15:15:00",
+      "t_end": "2018-02-04 15:00:00"
+    },
+    {
+      "k": 69994,
+      "window_idx": 9999,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 53775,
+      "abs_row_end": 56078,
+      "t_start": "2018-01-12 03:45:00",
+      "t_end": "2018-02-05 03:30:00"
+    },
+    {
+      "k": 70166,
+      "window_idx": 10023,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 53799,
+      "abs_row_end": 56102,
+      "t_start": "2018-01-12 09:45:00",
+      "t_end": "2018-02-05 09:30:00"
+    },
+    {
+      "k": 70192,
+      "window_idx": 10027,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 53803,
+      "abs_row_end": 56106,
+      "t_start": "2018-01-12 10:45:00",
+      "t_end": "2018-02-05 10:30:00"
+    },
+    {
+      "k": 70309,
+      "window_idx": 10044,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 53820,
+      "abs_row_end": 56123,
+      "t_start": "2018-01-12 15:00:00",
+      "t_end": "2018-02-05 14:45:00"
+    },
+    {
+      "k": 70729,
+      "window_idx": 10104,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 53880,
+      "abs_row_end": 56183,
+      "t_start": "2018-01-13 06:00:00",
+      "t_end": "2018-02-06 05:45:00"
+    },
+    {
+      "k": 70820,
+      "window_idx": 10117,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 53893,
+      "abs_row_end": 56196,
+      "t_start": "2018-01-13 09:15:00",
+      "t_end": "2018-02-06 09:00:00"
+    },
+    {
+      "k": 70861,
+      "window_idx": 10123,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 53899,
+      "abs_row_end": 56202,
+      "t_start": "2018-01-13 10:45:00",
+      "t_end": "2018-02-06 10:30:00"
+    },
+    {
+      "k": 71115,
+      "window_idx": 10159,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 53935,
+      "abs_row_end": 56238,
+      "t_start": "2018-01-13 19:45:00",
+      "t_end": "2018-02-06 19:30:00"
+    },
+    {
+      "k": 71330,
+      "window_idx": 10190,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 53966,
+      "abs_row_end": 56269,
+      "t_start": "2018-01-14 03:30:00",
+      "t_end": "2018-02-07 03:15:00"
+    },
+    {
+      "k": 71798,
+      "window_idx": 10256,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 54032,
+      "abs_row_end": 56335,
+      "t_start": "2018-01-14 20:00:00",
+      "t_end": "2018-02-07 19:45:00"
+    },
+    {
+      "k": 72318,
+      "window_idx": 10331,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 54107,
+      "abs_row_end": 56410,
+      "t_start": "2018-01-15 14:45:00",
+      "t_end": "2018-02-08 14:30:00"
+    },
+    {
+      "k": 72407,
+      "window_idx": 10343,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 54119,
+      "abs_row_end": 56422,
+      "t_start": "2018-01-15 17:45:00",
+      "t_end": "2018-02-08 17:30:00"
+    },
+    {
+      "k": 72492,
+      "window_idx": 10356,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 54132,
+      "abs_row_end": 56435,
+      "t_start": "2018-01-15 21:00:00",
+      "t_end": "2018-02-08 20:45:00"
+    },
+    {
+      "k": 72687,
+      "window_idx": 10383,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 54159,
+      "abs_row_end": 56462,
+      "t_start": "2018-01-16 03:45:00",
+      "t_end": "2018-02-09 03:30:00"
+    },
+    {
+      "k": 72816,
+      "window_idx": 10402,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 54178,
+      "abs_row_end": 56481,
+      "t_start": "2018-01-16 08:30:00",
+      "t_end": "2018-02-09 08:15:00"
+    },
+    {
+      "k": 73286,
+      "window_idx": 10469,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 54245,
+      "abs_row_end": 56548,
+      "t_start": "2018-01-17 01:15:00",
+      "t_end": "2018-02-10 01:00:00"
+    },
+    {
+      "k": 73325,
+      "window_idx": 10475,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 54251,
+      "abs_row_end": 56554,
+      "t_start": "2018-01-17 02:45:00",
+      "t_end": "2018-02-10 02:30:00"
+    },
+    {
+      "k": 73842,
+      "window_idx": 10548,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 54324,
+      "abs_row_end": 56627,
+      "t_start": "2018-01-17 21:00:00",
+      "t_end": "2018-02-10 20:45:00"
+    },
+    {
+      "k": 73986,
+      "window_idx": 10569,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 54345,
+      "abs_row_end": 56648,
+      "t_start": "2018-01-18 02:15:00",
+      "t_end": "2018-02-11 02:00:00"
+    },
+    {
+      "k": 74040,
+      "window_idx": 10577,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 54353,
+      "abs_row_end": 56656,
+      "t_start": "2018-01-18 04:15:00",
+      "t_end": "2018-02-11 04:00:00"
+    },
+    {
+      "k": 74077,
+      "window_idx": 10582,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 54358,
+      "abs_row_end": 56661,
+      "t_start": "2018-01-18 05:30:00",
+      "t_end": "2018-02-11 05:15:00"
+    },
+    {
+      "k": 74338,
+      "window_idx": 10619,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 54395,
+      "abs_row_end": 56698,
+      "t_start": "2018-01-18 14:45:00",
+      "t_end": "2018-02-11 14:30:00"
+    },
+    {
+      "k": 75238,
+      "window_idx": 10748,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 54524,
+      "abs_row_end": 56827,
+      "t_start": "2018-01-19 23:00:00",
+      "t_end": "2018-02-12 22:45:00"
+    },
+    {
+      "k": 75277,
+      "window_idx": 10753,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 54529,
+      "abs_row_end": 56832,
+      "t_start": "2018-01-20 00:15:00",
+      "t_end": "2018-02-13 00:00:00"
+    },
+    {
+      "k": 75429,
+      "window_idx": 10775,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 54551,
+      "abs_row_end": 56854,
+      "t_start": "2018-01-20 05:45:00",
+      "t_end": "2018-02-13 05:30:00"
+    },
+    {
+      "k": 75783,
+      "window_idx": 10826,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 54602,
+      "abs_row_end": 56905,
+      "t_start": "2018-01-20 18:30:00",
+      "t_end": "2018-02-13 18:15:00"
+    },
+    {
+      "k": 76020,
+      "window_idx": 10860,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 54636,
+      "abs_row_end": 56939,
+      "t_start": "2018-01-21 03:00:00",
+      "t_end": "2018-02-14 02:45:00"
+    },
+    {
+      "k": 77111,
+      "window_idx": 11015,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 54791,
+      "abs_row_end": 57094,
+      "t_start": "2018-01-22 17:45:00",
+      "t_end": "2018-02-15 17:30:00"
+    },
+    {
+      "k": 77348,
+      "window_idx": 11049,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 54825,
+      "abs_row_end": 57128,
+      "t_start": "2018-01-23 02:15:00",
+      "t_end": "2018-02-16 02:00:00"
+    },
+    {
+      "k": 77468,
+      "window_idx": 11066,
+      "channel_idx": 6,
+      "variable": "OT",
+      "abs_row_start": 54842,
+      "abs_row_end": 57145,
+      "t_start": "2018-01-23 06:30:00",
+      "t_end": "2018-02-16 06:15:00"
+    },
+    {
+      "k": 77779,
+      "window_idx": 11111,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 54887,
+      "abs_row_end": 57190,
+      "t_start": "2018-01-23 17:45:00",
+      "t_end": "2018-02-16 17:30:00"
+    },
+    {
+      "k": 77884,
+      "window_idx": 11126,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 54902,
+      "abs_row_end": 57205,
+      "t_start": "2018-01-23 21:30:00",
+      "t_end": "2018-02-16 21:15:00"
+    },
+    {
+      "k": 77891,
+      "window_idx": 11127,
+      "channel_idx": 2,
+      "variable": "MUFL",
+      "abs_row_start": 54903,
+      "abs_row_end": 57206,
+      "t_start": "2018-01-23 21:45:00",
+      "t_end": "2018-02-16 21:30:00"
+    },
+    {
+      "k": 78019,
+      "window_idx": 11145,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 54921,
+      "abs_row_end": 57224,
+      "t_start": "2018-01-24 02:15:00",
+      "t_end": "2018-02-17 02:00:00"
+    },
+    {
+      "k": 78237,
+      "window_idx": 11176,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 54952,
+      "abs_row_end": 57255,
+      "t_start": "2018-01-24 10:00:00",
+      "t_end": "2018-02-17 09:45:00"
+    },
+    {
+      "k": 78288,
+      "window_idx": 11184,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 54960,
+      "abs_row_end": 57263,
+      "t_start": "2018-01-24 12:00:00",
+      "t_end": "2018-02-17 11:45:00"
+    },
+    {
+      "k": 78334,
+      "window_idx": 11190,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 54966,
+      "abs_row_end": 57269,
+      "t_start": "2018-01-24 13:30:00",
+      "t_end": "2018-02-17 13:15:00"
+    },
+    {
+      "k": 78348,
+      "window_idx": 11192,
+      "channel_idx": 4,
+      "variable": "LUFL",
+      "abs_row_start": 54968,
+      "abs_row_end": 57271,
+      "t_start": "2018-01-24 14:00:00",
+      "t_end": "2018-02-17 13:45:00"
+    },
+    {
+      "k": 78646,
+      "window_idx": 11235,
+      "channel_idx": 1,
+      "variable": "HULL",
+      "abs_row_start": 55011,
+      "abs_row_end": 57314,
+      "t_start": "2018-01-25 00:45:00",
+      "t_end": "2018-02-18 00:30:00"
+    },
+    {
+      "k": 78720,
+      "window_idx": 11245,
+      "channel_idx": 5,
+      "variable": "LULL",
+      "abs_row_start": 55021,
+      "abs_row_end": 57324,
+      "t_start": "2018-01-25 03:15:00",
+      "t_end": "2018-02-18 03:00:00"
+    },
+    {
+      "k": 78872,
+      "window_idx": 11267,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 55043,
+      "abs_row_end": 57346,
+      "t_start": "2018-01-25 08:45:00",
+      "t_end": "2018-02-18 08:30:00"
+    },
+    {
+      "k": 79096,
+      "window_idx": 11299,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 55075,
+      "abs_row_end": 57378,
+      "t_start": "2018-01-25 16:45:00",
+      "t_end": "2018-02-18 16:30:00"
+    },
+    {
+      "k": 79817,
+      "window_idx": 11402,
+      "channel_idx": 3,
+      "variable": "MULL",
+      "abs_row_start": 55178,
+      "abs_row_end": 57481,
+      "t_start": "2018-01-26 18:30:00",
+      "t_end": "2018-02-19 18:15:00"
+    },
+    {
+      "k": 79947,
+      "window_idx": 11421,
+      "channel_idx": 0,
+      "variable": "HUFL",
+      "abs_row_start": 55197,
+      "abs_row_end": 57500,
+      "t_start": "2018-01-26 23:15:00",
+      "t_end": "2018-02-19 23:00:00"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "params": {
+    "n_components": 2,
+    "perplexity": 30,
+    "learning_rate": 200.0,
+    "init": "pca",
+    "early_exaggeration": 12.0,
+    "max_iter": 1000,
+    "random_state": 2021,
+    "metric": "euclidean"
+  },
+  "sklearn_version": "1.9.1",
+  "input_shape": [
+    1900,
+    54528
+  ],
+  "input_dtype": "float32",
+  "note": "one joint run over all 1900 samples; no pre-PCA, no per-group standardization (init=pca seeds the 2-D initialization only); parameters are supplementary settings, the paper does not disclose them.",
+  "group_order": [
+    "ImageNet",
+    "ETTm1",
+    "Weather",
+    "Electricity"
+  ],
+  "elapsed_s": 11.3
+}
