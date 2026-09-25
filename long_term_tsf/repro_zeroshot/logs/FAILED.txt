@@ -1,0 +1,69 @@
+time=2026-09-25 00:44:54  config=ETTh1_96  exit=0
+log: /dev_data/wlt/VisionTS_Experiments/long_term_tsf/repro_zeroshot/logs/ETTh1_96.log
+--- log tail ---
+Traceback (most recent call last):
+  File "/dev_data/wlt/VisionTS_Experiments/long_term_tsf/run.py", line 4, in <module>
+    from exp.exp_long_term_forecasting import Exp_Long_Term_Forecast
+  File "/dev_data/wlt/VisionTS_Experiments/long_term_tsf/exp/exp_long_term_forecasting.py", line 2, in <module>
+    from exp.exp_basic import Exp_Basic
+  File "/dev_data/wlt/VisionTS_Experiments/long_term_tsf/exp/exp_basic.py", line 3, in <module>
+    from models import Autoformer, Transformer, TimesNet, Nonstationary_Transformer, DLinear, FEDformer, \
+  File "/dev_data/wlt/VisionTS_Experiments/long_term_tsf/models/Transformer.py", line 5, in <module>
+    from layers.SelfAttention_Family import FullAttention, AttentionLayer
+  File "/dev_data/wlt/VisionTS_Experiments/long_term_tsf/layers/SelfAttention_Family.py", line 6, in <module>
+    from reformer_pytorch import LSHSelfAttention
+ModuleNotFoundError: No module named 'reformer_pytorch'
+[run_one] exit_code=1 wall_time=5s
+time=2026-09-25 00:47:10  config=ETTh1_96  exit=1
+log: /dev_data/wlt/VisionTS_Experiments/long_term_tsf/repro_zeroshot/logs/ETTh1_96.log
+--- log tail ---
+  Checkpoints:        ./checkpoints/      
+
+[1mForecasting Task[0m
+  Seq Len:            2880                Label Len:          48                  
+  Pred Len:           96                  Seasonal Patterns:  Monthly             
+  Inverse:            0                   
+
+[1mModel Parameters[0m
+  Top k:              5                   Num Kernels:        6                   
+  Enc In:             7                   Dec In:             7                   
+  C Out:              7                   d model:            512                 
+  n heads:            8                   e layers:           2                   
+  d layers:           1                   d FF:               2048                
+  Moving Avg:         25                  Factor:             1                   
+  Distil:             1                   Dropout:            0.1                 
+  Embed:              timeF               Activation:         gelu                
+  Output Attention:   0                   
+
+[1mRun Parameters[0m
+  Num Workers:        10                  Itr:                1                   
+  Train Epochs:       0                   Batch Size:         32                  
+  Patience:           3                   Learning Rate:      0.0001              
+  Des:                test                Loss:               MSE                 
+  Lradj:              type1               Use Amp:            0                   
+
+[1mGPU[0m
+  Use GPU:            1                   GPU:                0                   
+  Use Multi GPU:      0                   Devices:            0,1,2,3             
+
+[1mDe-stationary Projector Params[0m
+  P Hidden Dims:      128, 128            P Hidden Layers:    2                   
+
+Use GPU: cuda:0
+>>>>>>>start training : _>>>>>>>>>>>>>>>>>>>>>>>>>>
+train 5665
+val 2785
+test 2785
+Traceback (most recent call last):
+  File "/dev_data/wlt/VisionTS_Experiments/long_term_tsf/run.py", line 163, in <module>
+    exp.train(setting)
+  File "/dev_data/wlt/VisionTS_Experiments/long_term_tsf/exp/exp_long_term_forecasting.py", line 93, in train
+    early_stopping = EarlyStopping(patience=self.args.patience, verbose=True)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/dev_data/wlt/VisionTS_Experiments/long_term_tsf/utils/tools.py", line 38, in __init__
+    self.val_loss_min = np.Inf
+                        ^^^^^^
+  File "/dev_data/wlt/conda/envs/visionts/lib/python3.12/site-packages/numpy/__init__.py", line 778, in __getattr__
+    raise AttributeError(
+AttributeError: `np.Inf` was removed in the NumPy 2.0 release. Use `np.inf` instead.
+[run_one] exit_code=1 wall_time=10s

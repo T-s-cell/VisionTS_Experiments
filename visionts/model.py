@@ -39,8 +39,9 @@ class VisionTS(nn.Module):
             try:
                 checkpoint = torch.load(ckpt_path, map_location='cpu')
                 self.vision_model.load_state_dict(checkpoint['model'], strict=True)
-            except:
-                print(f"Bad checkpoint file. Please delete {ckpt_path} and redownload!")
+            except Exception as e:
+                print(f"Bad checkpoint file. Please delete {ckpt_path} and redownload! Error: {e}")
+                raise
         
         if finetune_type != 'full':
             for n, param in self.vision_model.named_parameters():

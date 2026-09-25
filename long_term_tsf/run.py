@@ -11,10 +11,10 @@ import random
 import numpy as np
 
 if __name__ == '__main__':
-    # fix_seed = 2021
-    # random.seed(fix_seed)
-    # torch.manual_seed(fix_seed)
-    # np.random.seed(fix_seed)
+    fix_seed = 2021
+    random.seed(fix_seed)
+    torch.manual_seed(fix_seed)
+    np.random.seed(fix_seed)
 
     parser = argparse.ArgumentParser(description='TimesNet')
 
@@ -164,6 +164,8 @@ if __name__ == '__main__':
 
             print('>>>>>>>testing : {}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'.format(setting))
             exp.test(setting)
+            if args.use_gpu and torch.cuda.is_available():
+                print('Peak GPU memory (this process): {:.2f} GB'.format(torch.cuda.max_memory_allocated() / 1024**3))
             torch.cuda.empty_cache()
     else:
         ii = 0
@@ -189,4 +191,6 @@ if __name__ == '__main__':
         exp = Exp(args)  # set experiments
         print('>>>>>>>testing : {}<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<'.format(setting))
         exp.test(setting, test=1)
+        if args.use_gpu and torch.cuda.is_available():
+            print('Peak GPU memory (this process): {:.2f} GB'.format(torch.cuda.max_memory_allocated() / 1024**3))
         torch.cuda.empty_cache()

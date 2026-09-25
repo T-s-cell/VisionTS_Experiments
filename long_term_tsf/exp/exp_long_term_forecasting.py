@@ -174,7 +174,9 @@ class Exp_Long_Term_Forecast(Exp_Basic):
             adjust_learning_rate(model_optim, epoch + 1, self.args)
 
         best_model_path = path + '/' + 'checkpoint.pth'
-        if os.path.isfile(best_model_path):
+        if self.args.train_epochs == 0:
+            print("Zero-shot: skip loading any checkpoint from", path)
+        elif os.path.isfile(best_model_path):
             self.model.load_state_dict(torch.load(best_model_path))
         else:
             print("Test without train!",best_model_path)

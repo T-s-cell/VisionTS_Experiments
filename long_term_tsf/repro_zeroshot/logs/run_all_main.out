@@ -1,0 +1,107 @@
+[run_all] env snapshot -> /dev_data/wlt/VisionTS_Experiments/long_term_tsf/repro_zeroshot/logs/env_snapshot_main.txt
+torch 2.12.0+cu126 | cuda 12.6 | available True
+torchvision 0.27.0+cu126
+timm 1.0.30
+device: NVIDIA L20
+ETT split: 12/4/4 months (total 20); custom (Weather/Electricity): 0.7/0.1/0.2; StandardScaler fit on train only; metrics in normalized space.
+reformer-pytorch==1.4.4
+timm==1.0.30
+torch==2.12.0+cu126
+[run_all] RUN  ETTh1_96
+[run_one] ETTh1 pred=96 ctx=2880 period=24 save=save_repro_zeroshot gpu=0 start=2026-09-25 00:51:43
+[run_one] exit_code=0 wall_time=95s
+[run_one] SUCCESS ETTh1_96 mse:0.352749764919281, mae:0.38327986001968384 Peak GPU memory (this process): 1.63 GB time=95s
+[run_all] RUN  ETTh1_192
+[run_one] ETTh1 pred=192 ctx=2880 period=24 save=save_repro_zeroshot gpu=0 start=2026-09-25 00:53:19
+[run_one] exit_code=0 wall_time=101s
+[run_one] SUCCESS ETTh1_192 mse:0.39192527532577515, mae:0.40975889563560486 Peak GPU memory (this process): 1.63 GB time=101s
+[run_all] RUN  ETTh1_336
+[run_one] ETTh1 pred=336 ctx=2880 period=24 save=save_repro_zeroshot gpu=0 start=2026-09-25 00:55:02
+[run_one] exit_code=0 wall_time=91s
+[run_one] SUCCESS ETTh1_336 mse:0.40712490677833557, mae:0.4225219786167145 Peak GPU memory (this process): 1.63 GB time=91s
+[run_all] RUN  ETTh1_720
+[run_one] ETTh1 pred=720 ctx=2880 period=24 save=save_repro_zeroshot gpu=0 start=2026-09-25 00:56:34
+[run_one] exit_code=0 wall_time=74s
+[run_one] SUCCESS ETTh1_720 mse:0.4061579406261444, mae:0.4409675896167755 Peak GPU memory (this process): 1.63 GB time=74s
+[run_all] RUN  ETTh2_96
+[run_one] ETTh2 pred=96 ctx=1728 period=24 save=save_repro_zeroshot gpu=0 start=2026-09-25 00:57:49
+[run_one] exit_code=0 wall_time=96s
+[run_one] SUCCESS ETTh2_96 mse:0.2714855372905731, mae:0.32843488454818726 Peak GPU memory (this process): 1.63 GB time=96s
+[run_all] RUN  ETTh2_192
+[run_one] ETTh2 pred=192 ctx=1728 period=24 save=save_repro_zeroshot gpu=0 start=2026-09-25 00:59:26
+[run_one] exit_code=0 wall_time=101s
+[run_one] SUCCESS ETTh2_192 mse:0.328258752822876, mae:0.36679893732070923 Peak GPU memory (this process): 1.63 GB time=101s
+[run_all] RUN  ETTh2_336
+[run_one] ETTh2 pred=336 ctx=1728 period=24 save=save_repro_zeroshot gpu=0 start=2026-09-25 01:01:08
+[run_one] exit_code=0 wall_time=82s
+[run_one] SUCCESS ETTh2_336 mse:0.3449770510196686, mae:0.38143184781074524 Peak GPU memory (this process): 1.62 GB time=82s
+[run_all] RUN  ETTh2_720
+[run_one] ETTh2 pred=720 ctx=1728 period=24 save=save_repro_zeroshot gpu=0 start=2026-09-25 01:02:31
+[run_one] exit_code=0 wall_time=65s
+[run_one] SUCCESS ETTh2_720 mse:0.38782644271850586, mae:0.4217681884765625 Peak GPU memory (this process): 1.62 GB time=65s
+[run_all] RUN  ETTm1_96
+[run_one] ETTm1 pred=96 ctx=2304 period=96 save=save_repro_zeroshot gpu=0 start=2026-09-25 01:03:38
+[run_one] exit_code=0 wall_time=375s
+[run_one] SUCCESS ETTm1_96 mse:0.3411028981208801, mae:0.34679311513900757 Peak GPU memory (this process): 1.63 GB time=375s
+[run_all] RUN  ETTm1_192
+[run_one] ETTm1 pred=192 ctx=2304 period=96 save=save_repro_zeroshot gpu=0 start=2026-09-25 01:09:55
+[run_one] exit_code=0 wall_time=366s
+[run_one] SUCCESS ETTm1_192 mse:0.3597588837146759, mae:0.3603294789791107 Peak GPU memory (this process): 1.63 GB time=366s
+[run_all] RUN  ETTm1_336
+[run_one] ETTm1 pred=336 ctx=2304 period=96 save=save_repro_zeroshot gpu=0 start=2026-09-25 01:16:02
+[run_one] exit_code=0 wall_time=328s
+[run_one] SUCCESS ETTm1_336 mse:0.37681761384010315, mae:0.3739188015460968 Peak GPU memory (this process): 1.63 GB time=328s
+[run_all] RUN  ETTm1_720
+[run_one] ETTm1 pred=720 ctx=2304 period=96 save=save_repro_zeroshot gpu=0 start=2026-09-25 01:21:32
+[run_one] exit_code=0 wall_time=316s
+[run_one] SUCCESS ETTm1_720 mse:0.4163892865180969, mae:0.40544411540031433 Peak GPU memory (this process): 1.63 GB time=316s
+[run_all] RUN  ETTm2_96
+[run_one] ETTm2 pred=96 ctx=4032 period=96 save=save_repro_zeroshot gpu=0 start=2026-09-25 01:26:50
+[run_one] exit_code=0 wall_time=376s
+[run_one] SUCCESS ETTm2_96 mse:0.22785815596580505, mae:0.2823617458343506 Peak GPU memory (this process): 1.63 GB time=376s
+[run_all] RUN  ETTm2_192
+[run_one] ETTm2 pred=192 ctx=4032 period=96 save=save_repro_zeroshot gpu=0 start=2026-09-25 01:33:07
+[run_one] exit_code=0 wall_time=365s
+[run_one] SUCCESS ETTm2_192 mse:0.2615295648574829, mae:0.30469849705696106 Peak GPU memory (this process): 1.63 GB time=365s
+[run_all] RUN  ETTm2_336
+[run_one] ETTm2 pred=336 ctx=4032 period=96 save=save_repro_zeroshot gpu=0 start=2026-09-25 01:39:13
+[run_one] exit_code=0 wall_time=368s
+[run_one] SUCCESS ETTm2_336 mse:0.2931411862373352, mae:0.3281802833080292 Peak GPU memory (this process): 1.63 GB time=368s
+[run_all] RUN  ETTm2_720
+[run_one] ETTm2 pred=720 ctx=4032 period=96 save=save_repro_zeroshot gpu=0 start=2026-09-25 01:45:23
+[run_one] exit_code=0 wall_time=316s
+[run_one] SUCCESS ETTm2_720 mse:0.34322240948677063, mae:0.37003281712532043 Peak GPU memory (this process): 1.63 GB time=316s
+[run_all] RUN  Weather_96
+[run_one] Weather pred=96 ctx=4032 period=144 save=save_repro_zeroshot gpu=0 start=2026-09-25 01:50:40
+[run_one] exit_code=0 wall_time=1111s
+[run_one] SUCCESS Weather_96 mse:0.21997405588626862, mae:0.2568363845348358 Peak GPU memory (this process): 0.60 GB time=1111s
+[run_all] RUN  Weather_192
+[run_one] Weather pred=192 ctx=4032 period=144 save=save_repro_zeroshot gpu=0 start=2026-09-25 02:09:12
+[run_one] exit_code=0 wall_time=1100s
+[run_one] SUCCESS Weather_192 mse:0.24419397115707397, mae:0.2745096981525421 Peak GPU memory (this process): 0.60 GB time=1100s
+[run_all] RUN  Weather_336
+[run_one] Weather pred=336 ctx=4032 period=144 save=save_repro_zeroshot gpu=0 start=2026-09-25 02:27:33
+[run_one] exit_code=0 wall_time=977s
+[run_one] SUCCESS Weather_336 mse:0.2799457311630249, mae:0.2994217872619629 Peak GPU memory (this process): 0.60 GB time=977s
+[run_all] RUN  Weather_720
+[run_one] Weather pred=720 ctx=4032 period=144 save=save_repro_zeroshot gpu=0 start=2026-09-25 02:43:52
+[run_one] exit_code=0 wall_time=585s
+[run_one] SUCCESS Weather_720 mse:0.32952257990837097, mae:0.33749762177467346 Peak GPU memory (this process): 0.60 GB time=585s
+[run_all] RUN  Electricity_96
+[run_one] Electricity pred=96 ctx=2880 period=24 save=save_repro_zeroshot gpu=0 start=2026-09-25 02:53:39
+[run_one] exit_code=0 wall_time=4863s
+[run_one] SUCCESS Electricity_96 mse:0.17723090946674347, mae:0.26588690280914307 Peak GPU memory (this process): 0.60 GB time=4863s
+[run_all] RUN  Electricity_192
+[run_one] Electricity pred=192 ctx=2880 period=24 save=save_repro_zeroshot gpu=0 start=2026-09-25 04:14:43
+[run_one] exit_code=0 wall_time=3618s
+[run_one] SUCCESS Electricity_192 mse:0.18821212649345398, mae:0.2768862843513489 Peak GPU memory (this process): 0.60 GB time=3618s
+[run_all] RUN  Electricity_336
+[run_one] Electricity pred=336 ctx=2880 period=24 save=save_repro_zeroshot gpu=0 start=2026-09-25 05:15:02
+[run_one] exit_code=0 wall_time=3077s
+[run_one] SUCCESS Electricity_336 mse:0.20723359286785126, mae:0.2959032654762268 Peak GPU memory (this process): 0.60 GB time=3077s
+[run_all] RUN  Electricity_720
+[run_one] Electricity pred=720 ctx=2880 period=24 save=save_repro_zeroshot gpu=0 start=2026-09-25 06:06:20
+[run_one] exit_code=0 wall_time=2601s
+[run_one] SUCCESS Electricity_720 mse:0.25583916902542114, mae:0.33724361658096313 Peak GPU memory (this process): 0.60 GB time=2601s
+[run_all] ALL DONE (main): 24 runs. Collect results:
+  PYTHON=/dev_data/wlt/conda/envs/visionts/bin/python /dev_data/wlt/conda/envs/visionts/bin/python /dev_data/wlt/VisionTS_Experiments/long_term_tsf/repro_zeroshot/collect_results.py --save_base save_repro_zeroshot
