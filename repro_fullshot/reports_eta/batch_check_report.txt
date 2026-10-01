@@ -1,0 +1,144 @@
+[PASS] ETTh1/96 train: len == windows x C | len=51751 windows=7393 len(data_x)=8640
+[PASS] ETTh1/96 val: len == windows x C | len=19495 windows=2785 len(data_x)=4032
+[PASS] ETTh1/96 test: len == windows x C | len=19495 windows=2785 len(data_x)=4032
+[PASS] ETTh1/96: sample shapes | x=(1152, 1) y=(144, 1) mark=(1152, 4)
+[PASS] ETTh1/96: batch shape | x=(256, 1152, 1) y=(256, 144, 1)
+[PASS] ETTh1/96: num_patch_input recorded | npi=5 tokens=71 mask_ratio=0.6429
+[PASS] ETTh1/192 train: len == windows x C | len=51079 windows=7297 len(data_x)=8640
+[PASS] ETTh1/192 val: len == windows x C | len=18823 windows=2689 len(data_x)=4032
+[PASS] ETTh1/192 test: len == windows x C | len=18823 windows=2689 len(data_x)=4032
+[PASS] ETTh1/192: num_patch_input recorded | npi=4 tokens=57 mask_ratio=0.7143
+[PASS] ETTh1/336 train: len == windows x C | len=50071 windows=7153 len(data_x)=8640
+[PASS] ETTh1/336 val: len == windows x C | len=17815 windows=2545 len(data_x)=4032
+[PASS] ETTh1/336 test: len == windows x C | len=17815 windows=2545 len(data_x)=4032
+[PASS] ETTh1/336: num_patch_input recorded | npi=4 tokens=57 mask_ratio=0.7143
+[PASS] ETTh1/720 train: len == windows x C | len=47383 windows=6769 len(data_x)=8640
+[PASS] ETTh1/720 val: len == windows x C | len=15127 windows=2161 len(data_x)=4032
+[PASS] ETTh1/720 test: len == windows x C | len=15127 windows=2161 len(data_x)=4032
+[PASS] ETTh1/720: num_patch_input recorded | npi=3 tokens=43 mask_ratio=0.7857
+[PASS] ETTh2/96 train: len == windows x C | len=51751 windows=7393 len(data_x)=8640
+[PASS] ETTh2/96 val: len == windows x C | len=19495 windows=2785 len(data_x)=4032
+[PASS] ETTh2/96 test: len == windows x C | len=19495 windows=2785 len(data_x)=4032
+[PASS] ETTh2/96: sample shapes | x=(1152, 1) y=(144, 1) mark=(1152, 4)
+[PASS] ETTh2/96: batch shape | x=(256, 1152, 1) y=(256, 144, 1)
+[PASS] ETTh2/96: num_patch_input recorded | npi=5 tokens=71 mask_ratio=0.6429
+[PASS] ETTh2/192 train: len == windows x C | len=51079 windows=7297 len(data_x)=8640
+[PASS] ETTh2/192 val: len == windows x C | len=18823 windows=2689 len(data_x)=4032
+[PASS] ETTh2/192 test: len == windows x C | len=18823 windows=2689 len(data_x)=4032
+[PASS] ETTh2/192: num_patch_input recorded | npi=4 tokens=57 mask_ratio=0.7143
+[PASS] ETTh2/336 train: len == windows x C | len=50071 windows=7153 len(data_x)=8640
+[PASS] ETTh2/336 val: len == windows x C | len=17815 windows=2545 len(data_x)=4032
+[PASS] ETTh2/336 test: len == windows x C | len=17815 windows=2545 len(data_x)=4032
+[PASS] ETTh2/336: num_patch_input recorded | npi=4 tokens=57 mask_ratio=0.7143
+[PASS] ETTh2/720 train: len == windows x C | len=47383 windows=6769 len(data_x)=8640
+[PASS] ETTh2/720 val: len == windows x C | len=15127 windows=2161 len(data_x)=4032
+[PASS] ETTh2/720 test: len == windows x C | len=15127 windows=2161 len(data_x)=4032
+[PASS] ETTh2/720: num_patch_input recorded | npi=3 tokens=43 mask_ratio=0.7857
+[PASS] ETTm2/96 train: len == windows x C | len=233191 windows=33313 len(data_x)=34560
+[PASS] ETTm2/96 val: len == windows x C | len=79975 windows=11425 len(data_x)=12672
+[PASS] ETTm2/96 test: len == windows x C | len=79975 windows=11425 len(data_x)=12672
+[PASS] ETTm2/96: sample shapes | x=(1152, 1) y=(144, 1) mark=(1152, 5)
+[PASS] ETTm2/96: batch shape | x=(256, 1152, 1) y=(256, 144, 1)
+[PASS] ETTm2/96: num_patch_input recorded | npi=5 tokens=71 mask_ratio=0.6429
+[PASS] ETTm2/192 train: len == windows x C | len=232519 windows=33217 len(data_x)=34560
+[PASS] ETTm2/192 val: len == windows x C | len=79303 windows=11329 len(data_x)=12672
+[PASS] ETTm2/192 test: len == windows x C | len=79303 windows=11329 len(data_x)=12672
+[PASS] ETTm2/192: num_patch_input recorded | npi=4 tokens=57 mask_ratio=0.7143
+[PASS] ETTm2/336 train: len == windows x C | len=231511 windows=33073 len(data_x)=34560
+[PASS] ETTm2/336 val: len == windows x C | len=78295 windows=11185 len(data_x)=12672
+[PASS] ETTm2/336 test: len == windows x C | len=78295 windows=11185 len(data_x)=12672
+[PASS] ETTm2/336: num_patch_input recorded | npi=4 tokens=57 mask_ratio=0.7143
+[PASS] ETTm2/720 train: len == windows x C | len=228823 windows=32689 len(data_x)=34560
+[PASS] ETTm2/720 val: len == windows x C | len=75607 windows=10801 len(data_x)=12672
+[PASS] ETTm2/720 test: len == windows x C | len=75607 windows=10801 len(data_x)=12672
+[PASS] ETTm2/720: num_patch_input recorded | npi=3 tokens=43 mask_ratio=0.7857
+[PASS] ETTm1/96 train: len == windows x C | len=225127 windows=32161 len(data_x)=34560
+[PASS] ETTm1/96 val: len == windows x C | len=79975 windows=11425 len(data_x)=13824
+[PASS] ETTm1/96 test: len == windows x C | len=79975 windows=11425 len(data_x)=13824
+[PASS] ETTm1/96: sample shapes | x=(2304, 1) y=(144, 1) mark=(2304, 5)
+[PASS] ETTm1/96: batch shape | x=(256, 2304, 1) y=(256, 144, 1)
+[PASS] ETTm1/96: num_patch_input recorded | npi=5 tokens=71 mask_ratio=0.6429
+[PASS] ETTm1/192 train: len == windows x C | len=224455 windows=32065 len(data_x)=34560
+[PASS] ETTm1/192 val: len == windows x C | len=79303 windows=11329 len(data_x)=13824
+[PASS] ETTm1/192 test: len == windows x C | len=79303 windows=11329 len(data_x)=13824
+[PASS] ETTm1/192: num_patch_input recorded | npi=5 tokens=71 mask_ratio=0.6429
+[PASS] ETTm1/336 train: len == windows x C | len=223447 windows=31921 len(data_x)=34560
+[PASS] ETTm1/336 val: len == windows x C | len=78295 windows=11185 len(data_x)=13824
+[PASS] ETTm1/336 test: len == windows x C | len=78295 windows=11185 len(data_x)=13824
+[PASS] ETTm1/336: num_patch_input recorded | npi=4 tokens=57 mask_ratio=0.7143
+[PASS] ETTm1/720 train: len == windows x C | len=220759 windows=31537 len(data_x)=34560
+[PASS] ETTm1/720 val: len == windows x C | len=75607 windows=10801 len(data_x)=13824
+[PASS] ETTm1/720 test: len == windows x C | len=75607 windows=10801 len(data_x)=13824
+[PASS] ETTm1/720: num_patch_input recorded | npi=4 tokens=57 mask_ratio=0.7143
+[PASS] Weather/96 train: len == windows x C | len=760536 windows=36216 len(data_x)=36887
+[PASS] Weather/96 val: len == windows x C | len=108675 windows=5175 len(data_x)=5846
+[PASS] Weather/96 test: len == windows x C | len=219324 windows=10444 len(data_x)=11115
+[PASS] Weather/96: sample shapes | x=(576, 1) y=(144, 1) mark=(576, 4)
+[PASS] Weather/96: batch shape | x=(256, 576, 1) y=(256, 144, 1)
+[PASS] Weather/96: num_patch_input recorded | npi=7 tokens=99 mask_ratio=0.5000
+[PASS] Weather/192 train: len == windows x C | len=758520 windows=36120 len(data_x)=36887
+[PASS] Weather/192 val: len == windows x C | len=106659 windows=5079 len(data_x)=5846
+[PASS] Weather/192 test: len == windows x C | len=217308 windows=10348 len(data_x)=11115
+[PASS] Weather/192: num_patch_input recorded | npi=6 tokens=85 mask_ratio=0.5714
+[PASS] Weather/336 train: len == windows x C | len=755496 windows=35976 len(data_x)=36887
+[PASS] Weather/336 val: len == windows x C | len=103635 windows=4935 len(data_x)=5846
+[PASS] Weather/336 test: len == windows x C | len=214284 windows=10204 len(data_x)=11115
+[PASS] Weather/336: num_patch_input recorded | npi=5 tokens=71 mask_ratio=0.6429
+[PASS] Weather/720 train: len == windows x C | len=747432 windows=35592 len(data_x)=36887
+[PASS] Weather/720 val: len == windows x C | len=95571 windows=4551 len(data_x)=5846
+[PASS] Weather/720 test: len == windows x C | len=206220 windows=9820 len(data_x)=11115
+[PASS] Weather/720: num_patch_input recorded | npi=4 tokens=57 mask_ratio=0.7143
+[PASS] Electricity/96 train: len == windows x C | len=5509965 windows=17165 len(data_x)=18412
+[PASS] Electricity/96 val: len == windows x C | len=814377 windows=2537 len(data_x)=3784
+[PASS] Electricity/96 test: len == windows x C | len=1657965 windows=5165 len(data_x)=6412
+[PASS] Electricity/96: sample shapes | x=(1152, 1) y=(144, 1) mark=(1152, 4)
+[PASS] Electricity/96: batch shape | x=(256, 1152, 1) y=(256, 144, 1)
+[PASS] Electricity/96: num_patch_input recorded | npi=5 tokens=71 mask_ratio=0.6429
+[PASS] Electricity/192 train: len == windows x C | len=5479149 windows=17069 len(data_x)=18412
+[PASS] Electricity/192 val: len == windows x C | len=783561 windows=2441 len(data_x)=3784
+[PASS] Electricity/192 test: len == windows x C | len=1627149 windows=5069 len(data_x)=6412
+[PASS] Electricity/192: num_patch_input recorded | npi=4 tokens=57 mask_ratio=0.7143
+[PASS] Electricity/336 train: len == windows x C | len=5432925 windows=16925 len(data_x)=18412
+[PASS] Electricity/336 val: len == windows x C | len=737337 windows=2297 len(data_x)=3784
+[PASS] Electricity/336 test: len == windows x C | len=1580925 windows=4925 len(data_x)=6412
+[PASS] Electricity/336: num_patch_input recorded | npi=4 tokens=57 mask_ratio=0.7143
+[PASS] Electricity/720 train: len == windows x C | len=5309661 windows=16541 len(data_x)=18412
+[PASS] Electricity/720 val: len == windows x C | len=614073 windows=1913 len(data_x)=3784
+[PASS] Electricity/720 test: len == windows x C | len=1457661 windows=4541 len(data_x)=6412
+[PASS] Electricity/720: num_patch_input recorded | npi=3 tokens=43 mask_ratio=0.7857
+[PASS] Traffic/96 train: len == windows x C | len=9510446 windows=11033 len(data_x)=12280
+[PASS] Traffic/96 val: len == windows x C | len=1431782 windows=1661 len(data_x)=2908
+[PASS] Traffic/96 test: len == windows x C | len=2942006 windows=3413 len(data_x)=4660
+[PASS] Traffic/96: sample shapes | x=(1152, 1) y=(144, 1) mark=(1152, 4)
+[PASS] Traffic/96: batch shape | x=(256, 1152, 1) y=(256, 144, 1)
+[PASS] Traffic/96: num_patch_input recorded | npi=5 tokens=71 mask_ratio=0.6429
+[PASS] Traffic/192 train: len == windows x C | len=9427694 windows=10937 len(data_x)=12280
+[PASS] Traffic/192 val: len == windows x C | len=1349030 windows=1565 len(data_x)=2908
+[PASS] Traffic/192 test: len == windows x C | len=2859254 windows=3317 len(data_x)=4660
+[PASS] Traffic/192: num_patch_input recorded | npi=4 tokens=57 mask_ratio=0.7143
+[PASS] Traffic/336 train: len == windows x C | len=9303566 windows=10793 len(data_x)=12280
+[PASS] Traffic/336 val: len == windows x C | len=1224902 windows=1421 len(data_x)=2908
+[PASS] Traffic/336 test: len == windows x C | len=2735126 windows=3173 len(data_x)=4660
+[PASS] Traffic/336: num_patch_input recorded | npi=4 tokens=57 mask_ratio=0.7143
+[PASS] Traffic/720 train: len == windows x C | len=8972558 windows=10409 len(data_x)=12280
+[PASS] Traffic/720 val: len == windows x C | len=893894 windows=1037 len(data_x)=2908
+[PASS] Traffic/720 test: len == windows x C | len=2404118 windows=2789 len(data_x)=4660
+[PASS] Traffic/720: num_patch_input recorded | npi=3 tokens=43 mask_ratio=0.7857
+[PASS] illness/24 train: len == windows x C | len=3843 windows=549 len(data_x)=676
+[PASS] illness/24 val: len == windows x C | len=518 windows=74 len(data_x)=201
+[PASS] illness/24 test: len == windows x C | len=1190 windows=170 len(data_x)=297
+[PASS] illness/24: sample shapes | x=(104, 1) y=(72, 1) mark=(104, 4)
+[PASS] illness/24: batch shape | x=(256, 104, 1) y=(256, 72, 1)
+[PASS] illness/24: num_patch_input recorded | npi=3 tokens=43 mask_ratio=0.7857
+[PASS] illness/36 train: len == windows x C | len=3759 windows=537 len(data_x)=676
+[PASS] illness/36 val: len == windows x C | len=434 windows=62 len(data_x)=201
+[PASS] illness/36 test: len == windows x C | len=1106 windows=158 len(data_x)=297
+[PASS] illness/36: num_patch_input recorded | npi=3 tokens=43 mask_ratio=0.7857
+[PASS] illness/48 train: len == windows x C | len=3675 windows=525 len(data_x)=676
+[PASS] illness/48 val: len == windows x C | len=350 windows=50 len(data_x)=201
+[PASS] illness/48 test: len == windows x C | len=1022 windows=146 len(data_x)=297
+[PASS] illness/48: num_patch_input recorded | npi=3 tokens=43 mask_ratio=0.7857
+[PASS] illness/60 train: len == windows x C | len=3591 windows=513 len(data_x)=676
+[PASS] illness/60 val: len == windows x C | len=266 windows=38 len(data_x)=201
+[PASS] illness/60 test: len == windows x C | len=938 windows=134 len(data_x)=297
+[PASS] illness/60: num_patch_input recorded | npi=2 tokens=29 mask_ratio=0.8571

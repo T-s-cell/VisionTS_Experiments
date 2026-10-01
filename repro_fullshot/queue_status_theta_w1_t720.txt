@@ -1,0 +1,8 @@
+===== theta t720 continuation worker 1 start 2026-09-29 13:35:40 =====
+0, NVIDIA GeForce RTX 3090, 24576 MiB, 1321 MiB
+1, NVIDIA GeForce RTX 3090, 24576 MiB, 24246 MiB
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda        7.3T  6.0T  955G  87% /dev_data
+[QUEUE] 2026-09-29 13:35:40 start Traffic_720_seed2023 (gpu 1)
+[QUEUE] 2026-09-30 01:11:26 DONE Traffic_720_seed2023
+[QUEUE] 2026-09-30 01:11:26 ALL JOBS COMPLETED t720 worker 1 (done/skip this invocation: 1)

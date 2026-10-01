@@ -1,0 +1,18 @@
+===== theta illness acceleration worker 0 start 2026-09-30 20:56:02 =====
+0, NVIDIA GeForce RTX 3090, 24576 MiB, 16193 MiB
+1, NVIDIA GeForce RTX 3090, 24576 MiB, 22671 MiB
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda        7.3T  6.0T  915G  87% /dev_data
+[QUEUE] 2026-09-30 20:56:02 start illness_24_seed2021 (gpu 0)
+[QUEUE] 2026-09-30 21:00:16 DONE illness_24_seed2021
+[QUEUE] 2026-09-30 21:00:16 start illness_24_seed2022 (gpu 0)
+[QUEUE] 2026-09-30 21:05:59 DONE illness_24_seed2022
+[QUEUE] 2026-09-30 21:05:59 start illness_24_seed2023 (gpu 0)
+[QUEUE] 2026-09-30 21:11:31 DONE illness_24_seed2023
+[QUEUE] 2026-09-30 21:11:31 start illness_36_seed2021 (gpu 0)
+[QUEUE] 2026-09-30 21:13:41 DONE illness_36_seed2021
+[QUEUE] 2026-09-30 21:13:41 start illness_36_seed2022 (gpu 0)
+[QUEUE] 2026-09-30 21:15:33 DONE illness_36_seed2022
+[QUEUE] 2026-09-30 21:15:33 start illness_36_seed2023 (gpu 0)
+[QUEUE] 2026-09-30 21:17:24 DONE illness_36_seed2023
+[QUEUE] 2026-09-30 21:17:24 ALL JOBS COMPLETED illness worker 0 (done/skip this invocation: 6)

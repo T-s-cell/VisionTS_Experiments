@@ -1,0 +1,13 @@
+===== theta ECL_720 rescue worker 1 start 2026-10-01 00:14:40 =====
+0, NVIDIA GeForce RTX 3090, 24576 MiB, 18493 MiB
+1, NVIDIA GeForce RTX 3090, 24576 MiB, 22671 MiB
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda        7.3T  6.0T  910G  88% /dev_data
+[QUEUE] 2026-10-01 00:14:40 start Electricity_720_seed2023 (gpu 1)
+===== theta ECL_720 rescue worker 1 start 2026-10-01 00:16:02 =====
+0, NVIDIA GeForce RTX 3090, 24576 MiB, 18493 MiB
+1, NVIDIA GeForce RTX 3090, 24576 MiB, 7712 MiB
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda        7.3T  6.0T  910G  88% /dev_data
+[QUEUE] 2026-10-01 00:16:02 GPU 1 busy (free 7712MiB < 22000MiB), yield & retry in 60s
+[QUEUE] 2026-10-01 00:17:02 GPU 1 busy (free 7712MiB < 22000MiB), yield & retry in 60s

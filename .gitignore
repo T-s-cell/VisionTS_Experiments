@@ -6,3 +6,6 @@ build/
 dist/
 *.egg-info
 dist.sh
+repro_fullshot/logs/
+repro_fullshot/logs_theta/
+audit_supplement/

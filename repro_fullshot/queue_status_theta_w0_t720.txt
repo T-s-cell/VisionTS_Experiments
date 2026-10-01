@@ -1,0 +1,23 @@
+===== theta t720 continuation worker 0 start 2026-09-29 05:37:41 =====
+0, NVIDIA GeForce RTX 3090, 24576 MiB, 23265 MiB
+1, NVIDIA GeForce RTX 3090, 24576 MiB, 8559 MiB
+Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda        7.3T  6.0T  963G  87% /dev_data
+[QUEUE] 2026-09-29 05:37:42 start Traffic_720_seed2021 (gpu 0)
+[QUEUE] 2026-09-29 18:47:43 DONE Traffic_720_seed2021
+[QUEUE] 2026-09-29 18:47:43 GPU 0 busy (free 16279MiB < 22700MiB), yield & retry in 60s
+[QUEUE] 2026-09-29 18:48:43 GPU 0 busy (free 16279MiB < 22700MiB), yield & retry in 60s
+[QUEUE] 2026-09-29 18:49:43 GPU 0 busy (free 16279MiB < 22700MiB), yield & retry in 60s
+[QUEUE] 2026-09-29 18:50:43 GPU 0 busy (free 16279MiB < 22700MiB), yield & retry in 60s
+[QUEUE] 2026-09-29 18:51:43 GPU 0 busy (free 16279MiB < 22700MiB), yield & retry in 60s
+[QUEUE] 2026-09-29 18:52:43 GPU 0 busy (free 16279MiB < 22700MiB), yield & retry in 60s
+[QUEUE] 2026-09-29 18:53:43 GPU 0 busy (free 16279MiB < 22700MiB), yield & retry in 60s
+[QUEUE] 2026-09-29 18:54:43 GPU 0 busy (free 16279MiB < 22700MiB), yield & retry in 60s
+[QUEUE] 2026-09-29 18:55:43 GPU 0 busy (free 16279MiB < 22700MiB), yield & retry in 60s
+[QUEUE] 2026-09-29 18:56:43 GPU 0 busy (free 16279MiB < 22700MiB), yield & retry in 60s
+[QUEUE] 2026-09-29 18:57:43 GPU 0 busy (free 16279MiB < 22700MiB), yield & retry in 60s
+[QUEUE] 2026-09-29 18:58:43 GPU 0 busy (free 16279MiB < 22700MiB), yield & retry in 60s
+[QUEUE] 2026-09-29 18:59:43 GPU 0 busy (free 16279MiB < 22700MiB), yield & retry in 60s
+[QUEUE] 2026-09-29 19:00:43 start Traffic_720_seed2022 (gpu 0)
+[QUEUE] 2026-09-30 07:58:32 DONE Traffic_720_seed2022
+[QUEUE] 2026-09-30 07:58:32 ALL JOBS COMPLETED t720 worker 0 (done/skip this invocation: 2)
