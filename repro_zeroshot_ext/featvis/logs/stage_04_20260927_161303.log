@@ -1,0 +1,3 @@
+{"spearman_dist_mse": 0.1876357560568087, "spearman_dist_mae": 0.330966158852629}
+highdim outputs -> /dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/highdim
+[featvis] stage(s) completed OK

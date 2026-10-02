@@ -1,0 +1,74 @@
+{
+ "main": {
+  "ref": "masked",
+  "seed": 2021,
+  "perplexity": 30,
+  "learning_rate": 200,
+  "init": "pca",
+  "max_iter": 1000,
+  "rows": 2117,
+  "pca_dim": 50,
+  "sklearn": "1.9.1",
+  "note": "main and supplementary fits are separate; absolute coords not comparable across fits"
+ },
+ "supp_nomask": {
+  "ref": "nomask",
+  "seed": 2021,
+  "perplexity": 30,
+  "learning_rate": 200,
+  "init": "pca",
+  "max_iter": 1000,
+  "rows": 2117,
+  "pca_dim": 50,
+  "sklearn": "1.9.1",
+  "note": "main and supplementary fits are separate; absolute coords not comparable across fits"
+ },
+ "sens_seed2022": {
+  "ref": "masked",
+  "seed": 2022,
+  "perplexity": 30,
+  "learning_rate": 200,
+  "init": "pca",
+  "max_iter": 1000,
+  "rows": 2117,
+  "pca_dim": 50,
+  "sklearn": "1.9.1",
+  "note": "main and supplementary fits are separate; absolute coords not comparable across fits"
+ },
+ "sens_seed2023": {
+  "ref": "masked",
+  "seed": 2023,
+  "perplexity": 30,
+  "learning_rate": 200,
+  "init": "pca",
+  "max_iter": 1000,
+  "rows": 2117,
+  "pca_dim": 50,
+  "sklearn": "1.9.1",
+  "note": "main and supplementary fits are separate; absolute coords not comparable across fits"
+ },
+ "sens_perp20": {
+  "ref": "masked",
+  "seed": 2021,
+  "perplexity": 20,
+  "learning_rate": 200,
+  "init": "pca",
+  "max_iter": 1000,
+  "rows": 2117,
+  "pca_dim": 50,
+  "sklearn": "1.9.1",
+  "note": "main and supplementary fits are separate; absolute coords not comparable across fits"
+ },
+ "sens_perp50": {
+  "ref": "masked",
+  "seed": 2021,
+  "perplexity": 50,
+  "learning_rate": 200,
+  "init": "pca",
+  "max_iter": 1000,
+  "rows": 2117,
+  "pca_dim": 50,
+  "sklearn": "1.9.1",
+  "note": "main and supplementary fits are separate; absolute coords not comparable across fits"
+ }
+}

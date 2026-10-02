@@ -1,0 +1,3 @@
+{"selected": 18, "test_windows": 117, "out": "/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/selection/selected_vars.csv"}
+ranking recomputation matches the frozen list; selection frozen
+[featvis] stage(s) completed OK

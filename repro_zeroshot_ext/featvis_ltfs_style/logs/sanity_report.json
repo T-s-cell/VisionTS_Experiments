@@ -1,0 +1,55 @@
+{
+ "device": "cuda",
+ "ckpt_sha256_prefix": "/dev_data/wlt/Vi",
+ "pred_rtol_declared": 0.0001,
+ "checks": {
+  "S1a_mask_shape": {
+   "pass": true,
+   "detail": "(1, 196)"
+  },
+  "S1b_mask_sum140": {
+   "pass": true,
+   "detail": "sum=140.0"
+  },
+  "S1c_kept_set": {
+   "pass": true,
+   "detail": "buffer kept set == leftmost-4-columns: True"
+  },
+  "S2a_norm_shape": {
+   "pass": true,
+   "detail": "(4, 57, 768)"
+  },
+  "S2b_order_elementwise_same_across_batch": {
+   "pass": true,
+   "detail": ""
+  },
+  "S2c_order_equals_noise_derived": {
+   "pass": true,
+   "detail": ""
+  },
+  "S2d_kept_set": {
+   "pass": true,
+   "detail": "n_unique=56"
+  },
+  "S3_independent_image_equals_hook": {
+   "pass": true,
+   "detail": "max|d|=0.000e+00"
+  },
+  "S4_independent_flatten_equals_hook": {
+   "pass": true,
+   "detail": "max|d|=0.000e+00, dim=43776"
+  },
+  "S4b_forward_ids_keep_order_matches_archive": {
+   "pass": true,
+   "detail": ""
+  },
+  "S5_pred_spotcheck_within_declared_rtol": {
+   "pass": true,
+   "detail": "rtol<=0.0001; CropsAndStaples__rice_usd_cw: 49 rows max_abs=0.000e+00 rel=0.00e+00; arts__food_wine_festivals_96: 18 rows max_abs=0.000e+00 rel=0.00e+00"
+  },
+  "S6_repeat_forward_bitwise": {
+   "pass": true,
+   "detail": ""
+  }
+ }
+}

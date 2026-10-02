@@ -1,0 +1,8 @@
+main: rows=2117 ref=masked seed=2021 perp=30 -> /dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/tsne/coords_main.csv
+supp_nomask: rows=2117 ref=nomask seed=2021 perp=30 -> /dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/tsne/coords_supp_nomask.csv
+sens_seed2022: rows=2117 ref=masked seed=2022 perp=30 -> /dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/tsne/coords_sens_seed2022.csv
+sens_seed2023: rows=2117 ref=masked seed=2023 perp=30 -> /dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/tsne/coords_sens_seed2023.csv
+sens_perp20: rows=2117 ref=masked seed=2021 perp=20 -> /dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/tsne/coords_sens_perp20.csv
+sens_perp50: rows=2117 ref=masked seed=2021 perp=50 -> /dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/tsne/coords_sens_perp50.csv
+t-SNE done -> /dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/tsne
+[featvis] stage(s) completed OK

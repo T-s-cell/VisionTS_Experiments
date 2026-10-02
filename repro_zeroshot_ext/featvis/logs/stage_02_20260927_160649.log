@@ -1,0 +1,19 @@
+[featvis] GPU 0 free 28330MiB >= 9000MiB, proceeding
+[PASS] S1a_mask_shape (1, 196)
+[PASS] S1b_mask_sum140 sum=140.0
+[PASS] S1c_ratio 0.714285671710968 (fp32 buffer mean; 5/7 differs at fp32 eps)
+[PASS] S1d_kept_set buffer kept set == leftmost-4-columns: True
+[PASS] S2a_norm_shape (3, 57, 768)
+[PASS] S2b_kept_set_per_sample 
+[PASS] S2c_56_unique_ids 
+[PASS] S2d_encoder_order_is_permutation_of_kept (order itself not asserted)
+[PASS] S3a_nomask_all_kept 
+[PASS] S3b_nomask_natural_order 
+[PASS] S4_independent_image_equals_hook max|d|=0.000e+00
+[PASS] S5_independent_features_equals_hook max|d|=0.000e+00
+[PASS] S6a_pred_vs_cache_batch_within_declared_rtol rtol<=0.0001; traffic__tour_de_france_../batch6: max_abs=2.003e-05 rel=9.72e-07; shopping__air_conditione../batch6: max_abs=2.289e-05 rel=4.09e-07; CropsAndStaples__rice_us../batch6: max_abs=1.907e-06 rel=1.38e-07; arts__food_wine_festival../batch6: max_abs=1.907e-05 rel=3.53e-07; economy__cost_of_living_../batch6: max_abs=3.052e-05 rel=2.35e-07; science__nobel_prize_96_../batch6: max_abs=1.907e-05 rel=4.67e-07
+[PASS] S6b_solo_batch_dependence_diagnostic traffic__tour_de_france_../solo: max_abs=1.431e-05 rel=6.94e-07; shopping__air_conditione../solo: max_abs=1.526e-05 rel=2.73e-07; CropsAndStaples__rice_us../solo: max_abs=9.537e-07 rel=6.92e-08; arts__food_wine_festival../solo: max_abs=3.052e-05 rel=5.65e-07; economy__cost_of_living_../solo: max_abs=1.526e-05 rel=1.18e-07; science__nobel_prize_96_../solo: max_abs=2.670e-05 rel=6.54e-07 | root cause (resolved): cudnn TF32 default-on vs infer.py TF32-off; after parity solo agrees ~1e-7
+[PASS] S6c_infer_order_B64_replication_within_rtol traffic__tour_de_france_96_12_4_10events: 27 rows, worst rel=0.00e+00 (rtol<=0.0001)
+[PASS] S7_repeat_forward_bitwise 
+sanity: 16/16 PASS
+[featvis] stage(s) completed OK

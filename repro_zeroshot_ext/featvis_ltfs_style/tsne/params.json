@@ -1,0 +1,56 @@
+{
+ "fits": {
+  "main": {
+   "ref": "fig7_imagenet_1000_masked_P1like",
+   "tsne": {
+    "n_components": 2,
+    "perplexity": 30,
+    "learning_rate": 200,
+    "init": "pca",
+    "early_exaggeration": 12,
+    "max_iter": 1000,
+    "random_state": 2021,
+    "metric": "euclidean"
+   },
+   "pca": null,
+   "l2_normalize": false,
+   "rows": 1117,
+   "imagenet": 1000,
+   "timesx": 117
+  },
+  "ctrl": {
+   "ref": "fig7_imagenet_1000_masked_P1like",
+   "tsne": {
+    "n_components": 2,
+    "perplexity": 30,
+    "learning_rate": 200,
+    "init": "pca",
+    "early_exaggeration": 12,
+    "max_iter": 1000,
+    "random_state": 2021,
+    "metric": "euclidean"
+   },
+   "pca": {
+    "n_components": 50,
+    "random_state": 2021
+   },
+   "l2_normalize": true,
+   "rows": 1117,
+   "imagenet": 1000,
+   "timesx": 117
+  }
+ },
+ "weights_sha256_prefix": "/dev_data/wlt/Vi",
+ "imagenet_list_sha256_prefix": "84a885e90f8fcd68",
+ "pred_rtol_declared": 0.0001,
+ "software": {
+  "python": "3.12.13",
+  "sklearn": "1.9.1",
+  "numpy": "2.4.4",
+  "torch": "2.12.0+cu126"
+ },
+ "notes": [
+  "main and ctrl fits are separate; absolute coordinates not comparable across the two arms",
+  "init='pca' only initializes the optimization; no PCA reduction is applied to the flatten features"
+ ]
+}

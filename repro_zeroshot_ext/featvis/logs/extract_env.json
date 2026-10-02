@@ -1,0 +1,13 @@
+{
+ "device": "cuda",
+ "torch": "2.12.0+cu126",
+ "ckpt_sha256_prefix": "/dev_data/wlt/Vi",
+ "batch": 64,
+ "pred_rtol_declared": 0.0001,
+ "worst_cache_pred_rel": 0.0,
+ "protocol": {
+  "feat": "encoder final-norm output, CLS excluded, mean over 56 visible tokens (768-d)",
+  "masked_noise": "model.mask [1,196] expanded to [B,196] (production path)",
+  "nomask_noise": "explicit arange(196), mask_ratio=0 (natural token order)"
+ }
+}

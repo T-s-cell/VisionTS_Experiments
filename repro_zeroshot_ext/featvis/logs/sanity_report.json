@@ -1,0 +1,71 @@
+{
+ "device": "cuda",
+ "ckpt_sha256_prefix": "/dev_data/wlt/Vi",
+ "pred_rtol_declared": 0.0001,
+ "checks": {
+  "S1a_mask_shape": {
+   "pass": true,
+   "detail": "(1, 196)"
+  },
+  "S1b_mask_sum140": {
+   "pass": true,
+   "detail": "sum=140.0"
+  },
+  "S1c_ratio": {
+   "pass": true,
+   "detail": "0.714285671710968 (fp32 buffer mean; 5/7 differs at fp32 eps)"
+  },
+  "S1d_kept_set": {
+   "pass": true,
+   "detail": "buffer kept set == leftmost-4-columns: True"
+  },
+  "S2a_norm_shape": {
+   "pass": true,
+   "detail": "(3, 57, 768)"
+  },
+  "S2b_kept_set_per_sample": {
+   "pass": true,
+   "detail": ""
+  },
+  "S2c_56_unique_ids": {
+   "pass": true,
+   "detail": ""
+  },
+  "S2d_encoder_order_is_permutation_of_kept": {
+   "pass": true,
+   "detail": "(order itself not asserted)"
+  },
+  "S3a_nomask_all_kept": {
+   "pass": true,
+   "detail": ""
+  },
+  "S3b_nomask_natural_order": {
+   "pass": true,
+   "detail": ""
+  },
+  "S4_independent_image_equals_hook": {
+   "pass": true,
+   "detail": "max|d|=0.000e+00"
+  },
+  "S5_independent_features_equals_hook": {
+   "pass": true,
+   "detail": "max|d|=0.000e+00"
+  },
+  "S6a_pred_vs_cache_batch_within_declared_rtol": {
+   "pass": true,
+   "detail": "rtol<=0.0001; traffic__tour_de_france_../batch6: max_abs=2.003e-05 rel=9.72e-07; shopping__air_conditione../batch6: max_abs=2.289e-05 rel=4.09e-07; CropsAndStaples__rice_us../batch6: max_abs=1.907e-06 rel=1.38e-07; arts__food_wine_festival../batch6: max_abs=1.907e-05 rel=3.53e-07; economy__cost_of_living_../batch6: max_abs=3.052e-05 rel=2.35e-07; science__nobel_prize_96_../batch6: max_abs=1.907e-05 rel=4.67e-07"
+  },
+  "S6b_solo_batch_dependence_diagnostic": {
+   "pass": true,
+   "detail": "traffic__tour_de_france_../solo: max_abs=1.431e-05 rel=6.94e-07; shopping__air_conditione../solo: max_abs=1.526e-05 rel=2.73e-07; CropsAndStaples__rice_us../solo: max_abs=9.537e-07 rel=6.92e-08; arts__food_wine_festival../solo: max_abs=3.052e-05 rel=5.65e-07; economy__cost_of_living_../solo: max_abs=1.526e-05 rel=1.18e-07; science__nobel_prize_96_../solo: max_abs=2.670e-05 rel=6.54e-07 | root cause (resolved): cudnn TF32 default-on vs infer.py TF32-off; after parity solo agrees ~1e-7"
+  },
+  "S6c_infer_order_B64_replication_within_rtol": {
+   "pass": true,
+   "detail": "traffic__tour_de_france_96_12_4_10events: 27 rows, worst rel=0.00e+00 (rtol<=0.0001)"
+  },
+  "S7_repeat_forward_bitwise": {
+   "pass": true,
+   "detail": ""
+  }
+ }
+}

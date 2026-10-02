@@ -1,0 +1,29 @@
+{
+ "n_vars": 190,
+ "k": 10,
+ "space": "L2-normalized 768-d (pre-DR)",
+ "spearman_primary": {
+  "dist_vs_mse": {
+   "stat": 0.1876357560568087,
+   "p": 0.009531452956635439
+  },
+  "dist_vs_mae": {
+   "stat": 0.330966158852629,
+   "p": 3.1001593980338515e-06
+  }
+ },
+ "pearson_supplementary": {
+  "dist_vs_mse": {
+   "stat": 0.08050577708049514,
+   "p": 0.269521145246816
+  },
+  "dist_vs_mae": {
+   "stat": 0.27724316093488977,
+   "p": 0.00010772324986528447
+  }
+ },
+ "caveats": [
+  "overlapping test windows are not independent samples",
+  "p-values ignore within-domain variable dependence; exploratory only, not evidence that feature proximity causes forecast error"
+ ]
+}

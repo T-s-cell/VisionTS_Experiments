@@ -1,0 +1,20 @@
+main: tsne done rows=1117 -> /dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis_ltfs_style/tsne/coords_main.csv
+ctrl: tsne done rows=1117 -> /dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis_ltfs_style/tsne/coords_ctrl.csv
+separation[main]: {'timesx_nn_median': 3.9153635165813285, 'timesx_nn_min': 0.9511786892647439, 'timesx_nn_max': 9.311387605113586, 'imagenet_nn_median_sampled': 0.7201571401777774, 'imagenet_nn_p95_sampled': 1.623285843236033}
+separation[ctrl]: {'timesx_nn_median': 7.082915093423655, 'timesx_nn_min': 1.3484457713468199, 'timesx_nn_max': 12.268953466559504, 'imagenet_nn_median_sampled': 0.7721304822396728, 'imagenet_nn_p95_sampled': 1.605936175151826}
+Traceback (most recent call last):
+  File "/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis_ltfs_style/03_tsne_plot.py", line 294, in <module>
+    main()
+  File "/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis_ltfs_style/03_tsne_plot.py", line 287, in main
+    draw_fit("main", FITS[0][1], "main")
+  File "/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis_ltfs_style/03_tsne_plot.py", line 189, in draw_fit
+    ax.legend(handles=legend_items([g]), fontsize=6.5,
+                      ^^^^^^^^^^^^^^^^^
+  File "/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis_ltfs_style/03_tsne_plot.py", line 183, in legend_items
+    f"{short(vk)} ({freq_cn(vk)})"))
+                    ^^^^^^^^^^^
+  File "/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis_ltfs_style/03_tsne_plot.py", line 149, in <lambda>
+    freq_cn = lambda vk: "周频" if win[vk]["frequency"] == "weekly" else "日频"
+                                   ~~~^^^^
+KeyError: 'traffic__tour_de_france_96_12_4_10events'
+[ltfs_style] stage 03 FAILED

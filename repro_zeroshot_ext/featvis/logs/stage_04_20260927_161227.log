@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/04_highdim_analysis.py", line 117, in <module>
+    main()
+  File "/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/04_highdim_analysis.py", line 91, in main
+    f"- **Spearman(主)**: dist~MSE ρ={s['dist_vs_mse']['stat']:.4f} "
+                                      ~~~~~~~~~~~~~~~~^^^^^^^^
+TypeError: tuple indices must be integers or slices, not str
+[featvis] stage 04 FAILED

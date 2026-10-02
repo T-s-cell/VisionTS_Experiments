@@ -1,0 +1,5 @@
+[ltfs_style] GPU 0 free 28330MiB >= 9000MiB, proceeding
+timesx: 499 rows forwarded, 117 kept, worst cache-pred rel=0.00e+00, 2.2s
+imagenet: 1000 files, 22.5s
+features written -> /dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis_ltfs_style/features
+[ltfs_style] stage(s) completed OK

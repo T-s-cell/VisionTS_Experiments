@@ -1,0 +1,9 @@
+[featvis] GPU 0 free 28330MiB >= 9000MiB, proceeding
+timesx_all: (1677, 768), worst cache-pred rel=0.00e+00, 22.0s
+Traceback (most recent call last):
+  File "/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/03_extract_features.py", line 164, in <module>
+    main()
+  File "/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/03_extract_features.py", line 135, in main
+    np.savez_compressed(os.path.join(DIRS["features"], "imagenet_masked.npz"),
+TypeError: savez_compressed() got multiple values for argument 'file'
+[featvis] stage 03 FAILED

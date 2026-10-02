@@ -1,0 +1,5 @@
+[featvis] GPU 0 free 28330MiB >= 9000MiB, proceeding
+timesx_all: (1677, 768), worst cache-pred rel=0.00e+00, 22.3s
+imagenet: masked (2000, 768), nomask (2000, 768), 29.2s
+features written -> /dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/features
+[featvis] stage(s) completed OK

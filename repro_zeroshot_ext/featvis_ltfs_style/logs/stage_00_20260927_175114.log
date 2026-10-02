@@ -1,0 +1,12 @@
+timesx_windows: 117 rows (== featvis) -> /dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis_ltfs_style/lists/timesx_windows.csv
+Traceback (most recent call last):
+  File "/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis_ltfs_style/00_make_lists.py", line 67, in <module>
+    main()
+  File "/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis_ltfs_style/00_make_lists.py", line 52, in main
+    files, md5, rule = load_fig7_imagenet_json()
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis_ltfs_style/common.py", line 84, in load_fig7_imagenet_json
+    with open(FIG7_LIST_JSON) as f:
+         ^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/repro_fig7/outputs/sampling_lists/ImageNet.json'
+[ltfs_style] stage 00 FAILED

@@ -1,0 +1,496 @@
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 26368 (\N{CJK UNIFIED IDEOGRAPH-6700}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 22909 (\N{CJK UNIFIED IDEOGRAPH-597D}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 31383 (\N{CJK UNIFIED IDEOGRAPH-7A97}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 21475 (\N{CJK UNIFIED IDEOGRAPH-53E3}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 30456 (\N{CJK UNIFIED IDEOGRAPH-76F8}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 21516 (\N{CJK UNIFIED IDEOGRAPH-540C}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 36974 (\N{CJK UNIFIED IDEOGRAPH-906E}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 25377 (\N{CJK UNIFIED IDEOGRAPH-6321}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 21442 (\N{CJK UNIFIED IDEOGRAPH-53C2}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 32771 (\N{CJK UNIFIED IDEOGRAPH-8003}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 65306 (\N{FULLWIDTH COLON}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 21487 (\N{CJK UNIFIED IDEOGRAPH-53EF}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 35265 (\N{CJK UNIFIED IDEOGRAPH-89C1}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 21608 (\N{CJK UNIFIED IDEOGRAPH-5468}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 39057 (\N{CJK UNIFIED IDEOGRAPH-9891}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 32534 (\N{CJK UNIFIED IDEOGRAPH-7F16}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 30721 (\N{CJK UNIFIED IDEOGRAPH-7801}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 22120 (\N{CJK UNIFIED IDEOGRAPH-5668}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 29305 (\N{CJK UNIFIED IDEOGRAPH-7279}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 24449 (\N{CJK UNIFIED IDEOGRAPH-5F81}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 65288 (\N{FULLWIDTH LEFT PARENTHESIS}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 65289 (\N{FULLWIDTH RIGHT PARENTHESIS}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 26368 (\N{CJK UNIFIED IDEOGRAPH-6700}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 22909 (\N{CJK UNIFIED IDEOGRAPH-597D}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 31383 (\N{CJK UNIFIED IDEOGRAPH-7A97}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 21475 (\N{CJK UNIFIED IDEOGRAPH-53E3}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 30456 (\N{CJK UNIFIED IDEOGRAPH-76F8}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 21516 (\N{CJK UNIFIED IDEOGRAPH-540C}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 36974 (\N{CJK UNIFIED IDEOGRAPH-906E}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 25377 (\N{CJK UNIFIED IDEOGRAPH-6321}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 21442 (\N{CJK UNIFIED IDEOGRAPH-53C2}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 32771 (\N{CJK UNIFIED IDEOGRAPH-8003}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 65306 (\N{FULLWIDTH COLON}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 21487 (\N{CJK UNIFIED IDEOGRAPH-53EF}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 35265 (\N{CJK UNIFIED IDEOGRAPH-89C1}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 21608 (\N{CJK UNIFIED IDEOGRAPH-5468}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 39057 (\N{CJK UNIFIED IDEOGRAPH-9891}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 32534 (\N{CJK UNIFIED IDEOGRAPH-7F16}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 30721 (\N{CJK UNIFIED IDEOGRAPH-7801}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 22120 (\N{CJK UNIFIED IDEOGRAPH-5668}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 29305 (\N{CJK UNIFIED IDEOGRAPH-7279}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 24449 (\N{CJK UNIFIED IDEOGRAPH-5F81}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 65288 (\N{FULLWIDTH LEFT PARENTHESIS}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 65289 (\N{FULLWIDTH RIGHT PARENTHESIS}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 38543 (\N{CJK UNIFIED IDEOGRAPH-968F}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 26426 (\N{CJK UNIFIED IDEOGRAPH-673A}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 23376 (\N{CJK UNIFIED IDEOGRAPH-5B50}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 38598 (\N{CJK UNIFIED IDEOGRAPH-96C6}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 24352 (\N{CJK UNIFIED IDEOGRAPH-5F20}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 65292 (\N{FULLWIDTH COMMA}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 26410 (\N{CJK UNIFIED IDEOGRAPH-672A}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 25353 (\N{CJK UNIFIED IDEOGRAPH-6309}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 31867 (\N{CJK UNIFIED IDEOGRAPH-7C7B}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 21035 (\N{CJK UNIFIED IDEOGRAPH-522B}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 20998 (\N{CJK UNIFIED IDEOGRAPH-5206}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 23618 (\N{CJK UNIFIED IDEOGRAPH-5C42}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 20027 (\N{CJK UNIFIED IDEOGRAPH-4E3B}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 22270 (\N{CJK UNIFIED IDEOGRAPH-56FE}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 19982 (\N{CJK UNIFIED IDEOGRAPH-4E0E}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 26080 (\N{CJK UNIFIED IDEOGRAPH-65E0}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 34917 (\N{CJK UNIFIED IDEOGRAPH-8865}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 20805 (\N{CJK UNIFIED IDEOGRAPH-5145}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 25311 (\N{CJK UNIFIED IDEOGRAPH-62DF}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 21512 (\N{CJK UNIFIED IDEOGRAPH-5408}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 20004 (\N{CJK UNIFIED IDEOGRAPH-4E24}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 22871 (\N{CJK UNIFIED IDEOGRAPH-5957}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 22352 (\N{CJK UNIFIED IDEOGRAPH-5750}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 26631 (\N{CJK UNIFIED IDEOGRAPH-6807}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 19981 (\N{CJK UNIFIED IDEOGRAPH-4E0D}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 30452 (\N{CJK UNIFIED IDEOGRAPH-76F4}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 25509 (\N{CJK UNIFIED IDEOGRAPH-63A5}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 27604 (\N{CJK UNIFIED IDEOGRAPH-6BD4}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 36739 (\N{CJK UNIFIED IDEOGRAPH-8F83}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 20013 (\N{CJK UNIFIED IDEOGRAPH-4E2D}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 38388 (\N{CJK UNIFIED IDEOGRAPH-95F4}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 26085 (\N{CJK UNIFIED IDEOGRAPH-65E5}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 20013 (\N{CJK UNIFIED IDEOGRAPH-4E2D}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 38388 (\N{CJK UNIFIED IDEOGRAPH-95F4}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 26085 (\N{CJK UNIFIED IDEOGRAPH-65E5}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 24046 (\N{CJK UNIFIED IDEOGRAPH-5DEE}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 24046 (\N{CJK UNIFIED IDEOGRAPH-5DEE}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 26368 (\N{CJK UNIFIED IDEOGRAPH-6700}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 22909 (\N{CJK UNIFIED IDEOGRAPH-597D}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 31383 (\N{CJK UNIFIED IDEOGRAPH-7A97}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 21475 (\N{CJK UNIFIED IDEOGRAPH-53E3}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 20013 (\N{CJK UNIFIED IDEOGRAPH-4E2D}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 38388 (\N{CJK UNIFIED IDEOGRAPH-95F4}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 24046 (\N{CJK UNIFIED IDEOGRAPH-5DEE}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 30456 (\N{CJK UNIFIED IDEOGRAPH-76F8}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 21516 (\N{CJK UNIFIED IDEOGRAPH-540C}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 36974 (\N{CJK UNIFIED IDEOGRAPH-906E}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 25377 (\N{CJK UNIFIED IDEOGRAPH-6321}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 21442 (\N{CJK UNIFIED IDEOGRAPH-53C2}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 32771 (\N{CJK UNIFIED IDEOGRAPH-8003}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 65306 (\N{FULLWIDTH COLON}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 21487 (\N{CJK UNIFIED IDEOGRAPH-53EF}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 35265 (\N{CJK UNIFIED IDEOGRAPH-89C1}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 26085 (\N{CJK UNIFIED IDEOGRAPH-65E5}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 39057 (\N{CJK UNIFIED IDEOGRAPH-9891}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 21608 (\N{CJK UNIFIED IDEOGRAPH-5468}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 32534 (\N{CJK UNIFIED IDEOGRAPH-7F16}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 30721 (\N{CJK UNIFIED IDEOGRAPH-7801}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 22120 (\N{CJK UNIFIED IDEOGRAPH-5668}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 29305 (\N{CJK UNIFIED IDEOGRAPH-7279}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 24449 (\N{CJK UNIFIED IDEOGRAPH-5F81}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 65288 (\N{FULLWIDTH LEFT PARENTHESIS}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 65292 (\N{FULLWIDTH COMMA}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 19977 (\N{CJK UNIFIED IDEOGRAPH-4E09}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 32452 (\N{CJK UNIFIED IDEOGRAPH-7EC4}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 20849 (\N{CJK UNIFIED IDEOGRAPH-5171}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 29992 (\N{CJK UNIFIED IDEOGRAPH-7528}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 22352 (\N{CJK UNIFIED IDEOGRAPH-5750}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 26631 (\N{CJK UNIFIED IDEOGRAPH-6807}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 65289 (\N{FULLWIDTH RIGHT PARENTHESIS}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 26368 (\N{CJK UNIFIED IDEOGRAPH-6700}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 22909 (\N{CJK UNIFIED IDEOGRAPH-597D}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 31383 (\N{CJK UNIFIED IDEOGRAPH-7A97}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 21475 (\N{CJK UNIFIED IDEOGRAPH-53E3}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 20013 (\N{CJK UNIFIED IDEOGRAPH-4E2D}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 38388 (\N{CJK UNIFIED IDEOGRAPH-95F4}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 24046 (\N{CJK UNIFIED IDEOGRAPH-5DEE}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 30456 (\N{CJK UNIFIED IDEOGRAPH-76F8}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 21516 (\N{CJK UNIFIED IDEOGRAPH-540C}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 36974 (\N{CJK UNIFIED IDEOGRAPH-906E}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 25377 (\N{CJK UNIFIED IDEOGRAPH-6321}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 21442 (\N{CJK UNIFIED IDEOGRAPH-53C2}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 32771 (\N{CJK UNIFIED IDEOGRAPH-8003}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 65306 (\N{FULLWIDTH COLON}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 21487 (\N{CJK UNIFIED IDEOGRAPH-53EF}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 35265 (\N{CJK UNIFIED IDEOGRAPH-89C1}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 26085 (\N{CJK UNIFIED IDEOGRAPH-65E5}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 39057 (\N{CJK UNIFIED IDEOGRAPH-9891}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 21608 (\N{CJK UNIFIED IDEOGRAPH-5468}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 32534 (\N{CJK UNIFIED IDEOGRAPH-7F16}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 30721 (\N{CJK UNIFIED IDEOGRAPH-7801}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 22120 (\N{CJK UNIFIED IDEOGRAPH-5668}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 29305 (\N{CJK UNIFIED IDEOGRAPH-7279}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 24449 (\N{CJK UNIFIED IDEOGRAPH-5F81}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 65288 (\N{FULLWIDTH LEFT PARENTHESIS}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 65292 (\N{FULLWIDTH COMMA}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 19977 (\N{CJK UNIFIED IDEOGRAPH-4E09}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 32452 (\N{CJK UNIFIED IDEOGRAPH-7EC4}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 20849 (\N{CJK UNIFIED IDEOGRAPH-5171}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 29992 (\N{CJK UNIFIED IDEOGRAPH-7528}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 22352 (\N{CJK UNIFIED IDEOGRAPH-5750}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 26631 (\N{CJK UNIFIED IDEOGRAPH-6807}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 65289 (\N{FULLWIDTH RIGHT PARENTHESIS}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 38543 (\N{CJK UNIFIED IDEOGRAPH-968F}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 26426 (\N{CJK UNIFIED IDEOGRAPH-673A}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 23376 (\N{CJK UNIFIED IDEOGRAPH-5B50}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 38598 (\N{CJK UNIFIED IDEOGRAPH-96C6}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 24352 (\N{CJK UNIFIED IDEOGRAPH-5F20}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 26410 (\N{CJK UNIFIED IDEOGRAPH-672A}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 25353 (\N{CJK UNIFIED IDEOGRAPH-6309}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 31867 (\N{CJK UNIFIED IDEOGRAPH-7C7B}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 21035 (\N{CJK UNIFIED IDEOGRAPH-522B}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 20998 (\N{CJK UNIFIED IDEOGRAPH-5206}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 23618 (\N{CJK UNIFIED IDEOGRAPH-5C42}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 20027 (\N{CJK UNIFIED IDEOGRAPH-4E3B}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 22270 (\N{CJK UNIFIED IDEOGRAPH-56FE}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 19982 (\N{CJK UNIFIED IDEOGRAPH-4E0E}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 26080 (\N{CJK UNIFIED IDEOGRAPH-65E0}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 34917 (\N{CJK UNIFIED IDEOGRAPH-8865}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 20805 (\N{CJK UNIFIED IDEOGRAPH-5145}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 25311 (\N{CJK UNIFIED IDEOGRAPH-62DF}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 21512 (\N{CJK UNIFIED IDEOGRAPH-5408}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 20004 (\N{CJK UNIFIED IDEOGRAPH-4E24}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 22871 (\N{CJK UNIFIED IDEOGRAPH-5957}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 19981 (\N{CJK UNIFIED IDEOGRAPH-4E0D}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 30452 (\N{CJK UNIFIED IDEOGRAPH-76F4}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 25509 (\N{CJK UNIFIED IDEOGRAPH-63A5}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 27604 (\N{CJK UNIFIED IDEOGRAPH-6BD4}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 36739 (\N{CJK UNIFIED IDEOGRAPH-8F83}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 26080 (\N{CJK UNIFIED IDEOGRAPH-65E0}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:94: UserWarning: Glyph 20840 (\N{CJK UNIFIED IDEOGRAPH-5168}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.03, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 20840 (\N{CJK UNIFIED IDEOGRAPH-5168}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 65307 (\N{FULLWIDTH SEMICOLON}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 20445 (\N{CJK UNIFIED IDEOGRAPH-4FDD}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 30041 (\N{CJK UNIFIED IDEOGRAPH-7559}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 23454 (\N{CJK UNIFIED IDEOGRAPH-5B9E}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 38469 (\N{CJK UNIFIED IDEOGRAPH-9645}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 39044 (\N{CJK UNIFIED IDEOGRAPH-9884}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:95: UserWarning: Glyph 27979 (\N{CJK UNIFIED IDEOGRAPH-6D4B}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_{g}.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 26080 (\N{CJK UNIFIED IDEOGRAPH-65E0}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:105: UserWarning: Glyph 20840 (\N{CJK UNIFIED IDEOGRAPH-5168}) missing from font(s) DejaVu Sans.
+  fig.tight_layout(rect=(0, 0.04, 1, 1))
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 20840 (\N{CJK UNIFIED IDEOGRAPH-5168}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 65307 (\N{FULLWIDTH SEMICOLON}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 20445 (\N{CJK UNIFIED IDEOGRAPH-4FDD}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 30041 (\N{CJK UNIFIED IDEOGRAPH-7559}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 23454 (\N{CJK UNIFIED IDEOGRAPH-5B9E}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 38469 (\N{CJK UNIFIED IDEOGRAPH-9645}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 39044 (\N{CJK UNIFIED IDEOGRAPH-9884}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:106: UserWarning: Glyph 27979 (\N{CJK UNIFIED IDEOGRAPH-6D4B}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], f"{out_prefix}_triple.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:156: UserWarning: Glyph 20195 (\N{CJK UNIFIED IDEOGRAPH-4EE3}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:156: UserWarning: Glyph 34920 (\N{CJK UNIFIED IDEOGRAPH-8868}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:156: UserWarning: Glyph 31383 (\N{CJK UNIFIED IDEOGRAPH-7A97}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:156: UserWarning: Glyph 21475 (\N{CJK UNIFIED IDEOGRAPH-53E3}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:156: UserWarning: Glyph 65306 (\N{FULLWIDTH COLON}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:156: UserWarning: Glyph 21382 (\N{CJK UNIFIED IDEOGRAPH-5386}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:156: UserWarning: Glyph 21490 (\N{CJK UNIFIED IDEOGRAPH-53F2}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:156: UserWarning: Glyph 27493 (\N{CJK UNIFIED IDEOGRAPH-6B65}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:156: UserWarning: Glyph 32534 (\N{CJK UNIFIED IDEOGRAPH-7F16}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:156: UserWarning: Glyph 30721 (\N{CJK UNIFIED IDEOGRAPH-7801}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:156: UserWarning: Glyph 22120 (\N{CJK UNIFIED IDEOGRAPH-5668}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:156: UserWarning: Glyph 23454 (\N{CJK UNIFIED IDEOGRAPH-5B9E}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:156: UserWarning: Glyph 38469 (\N{CJK UNIFIED IDEOGRAPH-9645}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:156: UserWarning: Glyph 36755 (\N{CJK UNIFIED IDEOGRAPH-8F93}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:156: UserWarning: Glyph 20837 (\N{CJK UNIFIED IDEOGRAPH-5165}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:156: UserWarning: Glyph 22270 (\N{CJK UNIFIED IDEOGRAPH-56FE}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:156: UserWarning: Glyph 65288 (\N{FULLWIDTH LEFT PARENTHESIS}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:156: UserWarning: Glyph 65292 (\N{FULLWIDTH COMMA}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:156: UserWarning: Glyph 21491 (\N{CJK UNIFIED IDEOGRAPH-53F3}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:156: UserWarning: Glyph 21015 (\N{CJK UNIFIED IDEOGRAPH-5217}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:156: UserWarning: Glyph 20026 (\N{CJK UNIFIED IDEOGRAPH-4E3A}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:156: UserWarning: Glyph 38646 (\N{CJK UNIFIED IDEOGRAPH-96F6}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:156: UserWarning: Glyph 65289 (\N{FULLWIDTH RIGHT PARENTHESIS}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:156: UserWarning: Glyph 39044 (\N{CJK UNIFIED IDEOGRAPH-9884}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:156: UserWarning: Glyph 27979 (\N{CJK UNIFIED IDEOGRAPH-6D4B}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:156: UserWarning: Glyph 30495 (\N{CJK UNIFIED IDEOGRAPH-771F}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:156: UserWarning: Glyph 20540 (\N{CJK UNIFIED IDEOGRAPH-503C}) missing from font(s) DejaVu Sans.
+  fig.tight_layout()
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:157: UserWarning: Glyph 20195 (\N{CJK UNIFIED IDEOGRAPH-4EE3}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], "representative_windows.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:157: UserWarning: Glyph 34920 (\N{CJK UNIFIED IDEOGRAPH-8868}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], "representative_windows.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:157: UserWarning: Glyph 31383 (\N{CJK UNIFIED IDEOGRAPH-7A97}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], "representative_windows.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:157: UserWarning: Glyph 21475 (\N{CJK UNIFIED IDEOGRAPH-53E3}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], "representative_windows.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:157: UserWarning: Glyph 65306 (\N{FULLWIDTH COLON}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], "representative_windows.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:157: UserWarning: Glyph 21382 (\N{CJK UNIFIED IDEOGRAPH-5386}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], "representative_windows.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:157: UserWarning: Glyph 21490 (\N{CJK UNIFIED IDEOGRAPH-53F2}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], "representative_windows.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:157: UserWarning: Glyph 27493 (\N{CJK UNIFIED IDEOGRAPH-6B65}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], "representative_windows.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:157: UserWarning: Glyph 32534 (\N{CJK UNIFIED IDEOGRAPH-7F16}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], "representative_windows.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:157: UserWarning: Glyph 30721 (\N{CJK UNIFIED IDEOGRAPH-7801}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], "representative_windows.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:157: UserWarning: Glyph 22120 (\N{CJK UNIFIED IDEOGRAPH-5668}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], "representative_windows.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:157: UserWarning: Glyph 23454 (\N{CJK UNIFIED IDEOGRAPH-5B9E}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], "representative_windows.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:157: UserWarning: Glyph 38469 (\N{CJK UNIFIED IDEOGRAPH-9645}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], "representative_windows.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:157: UserWarning: Glyph 36755 (\N{CJK UNIFIED IDEOGRAPH-8F93}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], "representative_windows.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:157: UserWarning: Glyph 20837 (\N{CJK UNIFIED IDEOGRAPH-5165}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], "representative_windows.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:157: UserWarning: Glyph 22270 (\N{CJK UNIFIED IDEOGRAPH-56FE}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], "representative_windows.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:157: UserWarning: Glyph 65288 (\N{FULLWIDTH LEFT PARENTHESIS}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], "representative_windows.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:157: UserWarning: Glyph 65292 (\N{FULLWIDTH COMMA}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], "representative_windows.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:157: UserWarning: Glyph 21491 (\N{CJK UNIFIED IDEOGRAPH-53F3}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], "representative_windows.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:157: UserWarning: Glyph 21015 (\N{CJK UNIFIED IDEOGRAPH-5217}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], "representative_windows.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:157: UserWarning: Glyph 20026 (\N{CJK UNIFIED IDEOGRAPH-4E3A}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], "representative_windows.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:157: UserWarning: Glyph 38646 (\N{CJK UNIFIED IDEOGRAPH-96F6}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], "representative_windows.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:157: UserWarning: Glyph 65289 (\N{FULLWIDTH RIGHT PARENTHESIS}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], "representative_windows.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:157: UserWarning: Glyph 39044 (\N{CJK UNIFIED IDEOGRAPH-9884}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], "representative_windows.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:157: UserWarning: Glyph 27979 (\N{CJK UNIFIED IDEOGRAPH-6D4B}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], "representative_windows.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:157: UserWarning: Glyph 30495 (\N{CJK UNIFIED IDEOGRAPH-771F}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], "representative_windows.png"), dpi=200)
+/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/06_plot_fig.py:157: UserWarning: Glyph 20540 (\N{CJK UNIFIED IDEOGRAPH-503C}) missing from font(s) DejaVu Sans.
+  fig.savefig(os.path.join(DIRS["figures"], "representative_windows.png"), dpi=200)
+figures -> /dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis/figures
+[featvis] stage(s) completed OK

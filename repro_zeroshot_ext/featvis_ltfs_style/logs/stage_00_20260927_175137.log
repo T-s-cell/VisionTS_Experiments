@@ -1,0 +1,3 @@
+timesx_windows: 117 rows (== featvis) -> /dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis_ltfs_style/lists/timesx_windows.csv
+imagenet_list: 1000 files in LTFS original order (sha256 84a885e90f8fcd68) -> /dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/featvis_ltfs_style/lists/imagenet_list.json
+[ltfs_style] stage(s) completed OK
