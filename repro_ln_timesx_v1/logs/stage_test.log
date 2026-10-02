@@ -1,0 +1,23 @@
+[test] Z0 done: 2474 windows
+[test] N0 done: 2474 windows
+[test] 285 runs, 285 to evaluate
+[test] 15/285 (F0__RawMaterialsAndConstruction__s2023)
+[test] 30/285 (F0__economy__s2023)
+[test] 45/285 (F0__public_policy__s2023)
+[test] 60/285 (F1__CropsAndStaples__s2023)
+[test] 75/285 (F1__SpecialtyAndAdvancedMaterials__s2023)
+[test] 90/285 (F1__electronic_technology__s2023)
+[test] 105/285 (F1__science__s2023)
+[test] 120/285 (F2__Currency__s2023)
+[test] 135/285 (F2__StrategicAndHighValueMaterials__s2023)
+[test] 150/285 (F2__finance__s2023)
+[test] 165/285 (F2__shopping__s2023)
+[test] 180/285 (F3__EnergyAndFuels__s2023)
+[test] 195/285 (F3__arts__s2023)
+[test] 210/285 (F3__pets__s2023)
+[test] 225/285 (F3__society__s2023)
+[test] 240/285 (F4__LivestockAndFoodProducts__s2023)
+[test] 255/285 (F4__climate__s2023)
+[test] 270/285 (F4__public_health__s2023)
+[test] 285/285 (F4__traffic__s2023)
+[test] complete

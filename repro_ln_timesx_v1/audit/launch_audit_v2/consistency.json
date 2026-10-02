@@ -1,0 +1,32 @@
+{
+ "note": "v2 re-verification after audit fixes; eta manifests regenerated via prepare --force ON ETA",
+ "data_cache_array_sha256": {
+  "local": {
+   "series": "948d78a48b0cbb03b5cd24b004259291ccb6ffe3cba2f2597ea71cfa9177b155",
+   "series_off": "9aff39665e203657459da3c248046698fd7ccf86b2c23f47b2322f2b253c254c",
+   "series_len": "0f0d9cc49f4b9c3c0f30ff65e402133b9545bb4cee959c2311955c44108262cb",
+   "var_keys": "c20d71401295a40c23316d40859115edfec608d3d8d4e4a51baf7292765d36e0"
+  },
+  "eta": {
+   "series": "948d78a48b0cbb03b5cd24b004259291ccb6ffe3cba2f2597ea71cfa9177b155",
+   "series_off": "9aff39665e203657459da3c248046698fd7ccf86b2c23f47b2322f2b253c254c",
+   "series_len": "0f0d9cc49f4b9c3c0f30ff65e402133b9545bb4cee959c2311955c44108262cb",
+   "var_keys": "c20d71401295a40c23316d40859115edfec608d3d8d4e4a51baf7292765d36e0"
+  },
+  "equal": true
+ },
+ "split_manifest_content_sha256_excl_zip_path": {
+  "local": "1b0c2db9ceba21ec3c52f3586ba3a60cd95e7fd9f037ae431ed6bfdf6f9b9cd9",
+  "eta": "1b0c2db9ceba21ec3c52f3586ba3a60cd95e7fd9f037ae431ed6bfdf6f9b9cd9",
+  "equal": true
+ },
+ "code_fingerprint": {
+  "local_files": 12,
+  "eta_files": 13,
+  "equal_ignoring_stray_v1yaml": true,
+  "stray_note": "eta has top-level v1.yaml (md5 f315d77cee5fea257c7e24c0c0a49a9b) byte-identical to configs/v1.yaml; left in place after preflight PASS to keep the verified fingerprint binding; included in eta code fingerprint (13 files vs 12 local)"
+ },
+ "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+ "zip_sha256": "9adb9540733c128e05e774e81cf0e238a9cc80b37e99da0c883bee9f57988bcc",
+ "protocol_data_cache_sha256": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa"
+}

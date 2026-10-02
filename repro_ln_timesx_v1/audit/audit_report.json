@@ -1,0 +1,98 @@
+{
+ "finished": "2026-09-30T11:23:41",
+ "environment": {
+  "python": "3.12.13",
+  "numpy": "2.4.4",
+  "torch": "2.12.0+cu126",
+  "cuda": "12.6",
+  "cudnn": 91002
+ },
+ "baseline_diff": {
+  "ok": true,
+  "static_changed": [],
+  "static_missing": [],
+  "static_added": [],
+  "dynamic_new_n": 0,
+  "dynamic_new": [],
+  "dynamic_removed_n": 0,
+  "dynamic_removed": [],
+  "n_static": 90
+ },
+ "hash_chain": {
+  "zip": {
+   "expected": "9adb9540733c128e05e774e81cf0e238a9cc80b37e99da0c883bee9f57988bcc",
+   "got": "9adb9540733c128e05e774e81cf0e238a9cc80b37e99da0c883bee9f57988bcc"
+  },
+  "data_cache": {
+   "expected": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "got": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa"
+  },
+  "split_manifest": {
+   "expected": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "got": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9"
+  },
+  "code_fingerprint": {
+   "expected": {
+    "aggregate.py": "c174b8f12b12814840cb7f761fb2328b",
+    "audit.py": "388ee06f2ac7207d1e732284aea21450",
+    "augmentation.py": "f70094b5854075a586c203bfac8b22dd",
+    "common.py": "fdd359a88279fbc3090786726d9db264",
+    "evaluate_test.py": "4fcf42c4bdb59b16f34eb46d67d266b0",
+    "freeze_selection.py": "86c5755f338ccbbf96336f198fb487a1",
+    "preflight.py": "e33367a615ea54be8b58d2a79ae44e7c",
+    "prepare_data.py": "fb566c70b575098cc580f8fbdc3520d9",
+    "queue_train.py": "6a42304b2bbd3048a802a1af4ec6a3f8",
+    "run_all.sh": "cc80ab6a110041b4ca245d84752a908e",
+    "trainer.py": "a2eb080dd4ff3d95827fe2daf6a32b4c",
+    "v1.yaml": "f315d77cee5fea257c7e24c0c0a49a9b",
+    "configs/v1.yaml": "e6a132bfb55f2fce2808c4acb41486af"
+   },
+   "got": {
+    "aggregate.py": "c174b8f12b12814840cb7f761fb2328b",
+    "audit.py": "388ee06f2ac7207d1e732284aea21450",
+    "augmentation.py": "f70094b5854075a586c203bfac8b22dd",
+    "common.py": "fdd359a88279fbc3090786726d9db264",
+    "evaluate_test.py": "4fcf42c4bdb59b16f34eb46d67d266b0",
+    "freeze_selection.py": "86c5755f338ccbbf96336f198fb487a1",
+    "preflight.py": "e33367a615ea54be8b58d2a79ae44e7c",
+    "prepare_data.py": "fb566c70b575098cc580f8fbdc3520d9",
+    "queue_train.py": "6a42304b2bbd3048a802a1af4ec6a3f8",
+    "run_all.sh": "cc80ab6a110041b4ca245d84752a908e",
+    "trainer.py": "a2eb080dd4ff3d95827fe2daf6a32b4c",
+    "v1.yaml": "f315d77cee5fea257c7e24c0c0a49a9b",
+    "configs/v1.yaml": "e6a132bfb55f2fce2808c4acb41486af"
+   }
+  },
+  "ckpt": {
+   "expected": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "got": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e"
+  },
+  "preflight_binding": {
+   "preflight.code": true,
+   "preflight.data_cache": true,
+   "preflight.split_manifest": true
+  },
+  "ok": true,
+  "failures": []
+ },
+ "aggregate_outputs": {
+  "problems": [],
+  "ok": true
+ },
+ "runs": {
+  "n_expected": 285,
+  "n_verified_ok": 285,
+  "problems": [],
+  "n_problems": 0
+ },
+ "preflight_all_pass": true,
+ "artifacts": {
+  "selection": true,
+  "overall_csv": true,
+  "report_md": true,
+  "n_pred_npz": 287
+ },
+ "ln_tensor_count": 84,
+ "all_ok": true,
+ "violations": []
+}

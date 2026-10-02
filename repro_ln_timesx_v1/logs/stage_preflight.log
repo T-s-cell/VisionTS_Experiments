@@ -1,0 +1,43 @@
+[PASS] A1 totals == spec {'native_train': 4041, 'dense': 36763, 'val': 895, 'test': 2474, 'excluded': 696}
+[PASS] A2 190 vars / 19 domains 
+[PASS] A3 domain boundary strictness []
+[PASS] A4 all vars non-empty train/val/test []
+[PASS] A5 fallback_std non-degenerate []
+[PASS] A6 windows finite + located []
+[PASS] B1 trainable == 84 LN tensors 84 tensors
+[PASS] B2 trainable scalars == 55808 55808
+[PASS] B3 no pos/patch/attn/mlp trainable 
+[PASS] B4 train()==eval() forward bitwise max|d|=0.00e+00
+[PASS] C1 ln-model == zero-shot model predictions (declared tol) max|d|=0.000e+00
+[PASS] B5 all 84 LN grads finite & nonzero []
+[PASS] B6 frozen grads None []
+[PASS] B7 clip: post<=1.0 pre=5.435 post=1.000000
+[PASS] B8 step changes LN max|delta|=1.001e-05
+[PASS] B9 frozen params bitwise unchanged 
+[PASS] D1 old-cache predictions within rtol/atol n=6413 worst_rel=0.000e+00 worst_abs=0.000e+00
+[PASS] D2 old-cache targets bitwise equal mismatched chunks=0
+[PASS] D3 cache coverage == 6413 ids 6413
+[PASS] E1 FreqMask self-test 
+[PASS] E2 augmented shapes preserved []
+[PASS] E3 augmented d from augmented input (finite) applied=18
+[PASS] F1 accum grads == single-pass (declared tol) max|dgrad|=3.044e-06
+[PASS] F2 no loss inflation (sum mb/2 == mean16 grads, tol) max|dgrad|=3.044e-06
+[PASS] G3 Currency slots deterministic on re-derivation 
+[PASS] G3 arts slots deterministic on re-derivation 
+[PASS] G5 Currency F0 slots from native train pool []
+[PASS] G5 arts F0 slots from native train pool []
+[PASS] H1 val windows == 895 895
+[PASS] H2 test windows == 2474 2474
+[PASS] H3 split_rows covers all test windows 2474
+[PASS] I1 VRAM gate satisfiable now peak=910MiB need<=3982 free=27866.5MiB
+[preflight] estimate: 14.0 h total (train 13.9 + val 0.1 + test 0.0); 0.287 s/update, peak 910 MiB
+[F1__arts__s2021] epoch 1: val_mse=1.458541 pred_loss=0.733940 reg=0.000e+00 (5s)
+[F1__arts__s2021] epoch 2: val_mse=1.459104 pred_loss=0.719167 reg=0.000e+00 (7s)
+[F1__arts__s2021] epoch 1: val_mse=1.458541 pred_loss=0.733940 reg=0.000e+00 (5s)
+[F1__arts__s2021] resume at epoch 2 (attempt 1)
+[F1__arts__s2021] epoch 2: val_mse=1.459104 pred_loss=0.719167 reg=0.000e+00 (5s)
+[PASS] J1 epoch-1 replay identical (interrupted path) 7 updates
+[PASS] J2 epoch-2 replay after resume == continuous 7 updates
+[PASS] J3 stale interrupted-epoch rows voided by attempt stale=2 complete=7
+[PASS] J4 resumed epoch-2 val MSE == continuous 1.45910419 vs 1.45910418
+[preflight] ALL PASS (36/36 checks)

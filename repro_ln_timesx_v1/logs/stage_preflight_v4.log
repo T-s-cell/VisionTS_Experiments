@@ -1,0 +1,80 @@
+[PASS] M1 data_cache == protocol 
+[PASS] M2 ckpt == protocol ckpt file present
+[PASS] M3 split_manifest == protocol 
+[PASS] M4 code fingerprint == protocol 13 files
+[PASS] M5 zip == protocol 
+[PASS] K1 merge == 190 vars no dups 190
+[PASS] K2 overall MSE == 130 / MAE == 10 MSE=130.0 MAE=10.0
+[PASS] K3 seed std == 0 for identical seeds std=0.0
+[PASS] K4 F0-Z0 delta == 129 129.0
+[PASS] K5 duplicate var raises 
+[PASS] K6 missing domains raise (strict) 
+[PASS] K7 non-finite raises 
+[PASS] A1 totals == spec {'native_train': 4041, 'dense': 36763, 'val': 895, 'test': 2474, 'excluded': 696}
+[PASS] A2 190 vars / 19 domains 
+[PASS] A3 domain boundary strictness []
+[PASS] A4 all vars non-empty train/val/test []
+[PASS] A5 fallback_std non-degenerate []
+[PASS] A6 windows finite + located []
+[PASS] B1 trainable == 84 LN tensors 84 tensors
+[PASS] B2 trainable scalars == 55808 55808
+[PASS] B3 no pos/patch/attn/mlp trainable 
+[PASS] B4 train()==eval() forward bitwise max|d|=0.00e+00
+[PASS] C1 ln-model == zero-shot model predictions (declared tol) max|d|=0.000e+00
+[PASS] B5 all 84 LN grads finite & nonzero []
+[PASS] B6 frozen grads None []
+[PASS] B7 clip: post<=1.0 pre=5.435 post=1.000000
+[PASS] B8 step changes LN max|delta|=1.001e-05
+[PASS] B9 frozen params bitwise unchanged 
+[PASS] D1 old-cache predictions within rtol/atol n=6413 worst_rel=0.000e+00 worst_abs=0.000e+00
+[PASS] D2 old-cache targets bitwise equal mismatched chunks=0
+[PASS] D3 cache coverage == 6413 ids 6413
+[PASS] E1 FreqMask self-test 
+[PASS] E2 augmented shapes preserved []
+[PASS] E3 augmented d from augmented input (finite) applied=18
+[PASS] F1 anchor gradient nonzero off-init |grad_reg|=4.750e-02 max|theta-theta0|=4.590e-02
+[PASS] F2 4x8 (mb+reg)/4 == 32 (mean+reg) grads (declared tol) max|dgrad|=4.530e-06
+[PASS] F3 no loss inflation (sum mb/4 == mean32 grads, tol) max|dgrad|=4.530e-06
+[PASS] G3 Currency slots deterministic on re-derivation 
+[PASS] G3 arts slots deterministic on re-derivation 
+[PASS] G5 Currency F0 slots from native train pool []
+[PASS] G5 arts F0 slots from native train pool []
+[PASS] H1 val windows == 895 895
+[PASS] H2 test windows == 2474 2474
+[PASS] H3 split_rows covers all test windows 2474
+[PASS] I1 VRAM gate satisfiable now peak=910MiB need<=3982 free=26247.1875MiB
+[preflight] estimate: 16.3 h total (train 16.1 + val 0.2 + test 0.0); 0.334 s/update, peak 910 MiB
+[F1__arts__s2021] epoch 1: val_mse=1.458541 pred_loss=0.733940 reg=0.000e+00 (7s)
+[F1__arts__s2021] epoch 2: val_mse=1.459104 pred_loss=0.719167 reg=0.000e+00 (10s)
+[F1__arts__s2021] epoch 1: val_mse=1.458541 pred_loss=0.733940 reg=0.000e+00 (7s)
+[F1__arts__s2021] resume at epoch 2 (prev attempt 0, new attempt 1)
+[F1__arts__s2021] epoch 2: val_mse=1.459104 pred_loss=0.719167 reg=0.000e+00 (8s)
+[PASS] J1 epoch-1 replay identical (interrupted path) 7 updates
+[PASS] J2 epoch-2 replay after resume == continuous 7 updates
+[PASS] J3 stale interrupted-epoch rows voided by attempt stale=2 complete=7
+[PASS] J4 resumed epoch-2 val MSE == continuous 1.45910434 vs 1.45910421
+[F1__arts__s2021] epoch 1: val_mse=1.458541 pred_loss=0.733940 reg=0.000e+00 (7s)
+[F1__arts__s2021] epoch 2: val_mse=1.459104 pred_loss=0.719167 reg=0.000e+00 (10s)
+[PASS] L1a first-epoch interrupt fired interrupted
+[F1__arts__s2021] epoch 1: val_mse=1.458541 pred_loss=0.733940 reg=0.000e+00 (7s)
+[F1__arts__s2021] epoch 2: val_mse=1.459104 pred_loss=0.719167 reg=0.000e+00 (10s)
+[PASS] L1b resume after first-epoch interrupt completes done
+[PASS] L1c epoch-1 replay == continuous (max-attempt dedupe) 7 vs 7
+[PASS] L1d epoch-2 == continuous 
+[F1__arts__s2021] epoch 1: val_mse=1.458541 pred_loss=0.733940 reg=0.000e+00 (7s)
+[F1__arts__s2021] resume at epoch 2 (prev attempt 0, new attempt 1)
+[F1__arts__s2021] resume at epoch 2 (prev attempt 0, new attempt 2)
+[F1__arts__s2021] epoch 2: val_mse=1.459104 pred_loss=0.719167 reg=0.000e+00 (8s)
+[PASS] L2a double-interrupt resume completes done
+[PASS] L2b epoch-2 attempts unique & increasing [0, 1, 2]
+[PASS] L2c epoch-2 max-attempt replay == continuous 7 updates
+[F1__arts__s2021] epoch 1: val_mse=1.458541 pred_loss=0.733940 reg=0.000e+00 (7s)
+[F1__arts__s2021] epoch 2: val_mse=1.459104 pred_loss=0.719167 reg=0.000e+00 (10s)
+[PASS] L3a crash-before-SUCCESS fired interrupted
+[F1__arts__s2021] resume at epoch 3 (prev attempt 0, new attempt 1)
+[F1__arts__s2021] all 2 epochs complete in checkpoints; finalizing (attempt 1)
+[PASS] L3b finalize-after-final-checkpoint completes done
+[PASS] L3c finalized best epoch == continuous 1 vs 1
+[PASS] L4 SUCCESS-skip returns full metadata {'status': 'skipped', 'skipped': True, 'local_best_epoch': 1, 'U_d': 7}
+[PASS] L5 stale partial-epoch rows voided stale=2
+[preflight] ALL PASS (61/61 checks)

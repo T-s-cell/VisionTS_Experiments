@@ -1,0 +1,131 @@
+{
+  "protocol_version": "timesx_ln_v1",
+  "spec_doc": "VisionTS_TimesX_LN_Experiment_Plan_v1.md",
+
+  "data": {
+    "zip_rel": "repro_ln_timesx_v1/dataset/TimesX_Datasets.zip",
+    "zip_sha256": "9adb9540733c128e05e774e81cf0e238a9cc80b37e99da0c883bee9f57988bcc",
+    "ctx": 96, "pred": 12,
+    "split_rule": "domain-common time boundaries from per-var 70/10/20 candidates (spec sec 3.2)",
+    "std_ddof": 0, "std_eps": 1e-8,
+    "fallback_std_rule": "pstdev of the variable's first 96 training observations (ts < T_train_d), frozen in prepare; all 190 must be non-degenerate"
+  },
+
+  "model": {
+    "arch": "mae_base", "finetune_type": "ln",
+    "ckpt_rel": "ckpt/mae_visualize_vit_base.pth",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "periodicity": 1, "norm_const": 0.4, "align_const": 0.4, "interpolation": "bilinear",
+    "fp32": true, "tf32_matmul": false, "tf32_cudnn": false,
+    "core_md5": {
+      "visionts/model.py": "621f3f87b299c4bfeb5a64c87eefaa62",
+      "visionts/models_mae.py": "20edd0d6da5b21455d6c2ffb35de3d43",
+      "visionts/util.py": "d14f84b9bd2650c5bfdab3128457b540"
+    }
+  },
+
+  "trainable": {"n_tensors": 84, "n_scalars": 55808},
+
+  "optim": {
+    "lr": 1e-5, "weight_decay": 0.0, "betas": [0.9, 0.999], "eps": 1e-8,
+    "clip_grad": 1.0, "microbatch": 8, "accum": 4, "effective_batch": 32,
+    "loss": "mean_batch(mean_12steps(((pred-target)/d)^2)); d=pstdev(actual 96-step input fed)",
+    "reg": "0.01 * sum((theta_ln - theta0)^2) over all 84 LN tensors; added FULL per microbatch, also divided by accum -> effective = pred_mean_32 + reg"
+  },
+
+  "budget": {
+    "epochs": 10, "val_at_epoch0": true,
+    "seeds": [2021, 2022, 2023],
+    "U_d": "ceil(D_d / 32)", "S_d": "32 * U_d",
+    "methods_train": ["F0", "F1", "F2", "F3", "F4"]
+  },
+
+  "methods": {
+    "Z0": {"desc": "fixed P=1 zero-shot, recomputed on the NEW split at test stage"},
+    "N0": {"desc": "last-value baseline, repeat final history value for 12 steps"},
+    "F0": {"pool": "native"},
+    "F1": {"pool": "dense"},
+    "F2": {"pool": "dense", "aug": true},
+    "F3": {"pool": "dense", "anchor": true},
+    "F4": {"pool": "dense", "aug": true, "anchor": true}
+  },
+
+  "aug": {
+    "kind": "FreqMask (FrAug-style joint input+target, spec sec 5.1)",
+    "prob": 0.5, "mask_rate": 0.10, "keep_dc": true,
+    "n_fft_len": 108, "max_retry": 3,
+    "fallback": "on non-finite or augmented input std < 1e-8 retry up to 3, then use ORIGINAL sample (d recomputed from original input); constant samples skip augmentation entirely",
+    "online_only": true
+  },
+
+  "anchor": {"coef": 0.01},
+
+  "sampling": {
+    "balance": "S_d slots split as equally as possible among domain vars; remainder by per-epoch fixed-seed rotation; within-var uniform WITH replacement; slot order shuffled",
+    "f1_f4_same_base": "F1-F4 same seed use identical base window index sequences (base RNG method-independent)",
+    "f2_f4_shared_aug_stream": true,
+    "rng_families": {
+      "slot_remainder": "np.random.default_rng([seed, 3000+domain_idx, epoch])",
+      "aug": "np.random.default_rng([seed, 5000+domain_idx, epoch])  # shared by F2/F4, unused by F1/F3",
+      "shuffle": "np.random.default_rng([seed, 7000+domain_idx, epoch])",
+      "base_indices": "np.random.default_rng([seed, 9000+domain_idx, epoch])",
+      "note": "all generators re-derived from constant seeds at every epoch start; never resumed from pickled streams"
+    }
+  },
+
+  "selection": {
+    "metric": "val std-MSE: per-window d=raw input pstdev (fallback rule), mean_12 steps; per-var mean then var-equal mean",
+    "tie_tol": 1e-8,
+    "best_ft": "min val MSE over epochs 1-10, ties -> earlier epoch",
+    "selected_with_fallback": "adds epoch 0; tie tol = 1e-8 * max(1, earlier candidate MSE); earlier (incl. epoch 0) preferred on tie; fallback_to_zeroshot flagged separately, never merged into main table",
+    "val_mae": "recorded, never used for selection"
+  },
+
+  "test": {
+    "only_after_freeze": true,
+    "z0_n0_recomputed_on_new_test": true,
+    "fallback_reuses_z0_predictions": true,
+    "aggregation": "window mean -> var equal -> domain equal -> 19-domain overall",
+    "seed_stats": "mean +/- sample std (ddof=1) over 3 seeds for F0-F4; Z0/N0 deterministic single",
+    "pre_registered_comparisons": ["F1-F0", "F2-F1", "F3-F1", "F4-F2", "F4-F3", "F0-F4 vs Z0"]
+  },
+
+  "preflight_tolerances": {
+    "old_cache_rtol": 1e-5, "old_cache_atol": 1e-6,
+    "init_pred_rtol": 1e-6, "init_pred_atol": 1e-8,
+    "accum_grad_rtol": 1e-4, "accum_grad_atol": 2e-5,
+    "accum_grad_note": "atol recalibrated 2026-09-30: cross-run fp32 sum-order noise up to 5.8e-6 abs on small-magnitude LN grad elements (4.5e-6 the day before); 2e-5 gives ~3x headroom, far below typical grad scale; rtol covers large elements",
+    "resume_replay_rtol": 1e-6, "resume_replay_atol": 1e-8,
+    "note": "declared allclose tolerances with recorded max error; frozen params must remain BITWISE unchanged"
+  },
+
+  "resources": {
+    "gpu": "single L20 on eta (uuid GPU-534dc363-5a70-bc9a-824a-309a9a2a3911)",
+    "gate": "free VRAM >= preflight peak + 3 GiB before every GPU stage; PAUSE sentinel honored; never touch co-tenant; never fall back to CPU; never change microbatch",
+    "pythondontwritebytecode": 1
+  },
+
+  "expected_totals": {"native_train": 4041, "dense_train": 36763, "val": 895, "test": 2474, "excluded": 696, "n_vars": 190, "n_domains": 19},
+
+  "expected_domain_table": [
+    {"domain": "CropsAndStaples",                "n_vars": 11, "native_train": 428, "dense": 5069, "val": 88,  "test": 188},
+    {"domain": "EnergyAndFuels",                 "n_vars": 10, "native_train": 401, "dense": 4745, "val": 84,  "test": 171},
+    {"domain": "LivestockAndFoodProducts",       "n_vars": 10, "native_train": 283, "dense": 3343, "val": 46,  "test": 318},
+    {"domain": "RawMaterialsAndConstruction",    "n_vars": 10, "native_train": 369, "dense": 4386, "val": 82,  "test": 172},
+    {"domain": "SpecialtyAndAdvancedMaterials",  "n_vars": 8,  "native_train": 267, "dense": 3150, "val": 54,  "test": 117},
+    {"domain": "StrategicAndHighValueMaterials", "n_vars": 10, "native_train": 431, "dense": 5113, "val": 88,  "test": 178},
+    {"domain": "Currency",                       "n_vars": 10, "native_train": 470, "dense": 5530, "val": 90,  "test": 180},
+    {"domain": "arts",                           "n_vars": 10, "native_train": 60,  "dense": 210,  "val": 30,  "test": 151},
+    {"domain": "climate",                        "n_vars": 10, "native_train": 120, "dense": 470,  "val": 30,  "test": 90},
+    {"domain": "economy",                        "n_vars": 10, "native_train": 120, "dense": 470,  "val": 30,  "test": 90},
+    {"domain": "electronic_technology",          "n_vars": 10, "native_train": 120, "dense": 470,  "val": 30,  "test": 90},
+    {"domain": "finance",                        "n_vars": 10, "native_train": 120, "dense": 470,  "val": 30,  "test": 90},
+    {"domain": "pets",                           "n_vars": 10, "native_train": 120, "dense": 470,  "val": 30,  "test": 90},
+    {"domain": "public_health",                  "n_vars": 10, "native_train": 120, "dense": 470,  "val": 30,  "test": 90},
+    {"domain": "public_policy",                  "n_vars": 11, "native_train": 132, "dense": 517,  "val": 33,  "test": 99},
+    {"domain": "science",                        "n_vars": 10, "native_train": 120, "dense": 470,  "val": 30,  "test": 90},
+    {"domain": "shopping",                       "n_vars": 10, "native_train": 120, "dense": 470,  "val": 30,  "test": 90},
+    {"domain": "society",                        "n_vars": 10, "native_train": 120, "dense": 470,  "val": 30,  "test": 90},
+    {"domain": "traffic",                        "n_vars": 10, "native_train": 120, "dense": 470,  "val": 30,  "test": 90}
+  ]
+}

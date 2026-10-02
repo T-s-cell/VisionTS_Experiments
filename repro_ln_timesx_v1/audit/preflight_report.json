@@ -1,0 +1,364 @@
+{
+ "environment": {
+  "python": "3.12.13",
+  "numpy": "2.4.4",
+  "torch": "2.12.0+cu126",
+  "cuda": "12.6",
+  "cudnn": 91002
+ },
+ "fingerprints": {
+  "code": {
+   "aggregate.py": "c174b8f12b12814840cb7f761fb2328b",
+   "audit.py": "388ee06f2ac7207d1e732284aea21450",
+   "augmentation.py": "f70094b5854075a586c203bfac8b22dd",
+   "common.py": "fdd359a88279fbc3090786726d9db264",
+   "evaluate_test.py": "4fcf42c4bdb59b16f34eb46d67d266b0",
+   "freeze_selection.py": "86c5755f338ccbbf96336f198fb487a1",
+   "preflight.py": "e33367a615ea54be8b58d2a79ae44e7c",
+   "prepare_data.py": "fb566c70b575098cc580f8fbdc3520d9",
+   "queue_train.py": "6a42304b2bbd3048a802a1af4ec6a3f8",
+   "run_all.sh": "cc80ab6a110041b4ca245d84752a908e",
+   "trainer.py": "a2eb080dd4ff3d95827fe2daf6a32b4c",
+   "v1.yaml": "f315d77cee5fea257c7e24c0c0a49a9b",
+   "configs/v1.yaml": "e6a132bfb55f2fce2808c4acb41486af"
+  },
+  "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+  "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+  "zip": "9adb9540733c128e05e774e81cf0e238a9cc80b37e99da0c883bee9f57988bcc",
+  "ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e"
+ },
+ "checks": [
+  {
+   "name": "M1 data_cache == protocol",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "M2 ckpt == protocol",
+   "pass": true,
+   "detail": "ckpt file present"
+  },
+  {
+   "name": "M3 split_manifest == protocol",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "M4 code fingerprint == protocol",
+   "pass": true,
+   "detail": "13 files"
+  },
+  {
+   "name": "M5 zip == protocol",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "K1 merge == 190 vars no dups",
+   "pass": true,
+   "detail": "190"
+  },
+  {
+   "name": "K2 overall MSE == 130 / MAE == 10",
+   "pass": true,
+   "detail": "MSE=130.0 MAE=10.0"
+  },
+  {
+   "name": "K3 seed std == 0 for identical seeds",
+   "pass": true,
+   "detail": "std=0.0"
+  },
+  {
+   "name": "K4 F0-Z0 delta == 129",
+   "pass": true,
+   "detail": "129.0"
+  },
+  {
+   "name": "K5 duplicate var raises",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "K6 missing domains raise (strict)",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "K7 non-finite raises",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "A1 totals == spec",
+   "pass": true,
+   "detail": "{'native_train': 4041, 'dense': 36763, 'val': 895, 'test': 2474, 'excluded': 696}"
+  },
+  {
+   "name": "A2 190 vars / 19 domains",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "A3 domain boundary strictness",
+   "pass": true,
+   "detail": "[]"
+  },
+  {
+   "name": "A4 all vars non-empty train/val/test",
+   "pass": true,
+   "detail": "[]"
+  },
+  {
+   "name": "A5 fallback_std non-degenerate",
+   "pass": true,
+   "detail": "[]"
+  },
+  {
+   "name": "A6 windows finite + located",
+   "pass": true,
+   "detail": "[]"
+  },
+  {
+   "name": "B1 trainable == 84 LN tensors",
+   "pass": true,
+   "detail": "84 tensors"
+  },
+  {
+   "name": "B2 trainable scalars == 55808",
+   "pass": true,
+   "detail": "55808"
+  },
+  {
+   "name": "B3 no pos/patch/attn/mlp trainable",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "B4 train()==eval() forward bitwise",
+   "pass": true,
+   "detail": "max|d|=0.00e+00"
+  },
+  {
+   "name": "C1 ln-model == zero-shot model predictions (declared tol)",
+   "pass": true,
+   "detail": "max|d|=0.000e+00"
+  },
+  {
+   "name": "B5 all 84 LN grads finite & nonzero",
+   "pass": true,
+   "detail": "[]"
+  },
+  {
+   "name": "B6 frozen grads None",
+   "pass": true,
+   "detail": "[]"
+  },
+  {
+   "name": "B7 clip: post<=1.0",
+   "pass": true,
+   "detail": "pre=5.435 post=1.000000"
+  },
+  {
+   "name": "B8 step changes LN",
+   "pass": true,
+   "detail": "max|delta|=1.001e-05"
+  },
+  {
+   "name": "B9 frozen params bitwise unchanged",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "D1 old-cache predictions within rtol/atol",
+   "pass": true,
+   "detail": "n=6413 worst_rel=0.000e+00 worst_abs=0.000e+00"
+  },
+  {
+   "name": "D2 old-cache targets bitwise equal",
+   "pass": true,
+   "detail": "mismatched chunks=0"
+  },
+  {
+   "name": "D3 cache coverage == 6413 ids",
+   "pass": true,
+   "detail": "6413"
+  },
+  {
+   "name": "E1 FreqMask self-test",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "E2 augmented shapes preserved",
+   "pass": true,
+   "detail": "[]"
+  },
+  {
+   "name": "E3 augmented d from augmented input (finite)",
+   "pass": true,
+   "detail": "applied=18"
+  },
+  {
+   "name": "F1 anchor gradient nonzero off-init",
+   "pass": true,
+   "detail": "|grad_reg|=4.750e-02 max|theta-theta0|=4.590e-02"
+  },
+  {
+   "name": "F2 4x8 (mb+reg)/4 == 32 (mean+reg) grads (declared tol)",
+   "pass": true,
+   "detail": "max|dgrad|=4.530e-06"
+  },
+  {
+   "name": "F3 no loss inflation (sum mb/4 == mean32 grads, tol)",
+   "pass": true,
+   "detail": "max|dgrad|=4.530e-06"
+  },
+  {
+   "name": "G3 Currency slots deterministic on re-derivation",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "G3 arts slots deterministic on re-derivation",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "G5 Currency F0 slots from native train pool",
+   "pass": true,
+   "detail": "[]"
+  },
+  {
+   "name": "G5 arts F0 slots from native train pool",
+   "pass": true,
+   "detail": "[]"
+  },
+  {
+   "name": "H1 val windows == 895",
+   "pass": true,
+   "detail": "895"
+  },
+  {
+   "name": "H2 test windows == 2474",
+   "pass": true,
+   "detail": "2474"
+  },
+  {
+   "name": "H3 split_rows covers all test windows",
+   "pass": true,
+   "detail": "2474"
+  },
+  {
+   "name": "I1 VRAM gate satisfiable now",
+   "pass": true,
+   "detail": "peak=910MiB need<=3982 free=26247.1875MiB"
+  },
+  {
+   "name": "J1 epoch-1 replay identical (interrupted path)",
+   "pass": true,
+   "detail": "7 updates"
+  },
+  {
+   "name": "J2 epoch-2 replay after resume == continuous",
+   "pass": true,
+   "detail": "7 updates"
+  },
+  {
+   "name": "J3 stale interrupted-epoch rows voided by attempt",
+   "pass": true,
+   "detail": "stale=2 complete=7"
+  },
+  {
+   "name": "J4 resumed epoch-2 val MSE == continuous",
+   "pass": true,
+   "detail": "1.45910434 vs 1.45910421"
+  },
+  {
+   "name": "L1a first-epoch interrupt fired",
+   "pass": true,
+   "detail": "interrupted"
+  },
+  {
+   "name": "L1b resume after first-epoch interrupt completes",
+   "pass": true,
+   "detail": "done"
+  },
+  {
+   "name": "L1c epoch-1 replay == continuous (max-attempt dedupe)",
+   "pass": true,
+   "detail": "7 vs 7"
+  },
+  {
+   "name": "L1d epoch-2 == continuous",
+   "pass": true,
+   "detail": ""
+  },
+  {
+   "name": "L2a double-interrupt resume completes",
+   "pass": true,
+   "detail": "done"
+  },
+  {
+   "name": "L2b epoch-2 attempts unique & increasing",
+   "pass": true,
+   "detail": "[0, 1, 2]"
+  },
+  {
+   "name": "L2c epoch-2 max-attempt replay == continuous",
+   "pass": true,
+   "detail": "7 updates"
+  },
+  {
+   "name": "L3a crash-before-SUCCESS fired",
+   "pass": true,
+   "detail": "interrupted"
+  },
+  {
+   "name": "L3b finalize-after-final-checkpoint completes",
+   "pass": true,
+   "detail": "done"
+  },
+  {
+   "name": "L3c finalized best epoch == continuous",
+   "pass": true,
+   "detail": "1 vs 1"
+  },
+  {
+   "name": "L4 SUCCESS-skip returns full metadata",
+   "pass": true,
+   "detail": "{'status': 'skipped', 'skipped': True, 'local_best_epoch': 1, 'U_d': 7}"
+  },
+  {
+   "name": "L5 stale partial-epoch rows voided",
+   "pass": true,
+   "detail": "stale=2"
+  }
+ ],
+ "all_pass": true,
+ "peak_vram_mb": 910.068359375,
+ "timing": {
+  "arts": {
+   "s_per_update": 0.33364333999343215,
+   "val_s": 0.12139148404821754,
+   "n_val_windows": 30,
+   "s_per_val_window": 0.004046382801607251
+  },
+  "Currency": {
+   "s_per_update": 0.33361608209088445,
+   "val_s": 0.32676314283162355,
+   "n_val_windows": 90,
+   "s_per_val_window": 0.0036307015870180393
+  }
+ },
+ "estimate": {
+  "s_per_update": 0.33364333999343215,
+  "peak_vram_mb": 910.068359375,
+  "train_h": 16.084389348850042,
+  "val_h": 0.15746019959586663,
+  "test_h": 0.044780859743539576,
+  "total_h_est": 16.28663040818945,
+  "free_mb_now": 26247.1875,
+  "gate_required_mb": 3982.068359375
+ },
+ "finished": "2026-09-30T11:03:44"
+}

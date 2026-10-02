@@ -1,0 +1,42 @@
+{
+  "local": {
+    "series": "948d78a48b0cbb03b5cd24b004259291ccb6ffe3cba2f2597ea71cfa9177b155",
+    "series_off": "9aff39665e203657459da3c248046698fd7ccf86b2c23f47b2322f2b253c254c",
+    "series_len": "0f0d9cc49f4b9c3c0f30ff65e402133b9545bb4cee959c2311955c44108262cb",
+    "var_keys": "c20d71401295a40c23316d40859115edfec608d3d8d4e4a51baf7292765d36e0",
+    "native_starts": "17eff85c62d320a4a736e47a045d8001388f17951de9b1367780194e825a1e07",
+    "native_off": "e6240fff6456b3ea6872c026cc6f9f7f0cbb7a3d100cc9c1e385b78778cf98e0"
+  },
+  "eta_note": "eta arrays verified equal in-session (all 6 shas matched)",
+  "consistency": {
+    "code_fingerprint_equal": true,
+    "zip_sha256": "9adb9540733c128e05e774e81cf0e238a9cc80b37e99da0c883bee9f57988bcc",
+    "ckpt_sha256_eta": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "ckpt_sha256_local": null,
+    "ckpt_sha_note": "local host has no ckpt file; local protocol records null; eta ckpt sha equals spec App.B c551c37b...",
+    "data_cache_content_sha_local": {
+      "series": "948d78a48b0cbb03b5cd24b004259291ccb6ffe3cba2f2597ea71cfa9177b155",
+      "series_off": "9aff39665e203657459da3c248046698fd7ccf86b2c23f47b2322f2b253c254c",
+      "series_len": "0f0d9cc49f4b9c3c0f30ff65e402133b9545bb4cee959c2311955c44108262cb",
+      "var_keys": "c20d71401295a40c23316d40859115edfec608d3d8d4e4a51baf7292765d36e0",
+      "native_starts": "17eff85c62d320a4a736e47a045d8001388f17951de9b1367780194e825a1e07",
+      "native_off": "e6240fff6456b3ea6872c026cc6f9f7f0cbb7a3d100cc9c1e385b78778cf98e0"
+    },
+    "data_cache_content_sha_equal": true,
+    "npz_container_sha_note": "np.savez_compressed embeds timestamps -> whole-file sha differs across hosts; array-level shas above are the content anchor",
+    "split_manifest_diff": {
+      "only_differing_key": "zip_path_used",
+      "local": "/home/wlt/MMTS/.../dataset/TimesX_Datasets.zip",
+      "eta": "/dev_data/wlt/.../dataset/TimesX_Datasets.zip"
+    },
+    "split_counts_sha256": "a24b8757d70217864806deb79e386ea5bb41d6a7830e3a8d7190ccd0a0076f11"
+  },
+  "eta": {
+    "series": "948d78a48b0cbb03b5cd24b004259291ccb6ffe3cba2f2597ea71cfa9177b155",
+    "series_off": "9aff39665e203657459da3c248046698fd7ccf86b2c23f47b2322f2b253c254c",
+    "series_len": "0f0d9cc49f4b9c3c0f30ff65e402133b9545bb4cee959c2311955c44108262cb",
+    "var_keys": "c20d71401295a40c23316d40859115edfec608d3d8d4e4a51baf7292765d36e0",
+    "native_starts": "17eff85c62d320a4a736e47a045d8001388f17951de9b1367780194e825a1e07",
+    "native_off": "e6240fff6456b3ea6872c026cc6f9f7f0cbb7a3d100cc9c1e385b78778cf98e0"
+  }
+}

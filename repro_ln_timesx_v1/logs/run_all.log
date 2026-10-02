@@ -1,0 +1,17 @@
+[2026-09-29 15:02:59] === stage train start: /dev_data/wlt/conda/envs/visionts/bin/python queue_train.py
+[2026-09-30 09:57:14] === stage train rc=0
+[2026-09-30 10:17:38] === stage freeze_selection start: /dev_data/wlt/conda/envs/visionts/bin/python freeze_selection.py
+[2026-09-30 10:17:40] === stage freeze_selection rc=0
+[2026-09-30 10:17:58] gpu_gate: free=18614MiB >= need=3982MiB, proceed
+[2026-09-30 10:17:58] === stage test start: /dev_data/wlt/conda/envs/visionts/bin/python evaluate_test.py
+[2026-09-30 10:23:25] === stage test rc=0
+[2026-09-30 10:25:06] === stage aggregate start: /dev_data/wlt/conda/envs/visionts/bin/python aggregate.py
+[2026-09-30 10:25:07] === stage aggregate rc=0
+[2026-09-30 10:25:16] === stage audit start: /dev_data/wlt/conda/envs/visionts/bin/python audit.py
+[2026-09-30 10:25:23] === stage audit rc=1
+[2026-09-30 10:25:23] STOPPING: stage audit failed (rc=1); scene preserved
+[2026-09-30 10:53:50] === stage audit start: /dev_data/wlt/conda/envs/visionts/bin/python audit.py
+[2026-09-30 10:53:56] === stage audit rc=1
+[2026-09-30 10:53:56] STOPPING: stage audit failed (rc=1); scene preserved
+[2026-09-30 11:23:41] === stage audit start: /dev_data/wlt/conda/envs/visionts/bin/python audit.py
+[2026-09-30 11:23:47] === stage audit rc=0
