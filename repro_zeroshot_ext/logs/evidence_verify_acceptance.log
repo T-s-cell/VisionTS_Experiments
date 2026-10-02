@@ -1,0 +1,14 @@
+[PASS] A1 val/test windows disjoint (real dates) violations=[]
+[PASS] A2 frozen totals 
+[PASS] A3 sample_ids globally unique unique=6413
+[PASS] B1 each test sample exactly one prediction per applicable config mismatches=[]
+[PASS] B2 no duplicate (var,P,sample_id) rows 
+[PASS] B3 all prediction ids belong to frozen test set 
+[PASS] B4 (var,config) pair count 279 vs 279
+[PASS] C1 P=1 summary: exactly one row per variable 
+[PASS] C2 selected summary: exactly one row per variable 
+[PASS] C3 n_test sums == 1677 (both configs) 
+[PASS] C4 identical test samples across P=1 and selected (n_test equal per var) 
+[INFO] denominator sources: {'window': 2412}; std_undefined rows: 0
+
+ALL ACCEPTANCE CHECKS PASSED

@@ -1,0 +1,6736 @@
+{
+ "protocol": {
+  "name": "TimesX-ext-protocol",
+  "sort_key": "(future_start, idx)",
+  "test_rule": "last ceil(N/5) samples by future_start",
+  "val_rule": "most recent pre-test samples with future_end < min(test future_start), cap 32",
+  "val_cap": 32,
+  "fallback_min_val": 8,
+  "tie_break": "P=1",
+  "calib_std_rule": "std(ddof=0) of past_time (96 values) of the FIRST sample sorted by future_start; denominator fallback only when window std < 1e-8; never modifies pred/true",
+  "frozen_on": "2026-09-27"
+ },
+ "selection_rule": "argmin val standardized MSE over candidates; tie -> P=1; fallback to P=1 when val < 8 (flagged)",
+ "stats": {
+  "n_vars": 190,
+  "by_selected_P": {
+   "1": 101,
+   "5": 26,
+   "52": 63
+  },
+  "by_reason": {
+   "P1_lower_val_mse": 101,
+   "val_lower_std_mse": 89
+  },
+  "fallback_vars": 0,
+  "exact_ties": 0
+ },
+ "fingerprint": {
+  "run_config": {
+   "arch": "mae_base",
+   "finetune_type": "none",
+   "context_len": 96,
+   "pred_len": 12,
+   "periodicity_candidates": {
+    "daily": [
+     1,
+     5
+    ],
+    "weekly": [
+     1,
+     52
+    ]
+   },
+   "norm_const_r": 0.4,
+   "align_const_c": 0.4,
+   "interpolation": "bilinear",
+   "precision": "fp32",
+   "tf32": false,
+   "image_size": 224,
+   "patch_size": 16
+  },
+  "zip_sha256": "9adb9540733c128e05e774e81cf0e238a9cc80b37e99da0c883bee9f57988bcc",
+  "splits_sha256": "d012d68311101ae2540284f0ea15b8ad5fe52980386d735e3720e5f6f0997f90",
+  "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+  "code_md5_forward": {
+   "timesx_data.py": "35ee411bfbd001265f71fbd2a3032f7d",
+   "infer.py": "d7ca6af645202910ad5413d8ef8b494b",
+   "record_fingerprint.py": "bb8f5d7dd0521138661b7aa283a77b5a"
+  },
+  "code_md5": {
+   "timesx_data.py": "35ee411bfbd001265f71fbd2a3032f7d",
+   "build_splits.py": "fa312ce50b1fb55f453c8d9c4f8d5994",
+   "data_audit.py": "af2642de9c4c9e146349513fcc8f761a",
+   "metrics_util.py": "a27ab8e5a437c6173a4b04ce7a596424",
+   "infer.py": "d7ca6af645202910ad5413d8ef8b494b",
+   "select_period.py": "66cbcf9cc32c6db2083e11215b2b3212",
+   "evaluate_test.py": "65598ab573bde45e25321bcb17fe9f81",
+   "aggregate.py": "aa69169481aaaff3ebea0c2a50d91299",
+   "record_fingerprint.py": "bb8f5d7dd0521138661b7aa283a77b5a",
+   "run_all.sh": "7af7d6063abc122865c373c6862d2913",
+   "audit_ext.sh": "9ed74066f38026cdd97723979836e2ed"
+  },
+  "env": {
+   "python": "3.12.13",
+   "platform": "Linux-7.0.0-29-generic-x86_64-with-glibc2.39",
+   "torch": "2.12.0+cu126",
+   "cuda_available": true,
+   "gpu": "NVIDIA L20",
+   "numpy": "2.4.4"
+  }
+ },
+ "variables": {
+  "CropsAndStaples__barley_inr_t_96_12_12_10events": {
+   "domain": "CropsAndStaples",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.466167751510879,
+     "std_mae": 0.5586764937539163,
+     "raw_mse": 5395.848977855484,
+     "raw_mae": 41.10408083597819,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 2.00016814010917,
+     "std_mae": 0.5954289754566803,
+     "raw_mse": 6034.230712032411,
+     "raw_mae": 41.71947224934896,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "CropsAndStaples__canola_cad_t_96_12_12_10events": {
+   "domain": "CropsAndStaples",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.1001277864785097,
+     "std_mae": 0.7934696518062195,
+     "raw_mse": 863.3403142581974,
+     "raw_mae": 22.80468569310506,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.1731619355261247,
+     "std_mae": 0.8462787610402608,
+     "raw_mse": 854.3998042333761,
+     "raw_mae": 23.55342799758911,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "CropsAndStaples__cocoa_usd_t_96_12_12_10events": {
+   "domain": "CropsAndStaples",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 0.6555740092048817,
+     "std_mae": 0.6151438354002856,
+     "raw_mse": 1098051.6587888715,
+     "raw_mae": 771.2796297200521,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 0.8889255996963644,
+     "std_mae": 0.7089861366063754,
+     "raw_mse": 1293204.1014887886,
+     "raw_mae": 869.3893262227376,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "CropsAndStaples__cotton_usd_lbs_96_12_12_10events": {
+   "domain": "CropsAndStaples",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.2874078130604223,
+     "std_mae": 0.789252696124667,
+     "raw_mse": 11.588411143949745,
+     "raw_mae": 2.3914385506312055,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.062012503955918,
+     "std_mae": 0.7005102857273516,
+     "raw_mse": 10.346679874381726,
+     "raw_mae": 2.1459574779351556,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 5,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "CropsAndStaples__diammonium_usd_t_96_12_12_10events": {
+   "domain": "CropsAndStaples",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 0.9361912296122211,
+     "std_mae": 0.5987903584187203,
+     "raw_mse": 430.00809222595933,
+     "raw_mae": 12.630242389043172,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 0.8883117079189646,
+     "std_mae": 0.6191432215968611,
+     "raw_mse": 470.34037093073357,
+     "raw_mae": 13.024886732101441,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 5,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "CropsAndStaples__oat_usd_bu_96_12_12_10events": {
+   "domain": "CropsAndStaples",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.2483875400215467,
+     "std_mae": 0.8122364318490696,
+     "raw_mse": 389.0935986866248,
+     "raw_mae": 15.133940582911173,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.3795709038741268,
+     "std_mae": 0.8895577371070361,
+     "raw_mse": 449.09192859923826,
+     "raw_mae": 16.756392843882242,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "CropsAndStaples__potatoes_eur_100kg_96_12_12_10events": {
+   "domain": "CropsAndStaples",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.1804984657840476,
+     "std_mae": 0.6276909729197949,
+     "raw_mse": 12.293218661244259,
+     "raw_mae": 2.2753524089852966,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.5505329394718657,
+     "std_mae": 0.7402398045155177,
+     "raw_mse": 14.220687562928951,
+     "raw_mae": 2.470630058646202,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "CropsAndStaples__rice_usd_cwt_96_12_12_10events": {
+   "domain": "CropsAndStaples",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.600374546830241,
+     "std_mae": 0.835043650818577,
+     "raw_mse": 0.6600712589518178,
+     "raw_mae": 0.5616881674051285,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.7111852943200194,
+     "std_mae": 0.8455836367668428,
+     "raw_mse": 0.5864172870979126,
+     "raw_mae": 0.5120073129455248,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "CropsAndStaples__sugar_usd_lbs_96_12_12_10events": {
+   "domain": "CropsAndStaples",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.3867004226277566,
+     "std_mae": 0.7521996452800637,
+     "raw_mse": 1.4986639873979777,
+     "raw_mae": 0.8672107628583908,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.2993425031310244,
+     "std_mae": 0.7112772377275982,
+     "raw_mse": 1.3145420672974413,
+     "raw_mae": 0.82886173128287,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 5,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "CropsAndStaples__urea_usd_t_96_12_12_10events": {
+   "domain": "CropsAndStaples",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 0.7281337077580096,
+     "std_mae": 0.5166865847549115,
+     "raw_mse": 489.0841437999028,
+     "raw_mae": 12.938864135742188,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.033900571887746,
+     "std_mae": 0.6726406540768366,
+     "raw_mse": 629.8928033013103,
+     "raw_mae": 15.860148798624675,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "CropsAndStaples__wheat_usd_bu_96_12_12_10events": {
+   "domain": "CropsAndStaples",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 0.9273500525295473,
+     "std_mae": 0.706410064109775,
+     "raw_mse": 682.2985266836736,
+     "raw_mae": 19.61626180267334,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 0.9488366200399476,
+     "std_mae": 0.7202527159885703,
+     "raw_mse": 804.18940516342,
+     "raw_mae": 20.79648814582825,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "EnergyAndFuels__bitumen_cny_t_96_12_12_10events": {
+   "domain": "EnergyAndFuels",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.888182974315225,
+     "std_mae": 0.9237270811263625,
+     "raw_mse": 16889.650142867118,
+     "raw_mae": 93.81814066569011,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.6290770228732336,
+     "std_mae": 0.8297209481696438,
+     "raw_mse": 14663.504160498735,
+     "raw_mae": 84.73911984761557,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 5,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "EnergyAndFuels__brent_usd_bbl_96_12_12_10events": {
+   "domain": "EnergyAndFuels",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.3275516291229599,
+     "std_mae": 0.8402134335308724,
+     "raw_mse": 16.302241445097465,
+     "raw_mae": 3.03618627670606,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.2110796322523476,
+     "std_mae": 0.7949817482936518,
+     "raw_mse": 13.825988935385059,
+     "raw_mae": 2.7647427340666457,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 5,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "EnergyAndFuels__coal_usd_t_96_12_12_10events": {
+   "domain": "EnergyAndFuels",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 0.8501309336225777,
+     "std_mae": 0.6214095016913633,
+     "raw_mse": 44.1770554831447,
+     "raw_mae": 4.890096068382263,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.0034515168520768,
+     "std_mae": 0.7168204040036956,
+     "raw_mse": 53.53955805041605,
+     "raw_mae": 5.609754065672557,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "EnergyAndFuels__ethanol_usd_gal_96_12_12_10events": {
+   "domain": "EnergyAndFuels",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 0.7959719230661763,
+     "std_mae": 0.5973809267831865,
+     "raw_mse": 0.0059399401214479935,
+     "raw_mae": 0.05682418881754081,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 0.8402090971718581,
+     "std_mae": 0.6347519270124078,
+     "raw_mse": 0.005766921913694655,
+     "raw_mae": 0.05729396959443887,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "EnergyAndFuels__gasoline_usd_gal_96_12_12_10events": {
+   "domain": "EnergyAndFuels",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 0.9997450887189551,
+     "std_mae": 0.6840660555349394,
+     "raw_mse": 0.010317588797619523,
+     "raw_mae": 0.07243037473162015,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.1450073714149624,
+     "std_mae": 0.7590687834789401,
+     "raw_mse": 0.011227750959994976,
+     "raw_mae": 0.08032348981946706,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "EnergyAndFuels__methanol_cny_t_96_12_12_10events": {
+   "domain": "EnergyAndFuels",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.1966855297955277,
+     "std_mae": 0.7760237901366213,
+     "raw_mse": 6545.040906014231,
+     "raw_mae": 59.03270467122396,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.1832078505365504,
+     "std_mae": 0.8347539760148919,
+     "raw_mse": 7062.208279556595,
+     "raw_mae": 65.05209223429362,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 5,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "EnergyAndFuels__naphtha_usd_t_96_12_12_10events": {
+   "domain": "EnergyAndFuels",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.4051075584742334,
+     "std_mae": 0.7473752187760698,
+     "raw_mse": 697.5642483755406,
+     "raw_mae": 17.604789777119958,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.210819534801209,
+     "std_mae": 0.7549784199764072,
+     "raw_mse": 574.8027227276472,
+     "raw_mae": 17.61206410598755,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 5,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "EnergyAndFuels__propane_usd_gal_96_12_12_10events": {
+   "domain": "EnergyAndFuels",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.0148945894140777,
+     "std_mae": 0.6805524855943613,
+     "raw_mse": 0.0030641859937639566,
+     "raw_mae": 0.04006583967998623,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.0968654389793435,
+     "std_mae": 0.7289745858936855,
+     "raw_mse": 0.0033523839998475286,
+     "raw_mae": 0.04292072563876708,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "EnergyAndFuels__rapeseed_eur_t_96_12_12_10events": {
+   "domain": "EnergyAndFuels",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.0143435210009915,
+     "std_mae": 0.7641183211900985,
+     "raw_mse": 308.9663377120963,
+     "raw_mae": 13.244661565144856,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.0869772460753577,
+     "std_mae": 0.7963726166194177,
+     "raw_mse": 309.8107260859619,
+     "raw_mae": 13.729554848353068,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "EnergyAndFuels__uranium_usd_lbs_96_12_12_10events": {
+   "domain": "EnergyAndFuels",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 0.8242232591099703,
+     "std_mae": 0.5819117745532469,
+     "raw_mse": 13.658229726085812,
+     "raw_mae": 2.655506906906764,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 0.7292012838003453,
+     "std_mae": 0.5539827102604641,
+     "raw_mse": 10.962786635799674,
+     "raw_mae": 2.3602200726668046,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 5,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "LivestockAndFoodProducts__beef_brl_kg_96_12_12_10events": {
+   "domain": "LivestockAndFoodProducts",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 0.7547905712334693,
+     "std_mae": 0.6202954407839608,
+     "raw_mse": 0.3610467408026791,
+     "raw_mae": 0.44196505069732667,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.101422776816008,
+     "std_mae": 0.7157231159497056,
+     "raw_mse": 0.4418592324783439,
+     "raw_mae": 0.4757721648613612,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "LivestockAndFoodProducts__butter_eur_t_96_12_12_10events": {
+   "domain": "LivestockAndFoodProducts",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.0811267463062169,
+     "std_mae": 0.6474319231588239,
+     "raw_mse": 52526.16389154767,
+     "raw_mae": 152.27274322509766,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.1450474434903122,
+     "std_mae": 0.6974196408891253,
+     "raw_mse": 62966.5598039031,
+     "raw_mae": 175.0770467122396,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "LivestockAndFoodProducts__cheese_usd_lbs_96_12_12_10events": {
+   "domain": "LivestockAndFoodProducts",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.2044090008917043,
+     "std_mae": 0.7697147658933121,
+     "raw_mse": 0.008732353828924939,
+     "raw_mae": 0.07091222951759894,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.253328986351682,
+     "std_mae": 0.7998156715251621,
+     "raw_mse": 0.009975234327423164,
+     "raw_mae": 0.07607688219000897,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "LivestockAndFoodProducts__coffee_usd_lbs_96_12_12_10events": {
+   "domain": "LivestockAndFoodProducts",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.5890137752769187,
+     "std_mae": 0.8169965193121334,
+     "raw_mse": 454.28707649960836,
+     "raw_mae": 15.30351838493347,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.8621993295513262,
+     "std_mae": 0.8851651627899665,
+     "raw_mse": 493.1166716327533,
+     "raw_mae": 16.142513284365336,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "LivestockAndFoodProducts__corn_usd_bu_96_12_12_10events": {
+   "domain": "LivestockAndFoodProducts",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.0442545485832,
+     "std_mae": 0.7511713826941974,
+     "raw_mse": 291.77588887666707,
+     "raw_mae": 13.06210071881612,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 0.9480052544561242,
+     "std_mae": 0.7597029537388016,
+     "raw_mse": 281.1071906602908,
+     "raw_mae": 13.476538599650064,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 5,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "LivestockAndFoodProducts__milk_usd_cwt_96_12_12_10events": {
+   "domain": "LivestockAndFoodProducts",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 0.8852255337538644,
+     "std_mae": 0.5151428347885864,
+     "raw_mse": 0.7212895637338602,
+     "raw_mae": 0.4992697734634082,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.360399160229576,
+     "std_mae": 0.650869336053094,
+     "raw_mse": 0.9429293264371587,
+     "raw_mae": 0.6127160347501437,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "LivestockAndFoodProducts__poultry_brl_kgs_96_12_12_10events": {
+   "domain": "LivestockAndFoodProducts",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.855275686484325,
+     "std_mae": 0.8065187915415755,
+     "raw_mse": 0.04313410691020525,
+     "raw_mae": 0.11523684615890185,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 2.227882478874922,
+     "std_mae": 0.8957960481887892,
+     "raw_mse": 0.05007385671382447,
+     "raw_mae": 0.1259792521595955,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "LivestockAndFoodProducts__salmon_nok_kg_96_12_12_10events": {
+   "domain": "LivestockAndFoodProducts",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.4866556481080242,
+     "std_mae": 0.8640519844811115,
+     "raw_mse": 30.407868771955737,
+     "raw_mae": 4.037811458110809,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.8060631956320488,
+     "std_mae": 0.9506865541565306,
+     "raw_mse": 35.00469432903331,
+     "raw_mae": 4.408935639858246,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "LivestockAndFoodProducts__soybeans_usd_bu_96_12_12_10events": {
+   "domain": "LivestockAndFoodProducts",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.2947116237598564,
+     "std_mae": 0.8312263906248286,
+     "raw_mse": 2164.992202924819,
+     "raw_mae": 34.815077798207604,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.0990802172166096,
+     "std_mae": 0.7475444851899252,
+     "raw_mse": 1661.7397133335855,
+     "raw_mae": 30.335900521596272,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 5,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "LivestockAndFoodProducts__wool_aud_100kg_96_12_12_10events": {
+   "domain": "LivestockAndFoodProducts",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 0.757976187157406,
+     "std_mae": 0.5939892706419575,
+     "raw_mse": 589.9243143537702,
+     "raw_mae": 15.862922668457031,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 0.6657936743971086,
+     "std_mae": 0.5920176333281588,
+     "raw_mse": 448.44042804301716,
+     "raw_mae": 15.117062250773111,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 5,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "RawMaterialsAndConstruction__aluminum_usd_t_96_12_12_10events": {
+   "domain": "RawMaterialsAndConstruction",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.4739373900632151,
+     "std_mae": 0.7322189252704866,
+     "raw_mse": 7941.77605695445,
+     "raw_mae": 63.69502148946126,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.468149802844481,
+     "std_mae": 0.7347713128049379,
+     "raw_mse": 8383.367784063908,
+     "raw_mae": 65.42093892415365,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 5,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "RawMaterialsAndConstruction__copper_usd_lbs_96_12_12_10events": {
+   "domain": "RawMaterialsAndConstruction",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.383115513659363,
+     "std_mae": 0.8058589862959749,
+     "raw_mse": 0.05411223459521538,
+     "raw_mae": 0.16382003036340076,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.2390438621370363,
+     "std_mae": 0.8493555500834257,
+     "raw_mse": 0.055211145178617846,
+     "raw_mae": 0.17647036560575166,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 5,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "RawMaterialsAndConstruction__lead_usd_t_96_12_12_10events": {
+   "domain": "RawMaterialsAndConstruction",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 0.891769074651789,
+     "std_mae": 0.7279830937536855,
+     "raw_mse": 3966.708073172423,
+     "raw_mae": 49.814160550435375,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.1845205033528463,
+     "std_mae": 0.8056413172467947,
+     "raw_mse": 4855.136458955056,
+     "raw_mae": 54.477358945210774,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "RawMaterialsAndConstruction__lumber_usd_1000_board_feet_96_12_12_10events": {
+   "domain": "RawMaterialsAndConstruction",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 0.9083991809366987,
+     "std_mae": 0.7029576068432253,
+     "raw_mse": 760.1695745808425,
+     "raw_mae": 21.321412317276003,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 0.9879143599421295,
+     "std_mae": 0.7578372993311759,
+     "raw_mse": 847.3964207201038,
+     "raw_mae": 22.98700939687093,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "RawMaterialsAndConstruction__polyethylene_cny_t_96_12_12_10events": {
+   "domain": "RawMaterialsAndConstruction",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 0.8737477767218043,
+     "std_mae": 0.6882702193344296,
+     "raw_mse": 33804.83756183957,
+     "raw_mae": 130.57325490315756,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 0.9153156905692026,
+     "std_mae": 0.6667932077310652,
+     "raw_mse": 36474.46413420886,
+     "raw_mae": 129.3167521158854,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "RawMaterialsAndConstruction__polypropylene_cny_t_96_12_12_10events": {
+   "domain": "RawMaterialsAndConstruction",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 0.9946010804371904,
+     "std_mae": 0.7659614401261763,
+     "raw_mse": 10506.89282631812,
+     "raw_mae": 77.93808110555013,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 0.8802541740745429,
+     "std_mae": 0.7206531509110322,
+     "raw_mse": 10209.325129243856,
+     "raw_mae": 75.81562932332356,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 5,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "RawMaterialsAndConstruction__rubber_usd_cents_kg_96_12_12_10events": {
+   "domain": "RawMaterialsAndConstruction",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.4609054695475017,
+     "std_mae": 0.7800578962030243,
+     "raw_mse": 73.38252069135098,
+     "raw_mae": 6.084085186322531,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.326695504560326,
+     "std_mae": 0.730781704413166,
+     "raw_mse": 61.69691600315647,
+     "raw_mae": 5.549705123901368,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 5,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "RawMaterialsAndConstruction__steel_cny_t_96_12_12_10events": {
+   "domain": "RawMaterialsAndConstruction",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.3353555552291052,
+     "std_mae": 0.8224062308746789,
+     "raw_mse": 19296.938429595593,
+     "raw_mae": 101.1160659790039,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.0263199805182752,
+     "std_mae": 0.7408743805063307,
+     "raw_mse": 14822.826824693164,
+     "raw_mae": 91.9128360748291,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 5,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "RawMaterialsAndConstruction__tin_usd_t_96_12_12_10events": {
+   "domain": "RawMaterialsAndConstruction",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 0.8930469300873362,
+     "std_mae": 0.6719104474629178,
+     "raw_mse": 2608595.2587026856,
+     "raw_mae": 1125.7931060791016,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.1425005238433954,
+     "std_mae": 0.766111709591427,
+     "raw_mse": 2970290.556553652,
+     "raw_mae": 1249.194300333659,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "RawMaterialsAndConstruction__zinc_usd_t_96_12_12_10events": {
+   "domain": "RawMaterialsAndConstruction",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.400556044296561,
+     "std_mae": 0.8208576274290487,
+     "raw_mse": 17597.005203019464,
+     "raw_mae": 98.33093864440917,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.1190812251452058,
+     "std_mae": 0.7565857891848023,
+     "raw_mse": 14239.964942239121,
+     "raw_mae": 92.25217811584473,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 5,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "SpecialtyAndAdvancedMaterials__gallium_cny_kg_96_12_12_10events": {
+   "domain": "SpecialtyAndAdvancedMaterials",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 0.6041791216657196,
+     "std_mae": 0.48790084632737,
+     "raw_mse": 9128.726459316831,
+     "raw_mae": 58.11049779256185,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 0.6258121286189725,
+     "std_mae": 0.511081700087784,
+     "raw_mse": 9292.883224745397,
+     "raw_mae": 59.84300390879313,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "SpecialtyAndAdvancedMaterials__germanium_cny_kg_96_12_12_10events": {
+   "domain": "SpecialtyAndAdvancedMaterials",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.1816272300574946,
+     "std_mae": 0.45203263129898735,
+     "raw_mse": 172412.83930672705,
+     "raw_mae": 250.02445475260416,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.5413508534495743,
+     "std_mae": 0.5934752145897062,
+     "raw_mse": 271974.5293356329,
+     "raw_mae": 323.650385538737,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "SpecialtyAndAdvancedMaterials__indium_cny_kg_96_12_12_10events": {
+   "domain": "SpecialtyAndAdvancedMaterials",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 29.42553319981695,
+     "std_mae": 1.3406051401658123,
+     "raw_mse": 17474.791506791604,
+     "raw_mae": 59.808616956075035,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 29.259013321683593,
+     "std_mae": 1.44506208709212,
+     "raw_mse": 20258.28849017523,
+     "raw_mae": 71.92764504750569,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 5,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "SpecialtyAndAdvancedMaterials__magnesium_cny_t_96_12_12_10events": {
+   "domain": "SpecialtyAndAdvancedMaterials",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.1287935467928871,
+     "std_mae": 0.6972767279154022,
+     "raw_mse": 339657.2619038224,
+     "raw_mae": 379.67113240559894,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 0.9685850735729484,
+     "std_mae": 0.6406875295695935,
+     "raw_mse": 260839.78464964777,
+     "raw_mae": 340.21325937906903,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 5,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "SpecialtyAndAdvancedMaterials__molybdenum_cny_kg_96_12_12_10events": {
+   "domain": "SpecialtyAndAdvancedMaterials",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 29,
+     "std_mse": 1.6292238132303287,
+     "std_mae": 0.6752518499008421,
+     "raw_mse": 167.45717907762906,
+     "raw_mae": 7.474473101736485,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 29
+     }
+    },
+    "5": {
+     "n": 29,
+     "std_mse": 1.7673750756523574,
+     "std_mae": 0.7307757113573383,
+     "raw_mse": 180.3953182459579,
+     "raw_mae": 8.166198120117187,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 29
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "SpecialtyAndAdvancedMaterials__polyvinyl_cny_t_96_12_12_10events": {
+   "domain": "SpecialtyAndAdvancedMaterials",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 0.8511687534001732,
+     "std_mae": 0.7013881100775381,
+     "raw_mse": 25076.331975271303,
+     "raw_mae": 125.50577036539714,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.036531829937791,
+     "std_mae": 0.7532862991431553,
+     "raw_mse": 28687.923492547747,
+     "raw_mae": 134.10688654581705,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "SpecialtyAndAdvancedMaterials__tellurium_cny_kg_96_12_12_10events": {
+   "domain": "SpecialtyAndAdvancedMaterials",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 0.6361922738308396,
+     "std_mae": 0.4474903765583374,
+     "raw_mse": 398.8096287697069,
+     "raw_mae": 12.688885847727457,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 0.9156679112958951,
+     "std_mae": 0.5660425500212758,
+     "raw_mse": 600.6279185156067,
+     "raw_mae": 15.870574315388998,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "SpecialtyAndAdvancedMaterials__titanium_cny_kg_96_12_12_10events": {
+   "domain": "SpecialtyAndAdvancedMaterials",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 29,
+     "std_mse": 0.48217211104067037,
+     "std_mae": 0.36319689359520313,
+     "raw_mse": 2.158288548543826,
+     "raw_mae": 0.7812850459833255,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 29
+     }
+    },
+    "5": {
+     "n": 29,
+     "std_mse": 0.5491749065120692,
+     "std_mae": 0.39088800078570435,
+     "raw_mse": 0.8296744942032712,
+     "raw_mae": 0.5813454032634866,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 29
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events": {
+   "domain": "StrategicAndHighValueMaterials",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 87.0987976408461,
+     "std_mae": 2.029485688500182,
+     "raw_mse": 2283154.8890479803,
+     "raw_mae": 510.45741780598956,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 31,
+      "calib_std": 1
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 79.90387296165234,
+     "std_mae": 2.0073886721036343,
+     "raw_mse": 3123754.9171408317,
+     "raw_mae": 572.6411590576172,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 31,
+      "calib_std": 1
+     }
+    }
+   },
+   "selected_P": 5,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "StrategicAndHighValueMaterials__gold_usd_t_oz_96_12_12_10events": {
+   "domain": "StrategicAndHighValueMaterials",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.1586589463781298,
+     "std_mae": 0.6844205607967864,
+     "raw_mse": 6986.1464189288035,
+     "raw_mae": 60.596526921590176,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.126003250808767,
+     "std_mae": 0.658275144044809,
+     "raw_mse": 6276.3663258651795,
+     "raw_mae": 56.68052186330159,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 5,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "StrategicAndHighValueMaterials__lithium_cny_t_96_12_12_10events": {
+   "domain": "StrategicAndHighValueMaterials",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 0.5518639046738995,
+     "std_mae": 0.4676537076130721,
+     "raw_mse": 58618698.114978395,
+     "raw_mae": 4043.2626342773438,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 0.7176952815465567,
+     "std_mae": 0.5550209292967825,
+     "raw_mse": 70916461.43751149,
+     "raw_mae": 4634.326548258464,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "StrategicAndHighValueMaterials__manganese_cny_mtu_96_12_12_10events": {
+   "domain": "StrategicAndHighValueMaterials",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 2.4164157067125225,
+     "std_mae": 0.5151731312776967,
+     "raw_mse": 1.5386427285520794,
+     "raw_mae": 0.6887396186590194,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 2.8158684125926907,
+     "std_mae": 0.6059364484079328,
+     "raw_mse": 2.760060568187209,
+     "raw_mae": 0.8828182468811671,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "StrategicAndHighValueMaterials__neodymium_cny_t_96_12_12_10events": {
+   "domain": "StrategicAndHighValueMaterials",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 0.35778603749245885,
+     "std_mae": 0.3852707522836287,
+     "raw_mse": 337868680.3277156,
+     "raw_mae": 11659.715738932291,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 0.6621086433076865,
+     "std_mae": 0.5349880312381919,
+     "raw_mse": 525862038.31099445,
+     "raw_mae": 15607.100260416666,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "StrategicAndHighValueMaterials__nickel_usd_t_96_12_12_10events": {
+   "domain": "StrategicAndHighValueMaterials",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 0.8298583817690032,
+     "std_mae": 0.6771409452634882,
+     "raw_mse": 513024.5557360759,
+     "raw_mae": 505.9765782674154,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.1893595758758466,
+     "std_mae": 0.8089997445603597,
+     "raw_mse": 629226.8472953913,
+     "raw_mae": 594.166049194336,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "StrategicAndHighValueMaterials__palladium_usd_t_oz_96_12_12_10events": {
+   "domain": "StrategicAndHighValueMaterials",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.2998807513295274,
+     "std_mae": 0.8449140840472606,
+     "raw_mse": 4577.727934583681,
+     "raw_mae": 50.879578678131104,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.271510945708447,
+     "std_mae": 0.8045210008464238,
+     "raw_mse": 4214.99368320739,
+     "raw_mae": 47.23043679300944,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 5,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "StrategicAndHighValueMaterials__platinum_usd_t_oz_96_12_12_10events": {
+   "domain": "StrategicAndHighValueMaterials",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.2868432548852295,
+     "std_mae": 0.7837564714668469,
+     "raw_mse": 1784.511164431967,
+     "raw_mae": 28.87262349192302,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.5627566966065287,
+     "std_mae": 0.9311976350495111,
+     "raw_mse": 2003.551353165691,
+     "raw_mae": 33.40702509180705,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "StrategicAndHighValueMaterials__rhodium_usd_t_oz_96_12_12_10events": {
+   "domain": "StrategicAndHighValueMaterials",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 6.063187678401274,
+     "std_mae": 0.9452503349437323,
+     "raw_mse": 50856.03252303973,
+     "raw_mae": 102.21177927652995,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 7.699880786695317,
+     "std_mae": 1.0965316361030464,
+     "raw_mse": 63395.33235322995,
+     "raw_mae": 119.50645065307617,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "StrategicAndHighValueMaterials__silver_usd_t_oz_96_12_12_10events": {
+   "domain": "StrategicAndHighValueMaterials",
+   "group": "CommodityPrice",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.2564633328305728,
+     "std_mae": 0.8440624209849025,
+     "raw_mse": 2.2758698373254123,
+     "raw_mae": 1.207472191508611,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.2399333029129425,
+     "std_mae": 0.8077362084451316,
+     "raw_mse": 2.213327189668181,
+     "raw_mae": 1.1489752614657085,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 5,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "Currency__usdtoaud_exchangerate_96_12_12_10events": {
+   "domain": "Currency",
+   "group": "Currency",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 0.9523998985103038,
+     "std_mae": 0.7421675432910773,
+     "raw_mse": 0.0005178305531087504,
+     "raw_mae": 0.01777534931451082,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.0541690885004404,
+     "std_mae": 0.7467923557439751,
+     "raw_mse": 0.0005546980865720696,
+     "raw_mae": 0.017720831978817783,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "Currency__usdtobrl_exchangerate_96_12_12_10events": {
+   "domain": "Currency",
+   "group": "Currency",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.1036316101527643,
+     "std_mae": 0.7150229113070546,
+     "raw_mse": 0.014290422915305318,
+     "raw_mae": 0.0872146372417609,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 0.9900423364036204,
+     "std_mae": 0.7133878468461102,
+     "raw_mse": 0.013450487682421278,
+     "raw_mae": 0.09010920361876486,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 5,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "Currency__usdtocad_exchangerate_96_12_12_10events": {
+   "domain": "Currency",
+   "group": "Currency",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 0.9159348573154756,
+     "std_mae": 0.6743754483197568,
+     "raw_mse": 0.0001938778756864941,
+     "raw_mae": 0.009995906290411952,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.0148771495628972,
+     "std_mae": 0.6658968485650897,
+     "raw_mse": 0.0001780917930802292,
+     "raw_mae": 0.009407549045979981,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "Currency__usdtochf_exchangerate_96_12_12_10events": {
+   "domain": "Currency",
+   "group": "Currency",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.032803717693332,
+     "std_mae": 0.6313217889517843,
+     "raw_mse": 0.00023904739178416491,
+     "raw_mae": 0.010867302719801665,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 0.9093446510632927,
+     "std_mae": 0.6242464474290279,
+     "raw_mse": 0.0002169368763787834,
+     "raw_mae": 0.01064121209099889,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 5,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "Currency__usdtogbp_exchangerate_96_12_12_10events": {
+   "domain": "Currency",
+   "group": "Currency",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 0.8774183578532748,
+     "std_mae": 0.6897980255217998,
+     "raw_mse": 0.00011900029567131841,
+     "raw_mae": 0.007978253883769115,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.0170880134295508,
+     "std_mae": 0.7559850635119116,
+     "raw_mse": 0.0001260083820497679,
+     "raw_mae": 0.008487077918847402,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "Currency__usdtohkd_exchangerate_96_12_12_10events": {
+   "domain": "Currency",
+   "group": "Currency",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.4039145303094382,
+     "std_mae": 0.7847969683841077,
+     "raw_mse": 0.00012500307882107545,
+     "raw_mae": 0.00756595423817636,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.5263316678583285,
+     "std_mae": 0.8560008328203911,
+     "raw_mse": 0.00015135219298051413,
+     "raw_mae": 0.008399932628870036,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "Currency__usdtoinr_exchangerate_96_12_12_10events": {
+   "domain": "Currency",
+   "group": "Currency",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 0.8150488926498577,
+     "std_mae": 0.6480660384190887,
+     "raw_mse": 0.1210974639557657,
+     "raw_mae": 0.2155818788210551,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 0.9334298877846096,
+     "std_mae": 0.713140982029047,
+     "raw_mse": 0.1457926290486977,
+     "raw_mae": 0.24902257760365776,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "Currency__usdtokrw_exchangerate_96_12_12_10events": {
+   "domain": "Currency",
+   "group": "Currency",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.1300611148969102,
+     "std_mae": 0.718345320341927,
+     "raw_mse": 424.86349057708776,
+     "raw_mae": 15.637564519246418,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.1478842119261479,
+     "std_mae": 0.7197803328073661,
+     "raw_mse": 392.24612236772884,
+     "raw_mae": 15.079322484334313,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "Currency__usdtomxn_exchangerate_96_12_12_10events": {
+   "domain": "Currency",
+   "group": "Currency",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.3589218238772558,
+     "std_mae": 0.757856935814875,
+     "raw_mse": 0.14600513605865967,
+     "raw_mae": 0.283495389564832,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.4345087993477152,
+     "std_mae": 0.7820694658241816,
+     "raw_mse": 0.15401311273956733,
+     "raw_mae": 0.29373779501120245,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "Currency__usdtosgd_exchangerate_96_12_12_10events": {
+   "domain": "Currency",
+   "group": "Currency",
+   "candidates": [
+    1,
+    5
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 32,
+     "std_mse": 1.406711665299413,
+     "std_mae": 0.7731099535253969,
+     "raw_mse": 0.00019212908109560303,
+     "raw_mae": 0.01010680006792148,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    },
+    "5": {
+     "n": 32,
+     "std_mse": 1.1407721320478703,
+     "std_mae": 0.7514932029242023,
+     "raw_mse": 0.00016369207296096827,
+     "raw_mae": 0.009988322946429254,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 32
+     }
+    }
+   },
+   "selected_P": 5,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "arts__art_exhibitions_96_12_4_10events": {
+   "domain": "arts",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 3.439771281797885,
+     "std_mae": 0.956969334072033,
+     "raw_mse": 417.79220795506876,
+     "raw_mae": 10.967942488374256,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 3.723046981488635,
+     "std_mae": 1.0171791525792513,
+     "raw_mse": 468.96591765425046,
+     "raw_mae": 11.917413144632976,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "arts__broadway_shows_96_12_4_10events": {
+   "domain": "arts",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.7742308534654974,
+     "std_mae": 0.8330489352566898,
+     "raw_mse": 69.69461640855765,
+     "raw_mae": 5.390155006193615,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 1.7047417385666592,
+     "std_mae": 0.8082781292449591,
+     "raw_mse": 69.7187277562252,
+     "raw_mae": 5.334439729915558,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "arts__comic_con_96_12_4_10events": {
+   "domain": "arts",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.6654851592242655,
+     "std_mae": 0.4415793488955187,
+     "raw_mse": 60.43185789838621,
+     "raw_mae": 4.449620868104723,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.5976054272164156,
+     "std_mae": 0.3947930692342753,
+     "raw_mse": 49.195808826709744,
+     "raw_mae": 3.913793160551283,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "arts__esports_96_12_4_10events": {
+   "domain": "arts",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.4044886401503838,
+     "std_mae": 0.7324133552763233,
+     "raw_mse": 164.35930733551749,
+     "raw_mae": 8.044518459691608,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 1.2999924951808999,
+     "std_mae": 0.7154211291543822,
+     "raw_mse": 154.45206186838737,
+     "raw_mae": 7.869986265705411,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "arts__film_festivals_96_12_4_10events": {
+   "domain": "arts",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.3112579332773298,
+     "std_mae": 0.8588346708334965,
+     "raw_mse": 152.5144225553934,
+     "raw_mae": 9.187916959475562,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 1.2494582916579353,
+     "std_mae": 0.8559460845570678,
+     "raw_mse": 144.90499171540608,
+     "raw_mae": 9.13916976055327,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "arts__food_wine_festivals_96_12_4_10events": {
+   "domain": "arts",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 14,
+     "std_mse": 1.1009651286313578,
+     "std_mae": 0.9402990757836556,
+     "raw_mse": 1117.5004926832582,
+     "raw_mae": 29.97431262334188,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 14
+     }
+    },
+    "52": {
+     "n": 14,
+     "std_mse": 1.3903906600963054,
+     "std_mae": 0.8887194679480217,
+     "raw_mse": 1420.9245318101146,
+     "raw_mae": 28.401384274164837,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 14
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "arts__major_league_baseball_96_12_4_10events": {
+   "domain": "arts",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.22025988897488927,
+     "std_mae": 0.32257712276688144,
+     "raw_mse": 56.623033938621866,
+     "raw_mae": 5.294618620942131,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.18679603072497847,
+     "std_mae": 0.32819669007237096,
+     "raw_mse": 71.843416811191,
+     "raw_mae": 6.171123106511435,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "arts__music_festivals_96_12_4_10events": {
+   "domain": "arts",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.36067765557394066,
+     "std_mae": 0.4594605562451675,
+     "raw_mse": 112.01673920139771,
+     "raw_mae": 8.041145425193182,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.25558530740894725,
+     "std_mae": 0.39778555581857733,
+     "raw_mse": 79.57226319693501,
+     "raw_mae": 6.985580202219161,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "arts__national_basketball_association_96_12_4_10events": {
+   "domain": "arts",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.6594659876621931,
+     "std_mae": 0.6336274345134095,
+     "raw_mse": 344.81804485532456,
+     "raw_mae": 14.525599291475327,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.6364449144513626,
+     "std_mae": 0.6370010168566159,
+     "raw_mse": 330.4248904339675,
+     "raw_mae": 14.585211554053895,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "arts__national_football_league_96_12_4_10events": {
+   "domain": "arts",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 3.0726746207437623,
+     "std_mae": 1.1072724321846676,
+     "raw_mse": 317.28363070457397,
+     "raw_mae": 11.462435756913685,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 2.211836950945129,
+     "std_mae": 0.8262319836205337,
+     "raw_mse": 235.3719061487357,
+     "raw_mae": 8.44145074349467,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "climate__deforestation_96_12_4_10events": {
+   "domain": "climate",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.5104493691460679,
+     "std_mae": 0.5597918374139678,
+     "raw_mse": 231.694179201369,
+     "raw_mae": 11.921763678942483,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.17523924019215256,
+     "std_mae": 0.2792192495286564,
+     "raw_mse": 81.0888742021163,
+     "raw_mae": 6.0085891224258665,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "climate__drought_96_12_4_10events": {
+   "domain": "climate",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.3851449570964563,
+     "std_mae": 0.45702690745255803,
+     "raw_mse": 81.25343360019049,
+     "raw_mae": 6.438567251152402,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.8173104187121374,
+     "std_mae": 0.6658851384650005,
+     "raw_mse": 214.25871794002433,
+     "raw_mae": 9.951617285618857,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "climate__endangered_species_96_12_4_10events": {
+   "domain": "climate",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.5449255349130498,
+     "std_mae": 0.5896365757924136,
+     "raw_mse": 200.8196281569541,
+     "raw_mae": 11.374812749885681,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.1658891933744171,
+     "std_mae": 0.28512293151687207,
+     "raw_mse": 64.71326788974274,
+     "raw_mae": 5.586190652037121,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "climate__flooding_96_12_4_10events": {
+   "domain": "climate",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 3.2937700284612106,
+     "std_mae": 0.8525391465387864,
+     "raw_mse": 472.7165150326213,
+     "raw_mae": 9.966737301377432,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 3.379775312399085,
+     "std_mae": 0.906600631418609,
+     "raw_mse": 482.2918508593355,
+     "raw_mae": 10.480534879734947,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "climate__global_warming_96_12_4_10events": {
+   "domain": "climate",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.8814702890271364,
+     "std_mae": 0.7259768042124721,
+     "raw_mse": 168.92552210375015,
+     "raw_mae": 10.125620167427185,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.5806739931801002,
+     "std_mae": 0.5732465758465478,
+     "raw_mse": 112.13030038257178,
+     "raw_mae": 8.054166716245621,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "climate__heatwave_96_12_4_10events": {
+   "domain": "climate",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.8295584676141813,
+     "std_mae": 0.5038880353871519,
+     "raw_mse": 62.996528012420534,
+     "raw_mae": 4.644348940360175,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.7749192316783728,
+     "std_mae": 0.44102234602526963,
+     "raw_mse": 56.159720090598434,
+     "raw_mae": 3.9572490018966913,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "climate__heavy_rainfall_96_12_4_10events": {
+   "domain": "climate",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.5420033461152922,
+     "std_mae": 0.9758283695246774,
+     "raw_mse": 506.14980884622577,
+     "raw_mae": 17.112626543371775,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 1.4587158208971434,
+     "std_mae": 0.8945009156280415,
+     "raw_mse": 531.0196337178878,
+     "raw_mae": 16.00600502061971,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "climate__marine_pollution_96_12_4_10events": {
+   "domain": "climate",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.7003056512843943,
+     "std_mae": 0.65417642073365,
+     "raw_mse": 289.34534319873546,
+     "raw_mae": 13.414610091368662,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.3282819483941227,
+     "std_mae": 0.4277053043613472,
+     "raw_mse": 136.63316006224602,
+     "raw_mae": 8.791449055605934,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "climate__sustainable_fashion_96_12_4_10events": {
+   "domain": "climate",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.0560893202839465,
+     "std_mae": 0.7882318791925678,
+     "raw_mse": 211.2701802067255,
+     "raw_mae": 11.059830525171673,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 1.057826943737724,
+     "std_mae": 0.7385650643443624,
+     "raw_mse": 221.41347900768687,
+     "raw_mae": 10.501624489194356,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "climate__water_scarcity_96_12_4_10events": {
+   "domain": "climate",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.8535214290054386,
+     "std_mae": 0.7363907766280106,
+     "raw_mse": 362.3649173850737,
+     "raw_mae": 15.346303060740153,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.4872405218690723,
+     "std_mae": 0.5467512373567652,
+     "raw_mse": 225.58334427811056,
+     "raw_mae": 11.66041097491891,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "economy__cost_of_living_96_12_4_10events": {
+   "domain": "economy",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 2.25119873949734,
+     "std_mae": 1.0046077155534288,
+     "raw_mse": 72.13817037529203,
+     "raw_mae": 5.717650065129355,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 2.2644808114242734,
+     "std_mae": 0.9653463283012952,
+     "raw_mse": 71.28582477011007,
+     "raw_mae": 5.4416780923762245,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "economy__federal_budget_deficit_96_12_4_10events": {
+   "domain": "economy",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.6371404637527855,
+     "std_mae": 0.6181541563977168,
+     "raw_mse": 320.19068580499396,
+     "raw_mae": 13.886158053420294,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.2709108711762835,
+     "std_mae": 0.38151709749282164,
+     "raw_mse": 137.20435672385213,
+     "raw_mae": 8.580468521936327,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "economy__government_spending_96_12_4_10events": {
+   "domain": "economy",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.3455887167403628,
+     "std_mae": 0.8668020373377677,
+     "raw_mse": 387.1291617678964,
+     "raw_mae": 14.53132978555201,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.812248457871811,
+     "std_mae": 0.5611323046889284,
+     "raw_mse": 218.2741366395853,
+     "raw_mae": 9.124094979626125,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "economy__healthcare_costs_96_12_4_10events": {
+   "domain": "economy",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.3522275935186345,
+     "std_mae": 0.8711479648329413,
+     "raw_mse": 234.87200023919655,
+     "raw_mae": 11.576091447015672,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 1.5669304015734606,
+     "std_mae": 1.0256321635480583,
+     "raw_mse": 333.7213820497934,
+     "raw_mae": 14.41814763060361,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "economy__inflation_96_12_4_10events": {
+   "domain": "economy",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.8476528440693045,
+     "std_mae": 0.6962154081880325,
+     "raw_mse": 33.74094367906222,
+     "raw_mae": 4.746169749829004,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.7416140719519644,
+     "std_mae": 0.5961435410538967,
+     "raw_mse": 23.598309996241706,
+     "raw_mae": 3.7006892184695293,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "economy__international_trade_96_12_4_10events": {
+   "domain": "economy",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.1049091742505324,
+     "std_mae": 0.783050006757343,
+     "raw_mse": 175.50398441425142,
+     "raw_mae": 9.763580082688105,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.8069174181079884,
+     "std_mae": 0.5405106291834458,
+     "raw_mse": 140.40540130670942,
+     "raw_mae": 6.881942759217762,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "economy__minimum_wage_96_12_4_10events": {
+   "domain": "economy",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.6901706128719487,
+     "std_mae": 0.7729656910465856,
+     "raw_mse": 107.82687853971989,
+     "raw_mae": 6.699860400805276,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 1.2666592867660964,
+     "std_mae": 0.6943357313104492,
+     "raw_mse": 95.87770734459883,
+     "raw_mae": 6.091497914401584,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "economy__student_loans_96_12_4_10events": {
+   "domain": "economy",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.8710249588819543,
+     "std_mae": 0.6498356824500776,
+     "raw_mse": 14.95210531510659,
+     "raw_mae": 2.9666771612057152,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 1.008269373612646,
+     "std_mae": 0.634264295396425,
+     "raw_mse": 13.646427800190432,
+     "raw_mae": 2.49670368409947,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "economy__taxes_96_12_4_10events": {
+   "domain": "economy",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.44904035835785844,
+     "std_mae": 0.4703057746709699,
+     "raw_mse": 127.97961251984277,
+     "raw_mae": 8.00208338878135,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.07692019807192255,
+     "std_mae": 0.19405348216698384,
+     "raw_mse": 22.65382486784256,
+     "raw_mae": 3.3336463392789324,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "economy__unemployment_rate_96_12_4_10events": {
+   "domain": "economy",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.9568630388144629,
+     "std_mae": 0.7578369672893877,
+     "raw_mse": 179.24789997399125,
+     "raw_mae": 10.323771569696335,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.6911592128576635,
+     "std_mae": 0.5866270469866084,
+     "raw_mse": 130.15823661794232,
+     "raw_mae": 7.971247985481868,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "electronic_technology__alphabet_96_12_4_10events": {
+   "domain": "electronic_technology",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.0041607130443502,
+     "std_mae": 0.7620508310833705,
+     "raw_mse": 87.38700244694851,
+     "raw_mae": 7.1334138486425,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.8291574125162555,
+     "std_mae": 0.6952754459596772,
+     "raw_mse": 71.70199073904949,
+     "raw_mae": 6.511014838577513,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "electronic_technology__amazon_96_12_4_10events": {
+   "domain": "electronic_technology",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.9381935764175837,
+     "std_mae": 0.7823085464573061,
+     "raw_mse": 59.41750687706481,
+     "raw_mae": 6.399804733784993,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 1.4491979264461436,
+     "std_mae": 1.0798783436696129,
+     "raw_mse": 108.1743146775116,
+     "raw_mae": 9.230778665554471,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "electronic_technology__apple_inc_96_12_4_10events": {
+   "domain": "electronic_technology",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 3.8607193761467817,
+     "std_mae": 1.2414636062268636,
+     "raw_mse": 161.80134947768147,
+     "raw_mae": 7.202614094433981,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 5.441519183726238,
+     "std_mae": 1.5200119578582114,
+     "raw_mse": 232.22240629941666,
+     "raw_mae": 8.851642823312668,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "electronic_technology__artificial_intelligence_96_12_4_10events": {
+   "domain": "electronic_technology",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 4.5321666688862,
+     "std_mae": 0.9527712760925462,
+     "raw_mse": 210.70397801510222,
+     "raw_mae": 7.889540610702273,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 6.378211164104563,
+     "std_mae": 1.1623432538889253,
+     "raw_mse": 313.4734100157989,
+     "raw_mae": 9.905263710486517,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "electronic_technology__consumer_electronics_96_12_4_10events": {
+   "domain": "electronic_technology",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 2.389594788377261,
+     "std_mae": 0.8887059628815628,
+     "raw_mse": 249.10993292400786,
+     "raw_mae": 9.371023511345273,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 2.0888862745169994,
+     "std_mae": 0.8757563004259435,
+     "raw_mse": 231.87571427072902,
+     "raw_mae": 9.264107257816375,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "electronic_technology__drones_96_12_4_10events": {
+   "domain": "electronic_technology",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 128.85325896916356,
+     "std_mae": 2.9482028385543573,
+     "raw_mse": 187.6137725159097,
+     "raw_mae": 3.861124499588194,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 133.4447733045081,
+     "std_mae": 3.261060249273444,
+     "raw_mse": 194.79593571306663,
+     "raw_mae": 4.228762309564076,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "electronic_technology__meta_platforms_96_12_4_10events": {
+   "domain": "electronic_technology",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 10.585967434860244,
+     "std_mae": 1.3276887665480495,
+     "raw_mse": 581.0885347762072,
+     "raw_mae": 8.179447926443434,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 10.019783026356137,
+     "std_mae": 1.1779172618338147,
+     "raw_mse": 602.3698086855353,
+     "raw_mae": 7.5681333496738015,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "electronic_technology__microsoft_96_12_4_10events": {
+   "domain": "electronic_technology",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 3.7831287094455113,
+     "std_mae": 0.7947911359052433,
+     "raw_mse": 45.167934252350875,
+     "raw_mae": 3.3309210501931807,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 3.8897899048291253,
+     "std_mae": 0.8444922615820971,
+     "raw_mse": 51.01968350217379,
+     "raw_mae": 3.7519959501720614,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "electronic_technology__nvidia_96_12_4_10events": {
+   "domain": "electronic_technology",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 4.71319665229781,
+     "std_mae": 1.2647780090082135,
+     "raw_mse": 185.0308555074937,
+     "raw_mae": 9.237191849882823,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 8.566007130349659,
+     "std_mae": 2.1538501184358605,
+     "raw_mse": 400.8100058353742,
+     "raw_mae": 16.388813509479583,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "electronic_technology__robotics_96_12_4_10events": {
+   "domain": "electronic_technology",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.9450521446769256,
+     "std_mae": 0.8904179014295052,
+     "raw_mse": 101.88360182991198,
+     "raw_mae": 6.871750241439576,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 2.2368859016438165,
+     "std_mae": 1.0547854349973806,
+     "raw_mse": 148.35758380196654,
+     "raw_mae": 8.822010948749845,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "finance__asset_management_96_12_4_10events": {
+   "domain": "finance",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 2.184568611841089,
+     "std_mae": 1.0671124299657475,
+     "raw_mse": 84.75459235198147,
+     "raw_mae": 6.430607118172782,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 2.665020771532248,
+     "std_mae": 1.1524242383887335,
+     "raw_mse": 126.6993757571262,
+     "raw_mae": 7.348485148011223,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "finance__cryptocurrency_96_12_4_10events": {
+   "domain": "finance",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 4.2967225948350505,
+     "std_mae": 1.0127379234763598,
+     "raw_mse": 153.75348860027646,
+     "raw_mae": 6.470710426154001,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 4.792594294134038,
+     "std_mae": 1.1043024543185662,
+     "raw_mse": 181.0997294672777,
+     "raw_mae": 7.2533339669414705,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "finance__financial_regulation_96_12_4_10events": {
+   "domain": "finance",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.7086102342207201,
+     "std_mae": 0.9923473965205938,
+     "raw_mse": 245.14002835374976,
+     "raw_mae": 11.570995159399606,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 2.1179208093017876,
+     "std_mae": 1.1357844557200605,
+     "raw_mse": 319.61646595022717,
+     "raw_mae": 13.498154695852127,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "finance__goldman_sachs_96_12_4_10events": {
+   "domain": "finance",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.9168536488546273,
+     "std_mae": 0.6102706747871456,
+     "raw_mse": 45.88785575426902,
+     "raw_mae": 4.747682557377891,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 1.3507096539533439,
+     "std_mae": 0.7072193209715594,
+     "raw_mse": 84.64156253558565,
+     "raw_mae": 5.670916982271709,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "finance__hedge_funds_96_12_4_10events": {
+   "domain": "finance",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 2.0724864939024497,
+     "std_mae": 0.9741029412347456,
+     "raw_mse": 114.32851975438213,
+     "raw_mae": 7.564872786765447,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 2.2473726166063583,
+     "std_mae": 1.078803490151544,
+     "raw_mse": 130.620988334299,
+     "raw_mae": 8.491604759232779,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "finance__investment_banking_96_12_4_10events": {
+   "domain": "finance",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.417061709014313,
+     "std_mae": 0.9071224531737876,
+     "raw_mse": 108.35486043848931,
+     "raw_mae": 8.05446404488409,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 1.945094615936061,
+     "std_mae": 1.1516053501082273,
+     "raw_mse": 158.4796859226111,
+     "raw_mae": 10.361178329871768,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "finance__mortgage_rates_96_12_4_10events": {
+   "domain": "finance",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 3.2891329474414484,
+     "std_mae": 0.9022360010624566,
+     "raw_mse": 113.39885065895872,
+     "raw_mae": 6.404822603175087,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 4.420008617180344,
+     "std_mae": 1.0237952024061852,
+     "raw_mse": 147.0370711971543,
+     "raw_mae": 6.928680673548622,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "finance__private_equity_96_12_4_10events": {
+   "domain": "finance",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.9465072341335892,
+     "std_mae": 0.9370895167673461,
+     "raw_mse": 90.00307417349995,
+     "raw_mae": 6.205282227716355,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 3.2368372405505412,
+     "std_mae": 1.4612990291674681,
+     "raw_mse": 154.7614130377759,
+     "raw_mae": 9.84300759609501,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "finance__stock_market_96_12_4_10events": {
+   "domain": "finance",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 10.273251109114465,
+     "std_mae": 1.1885417673807397,
+     "raw_mse": 156.7046705198127,
+     "raw_mae": 5.037341674995059,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 11.892664429976296,
+     "std_mae": 1.4173196686228564,
+     "raw_mse": 199.25215108398447,
+     "raw_mae": 6.455895146178715,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "finance__venture_capital_96_12_4_10events": {
+   "domain": "finance",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 2.287875435506986,
+     "std_mae": 1.0695212631248063,
+     "raw_mse": 80.95178838230213,
+     "raw_mae": 5.958466904092456,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 3.8632492523498057,
+     "std_mae": 1.5812824903330245,
+     "raw_mse": 133.92744824209356,
+     "raw_mae": 8.85799213776991,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "pets__animal_migration_96_12_4_10events": {
+   "domain": "pets",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.579684117254161,
+     "std_mae": 0.9049900185877839,
+     "raw_mse": 271.09024657317275,
+     "raw_mae": 12.419398763418531,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 1.4916490937676492,
+     "std_mae": 0.8128107345999382,
+     "raw_mse": 251.64788403252047,
+     "raw_mae": 11.123878060945298,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "pets__animal_rescue_96_12_4_10events": {
+   "domain": "pets",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.9094149563562153,
+     "std_mae": 0.7418590588803649,
+     "raw_mse": 25.10037853579011,
+     "raw_mae": 3.9391307393585686,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 1.7659335223300057,
+     "std_mae": 1.1465568480290094,
+     "raw_mse": 50.42909439672119,
+     "raw_mae": 6.149545377937438,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "pets__animal_welfare_96_12_4_10events": {
+   "domain": "pets",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.1668989632782119,
+     "std_mae": 0.8944577598210627,
+     "raw_mse": 57.300677644475506,
+     "raw_mae": 6.2897599606507315,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.9848626019275977,
+     "std_mae": 0.7703731077186378,
+     "raw_mse": 49.073366374895265,
+     "raw_mae": 5.436198619834294,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "pets__beekeeping_96_12_4_10events": {
+   "domain": "pets",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.4746580599118957,
+     "std_mae": 0.5293248424676518,
+     "raw_mse": 44.86691854769095,
+     "raw_mae": 5.15345987451075,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.4589090587064399,
+     "std_mae": 0.44845139412762774,
+     "raw_mse": 40.77677732335512,
+     "raw_mae": 4.30485616465832,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "pets__biodiversity_96_12_4_10events": {
+   "domain": "pets",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.5941372993147801,
+     "std_mae": 0.5740596919557827,
+     "raw_mse": 353.12319054221484,
+     "raw_mae": 14.057546700922407,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.2013039594205317,
+     "std_mae": 0.3167782987947095,
+     "raw_mse": 125.33672167605746,
+     "raw_mae": 7.873482929209392,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "pets__invasive_species_96_12_4_10events": {
+   "domain": "pets",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.6403602583142943,
+     "std_mae": 0.6159452538120341,
+     "raw_mse": 213.0395691052146,
+     "raw_mae": 11.276168394729856,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.19537615577070783,
+     "std_mae": 0.32355823997039707,
+     "raw_mse": 66.79438603516803,
+     "raw_mae": 5.960787323658776,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "pets__marine_life_96_12_4_10events": {
+   "domain": "pets",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.1698548008055394,
+     "std_mae": 0.8667296596455214,
+     "raw_mse": 141.50090398293045,
+     "raw_mae": 9.530478549577017,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.8400218304186321,
+     "std_mae": 0.6751368200223334,
+     "raw_mse": 109.07950063894535,
+     "raw_mae": 7.551234161633689,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "pets__pest_control_96_12_4_10events": {
+   "domain": "pets",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.3134714205345066,
+     "std_mae": 0.413182200942358,
+     "raw_mse": 61.89720384894244,
+     "raw_mae": 5.821507988426087,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.44926571220432976,
+     "std_mae": 0.46112467679953023,
+     "raw_mse": 89.56634046480922,
+     "raw_mae": 6.506157206122504,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "pets__pet_adoption_96_12_4_10events": {
+   "domain": "pets",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 2.298800594343365,
+     "std_mae": 0.601713471864817,
+     "raw_mse": 58.961040540124294,
+     "raw_mae": 3.7740996042577346,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 2.864317454871546,
+     "std_mae": 0.8471476199950587,
+     "raw_mse": 90.03033307662274,
+     "raw_mae": 5.237591679859948,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "pets__pet_health_96_12_4_10events": {
+   "domain": "pets",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 4.3024178985833235,
+     "std_mae": 1.2620726827817574,
+     "raw_mse": 143.88662363027748,
+     "raw_mae": 6.152926629897345,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 6.329826182254221,
+     "std_mae": 1.6407314678011524,
+     "raw_mse": 210.29751080797732,
+     "raw_mae": 8.066487996750604,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "public_health__air_pollution_96_12_4_10events": {
+   "domain": "public_health",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.44233488413044003,
+     "std_mae": 0.5013831036410628,
+     "raw_mse": 59.22369338332851,
+     "raw_mae": 5.762581412749517,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.5013318813031139,
+     "std_mae": 0.32089145242002876,
+     "raw_mse": 65.7638828327804,
+     "raw_mae": 3.6395971234101796,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "public_health__climate_change_96_12_4_10events": {
+   "domain": "public_health",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 3.6024883392598124,
+     "std_mae": 0.3549768248802439,
+     "raw_mse": 66.12952313800962,
+     "raw_mae": 2.20689642660144,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 3.438086795954279,
+     "std_mae": 0.3763811992312565,
+     "raw_mse": 83.22405842116922,
+     "raw_mae": 2.2367784509210433,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "public_health__diabetes_96_12_4_10events": {
+   "domain": "public_health",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.9739012764218825,
+     "std_mae": 0.7251825072196575,
+     "raw_mse": 30.87080951578461,
+     "raw_mae": 4.106806653919039,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.6750148487152346,
+     "std_mae": 0.5515359568421466,
+     "raw_mse": 21.555001865991684,
+     "raw_mae": 3.133932148739769,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "public_health__drug_overdose_96_12_4_10events": {
+   "domain": "public_health",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.5168896597379679,
+     "std_mae": 0.5593152839861899,
+     "raw_mse": 31.9429227286896,
+     "raw_mae": 4.299615997466557,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.824585799537531,
+     "std_mae": 0.5907117984709686,
+     "raw_mse": 55.08951094796585,
+     "raw_mae": 4.579583199547177,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "public_health__food_safety_96_12_4_10events": {
+   "domain": "public_health",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.361989325672893,
+     "std_mae": 0.7830686433521501,
+     "raw_mse": 113.46257142149314,
+     "raw_mae": 7.1777553849497,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 1.9710513145231043,
+     "std_mae": 1.026124106873621,
+     "raw_mse": 172.70186470715166,
+     "raw_mae": 9.579070831833613,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "public_health__hiv_aids_96_12_4_10events": {
+   "domain": "public_health",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.6132002284471625,
+     "std_mae": 0.606773847650325,
+     "raw_mse": 30.36469366806779,
+     "raw_mae": 4.2476630601554755,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.5046408128113548,
+     "std_mae": 0.5453829470943989,
+     "raw_mse": 23.855606791943227,
+     "raw_mae": 3.781066668689546,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "public_health__infectious_disease_96_12_4_10events": {
+   "domain": "public_health",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.189316705291073,
+     "std_mae": 0.7872430331100297,
+     "raw_mse": 82.8306045733089,
+     "raw_mae": 6.690943148325118,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.8779464417388907,
+     "std_mae": 0.6654928449221688,
+     "raw_mse": 64.71060355208958,
+     "raw_mae": 5.768678353980654,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "public_health__mental_health_96_12_4_10events": {
+   "domain": "public_health",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.8889661240526584,
+     "std_mae": 0.7171988952953744,
+     "raw_mse": 83.40432107840259,
+     "raw_mae": 6.969810304781474,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.5140610891744612,
+     "std_mae": 0.4969196384598543,
+     "raw_mse": 50.07111389810329,
+     "raw_mae": 4.876778557780916,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "public_health__obesity_96_12_4_10events": {
+   "domain": "public_health",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 2.9055266805992326,
+     "std_mae": 0.9845302349246561,
+     "raw_mse": 219.17069733968998,
+     "raw_mae": 8.739576388311477,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 2.532342458031935,
+     "std_mae": 0.7697873551237615,
+     "raw_mse": 175.4905135628613,
+     "raw_mae": 6.701226283025833,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "public_health__opioid_crisis_96_12_4_10events": {
+   "domain": "public_health",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.6348165730796502,
+     "std_mae": 0.6184680266449697,
+     "raw_mse": 156.85823383857684,
+     "raw_mae": 9.767561119792635,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.539745407089856,
+     "std_mae": 0.5368079691550124,
+     "raw_mse": 134.38345704743688,
+     "raw_mae": 8.487881443451897,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "public_policy__carbon_emissions_96_12_4_10events": {
+   "domain": "public_policy",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 2.3363151834905813,
+     "std_mae": 1.0163919869479632,
+     "raw_mse": 311.8162783251213,
+     "raw_mae": 12.58597043178643,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 1.6271118708439758,
+     "std_mae": 0.7550535370802137,
+     "raw_mse": 216.4019609217034,
+     "raw_mae": 9.356139945210291,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "public_policy__federal_reserve_96_12_4_10events": {
+   "domain": "public_policy",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.1573832707850042,
+     "std_mae": 0.663367835237362,
+     "raw_mse": 196.78589681488756,
+     "raw_mae": 8.978845988731749,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 1.2251829067171607,
+     "std_mae": 0.6082245108448874,
+     "raw_mse": 206.83849737929285,
+     "raw_mae": 8.20860496283734,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "public_policy__healthcare_policy_96_12_4_10events": {
+   "domain": "public_policy",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 2.3599584078305287,
+     "std_mae": 1.0755313152119326,
+     "raw_mse": 166.48309661606757,
+     "raw_mae": 8.376229508923727,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 3.282345427567237,
+     "std_mae": 1.3353619630888587,
+     "raw_mse": 261.7566330816225,
+     "raw_mae": 10.829048182678223,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "public_policy__human_rights_96_12_4_10events": {
+   "domain": "public_policy",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.230625677065533,
+     "std_mae": 0.7963384054672276,
+     "raw_mse": 129.0777254959727,
+     "raw_mae": 8.157935308687724,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.7296514268009755,
+     "std_mae": 0.48283361865872154,
+     "raw_mse": 77.88146193748113,
+     "raw_mae": 5.00538946923925,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "public_policy__immigration_reform_96_12_4_10events": {
+   "domain": "public_policy",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.875779556870833,
+     "std_mae": 1.0409875902974035,
+     "raw_mse": 249.49944641033795,
+     "raw_mae": 12.036772841220916,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 1.8566187426253837,
+     "std_mae": 1.1577582031694749,
+     "raw_mse": 255.4268281790737,
+     "raw_mae": 13.545818137646387,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "public_policy__national_debt_96_12_4_10events": {
+   "domain": "public_policy",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.4402677975718639,
+     "std_mae": 0.9016442933105757,
+     "raw_mse": 180.66420163453495,
+     "raw_mae": 10.355499326465425,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 1.9893585907127467,
+     "std_mae": 1.110558046120996,
+     "raw_mse": 248.9325114668226,
+     "raw_mae": 12.701788508900961,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "public_policy__presidential_election_96_12_4_10events": {
+   "domain": "public_policy",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 287.1781903833786,
+     "std_mae": 2.620492414452292,
+     "raw_mse": 116.55533946388546,
+     "raw_mae": 1.865224038205533,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 288.7440010854625,
+     "std_mae": 3.2206235274163983,
+     "raw_mse": 116.935723648631,
+     "raw_mae": 2.1619025584141527,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "public_policy__refugee_support_96_12_4_10events": {
+   "domain": "public_policy",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.4285651800558072,
+     "std_mae": 0.8880808790019072,
+     "raw_mse": 344.4491901227265,
+     "raw_mae": 13.91249691009037,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 1.102186944048876,
+     "std_mae": 0.6963222459310684,
+     "raw_mse": 297.78405610485356,
+     "raw_mae": 11.134236240079364,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "public_policy__renewable_energy_96_12_4_10events": {
+   "domain": "public_policy",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.7545345759309672,
+     "std_mae": 0.6637840946828146,
+     "raw_mse": 235.06619322099422,
+     "raw_mae": 11.677634111186679,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.3886174097048625,
+     "std_mae": 0.39465503389630946,
+     "raw_mse": 131.27901893652665,
+     "raw_mae": 7.080056698263501,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "public_policy__space_exploration_96_12_4_10events": {
+   "domain": "public_policy",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.7452176175438234,
+     "std_mae": 0.6773707438256628,
+     "raw_mse": 241.97086980311113,
+     "raw_mae": 12.282327232551696,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.3253607307970738,
+     "std_mae": 0.4515121049548486,
+     "raw_mse": 108.94716337521123,
+     "raw_mae": 8.247516227791923,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "public_policy__wildlife_conservation_96_12_4_10events": {
+   "domain": "public_policy",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.3844120208049933,
+     "std_mae": 0.9465881949120869,
+     "raw_mse": 104.28608552607928,
+     "raw_mae": 8.221001131579202,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 1.395448331225752,
+     "std_mae": 0.9794767375242948,
+     "raw_mse": 116.51978779393204,
+     "raw_mae": 8.78750665611146,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "science__cancer_research_96_12_4_10events": {
+   "domain": "science",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 12.549902850158354,
+     "std_mae": 1.5788018922903007,
+     "raw_mse": 145.67395592689067,
+     "raw_mae": 5.548892330955626,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 14.388601916808739,
+     "std_mae": 1.8351793840188693,
+     "raw_mse": 186.42003734294525,
+     "raw_mae": 6.960062479734875,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "science__data_breach_96_12_4_10events": {
+   "domain": "science",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 5.0393346536194885,
+     "std_mae": 1.197416279511843,
+     "raw_mse": 267.93156649055294,
+     "raw_mae": 10.716791313169933,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 7.16265701977217,
+     "std_mae": 1.4827616035324822,
+     "raw_mse": 362.030448542044,
+     "raw_mae": 12.292289663367862,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "science__earthquake_96_12_4_10events": {
+   "domain": "science",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 2.7193038794545368,
+     "std_mae": 0.6489000674633868,
+     "raw_mse": 155.66584477130252,
+     "raw_mae": 5.872588445311652,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 3.31820485341748,
+     "std_mae": 0.7272680337313906,
+     "raw_mse": 207.17717112867442,
+     "raw_mae": 6.5434900816053965,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "science__food_recall_96_12_4_10events": {
+   "domain": "science",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 2.4677501573350122,
+     "std_mae": 0.8498583785563085,
+     "raw_mse": 243.62517856158345,
+     "raw_mae": 11.310580596924313,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 3.294915256506538,
+     "std_mae": 0.9199707096436792,
+     "raw_mse": 405.285277322425,
+     "raw_mae": 12.160149688871595,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "science__gene_editing_96_12_4_10events": {
+   "domain": "science",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.4752329806632278,
+     "std_mae": 0.7796204376809855,
+     "raw_mse": 189.9114122464129,
+     "raw_mae": 9.203321593815394,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 1.3821185749565088,
+     "std_mae": 0.6676234175394976,
+     "raw_mse": 189.72817856251348,
+     "raw_mae": 7.975163929713173,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "science__meteor_shower_96_12_4_10events": {
+   "domain": "science",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.4904502002027683,
+     "std_mae": 0.35631419255754654,
+     "raw_mse": 81.03377840556892,
+     "raw_mae": 4.781606441696106,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.15304777069992964,
+     "std_mae": 0.15955835225517734,
+     "raw_mse": 26.37513057546541,
+     "raw_mae": 2.146551328289698,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "science__nobel_prize_96_12_4_10events": {
+   "domain": "science",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.271449462764141,
+     "std_mae": 0.4345591160542908,
+     "raw_mse": 113.94088937472145,
+     "raw_mae": 4.48446418955921,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 1.4437123107355532,
+     "std_mae": 0.4404281572567814,
+     "raw_mse": 130.79090017797606,
+     "raw_mae": 4.458254816236466,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "science__quantum_computing_96_12_4_10events": {
+   "domain": "science",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 19.51547409859523,
+     "std_mae": 1.8962122493927258,
+     "raw_mse": 417.58894932473345,
+     "raw_mae": 10.770367905398658,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 20.633008038058726,
+     "std_mae": 2.186195417891351,
+     "raw_mse": 519.8291228153091,
+     "raw_mae": 13.54506116740805,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "science__vaccine_research_96_12_4_10events": {
+   "domain": "science",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 2.595903887001081,
+     "std_mae": 1.066490911284243,
+     "raw_mse": 137.1462008855024,
+     "raw_mae": 7.150836686761282,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 3.669036145930158,
+     "std_mae": 1.2075467895891567,
+     "raw_mse": 222.69983048006088,
+     "raw_mae": 8.595408212092808,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "science__volcanic_eruption_96_12_4_10events": {
+   "domain": "science",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.5055925512004131,
+     "std_mae": 0.5540730666485945,
+     "raw_mse": 23.667150407448883,
+     "raw_mae": 3.7178392848309714,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.4688020932048672,
+     "std_mae": 0.47814164232807144,
+     "raw_mse": 22.851547261176364,
+     "raw_mae": 3.2376884606253005,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "shopping__air_conditioner_96_12_4_10events": {
+   "domain": "shopping",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.2383183829881334,
+     "std_mae": 0.2953054293526232,
+     "raw_mse": 86.52414467147429,
+     "raw_mae": 5.764994470457773,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.19374210801152658,
+     "std_mae": 0.24434794926636538,
+     "raw_mse": 71.40906390830057,
+     "raw_mae": 4.799647064992753,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "shopping__back_to_school_96_12_4_10events": {
+   "domain": "shopping",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.971509509573695,
+     "std_mae": 0.41320066936872524,
+     "raw_mse": 211.75993892986736,
+     "raw_mae": 6.454696412588695,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.5744639624543997,
+     "std_mae": 0.30685712287153893,
+     "raw_mse": 117.53548579602032,
+     "raw_mae": 4.730500231136988,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "shopping__black_friday_deals_96_12_4_10events": {
+   "domain": "shopping",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.2087547383460442,
+     "std_mae": 0.3822511570275883,
+     "raw_mse": 137.97056329180057,
+     "raw_mae": 4.3253054712157475,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 1.0732515215400729,
+     "std_mae": 0.21630064269137264,
+     "raw_mse": 129.79911961296324,
+     "raw_mae": 2.4335703985689254,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "shopping__christmas_gifts_96_12_4_10events": {
+   "domain": "shopping",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.541523262564837,
+     "std_mae": 0.4104739671384751,
+     "raw_mse": 237.93294890999044,
+     "raw_mae": 8.692457003493415,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.03536511006672282,
+     "std_mae": 0.07514088074963154,
+     "raw_mse": 13.886681065592056,
+     "raw_mae": 1.5681033614568558,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "shopping__fashion_week_96_12_4_10events": {
+   "domain": "shopping",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.3913776506393919,
+     "std_mae": 0.4451154843131689,
+     "raw_mse": 115.02839121767688,
+     "raw_mae": 7.698929665359013,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.10147545690953448,
+     "std_mae": 0.2377645412337724,
+     "raw_mse": 29.40272576252199,
+     "raw_mae": 4.099243809673733,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "shopping__flu_shot_96_12_4_10events": {
+   "domain": "shopping",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.13185375780754294,
+     "std_mae": 0.22888223455815682,
+     "raw_mse": 55.935667329330045,
+     "raw_mae": 4.912870708808294,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.07773078959552204,
+     "std_mae": 0.1833893059599284,
+     "raw_mse": 39.45277154438151,
+     "raw_mae": 4.043107546407306,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "shopping__halloween_costumes_96_12_4_10events": {
+   "domain": "shopping",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.4442384310283521,
+     "std_mae": 0.3077451768803031,
+     "raw_mse": 108.0250280789169,
+     "raw_mae": 5.005641877638075,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.06188309864907783,
+     "std_mae": 0.08918818580123215,
+     "raw_mse": 14.720874663496074,
+     "raw_mae": 1.4576961256340268,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "shopping__organic_food_96_12_4_10events": {
+   "domain": "shopping",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.544225500458021,
+     "std_mae": 0.8248957775356761,
+     "raw_mse": 81.79009745484318,
+     "raw_mae": 6.1646890009930315,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 1.15173499157545,
+     "std_mae": 0.6437227581099298,
+     "raw_mse": 63.40998463852097,
+     "raw_mae": 4.857275561680869,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "shopping__ski_gear_96_12_4_10events": {
+   "domain": "shopping",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.417149740890263,
+     "std_mae": 0.41385124593562317,
+     "raw_mse": 187.86985927497074,
+     "raw_mae": 8.824743192623563,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.16827349648799514,
+     "std_mae": 0.2449906038714201,
+     "raw_mse": 67.43710653326168,
+     "raw_mae": 5.085501119534205,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "shopping__tax_software_96_12_4_10events": {
+   "domain": "shopping",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.649430627197591,
+     "std_mae": 0.5277936542674498,
+     "raw_mse": 333.73350169985804,
+     "raw_mae": 11.64213503545852,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.5237652298076264,
+     "std_mae": 0.3461489747315985,
+     "raw_mse": 296.2310752901055,
+     "raw_mae": 7.86986200964307,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "society__affordable_housing_96_12_4_10events": {
+   "domain": "society",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.0943107777137497,
+     "std_mae": 0.7539999543474619,
+     "raw_mse": 49.428236909673,
+     "raw_mae": 5.15494809219215,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.9619949597984142,
+     "std_mae": 0.731320247490169,
+     "raw_mse": 45.68360850837775,
+     "raw_mae": 5.050628731671046,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "society__cybersecurity_96_12_4_10events": {
+   "domain": "society",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 3.6090863680925898,
+     "std_mae": 1.1878712216909169,
+     "raw_mse": 128.62196667776686,
+     "raw_mae": 6.5623801141662605,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 6.363582365884272,
+     "std_mae": 1.8124611488808018,
+     "raw_mse": 222.88566856321467,
+     "raw_mae": 10.018344058798169,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "society__data_privacy_96_12_4_10events": {
+   "domain": "society",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 2.498353376949009,
+     "std_mae": 1.0764761508293592,
+     "raw_mse": 210.03661361095607,
+     "raw_mae": 9.0795901174888,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 4.090305636350105,
+     "std_mae": 1.4234789034034725,
+     "raw_mse": 369.2277761846234,
+     "raw_mae": 12.332881005351718,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "society__domestic_violence_96_12_4_10events": {
+   "domain": "society",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.656516978399616,
+     "std_mae": 0.5910398711460493,
+     "raw_mse": 59.82833276455933,
+     "raw_mae": 5.711644166500031,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.7864697192286417,
+     "std_mae": 0.6411339782587239,
+     "raw_mse": 72.66299547960988,
+     "raw_mae": 6.200721098771353,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "society__gender_equality_96_12_4_10events": {
+   "domain": "society",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.5040059572335766,
+     "std_mae": 0.5434952242740198,
+     "raw_mse": 204.5342165860866,
+     "raw_mae": 10.900720329422239,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.1853387980266481,
+     "std_mae": 0.3046461107389491,
+     "raw_mse": 75.10670006546682,
+     "raw_mae": 6.12957704436723,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "society__homelessness_96_12_4_10events": {
+   "domain": "society",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.1962629699028182,
+     "std_mae": 0.8365647084190851,
+     "raw_mse": 142.4749895574756,
+     "raw_mae": 9.171043955552843,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.9603359561706808,
+     "std_mae": 0.64152901608887,
+     "raw_mse": 117.11389256531186,
+     "raw_mae": 7.075099827139718,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "society__income_inequality_96_12_4_10events": {
+   "domain": "society",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.5063474162491174,
+     "std_mae": 0.5401050541985032,
+     "raw_mse": 226.19600023403078,
+     "raw_mae": 11.468782814622667,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.19674048388125107,
+     "std_mae": 0.31554153525149764,
+     "raw_mse": 90.21527425903419,
+     "raw_mae": 6.747051674049983,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "society__infrastructure_spending_96_12_4_10events": {
+   "domain": "society",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.2104878714499638,
+     "std_mae": 0.8757089296480255,
+     "raw_mse": 360.3205514735181,
+     "raw_mae": 14.965291071511404,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 1.2942218958033211,
+     "std_mae": 0.9036932726737774,
+     "raw_mse": 415.56908865833464,
+     "raw_mae": 15.68814743417213,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "society__protest_96_12_4_10events": {
+   "domain": "society",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 8.769272346857353,
+     "std_mae": 1.3315939522224158,
+     "raw_mse": 93.65008786110288,
+     "raw_mae": 3.3621076833198793,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 9.212776715201022,
+     "std_mae": 1.3659472633425491,
+     "raw_mse": 101.29497633394158,
+     "raw_mae": 3.494972160577048,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "society__wildfires_96_12_4_10events": {
+   "domain": "society",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.5361198813310308,
+     "std_mae": 0.3281229950197664,
+     "raw_mse": 65.25835680263329,
+     "raw_mae": 3.6139529279988305,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.9341353291871032,
+     "std_mae": 0.3763390129408214,
+     "raw_mse": 113.07144546509657,
+     "raw_mae": 4.115135031149426,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "traffic__air_travel_96_12_4_10events": {
+   "domain": "traffic",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 1.5833274853700106,
+     "std_mae": 0.8315830818705663,
+     "raw_mse": 81.69751938861876,
+     "raw_mae": 5.987540634758843,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 2.752318598044346,
+     "std_mae": 1.0615218350960614,
+     "raw_mse": 146.07681258101204,
+     "raw_mae": 7.79517404985991,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "traffic__autonomous_driving_96_12_4_10events": {
+   "domain": "traffic",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 4.0602890798157585,
+     "std_mae": 1.3187860098939979,
+     "raw_mse": 168.03683506217658,
+     "raw_mae": 7.427677034183562,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 5.860022530210097,
+     "std_mae": 1.5818488220759443,
+     "raw_mse": 252.46764386823284,
+     "raw_mae": 9.15933923947095,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "traffic__electric_vehicle_96_12_4_10events": {
+   "domain": "traffic",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 3.1988838511574524,
+     "std_mae": 1.0123478495937175,
+     "raw_mse": 83.2780235873007,
+     "raw_mae": 5.441776712098137,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 3.4585636910415047,
+     "std_mae": 1.0262676923463714,
+     "raw_mse": 90.02226044712921,
+     "raw_mae": 5.535867960988847,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "traffic__formula_1_96_12_4_10events": {
+   "domain": "traffic",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.8955088109700587,
+     "std_mae": 0.7022053087790378,
+     "raw_mse": 276.492790572542,
+     "raw_mae": 12.151014028456915,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.7578759681157345,
+     "std_mae": 0.5692550249347562,
+     "raw_mse": 216.05667299197523,
+     "raw_mae": 9.653172844355508,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "traffic__gas_prices_96_12_4_10events": {
+   "domain": "traffic",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.5568390978508015,
+     "std_mae": 0.5686097847220263,
+     "raw_mse": 4.412091369997303,
+     "raw_mae": 1.4805127682016765,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 1.055634054079087,
+     "std_mae": 0.7636422460323806,
+     "raw_mse": 3.6612464466057495,
+     "raw_mae": 1.5921732741706485,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "traffic__rocket_launch_96_12_4_10events": {
+   "domain": "traffic",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.8865802782646164,
+     "std_mae": 0.7209204694005434,
+     "raw_mse": 82.78149240039785,
+     "raw_mae": 7.166573698383634,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 1.1130462443862323,
+     "std_mae": 0.8183313716785718,
+     "raw_mse": 112.65694591176232,
+     "raw_mae": 8.195651172896612,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "traffic__tesla_96_12_4_10events": {
+   "domain": "traffic",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 6.341290069203798,
+     "std_mae": 1.377261164473494,
+     "raw_mse": 158.90391776376597,
+     "raw_mae": 7.366444336071195,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 7.035843120554903,
+     "std_mae": 1.5239186213573985,
+     "raw_mse": 173.6615792521366,
+     "raw_mae": 7.730144370052277,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "traffic__tour_de_france_96_12_4_10events": {
+   "domain": "traffic",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.6112709851792631,
+     "std_mae": 0.37823651803617975,
+     "raw_mse": 191.59635427423453,
+     "raw_mae": 6.840654974573226,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.18194926431800135,
+     "std_mae": 0.1460357065951382,
+     "raw_mse": 57.79459758189678,
+     "raw_mae": 2.6446150954403955,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 52,
+   "reason": "val_lower_std_mse",
+   "fallback_p1": false
+  },
+  "traffic__traffic_insurance_96_12_4_10events": {
+   "domain": "traffic",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 2.649467039949253,
+     "std_mae": 1.1039138976482659,
+     "raw_mse": 121.53661100380106,
+     "raw_mae": 6.950220349142408,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 5.4564813101315215,
+     "std_mae": 1.7348907623475953,
+     "raw_mse": 249.46075522318557,
+     "raw_mae": 10.972321463809058,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  },
+  "traffic__used_car_96_12_4_10events": {
+   "domain": "traffic",
+   "group": "SearchTrend",
+   "candidates": [
+    1,
+    52
+   ],
+   "val_metrics": {
+    "1": {
+     "n": 21,
+     "std_mse": 0.8924733556534713,
+     "std_mae": 0.7340224571599292,
+     "raw_mse": 24.13777410667254,
+     "raw_mae": 3.872345245427207,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    },
+    "52": {
+     "n": 21,
+     "std_mse": 0.9715056766529877,
+     "std_mae": 0.7498003510147887,
+     "raw_mse": 26.97711105944298,
+     "raw_mae": 3.977680935153537,
+     "n_std_undefined": 0,
+     "denom_sources": {
+      "window": 21
+     }
+    }
+   },
+   "selected_P": 1,
+   "reason": "P1_lower_val_mse",
+   "fallback_p1": false
+  }
+ }
+}

@@ -1,0 +1,12 @@
+== 1) locked files md5 vs snapshot ==
+locked md5: OK (12 files unchanged)
+== 2) git status isolation ==
+-- tracked modifications (must be empty):
+
+-- repro_fullshot/ still untracked & present:
+-- untracked entries outside repro_zeroshot_ext/repro_fullshot (must be empty):
+
+== 3) package ==
+-rw-r--r-- 1 wlt wlt 3240594 Sep 27 01:26 /home/wlt/MMTS/temp/VisionTS_zeroshot_ext_20260927_012645.tar.gz
+audit package -> /home/wlt/MMTS/temp/VisionTS_zeroshot_ext_20260927_012645.tar.gz
+AUDIT OK

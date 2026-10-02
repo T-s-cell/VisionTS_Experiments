@@ -1,0 +1,41 @@
+# VisionTS zero-shot on TimesX — stage-1 results
+
+Protocol: **TimesX-ext-protocol** — per-window z-score standardization (denominator falls back to the frozen calib_std when the window std degenerates); chronological split: test = last ceil(N/5), val = pre-test non-overlapping capped 32; MSE/MAE only. Not comparable with tables built under other protocols.
+
+- variables: 190 | selected-P counts: {'1': 101, '5': 26, '52': 63} | fallback: 0 | exact ties: 0
+- selection reasons: {'P1_lower_val_mse': 101, 'val_lower_std_mse': 89}
+- fingerprints: splits=d012d6831110… zip=9adb9540733c… ckpt=c551c37b63a2… | r(norm_const)=c(align_const)=0.4, ctx=96→12, arch=mae_base, fp32
+
+## Overall (standardized scale; equal weight over 19 domains)
+
+| config | MSE | MAE |
+|---|-----|-----|
+| P1_fixed | 3.2547 | 1.0421 |
+| selected | 3.4638 | 1.0725 |
+
+## Per domain (standardized scale, variables equal-weight)
+
+| Domain | P=1 MSE | P=1 MAE | sel MSE | sel MAE | selected-P counts | vars |
+|---|---|---|---|---|---|---|
+| CropsAndStaples | 1.4929 | 0.7687 | 1.4651 | 0.7574 | {'1': 8, '5': 3} | 11 |
+| Currency | 1.0224 | 0.7123 | 1.0038 | 0.6996 | {'1': 7, '5': 3} | 10 |
+| EnergyAndFuels | 2.6325 | 0.9870 | 2.7852 | 0.9959 | {'5': 5, '1': 5} | 10 |
+| LivestockAndFoodProducts | 1.6549 | 0.7576 | 1.7595 | 0.7872 | {'1': 7, '5': 3} | 10 |
+| RawMaterialsAndConstruction | 1.5852 | 0.7903 | 1.6332 | 0.8207 | {'5': 6, '1': 4} | 10 |
+| SpecialtyAndAdvancedMaterials | 1.9552 | 0.6614 | 2.0436 | 0.6775 | {'1': 6, '5': 2} | 8 |
+| StrategicAndHighValueMaterials | 2.8349 | 0.7578 | 3.0442 | 0.8213 | {'5': 4, '1': 6} | 10 |
+| arts | 2.7331 | 1.0561 | 2.9218 | 1.0979 | {'1': 2, '52': 8} | 10 |
+| climate | 6.2228 | 1.2065 | 6.2343 | 1.1674 | {'52': 7, '1': 3} | 10 |
+| economy | 3.0789 | 1.2209 | 3.1454 | 1.1890 | {'1': 3, '52': 7} | 10 |
+| electronic_technology | 3.6940 | 1.1319 | 5.3191 | 1.4282 | {'52': 3, '1': 7} | 10 |
+| finance | 3.7548 | 1.3099 | 3.7548 | 1.3099 | {'1': 10} | 10 |
+| pets | 4.1452 | 1.3793 | 4.9152 | 1.4709 | {'52': 6, '1': 4} | 10 |
+| public_health | 3.2927 | 1.2619 | 3.4314 | 1.3011 | {'1': 3, '52': 7} | 10 |
+| public_policy | 4.1481 | 1.4671 | 4.6452 | 1.5279 | {'52': 6, '1': 5} | 11 |
+| science | 7.8793 | 1.0668 | 7.9865 | 1.0910 | {'1': 7, '52': 3} | 10 |
+| shopping | 1.4230 | 0.7321 | 1.3282 | 0.6716 | {'52': 10} | 10 |
+| society | 3.1031 | 1.2249 | 3.1687 | 1.2402 | {'52': 4, '1': 6} | 10 |
+| traffic | 5.1867 | 1.3068 | 5.2265 | 1.3227 | {'1': 8, '52': 2} | 10 |
+
+Raw-scale metrics are reported only at variable level (test_variable_level.csv); they are never averaged across units.
+

@@ -1,0 +1,3 @@
+[run_all] GPU 0 free 27058MiB >= 9000MiB, proceeding
+done: 380 (var,P) entries, forwards_executed=12826 (== forwards_saved; one forward per (var,P,sample)), 44.7s -> /dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/cache
+[run_all] stage(s) completed OK

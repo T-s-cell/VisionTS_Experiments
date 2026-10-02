@@ -1,0 +1,8 @@
+done: 2 (var,P) entries, forwards_executed=94 (== forwards_saved; one forward per (var,P,sample)), 4.4s -> cache_cpu_check
+  File "<stdin>", line 14
+    print(f"  {k}: max|d|={d:.3e}, max|pred|={scale:.3e}, rel={d/denom:.3e}, allclose(atol=1e-3)={np.allclose(g[\"pred\"], c[\"pred\"], atol=1e-3)}")
+                                                                                                                 ^
+SyntaxError: unexpected character after line continuation character
+CPU vs GPU pairs: ['StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__P1', 'StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__P5']
+  StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__P1: max|d|=3.516e-02 max|pred|=5.665e+04 rel=6.205e-07 allclose(atol=1e-3)=True
+  StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__P5: max|d|=2.344e-02 max|pred|=5.699e+04 rel=4.112e-07 allclose(atol=1e-3)=True

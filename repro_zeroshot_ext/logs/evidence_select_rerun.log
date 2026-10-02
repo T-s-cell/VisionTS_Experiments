@@ -1,0 +1,16 @@
+[select] cache manifest verified: 380 entries, forward bindings match
+{
+  "n_vars": 190,
+  "by_selected_P": {
+    "1": 101,
+    "5": 26,
+    "52": 63
+  },
+  "by_reason": {
+    "P1_lower_val_mse": 101,
+    "val_lower_std_mse": 89
+  },
+  "fallback_vars": 0,
+  "exact_ties": 0
+}
+P_selection -> /dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/P_selection.json

@@ -1,0 +1,3 @@
+[test] linkage verified: cache manifest + P_selection (incl. selection/scoring code hashes) match current state
+test metrics for 279 (var,config) pairs -> /dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/results
+variable-level CSV and sample-level JSONL written

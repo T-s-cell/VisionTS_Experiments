@@ -1,0 +1,63 @@
+python: /dev_data/wlt/conda/envs/visionts/bin/python
+[run_all] === stage freeze ===
+{
+  "totals": {
+    "val": 4736,
+    "test": 1677,
+    "cross_boundary_removed": 242,
+    "fallback_vars": 0
+  },
+  "expected": {
+    "val": 4736,
+    "test": 1677,
+    "cross_boundary_removed": 242,
+    "fallback_vars": 0,
+    "food_wine_festivals": {
+      "val": 14,
+      "test": 4,
+      "removed": 2
+    }
+  },
+  "check": {
+    "val": true,
+    "test": true,
+    "cross_boundary_removed": true,
+    "fallback_vars": true,
+    "food_wine_festivals": true
+  }
+}
+calib_hist_before_first_val_target violations: []
+degenerate calib_std (<1e-8): []
+food_wine_festivals: {'n': 20, 'n_val': 14, 'n_test': 4, 'n_cross_boundary_removed': 2, 'fallback_p1': False}
+frozen -> /dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/splits.json (190 variables)
+[run_all] === stage infer ===
+[run_all] GPU 0 free 25710MiB >= 9000MiB, proceeding
+done: 380 (var,P) entries, 12826 new forwards, 87.4s -> /dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/cache
+[run_all] === stage select ===
+{
+  "n_vars": 190,
+  "by_selected_P": {
+    "1": 101,
+    "5": 26,
+    "52": 63
+  },
+  "by_reason": {
+    "P1_lower_val_mse": 101,
+    "val_lower_std_mse": 89
+  },
+  "fallback_vars": 0,
+  "exact_ties": 0
+}
+P_selection -> /dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/P_selection.json
+[run_all] === stage test ===
+test metrics for 279 (var,config) pairs -> /dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/results
+variable-level CSV and sample-level JSONL written
+[run_all] === stage aggregate ===
+Traceback (most recent call last):
+  File "/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/aggregate.py", line 129, in <module>
+    main()
+  File "/dev_data/wlt/VisionTS_Experiments/repro_zeroshot_ext/aggregate.py", line 66, in main
+    "n_std_undefined": sum(r["n_std_undefined"] for r in drs)}
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: unsupported operand type(s) for +: 'int' and 'str'
+[run_all] stage aggregate FAILED

@@ -1,0 +1,32 @@
+sampled (var,P) pairs: ['StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__P1', 'StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__P5', 'arts__art_exhibitions_96_12_4_10events__P1', 'arts__art_exhibitions_96_12_4_10events__P52', 'CropsAndStaples__barley_inr_t_96_12_12_10events__P5', 'arts__broadway_shows_96_12_4_10events__P52']
+  StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__P1 pred: max|d|=0.000e+00 bitwise_identical=True
+  StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__P1 true: max|d|=0.000e+00 bitwise_identical=True
+  StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__P1 mu: max|d|=0.000e+00 bitwise_identical=True
+  StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__P1 win_std: max|d|=0.000e+00 bitwise_identical=True
+  StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__P1 calib_std: max|d|=0.000e+00 bitwise_identical=True
+  StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__P5 pred: max|d|=0.000e+00 bitwise_identical=True
+  StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__P5 true: max|d|=0.000e+00 bitwise_identical=True
+  StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__P5 mu: max|d|=0.000e+00 bitwise_identical=True
+  StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__P5 win_std: max|d|=0.000e+00 bitwise_identical=True
+  StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__P5 calib_std: max|d|=0.000e+00 bitwise_identical=True
+  arts__art_exhibitions_96_12_4_10events__P1 pred: max|d|=0.000e+00 bitwise_identical=True
+  arts__art_exhibitions_96_12_4_10events__P1 true: max|d|=0.000e+00 bitwise_identical=True
+  arts__art_exhibitions_96_12_4_10events__P1 mu: max|d|=0.000e+00 bitwise_identical=True
+  arts__art_exhibitions_96_12_4_10events__P1 win_std: max|d|=0.000e+00 bitwise_identical=True
+  arts__art_exhibitions_96_12_4_10events__P1 calib_std: max|d|=0.000e+00 bitwise_identical=True
+  arts__art_exhibitions_96_12_4_10events__P52 pred: max|d|=0.000e+00 bitwise_identical=True
+  arts__art_exhibitions_96_12_4_10events__P52 true: max|d|=0.000e+00 bitwise_identical=True
+  arts__art_exhibitions_96_12_4_10events__P52 mu: max|d|=0.000e+00 bitwise_identical=True
+  arts__art_exhibitions_96_12_4_10events__P52 win_std: max|d|=0.000e+00 bitwise_identical=True
+  arts__art_exhibitions_96_12_4_10events__P52 calib_std: max|d|=0.000e+00 bitwise_identical=True
+  CropsAndStaples__barley_inr_t_96_12_12_10events__P5 pred: max|d|=0.000e+00 bitwise_identical=True
+  CropsAndStaples__barley_inr_t_96_12_12_10events__P5 true: max|d|=0.000e+00 bitwise_identical=True
+  CropsAndStaples__barley_inr_t_96_12_12_10events__P5 mu: max|d|=0.000e+00 bitwise_identical=True
+  CropsAndStaples__barley_inr_t_96_12_12_10events__P5 win_std: max|d|=0.000e+00 bitwise_identical=True
+  CropsAndStaples__barley_inr_t_96_12_12_10events__P5 calib_std: max|d|=0.000e+00 bitwise_identical=True
+  arts__broadway_shows_96_12_4_10events__P52 pred: max|d|=0.000e+00 bitwise_identical=True
+  arts__broadway_shows_96_12_4_10events__P52 true: max|d|=0.000e+00 bitwise_identical=True
+  arts__broadway_shows_96_12_4_10events__P52 mu: max|d|=0.000e+00 bitwise_identical=True
+  arts__broadway_shows_96_12_4_10events__P52 win_std: max|d|=0.000e+00 bitwise_identical=True
+  arts__broadway_shows_96_12_4_10events__P52 calib_std: max|d|=0.000e+00 bitwise_identical=True
+WORST_DIFF_BY_FIELD: {'pred': '0.000e+00', 'true': '0.000e+00', 'mu': '0.000e+00', 'win_std': '0.000e+00', 'calib_std': '0.000e+00'}
