@@ -1,0 +1,29 @@
+{
+ "domain": "climate",
+ "state": "F0_s2021",
+ "tsne": {
+  "n_components": 2,
+  "perplexity": 30,
+  "learning_rate": 200,
+  "init": "pca",
+  "early_exaggeration": 12,
+  "max_iter": 1000,
+  "random_state": 2021,
+  "metric": "euclidean",
+  "method": "barnes_hut",
+  "angle": 0.5
+ },
+ "kl_divergence": 1.4517914056777954,
+ "n_iter": 999,
+ "n_imagenet": 1000,
+ "n_timesx": 90,
+ "sklearn_version": "1.9.1",
+ "threads": "1 per process",
+ "fit_key": "b5800845bca8054c8eb33d4310893b03bd7e35ea8929c18ddd2ae885563510b9",
+ "inputs": {
+  "imagenet_sha": "77fb96db7ae6687ffc22b66a1d3576004f87ef3c459b124ed807f1297f728e8b",
+  "timesx_sha": "ef99822f437fe955fbbfdc52c1c5b5106982f260c19e324a4c63687c683045f5"
+ },
+ "wall_secs": 12.5,
+ "peak_rss_mib": 757.6
+}

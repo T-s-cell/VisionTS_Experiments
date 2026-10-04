@@ -1,0 +1,29 @@
+{
+ "domain": "finance",
+ "state": "F0_s2021",
+ "tsne": {
+  "n_components": 2,
+  "perplexity": 30,
+  "learning_rate": 200,
+  "init": "pca",
+  "early_exaggeration": 12,
+  "max_iter": 1000,
+  "random_state": 2021,
+  "metric": "euclidean",
+  "method": "barnes_hut",
+  "angle": 0.5
+ },
+ "kl_divergence": 1.4483778476715088,
+ "n_iter": 999,
+ "n_imagenet": 1000,
+ "n_timesx": 90,
+ "sklearn_version": "1.9.1",
+ "threads": "1 per process",
+ "fit_key": "2e970b4f4dc1399655efd5709f2ba2c14a9b34b50ab2e4e20cd800b4d717bd8f",
+ "inputs": {
+  "imagenet_sha": "cff4a14543c52c26cacf5b36d60ee02fb900b8d8e31378ef21ec31ebcd61f2ae",
+  "timesx_sha": "37ec744e085c2d37738bb87afedac3c20588bdb520d73157ef710594753d70bf"
+ },
+ "wall_secs": 13.8,
+ "peak_rss_mib": 866.4
+}

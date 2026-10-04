@@ -1,0 +1,29 @@
+{
+ "domain": "RawMaterialsAndConstruction",
+ "state": "F0_s2021",
+ "tsne": {
+  "n_components": 2,
+  "perplexity": 30,
+  "learning_rate": 200,
+  "init": "pca",
+  "early_exaggeration": 12,
+  "max_iter": 1000,
+  "random_state": 2021,
+  "metric": "euclidean",
+  "method": "barnes_hut",
+  "angle": 0.5
+ },
+ "kl_divergence": 1.412973403930664,
+ "n_iter": 999,
+ "n_imagenet": 1000,
+ "n_timesx": 172,
+ "sklearn_version": "1.9.1",
+ "threads": "1 per process",
+ "fit_key": "af51c066d3d49c6d192bfb5a7113adce0991b740f1d74861a7f54896fc329a95",
+ "inputs": {
+  "imagenet_sha": "7c038727f7816c97dbcee5bd48a272c2e40e3da8f84ce87be43fd2411358a975",
+  "timesx_sha": "93b263e1e5c2c9bc704e6331cda65d9caf9264c7b550830c0ac98db60e2a9125"
+ },
+ "wall_secs": 14.3,
+ "peak_rss_mib": 810.0
+}

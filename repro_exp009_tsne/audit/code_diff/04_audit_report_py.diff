@@ -1,0 +1,265 @@
+--- a/04_audit_report.py
++++ b/04_audit_report.py
+@@ -19,12 +19,22 @@
+                    Z0/single; F0 s2021 from its own npz; never 3-seed means
+ Also verifies every coords file (row count, finite, fit_key) and writes
+ REPORT.md (per-domain one-line table + conclusion boundaries + provenance).
++
++--postaudit: re-attestation of the FINAL files (default full mode). Loads
++audit/postaudit_changelog.json (hash-anchored record of the post-campaign
++figure-presentation edits), verifies: declared changes old/new/diff hashes,
++config diff confined to figures keys, generation-time records untouched
++(baseline / cache index / original report), and all 40 feature cache keys
++bound to the generation-time fingerprints. Writes
++audit/audit_report_final.json; the original audit_report.json is preserved.
+ """
+ import argparse
+ import csv
++import hashlib
+ import importlib.util
+ import json
+ import os
++import re
+ import sys
+ import time
+ 
+@@ -38,6 +48,8 @@
+ _spec.loader.exec_module(E9)
+ 
+ AUDIT_JSON = os.path.join(E9.AUDIT, "audit_report.json")
++AUDIT_JSON_FINAL = os.path.join(E9.AUDIT, "audit_report_final.json")
++CHANGELOG_PATH = os.path.join(E9.AUDIT, "postaudit_changelog.json")
+ REPORT_MD = os.path.join(E9.HERE, "REPORT.md")
+ EXTRACT_LOG = os.path.join(E9.LOGS, "extract.jsonl")
+ METRIC_ATOL = 1e-6
+@@ -169,7 +181,7 @@
+     ck.add("hook_equivalence", ok, n_models=len(events), need=need, note=note)
+ 
+ 
+-def check_immutability(ck, domains_subset):
++def check_immutability(ck, domains_subset, changelog=None):
+     full_mode = len(domains_subset) == len(E9.DOMAIN_NAMES)
+     with open(E9.BASELINE_JSON) as f:
+         base = json.load(f)["entries"]
+@@ -215,12 +227,28 @@
+                        if sel_e[k] != sel_b[k]))
+ 
+     a, r, ch = diff("exp009_code/")
+-    ck.add("immutability.exp009_code",
+-           (not a and not r and not ch) or (not full_mode),
+-           n_entries=len(entries), added=a, removed=r, changed=ch,
+-           note=None if full_mode else
+-           "informational in subset mode: code iterates between campaigns; "
+-           "the full run rebuilds the baseline at extract start")
++    if changelog is None:
++        ck.add("immutability.exp009_code",
++               (not a and not r and not ch) or (not full_mode),
++               n_entries=len(entries), added=a, removed=r, changed=ch,
++               note=None if full_mode else
++               "informational in subset mode: code iterates between campaigns; "
++               "the full run rebuilds the baseline at extract start")
++    else:
++        declared = {c["file"]: c for c in changelog["changes"]}
++        ch_undecl = [f for f in ch
++                     if f[len("exp009_code/"):] not in declared]
++        gen_ok = all(base.get(f"exp009_code/{f}") == c["old_sha256"]
++                     for f, c in declared.items())
++        ck.add("immutability.exp009_code_generation_inputs",
++               full_mode and not a and not r and not ch_undecl and gen_ok,
++               declared=sorted(declared), added=a, removed=r,
++               changed_undeclared=ch_undecl,
++               baseline_matches_changelog_old_sha=gen_ok,
++               note="every generation-time input byte-identical to "
++                    "baseline.json except the changelog-declared files "
++                    "(whose baseline hashes themselves match the declared "
++                    "old_sha256)")
+     for prefix in ("reused/", "visionts/", "ckpt/", "ln_inputs/",
+                    "ln_predictions/"):
+         a, r, ch = diff(prefix)
+@@ -229,10 +257,93 @@
+                added=a, removed=r, changed=ch)
+ 
+ 
++def check_declared_changes(ck, changelog):
++    """Every changelog-declared change: baseline hash == declared old, current
++    file == declared new, archived diff byte-exact, scope declared; the config
++    diff must stay confined to the figures-section keys."""
++    base = json.load(open(E9.BASELINE_JSON))["entries"]
++    allowed_scopes = {"figure_presentation_only", "audit_tooling_only"}
++    cfg_keys_allowed = {"imagenet_style", "domain_rank_header"}
++    probs = []
++    for c in changelog["changes"]:
++        rel = c["file"]
++        if base.get(f"exp009_code/{rel}") != c["old_sha256"]:
++            probs.append({"file": rel, "problem": "old_sha256 != baseline"})
++        p = os.path.join(E9.HERE, rel)
++        if not os.path.isfile(p) or \
++                E9.sha256_file(p) != c["new_sha256"]:
++            probs.append({"file": rel, "problem": "new_sha256 != current"})
++        dp = os.path.join(E9.AUDIT, c["diff"])
++        if not os.path.isfile(dp) or E9.sha256_file(dp) != c["diff_sha256"]:
++            probs.append({"file": rel, "problem": "diff missing/ drifted"})
++        if c.get("scope") not in allowed_scopes:
++            probs.append({"file": rel, "problem": "undeclared scope"})
++        if rel.endswith(".yaml"):
++            with open(dp) as f:
++                body = [l for l in f if l[:1] in "+-"
++                        and not l.startswith(("+++", "---"))]
++            keys = {m.group(1) for l in body
++                    if (m := re.search(r'"([a-z_0-9]+)":', l))}
++            if not keys <= cfg_keys_allowed:
++                probs.append({"file": rel, "problem": "config keys beyond "
++                              "figures section", "keys": sorted(keys)})
++    ck.add("postaudit.declared_changes_verified", not probs,
++           n_declared=len(changelog["changes"]), problems=probs,
++           note="old/new/diff hashes all verified; config diff confined to "
++                "figures-section keys (presentation-only)")
++
++
++def check_preserved_records(ck, changelog):
++    """Generation-time records must survive byte-identical (never overwritten):
++    audit/baseline.json, features/_cache_index.json, original audit_report.json."""
++    probs = []
++    for rel, want in changelog["preserved_records"].items():
++        p = os.path.join(E9.HERE, rel)
++        got = E9.sha256_file(p) if os.path.isfile(p) else None
++        if got != want:
++            probs.append({"file": rel, "got": got, "want": want})
++    ck.add("postaudit.preserved_records_untouched", not probs,
++           n=len(changelog["preserved_records"]), problems=probs,
++           note="generation-time baseline / cache index / original audit "
++                "report are byte-identical to their pre-restyle values")
++
++
++def check_cache_binding(ck, changelog):
++    """Close the generation-version loop for all 40 feature artifacts:
++    (a) each cache key is reproducible from its recorded key_components;
++    (b) the components' code/config fingerprints equal the changelog's
++    frozen GENERATION-time fingerprints (changed files pinned by old_md5,
++    unchanged files must equal the current file)."""
++    gen = changelog["generation_fingerprints"]
++    idx = json.load(open(E9.CACHE_INDEX))
++    probs = []
++    for name, ent in idx.items():
++        comps = ent["key_components"]
++        key = hashlib.sha256(json.dumps(
++            comps, sort_keys=True, ensure_ascii=False).encode("utf-8")
++            ).hexdigest()
++        if key != ent["key"]:
++            probs.append({"artifact": name,
++                          "problem": "key not reproducible from components"})
++        if comps["exp009_config"] != gen["exp009_config_md5"]:
++            probs.append({"artifact": name,
++                          "problem": "config md5 != generation fingerprint"})
++        for fn, md5v in comps["exp009_code"].items():
++            want = gen["exp009_code_md5"].get(fn)
++            if want is None:
++                want = E9.md5_file(os.path.join(E9.HERE, fn))
++            if md5v != want:
++                probs.append({"artifact": name, "file": fn,
++                              "problem": "code md5 != generation fingerprint"})
++    ck.add("postaudit.cache_key_generation_binding", not probs,
++           n_artifacts=len(idx), problems=probs[:20], n_problems=len(probs),
++           note="all cache keys reproducible from recorded components and "
++                "bound to the generation-time code/config fingerprints")
++
++
+ def coords_fit_key(domain, state):
+     """Independently recompute stage-02's resume key from current inputs
+     (auditor recomputes; never trusts the recorded value alone)."""
+-    import hashlib
+     tag = state if state == E9.STATE_BEFORE else \
+         f"F0__{domain}__s{E9.F0_SEED}"
+     shas = {n: E9.sha256_file(os.path.join(E9.FEATURES, n))
+@@ -314,7 +425,7 @@
+     return rows, overall_z0, overall_f0
+ 
+ 
+-def write_report(rows, overall_z0, overall_f0, mode):
++def write_report(rows, overall_z0, overall_f0, mode, postaudit=False):
+     n_imp = sum(1 for r in rows if r["f0_mse"] < r["z0_mse"])
+     lines = [
+         "# EXP-009 — TimesX 分域 LN 微调前后编码器特征 t-SNE（REPORT）",
+@@ -367,6 +478,22 @@
+         "- 审计：`audit/audit_report.json`（完整性/检查点/特征/hook/不可变性/"
+         "溯源/指标 七类检查）。",
+     ]
++    if postaudit:
++        lines += [
++            "",
++            "## 绘图阶段后复核（postaudit re-attestation）",
++            "- 特征提取与 t-SNE 之后，应用户要求做了两轮纯绘图改动（ImageNet 参考图"
++            "点样式；每域性能排名题头），并为此扩展了审计脚本本身。",
++            "- 三处代码/配置变更均经哈希锚定：生成时文件内容先重建并双哈希验证"
++            "（SHA256 == audit/baseline.json 且 MD5 == _cache_index.json 生成指纹），"
++            "再以 unified diff 存档于 `audit/code_diff/`，见"
++            " `audit/postaudit_changelog.json`。",
++            "- `audit/baseline.json`、`features/_cache_index.json` 与原始"
++            " `audit/audit_report.json` 原样保留（本报告的"
++            " postaudit.preserved_records_untouched 检查项逐字节验证）。",
++            "- 本复核报告：`audit/audit_report_final.json`（覆盖最终交付文件；"
++            "特征/坐标/指标检查全部按现状重算通过）。",
++        ]
+     tmp = REPORT_MD + ".tmp"
+     with open(tmp, "w") as f:
+         f.write("\n".join(lines) + "\n")
+@@ -378,32 +505,53 @@
+     ap.add_argument("--domains", default=None,
+                     help="subset mode for the small trial (default: all 19, "
+                          "full mode)")
++    ap.add_argument("--postaudit", action="store_true",
++                    help="re-attest the FINAL files against the generation-"
++                         "time records via audit/postaudit_changelog.json; "
++                         "writes audit_report_final.json and never touches "
++                         "the original audit_report.json")
+     args = ap.parse_args()
++    changelog = None
++    if args.postaudit:
++        assert not args.domains, "--postaudit runs full mode only"
++        with open(CHANGELOG_PATH) as f:
++            changelog = json.load(f)
+     domains_subset = (args.domains.split(",") if args.domains
+                       else E9.DOMAIN_NAMES)
+-    mode = "full (19 domains)" if not args.domains else \
+-        f"PARTIAL (domains: {','.join(domains_subset)})"
++    if changelog is not None:
++        mode = "postaudit re-attestation (full 19 domains, FINAL files)"
++    else:
++        mode = "full (19 domains)" if not args.domains else \
++            f"PARTIAL (domains: {','.join(domains_subset)})"
+ 
+     ck = Checks()
+     check_completeness(ck, domains_subset)
+     check_checkpoints(ck, domains_subset)
+     check_features(ck, domains_subset)
+     check_hook_equivalence(ck, domains_subset)
+-    check_immutability(ck, domains_subset)
++    check_immutability(ck, domains_subset, changelog)
++    if changelog is not None:
++        check_declared_changes(ck, changelog)
++        check_preserved_records(ck, changelog)
++        check_cache_binding(ck, changelog)
+     check_coords(ck, domains_subset)
+     rows, overall_z0, overall_f0 = check_metrics(ck, domains_subset)
+ 
+     if not args.domains:
+         ck.add("full_coverage", len(rows) == 19, n=len(rows))
+ 
++    out_json = AUDIT_JSON_FINAL if changelog is not None else AUDIT_JSON
+     E9.atomic_write_json(
+         {"protocol_version": E9.CFG["protocol_version"],
+          "created": time.strftime("%Y-%m-%dT%H:%M:%S"), "mode": mode,
++         "changelog": "audit/postaudit_changelog.json"
++         if changelog is not None else None,
+          "all_ok": ck.all_ok, "checks": ck.results},
+-        AUDIT_JSON)
+-    write_report(rows, overall_z0, overall_f0, mode)
++        out_json)
++    write_report(rows, overall_z0, overall_f0, mode,
++                 postaudit=changelog is not None)
+     print(f"[audit] ALL {'OK' if ck.all_ok else 'PROBLEMS'} — "
+-          f"{AUDIT_JSON}", flush=True)
++          f"{out_json}", flush=True)
+     sys.exit(0 if ck.all_ok else 1)
+ 
+ 

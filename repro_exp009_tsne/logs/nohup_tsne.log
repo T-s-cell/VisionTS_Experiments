@@ -1,0 +1,14 @@
+[run_all] == stage: tsne ==
+[tsne] {"event": "plan", "fits": 2, "jobs": 1, "note": "wall times are estimates; parallelism set from small trial"}
+[tsne] {"domain": "climate", "state": "Z0", "event": "skip"}
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1090 samples in 0.019s...
+[t-SNE] Computed neighbors for 1090 samples in 3.393s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1090
+[t-SNE] Computed conditional probabilities for sample 1090 / 1090
+[t-SNE] Mean sigma: 32.609364
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 85.331505
+[t-SNE] KL divergence after 1000 iterations: 1.451791
+[tsne] {"domain": "climate", "state": "F0_s2021", "event": "fit", "n": 1090, "kl": 1.4517914056777954, "n_iter": 999, "secs": 12.5, "peak_rss_mib": 757.6}
+[tsne] {"event": "tsne_complete", "fits": 2}
+[run_all] stage 'tsne' done

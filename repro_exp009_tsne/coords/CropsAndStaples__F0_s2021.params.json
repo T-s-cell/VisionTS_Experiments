@@ -1,0 +1,29 @@
+{
+ "domain": "CropsAndStaples",
+ "state": "F0_s2021",
+ "tsne": {
+  "n_components": 2,
+  "perplexity": 30,
+  "learning_rate": 200,
+  "init": "pca",
+  "early_exaggeration": 12,
+  "max_iter": 1000,
+  "random_state": 2021,
+  "metric": "euclidean",
+  "method": "barnes_hut",
+  "angle": 0.5
+ },
+ "kl_divergence": 1.424437403678894,
+ "n_iter": 999,
+ "n_imagenet": 1000,
+ "n_timesx": 188,
+ "sklearn_version": "1.9.1",
+ "threads": "1 per process",
+ "fit_key": "45fd3b7a26c6461764717a44181f662066c42ad44417d330dd2043f253f189d5",
+ "inputs": {
+  "imagenet_sha": "7ae9e71187a2be2e1eb5c7feb6557a519423487865ccc42a491bc390cb2342c6",
+  "timesx_sha": "90c9a3208ba1b1c70f708d4f05cb26001a4bc90426b1c32a64ef0e151fe47d07"
+ },
+ "wall_secs": 14.6,
+ "peak_rss_mib": 801.3
+}

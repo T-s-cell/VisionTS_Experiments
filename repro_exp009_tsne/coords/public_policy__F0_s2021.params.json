@@ -1,0 +1,29 @@
+{
+ "domain": "public_policy",
+ "state": "F0_s2021",
+ "tsne": {
+  "n_components": 2,
+  "perplexity": 30,
+  "learning_rate": 200,
+  "init": "pca",
+  "early_exaggeration": 12,
+  "max_iter": 1000,
+  "random_state": 2021,
+  "metric": "euclidean",
+  "method": "barnes_hut",
+  "angle": 0.5
+ },
+ "kl_divergence": 1.4321010112762451,
+ "n_iter": 999,
+ "n_imagenet": 1000,
+ "n_timesx": 99,
+ "sklearn_version": "1.9.1",
+ "threads": "1 per process",
+ "fit_key": "55053b7b81fb96f9d184e04f1688e93cb6eeb2089be34d9a53075c19a4d6e8b2",
+ "inputs": {
+  "imagenet_sha": "1df10e43e118e75a6d798648d9ba3190cfae0e326555cd93156a8dc05848edb6",
+  "timesx_sha": "51d2652665d42f6da771883a0d2c845f6dc9243aa842fe899e3f98731e6e4d7e"
+ },
+ "wall_secs": 13.6,
+ "peak_rss_mib": 866.4
+}

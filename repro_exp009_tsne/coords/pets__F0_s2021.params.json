@@ -1,0 +1,29 @@
+{
+ "domain": "pets",
+ "state": "F0_s2021",
+ "tsne": {
+  "n_components": 2,
+  "perplexity": 30,
+  "learning_rate": 200,
+  "init": "pca",
+  "early_exaggeration": 12,
+  "max_iter": 1000,
+  "random_state": 2021,
+  "metric": "euclidean",
+  "method": "barnes_hut",
+  "angle": 0.5
+ },
+ "kl_divergence": 1.5234042406082153,
+ "n_iter": 999,
+ "n_imagenet": 1000,
+ "n_timesx": 90,
+ "sklearn_version": "1.9.1",
+ "threads": "1 per process",
+ "fit_key": "a589f46ed9eeff6cdd8d151a67140b3b723edff8ced192f7ffe62b717122d89d",
+ "inputs": {
+  "imagenet_sha": "d9af13f33ef522839e05f52a2731940f17a72738be6f5efc9ecbf6c315c42124",
+  "timesx_sha": "e0cdef3c7052c12d0b5366da11d2a2b9d1e23556977e0a23e0a0f0b6e06404dc"
+ },
+ "wall_secs": 14.2,
+ "peak_rss_mib": 801.0
+}

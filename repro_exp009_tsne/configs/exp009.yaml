@@ -1,0 +1,74 @@
+{
+  "protocol_version": "exp009_tsne_v1",
+  "base_commit": "dcd24258ba2c3588afefce0ade93edf9b4e6ef6c",
+  "spec": "EXP-009 directive: per-domain LN fine-tuning before/after t-SNE (post-hoc exploratory visualization; 19 domains x 2 states = 38 main figures)",
+
+  "model": {
+    "arch": "mae_base",
+    "ctx": 96, "pred": 12, "periodicity": 1,
+    "norm_const": 0.4, "align_const": 0.4, "interpolation": "bilinear",
+    "fp32": true, "tf32": false,
+    "z0_construction": "VisionTS finetune_type='none' from ckpt/mae_visualize_vit_base.pth - identical to EXP-004 evaluate_test.py Z0 (original ImageNet-pretrained MAE-base)",
+    "f0_construction": "VisionTS finetune_type='ln' + ln_state from EXP-004 F0 s2021 per-domain best_ft checkpoint"
+  },
+
+  "states": {
+    "before": {"tag": "Z0", "desc": "original ImageNet-pretrained MAE-base"},
+    "after": {"tag": "F0_s2021", "method": "F0", "seed": 2021,
+              "desc": "per-domain best_ft from EXP-004 results/selection.json (NOT the fallback variant, NOT seed-picked)"}
+  },
+
+  "tsne": {
+    "n_components": 2, "perplexity": 30, "learning_rate": 200,
+    "init": "pca", "early_exaggeration": 12, "max_iter": 1000,
+    "random_state": 2021, "metric": "euclidean",
+    "method": "barnes_hut", "angle": 0.5,
+    "joint": "X = concat([imagenet(1000), timesx(n_d)]) then ONE joint fit; before/after fit independently, no coordinate locking",
+    "preprocessing": "NONE (no pooling / L2 / PCA50); features fed as stored (float32)",
+    "workers": "decided from small-trial measured per-process RSS/CPU; per-process OMP_NUM_THREADS=1; reported wall-times are estimates only"
+  },
+
+  "data": {
+    "source": "EXP-004 native test windows via repro_ln_timesx_v1/trainer.py ExperimentData.split_rows(domain,'test')",
+    "invariants": "no re-splitting, no densification, no error-based filtering; only the past 96 steps enter the encoder",
+    "expected": {"n_vars": 190, "n_domains": 19, "n_test_windows": 2474}
+  },
+
+  "imagenet": {
+    "list_rel": "repro_fig7/outputs/sampling_lists/ImageNet.json",
+    "n": 1000,
+    "note": "frozen LTFS 1,000-image list in original order (actually ILSVRC2012 val; labeled 'ImageNet-1k val reference'); same list for all domains/states; Z0 encodes it once, each F0 re-encodes it (Ed(I))",
+    "val_dir_env": "IMAGENET_VAL_DIR",
+    "val_dir_default": "/dev_data/wlt/data/ImageNet/val"
+  },
+
+  "features": {
+    "flatten": "hook on vision_model.norm output [B,57,768] (CLS kept) -> flatten [B,43776]; TimesX via real model.forward; ImageNet via direct forward_encoder with the same deterministic mask (56 visible patches)",
+    "dtype": "float32",
+    "batch": 64
+  },
+
+  "figures": {
+    "dpi": 300,
+    "imagenet_style": "medium gray enlarged dots (s=16, gray 0.55, alpha 0.8)",
+    "domain_rank_header": "each figure header shows ITS OWN state's rank (Z0 fig: rank by Z0 test MSE; F0 fig: rank by F0 s2021 test MSE; each among all 19 domains, 1=best) and its own MSE/MAE, recomputed from EXP-004 predictions npz via common.metrics_from_npz (window d -> per-var -> var-equal); the F0 figure additionally shows delta MSE vs Z0",
+    "timesx_colors": "tab20 by var_key (sorted within domain; identical colors before/after)",
+    "footnote": "before/after are independent t-SNE fits; absolute coordinates are not directly comparable"
+  },
+
+  "metrics": {
+    "rule": "window metric = mean_12(((pred-target)/d)^2) with d stored in EXP-004 predictions npz (MAE analogous); then per-var mean, then var-equal within domain; NEVER a direct mean over all windows of a domain; single seed s2021 only, never 3-seed means",
+    "z0_cross_check": "recomputed per-domain Z0 rows must match EXP-004 results/domain_summary.csv Z0/single rows"
+  },
+
+  "resources": {
+    "batch": 64,
+    "gpu_gate": "free VRAM >= peak + 3 GiB before the GPU stage; PAUSE sentinel honored; never touch co-tenant; never fall back to CPU; never change batch",
+    "gpu_gate_min_free_gib": 6
+  },
+
+  "checkpoint_binding": {
+    "level_1": "whole .ln.pt file SHA256 == selection.json selected_ckpt_sha256 (this hash is file-level, NOT a tensor hash)",
+    "level_2": "after load_state_dict: 84 LN tensors verified item-by-item (name == expected list, shape, and bitwise value equality vs the file)"
+  }
+}

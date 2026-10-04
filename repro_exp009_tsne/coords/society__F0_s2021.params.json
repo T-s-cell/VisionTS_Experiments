@@ -1,0 +1,29 @@
+{
+ "domain": "society",
+ "state": "F0_s2021",
+ "tsne": {
+  "n_components": 2,
+  "perplexity": 30,
+  "learning_rate": 200,
+  "init": "pca",
+  "early_exaggeration": 12,
+  "max_iter": 1000,
+  "random_state": 2021,
+  "metric": "euclidean",
+  "method": "barnes_hut",
+  "angle": 0.5
+ },
+ "kl_divergence": 1.507065773010254,
+ "n_iter": 999,
+ "n_imagenet": 1000,
+ "n_timesx": 90,
+ "sklearn_version": "1.9.1",
+ "threads": "1 per process",
+ "fit_key": "bbd4bfec40e25061bf71f8a5e2b27f2f531a4cc25fd67809ea6c70dd479f37c0",
+ "inputs": {
+  "imagenet_sha": "578ee7df2bc499eb9efdfdf3eeeb0c210077188d8900ec977437292587524a0f",
+  "timesx_sha": "18e7acd1bb9b1cb52d50cf5c250f5e9c81f2d638a3f17b8aa37e2239bde291b6"
+ },
+ "wall_secs": 13.1,
+ "peak_rss_mib": 831.6
+}

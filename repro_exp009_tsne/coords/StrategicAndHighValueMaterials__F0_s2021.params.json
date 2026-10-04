@@ -1,0 +1,29 @@
+{
+ "domain": "StrategicAndHighValueMaterials",
+ "state": "F0_s2021",
+ "tsne": {
+  "n_components": 2,
+  "perplexity": 30,
+  "learning_rate": 200,
+  "init": "pca",
+  "early_exaggeration": 12,
+  "max_iter": 1000,
+  "random_state": 2021,
+  "metric": "euclidean",
+  "method": "barnes_hut",
+  "angle": 0.5
+ },
+ "kl_divergence": 1.411094307899475,
+ "n_iter": 999,
+ "n_imagenet": 1000,
+ "n_timesx": 178,
+ "sklearn_version": "1.9.1",
+ "threads": "1 per process",
+ "fit_key": "205b1af42f21755778398c5dab5ca4db20483730c4919a444ddd3f2718dace07",
+ "inputs": {
+  "imagenet_sha": "fbe843e649a7a8da8154ab2c78133f603fe1adf4358fafcec7bcbfc97f751f83",
+  "timesx_sha": "9745f8c72f3ac28fb7504a48d4ecc9cc3366ff1041e53ce9621ab921a3f6a33a"
+ },
+ "wall_secs": 15.7,
+ "peak_rss_mib": 815.9
+}

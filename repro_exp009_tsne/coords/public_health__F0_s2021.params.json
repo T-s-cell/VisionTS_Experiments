@@ -1,0 +1,29 @@
+{
+ "domain": "public_health",
+ "state": "F0_s2021",
+ "tsne": {
+  "n_components": 2,
+  "perplexity": 30,
+  "learning_rate": 200,
+  "init": "pca",
+  "early_exaggeration": 12,
+  "max_iter": 1000,
+  "random_state": 2021,
+  "metric": "euclidean",
+  "method": "barnes_hut",
+  "angle": 0.5
+ },
+ "kl_divergence": 1.450612187385559,
+ "n_iter": 999,
+ "n_imagenet": 1000,
+ "n_timesx": 90,
+ "sklearn_version": "1.9.1",
+ "threads": "1 per process",
+ "fit_key": "bf7af8a40946e194153ed7143ca87782a91cecdc0498864bbbe55a97867d87a1",
+ "inputs": {
+  "imagenet_sha": "30d1934909cc68a63f408c0ed8c6b4a7268511880b8370d13e12a39a2e0d98d1",
+  "timesx_sha": "8a64de185eaba01196ffa0c9be6fc695be05360740ae91748797fe1f7c01b6d9"
+ },
+ "wall_secs": 13.3,
+ "peak_rss_mib": 799.6
+}

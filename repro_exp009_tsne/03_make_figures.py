@@ -1,0 +1,245 @@
+#!/usr/bin/env python3
+"""Stage 03 — figures (EXP-009): 19 domains x 2 states = 38 main figures.
+
+Style: ImageNet = medium-gray enlarged dots (s=16, gray 0.55); TimesX = tab20 colors fixed per
+var_key (identical before/after within a domain); legend outside; annotation
+box (domain rank/perf + state/seed/epoch/counts); footnote that before/after
+are independent fits so absolute coordinates are not directly comparable.
+Domain header: each state shows ITS OWN rank (Z0 fig: rank by Z0 test MSE;
+F0 fig: rank by F0 s2021 test MSE; both among all 19 domains, 1=best) and
+its own MSE/MAE, recomputed from EXP-004 predictions npz via
+common.metrics_from_npz (same path the audit cross-checks); the F0 figure
+additionally shows delta MSE vs Z0.
+Also emits side-by-side composites and an index.html.
+"""
+import argparse
+import csv
+import importlib.util
+import json
+import os
+import sys
+
+import matplotlib
+matplotlib.use("Agg")
+import matplotlib.pyplot as plt
+import numpy as np
+from matplotlib import font_manager
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+_spec = importlib.util.spec_from_file_location(
+    "exp009_common", os.path.join(HERE, "common.py"))
+E9 = importlib.util.module_from_spec(_spec)
+sys.modules["exp009_common"] = E9
+_spec.loader.exec_module(E9)
+
+FOOTNOTE_CN = "前后独立拟合，绝对坐标不可直接比较。"
+FOOTNOTE_EN = ("Before/after are independent t-SNE fits; absolute coordinates "
+               "are not directly comparable.")
+DPI = int(E9.CFG["figures"]["dpi"])
+
+
+def cjk_font():
+    """Return a font FILE PATH covering the footnote glyphs, or None.
+    Name-based matching alone proved unreliable on eta (a listed CJK face
+    resolved to glyphs without coverage -> tofu), so every candidate is
+    verified with freetype glyph indices; the file is pinned via
+    FontProperties(fname=...) at draw time."""
+    from matplotlib import ft2font
+    from matplotlib.font_manager import FontProperties, findfont, fontManager
+    probe = "前后拟合绝对坐标可比较。"
+    candidates = []
+    for p in ("/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc",
+              "/usr/share/fonts/opentype/noto/NotoSansCJK-Bold.ttc",
+              "/usr/share/fonts/truetype/droid/DroidSansFallbackFull.ttf"):
+        if os.path.isfile(p):
+            candidates.append(p)
+            try:
+                fontManager.addfont(p)
+            except Exception:
+                pass
+    names = ("Noto Sans CJK", "WenQuanYi", "SimHei", "Source Han Sans",
+             "Droid Sans Fallback")
+    for f in font_manager.fontManager.ttflist:
+        if any(k in f.name for k in names):
+            try:
+                candidates.append(findfont(FontProperties(family=f.name),
+                                           fallback_to_default=False))
+            except Exception:
+                pass
+    seen = set()
+    for p in candidates:
+        if p in seen:
+            continue
+        seen.add(p)
+        try:
+            ft = ft2font.FT2Font(p)
+            if all(ft.get_char_index(ord(c)) != 0 for c in probe):
+                return p
+        except Exception:
+            continue
+    return None
+
+
+def load_coords(domain, state):
+    p = os.path.join(E9.COORDS, f"{domain}__{state}.csv")
+    with open(p) as f:
+        rows = list(csv.DictReader(f))
+    assert len(rows) == E9.IMAGENET_N + sum(
+        1 for r in rows if r["source"] == "timesx"), "coords row count drift"
+    return rows
+
+
+def perf_table(domains):
+    """Per-domain ranks (Z0 and F0 s2021 test MSE separately, 1=best) +
+    both-state MSE/MAE. Each figure header shows its own state's rank/metrics."""
+    rows = {}
+    for d in domains:
+        m0 = E9.metrics_from_npz(E9.Z0_PRED_NPZ, domain=d)
+        mf = E9.metrics_from_npz(os.path.join(
+            E9.LN_PREDICTIONS, f"F0__{d}__s{E9.F0_SEED}__test.npz"))
+        rows[d] = {"mse_z0": m0["mse"], "mae_z0": m0["mae"],
+                   "mse_f0": mf["mse"], "mae_f0": mf["mae"]}
+    for key, mk in (("rank_z0", "mse_z0"), ("rank_f0", "mse_f0")):
+        for r, d in enumerate(sorted(domains, key=lambda x: rows[x][mk]), 1):
+            rows[d][key] = r
+    for d in domains:
+        rows[d]["delta_pct"] = 100.0 * (rows[d]["mse_f0"] - rows[d]["mse_z0"]) \
+            / rows[d]["mse_z0"]
+    return rows
+
+
+def one_figure(domain, state, rows, perf, fname_cjk, out_path):
+    var_order = sorted({r["var_key"] for r in rows if r["source"] == "timesx"})
+    cmap = plt.get_cmap("tab20")
+    color = {vk: cmap(i % 20) for i, vk in enumerate(var_order)}
+
+    img_x = [float(r["x"]) for r in rows if r["source"] == "imagenet"]
+    img_y = [float(r["y"]) for r in rows if r["source"] == "imagenet"]
+
+    fig, ax = plt.subplots(figsize=(9.6, 5.8))
+    ax.scatter(img_x, img_y, s=16, c="0.55", alpha=0.8, linewidths=0,
+               label="ImageNet-1k val reference (n=1000)")
+    for vk in var_order:
+        xs = [float(r["x"]) for r in rows
+              if r["source"] == "timesx" and r["var_key"] == vk]
+        ys = [float(r["y"]) for r in rows
+              if r["source"] == "timesx" and r["var_key"] == vk]
+        short = vk.split("__", 1)[1] if "__" in vk else vk
+        ax.scatter(xs, ys, s=14, color=color[vk], linewidths=0, label=short)
+
+    if state == E9.STATE_BEFORE:
+        state_line = "Z0: original ImageNet-pretrained MAE-base"
+        seed_line = "seed: n/a (deterministic zero-shot)"
+        rank_line = f"domain rank by Z0 test MSE: {perf['rank_z0']}/19 (1=best)"
+        metric_line = (f"Z0 MSE {perf['mse_z0']:.4f} "
+                       f"MAE {perf['mae_z0']:.4f}")
+    else:
+        ep = E9.f0_selection()[domain]["best_epoch"]
+        state_line = f"F0 LN fine-tuned (EXP-004 best_ft), best_epoch={ep}"
+        seed_line = "seed: 2021"
+        rank_line = f"domain rank by F0 test MSE: {perf['rank_f0']}/19 (1=best)"
+        metric_line = (f"F0 MSE {perf['mse_f0']:.4f} "
+                       f"MAE {perf['mae_f0']:.4f} "
+                       f"(ΔMSE vs Z0 {perf['delta_pct']:+.1f}%)")
+    ax.set_title(f"{domain} — encoder-feature t-SNE")
+    ax.text(0.01, 0.99,
+            f"{rank_line}\n{metric_line}\n{state_line}\n{seed_line} | "
+            f"ImageNet n={len(img_x)}, "
+            f"TimesX n={len(rows) - len(img_x)} ({len(var_order)} vars)",
+            transform=ax.transAxes, fontsize=8, va="top",
+            bbox=dict(facecolor="white", alpha=0.75, edgecolor="none",
+                      pad=2))
+    note = FOOTNOTE_CN if fname_cjk else FOOTNOTE_EN
+    fp = font_manager.FontProperties(fname=fname_cjk) if fname_cjk else None
+    fig.text(0.01, 0.005, note, fontsize=7.5, style="italic", color="0.35",
+             fontproperties=fp)
+    ax.legend(loc="center left", bbox_to_anchor=(1.01, 0.5), fontsize=6.5,
+              frameon=False)
+    ax.set_xticks([])
+    ax.set_yticks([])
+    fig.tight_layout(rect=(0, 0.03, 1, 1))
+    fig.savefig(out_path, dpi=DPI)
+    plt.close(fig)
+
+
+def side_by_side(domain, out_dir):
+    p0 = os.path.join(E9.FIGURES, domain, f"{E9.STATE_BEFORE}.png")
+    p1 = os.path.join(E9.FIGURES, domain, f"{E9.STATE_AFTER}.png")
+    a, b = plt.imread(p0), plt.imread(p1)
+    gap = np.ones((a.shape[0], max(8, a.shape[1] // 100), a.shape[2]), a.dtype)
+    canvas = np.concatenate([a, gap, b], axis=1)
+    fig = plt.figure(figsize=(canvas.shape[1] / DPI, canvas.shape[0] / DPI))
+    ax = fig.add_axes((0, 0, 1, 1))
+    ax.imshow(canvas)
+    ax.axis("off")
+    fig.savefig(os.path.join(out_dir, f"{domain}.png"), dpi=DPI)
+    plt.close(fig)
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--domains", default=None, help="comma list (default all)")
+    args = ap.parse_args()
+    domains = args.domains.split(",") if args.domains else E9.DOMAIN_NAMES
+
+    fname_cjk = cjk_font()
+    perf = perf_table(E9.DOMAIN_NAMES)
+    side_dir = os.path.join(E9.FIGURES, "_side_by_side")
+    os.makedirs(side_dir, exist_ok=True)
+
+    index = []
+    for d in domains:
+        dd = os.path.join(E9.FIGURES, d)
+        os.makedirs(dd, exist_ok=True)
+        entry = {"domain": d, **perf[d]}
+        for state in (E9.STATE_BEFORE, E9.STATE_AFTER):
+            rows = load_coords(d, state)
+            out = os.path.join(dd, f"{state}.png")
+            one_figure(d, state, rows, perf[d], fname_cjk, out)
+            with open(os.path.join(E9.COORDS, f"{d}__{state}.params.json")) as f:
+                par = json.load(f)
+            entry[state] = {"png": f"{d}/{state}.png",
+                            "kl": par["kl_divergence"],
+                            "n_iter": par["n_iter"],
+                            "n_timesx": par["n_timesx"]}
+        side_by_side(d, side_dir)
+        index.append(entry)
+        print(f"[figures] {d} done", flush=True)
+
+    rows_html = "".join(
+        f"<tr><td>{e['domain']}</td>"
+        f"<td><a href='../{e[E9.STATE_BEFORE]['png']}'>Z0</a></td>"
+        f"<td><a href='../{e[E9.STATE_AFTER]['png']}'>F0_s2021</a></td>"
+        f"<td><a href='{e['domain']}.png'>side-by-side</a></td>"
+        f"<td>{e['rank_z0']}/19 → {e['rank_f0']}/19</td>"
+        f"<td>{e['mse_z0']:.4f} → {e['mse_f0']:.4f}</td>"
+        f"<td>{e['mae_z0']:.4f} → {e['mae_f0']:.4f}</td>"
+        f"<td>{e['delta_pct']:+.1f}%</td>"
+        f"<td>{e[E9.STATE_BEFORE]['kl']:.4f} / {e[E9.STATE_AFTER]['kl']:.4f}</td>"
+        f"<td>{e[E9.STATE_BEFORE]['n_iter']} / {e[E9.STATE_AFTER]['n_iter']}</td>"
+        f"<td>{e[E9.STATE_AFTER]['n_timesx']}</td></tr>"
+        for e in index)
+    html = ("<!doctype html><meta charset='utf-8'>"
+            "<title>EXP-009 t-SNE figures</title>"
+            "<style>body{font-family:sans-serif}td,th{padding:4px 10px;"
+            "border:1px solid #ccc}</style>"
+            "<h2>EXP-009: per-domain encoder-feature t-SNE "
+            "(before Z0 / after F0 s2021)</h2>"
+            "<p>Each state shows its own rank (by that state's test MSE among "
+            "all 19 domains, 1=best) and its own MSE/MAE from EXP-004 "
+            "predictions (window d → per-var → var-equal). "
+            "KL divergences and n_iter shown as before / after. "
+            "Before/after are independent fits; absolute coordinates are not "
+            "directly comparable.</p>"
+            "<table><tr><th>domain</th><th>Z0</th><th>F0_s2021</th>"
+            "<th>composite</th><th>rank Z0→F0 (state MSE)</th><th>MSE Z0→F0</th>"
+            "<th>MAE Z0→F0</th><th>ΔMSE</th><th>KL (b/a)</th>"
+            "<th>n_iter (b/a)</th><th>n_timesx</th></tr>" + rows_html
+            + "</table>")
+    with open(os.path.join(side_dir, "index.html"), "w") as f:
+        f.write(html)
+    print(f"[figures] complete: {len(domains)} domains", flush=True)
+
+
+if __name__ == "__main__":
+    main()

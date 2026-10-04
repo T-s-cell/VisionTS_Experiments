@@ -1,0 +1,95 @@
+{
+ "protocol_version": "exp009_tsne_v1",
+ "created": "2026-10-04T05:11:50",
+ "mode": "full (19 domains)",
+ "all_ok": true,
+ "checks": {
+  "completeness.z0_full": {
+   "status": "OK",
+   "n_windows": 2474,
+   "n_vars": 190,
+   "n_domains": 19
+  },
+  "completeness.counts": {
+   "status": "OK",
+   "n_windows": 2474,
+   "n_vars": 190,
+   "n_domains": 19
+  },
+  "completeness.domain_slices": {
+   "status": "OK",
+   "mismatches": []
+  },
+  "completeness.slices_reassemble_full": {
+   "status": "OK",
+   "mode": "full"
+  },
+  "checkpoints.binding": {
+   "status": "OK",
+   "problems": [],
+   "n": 19
+  },
+  "features.shape_finite_provenance": {
+   "status": "OK",
+   "problems": [],
+   "n_artifacts": 40
+  },
+  "hook_equivalence": {
+   "status": "OK",
+   "n_models": 20,
+   "need": 20,
+   "note": "captured vision_model.norm == direct forward_encoder (bitwise); instrumentation never changed predictions"
+  },
+  "immutability.exp009_code": {
+   "status": "OK",
+   "n_entries": 314,
+   "added": [],
+   "removed": [],
+   "changed": [],
+   "note": null
+  },
+  "immutability.reused": {
+   "status": "OK",
+   "added": [],
+   "removed": [],
+   "changed": []
+  },
+  "immutability.visionts": {
+   "status": "OK",
+   "added": [],
+   "removed": [],
+   "changed": []
+  },
+  "immutability.ckpt": {
+   "status": "OK",
+   "added": [],
+   "removed": [],
+   "changed": []
+  },
+  "immutability.ln_inputs": {
+   "status": "OK",
+   "added": [],
+   "removed": [],
+   "changed": []
+  },
+  "immutability.ln_predictions": {
+   "status": "OK",
+   "added": [],
+   "removed": [],
+   "changed": []
+  },
+  "coords.rows_finite_fresh": {
+   "status": "OK",
+   "problems": []
+  },
+  "metrics.z0_matches_exp004": {
+   "status": "OK",
+   "problems": [],
+   "rule": "window(d-normalized) -> var mean -> var-equal in domain"
+  },
+  "full_coverage": {
+   "status": "OK",
+   "n": 19
+  }
+ }
+}

@@ -1,0 +1,29 @@
+{
+ "domain": "LivestockAndFoodProducts",
+ "state": "F0_s2021",
+ "tsne": {
+  "n_components": 2,
+  "perplexity": 30,
+  "learning_rate": 200,
+  "init": "pca",
+  "early_exaggeration": 12,
+  "max_iter": 1000,
+  "random_state": 2021,
+  "metric": "euclidean",
+  "method": "barnes_hut",
+  "angle": 0.5
+ },
+ "kl_divergence": 1.393966794013977,
+ "n_iter": 999,
+ "n_imagenet": 1000,
+ "n_timesx": 318,
+ "sklearn_version": "1.9.1",
+ "threads": "1 per process",
+ "fit_key": "c9bce4008cd08677f62d69f67746bb21b48e47e82e45c232cb68551d7f9d6b7e",
+ "inputs": {
+  "imagenet_sha": "e558a4c9e00f270bb73426c5c0604ba9b2365350fa7c841ff37836112267d47c",
+  "timesx_sha": "47c7cd3ff84934e069ccde1ef4c336fd3542828cd2ec44a15585c48c4124aaeb"
+ },
+ "wall_secs": 16.8,
+ "peak_rss_mib": 867.9
+}

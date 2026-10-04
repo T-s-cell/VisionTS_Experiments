@@ -1,0 +1,29 @@
+{
+ "domain": "electronic_technology",
+ "state": "F0_s2021",
+ "tsne": {
+  "n_components": 2,
+  "perplexity": 30,
+  "learning_rate": 200,
+  "init": "pca",
+  "early_exaggeration": 12,
+  "max_iter": 1000,
+  "random_state": 2021,
+  "metric": "euclidean",
+  "method": "barnes_hut",
+  "angle": 0.5
+ },
+ "kl_divergence": 1.4734402894973755,
+ "n_iter": 999,
+ "n_imagenet": 1000,
+ "n_timesx": 90,
+ "sklearn_version": "1.9.1",
+ "threads": "1 per process",
+ "fit_key": "5d0f06c93137f34b3bc6ae937fb54c192b8fb9b82c623d40e63f3f30e85b41f1",
+ "inputs": {
+  "imagenet_sha": "0ae0b0f19b485893168c562073a4a3ddc60517d42f3470ae5db92681f51b3feb",
+  "timesx_sha": "ed005f8f2b81902170ff6b4a699bc43f4613861016543d7b2ce788f81d018aff"
+ },
+ "wall_secs": 14.0,
+ "peak_rss_mib": 799.6
+}

@@ -1,0 +1,2062 @@
+{
+ "Z0__imagenet.npz": {
+  "kind": "Z0__imagenet",
+  "sha256": "0dd291ea0d5a5bbc04c68a3896edc289396f12012916fdede1f740d1ddf0cd67",
+  "key": "827bb0c441e43bfc2daa9bc8df085923a7c83340309bb322accbe6ab8ba6a97e",
+  "key_components": {
+   "kind": "Z0__imagenet",
+   "model_weight_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    1000,
+    43776
+   ],
+   "filenames": [
+    1000
+   ]
+  },
+  "created": "2026-10-04T04:56:07"
+ },
+ "Z0__timesx.npz": {
+  "kind": "Z0__timesx",
+  "sha256": "260d3868cd6ba29b5ce133492a56872fe71ebe0339b05f55f4060be4b0b23218",
+  "key": "240b5c728f074d82cf711e160dfc4c17cd365e2c5a8e6f064b72d25bd32415ba",
+  "key_components": {
+   "kind": "Z0__timesx",
+   "model_weight_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    2474,
+    43776
+   ],
+   "sample_ids": [
+    2474
+   ],
+   "var_keys": [
+    2474
+   ]
+  },
+  "created": "2026-10-04T04:56:35"
+ },
+ "F0__climate__s2021__imagenet.npz": {
+  "kind": "F0__climate__s2021__imagenet",
+  "sha256": "77fb96db7ae6687ffc22b66a1d3576004f87ef3c459b124ed807f1297f728e8b",
+  "key": "a94ba4aac5cea2419471454b0fdf3f34a53b8f518f1d90dea1bf37a729c15c1c",
+  "key_components": {
+   "kind": "F0__climate__s2021__imagenet",
+   "model_weight_sha256": "76a63e5b206db7ace1f6f542e6ecec1d2ea141c5b8488f584b0ff175515a8355",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    1000,
+    43776
+   ],
+   "filenames": [
+    1000
+   ]
+  },
+  "created": "2026-10-04T05:09:06"
+ },
+ "F0__climate__s2021__timesx.npz": {
+  "kind": "F0__climate__s2021__timesx",
+  "sha256": "ef99822f437fe955fbbfdc52c1c5b5106982f260c19e324a4c63687c683045f5",
+  "key": "cf8c6480b81e675b6f1f108b01daab6b813ea05460a497ae7c45ad067de54b34",
+  "key_components": {
+   "kind": "F0__climate__s2021__timesx",
+   "model_weight_sha256": "76a63e5b206db7ace1f6f542e6ecec1d2ea141c5b8488f584b0ff175515a8355",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    90,
+    43776
+   ],
+   "sample_ids": [
+    90
+   ],
+   "var_keys": [
+    90
+   ]
+  },
+  "created": "2026-10-04T05:09:08"
+ },
+ "F0__CropsAndStaples__s2021__imagenet.npz": {
+  "kind": "F0__CropsAndStaples__s2021__imagenet",
+  "sha256": "7ae9e71187a2be2e1eb5c7feb6557a519423487865ccc42a491bc390cb2342c6",
+  "key": "391b4f0875e532e07cb206e0e6ca806d783f1c5e6c179a36a2ec64d77d98eed3",
+  "key_components": {
+   "kind": "F0__CropsAndStaples__s2021__imagenet",
+   "model_weight_sha256": "faf5b489698bfe248693dad7db050feef62a1cf071d4b4166a0b8e3ecb5dd5c3",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    1000,
+    43776
+   ],
+   "filenames": [
+    1000
+   ]
+  },
+  "created": "2026-10-04T04:56:53"
+ },
+ "F0__CropsAndStaples__s2021__timesx.npz": {
+  "kind": "F0__CropsAndStaples__s2021__timesx",
+  "sha256": "90c9a3208ba1b1c70f708d4f05cb26001a4bc90426b1c32a64ef0e151fe47d07",
+  "key": "74ede3bf0cf1718afc8311586949a1be08685fff33c1c5f714c2279a313ef627",
+  "key_components": {
+   "kind": "F0__CropsAndStaples__s2021__timesx",
+   "model_weight_sha256": "faf5b489698bfe248693dad7db050feef62a1cf071d4b4166a0b8e3ecb5dd5c3",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    188,
+    43776
+   ],
+   "sample_ids": [
+    188
+   ],
+   "var_keys": [
+    188
+   ]
+  },
+  "created": "2026-10-04T04:56:56"
+ },
+ "F0__Currency__s2021__imagenet.npz": {
+  "kind": "F0__Currency__s2021__imagenet",
+  "sha256": "361938f5c6f4f03008e94781adb6525e5eb09440586af1338d7f5c515d7d7a54",
+  "key": "106df8aa469c3ab642885eecef8a6d5a5641d9e9d1e5dd44bd4c7c55ea416da5",
+  "key_components": {
+   "kind": "F0__Currency__s2021__imagenet",
+   "model_weight_sha256": "816428606f1bdeee86e754dc627615ed4b0129e79045bdaf858dbc0d01554fb9",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    1000,
+    43776
+   ],
+   "filenames": [
+    1000
+   ]
+  },
+  "created": "2026-10-04T04:57:15"
+ },
+ "F0__Currency__s2021__timesx.npz": {
+  "kind": "F0__Currency__s2021__timesx",
+  "sha256": "e2050893427c98d0fc0cb4cf966ad931da29cbbb31e03ca612e01c5030d0207a",
+  "key": "56d2b0e24894932497ee28524ce266a15cf24c70d2c771e508c590283063d97c",
+  "key_components": {
+   "kind": "F0__Currency__s2021__timesx",
+   "model_weight_sha256": "816428606f1bdeee86e754dc627615ed4b0129e79045bdaf858dbc0d01554fb9",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    180,
+    43776
+   ],
+   "sample_ids": [
+    180
+   ],
+   "var_keys": [
+    180
+   ]
+  },
+  "created": "2026-10-04T04:57:18"
+ },
+ "F0__EnergyAndFuels__s2021__imagenet.npz": {
+  "kind": "F0__EnergyAndFuels__s2021__imagenet",
+  "sha256": "aa1b853945bad072735e22acee48cdd4cd32df4e8dfd931061d1eae1706df3b7",
+  "key": "7b10f2698c99626e40b93d8fa505e1a3b996a33988effae27c9143940b12f691",
+  "key_components": {
+   "kind": "F0__EnergyAndFuels__s2021__imagenet",
+   "model_weight_sha256": "87c1d750c0774a24596768ee29e9f1306808799fff106ca0920b034681c70dc5",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    1000,
+    43776
+   ],
+   "filenames": [
+    1000
+   ]
+  },
+  "created": "2026-10-04T04:57:36"
+ },
+ "F0__EnergyAndFuels__s2021__timesx.npz": {
+  "kind": "F0__EnergyAndFuels__s2021__timesx",
+  "sha256": "58feb9f7dcc588cac06aa08129923c462a582bd74fce6397a8cfe8169d15b430",
+  "key": "7ac628aad46810a91c8d509ae30bf5f4c2d07adc0a4b98f5ccc26ab49f824bfb",
+  "key_components": {
+   "kind": "F0__EnergyAndFuels__s2021__timesx",
+   "model_weight_sha256": "87c1d750c0774a24596768ee29e9f1306808799fff106ca0920b034681c70dc5",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    171,
+    43776
+   ],
+   "sample_ids": [
+    171
+   ],
+   "var_keys": [
+    171
+   ]
+  },
+  "created": "2026-10-04T04:57:39"
+ },
+ "F0__LivestockAndFoodProducts__s2021__imagenet.npz": {
+  "kind": "F0__LivestockAndFoodProducts__s2021__imagenet",
+  "sha256": "e558a4c9e00f270bb73426c5c0604ba9b2365350fa7c841ff37836112267d47c",
+  "key": "f2faaca2cfa69be6831435e1bc027bc805ebe4ccf05d10cdfad7d61deeb93759",
+  "key_components": {
+   "kind": "F0__LivestockAndFoodProducts__s2021__imagenet",
+   "model_weight_sha256": "771472f64050908710334871e0aa58e453687ca31f6fa8e11b8e1945e293bf3a",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    1000,
+    43776
+   ],
+   "filenames": [
+    1000
+   ]
+  },
+  "created": "2026-10-04T04:57:57"
+ },
+ "F0__LivestockAndFoodProducts__s2021__timesx.npz": {
+  "kind": "F0__LivestockAndFoodProducts__s2021__timesx",
+  "sha256": "47c7cd3ff84934e069ccde1ef4c336fd3542828cd2ec44a15585c48c4124aaeb",
+  "key": "06220a2787224da71aeed0338de36f735ffde2cfbe7ea65fa446d68f88f4ecfe",
+  "key_components": {
+   "kind": "F0__LivestockAndFoodProducts__s2021__timesx",
+   "model_weight_sha256": "771472f64050908710334871e0aa58e453687ca31f6fa8e11b8e1945e293bf3a",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    318,
+    43776
+   ],
+   "sample_ids": [
+    318
+   ],
+   "var_keys": [
+    318
+   ]
+  },
+  "created": "2026-10-04T04:58:01"
+ },
+ "F0__RawMaterialsAndConstruction__s2021__imagenet.npz": {
+  "kind": "F0__RawMaterialsAndConstruction__s2021__imagenet",
+  "sha256": "7c038727f7816c97dbcee5bd48a272c2e40e3da8f84ce87be43fd2411358a975",
+  "key": "f60f716b648a13b6eaa44fe9d42f731ca94d280f68a329da38e3992613df9c88",
+  "key_components": {
+   "kind": "F0__RawMaterialsAndConstruction__s2021__imagenet",
+   "model_weight_sha256": "6ebba90ddca6408b7f97cad21710a3efff2d072b3deafbc5ae03e60e4b070e5d",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    1000,
+    43776
+   ],
+   "filenames": [
+    1000
+   ]
+  },
+  "created": "2026-10-04T04:58:20"
+ },
+ "F0__RawMaterialsAndConstruction__s2021__timesx.npz": {
+  "kind": "F0__RawMaterialsAndConstruction__s2021__timesx",
+  "sha256": "93b263e1e5c2c9bc704e6331cda65d9caf9264c7b550830c0ac98db60e2a9125",
+  "key": "9dcdb00ff06022563734a9567b993bc99ec99d8fbe5b8b532d4dc74b0ce0af33",
+  "key_components": {
+   "kind": "F0__RawMaterialsAndConstruction__s2021__timesx",
+   "model_weight_sha256": "6ebba90ddca6408b7f97cad21710a3efff2d072b3deafbc5ae03e60e4b070e5d",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    172,
+    43776
+   ],
+   "sample_ids": [
+    172
+   ],
+   "var_keys": [
+    172
+   ]
+  },
+  "created": "2026-10-04T04:58:23"
+ },
+ "F0__SpecialtyAndAdvancedMaterials__s2021__imagenet.npz": {
+  "kind": "F0__SpecialtyAndAdvancedMaterials__s2021__imagenet",
+  "sha256": "4318a135941a4a05ebbfa32e34d55890e960ea3d670659abef42c4cff13a0bfc",
+  "key": "2a21ecdf9306b23cca1821787f0b9c7c245fbf50b904237e8a3a5235f139447e",
+  "key_components": {
+   "kind": "F0__SpecialtyAndAdvancedMaterials__s2021__imagenet",
+   "model_weight_sha256": "dbbf4712e2cdb996ee84bfd99f719cf1a57a67fca2265159fbf1903484389019",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    1000,
+    43776
+   ],
+   "filenames": [
+    1000
+   ]
+  },
+  "created": "2026-10-04T04:58:41"
+ },
+ "F0__SpecialtyAndAdvancedMaterials__s2021__timesx.npz": {
+  "kind": "F0__SpecialtyAndAdvancedMaterials__s2021__timesx",
+  "sha256": "722008fa630d3ee3aeaa4c8c3b900ff39fb5415ee75987f4e88ecb027a7100da",
+  "key": "1ac1407d7c84135ee160c76a865bf806d2eb527788e16762013fb2785f5aecb5",
+  "key_components": {
+   "kind": "F0__SpecialtyAndAdvancedMaterials__s2021__timesx",
+   "model_weight_sha256": "dbbf4712e2cdb996ee84bfd99f719cf1a57a67fca2265159fbf1903484389019",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    117,
+    43776
+   ],
+   "sample_ids": [
+    117
+   ],
+   "var_keys": [
+    117
+   ]
+  },
+  "created": "2026-10-04T04:58:43"
+ },
+ "F0__StrategicAndHighValueMaterials__s2021__imagenet.npz": {
+  "kind": "F0__StrategicAndHighValueMaterials__s2021__imagenet",
+  "sha256": "fbe843e649a7a8da8154ab2c78133f603fe1adf4358fafcec7bcbfc97f751f83",
+  "key": "db93a101c1c178f6eb051a75f33a6280487910343af4ad9371dab93b3fae7a14",
+  "key_components": {
+   "kind": "F0__StrategicAndHighValueMaterials__s2021__imagenet",
+   "model_weight_sha256": "8b61ee24d90192d6c9f5f1e3792628a79529c1134d49f0d1423595c736258896",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    1000,
+    43776
+   ],
+   "filenames": [
+    1000
+   ]
+  },
+  "created": "2026-10-04T04:59:01"
+ },
+ "F0__StrategicAndHighValueMaterials__s2021__timesx.npz": {
+  "kind": "F0__StrategicAndHighValueMaterials__s2021__timesx",
+  "sha256": "9745f8c72f3ac28fb7504a48d4ecc9cc3366ff1041e53ce9621ab921a3f6a33a",
+  "key": "9a98d927049c46bb9404421143b8f8357e9ca3ea75fe8a058c641ea89ac54cca",
+  "key_components": {
+   "kind": "F0__StrategicAndHighValueMaterials__s2021__timesx",
+   "model_weight_sha256": "8b61ee24d90192d6c9f5f1e3792628a79529c1134d49f0d1423595c736258896",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    178,
+    43776
+   ],
+   "sample_ids": [
+    178
+   ],
+   "var_keys": [
+    178
+   ]
+  },
+  "created": "2026-10-04T04:59:04"
+ },
+ "F0__arts__s2021__imagenet.npz": {
+  "kind": "F0__arts__s2021__imagenet",
+  "sha256": "c1e47b4096a29378e433faf217888221cafe5d11e84598ba4c8cc6b79f5e3fa6",
+  "key": "bb4afb80d6f69fc2c6aa1b9c6588c1e9ab941a631823d4f4bc9bf93a12abfa1e",
+  "key_components": {
+   "kind": "F0__arts__s2021__imagenet",
+   "model_weight_sha256": "29c3a4bf3acbffbef0d87822fcc81cd805b90d483fe6e180830d9bd1ca532ad1",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    1000,
+    43776
+   ],
+   "filenames": [
+    1000
+   ]
+  },
+  "created": "2026-10-04T04:59:22"
+ },
+ "F0__arts__s2021__timesx.npz": {
+  "kind": "F0__arts__s2021__timesx",
+  "sha256": "1136738d3b1d789f27682f06b1dffe4e3bb652c05711f1634cdf34801cbe53ac",
+  "key": "c9b98280ab130c760abaa4d3d626de5a40d937da9a8d0bdf7e5c3b674f980488",
+  "key_components": {
+   "kind": "F0__arts__s2021__timesx",
+   "model_weight_sha256": "29c3a4bf3acbffbef0d87822fcc81cd805b90d483fe6e180830d9bd1ca532ad1",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    151,
+    43776
+   ],
+   "sample_ids": [
+    151
+   ],
+   "var_keys": [
+    151
+   ]
+  },
+  "created": "2026-10-04T04:59:25"
+ },
+ "F0__economy__s2021__imagenet.npz": {
+  "kind": "F0__economy__s2021__imagenet",
+  "sha256": "692a5d04b5b4b4408f61d514f6b95a76e92ede7ba2d5a439f667c8bb1b6d7ab0",
+  "key": "89afadc20e797035a390ede3f05786a56976cc76235df991006af638e3bb9124",
+  "key_components": {
+   "kind": "F0__economy__s2021__imagenet",
+   "model_weight_sha256": "0d455e7cd20985dd93cd89dcb5cb54537f41c6068f72aa0901320122559c0bbb",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    1000,
+    43776
+   ],
+   "filenames": [
+    1000
+   ]
+  },
+  "created": "2026-10-04T04:59:43"
+ },
+ "F0__economy__s2021__timesx.npz": {
+  "kind": "F0__economy__s2021__timesx",
+  "sha256": "10f463c2c6375767dc425ab18f55278952155ed677c79bb7b5b96ecdefb1cb65",
+  "key": "82907af6ccffe67c389d2445d12ab46699dc8004c9dd0827a03ccc59582e764d",
+  "key_components": {
+   "kind": "F0__economy__s2021__timesx",
+   "model_weight_sha256": "0d455e7cd20985dd93cd89dcb5cb54537f41c6068f72aa0901320122559c0bbb",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    90,
+    43776
+   ],
+   "sample_ids": [
+    90
+   ],
+   "var_keys": [
+    90
+   ]
+  },
+  "created": "2026-10-04T04:59:45"
+ },
+ "F0__electronic_technology__s2021__imagenet.npz": {
+  "kind": "F0__electronic_technology__s2021__imagenet",
+  "sha256": "0ae0b0f19b485893168c562073a4a3ddc60517d42f3470ae5db92681f51b3feb",
+  "key": "48105b5df16d85a14f7b8c8df3e6c8cb4115fface836d4ff6323ab0aef615625",
+  "key_components": {
+   "kind": "F0__electronic_technology__s2021__imagenet",
+   "model_weight_sha256": "7181ca9ade3858ebed2375e20910a9afb15cdcf59186c5b08ddcaa959ebc3907",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    1000,
+    43776
+   ],
+   "filenames": [
+    1000
+   ]
+  },
+  "created": "2026-10-04T05:00:04"
+ },
+ "F0__electronic_technology__s2021__timesx.npz": {
+  "kind": "F0__electronic_technology__s2021__timesx",
+  "sha256": "ed005f8f2b81902170ff6b4a699bc43f4613861016543d7b2ce788f81d018aff",
+  "key": "55be3999aa0de91e0a3814ade092c15e4a3503c171503b2f585e5ca67dc94cec",
+  "key_components": {
+   "kind": "F0__electronic_technology__s2021__timesx",
+   "model_weight_sha256": "7181ca9ade3858ebed2375e20910a9afb15cdcf59186c5b08ddcaa959ebc3907",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    90,
+    43776
+   ],
+   "sample_ids": [
+    90
+   ],
+   "var_keys": [
+    90
+   ]
+  },
+  "created": "2026-10-04T05:00:06"
+ },
+ "F0__finance__s2021__imagenet.npz": {
+  "kind": "F0__finance__s2021__imagenet",
+  "sha256": "cff4a14543c52c26cacf5b36d60ee02fb900b8d8e31378ef21ec31ebcd61f2ae",
+  "key": "d4cd5f837b7845b80f6a6419433476fa1fcfb6986512724b033d1b856027f066",
+  "key_components": {
+   "kind": "F0__finance__s2021__imagenet",
+   "model_weight_sha256": "1b887ab387b31cfd4360c960dd0ba05ee16c20ac2240cff253ec2ff18ef3c5fc",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    1000,
+    43776
+   ],
+   "filenames": [
+    1000
+   ]
+  },
+  "created": "2026-10-04T05:00:24"
+ },
+ "F0__finance__s2021__timesx.npz": {
+  "kind": "F0__finance__s2021__timesx",
+  "sha256": "37ec744e085c2d37738bb87afedac3c20588bdb520d73157ef710594753d70bf",
+  "key": "8980f6ee64f6844bb1f7d38df3d006a2bb09c2290248a203f88569aeb29dbd39",
+  "key_components": {
+   "kind": "F0__finance__s2021__timesx",
+   "model_weight_sha256": "1b887ab387b31cfd4360c960dd0ba05ee16c20ac2240cff253ec2ff18ef3c5fc",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    90,
+    43776
+   ],
+   "sample_ids": [
+    90
+   ],
+   "var_keys": [
+    90
+   ]
+  },
+  "created": "2026-10-04T05:00:26"
+ },
+ "F0__pets__s2021__imagenet.npz": {
+  "kind": "F0__pets__s2021__imagenet",
+  "sha256": "d9af13f33ef522839e05f52a2731940f17a72738be6f5efc9ecbf6c315c42124",
+  "key": "4e9f978521eaa3677f5ea0bdf3b3fade10b39b0a5fa6d6f07e6903d6df769163",
+  "key_components": {
+   "kind": "F0__pets__s2021__imagenet",
+   "model_weight_sha256": "a24d85c5373416cc37bd9000a1a762a84edb05ac30bae2e2b57cfbcb8c210cb4",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    1000,
+    43776
+   ],
+   "filenames": [
+    1000
+   ]
+  },
+  "created": "2026-10-04T05:00:45"
+ },
+ "F0__pets__s2021__timesx.npz": {
+  "kind": "F0__pets__s2021__timesx",
+  "sha256": "e0cdef3c7052c12d0b5366da11d2a2b9d1e23556977e0a23e0a0f0b6e06404dc",
+  "key": "2b58a04148b2d274d10c127752795e1d1d06cafe811c56dbeabb3e81aa9d058c",
+  "key_components": {
+   "kind": "F0__pets__s2021__timesx",
+   "model_weight_sha256": "a24d85c5373416cc37bd9000a1a762a84edb05ac30bae2e2b57cfbcb8c210cb4",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    90,
+    43776
+   ],
+   "sample_ids": [
+    90
+   ],
+   "var_keys": [
+    90
+   ]
+  },
+  "created": "2026-10-04T05:00:47"
+ },
+ "F0__public_health__s2021__imagenet.npz": {
+  "kind": "F0__public_health__s2021__imagenet",
+  "sha256": "30d1934909cc68a63f408c0ed8c6b4a7268511880b8370d13e12a39a2e0d98d1",
+  "key": "0a83e66fddb2d3c5e24ffb7b73e9369bcfb61936a84742336df77a39ed90cdd6",
+  "key_components": {
+   "kind": "F0__public_health__s2021__imagenet",
+   "model_weight_sha256": "9b877ed4824f5b9998cdb99d0caf630f5bf8a878c1a531c00ac820a268d352a9",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    1000,
+    43776
+   ],
+   "filenames": [
+    1000
+   ]
+  },
+  "created": "2026-10-04T05:01:05"
+ },
+ "F0__public_health__s2021__timesx.npz": {
+  "kind": "F0__public_health__s2021__timesx",
+  "sha256": "8a64de185eaba01196ffa0c9be6fc695be05360740ae91748797fe1f7c01b6d9",
+  "key": "ac52bb691beca04ab974e64c77e7f49804a3f7bc708a176014313c8f51a9adea",
+  "key_components": {
+   "kind": "F0__public_health__s2021__timesx",
+   "model_weight_sha256": "9b877ed4824f5b9998cdb99d0caf630f5bf8a878c1a531c00ac820a268d352a9",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    90,
+    43776
+   ],
+   "sample_ids": [
+    90
+   ],
+   "var_keys": [
+    90
+   ]
+  },
+  "created": "2026-10-04T05:01:07"
+ },
+ "F0__public_policy__s2021__imagenet.npz": {
+  "kind": "F0__public_policy__s2021__imagenet",
+  "sha256": "1df10e43e118e75a6d798648d9ba3190cfae0e326555cd93156a8dc05848edb6",
+  "key": "d73d88ee4c6e20df353cc13d2d85c4c7a00eb051af669e23e6407a143b7b0778",
+  "key_components": {
+   "kind": "F0__public_policy__s2021__imagenet",
+   "model_weight_sha256": "29e081504bc340f0a584391932e633b29aabcb9b9a4b9b429baba7dcf787b183",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    1000,
+    43776
+   ],
+   "filenames": [
+    1000
+   ]
+  },
+  "created": "2026-10-04T05:01:25"
+ },
+ "F0__public_policy__s2021__timesx.npz": {
+  "kind": "F0__public_policy__s2021__timesx",
+  "sha256": "51d2652665d42f6da771883a0d2c845f6dc9243aa842fe899e3f98731e6e4d7e",
+  "key": "f9c5d566331cd9a3da88b221692008ba5fb7518aceab11f222be4be5b323ec24",
+  "key_components": {
+   "kind": "F0__public_policy__s2021__timesx",
+   "model_weight_sha256": "29e081504bc340f0a584391932e633b29aabcb9b9a4b9b429baba7dcf787b183",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    99,
+    43776
+   ],
+   "sample_ids": [
+    99
+   ],
+   "var_keys": [
+    99
+   ]
+  },
+  "created": "2026-10-04T05:01:27"
+ },
+ "F0__science__s2021__imagenet.npz": {
+  "kind": "F0__science__s2021__imagenet",
+  "sha256": "e30ad4b24914887eb8ae0b77fa9b8d37e5debfb4f10470a335bf54d404693016",
+  "key": "b763c540f15842fc6a54b3b85d72e3bd91a9e3996a8669e64483d5d448ddaecf",
+  "key_components": {
+   "kind": "F0__science__s2021__imagenet",
+   "model_weight_sha256": "53fc60c7badbf965c8b5725bdd717fc011d0f769091baaba0f435cc4be970016",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    1000,
+    43776
+   ],
+   "filenames": [
+    1000
+   ]
+  },
+  "created": "2026-10-04T05:01:46"
+ },
+ "F0__science__s2021__timesx.npz": {
+  "kind": "F0__science__s2021__timesx",
+  "sha256": "cb39e69719bcaf91ca3eb638f2514b9ab04651ef21fe2d79610f7d7ae27c1191",
+  "key": "570384b2d3351f5fc013ad3192ed465a43f377658ebfd7a85c6e87e752b0829d",
+  "key_components": {
+   "kind": "F0__science__s2021__timesx",
+   "model_weight_sha256": "53fc60c7badbf965c8b5725bdd717fc011d0f769091baaba0f435cc4be970016",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    90,
+    43776
+   ],
+   "sample_ids": [
+    90
+   ],
+   "var_keys": [
+    90
+   ]
+  },
+  "created": "2026-10-04T05:01:48"
+ },
+ "F0__shopping__s2021__imagenet.npz": {
+  "kind": "F0__shopping__s2021__imagenet",
+  "sha256": "569611a10cbc12211840fe6b5d7160c8e6d4925788c24c73d27f1e5d9ee9d352",
+  "key": "3e9c603e578306c8578bf0008975593ec5eca678017d6117944b8dc8a42e85c1",
+  "key_components": {
+   "kind": "F0__shopping__s2021__imagenet",
+   "model_weight_sha256": "6742e1d6307d9dc41d210284687ca1386e507f06786e5df06c5bed60a5e396db",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    1000,
+    43776
+   ],
+   "filenames": [
+    1000
+   ]
+  },
+  "created": "2026-10-04T05:02:06"
+ },
+ "F0__shopping__s2021__timesx.npz": {
+  "kind": "F0__shopping__s2021__timesx",
+  "sha256": "7b6c41856b109fdf60a248c47e124ff16dcda82b90c268754ea6e4cb76700b6a",
+  "key": "9e49fc3c8f811924d53629e52872eb88394638a905941a650dba07bd7af4f259",
+  "key_components": {
+   "kind": "F0__shopping__s2021__timesx",
+   "model_weight_sha256": "6742e1d6307d9dc41d210284687ca1386e507f06786e5df06c5bed60a5e396db",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    90,
+    43776
+   ],
+   "sample_ids": [
+    90
+   ],
+   "var_keys": [
+    90
+   ]
+  },
+  "created": "2026-10-04T05:02:08"
+ },
+ "F0__society__s2021__imagenet.npz": {
+  "kind": "F0__society__s2021__imagenet",
+  "sha256": "578ee7df2bc499eb9efdfdf3eeeb0c210077188d8900ec977437292587524a0f",
+  "key": "e09317d02c447b60a2889549964fe4cd587a9d7e4f7783f41612d0c1b9ca8fa8",
+  "key_components": {
+   "kind": "F0__society__s2021__imagenet",
+   "model_weight_sha256": "f254f815f9eb8f6981964e2c49191d886a389df0df30c8714fd34ad9d71bbeed",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    1000,
+    43776
+   ],
+   "filenames": [
+    1000
+   ]
+  },
+  "created": "2026-10-04T05:02:26"
+ },
+ "F0__society__s2021__timesx.npz": {
+  "kind": "F0__society__s2021__timesx",
+  "sha256": "18e7acd1bb9b1cb52d50cf5c250f5e9c81f2d638a3f17b8aa37e2239bde291b6",
+  "key": "0a7ebd022ef758d39d70d53c2c2922824387123d26dc744aa9a876da4cb3bb06",
+  "key_components": {
+   "kind": "F0__society__s2021__timesx",
+   "model_weight_sha256": "f254f815f9eb8f6981964e2c49191d886a389df0df30c8714fd34ad9d71bbeed",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    90,
+    43776
+   ],
+   "sample_ids": [
+    90
+   ],
+   "var_keys": [
+    90
+   ]
+  },
+  "created": "2026-10-04T05:02:28"
+ },
+ "F0__traffic__s2021__imagenet.npz": {
+  "kind": "F0__traffic__s2021__imagenet",
+  "sha256": "358b0ecc6a1cdaf619e92aaa7c4acc72a60dd8de1fd2827c5417f6a378e4670e",
+  "key": "54233bd74c371b78f4b3c75bb3b263ee51cadb6d230aab0621748a255c113a08",
+  "key_components": {
+   "kind": "F0__traffic__s2021__imagenet",
+   "model_weight_sha256": "376f6ddac26fcf9baf1bbb1ef43748db980d88b0600808c6671a1737ae29b1bf",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    1000,
+    43776
+   ],
+   "filenames": [
+    1000
+   ]
+  },
+  "created": "2026-10-04T05:02:46"
+ },
+ "F0__traffic__s2021__timesx.npz": {
+  "kind": "F0__traffic__s2021__timesx",
+  "sha256": "5f7d194c8d18c6800df2a3032d34bde1d12dd851c3ea38d1fc4fc8f442ae4700",
+  "key": "82c3e23963bd3fde98251255bd0693bc14414a24b075e310e7ddeea15756f672",
+  "key_components": {
+   "kind": "F0__traffic__s2021__timesx",
+   "model_weight_sha256": "376f6ddac26fcf9baf1bbb1ef43748db980d88b0600808c6671a1737ae29b1bf",
+   "dtype": "float32",
+   "batch": 64,
+   "flat_dim": 43776,
+   "mae_base_ckpt": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "data_cache": "f83924d9f459da096c45ccd880f204efc095fbed5513794a5d706d71371881aa",
+   "split_manifest": "b47feebfe5e7fbf6c650ce2d23735794d853b515774c43c658724cf8328363a9",
+   "ln_selection": "5d8bd3169930b6853ee3fc52ee51809b8692c99bde076972885140260c0f23cf",
+   "imagenet_list": "84a885e90f8fcd681b7b7ff9b0c231c70f23274d5f76092b99dc8a873d980e0a",
+   "exp009_config": "43d94493e4fcb131f78491d185511d93",
+   "exp009_code": {
+    "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+    "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+    "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+    "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+    "common.py": "7031429878cc0952bb1173c10471cfda",
+    "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566",
+    "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93"
+   },
+   "reused_sources": {
+    "ln_common": "371c6f462e37fda0b26e1cb19c921b95ed234f56052a890f2d29d1b62b37dad7",
+    "ln_trainer": "e33518e43b6be990a53f2fb4bce744d60006272d4b06193bb90f0f3f75721fb0",
+    "ln_augmentation": "2a3047b71df6aca69defa1e59d550c59f07b1e4bdc8cd925fc3f437b5d6702fa",
+    "timesx_data": "a27ec66e9b7e5c11bf95dba8bafc5f7d6b3cfdd6f2683a9774e5da80577a2cfa",
+    "featvis_ltfs_common": "f81e6ce1f5600caf40447b8defb19c8f848525fa379507e3db294008969cda73",
+    "featvis_common": "6ce172054af68ad47517b1a992bfaed0032fb843c61e97be19c4cacb7ff5de47",
+    "visionts/__init__.py": "34e05cd660c49dec71c6b534b414d2c9dcdcc0568bb374ce49b2fb25519c3582",
+    "visionts/model.py": "2ce8c017774930d386522a96312b42340a979f79fbbcd82205de613090b01030",
+    "visionts/models_mae.py": "658870b4e7cab6d9527dda13aac05e2eda5b37ec9a91de8e37bb1bea310e7d41",
+    "visionts/pos_embed.py": "b9f261e993f5fcb15192bb526dac2f731ddacbcde49b1b40b856af2bb07f2346",
+    "visionts/util.py": "660936de607a4e68fa9987a6580575ec830059e0fbecdc8c106adc1e20c0c9a1"
+   }
+  },
+  "shape": {
+   "feats": [
+    90,
+    43776
+   ],
+   "sample_ids": [
+    90
+   ],
+   "var_keys": [
+    90
+   ]
+  },
+  "created": "2026-10-04T05:02:49"
+ }
+}

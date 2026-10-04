@@ -1,0 +1,29 @@
+{
+ "domain": "SpecialtyAndAdvancedMaterials",
+ "state": "F0_s2021",
+ "tsne": {
+  "n_components": 2,
+  "perplexity": 30,
+  "learning_rate": 200,
+  "init": "pca",
+  "early_exaggeration": 12,
+  "max_iter": 1000,
+  "random_state": 2021,
+  "metric": "euclidean",
+  "method": "barnes_hut",
+  "angle": 0.5
+ },
+ "kl_divergence": 1.4668786525726318,
+ "n_iter": 999,
+ "n_imagenet": 1000,
+ "n_timesx": 117,
+ "sklearn_version": "1.9.1",
+ "threads": "1 per process",
+ "fit_key": "34aefbdd60b8776fdf464604e56e5d7c8ce9c15771fc76c1b690031f66877cbf",
+ "inputs": {
+  "imagenet_sha": "4318a135941a4a05ebbfa32e34d55890e960ea3d670659abef42c4cff13a0bfc",
+  "timesx_sha": "722008fa630d3ee3aeaa4c8c3b900ff39fb5415ee75987f4e88ecb027a7100da"
+ },
+ "wall_secs": 14.0,
+ "peak_rss_mib": 867.9
+}

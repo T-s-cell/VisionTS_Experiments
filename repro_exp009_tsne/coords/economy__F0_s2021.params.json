@@ -1,0 +1,29 @@
+{
+ "domain": "economy",
+ "state": "F0_s2021",
+ "tsne": {
+  "n_components": 2,
+  "perplexity": 30,
+  "learning_rate": 200,
+  "init": "pca",
+  "early_exaggeration": 12,
+  "max_iter": 1000,
+  "random_state": 2021,
+  "metric": "euclidean",
+  "method": "barnes_hut",
+  "angle": 0.5
+ },
+ "kl_divergence": 1.5128282308578491,
+ "n_iter": 999,
+ "n_imagenet": 1000,
+ "n_timesx": 90,
+ "sklearn_version": "1.9.1",
+ "threads": "1 per process",
+ "fit_key": "7c1a06961a9dad3df9612f27e46a3fb8174957a20ff26aeb296ba86c88227b4a",
+ "inputs": {
+  "imagenet_sha": "692a5d04b5b4b4408f61d514f6b95a76e92ede7ba2d5a439f667c8bb1b6d7ab0",
+  "timesx_sha": "10f463c2c6375767dc425ab18f55278952155ed677c79bb7b5b96ecdefb1cb65"
+ },
+ "wall_secs": 13.8,
+ "peak_rss_mib": 810.0
+}

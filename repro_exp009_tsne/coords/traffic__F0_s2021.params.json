@@ -1,0 +1,29 @@
+{
+ "domain": "traffic",
+ "state": "F0_s2021",
+ "tsne": {
+  "n_components": 2,
+  "perplexity": 30,
+  "learning_rate": 200,
+  "init": "pca",
+  "early_exaggeration": 12,
+  "max_iter": 1000,
+  "random_state": 2021,
+  "metric": "euclidean",
+  "method": "barnes_hut",
+  "angle": 0.5
+ },
+ "kl_divergence": 1.5055376291275024,
+ "n_iter": 999,
+ "n_imagenet": 1000,
+ "n_timesx": 90,
+ "sklearn_version": "1.9.1",
+ "threads": "1 per process",
+ "fit_key": "cfbc387ca7b0cf1554af8eca17325c2be7c28e310a45cca2cf942c22d79f9e9f",
+ "inputs": {
+  "imagenet_sha": "358b0ecc6a1cdaf619e92aaa7c4acc72a60dd8de1fd2827c5417f6a378e4670e",
+  "timesx_sha": "5f7d194c8d18c6800df2a3032d34bde1d12dd851c3ea38d1fc4fc8f442ae4700"
+ },
+ "wall_secs": 12.9,
+ "peak_rss_mib": 867.9
+}

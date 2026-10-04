@@ -1,0 +1,29 @@
+{
+ "domain": "EnergyAndFuels",
+ "state": "F0_s2021",
+ "tsne": {
+  "n_components": 2,
+  "perplexity": 30,
+  "learning_rate": 200,
+  "init": "pca",
+  "early_exaggeration": 12,
+  "max_iter": 1000,
+  "random_state": 2021,
+  "metric": "euclidean",
+  "method": "barnes_hut",
+  "angle": 0.5
+ },
+ "kl_divergence": 1.4376996755599976,
+ "n_iter": 999,
+ "n_imagenet": 1000,
+ "n_timesx": 171,
+ "sklearn_version": "1.9.1",
+ "threads": "1 per process",
+ "fit_key": "2b805c7fd3160faf6b0e0dad2442d740e11d9577ef0e811fec46e4ce32f8a104",
+ "inputs": {
+  "imagenet_sha": "aa1b853945bad072735e22acee48cdd4cd32df4e8dfd931061d1eae1706df3b7",
+  "timesx_sha": "58feb9f7dcc588cac06aa08129923c462a582bd74fce6397a8cfe8169d15b430"
+ },
+ "wall_secs": 14.5,
+ "peak_rss_mib": 792.0
+}

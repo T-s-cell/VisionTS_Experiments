@@ -1,0 +1,29 @@
+{
+ "domain": "arts",
+ "state": "F0_s2021",
+ "tsne": {
+  "n_components": 2,
+  "perplexity": 30,
+  "learning_rate": 200,
+  "init": "pca",
+  "early_exaggeration": 12,
+  "max_iter": 1000,
+  "random_state": 2021,
+  "metric": "euclidean",
+  "method": "barnes_hut",
+  "angle": 0.5
+ },
+ "kl_divergence": 1.447357177734375,
+ "n_iter": 999,
+ "n_imagenet": 1000,
+ "n_timesx": 151,
+ "sklearn_version": "1.9.1",
+ "threads": "1 per process",
+ "fit_key": "f8fd9fc11758aa00b13d65f9a4c1f07f2a34542ec7dede904034e7f61a44c445",
+ "inputs": {
+  "imagenet_sha": "c1e47b4096a29378e433faf217888221cafe5d11e84598ba4c8cc6b79f5e3fa6",
+  "timesx_sha": "1136738d3b1d789f27682f06b1dffe4e3bb652c05711f1634cdf34801cbe53ac"
+ },
+ "wall_secs": 14.4,
+ "peak_rss_mib": 866.4
+}

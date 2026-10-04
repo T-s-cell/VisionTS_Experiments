@@ -1,0 +1,120 @@
+{
+ "protocol_version": "exp009_tsne_v1",
+ "created": "2026-10-04T13:49:00",
+ "mode": "postaudit re-attestation (full 19 domains, FINAL files)",
+ "changelog": "audit/postaudit_changelog.json",
+ "all_ok": true,
+ "checks": {
+  "completeness.z0_full": {
+   "status": "OK",
+   "n_windows": 2474,
+   "n_vars": 190,
+   "n_domains": 19
+  },
+  "completeness.counts": {
+   "status": "OK",
+   "n_windows": 2474,
+   "n_vars": 190,
+   "n_domains": 19
+  },
+  "completeness.domain_slices": {
+   "status": "OK",
+   "mismatches": []
+  },
+  "completeness.slices_reassemble_full": {
+   "status": "OK",
+   "mode": "full"
+  },
+  "checkpoints.binding": {
+   "status": "OK",
+   "problems": [],
+   "n": 19
+  },
+  "features.shape_finite_provenance": {
+   "status": "OK",
+   "problems": [],
+   "n_artifacts": 40
+  },
+  "hook_equivalence": {
+   "status": "OK",
+   "n_models": 20,
+   "need": 20,
+   "note": "captured vision_model.norm == direct forward_encoder (bitwise); instrumentation never changed predictions"
+  },
+  "immutability.exp009_code_generation_inputs": {
+   "status": "OK",
+   "declared": [
+    "03_make_figures.py",
+    "04_audit_report.py",
+    "configs/exp009.yaml"
+   ],
+   "added": [],
+   "removed": [],
+   "changed_undeclared": [],
+   "baseline_matches_changelog_old_sha": true,
+   "note": "every generation-time input byte-identical to baseline.json except the changelog-declared files (whose baseline hashes themselves match the declared old_sha256)"
+  },
+  "immutability.reused": {
+   "status": "OK",
+   "added": [],
+   "removed": [],
+   "changed": []
+  },
+  "immutability.visionts": {
+   "status": "OK",
+   "added": [],
+   "removed": [],
+   "changed": []
+  },
+  "immutability.ckpt": {
+   "status": "OK",
+   "added": [],
+   "removed": [],
+   "changed": []
+  },
+  "immutability.ln_inputs": {
+   "status": "OK",
+   "added": [],
+   "removed": [],
+   "changed": []
+  },
+  "immutability.ln_predictions": {
+   "status": "OK",
+   "added": [],
+   "removed": [],
+   "changed": []
+  },
+  "postaudit.declared_changes_verified": {
+   "status": "OK",
+   "n_declared": 3,
+   "problems": [],
+   "note": "old/new/diff hashes all verified; config diff confined to figures-section keys (presentation-only)"
+  },
+  "postaudit.preserved_records_untouched": {
+   "status": "OK",
+   "n": 3,
+   "problems": [],
+   "note": "generation-time baseline / cache index / original audit report are byte-identical to their pre-restyle values"
+  },
+  "postaudit.cache_key_generation_binding": {
+   "status": "OK",
+   "n_artifacts": 40,
+   "problems": [],
+   "n_problems": 0,
+   "note": "all cache keys reproducible from recorded components and bound to the generation-time code/config fingerprints"
+  },
+  "coords.rows_finite_fresh": {
+   "status": "OK",
+   "problems": []
+  },
+  "metrics.z0_matches_exp004": {
+   "status": "OK",
+   "problems": [],
+   "rule": "window(d-normalized) -> var mean -> var-equal in domain"
+  },
+  "full_coverage": {
+   "status": "OK",
+   "n": 19
+  }
+ }
+}

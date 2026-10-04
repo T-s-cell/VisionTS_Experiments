@@ -1,0 +1,29 @@
+{
+ "domain": "shopping",
+ "state": "F0_s2021",
+ "tsne": {
+  "n_components": 2,
+  "perplexity": 30,
+  "learning_rate": 200,
+  "init": "pca",
+  "early_exaggeration": 12,
+  "max_iter": 1000,
+  "random_state": 2021,
+  "metric": "euclidean",
+  "method": "barnes_hut",
+  "angle": 0.5
+ },
+ "kl_divergence": 1.5087612867355347,
+ "n_iter": 999,
+ "n_imagenet": 1000,
+ "n_timesx": 90,
+ "sklearn_version": "1.9.1",
+ "threads": "1 per process",
+ "fit_key": "7bcc9bfa734246e32a699c6715dec2a5ee06c98cf84727f01b622e942b9a9d57",
+ "inputs": {
+  "imagenet_sha": "569611a10cbc12211840fe6b5d7160c8e6d4925788c24c73d27f1e5d9ee9d352",
+  "timesx_sha": "7b6c41856b109fdf60a248c47e124ff16dcda82b90c268754ea6e4cb76700b6a"
+ },
+ "wall_secs": 14.0,
+ "peak_rss_mib": 817.8
+}

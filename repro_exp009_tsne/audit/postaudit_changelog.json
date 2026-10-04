@@ -1,0 +1,68 @@
+{
+  "protocol": "exp009_postaudit_changelog_v1",
+  "created": "2026-10-04T13:46:33",
+  "context": "特征提取与 38 次 t-SNE 及原审计（audit_report.json ALL OK）完成后，应用户要求于 2026-10-04 做了两轮纯绘图改动并扩展审计脚本。本文件衔接生成时记录与最终交付文件：老哈希原样保留，不覆盖。",
+  "generation_time_records": {
+    "audit_baseline": "audit/baseline.json（extract 开始时快照，原样保留）",
+    "feature_cache_index": "features/_cache_index.json（40 个特征产物的 SHA256+缓存键，原样保留）",
+    "fingerprint_source": "全部 40 个缓存条目的 key_components 生成指纹逐项一致（已验证 len(set)==1）"
+  },
+  "reconstruction_verification": "03/config 的生成时内容按编辑记录重建，双哈希验证逐字节精确：SHA256 == baseline 条目且 MD5 == 缓存键组件指纹（4/4 OK）；04 的生成时内容为编辑前快照（SHA256 == baseline）。",
+  "generation_fingerprints": {
+    "exp009_config_md5": "43d94493e4fcb131f78491d185511d93",
+    "exp009_code_md5": {
+      "01_extract_features.py": "38465236d5d6fb79f24f2382ba8e0390",
+      "02_run_tsne.py": "607a6d62e4e1e11fa07afbb9551bdb7b",
+      "03_make_figures.py": "e5a41f0dfc62792930958503d212aa6a",
+      "04_audit_report.py": "50d8cf8ef426080b676cb5c63dc9dbb8",
+      "common.py": "7031429878cc0952bb1173c10471cfda",
+      "configs/exp009.yaml": "43d94493e4fcb131f78491d185511d93",
+      "run_all.sh": "d7e7f7b84c88ceb405e86788f16c0566"
+    }
+  },
+  "changes": [
+    {
+      "file": "03_make_figures.py",
+      "scope": "figure_presentation_only",
+      "old_sha256": "bf1abe074b9a3ac3fd6203e6f348790b16e2f3253d7368487441f02cb89f0122",
+      "old_md5": "e5a41f0dfc62792930958503d212aa6a",
+      "new_sha256": "ff2ea27a41f79023f4578e890f6fc8875bf197da3f1a250c7834f9451fd58598",
+      "new_md5": "7a0323bb25fb1b98a67431834fbf3fd0",
+      "diff": "code_diff/03_make_figures_py.diff",
+      "diff_sha256": "a0f47741549fcb948db91ba2ba0501407c87313696865802f5e5f20beab4c1dc",
+      "summary": "edit1 (2026-10-04, 用户要求): ImageNet 参考点 s=5->16、lightgray->灰0.55、alpha 0.6->0.8; edit2 (2026-10-04, 用户要求): 题头改为各状态自己的排名与 MSE/MAE（Z0 图标 Z0 排名/指标，F0 图标 F0 排名/指标+ΔMSE%），新增 perf_table()（只读 EXP-004 预测 npz，复用 common.metrics_from_npz 与审计同口径），index.html 增排名/指标列。仅影响绘图展示，不触碰特征/坐标/t-SNE。"
+    },
+    {
+      "file": "configs/exp009.yaml",
+      "scope": "figure_presentation_only",
+      "old_sha256": "3cc77fdb4f0a070f879ba4dcb87b36fb7bdd0fcc57efb2f5864eca357259b879",
+      "old_md5": "43d94493e4fcb131f78491d185511d93",
+      "new_sha256": "4c71309ada64c76c669e72d3a72d7fffb6675d8120815c4f5154c545eca0827b",
+      "new_md5": "32e8c805c1534b37890848a043b4ceb6",
+      "diff": "code_diff/configs__exp009_yaml.diff",
+      "diff_sha256": "015a38d8f0bd3dfa0344adb22b104e14b68160623f54d70037a8bf12a3c1a604",
+      "summary": "figures.imagenet_style 说明同步 + 新增 figures.domain_rank_header；其余所有节（tsne/data/features/metrics/resources/checkpoint_binding 等）逐字节未变，不影响 01/02 计算路径。"
+    },
+    {
+      "file": "04_audit_report.py",
+      "scope": "audit_tooling_only",
+      "old_sha256": "7329621dbcdd14c57aeb832f8c3e2a8757887e0bd7e9ec33fdab55eec353cd01",
+      "old_md5": "50d8cf8ef426080b676cb5c63dc9dbb8",
+      "new_sha256": "20ecdd86c9518c7f7bcfd5a3d9325d9595c06e218623ffc9f93656c5c8d735d6",
+      "new_md5": "ff62ece106324674258921e5376b31b6",
+      "diff": "code_diff/04_audit_report_py.diff",
+      "diff_sha256": "06bfe14d4e6ef653e0eeff1d50d08b88320a10a116cea3c7682b58941bd463e2",
+      "summary": "新增 --postaudit 复核模式（声明制变更核验/保留记录校验/缓存键↔生成指纹绑定），输出 audit_report_final.json；原 audit_report.json 不覆盖。仅审计工具，不参与特征/t-SNE/绘图生成。"
+    }
+  ],
+  "preserved_records": {
+    "audit/baseline.json": "82dc8a9275b883159aee94882b7d120a9a3ed7313f0e9804402c36f5243a7917",
+    "features/_cache_index.json": "8c3734b92ac8a02b13e01298353e9aa43f599d0de0a9ff09df11c82b8b1d97dd",
+    "audit/audit_report.json": "3b8dc6647febce505d5b2e2ceb30b32728f4d0095cfb409917d87ecae275c4fe"
+  },
+  "reattestation": {
+    "command": "python 04_audit_report.py --postaudit",
+    "output": "audit/audit_report_final.json",
+    "guarantee": "特征/坐标/检查点/hook/指标检查按最终现状重算；exp009_code 不可变性改为声明制（未声明文件必须与基线逐字节一致）；缓存键必须可由记录组件复现并绑定生成时指纹。"
+  }
+}

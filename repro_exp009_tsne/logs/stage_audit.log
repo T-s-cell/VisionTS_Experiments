@@ -1,0 +1,61 @@
+[audit] OK   completeness.z0_full: {"n_windows": 2474, "n_vars": 190, "n_domains": 19}
+[audit] OK   completeness.counts: {"n_windows": 2474, "n_vars": 190, "n_domains": 19}
+[audit] OK   completeness.domain_slices: {"mismatches": []}
+[audit] FAIL completeness.slices_reassemble_full: {"mode": "subset"}
+[audit] OK   checkpoints.binding: {"problems": [], "n": 1}
+[audit] OK   features.shape_finite_provenance: {"problems": [], "n_artifacts": 4}
+[audit] FAIL hook_equivalence: {"n_models": 4, "note": "captured vision_model.norm == direct forward_encoder (bitwise); instrumentation never changed predictions"}
+[audit] FAIL immutability.baseline_diff: {"n_entries": 314, "added": [], "removed": [], "changed": ["exp009_code/01_extract_features.py", "exp009_code/02_run_tsne.py", "exp009_code/04_audit_report.py"]}
+[audit] OK   coords.rows_finite_fresh: {"problems": []}
+[audit] OK   metrics.z0_matches_exp004: {"problems": [], "rule": "window(d-normalized) -> var mean -> var-equal in domain"}
+[audit] ALL PROBLEMS — /dev_data/wlt/VisionTS_Experiments/repro_exp009_tsne/audit/audit_report.json
+[audit] OK   completeness.z0_full: {"n_windows": 2474, "n_vars": 190, "n_domains": 19}
+[audit] OK   completeness.counts: {"n_windows": 2474, "n_vars": 190, "n_domains": 19}
+[audit] OK   completeness.domain_slices: {"mismatches": []}
+[audit] OK   completeness.slices_reassemble_full: {"mode": "subset", "note": "deferred to full mode"}
+[audit] OK   checkpoints.binding: {"problems": [], "n": 1}
+[audit] OK   features.shape_finite_provenance: {"problems": [], "n_artifacts": 4}
+[audit] OK   hook_equivalence: {"n_models": 4, "need": 2, "note": "subset campaign; full run must cover all 20 models"}
+[audit] OK   immutability.exp009_code: {"n_entries": 314, "added": [], "removed": [], "changed": ["exp009_code/01_extract_features.py", "exp009_code/02_run_tsne.py", "exp009_code/04_audit_report.py"], "note": "informational in subset mode: code iterates between campaigns; the full run rebuilds the baseline at extract start"}
+[audit] OK   immutability.reused: {"added": [], "removed": [], "changed": []}
+[audit] OK   immutability.visionts: {"added": [], "removed": [], "changed": []}
+[audit] OK   immutability.ckpt: {"added": [], "removed": [], "changed": []}
+[audit] OK   immutability.ln_inputs: {"added": [], "removed": [], "changed": []}
+[audit] OK   immutability.ln_predictions: {"added": [], "removed": [], "changed": []}
+[audit] OK   coords.rows_finite_fresh: {"problems": []}
+[audit] OK   metrics.z0_matches_exp004: {"problems": [], "rule": "window(d-normalized) -> var mean -> var-equal in domain"}
+[audit] ALL OK — /dev_data/wlt/VisionTS_Experiments/repro_exp009_tsne/audit/audit_report.json
+[audit] OK   completeness.z0_full: {"n_windows": 2474, "n_vars": 190, "n_domains": 19}
+[audit] OK   completeness.counts: {"n_windows": 2474, "n_vars": 190, "n_domains": 19}
+[audit] OK   completeness.domain_slices: {"mismatches": []}
+[audit] OK   completeness.slices_reassemble_full: {"mode": "full"}
+[audit] OK   checkpoints.binding: {"problems": [], "n": 19}
+[audit] OK   features.shape_finite_provenance: {"problems": [], "n_artifacts": 40}
+[audit] FAIL hook_equivalence: {"n_models": 19, "need": 20, "note": "captured vision_model.norm == direct forward_encoder (bitwise); instrumentation never changed predictions"}
+[audit] OK   immutability.exp009_code: {"n_entries": 314, "added": [], "removed": [], "changed": [], "note": null}
+[audit] OK   immutability.reused: {"added": [], "removed": [], "changed": []}
+[audit] OK   immutability.visionts: {"added": [], "removed": [], "changed": []}
+[audit] OK   immutability.ckpt: {"added": [], "removed": [], "changed": []}
+[audit] OK   immutability.ln_inputs: {"added": [], "removed": [], "changed": []}
+[audit] OK   immutability.ln_predictions: {"added": [], "removed": [], "changed": []}
+[audit] OK   coords.rows_finite_fresh: {"problems": []}
+[audit] OK   metrics.z0_matches_exp004: {"problems": [], "rule": "window(d-normalized) -> var mean -> var-equal in domain"}
+[audit] OK   full_coverage: {"n": 19}
+[audit] ALL PROBLEMS — /dev_data/wlt/VisionTS_Experiments/repro_exp009_tsne/audit/audit_report.json
+[audit] OK   completeness.z0_full: {"n_windows": 2474, "n_vars": 190, "n_domains": 19}
+[audit] OK   completeness.counts: {"n_windows": 2474, "n_vars": 190, "n_domains": 19}
+[audit] OK   completeness.domain_slices: {"mismatches": []}
+[audit] OK   completeness.slices_reassemble_full: {"mode": "full"}
+[audit] OK   checkpoints.binding: {"problems": [], "n": 19}
+[audit] OK   features.shape_finite_provenance: {"problems": [], "n_artifacts": 40}
+[audit] OK   hook_equivalence: {"n_models": 20, "need": 20, "note": "captured vision_model.norm == direct forward_encoder (bitwise); instrumentation never changed predictions"}
+[audit] OK   immutability.exp009_code: {"n_entries": 314, "added": [], "removed": [], "changed": [], "note": null}
+[audit] OK   immutability.reused: {"added": [], "removed": [], "changed": []}
+[audit] OK   immutability.visionts: {"added": [], "removed": [], "changed": []}
+[audit] OK   immutability.ckpt: {"added": [], "removed": [], "changed": []}
+[audit] OK   immutability.ln_inputs: {"added": [], "removed": [], "changed": []}
+[audit] OK   immutability.ln_predictions: {"added": [], "removed": [], "changed": []}
+[audit] OK   coords.rows_finite_fresh: {"problems": []}
+[audit] OK   metrics.z0_matches_exp004: {"problems": [], "rule": "window(d-normalized) -> var mean -> var-equal in domain"}
+[audit] OK   full_coverage: {"n": 19}
+[audit] ALL OK — /dev_data/wlt/VisionTS_Experiments/repro_exp009_tsne/audit/audit_report.json

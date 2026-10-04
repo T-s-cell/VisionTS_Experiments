@@ -1,0 +1,420 @@
+[tsne] {"event": "plan", "fits": 2, "jobs": 1, "note": "wall times are estimates; parallelism set from small trial"}
+Traceback (most recent call last):
+  File "/dev_data/wlt/VisionTS_Experiments/repro_exp009_tsne/02_run_tsne.py", line 170, in <module>
+    main()
+  File "/dev_data/wlt/VisionTS_Experiments/repro_exp009_tsne/02_run_tsne.py", line 156, in main
+    r = run_fit(t)
+        ^^^^^^^^^^
+  File "/dev_data/wlt/VisionTS_Experiments/repro_exp009_tsne/02_run_tsne.py", line 97, in run_fit
+    X_img, fnames, X_tsx, sids, vks = load_xy(state, domain)
+                                      ^^^^^^^^^^^^^^^^^^^^^^
+  File "/dev_data/wlt/VisionTS_Experiments/repro_exp009_tsne/02_run_tsne.py", line 80, in load_xy
+    assert X_tsx.shape[0] == len(sids) > 0
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+[tsne] {"event": "plan", "fits": 2, "jobs": 1, "note": "wall times are estimates; parallelism set from small trial"}
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1090 samples in 0.018s...
+[t-SNE] Computed neighbors for 1090 samples in 3.489s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1090
+[t-SNE] Computed conditional probabilities for sample 1090 / 1090
+[t-SNE] Mean sigma: 32.703749
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 86.137688
+[t-SNE] KL divergence after 1000 iterations: 1.440587
+[tsne] {"domain": "climate", "state": "Z0", "event": "fit", "n": 1090, "kl": 1.440586805343628, "n_iter": 999, "secs": 14.7, "peak_rss_mib": 792.6}
+Traceback (most recent call last):
+  File "/dev_data/wlt/VisionTS_Experiments/repro_exp009_tsne/02_run_tsne.py", line 170, in <module>
+    main()
+  File "/dev_data/wlt/VisionTS_Experiments/repro_exp009_tsne/02_run_tsne.py", line 156, in main
+    r = run_fit(t)
+        ^^^^^^^^^^
+  File "/dev_data/wlt/VisionTS_Experiments/repro_exp009_tsne/02_run_tsne.py", line 88, in run_fit
+    key, comps = fit_key(domain, state)
+                 ^^^^^^^^^^^^^^^^^^^^^^
+  File "/dev_data/wlt/VisionTS_Experiments/repro_exp009_tsne/02_run_tsne.py", line 61, in fit_key
+    "imagenet_sha": feats_sha(f"{tag}__imagenet.npz"),
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/dev_data/wlt/VisionTS_Experiments/repro_exp009_tsne/02_run_tsne.py", line 52, in feats_sha
+    assert os.path.isfile(p), f"missing feature artifact: {name}"
+           ^^^^^^^^^^^^^^^^^
+AssertionError: missing feature artifact: F0_s2021__imagenet.npz
+[tsne] {"event": "plan", "fits": 2, "jobs": 1, "note": "wall times are estimates; parallelism set from small trial"}
+[tsne] {"domain": "climate", "state": "Z0", "event": "skip"}
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1090 samples in 0.019s...
+[t-SNE] Computed neighbors for 1090 samples in 3.393s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1090
+[t-SNE] Computed conditional probabilities for sample 1090 / 1090
+[t-SNE] Mean sigma: 32.609364
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 85.331505
+[t-SNE] KL divergence after 1000 iterations: 1.451791
+[tsne] {"domain": "climate", "state": "F0_s2021", "event": "fit", "n": 1090, "kl": 1.4517914056777954, "n_iter": 999, "secs": 12.5, "peak_rss_mib": 757.6}
+[tsne] {"event": "tsne_complete", "fits": 2}
+[tsne] {"event": "plan", "fits": 38, "jobs": 8, "note": "wall times are estimates; parallelism set from small trial"}
+[tsne] {"domain": "EnergyAndFuels", "state": "F0_s2021", "event": "fit", "n": 1171, "kl": 1.4376996755599976, "n_iter": 999, "secs": 14.5, "peak_rss_mib": 792.0}
+[tsne] {"domain": "CropsAndStaples", "state": "F0_s2021", "event": "fit", "n": 1188, "kl": 1.424437403678894, "n_iter": 999, "secs": 14.6, "peak_rss_mib": 801.3}
+[tsne] {"domain": "Currency", "state": "F0_s2021", "event": "fit", "n": 1180, "kl": 1.410781741142273, "n_iter": 999, "secs": 14.8, "peak_rss_mib": 799.6}
+[tsne] {"domain": "LivestockAndFoodProducts", "state": "F0_s2021", "event": "fit", "n": 1318, "kl": 1.393966794013977, "n_iter": 999, "secs": 16.8, "peak_rss_mib": 867.9}
+[tsne] {"domain": "Currency", "state": "Z0", "event": "fit", "n": 1180, "kl": 1.4064135551452637, "n_iter": 999, "secs": 17.4, "peak_rss_mib": 799.6}
+[tsne] {"domain": "CropsAndStaples", "state": "Z0", "event": "fit", "n": 1188, "kl": 1.4404971599578857, "n_iter": 999, "secs": 18.0, "peak_rss_mib": 801.9}
+[tsne] {"domain": "EnergyAndFuels", "state": "Z0", "event": "fit", "n": 1171, "kl": 1.4227476119995117, "n_iter": 999, "secs": 18.1, "peak_rss_mib": 799.0}
+[tsne] {"domain": "LivestockAndFoodProducts", "state": "Z0", "event": "fit", "n": 1318, "kl": 1.4154258966445923, "n_iter": 999, "secs": 19.9, "peak_rss_mib": 866.4}
+[tsne] {"domain": "RawMaterialsAndConstruction", "state": "F0_s2021", "event": "fit", "n": 1172, "kl": 1.412973403930664, "n_iter": 999, "secs": 14.3, "peak_rss_mib": 810.0}
+[tsne] {"domain": "climate", "state": "Z0", "event": "skip"}
+[tsne] {"domain": "SpecialtyAndAdvancedMaterials", "state": "F0_s2021", "event": "fit", "n": 1117, "kl": 1.4668786525726318, "n_iter": 999, "secs": 14.0, "peak_rss_mib": 867.9}
+[tsne] {"domain": "climate", "state": "F0_s2021", "event": "skip"}
+[tsne] {"domain": "RawMaterialsAndConstruction", "state": "Z0", "event": "fit", "n": 1172, "kl": 1.4103249311447144, "n_iter": 999, "secs": 16.6, "peak_rss_mib": 814.7}
+[tsne] {"domain": "SpecialtyAndAdvancedMaterials", "state": "Z0", "event": "fit", "n": 1117, "kl": 1.4879577159881592, "n_iter": 999, "secs": 16.5, "peak_rss_mib": 799.6}
+[tsne] {"domain": "StrategicAndHighValueMaterials", "state": "F0_s2021", "event": "fit", "n": 1178, "kl": 1.411094307899475, "n_iter": 999, "secs": 15.7, "peak_rss_mib": 815.9}
+[tsne] {"domain": "arts", "state": "F0_s2021", "event": "fit", "n": 1151, "kl": 1.447357177734375, "n_iter": 999, "secs": 14.4, "peak_rss_mib": 866.4}
+[tsne] {"domain": "StrategicAndHighValueMaterials", "state": "Z0", "event": "fit", "n": 1178, "kl": 1.4211422204971313, "n_iter": 999, "secs": 17.4, "peak_rss_mib": 805.1}
+[tsne] {"domain": "arts", "state": "Z0", "event": "fit", "n": 1151, "kl": 1.4449551105499268, "n_iter": 999, "secs": 17.3, "peak_rss_mib": 801.0}
+[tsne] {"domain": "economy", "state": "F0_s2021", "event": "fit", "n": 1090, "kl": 1.5128282308578491, "n_iter": 999, "secs": 13.8, "peak_rss_mib": 810.0}
+[tsne] {"domain": "electronic_technology", "state": "F0_s2021", "event": "fit", "n": 1090, "kl": 1.4734402894973755, "n_iter": 999, "secs": 14.0, "peak_rss_mib": 799.6}
+[tsne] {"domain": "economy", "state": "Z0", "event": "fit", "n": 1090, "kl": 1.4700098037719727, "n_iter": 999, "secs": 16.0, "peak_rss_mib": 867.9}
+[tsne] {"domain": "finance", "state": "F0_s2021", "event": "fit", "n": 1090, "kl": 1.4483778476715088, "n_iter": 999, "secs": 13.8, "peak_rss_mib": 866.4}
+[tsne] {"domain": "electronic_technology", "state": "Z0", "event": "fit", "n": 1090, "kl": 1.5249059200286865, "n_iter": 999, "secs": 16.1, "peak_rss_mib": 814.7}
+[tsne] {"domain": "pets", "state": "F0_s2021", "event": "fit", "n": 1090, "kl": 1.5234042406082153, "n_iter": 999, "secs": 14.2, "peak_rss_mib": 801.0}
+[tsne] {"domain": "finance", "state": "Z0", "event": "fit", "n": 1090, "kl": 1.4581094980239868, "n_iter": 999, "secs": 16.3, "peak_rss_mib": 835.6}
+[tsne] {"domain": "pets", "state": "Z0", "event": "fit", "n": 1090, "kl": 1.475324034690857, "n_iter": 999, "secs": 16.3, "peak_rss_mib": 817.8}
+[tsne] {"domain": "public_health", "state": "F0_s2021", "event": "fit", "n": 1090, "kl": 1.450612187385559, "n_iter": 999, "secs": 13.3, "peak_rss_mib": 799.6}
+[tsne] {"domain": "public_health", "state": "Z0", "event": "fit", "n": 1090, "kl": 1.4371143579483032, "n_iter": 999, "secs": 15.6, "peak_rss_mib": 831.6}
+[tsne] {"domain": "public_policy", "state": "F0_s2021", "event": "fit", "n": 1099, "kl": 1.4321010112762451, "n_iter": 999, "secs": 13.6, "peak_rss_mib": 866.4}
+[tsne] {"domain": "public_policy", "state": "Z0", "event": "fit", "n": 1099, "kl": 1.4415397644042969, "n_iter": 999, "secs": 15.9, "peak_rss_mib": 867.9}
+[tsne] {"domain": "science", "state": "F0_s2021", "event": "fit", "n": 1090, "kl": 1.5170234441757202, "n_iter": 999, "secs": 14.4, "peak_rss_mib": 801.0}
+[tsne] {"domain": "science", "state": "Z0", "event": "fit", "n": 1090, "kl": 1.4689419269561768, "n_iter": 999, "secs": 16.0, "peak_rss_mib": 814.7}
+[tsne] {"domain": "shopping", "state": "F0_s2021", "event": "fit", "n": 1090, "kl": 1.5087612867355347, "n_iter": 999, "secs": 14.0, "peak_rss_mib": 817.8}
+[tsne] {"domain": "shopping", "state": "Z0", "event": "fit", "n": 1090, "kl": 1.4998657703399658, "n_iter": 999, "secs": 16.5, "peak_rss_mib": 835.7}
+[tsne] {"domain": "society", "state": "F0_s2021", "event": "fit", "n": 1090, "kl": 1.507065773010254, "n_iter": 999, "secs": 13.1, "peak_rss_mib": 831.6}
+[tsne] {"domain": "society", "state": "Z0", "event": "fit", "n": 1090, "kl": 1.4518030881881714, "n_iter": 999, "secs": 15.5, "peak_rss_mib": 809.3}
+[tsne] {"domain": "traffic", "state": "F0_s2021", "event": "fit", "n": 1090, "kl": 1.5055376291275024, "n_iter": 999, "secs": 12.9, "peak_rss_mib": 867.9}
+[tsne] {"domain": "traffic", "state": "Z0", "event": "fit", "n": 1090, "kl": 1.4585493803024292, "n_iter": 999, "secs": 15.0, "peak_rss_mib": 866.4}
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1180 samples in 0.024s...
+[t-SNE] Computed neighbors for 1180 samples in 4.350s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1180
+[t-SNE] Computed conditional probabilities for sample 1180 / 1180
+[t-SNE] Mean sigma: 29.506142
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 80.945717
+[t-SNE] KL divergence after 1000 iterations: 1.406414
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1178 samples in 0.023s...
+[t-SNE] Computed neighbors for 1178 samples in 4.324s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1178
+[t-SNE] Computed conditional probabilities for sample 1178 / 1178
+[t-SNE] Mean sigma: 28.446866
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 81.860451
+[t-SNE] KL divergence after 1000 iterations: 1.421142
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1090 samples in 0.022s...
+[t-SNE] Computed neighbors for 1090 samples in 3.741s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1090
+[t-SNE] Computed conditional probabilities for sample 1090 / 1090
+[t-SNE] Mean sigma: 32.706047
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 84.319420
+[t-SNE] KL divergence after 1000 iterations: 1.475324
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1090 samples in 0.021s...
+[t-SNE] Computed neighbors for 1090 samples in 3.747s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1090
+[t-SNE] Computed conditional probabilities for sample 1090 / 1090
+[t-SNE] Mean sigma: 32.532198
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 86.378090
+[t-SNE] KL divergence after 1000 iterations: 1.508761
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1171 samples in 0.022s...
+[t-SNE] Computed neighbors for 1171 samples in 4.201s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1171
+[t-SNE] Computed conditional probabilities for sample 1171 / 1171
+[t-SNE] Mean sigma: 30.303289
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 82.872528
+[t-SNE] KL divergence after 1000 iterations: 1.437700
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1172 samples in 0.021s...
+[t-SNE] Computed neighbors for 1172 samples in 4.211s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1172
+[t-SNE] Computed conditional probabilities for sample 1172 / 1172
+[t-SNE] Mean sigma: 30.018295
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 85.449524
+[t-SNE] KL divergence after 1000 iterations: 1.410325
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1090 samples in 0.022s...
+[t-SNE] Computed neighbors for 1090 samples in 3.727s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1090
+[t-SNE] Computed conditional probabilities for sample 1090 / 1090
+[t-SNE] Mean sigma: 31.332834
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 87.171638
+[t-SNE] KL divergence after 1000 iterations: 1.524906
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1090 samples in 0.021s...
+[t-SNE] Computed neighbors for 1090 samples in 3.698s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1090
+[t-SNE] Computed conditional probabilities for sample 1090 / 1090
+[t-SNE] Mean sigma: 31.520313
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 85.885437
+[t-SNE] KL divergence after 1000 iterations: 1.468942
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1188 samples in 0.023s...
+[t-SNE] Computed neighbors for 1188 samples in 4.410s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1188
+[t-SNE] Computed conditional probabilities for sample 1188 / 1188
+[t-SNE] Mean sigma: 29.391411
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 81.885384
+[t-SNE] KL divergence after 1000 iterations: 1.440497
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1178 samples in 0.023s...
+[t-SNE] Computed neighbors for 1178 samples in 4.308s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1178
+[t-SNE] Computed conditional probabilities for sample 1178 / 1178
+[t-SNE] Mean sigma: 28.670398
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 80.646111
+[t-SNE] KL divergence after 1000 iterations: 1.411094
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1090 samples in 0.022s...
+[t-SNE] Computed neighbors for 1090 samples in 3.823s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1090
+[t-SNE] Computed conditional probabilities for sample 1090 / 1090
+[t-SNE] Mean sigma: 31.033024
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 84.588799
+[t-SNE] KL divergence after 1000 iterations: 1.458109
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1090 samples in 0.021s...
+[t-SNE] Computed neighbors for 1090 samples in 3.833s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1090
+[t-SNE] Computed conditional probabilities for sample 1090 / 1090
+[t-SNE] Mean sigma: 32.561729
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 86.216568
+[t-SNE] KL divergence after 1000 iterations: 1.499866
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1188 samples in 0.022s...
+[t-SNE] Computed neighbors for 1188 samples in 4.325s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1188
+[t-SNE] Computed conditional probabilities for sample 1188 / 1188
+[t-SNE] Mean sigma: 29.502431
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 80.982849
+[t-SNE] KL divergence after 1000 iterations: 1.424437
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1172 samples in 0.021s...
+[t-SNE] Computed neighbors for 1172 samples in 4.101s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1172
+[t-SNE] Computed conditional probabilities for sample 1172 / 1172
+[t-SNE] Mean sigma: 30.223145
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 83.937263
+[t-SNE] KL divergence after 1000 iterations: 1.412973
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1090 samples in 0.020s...
+[t-SNE] Computed neighbors for 1090 samples in 3.695s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1090
+[t-SNE] Computed conditional probabilities for sample 1090 / 1090
+[t-SNE] Mean sigma: 32.206363
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 87.791115
+[t-SNE] KL divergence after 1000 iterations: 1.512828
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1090 samples in 0.021s...
+[t-SNE] Computed neighbors for 1090 samples in 3.663s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1090
+[t-SNE] Computed conditional probabilities for sample 1090 / 1090
+[t-SNE] Mean sigma: 32.247747
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 85.779091
+[t-SNE] KL divergence after 1000 iterations: 1.437114
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1090 samples in 0.020s...
+[t-SNE] Computed neighbors for 1090 samples in 3.647s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1090
+[t-SNE] Computed conditional probabilities for sample 1090 / 1090
+[t-SNE] Mean sigma: 31.807218
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 85.724297
+[t-SNE] KL divergence after 1000 iterations: 1.507066
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1318 samples in 0.039s...
+[t-SNE] Computed neighbors for 1318 samples in 5.497s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1318
+[t-SNE] Computed conditional probabilities for sample 1318 / 1318
+[t-SNE] Mean sigma: 27.193652
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 79.882195
+[t-SNE] KL divergence after 1000 iterations: 1.393967
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1117 samples in 0.021s...
+[t-SNE] Computed neighbors for 1117 samples in 3.850s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1117
+[t-SNE] Computed conditional probabilities for sample 1117 / 1117
+[t-SNE] Mean sigma: 32.528498
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 84.486588
+[t-SNE] KL divergence after 1000 iterations: 1.466879
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1090 samples in 0.022s...
+[t-SNE] Computed neighbors for 1090 samples in 3.749s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1090
+[t-SNE] Computed conditional probabilities for sample 1090 / 1090
+[t-SNE] Mean sigma: 32.215180
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 86.508301
+[t-SNE] KL divergence after 1000 iterations: 1.470010
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1099 samples in 0.022s...
+[t-SNE] Computed neighbors for 1099 samples in 3.728s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1099
+[t-SNE] Computed conditional probabilities for sample 1099 / 1099
+[t-SNE] Mean sigma: 31.969873
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 83.771126
+[t-SNE] KL divergence after 1000 iterations: 1.441540
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1090 samples in 0.021s...
+[t-SNE] Computed neighbors for 1090 samples in 3.600s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1090
+[t-SNE] Computed conditional probabilities for sample 1090 / 1090
+[t-SNE] Mean sigma: 31.664447
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 86.157791
+[t-SNE] KL divergence after 1000 iterations: 1.505538
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1318 samples in 0.026s...
+[t-SNE] Computed neighbors for 1318 samples in 5.550s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1318
+[t-SNE] Computed conditional probabilities for sample 1318 / 1318
+[t-SNE] Mean sigma: 26.881288
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 80.704239
+[t-SNE] KL divergence after 1000 iterations: 1.415426
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1151 samples in 0.022s...
+[t-SNE] Computed neighbors for 1151 samples in 4.169s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1151
+[t-SNE] Computed conditional probabilities for sample 1151 / 1151
+[t-SNE] Mean sigma: 29.674078
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 82.132858
+[t-SNE] KL divergence after 1000 iterations: 1.447357
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1090 samples in 0.023s...
+[t-SNE] Computed neighbors for 1090 samples in 3.810s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1090
+[t-SNE] Computed conditional probabilities for sample 1090 / 1090
+[t-SNE] Mean sigma: 30.994671
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 84.702698
+[t-SNE] KL divergence after 1000 iterations: 1.448378
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1099 samples in 0.021s...
+[t-SNE] Computed neighbors for 1099 samples in 3.828s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1099
+[t-SNE] Computed conditional probabilities for sample 1099 / 1099
+[t-SNE] Mean sigma: 31.843470
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 83.982300
+[t-SNE] KL divergence after 1000 iterations: 1.432101
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1090 samples in 0.022s...
+[t-SNE] Computed neighbors for 1090 samples in 3.501s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1090
+[t-SNE] Computed conditional probabilities for sample 1090 / 1090
+[t-SNE] Mean sigma: 31.666091
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 83.707710
+[t-SNE] KL divergence after 1000 iterations: 1.458549
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1180 samples in 0.022s...
+[t-SNE] Computed neighbors for 1180 samples in 4.272s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1180
+[t-SNE] Computed conditional probabilities for sample 1180 / 1180
+[t-SNE] Mean sigma: 29.418588
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 83.623016
+[t-SNE] KL divergence after 1000 iterations: 1.410782
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1117 samples in 0.021s...
+[t-SNE] Computed neighbors for 1117 samples in 3.894s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1117
+[t-SNE] Computed conditional probabilities for sample 1117 / 1117
+[t-SNE] Mean sigma: 32.293441
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 85.397293
+[t-SNE] KL divergence after 1000 iterations: 1.487958
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1090 samples in 0.022s...
+[t-SNE] Computed neighbors for 1090 samples in 3.704s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1090
+[t-SNE] Computed conditional probabilities for sample 1090 / 1090
+[t-SNE] Mean sigma: 31.187164
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 84.031776
+[t-SNE] KL divergence after 1000 iterations: 1.473440
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1090 samples in 0.020s...
+[t-SNE] Computed neighbors for 1090 samples in 3.631s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1090
+[t-SNE] Computed conditional probabilities for sample 1090 / 1090
+[t-SNE] Mean sigma: 32.250399
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 86.142937
+[t-SNE] KL divergence after 1000 iterations: 1.450612
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1090 samples in 0.020s...
+[t-SNE] Computed neighbors for 1090 samples in 3.594s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1090
+[t-SNE] Computed conditional probabilities for sample 1090 / 1090
+[t-SNE] Mean sigma: 31.901941
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 85.949768
+[t-SNE] KL divergence after 1000 iterations: 1.451803
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1171 samples in 0.023s...
+[t-SNE] Computed neighbors for 1171 samples in 4.381s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1171
+[t-SNE] Computed conditional probabilities for sample 1171 / 1171
+[t-SNE] Mean sigma: 30.182475
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 86.478134
+[t-SNE] KL divergence after 1000 iterations: 1.422748
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1151 samples in 0.023s...
+[t-SNE] Computed neighbors for 1151 samples in 4.193s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1151
+[t-SNE] Computed conditional probabilities for sample 1151 / 1151
+[t-SNE] Mean sigma: 29.667426
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 83.676888
+[t-SNE] KL divergence after 1000 iterations: 1.444955
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1090 samples in 0.021s...
+[t-SNE] Computed neighbors for 1090 samples in 3.833s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1090
+[t-SNE] Computed conditional probabilities for sample 1090 / 1090
+[t-SNE] Mean sigma: 32.617513
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 84.635101
+[t-SNE] KL divergence after 1000 iterations: 1.523404
+[t-SNE] Computing 91 nearest neighbors...
+[t-SNE] Indexed 1090 samples in 0.021s...
+[t-SNE] Computed neighbors for 1090 samples in 3.743s...
+[t-SNE] Computed conditional probabilities for sample 1000 / 1090
+[t-SNE] Computed conditional probabilities for sample 1090 / 1090
+[t-SNE] Mean sigma: 31.416111
+[t-SNE] KL divergence after 250 iterations with early exaggeration: 84.910072
+[t-SNE] KL divergence after 1000 iterations: 1.517023
+[tsne] {"event": "tsne_complete", "fits": 38}
+[tsne] {"event": "plan", "fits": 38, "jobs": 8, "note": "wall times are estimates; parallelism set from small trial"}
+[tsne] {"domain": "Currency", "state": "F0_s2021", "event": "skip"}
+[tsne] {"domain": "CropsAndStaples", "state": "F0_s2021", "event": "skip"}
+[tsne] {"domain": "EnergyAndFuels", "state": "F0_s2021", "event": "skip"}
+[tsne] {"domain": "LivestockAndFoodProducts", "state": "F0_s2021", "event": "skip"}
+[tsne] {"domain": "RawMaterialsAndConstruction", "state": "F0_s2021", "event": "skip"}
+[tsne] {"domain": "SpecialtyAndAdvancedMaterials", "state": "F0_s2021", "event": "skip"}
+[tsne] {"domain": "Currency", "state": "Z0", "event": "skip"}
+[tsne] {"domain": "CropsAndStaples", "state": "Z0", "event": "skip"}
+[tsne] {"domain": "LivestockAndFoodProducts", "state": "Z0", "event": "skip"}
+[tsne] {"domain": "EnergyAndFuels", "state": "Z0", "event": "skip"}
+[tsne] {"domain": "StrategicAndHighValueMaterials", "state": "F0_s2021", "event": "skip"}
+[tsne] {"domain": "arts", "state": "F0_s2021", "event": "skip"}
+[tsne] {"domain": "climate", "state": "F0_s2021", "event": "skip"}
+[tsne] {"domain": "RawMaterialsAndConstruction", "state": "Z0", "event": "skip"}
+[tsne] {"domain": "SpecialtyAndAdvancedMaterials", "state": "Z0", "event": "skip"}
+[tsne] {"domain": "economy", "state": "F0_s2021", "event": "skip"}
+[tsne] {"domain": "electronic_technology", "state": "F0_s2021", "event": "skip"}
+[tsne] {"domain": "StrategicAndHighValueMaterials", "state": "Z0", "event": "skip"}
+[tsne] {"domain": "finance", "state": "F0_s2021", "event": "skip"}
+[tsne] {"domain": "arts", "state": "Z0", "event": "skip"}
+[tsne] {"domain": "pets", "state": "F0_s2021", "event": "skip"}
+[tsne] {"domain": "climate", "state": "Z0", "event": "skip"}
+[tsne] {"domain": "economy", "state": "Z0", "event": "skip"}
+[tsne] {"domain": "public_health", "state": "F0_s2021", "event": "skip"}
+[tsne] {"domain": "electronic_technology", "state": "Z0", "event": "skip"}
+[tsne] {"domain": "public_policy", "state": "F0_s2021", "event": "skip"}
+[tsne] {"domain": "finance", "state": "Z0", "event": "skip"}
+[tsne] {"domain": "science", "state": "F0_s2021", "event": "skip"}
+[tsne] {"domain": "pets", "state": "Z0", "event": "skip"}
+[tsne] {"domain": "shopping", "state": "F0_s2021", "event": "skip"}
+[tsne] {"domain": "society", "state": "F0_s2021", "event": "skip"}
+[tsne] {"domain": "public_health", "state": "Z0", "event": "skip"}
+[tsne] {"domain": "public_policy", "state": "Z0", "event": "skip"}
+[tsne] {"domain": "traffic", "state": "F0_s2021", "event": "skip"}
+[tsne] {"domain": "science", "state": "Z0", "event": "skip"}
+[tsne] {"domain": "shopping", "state": "Z0", "event": "skip"}
+[tsne] {"domain": "society", "state": "Z0", "event": "skip"}
+[tsne] {"domain": "traffic", "state": "Z0", "event": "skip"}
+[tsne] {"event": "tsne_complete", "fits": 38}

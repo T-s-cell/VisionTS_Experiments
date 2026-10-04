@@ -1,0 +1,12 @@
+[run_all] GPU gate: free 45444 MiB / need 6144 MiB
+[run_all] == stage: extract ==
+[extract] {"event": "gpu_gate", "free_mib": 45444, "need_mib": 6144}
+[extract] {"event": "artifact", "artifact": "Z0__imagenet.npz", "n": 1000, "secs": 17.4}
+[extract] {"event": "equivalence_check", "tag": "Z0", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+[extract] {"event": "artifact", "artifact": "Z0__timesx.npz", "n": 2474, "secs": 24.5}
+[extract] {"event": "artifact", "artifact": "F0__climate__s2021__imagenet.npz", "n": 1000, "secs": 16.3}
+[extract] {"event": "equivalence_check", "tag": "F0__climate__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+[extract] {"event": "artifact", "artifact": "F0__climate__s2021__timesx.npz", "n": 90, "secs": 2.2}
+[extract] {"event": "domain_done", "domain": "climate"}
+[extract] {"event": "extract_complete", "domains": 1}
+[run_all] stage 'extract' done

@@ -1,0 +1,29 @@
+{
+ "domain": "science",
+ "state": "F0_s2021",
+ "tsne": {
+  "n_components": 2,
+  "perplexity": 30,
+  "learning_rate": 200,
+  "init": "pca",
+  "early_exaggeration": 12,
+  "max_iter": 1000,
+  "random_state": 2021,
+  "metric": "euclidean",
+  "method": "barnes_hut",
+  "angle": 0.5
+ },
+ "kl_divergence": 1.5170234441757202,
+ "n_iter": 999,
+ "n_imagenet": 1000,
+ "n_timesx": 90,
+ "sklearn_version": "1.9.1",
+ "threads": "1 per process",
+ "fit_key": "504c0637ee48602ecd4f5adb4d44f4ad02822a31e6a8e7d266efd9ba335b4342",
+ "inputs": {
+  "imagenet_sha": "e30ad4b24914887eb8ae0b77fa9b8d37e5debfb4f10470a335bf54d404693016",
+  "timesx_sha": "cb39e69719bcaf91ca3eb638f2514b9ab04651ef21fe2d79610f7d7ae27c1191"
+ },
+ "wall_secs": 14.4,
+ "peak_rss_mib": 801.0
+}

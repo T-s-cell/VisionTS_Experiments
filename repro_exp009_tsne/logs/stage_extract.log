@@ -1,0 +1,118 @@
+[extract] {"event": "gpu_gate", "free_mib": 45444, "need_mib": 6144}
+[extract] {"event": "baseline", "n_entries": 314}
+Traceback (most recent call last):
+  File "/dev_data/wlt/VisionTS_Experiments/repro_exp009_tsne/01_extract_features.py", line 347, in <module>
+    main()
+  File "/dev_data/wlt/VisionTS_Experiments/repro_exp009_tsne/01_extract_features.py", line 310, in main
+    encode_imagenet(model, fv, files, device, "Z0", idx, mae_sha)
+  File "/dev_data/wlt/VisionTS_Experiments/repro_exp009_tsne/01_extract_features.py", line 208, in encode_imagenet
+    assert_keep_order(model, fv, ids, imgs.shape[0], device)
+  File "/dev_data/wlt/VisionTS_Experiments/repro_exp009_tsne/01_extract_features.py", line 150, in assert_keep_order
+    assert set(keep[0].tolist()) == set(fv.expected_kept_set()), \
+           ^^^^^^^^^^^^^^^^^^^^^
+TypeError: 'int' object is not iterable
+[extract] {"event": "gpu_gate", "free_mib": 45444, "need_mib": 6144}
+[extract] {"event": "artifact", "artifact": "Z0__imagenet.npz", "n": 1000, "secs": 31.3}
+[extract] {"event": "equivalence_check", "tag": "Z0", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+[extract] {"event": "artifact", "artifact": "Z0__timesx.npz", "n": 2474, "secs": 24.7}
+[extract] {"event": "artifact", "artifact": "F0__climate__s2021__imagenet.npz", "n": 1000, "secs": 16.9}
+[extract] {"event": "equivalence_check", "tag": "F0__climate__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+[extract] {"event": "artifact", "artifact": "F0__climate__s2021__timesx.npz", "n": 90, "secs": 2.2}
+[extract] {"event": "domain_done", "domain": "climate"}
+[extract] {"event": "extract_complete", "domains": 1}
+[extract] {"event": "gpu_gate", "free_mib": 45444, "need_mib": 6144}
+[extract] {"event": "artifact", "artifact": "Z0__imagenet.npz", "n": 1000, "secs": 17.4}
+[extract] {"event": "equivalence_check", "tag": "Z0", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+[extract] {"event": "artifact", "artifact": "Z0__timesx.npz", "n": 2474, "secs": 24.5}
+[extract] {"event": "artifact", "artifact": "F0__climate__s2021__imagenet.npz", "n": 1000, "secs": 16.3}
+[extract] {"event": "equivalence_check", "tag": "F0__climate__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+[extract] {"event": "artifact", "artifact": "F0__climate__s2021__timesx.npz", "n": 90, "secs": 2.2}
+[extract] {"event": "domain_done", "domain": "climate"}
+[extract] {"event": "extract_complete", "domains": 1}
+[extract] {"event": "gpu_gate", "free_mib": 45444, "need_mib": 6144}
+[extract] {"event": "baseline", "n_entries": 314}
+[extract] {"event": "artifact", "artifact": "Z0__imagenet.npz", "n": 1000, "secs": 17.9}
+[extract] {"event": "equivalence_check", "tag": "Z0", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+[extract] {"event": "artifact", "artifact": "Z0__timesx.npz", "n": 2474, "secs": 26.8}
+[extract] {"event": "artifact", "artifact": "F0__CropsAndStaples__s2021__imagenet.npz", "n": 1000, "secs": 16.4}
+[extract] {"event": "equivalence_check", "tag": "F0__CropsAndStaples__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+[extract] {"event": "artifact", "artifact": "F0__CropsAndStaples__s2021__timesx.npz", "n": 188, "secs": 3.1}
+[extract] {"event": "domain_done", "domain": "CropsAndStaples"}
+[extract] {"event": "artifact", "artifact": "F0__Currency__s2021__imagenet.npz", "n": 1000, "secs": 16.5}
+[extract] {"event": "equivalence_check", "tag": "F0__Currency__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+[extract] {"event": "artifact", "artifact": "F0__Currency__s2021__timesx.npz", "n": 180, "secs": 3.2}
+[extract] {"event": "domain_done", "domain": "Currency"}
+[extract] {"event": "artifact", "artifact": "F0__EnergyAndFuels__s2021__imagenet.npz", "n": 1000, "secs": 16.5}
+[extract] {"event": "equivalence_check", "tag": "F0__EnergyAndFuels__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+[extract] {"event": "artifact", "artifact": "F0__EnergyAndFuels__s2021__timesx.npz", "n": 171, "secs": 2.9}
+[extract] {"event": "domain_done", "domain": "EnergyAndFuels"}
+[extract] {"event": "artifact", "artifact": "F0__LivestockAndFoodProducts__s2021__imagenet.npz", "n": 1000, "secs": 16.5}
+[extract] {"event": "equivalence_check", "tag": "F0__LivestockAndFoodProducts__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+[extract] {"event": "artifact", "artifact": "F0__LivestockAndFoodProducts__s2021__timesx.npz", "n": 318, "secs": 4.2}
+[extract] {"event": "domain_done", "domain": "LivestockAndFoodProducts"}
+[extract] {"event": "artifact", "artifact": "F0__RawMaterialsAndConstruction__s2021__imagenet.npz", "n": 1000, "secs": 16.4}
+[extract] {"event": "equivalence_check", "tag": "F0__RawMaterialsAndConstruction__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+[extract] {"event": "artifact", "artifact": "F0__RawMaterialsAndConstruction__s2021__timesx.npz", "n": 172, "secs": 2.9}
+[extract] {"event": "domain_done", "domain": "RawMaterialsAndConstruction"}
+[extract] {"event": "artifact", "artifact": "F0__SpecialtyAndAdvancedMaterials__s2021__imagenet.npz", "n": 1000, "secs": 16.4}
+[extract] {"event": "equivalence_check", "tag": "F0__SpecialtyAndAdvancedMaterials__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+[extract] {"event": "artifact", "artifact": "F0__SpecialtyAndAdvancedMaterials__s2021__timesx.npz", "n": 117, "secs": 2.4}
+[extract] {"event": "domain_done", "domain": "SpecialtyAndAdvancedMaterials"}
+[extract] {"event": "artifact", "artifact": "F0__StrategicAndHighValueMaterials__s2021__imagenet.npz", "n": 1000, "secs": 16.4}
+[extract] {"event": "equivalence_check", "tag": "F0__StrategicAndHighValueMaterials__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+[extract] {"event": "artifact", "artifact": "F0__StrategicAndHighValueMaterials__s2021__timesx.npz", "n": 178, "secs": 2.9}
+[extract] {"event": "domain_done", "domain": "StrategicAndHighValueMaterials"}
+[extract] {"event": "artifact", "artifact": "F0__arts__s2021__imagenet.npz", "n": 1000, "secs": 16.3}
+[extract] {"event": "equivalence_check", "tag": "F0__arts__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+[extract] {"event": "artifact", "artifact": "F0__arts__s2021__timesx.npz", "n": 151, "secs": 2.7}
+[extract] {"event": "domain_done", "domain": "arts"}
+[extract] {"event": "skip_domain", "domain": "climate"}
+[extract] {"event": "artifact", "artifact": "F0__economy__s2021__imagenet.npz", "n": 1000, "secs": 16.4}
+[extract] {"event": "equivalence_check", "tag": "F0__economy__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+[extract] {"event": "artifact", "artifact": "F0__economy__s2021__timesx.npz", "n": 90, "secs": 2.2}
+[extract] {"event": "domain_done", "domain": "economy"}
+[extract] {"event": "artifact", "artifact": "F0__electronic_technology__s2021__imagenet.npz", "n": 1000, "secs": 16.5}
+[extract] {"event": "equivalence_check", "tag": "F0__electronic_technology__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+[extract] {"event": "artifact", "artifact": "F0__electronic_technology__s2021__timesx.npz", "n": 90, "secs": 2.2}
+[extract] {"event": "domain_done", "domain": "electronic_technology"}
+[extract] {"event": "artifact", "artifact": "F0__finance__s2021__imagenet.npz", "n": 1000, "secs": 16.4}
+[extract] {"event": "equivalence_check", "tag": "F0__finance__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+[extract] {"event": "artifact", "artifact": "F0__finance__s2021__timesx.npz", "n": 90, "secs": 2.2}
+[extract] {"event": "domain_done", "domain": "finance"}
+[extract] {"event": "artifact", "artifact": "F0__pets__s2021__imagenet.npz", "n": 1000, "secs": 16.6}
+[extract] {"event": "equivalence_check", "tag": "F0__pets__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+[extract] {"event": "artifact", "artifact": "F0__pets__s2021__timesx.npz", "n": 90, "secs": 2.2}
+[extract] {"event": "domain_done", "domain": "pets"}
+[extract] {"event": "artifact", "artifact": "F0__public_health__s2021__imagenet.npz", "n": 1000, "secs": 16.3}
+[extract] {"event": "equivalence_check", "tag": "F0__public_health__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+[extract] {"event": "artifact", "artifact": "F0__public_health__s2021__timesx.npz", "n": 90, "secs": 2.2}
+[extract] {"event": "domain_done", "domain": "public_health"}
+[extract] {"event": "artifact", "artifact": "F0__public_policy__s2021__imagenet.npz", "n": 1000, "secs": 16.3}
+[extract] {"event": "equivalence_check", "tag": "F0__public_policy__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+[extract] {"event": "artifact", "artifact": "F0__public_policy__s2021__timesx.npz", "n": 99, "secs": 2.3}
+[extract] {"event": "domain_done", "domain": "public_policy"}
+[extract] {"event": "artifact", "artifact": "F0__science__s2021__imagenet.npz", "n": 1000, "secs": 16.3}
+[extract] {"event": "equivalence_check", "tag": "F0__science__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+[extract] {"event": "artifact", "artifact": "F0__science__s2021__timesx.npz", "n": 90, "secs": 2.2}
+[extract] {"event": "domain_done", "domain": "science"}
+[extract] {"event": "artifact", "artifact": "F0__shopping__s2021__imagenet.npz", "n": 1000, "secs": 16.5}
+[extract] {"event": "equivalence_check", "tag": "F0__shopping__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+[extract] {"event": "artifact", "artifact": "F0__shopping__s2021__timesx.npz", "n": 90, "secs": 2.2}
+[extract] {"event": "domain_done", "domain": "shopping"}
+[extract] {"event": "artifact", "artifact": "F0__society__s2021__imagenet.npz", "n": 1000, "secs": 16.3}
+[extract] {"event": "equivalence_check", "tag": "F0__society__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+[extract] {"event": "artifact", "artifact": "F0__society__s2021__timesx.npz", "n": 90, "secs": 2.2}
+[extract] {"event": "domain_done", "domain": "society"}
+[extract] {"event": "artifact", "artifact": "F0__traffic__s2021__imagenet.npz", "n": 1000, "secs": 16.3}
+[extract] {"event": "equivalence_check", "tag": "F0__traffic__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+[extract] {"event": "artifact", "artifact": "F0__traffic__s2021__timesx.npz", "n": 90, "secs": 2.2}
+[extract] {"event": "domain_done", "domain": "traffic"}
+[extract] {"event": "extract_complete", "domains": 19}
+[extract] {"event": "gpu_gate", "free_mib": 45444, "need_mib": 6144}
+[extract] {"event": "skip", "artifact": "Z0__imagenet.npz"}
+[extract] {"event": "skip", "artifact": "Z0__timesx.npz"}
+[extract] {"event": "artifact", "artifact": "F0__climate__s2021__imagenet.npz", "n": 1000, "secs": 19.2}
+[extract] {"event": "equivalence_check", "tag": "F0__climate__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+[extract] {"event": "artifact", "artifact": "F0__climate__s2021__timesx.npz", "n": 90, "secs": 2.3}
+[extract] {"event": "domain_done", "domain": "climate"}
+[extract] {"event": "extract_complete", "domains": 19}

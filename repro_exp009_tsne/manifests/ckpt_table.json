@@ -1,0 +1,173 @@
+[
+ {
+  "domain": "CropsAndStaples",
+  "run_id": "F0__CropsAndStaples__s2021",
+  "best_epoch": 6,
+  "ln_pt_sha256": "faf5b489698bfe248693dad7db050feef62a1cf071d4b4166a0b8e3ecb5dd5c3",
+  "n_tensors": 84,
+  "n_scalars": 55808,
+  "names_shapes_values_verified": true
+ },
+ {
+  "domain": "Currency",
+  "run_id": "F0__Currency__s2021",
+  "best_epoch": 10,
+  "ln_pt_sha256": "816428606f1bdeee86e754dc627615ed4b0129e79045bdaf858dbc0d01554fb9",
+  "n_tensors": 84,
+  "n_scalars": 55808,
+  "names_shapes_values_verified": true
+ },
+ {
+  "domain": "EnergyAndFuels",
+  "run_id": "F0__EnergyAndFuels__s2021",
+  "best_epoch": 9,
+  "ln_pt_sha256": "87c1d750c0774a24596768ee29e9f1306808799fff106ca0920b034681c70dc5",
+  "n_tensors": 84,
+  "n_scalars": 55808,
+  "names_shapes_values_verified": true
+ },
+ {
+  "domain": "LivestockAndFoodProducts",
+  "run_id": "F0__LivestockAndFoodProducts__s2021",
+  "best_epoch": 6,
+  "ln_pt_sha256": "771472f64050908710334871e0aa58e453687ca31f6fa8e11b8e1945e293bf3a",
+  "n_tensors": 84,
+  "n_scalars": 55808,
+  "names_shapes_values_verified": true
+ },
+ {
+  "domain": "RawMaterialsAndConstruction",
+  "run_id": "F0__RawMaterialsAndConstruction__s2021",
+  "best_epoch": 9,
+  "ln_pt_sha256": "6ebba90ddca6408b7f97cad21710a3efff2d072b3deafbc5ae03e60e4b070e5d",
+  "n_tensors": 84,
+  "n_scalars": 55808,
+  "names_shapes_values_verified": true
+ },
+ {
+  "domain": "SpecialtyAndAdvancedMaterials",
+  "run_id": "F0__SpecialtyAndAdvancedMaterials__s2021",
+  "best_epoch": 4,
+  "ln_pt_sha256": "dbbf4712e2cdb996ee84bfd99f719cf1a57a67fca2265159fbf1903484389019",
+  "n_tensors": 84,
+  "n_scalars": 55808,
+  "names_shapes_values_verified": true
+ },
+ {
+  "domain": "StrategicAndHighValueMaterials",
+  "run_id": "F0__StrategicAndHighValueMaterials__s2021",
+  "best_epoch": 10,
+  "ln_pt_sha256": "8b61ee24d90192d6c9f5f1e3792628a79529c1134d49f0d1423595c736258896",
+  "n_tensors": 84,
+  "n_scalars": 55808,
+  "names_shapes_values_verified": true
+ },
+ {
+  "domain": "arts",
+  "run_id": "F0__arts__s2021",
+  "best_epoch": 1,
+  "ln_pt_sha256": "29c3a4bf3acbffbef0d87822fcc81cd805b90d483fe6e180830d9bd1ca532ad1",
+  "n_tensors": 84,
+  "n_scalars": 55808,
+  "names_shapes_values_verified": true
+ },
+ {
+  "domain": "economy",
+  "run_id": "F0__economy__s2021",
+  "best_epoch": 10,
+  "ln_pt_sha256": "0d455e7cd20985dd93cd89dcb5cb54537f41c6068f72aa0901320122559c0bbb",
+  "n_tensors": 84,
+  "n_scalars": 55808,
+  "names_shapes_values_verified": true
+ },
+ {
+  "domain": "electronic_technology",
+  "run_id": "F0__electronic_technology__s2021",
+  "best_epoch": 10,
+  "ln_pt_sha256": "7181ca9ade3858ebed2375e20910a9afb15cdcf59186c5b08ddcaa959ebc3907",
+  "n_tensors": 84,
+  "n_scalars": 55808,
+  "names_shapes_values_verified": true
+ },
+ {
+  "domain": "finance",
+  "run_id": "F0__finance__s2021",
+  "best_epoch": 10,
+  "ln_pt_sha256": "1b887ab387b31cfd4360c960dd0ba05ee16c20ac2240cff253ec2ff18ef3c5fc",
+  "n_tensors": 84,
+  "n_scalars": 55808,
+  "names_shapes_values_verified": true
+ },
+ {
+  "domain": "pets",
+  "run_id": "F0__pets__s2021",
+  "best_epoch": 10,
+  "ln_pt_sha256": "a24d85c5373416cc37bd9000a1a762a84edb05ac30bae2e2b57cfbcb8c210cb4",
+  "n_tensors": 84,
+  "n_scalars": 55808,
+  "names_shapes_values_verified": true
+ },
+ {
+  "domain": "public_health",
+  "run_id": "F0__public_health__s2021",
+  "best_epoch": 1,
+  "ln_pt_sha256": "9b877ed4824f5b9998cdb99d0caf630f5bf8a878c1a531c00ac820a268d352a9",
+  "n_tensors": 84,
+  "n_scalars": 55808,
+  "names_shapes_values_verified": true
+ },
+ {
+  "domain": "public_policy",
+  "run_id": "F0__public_policy__s2021",
+  "best_epoch": 10,
+  "ln_pt_sha256": "29e081504bc340f0a584391932e633b29aabcb9b9a4b9b429baba7dcf787b183",
+  "n_tensors": 84,
+  "n_scalars": 55808,
+  "names_shapes_values_verified": true
+ },
+ {
+  "domain": "science",
+  "run_id": "F0__science__s2021",
+  "best_epoch": 10,
+  "ln_pt_sha256": "53fc60c7badbf965c8b5725bdd717fc011d0f769091baaba0f435cc4be970016",
+  "n_tensors": 84,
+  "n_scalars": 55808,
+  "names_shapes_values_verified": true
+ },
+ {
+  "domain": "shopping",
+  "run_id": "F0__shopping__s2021",
+  "best_epoch": 10,
+  "ln_pt_sha256": "6742e1d6307d9dc41d210284687ca1386e507f06786e5df06c5bed60a5e396db",
+  "n_tensors": 84,
+  "n_scalars": 55808,
+  "names_shapes_values_verified": true
+ },
+ {
+  "domain": "society",
+  "run_id": "F0__society__s2021",
+  "best_epoch": 10,
+  "ln_pt_sha256": "f254f815f9eb8f6981964e2c49191d886a389df0df30c8714fd34ad9d71bbeed",
+  "n_tensors": 84,
+  "n_scalars": 55808,
+  "names_shapes_values_verified": true
+ },
+ {
+  "domain": "traffic",
+  "run_id": "F0__traffic__s2021",
+  "best_epoch": 1,
+  "ln_pt_sha256": "376f6ddac26fcf9baf1bbb1ef43748db980d88b0600808c6671a1737ae29b1bf",
+  "n_tensors": 84,
+  "n_scalars": 55808,
+  "names_shapes_values_verified": true
+ },
+ {
+  "domain": "climate",
+  "run_id": "F0__climate__s2021",
+  "best_epoch": 10,
+  "ln_pt_sha256": "76a63e5b206db7ace1f6f542e6ecec1d2ea141c5b8488f584b0ff175515a8355",
+  "n_tensors": 84,
+  "n_scalars": 55808,
+  "names_shapes_values_verified": true
+ }
+]

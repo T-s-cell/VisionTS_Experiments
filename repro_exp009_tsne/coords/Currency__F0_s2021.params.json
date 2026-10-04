@@ -1,0 +1,29 @@
+{
+ "domain": "Currency",
+ "state": "F0_s2021",
+ "tsne": {
+  "n_components": 2,
+  "perplexity": 30,
+  "learning_rate": 200,
+  "init": "pca",
+  "early_exaggeration": 12,
+  "max_iter": 1000,
+  "random_state": 2021,
+  "metric": "euclidean",
+  "method": "barnes_hut",
+  "angle": 0.5
+ },
+ "kl_divergence": 1.410781741142273,
+ "n_iter": 999,
+ "n_imagenet": 1000,
+ "n_timesx": 180,
+ "sklearn_version": "1.9.1",
+ "threads": "1 per process",
+ "fit_key": "00e6d96205ac66d178d9f79103f91cd49eb4100d3e0eb4c1d38a9b502e884443",
+ "inputs": {
+  "imagenet_sha": "361938f5c6f4f03008e94781adb6525e5eb09440586af1338d7f5c515d7d7a54",
+  "timesx_sha": "e2050893427c98d0fc0cb4cf966ad931da29cbbb31e03ca612e01c5030d0207a"
+ },
+ "wall_secs": 14.8,
+ "peak_rss_mib": 799.6
+}

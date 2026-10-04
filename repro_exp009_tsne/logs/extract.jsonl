@@ -1,0 +1,87 @@
+{"t": "2026-10-04T04:55:40", "event": "gpu_gate", "free_mib": 45444, "need_mib": 6144}
+{"t": "2026-10-04T04:55:41", "event": "baseline", "n_entries": 314}
+{"t": "2026-10-04T04:56:07", "event": "artifact", "artifact": "Z0__imagenet.npz", "n": 1000, "secs": 17.9}
+{"t": "2026-10-04T04:56:08", "event": "equivalence_check", "tag": "Z0", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+{"t": "2026-10-04T04:56:35", "event": "artifact", "artifact": "Z0__timesx.npz", "n": 2474, "secs": 26.8}
+{"t": "2026-10-04T04:56:53", "event": "artifact", "artifact": "F0__CropsAndStaples__s2021__imagenet.npz", "n": 1000, "secs": 16.4}
+{"t": "2026-10-04T04:56:53", "event": "equivalence_check", "tag": "F0__CropsAndStaples__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+{"t": "2026-10-04T04:56:56", "event": "artifact", "artifact": "F0__CropsAndStaples__s2021__timesx.npz", "n": 188, "secs": 3.1}
+{"t": "2026-10-04T04:56:56", "event": "domain_done", "domain": "CropsAndStaples"}
+{"t": "2026-10-04T04:57:15", "event": "artifact", "artifact": "F0__Currency__s2021__imagenet.npz", "n": 1000, "secs": 16.5}
+{"t": "2026-10-04T04:57:15", "event": "equivalence_check", "tag": "F0__Currency__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+{"t": "2026-10-04T04:57:18", "event": "artifact", "artifact": "F0__Currency__s2021__timesx.npz", "n": 180, "secs": 3.2}
+{"t": "2026-10-04T04:57:18", "event": "domain_done", "domain": "Currency"}
+{"t": "2026-10-04T04:57:36", "event": "artifact", "artifact": "F0__EnergyAndFuels__s2021__imagenet.npz", "n": 1000, "secs": 16.5}
+{"t": "2026-10-04T04:57:36", "event": "equivalence_check", "tag": "F0__EnergyAndFuels__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+{"t": "2026-10-04T04:57:39", "event": "artifact", "artifact": "F0__EnergyAndFuels__s2021__timesx.npz", "n": 171, "secs": 2.9}
+{"t": "2026-10-04T04:57:39", "event": "domain_done", "domain": "EnergyAndFuels"}
+{"t": "2026-10-04T04:57:57", "event": "artifact", "artifact": "F0__LivestockAndFoodProducts__s2021__imagenet.npz", "n": 1000, "secs": 16.5}
+{"t": "2026-10-04T04:57:57", "event": "equivalence_check", "tag": "F0__LivestockAndFoodProducts__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+{"t": "2026-10-04T04:58:01", "event": "artifact", "artifact": "F0__LivestockAndFoodProducts__s2021__timesx.npz", "n": 318, "secs": 4.2}
+{"t": "2026-10-04T04:58:01", "event": "domain_done", "domain": "LivestockAndFoodProducts"}
+{"t": "2026-10-04T04:58:20", "event": "artifact", "artifact": "F0__RawMaterialsAndConstruction__s2021__imagenet.npz", "n": 1000, "secs": 16.4}
+{"t": "2026-10-04T04:58:20", "event": "equivalence_check", "tag": "F0__RawMaterialsAndConstruction__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+{"t": "2026-10-04T04:58:23", "event": "artifact", "artifact": "F0__RawMaterialsAndConstruction__s2021__timesx.npz", "n": 172, "secs": 2.9}
+{"t": "2026-10-04T04:58:23", "event": "domain_done", "domain": "RawMaterialsAndConstruction"}
+{"t": "2026-10-04T04:58:41", "event": "artifact", "artifact": "F0__SpecialtyAndAdvancedMaterials__s2021__imagenet.npz", "n": 1000, "secs": 16.4}
+{"t": "2026-10-04T04:58:41", "event": "equivalence_check", "tag": "F0__SpecialtyAndAdvancedMaterials__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+{"t": "2026-10-04T04:58:43", "event": "artifact", "artifact": "F0__SpecialtyAndAdvancedMaterials__s2021__timesx.npz", "n": 117, "secs": 2.4}
+{"t": "2026-10-04T04:58:43", "event": "domain_done", "domain": "SpecialtyAndAdvancedMaterials"}
+{"t": "2026-10-04T04:59:01", "event": "artifact", "artifact": "F0__StrategicAndHighValueMaterials__s2021__imagenet.npz", "n": 1000, "secs": 16.4}
+{"t": "2026-10-04T04:59:02", "event": "equivalence_check", "tag": "F0__StrategicAndHighValueMaterials__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+{"t": "2026-10-04T04:59:04", "event": "artifact", "artifact": "F0__StrategicAndHighValueMaterials__s2021__timesx.npz", "n": 178, "secs": 2.9}
+{"t": "2026-10-04T04:59:04", "event": "domain_done", "domain": "StrategicAndHighValueMaterials"}
+{"t": "2026-10-04T04:59:22", "event": "artifact", "artifact": "F0__arts__s2021__imagenet.npz", "n": 1000, "secs": 16.3}
+{"t": "2026-10-04T04:59:23", "event": "equivalence_check", "tag": "F0__arts__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+{"t": "2026-10-04T04:59:25", "event": "artifact", "artifact": "F0__arts__s2021__timesx.npz", "n": 151, "secs": 2.7}
+{"t": "2026-10-04T04:59:25", "event": "domain_done", "domain": "arts"}
+{"t": "2026-10-04T04:59:25", "event": "skip_domain", "domain": "climate"}
+{"t": "2026-10-04T04:59:43", "event": "artifact", "artifact": "F0__economy__s2021__imagenet.npz", "n": 1000, "secs": 16.4}
+{"t": "2026-10-04T04:59:44", "event": "equivalence_check", "tag": "F0__economy__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+{"t": "2026-10-04T04:59:45", "event": "artifact", "artifact": "F0__economy__s2021__timesx.npz", "n": 90, "secs": 2.2}
+{"t": "2026-10-04T04:59:45", "event": "domain_done", "domain": "economy"}
+{"t": "2026-10-04T05:00:04", "event": "artifact", "artifact": "F0__electronic_technology__s2021__imagenet.npz", "n": 1000, "secs": 16.5}
+{"t": "2026-10-04T05:00:04", "event": "equivalence_check", "tag": "F0__electronic_technology__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+{"t": "2026-10-04T05:00:06", "event": "artifact", "artifact": "F0__electronic_technology__s2021__timesx.npz", "n": 90, "secs": 2.2}
+{"t": "2026-10-04T05:00:06", "event": "domain_done", "domain": "electronic_technology"}
+{"t": "2026-10-04T05:00:24", "event": "artifact", "artifact": "F0__finance__s2021__imagenet.npz", "n": 1000, "secs": 16.4}
+{"t": "2026-10-04T05:00:24", "event": "equivalence_check", "tag": "F0__finance__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+{"t": "2026-10-04T05:00:26", "event": "artifact", "artifact": "F0__finance__s2021__timesx.npz", "n": 90, "secs": 2.2}
+{"t": "2026-10-04T05:00:27", "event": "domain_done", "domain": "finance"}
+{"t": "2026-10-04T05:00:45", "event": "artifact", "artifact": "F0__pets__s2021__imagenet.npz", "n": 1000, "secs": 16.6}
+{"t": "2026-10-04T05:00:45", "event": "equivalence_check", "tag": "F0__pets__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+{"t": "2026-10-04T05:00:47", "event": "artifact", "artifact": "F0__pets__s2021__timesx.npz", "n": 90, "secs": 2.2}
+{"t": "2026-10-04T05:00:47", "event": "domain_done", "domain": "pets"}
+{"t": "2026-10-04T05:01:05", "event": "artifact", "artifact": "F0__public_health__s2021__imagenet.npz", "n": 1000, "secs": 16.3}
+{"t": "2026-10-04T05:01:05", "event": "equivalence_check", "tag": "F0__public_health__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+{"t": "2026-10-04T05:01:07", "event": "artifact", "artifact": "F0__public_health__s2021__timesx.npz", "n": 90, "secs": 2.2}
+{"t": "2026-10-04T05:01:07", "event": "domain_done", "domain": "public_health"}
+{"t": "2026-10-04T05:01:25", "event": "artifact", "artifact": "F0__public_policy__s2021__imagenet.npz", "n": 1000, "secs": 16.3}
+{"t": "2026-10-04T05:01:25", "event": "equivalence_check", "tag": "F0__public_policy__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+{"t": "2026-10-04T05:01:27", "event": "artifact", "artifact": "F0__public_policy__s2021__timesx.npz", "n": 99, "secs": 2.3}
+{"t": "2026-10-04T05:01:27", "event": "domain_done", "domain": "public_policy"}
+{"t": "2026-10-04T05:01:46", "event": "artifact", "artifact": "F0__science__s2021__imagenet.npz", "n": 1000, "secs": 16.3}
+{"t": "2026-10-04T05:01:46", "event": "equivalence_check", "tag": "F0__science__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+{"t": "2026-10-04T05:01:48", "event": "artifact", "artifact": "F0__science__s2021__timesx.npz", "n": 90, "secs": 2.2}
+{"t": "2026-10-04T05:01:48", "event": "domain_done", "domain": "science"}
+{"t": "2026-10-04T05:02:06", "event": "artifact", "artifact": "F0__shopping__s2021__imagenet.npz", "n": 1000, "secs": 16.5}
+{"t": "2026-10-04T05:02:06", "event": "equivalence_check", "tag": "F0__shopping__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+{"t": "2026-10-04T05:02:08", "event": "artifact", "artifact": "F0__shopping__s2021__timesx.npz", "n": 90, "secs": 2.2}
+{"t": "2026-10-04T05:02:08", "event": "domain_done", "domain": "shopping"}
+{"t": "2026-10-04T05:02:26", "event": "artifact", "artifact": "F0__society__s2021__imagenet.npz", "n": 1000, "secs": 16.3}
+{"t": "2026-10-04T05:02:26", "event": "equivalence_check", "tag": "F0__society__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+{"t": "2026-10-04T05:02:28", "event": "artifact", "artifact": "F0__society__s2021__timesx.npz", "n": 90, "secs": 2.2}
+{"t": "2026-10-04T05:02:28", "event": "domain_done", "domain": "society"}
+{"t": "2026-10-04T05:02:46", "event": "artifact", "artifact": "F0__traffic__s2021__imagenet.npz", "n": 1000, "secs": 16.3}
+{"t": "2026-10-04T05:02:47", "event": "equivalence_check", "tag": "F0__traffic__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+{"t": "2026-10-04T05:02:49", "event": "artifact", "artifact": "F0__traffic__s2021__timesx.npz", "n": 90, "secs": 2.2}
+{"t": "2026-10-04T05:02:49", "event": "domain_done", "domain": "traffic"}
+{"t": "2026-10-04T05:02:49", "event": "extract_complete", "domains": 19}
+{"t": "2026-10-04T05:08:34", "event": "gpu_gate", "free_mib": 45444, "need_mib": 6144}
+{"t": "2026-10-04T05:08:43", "event": "skip", "artifact": "Z0__imagenet.npz"}
+{"t": "2026-10-04T05:08:45", "event": "skip", "artifact": "Z0__timesx.npz"}
+{"t": "2026-10-04T05:09:06", "event": "artifact", "artifact": "F0__climate__s2021__imagenet.npz", "n": 1000, "secs": 19.2}
+{"t": "2026-10-04T05:09:06", "event": "equivalence_check", "tag": "F0__climate__s2021", "batch": 64, "pred_bitwise_equal": true, "hook_equals_direct": true}
+{"t": "2026-10-04T05:09:08", "event": "artifact", "artifact": "F0__climate__s2021__timesx.npz", "n": 90, "secs": 2.3}
+{"t": "2026-10-04T05:09:08", "event": "domain_done", "domain": "climate"}
+{"t": "2026-10-04T05:09:08", "event": "extract_complete", "domains": 19}
