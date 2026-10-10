@@ -1,0 +1,9 @@
+data/
+predictions/
+results/
+logs/
+quarantine/
+pack_out/
+__pycache__/
+*.pyc
+*.tmp.npz
