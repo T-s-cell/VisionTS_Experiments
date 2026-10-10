@@ -88,6 +88,13 @@ import common as C
 import protocol as P
 import run_infer as R
 from load_cgtsf import load_windows
+
+P.PRED_DIR = r"{pred_dir}"
+P.QUARANTINE_DIR = r"{quarantine_dir}"
+npz_check, _, _ = P.shard_paths("PTF", 0)
+assert npz_check.startswith(r"{pred_dir}"), \
+    f"sandbox leak: shard would land at {{npz_check}}"
+
 R.setup_determinism()
 from visionts.model import VisionTS
 model = VisionTS(arch=P.ARCH, finetune_type=P.FINETUNE_TYPE,
@@ -147,7 +154,10 @@ def resume_test(model, ckpt_dir):
             ok &= not v2
             runner = os.path.join(td, "resume_runner.py")
             with open(runner, "w") as f:
-                f.write(RESUME_RUNNER.format(here=HERE, ckpt=ckpt_dir))
+                f.write(RESUME_RUNNER.format(
+                    here=HERE, ckpt=ckpt_dir,
+                    pred_dir=P.PRED_DIR,
+                    quarantine_dir=P.QUARANTINE_DIR))
             rp = subprocess.run([sys.executable, runner], cwd=HERE,
                                 capture_output=True, text=True, timeout=600)
             res["resume_proc_returncode"] = rp.returncode
