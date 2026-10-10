@@ -10,7 +10,13 @@ Resume policy (tiered, per user ruling 2026-10-10):
 A .done marker alone never skips a shard: payload sha256 is re-verified.
 Any NaN/Inf in a forward output = immediate hard stop (nothing is written).
 Per subset: update_config -> geometry gate -> in-memory model state digest
-taken before and after the subset's forwards must be identical."""
+taken before and after the subset's forwards must be identical.
+Preflight binding: results/preflight_report.json must exist with ok=true
+before anything runs; the run's batch is pinned to the report's
+chosen_batch (a different --batch is a hard stop); every shard's guards
+bind batch + env + sha256 of the preflight report; the weights file under
+the ACTUAL --ckpt-dir load path is hash-verified before model build and
+again after the run."""
 import argparse
 import datetime
 import os
@@ -113,13 +119,24 @@ def write_shard(ds, shard, windows, preds, ms, guards):
     return payload
 
 
+def check_loaded_ckpt(ckpt_dir):
+    w = os.path.join(ckpt_dir, P.WEIGHTS_FILE)
+    if not os.path.isfile(w):
+        sys.exit(f"HARD STOP: weights file missing at load path: {w}")
+    got = C.sha256_file(w)
+    if got != P.WEIGHTS_SHA256:
+        sys.exit(f"HARD STOP: loaded-weights sha mismatch at {w}: "
+                 f"got {got}, want {P.WEIGHTS_SHA256}")
+    return w
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--i-approve-frozen-protocol", required=True)
     ap.add_argument("--ckpt-dir", default=os.path.join(REPO_ROOT, "ckpt"))
     ap.add_argument("--device", default="cuda")
     ap.add_argument("--batch", type=int, default=None,
-                    help="default: results/preflight_report.json chosen_batch")
+                    help="must equal the preflight report's chosen_batch")
     ap.add_argument("--only-ds", choices=P.ORDER, default=None)
     args = ap.parse_args()
 
@@ -129,22 +146,34 @@ def main():
     device = args.device
     assert device == "cuda" and torch.cuda.is_available()
 
-    batch = args.batch
-    if batch is None:
-        rep_path = os.path.join(P.RESULTS_DIR, "preflight_report.json")
-        if os.path.isfile(rep_path):
-            batch = C.load_json(rep_path).get("chosen_batch", 1)
-            print(f"[infer] batch from preflight report: {batch}")
-        else:
-            batch = 1
-            print("[infer] no preflight report found; batch=1")
+    # --- preflight gate: no report, or ok!=true -> no full run ---
+    rep_path = os.path.join(P.RESULTS_DIR, "preflight_report.json")
+    if not os.path.isfile(rep_path):
+        sys.exit("HARD STOP: results/preflight_report.json missing — "
+                 "run preflight first")
+    pre = C.load_json(rep_path)
+    if not pre.get("ok"):
+        sys.exit("HARD STOP: preflight report ok!=true — full run blocked")
+    chosen = pre.get("chosen_batch")
+    batch = args.batch if args.batch is not None else chosen
+    if batch != chosen:
+        sys.exit(f"HARD STOP: --batch {batch} != preflight chosen_batch "
+                 f"{chosen} (execution config must match the preflight "
+                 f"evidence; rerun preflight to change batch)")
+    rep_sha = C.sha256_file(rep_path)
+    print(f"[infer] preflight ok; batch={batch} (chosen_batch={chosen}), "
+          f"preflight_report sha256 {rep_sha[:16]}...")
+
+    # --- verify the weights file VisionTS will ACTUALLY load ---
+    w_path = check_loaded_ckpt(args.ckpt_dir)
 
     from visionts.model import VisionTS
     model = VisionTS(arch=P.ARCH, finetune_type=P.FINETUNE_TYPE,
                      ckpt_dir=args.ckpt_dir, load_ckpt=True)
     model.eval().to(device)
 
-    guards = C.current_guards()
+    guards = C.current_guards(batch=batch,
+                              preflight_report_sha256=rep_sha)
     quarantined = []
     t_start = time.perf_counter()
 
@@ -200,12 +229,15 @@ def main():
         print(f"[infer] {ds}: model state unchanged; complete "
               f"({done_cnt}/{nsh} shards)", flush=True)
 
-    w = C.sha256_file(P.weights_path())
+    w = C.sha256_file(w_path)
     if w != P.WEIGHTS_SHA256:
         sys.exit("HARD STOP: weights file changed during run")
     summary = {"finished": time.strftime("%F %T"),
                "wall_seconds": time.perf_counter() - t_start,
-               "batch": batch, "quarantined": quarantined,
+               "batch": batch, "chosen_batch": chosen,
+               "preflight_report_sha256": rep_sha,
+               "ckpt_load_path": w_path,
+               "quarantined": quarantined,
                "weights_sha256": w, "env": C.env_info()}
     C.dump_json(summary, os.path.join(P.LOGS_DIR, "infer_summary.json"))
     print(f"[infer] ALL DONE in {summary['wall_seconds'] / 60:.1f} min; "

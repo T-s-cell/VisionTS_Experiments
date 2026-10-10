@@ -28,9 +28,12 @@ def load_all_shards(ds):
     for shard in range(P.n_shards(ds)):
         npz, hdr, done = P.shard_paths(ds, shard)
         with np.load(npz) as z:
-            for i in range(len(z["idx"])):
-                rows.append((int(z["idx"][i]), str(z["date"][i]),
-                             z["pred"][i], z["target"][i]))
+            idx = z["idx"]
+            date = z["date"]
+            pred = z["pred"]
+            tgt = z["target"]
+        for i in range(len(idx)):
+            rows.append((int(idx[i]), str(date[i]), pred[i], tgt[i]))
     return rows
 
 

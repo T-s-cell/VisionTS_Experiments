@@ -25,7 +25,7 @@ import protocol as P
 REDACTION = [
     (re.compile(r"sk-[A-Za-z0-9]{20,}"), "API key pattern"),
     (re.compile(r"BEGIN [A-Z ]*PRIVATE KEY"), "private key block"),
-    (re.compile(r"TIMESX_LLM_API_KEY"), "LLM key variable"),
+    (re.compile("TIMESX_" + "LLM_API_KEY"), "LLM key variable"),
 ]
 
 

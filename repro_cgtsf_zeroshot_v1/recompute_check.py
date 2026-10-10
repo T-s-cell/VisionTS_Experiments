@@ -34,15 +34,17 @@ def recompute_subset(ds):
     for shard in range(P.n_shards(ds)):
         npz_path = P.shard_paths(ds, shard)[0]
         with np.load(npz_path) as z:
-            for i in range(len(z["idx"])):
-                ix = int(z["idx"][i])
-                d = z["pred"][i].astype(np.float64) - \
-                    z["target"][i].astype(np.float64)
-                item = (float(np.mean(d ** 2)), float(np.mean(np.abs(d))))
-                if ix not in seq_m:
-                    seq_m[ix] = []
-                    order.append(ix)
-                seq_m[ix].append(item)
+            idx = z["idx"]
+            pred = z["pred"].astype(np.float64)
+            tgt = z["target"].astype(np.float64)
+        for i in range(len(idx)):
+            ix = int(idx[i])
+            d = pred[i] - tgt[i]
+            item = (float(np.mean(d ** 2)), float(np.mean(np.abs(d))))
+            if ix not in seq_m:
+                seq_m[ix] = []
+                order.append(ix)
+            seq_m[ix].append(item)
     seqs = []
     for ix in sorted(seq_m):
         a = np.array(seq_m[ix], dtype=np.float64)

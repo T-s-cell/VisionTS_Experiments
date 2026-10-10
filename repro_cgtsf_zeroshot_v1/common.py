@@ -60,12 +60,11 @@ def protocol_sha256():
     return sha256_file(P.PROTO_PATH) if os.path.isfile(P.PROTO_PATH) else None
 
 
-def current_guards():
-    """Fingerprints every prediction shard is bound to. A stored guard set
-    differing from this = protocol/source/weight/data mismatch = hard stop
-    (tier-1). Used by run_infer resume checks and recorded in headers."""
+def core_guards():
+    """Machine-independent fingerprints every prediction shard is bound to:
+    protocol json, weights, CSVs, experiment code, visionts sources."""
     import protocol as P
-    g = {
+    return {
         "protocol_sha256": protocol_sha256(),
         "weights_sha256": P.WEIGHTS_SHA256,
         "csv_sha256": dict(P.CSV_SHA256),
@@ -74,7 +73,21 @@ def current_guards():
         "visionts_code_md5": {n: md5_file(os.path.join(P.REPO_ROOT, n))
                               for n in P.VTS_CODE_FILES},
     }
-    return g
+
+
+def current_guards(batch=None, preflight_report_sha256=None):
+    """Full guard set: core fingerprints + runtime binding (batch, env,
+    preflight report). run_infer resume compares the FULL set on the same
+    host (any drift = tier-1 hard stop); verify_cache compares the core set
+    everywhere and cross-checks runtime.batch against the preflight report."""
+    return {
+        "core": core_guards(),
+        "runtime": {
+            "batch": batch,
+            "env": env_info(),
+            "preflight_report_sha256": preflight_report_sha256,
+        },
+    }
 
 
 def guards_equal(a, b):
