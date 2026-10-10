@@ -1,0 +1,25 @@
+{
+ "n_windows": 1677,
+ "pure_cache": {
+  "n_rows": 1677,
+  "std_mse": 3.2547149082498437,
+  "std_mae": 1.042066695644017,
+  "delta_vs_ref": {
+   "std_mse": 9.175015636131434e-08,
+   "std_mae": 3.0435598308287126e-07
+  },
+  "within_5e-7": true,
+  "reference": {
+   "std_mse": 3.254715,
+   "std_mae": 1.042067
+  }
+ },
+ "final_preds": {
+  "std_mse": 3.2547149076737516,
+  "std_mae": 1.0420666946882573
+ },
+ "reinfer_vars_touching_subset": [
+  "shopping__black_friday_deals_96_12_4_10events"
+ ],
+ "note": "\u22645e-7 is enforced on the PURE-cache recompute only (frozen amendment 2026-10-10); the final-subset value legitimately shifts when variables were re-inferred \u2014 delta and reasons are reported."
+}

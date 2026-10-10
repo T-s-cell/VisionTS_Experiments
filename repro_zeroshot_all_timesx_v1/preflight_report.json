@@ -1,0 +1,2598 @@
+{
+ "stage": "S3_preflight",
+ "created": "2026-10-10T11:56:07",
+ "device": "cuda",
+ "sample_sha256": "960d0b2bf6c89bba8c84a8dd606a24438932fe9c87a812ad650e2f8f6453b685",
+ "forward_binding": {
+  "protocol_version": "TimesX-all-native-P1-v1",
+  "run_config": {
+   "arch": "mae_base",
+   "finetune_type": "none",
+   "context_len": 96,
+   "pred_len": 12,
+   "periodicity": 1,
+   "norm_const_r": 0.4,
+   "align_const_c": 0.4,
+   "interpolation": "bilinear",
+   "precision": "fp32",
+   "tf32": false,
+   "image_size": 224,
+   "patch_size": 16,
+   "seed": 2021,
+   "batch_size": 64
+  },
+  "zip_sha256": "9adb9540733c128e05e774e81cf0e238a9cc80b37e99da0c883bee9f57988bcc",
+  "inventory_sha256": "0cb6e73971b0f8b54077ff3df5a332f7dbe34493b337ab0a2b9744aa88c217de",
+  "arrays_sha256": "fb0c0c454afd8f7b9f276b99704450bdc6c99a454c8d774ea8846f729fa9423d",
+  "vars_sha256": "22018d215b0dfe8ccc842846cf5e04bb2050828d993548728c72215681267068",
+  "old_splits_sha256": "d012d68311101ae2540284f0ea15b8ad5fe52980386d735e3720e5f6f0997f90",
+  "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+  "code_md5_forward": {
+   "protocol.py": "fbb3a4b1b61e4275d2e01c33f48000a0",
+   "common.py": "bea7823614f011a24b431bbf7695a27b",
+   "infer_fill.py": "f3c0d73cf41710dbcc3792b40811d332",
+   "preflight.py": "b1c45f3c241b36c9924f250e0c4892ba"
+  },
+  "code_md5_reused_old": {
+   "timesx_data.py": "35ee411bfbd001265f71fbd2a3032f7d",
+   "record_fingerprint.py": "b4b565d40fe99d6b01113148ce660a7d",
+   "metrics_util.py": "a27ab8e5a437c6173a4b04ce7a596424"
+  },
+  "code_md5_new_all": {
+   "protocol.py": "fbb3a4b1b61e4275d2e01c33f48000a0",
+   "common.py": "bea7823614f011a24b431bbf7695a27b",
+   "freeze_full.py": "7b2d1583747dc6c5ffd5c9512d80ffbc",
+   "verify_cache.py": "334390ea0a6350e7ec2039df89033ba9",
+   "preflight.py": "b1c45f3c241b36c9924f250e0c4892ba",
+   "infer_fill.py": "f3c0d73cf41710dbcc3792b40811d332",
+   "assemble.py": "79347e3658d786c095869b73db67bc27",
+   "evaluate.py": "0b92cc0476115d7872488548c037d0c1",
+   "recompute_check.py": "911cf07822f5cfbabb32c0e04c12b35a",
+   "verify_acceptance.py": "4f8792f917db99c2ae9d25665729a8bd",
+   "make_report.py": "e2f45621facf3cc87f84adc0ddb264d0",
+   "run_all.sh": "e2e61f3a5a11e89362dccc86c506b4db",
+   "audit_all.sh": "658bf45ec0f0e6188a2012dbec4314eb",
+   "stage_guard.py": "ad275d7e2a7b4c2c5a6514f29f233c7d"
+  },
+  "env": {
+   "python": "3.12.13",
+   "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+   "host": "theta",
+   "torch": "2.12.0+cu126",
+   "cuda_available": true,
+   "gpu": "NVIDIA GeForce RTX 3090",
+   "cuda_visible_devices": "1",
+   "numpy": "2.4.4"
+  }
+ },
+ "criteria": {
+  "c1_max_rel": 1e-05,
+  "c2_max_over_d": 0.0001
+ },
+ "stats": {
+  "n_checked": 194,
+  "n_compare": 191,
+  "n_new_only": 3,
+  "n_failed": 1,
+  "c1_max": 3.102428690676545e-05,
+  "c2_max": 1.0152948882734058e-05
+ },
+ "per_var_detail": {
+  "CropsAndStaples__canola_cad_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 67,
+     "sample_id": "CropsAndStaples__canola_cad_t_96_12_12_10events__20240322T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 9.128108623032117e-08,
+     "c2": 1.471077037874065e-06,
+     "d": 41.49011552665202,
+     "d_source": "window",
+     "old_file": "CropsAndStaples__canola_cad_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 78,
+     "sample_id": "CropsAndStaples__canola_cad_t_96_12_12_10events__20240910T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.0079397429431115e-07,
+     "c2": 1.8865764364471584e-06,
+     "d": 32.35233678893113,
+     "d_source": "window",
+     "old_file": "CropsAndStaples__canola_cad_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 89,
+     "sample_id": "CropsAndStaples__canola_cad_t_96_12_12_10events__20250224T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 9.063302272188006e-08,
+     "c2": 2.552050041184934e-06,
+     "d": 23.916128314498476,
+     "d_source": "window",
+     "old_file": "CropsAndStaples__canola_cad_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 100,
+     "sample_id": "CropsAndStaples__canola_cad_t_96_12_12_10events__20250827T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 0.0,
+     "c2": 0.0,
+     "d": 23.40026518275517,
+     "d_source": "window",
+     "old_file": "CropsAndStaples__canola_cad_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 111,
+     "sample_id": "CropsAndStaples__canola_cad_t_96_12_12_10events__20260303T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 8.619696903873829e-08,
+     "c2": 2.1563609302819876e-06,
+     "d": 28.304703258567397,
+     "d_source": "window",
+     "old_file": "CropsAndStaples__canola_cad_t_96_12_12_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "CropsAndStaples__cotton_usd_lbs_96_12_12_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 200,
+     "sample_id": "CropsAndStaples__cotton_usd_lbs_96_12_12_10events__20240404T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 8.500392250600404e-08,
+     "c2": 1.077540172574777e-06,
+     "d": 7.080380597801379,
+     "d_source": "window",
+     "old_file": "CropsAndStaples__cotton_usd_lbs_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 211,
+     "sample_id": "CropsAndStaples__cotton_usd_lbs_96_12_12_10events__20240921T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.0328951275754594e-07,
+     "c2": 1.998867734996742e-06,
+     "d": 3.816858113056908,
+     "d_source": "window",
+     "old_file": "CropsAndStaples__cotton_usd_lbs_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 222,
+     "sample_id": "CropsAndStaples__cotton_usd_lbs_96_12_12_10events__20250307T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.122107515404853e-07,
+     "c2": 3.497841945479005e-06,
+     "d": 2.181171891174519,
+     "d_source": "window",
+     "old_file": "CropsAndStaples__cotton_usd_lbs_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 234,
+     "sample_id": "CropsAndStaples__cotton_usd_lbs_96_12_12_10events__20250901T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.1590214520962526e-07,
+     "c2": 5.2169483456001215e-06,
+     "d": 1.4624247789772524,
+     "d_source": "window",
+     "old_file": "CropsAndStaples__cotton_usd_lbs_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 245,
+     "sample_id": "CropsAndStaples__cotton_usd_lbs_96_12_12_10events__20260303T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.1746349792436126e-07,
+     "c2": 6.605824331740504e-06,
+     "d": 1.154949654745028,
+     "d_source": "window",
+     "old_file": "CropsAndStaples__cotton_usd_lbs_96_12_12_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "CropsAndStaples__potatoes_eur_100kg_96_12_12_10events": {
+   "verdict": "reuse",
+   "n_checked": 2,
+   "detail": [
+    {
+     "flat_index": 393,
+     "sample_id": "CropsAndStaples__potatoes_eur_100kg_96_12_12_10events__20231018T000000",
+     "mode": "new_only",
+     "passed": true,
+     "reason": "new_only sanity (finite)"
+    },
+    {
+     "flat_index": 394,
+     "sample_id": "CropsAndStaples__potatoes_eur_100kg_96_12_12_10events__20231103T000000",
+     "mode": "new_only",
+     "passed": true,
+     "reason": "new_only sanity (finite)"
+    }
+   ]
+  },
+  "Currency__usdtoinr_exchangerate_96_12_12_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 4330,
+     "sample_id": "Currency__usdtoinr_exchangerate_96_12_12_10events__20231129T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 0.0,
+     "c2": 0.0,
+     "d": 0.39753319218511646,
+     "d_source": "window",
+     "old_file": "Currency__usdtoinr_exchangerate_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 4342,
+     "sample_id": "Currency__usdtoinr_exchangerate_96_12_12_10events__20240626T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 0.0,
+     "c2": 0.0,
+     "d": 0.2573481719329324,
+     "d_source": "window",
+     "old_file": "Currency__usdtoinr_exchangerate_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 4354,
+     "sample_id": "Currency__usdtoinr_exchangerate_96_12_12_10events__20250117T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 0.0,
+     "c2": 0.0,
+     "d": 0.7330948653463765,
+     "d_source": "window",
+     "old_file": "Currency__usdtoinr_exchangerate_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 4366,
+     "sample_id": "Currency__usdtoinr_exchangerate_96_12_12_10events__20250812T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 8.696377376165543e-08,
+     "c2": 1.0152948882734058e-05,
+     "d": 0.7514461679428354,
+     "d_source": "window",
+     "old_file": "Currency__usdtoinr_exchangerate_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 4378,
+     "sample_id": "Currency__usdtoinr_exchangerate_96_12_12_10events__20260305T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 8.276815786470071e-08,
+     "c2": 6.752192338232654e-06,
+     "d": 1.129913685670712,
+     "d_source": "window",
+     "old_file": "Currency__usdtoinr_exchangerate_96_12_12_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "Currency__usdtokrw_exchangerate_96_12_12_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 4399,
+     "sample_id": "Currency__usdtokrw_exchangerate_96_12_12_10events__20240123T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 9.115489422477229e-08,
+     "c2": 5.783650484994813e-06,
+     "d": 21.10610121007502,
+     "d_source": "window",
+     "old_file": "Currency__usdtokrw_exchangerate_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 4410,
+     "sample_id": "Currency__usdtokrw_exchangerate_96_12_12_10events__20240730T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 0.0,
+     "c2": 0.0,
+     "d": 17.201165819663377,
+     "d_source": "window",
+     "old_file": "Currency__usdtokrw_exchangerate_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 4421,
+     "sample_id": "Currency__usdtokrw_exchangerate_96_12_12_10events__20250204T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 8.264810478391198e-08,
+     "c2": 2.6821580793014438e-06,
+     "d": 45.511975391022695,
+     "d_source": "window",
+     "old_file": "Currency__usdtokrw_exchangerate_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 4433,
+     "sample_id": "Currency__usdtokrw_exchangerate_96_12_12_10events__20250828T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 8.686227994201421e-08,
+     "c2": 5.787532934174552e-06,
+     "d": 21.09194260981088,
+     "d_source": "window",
+     "old_file": "Currency__usdtokrw_exchangerate_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 4444,
+     "sample_id": "Currency__usdtokrw_exchangerate_96_12_12_10events__20260305T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 8.309090177890974e-08,
+     "c2": 7.609531149081439e-06,
+     "d": 16.04176526890692,
+     "d_source": "window",
+     "old_file": "Currency__usdtokrw_exchangerate_96_12_12_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "EnergyAndFuels__methanol_cny_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 1101,
+     "sample_id": "EnergyAndFuels__methanol_cny_t_96_12_12_10events__20240112T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.0143107069015324e-07,
+     "c2": 4.49370625879172e-06,
+     "d": 54.32945789955687,
+     "d_source": "window",
+     "old_file": "EnergyAndFuels__methanol_cny_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 1112,
+     "sample_id": "EnergyAndFuels__methanol_cny_t_96_12_12_10events__20240801T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 9.549315290220403e-08,
+     "c2": 3.6903993133009396e-06,
+     "d": 66.15561197403983,
+     "d_source": "window",
+     "old_file": "EnergyAndFuels__methanol_cny_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 1123,
+     "sample_id": "EnergyAndFuels__methanol_cny_t_96_12_12_10events__20250221T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 9.46697431808674e-08,
+     "c2": 2.6343343898692757e-06,
+     "d": 92.67639899432625,
+     "d_source": "window",
+     "old_file": "EnergyAndFuels__methanol_cny_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 1133,
+     "sample_id": "EnergyAndFuels__methanol_cny_t_96_12_12_10events__20250815T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.0236243282337393e-07,
+     "c2": 2.6650589524968673e-06,
+     "d": 91.6079641582664,
+     "d_source": "window",
+     "old_file": "EnergyAndFuels__methanol_cny_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 1144,
+     "sample_id": "EnergyAndFuels__methanol_cny_t_96_12_12_10events__20260309T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 9.623300705532291e-08,
+     "c2": 2.215049678817236e-06,
+     "d": 110.2190290966129,
+     "d_source": "window",
+     "old_file": "EnergyAndFuels__methanol_cny_t_96_12_12_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "EnergyAndFuels__rapeseed_eur_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 1299,
+     "sample_id": "EnergyAndFuels__rapeseed_eur_t_96_12_12_10events__20240227T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 7.194885414974369e-08,
+     "c2": 2.353554477288877e-06,
+     "d": 12.966590924274685,
+     "d_source": "window",
+     "old_file": "EnergyAndFuels__rapeseed_eur_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 1311,
+     "sample_id": "EnergyAndFuels__rapeseed_eur_t_96_12_12_10events__20240830T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 6.320942705395083e-08,
+     "c2": 2.2404344046551004e-06,
+     "d": 13.621277222663421,
+     "d_source": "window",
+     "old_file": "EnergyAndFuels__rapeseed_eur_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 1322,
+     "sample_id": "EnergyAndFuels__rapeseed_eur_t_96_12_12_10events__20250208T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.1551392433722442e-07,
+     "c2": 4.3504506103483765e-06,
+     "d": 14.029617094104283,
+     "d_source": "window",
+     "old_file": "EnergyAndFuels__rapeseed_eur_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 1333,
+     "sample_id": "EnergyAndFuels__rapeseed_eur_t_96_12_12_10events__20250812T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 6.385805733189159e-08,
+     "c2": 1.3910101308701155e-06,
+     "d": 21.93914871483388,
+     "d_source": "window",
+     "old_file": "EnergyAndFuels__rapeseed_eur_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 1345,
+     "sample_id": "EnergyAndFuels__rapeseed_eur_t_96_12_12_10events__20260302T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 0.0,
+     "c2": 0.0,
+     "d": 10.93603834411502,
+     "d_source": "window",
+     "old_file": "EnergyAndFuels__rapeseed_eur_t_96_12_12_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "LivestockAndFoodProducts__cheese_usd_lbs_96_12_12_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 1539,
+     "sample_id": "LivestockAndFoodProducts__cheese_usd_lbs_96_12_12_10events__20240315T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 7.319346988355871e-08,
+     "c2": 1.8057210333525358e-06,
+     "d": 0.06601755606150028,
+     "d_source": "window",
+     "old_file": "LivestockAndFoodProducts__cheese_usd_lbs_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 1550,
+     "sample_id": "LivestockAndFoodProducts__cheese_usd_lbs_96_12_12_10events__20240910T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 0.0,
+     "c2": 0.0,
+     "d": 0.08863596091103919,
+     "d_source": "window",
+     "old_file": "LivestockAndFoodProducts__cheese_usd_lbs_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 1561,
+     "sample_id": "LivestockAndFoodProducts__cheese_usd_lbs_96_12_12_10events__20250228T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 6.312465794325977e-08,
+     "c2": 2.2256405432506113e-06,
+     "d": 0.05356178917224104,
+     "d_source": "window",
+     "old_file": "LivestockAndFoodProducts__cheese_usd_lbs_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 1572,
+     "sample_id": "LivestockAndFoodProducts__cheese_usd_lbs_96_12_12_10events__20250901T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 6.550768290482028e-08,
+     "c2": 1.4216346729458743e-06,
+     "d": 0.0838536733939943,
+     "d_source": "window",
+     "old_file": "LivestockAndFoodProducts__cheese_usd_lbs_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 1583,
+     "sample_id": "LivestockAndFoodProducts__cheese_usd_lbs_96_12_12_10events__20260306T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 6.98867108462498e-08,
+     "c2": 9.344827062386164e-07,
+     "d": 0.1275671435703826,
+     "d_source": "window",
+     "old_file": "LivestockAndFoodProducts__cheese_usd_lbs_96_12_12_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "LivestockAndFoodProducts__milk_usd_cwt_96_12_12_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 1755,
+     "sample_id": "LivestockAndFoodProducts__milk_usd_cwt_96_12_12_10events__20240314T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 0.0,
+     "c2": 0.0,
+     "d": 0.652745994165652,
+     "d_source": "window",
+     "old_file": "LivestockAndFoodProducts__milk_usd_cwt_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 1766,
+     "sample_id": "LivestockAndFoodProducts__milk_usd_cwt_96_12_12_10events__20240910T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 8.313484197022592e-08,
+     "c2": 1.9992334041445647e-06,
+     "d": 0.954039997960428,
+     "d_source": "window",
+     "old_file": "LivestockAndFoodProducts__milk_usd_cwt_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 1777,
+     "sample_id": "LivestockAndFoodProducts__milk_usd_cwt_96_12_12_10events__20250225T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 9.343881953132957e-08,
+     "c2": 2.2345344990292547e-06,
+     "d": 0.8535776170120025,
+     "d_source": "window",
+     "old_file": "LivestockAndFoodProducts__milk_usd_cwt_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 1789,
+     "sample_id": "LivestockAndFoodProducts__milk_usd_cwt_96_12_12_10events__20250909T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 0.0,
+     "c2": 0.0,
+     "d": 0.635584813817602,
+     "d_source": "window",
+     "old_file": "LivestockAndFoodProducts__milk_usd_cwt_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 1800,
+     "sample_id": "LivestockAndFoodProducts__milk_usd_cwt_96_12_12_10events__20260309T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.1672275194897816e-07,
+     "c2": 2.0513253412520987e-06,
+     "d": 0.9298128358558094,
+     "d_source": "window",
+     "old_file": "LivestockAndFoodProducts__milk_usd_cwt_96_12_12_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "RawMaterialsAndConstruction__polyethylene_cny_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 2341,
+     "sample_id": "RawMaterialsAndConstruction__polyethylene_cny_t_96_12_12_10events__20240123T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.1841389326526903e-07,
+     "c2": 5.616791025093766e-06,
+     "d": 173.8648448263566,
+     "d_source": "window",
+     "old_file": "RawMaterialsAndConstruction__polyethylene_cny_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 2351,
+     "sample_id": "RawMaterialsAndConstruction__polyethylene_cny_t_96_12_12_10events__20240726T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.1679672371174381e-07,
+     "c2": 6.699149132200478e-06,
+     "d": 145.7741096262515,
+     "d_source": "window",
+     "old_file": "RawMaterialsAndConstruction__polyethylene_cny_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 2362,
+     "sample_id": "RawMaterialsAndConstruction__polyethylene_cny_t_96_12_12_10events__20250217T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 5.96648956932327e-08,
+     "c2": 1.8926336309442057e-06,
+     "d": 257.99036961865886,
+     "d_source": "window",
+     "old_file": "RawMaterialsAndConstruction__polyethylene_cny_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 2373,
+     "sample_id": "RawMaterialsAndConstruction__polyethylene_cny_t_96_12_12_10events__20250828T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 0.0,
+     "c2": 0.0,
+     "d": 119.73625348784535,
+     "d_source": "window",
+     "old_file": "RawMaterialsAndConstruction__polyethylene_cny_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 2383,
+     "sample_id": "RawMaterialsAndConstruction__polyethylene_cny_t_96_12_12_10events__20260304T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 6.8817488450705e-08,
+     "c2": 2.4232195276587533e-06,
+     "d": 201.50103794837096,
+     "d_source": "window",
+     "old_file": "RawMaterialsAndConstruction__polyethylene_cny_t_96_12_12_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "RawMaterialsAndConstruction__steel_cny_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 2530,
+     "sample_id": "RawMaterialsAndConstruction__steel_cny_t_96_12_12_10events__20231226T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 6.168079424138236e-08,
+     "c2": 1.9248603652776334e-06,
+     "d": 126.83549903360718,
+     "d_source": "window",
+     "old_file": "RawMaterialsAndConstruction__steel_cny_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 2541,
+     "sample_id": "RawMaterialsAndConstruction__steel_cny_t_96_12_12_10events__20240717T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 7.041216181390742e-08,
+     "c2": 2.0173632439946497e-06,
+     "d": 121.0196655098012,
+     "d_source": "window",
+     "old_file": "RawMaterialsAndConstruction__steel_cny_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 2552,
+     "sample_id": "RawMaterialsAndConstruction__steel_cny_t_96_12_12_10events__20250206T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 7.445967591574977e-08,
+     "c2": 2.3792833704078746e-06,
+     "d": 102.61099120704885,
+     "d_source": "window",
+     "old_file": "RawMaterialsAndConstruction__steel_cny_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 2563,
+     "sample_id": "RawMaterialsAndConstruction__steel_cny_t_96_12_12_10events__20250819T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 7.739416328821795e-08,
+     "c2": 2.535989234319355e-06,
+     "d": 96.27037122084863,
+     "d_source": "window",
+     "old_file": "RawMaterialsAndConstruction__steel_cny_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 2574,
+     "sample_id": "RawMaterialsAndConstruction__steel_cny_t_96_12_12_10events__20260311T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 7.85015067186692e-08,
+     "c2": 7.420522015890303e-06,
+     "d": 32.90073454093895,
+     "d_source": "window",
+     "old_file": "RawMaterialsAndConstruction__steel_cny_t_96_12_12_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "SpecialtyAndAdvancedMaterials__germanium_cny_kg_96_12_12_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 2778,
+     "sample_id": "SpecialtyAndAdvancedMaterials__germanium_cny_kg_96_12_12_10events__20240111T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.0355208504194273e-07,
+     "c2": 9.75729103017962e-06,
+     "d": 100.08541274206746,
+     "d_source": "window",
+     "old_file": "SpecialtyAndAdvancedMaterials__germanium_cny_kg_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 2789,
+     "sample_id": "SpecialtyAndAdvancedMaterials__germanium_cny_kg_96_12_12_10events__20240719T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.4142849283473755e-07,
+     "c2": 1.7924334665383208e-06,
+     "d": 1089.649929250662,
+     "d_source": "window",
+     "old_file": "SpecialtyAndAdvancedMaterials__germanium_cny_kg_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 2800,
+     "sample_id": "SpecialtyAndAdvancedMaterials__germanium_cny_kg_96_12_12_10events__20250210T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.1549924838864112e-07,
+     "c2": 2.7093367263170733e-06,
+     "d": 720.8867694548153,
+     "d_source": "window",
+     "old_file": "SpecialtyAndAdvancedMaterials__germanium_cny_kg_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 2811,
+     "sample_id": "SpecialtyAndAdvancedMaterials__germanium_cny_kg_96_12_12_10events__20250820T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 6.709771581258991e-08,
+     "c2": 3.3291059143415166e-06,
+     "d": 293.3407723055756,
+     "d_source": "window",
+     "old_file": "SpecialtyAndAdvancedMaterials__germanium_cny_kg_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 2822,
+     "sample_id": "SpecialtyAndAdvancedMaterials__germanium_cny_kg_96_12_12_10events__20260313T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 6.403016076692765e-08,
+     "c2": 2.2392778386411054e-06,
+     "d": 436.1059995094767,
+     "d_source": "window",
+     "old_file": "SpecialtyAndAdvancedMaterials__germanium_cny_kg_96_12_12_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "SpecialtyAndAdvancedMaterials__polyvinyl_cny_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 3004,
+     "sample_id": "SpecialtyAndAdvancedMaterials__polyvinyl_cny_t_96_12_12_10events__20231220T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 8.231621361880597e-08,
+     "c2": 2.3882015544916224e-06,
+     "d": 204.45562858028566,
+     "d_source": "window",
+     "old_file": "SpecialtyAndAdvancedMaterials__polyvinyl_cny_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 3015,
+     "sample_id": "SpecialtyAndAdvancedMaterials__polyvinyl_cny_t_96_12_12_10events__20240711T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 8.306169390702606e-08,
+     "c2": 2.251690907852741e-06,
+     "d": 216.85092225452698,
+     "d_source": "window",
+     "old_file": "SpecialtyAndAdvancedMaterials__polyvinyl_cny_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 3026,
+     "sample_id": "SpecialtyAndAdvancedMaterials__polyvinyl_cny_t_96_12_12_10events__20250123T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 9.77670207983694e-08,
+     "c2": 2.3026313714341537e-06,
+     "d": 212.05359053884624,
+     "d_source": "window",
+     "old_file": "SpecialtyAndAdvancedMaterials__polyvinyl_cny_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 3037,
+     "sample_id": "SpecialtyAndAdvancedMaterials__polyvinyl_cny_t_96_12_12_10events__20250814T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 9.61914810708151e-08,
+     "c2": 3.309945185698445e-06,
+     "d": 147.51943691084594,
+     "d_source": "window",
+     "old_file": "SpecialtyAndAdvancedMaterials__polyvinyl_cny_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 3048,
+     "sample_id": "SpecialtyAndAdvancedMaterials__polyvinyl_cny_t_96_12_12_10events__20260306T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 9.726539319681098e-08,
+     "c2": 2.6593385637434013e-06,
+     "d": 183.61003621617624,
+     "d_source": "window",
+     "old_file": "SpecialtyAndAdvancedMaterials__polyvinyl_cny_t_96_12_12_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "n_checked": 7,
+   "detail": [
+    {
+     "flat_index": 3174,
+     "sample_id": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__20231122T000000",
+     "mode": "new_only",
+     "passed": true,
+     "reason": "new_only sanity (finite)"
+    },
+    {
+     "flat_index": 3176,
+     "sample_id": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__20231226T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 6.650125145380049e-08,
+     "c2": 1.5410651482174524e-06,
+     "d": 1267.3863932742731,
+     "d_source": "window",
+     "old_file": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 3188,
+     "sample_id": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__20240723T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 7.28656379495901e-08,
+     "c2": 3.0704235244752084e-06,
+     "d": 636.109313399631,
+     "d_source": "window",
+     "old_file": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 3198,
+     "sample_id": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__20250113T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 0.0,
+     "c2": 0.0,
+     "d": 6672.939675654993,
+     "d_source": "calib_std",
+     "old_file": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 3199,
+     "sample_id": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__20250129T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 0.0,
+     "c2": 0.0,
+     "d": 55.84100926713469,
+     "d_source": "window",
+     "old_file": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 3210,
+     "sample_id": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__20250807T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 0.0,
+     "c2": 0.0,
+     "d": 332.7744623216113,
+     "d_source": "window",
+     "old_file": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 3222,
+     "sample_id": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__20260303T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 6.922841333461083e-08,
+     "c2": 1.0047912793324381e-06,
+     "d": 3887.623310778761,
+     "d_source": "window",
+     "old_file": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "StrategicAndHighValueMaterials__gold_usd_t_oz_96_12_12_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 3245,
+     "sample_id": "StrategicAndHighValueMaterials__gold_usd_t_oz_96_12_12_10events__20240208T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 0.0,
+     "c2": 0.0,
+     "d": 64.73766109776999,
+     "d_source": "window",
+     "old_file": "StrategicAndHighValueMaterials__gold_usd_t_oz_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 3256,
+     "sample_id": "StrategicAndHighValueMaterials__gold_usd_t_oz_96_12_12_10events__20240812T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.0021366555633266e-07,
+     "c2": 5.510739669234323e-06,
+     "d": 44.30269612680172,
+     "d_source": "window",
+     "old_file": "StrategicAndHighValueMaterials__gold_usd_t_oz_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 3267,
+     "sample_id": "StrategicAndHighValueMaterials__gold_usd_t_oz_96_12_12_10events__20250214T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 8.290550637646976e-08,
+     "c2": 3.0409530263720802e-06,
+     "d": 80.28424736677528,
+     "d_source": "window",
+     "old_file": "StrategicAndHighValueMaterials__gold_usd_t_oz_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 3279,
+     "sample_id": "StrategicAndHighValueMaterials__gold_usd_t_oz_96_12_12_10events__20250905T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 6.900286920830455e-08,
+     "c2": 3.93952883542018e-06,
+     "d": 61.97203655547317,
+     "d_source": "window",
+     "old_file": "StrategicAndHighValueMaterials__gold_usd_t_oz_96_12_12_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 3290,
+     "sample_id": "StrategicAndHighValueMaterials__gold_usd_t_oz_96_12_12_10events__20260312T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 9.255130442733973e-08,
+     "c2": 1.1197799744508232e-06,
+     "d": 436.051064620502,
+     "d_source": "window",
+     "old_file": "StrategicAndHighValueMaterials__gold_usd_t_oz_96_12_12_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "arts__national_basketball_association_96_12_4_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 4829,
+     "sample_id": "arts__national_basketball_association_96_12_4_10events__20231029T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 2.2901026458357403e-07,
+     "c2": 6.578979593633927e-07,
+     "d": 23.193245769093114,
+     "d_source": "window",
+     "old_file": "arts__national_basketball_association_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 4835,
+     "sample_id": "arts__national_basketball_association_96_12_4_10events__20240414T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.012405464338846e-06,
+     "c2": 3.7158942583283527e-06,
+     "d": 22.584964482144358,
+     "d_source": "window",
+     "old_file": "arts__national_basketball_association_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 4842,
+     "sample_id": "arts__national_basketball_association_96_12_4_10events__20241027T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 5.098607060551057e-07,
+     "c2": 1.581076794167465e-06,
+     "d": 24.12721051689127,
+     "d_source": "window",
+     "old_file": "arts__national_basketball_association_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 4849,
+     "sample_id": "arts__national_basketball_association_96_12_4_10events__20250511T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 5.25291292561418e-07,
+     "c2": 1.484523466400507e-06,
+     "d": 21.841976561295148,
+     "d_source": "window",
+     "old_file": "arts__national_basketball_association_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 4857,
+     "sample_id": "arts__national_basketball_association_96_12_4_10events__20251221T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.9142426930485042e-07,
+     "c2": 7.065319264274714e-07,
+     "d": 21.596743886231703,
+     "d_source": "window",
+     "old_file": "arts__national_basketball_association_96_12_4_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "arts__national_football_league_96_12_4_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 4858,
+     "sample_id": "arts__national_football_league_96_12_4_10events__20231029T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 5.868559237897161e-07,
+     "c2": 1.6983824074769652e-06,
+     "d": 8.984307064960547,
+     "d_source": "window",
+     "old_file": "arts__national_football_league_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 4864,
+     "sample_id": "arts__national_football_league_96_12_4_10events__20240414T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 4.097916854701289e-07,
+     "c2": 8.644386367062038e-07,
+     "d": 8.825837031441015,
+     "d_source": "window",
+     "old_file": "arts__national_football_league_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 4871,
+     "sample_id": "arts__national_football_league_96_12_4_10events__20241027T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.2608884614126758e-06,
+     "c2": 2.5221910579839514e-06,
+     "d": 12.099629815273964,
+     "d_source": "window",
+     "old_file": "arts__national_football_league_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 4878,
+     "sample_id": "arts__national_football_league_96_12_4_10events__20250511T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 7.47936093722376e-07,
+     "c2": 9.53384218961896e-07,
+     "d": 16.004868508432747,
+     "d_source": "window",
+     "old_file": "arts__national_football_league_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 4886,
+     "sample_id": "arts__national_football_league_96_12_4_10events__20251221T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 5.002600414227821e-07,
+     "c2": 9.241866695170088e-07,
+     "d": 16.510505470149692,
+     "d_source": "window",
+     "old_file": "arts__national_football_league_96_12_4_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "climate__deforestation_96_12_4_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 4887,
+     "sample_id": "climate__deforestation_96_12_4_10events__20231029T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 4.6575695019155254e-07,
+     "c2": 1.2008625893299466e-06,
+     "d": 22.236416636373516,
+     "d_source": "window",
+     "old_file": "climate__deforestation_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 4893,
+     "sample_id": "climate__deforestation_96_12_4_10events__20240414T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 2.63463068168645e-07,
+     "c2": 9.713656680449134e-07,
+     "d": 19.63574270286346,
+     "d_source": "window",
+     "old_file": "climate__deforestation_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 4900,
+     "sample_id": "climate__deforestation_96_12_4_10events__20241027T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 8.067417797046357e-07,
+     "c2": 2.1523769405392675e-06,
+     "d": 21.26782085670875,
+     "d_source": "window",
+     "old_file": "climate__deforestation_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 4907,
+     "sample_id": "climate__deforestation_96_12_4_10events__20250511T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 2.0702354282080136e-07,
+     "c2": 7.032126403830624e-07,
+     "d": 21.698684275908423,
+     "d_source": "window",
+     "old_file": "climate__deforestation_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 4915,
+     "sample_id": "climate__deforestation_96_12_4_10events__20251221T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 7.628632572061493e-07,
+     "c2": 2.059609166862572e-06,
+     "d": 22.22575424697284,
+     "d_source": "window",
+     "old_file": "climate__deforestation_96_12_4_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "climate__endangered_species_96_12_4_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 4945,
+     "sample_id": "climate__endangered_species_96_12_4_10events__20231029T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 6.540702254984401e-07,
+     "c2": 2.0855707773205886e-06,
+     "d": 20.11999323071871,
+     "d_source": "window",
+     "old_file": "climate__endangered_species_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 4951,
+     "sample_id": "climate__endangered_species_96_12_4_10events__20240414T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 3.8246011156170225e-07,
+     "c2": 1.7549323169406193e-06,
+     "d": 17.389604049346712,
+     "d_source": "window",
+     "old_file": "climate__endangered_species_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 4958,
+     "sample_id": "climate__endangered_species_96_12_4_10events__20241027T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 5.770151034344452e-07,
+     "c2": 1.7331822669961413e-06,
+     "d": 19.808808366201358,
+     "d_source": "window",
+     "old_file": "climate__endangered_species_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 4965,
+     "sample_id": "climate__endangered_species_96_12_4_10events__20250511T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 3.6864755745187857e-07,
+     "c2": 1.5207050422977045e-06,
+     "d": 20.06804559475226,
+     "d_source": "window",
+     "old_file": "climate__endangered_species_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 4973,
+     "sample_id": "climate__endangered_species_96_12_4_10events__20251221T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 4.816609403201624e-07,
+     "c2": 1.4607000383344982e-06,
+     "d": 20.892433301909396,
+     "d_source": "window",
+     "old_file": "climate__endangered_species_96_12_4_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "economy__inflation_96_12_4_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 5293,
+     "sample_id": "economy__inflation_96_12_4_10events__20231029T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 2.095166001573679e-07,
+     "c2": 6.192149446786525e-07,
+     "d": 12.321076222101434,
+     "d_source": "window",
+     "old_file": "economy__inflation_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 5299,
+     "sample_id": "economy__inflation_96_12_4_10events__20240414T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 9.541595967416213e-08,
+     "c2": 3.3029850634021684e-07,
+     "d": 11.549241647783152,
+     "d_source": "window",
+     "old_file": "economy__inflation_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 5306,
+     "sample_id": "economy__inflation_96_12_4_10events__20241027T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 2.2814639834977148e-07,
+     "c2": 1.7363624230991166e-06,
+     "d": 4.393895208600982,
+     "d_source": "window",
+     "old_file": "economy__inflation_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 5313,
+     "sample_id": "economy__inflation_96_12_4_10events__20250511T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 2.3809948987184296e-07,
+     "c2": 1.6441077787483904e-06,
+     "d": 4.640446709070392,
+     "d_source": "window",
+     "old_file": "economy__inflation_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 5321,
+     "sample_id": "economy__inflation_96_12_4_10events__20251221T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 4.115199918881179e-07,
+     "c2": 2.913190639290209e-06,
+     "d": 6.547283954191272,
+     "d_source": "window",
+     "old_file": "economy__inflation_96_12_4_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "economy__student_loans_96_12_4_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 5380,
+     "sample_id": "economy__student_loans_96_12_4_10events__20231029T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.0004137865330914e-06,
+     "c2": 1.249734422681281e-06,
+     "d": 9.920320580337446,
+     "d_source": "window",
+     "old_file": "economy__student_loans_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 5386,
+     "sample_id": "economy__student_loans_96_12_4_10events__20240414T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 6.367388105888815e-07,
+     "c2": 1.1440740508268745e-06,
+     "d": 10.002929258472241,
+     "d_source": "window",
+     "old_file": "economy__student_loans_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 5393,
+     "sample_id": "economy__student_loans_96_12_4_10events__20241027T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 3.9933682703615285e-07,
+     "c2": 1.2108607455339902e-06,
+     "d": 2.756601136615323,
+     "d_source": "window",
+     "old_file": "economy__student_loans_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 5400,
+     "sample_id": "economy__student_loans_96_12_4_10events__20250511T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 3.534190197746777e-07,
+     "c2": 1.4524063087308032e-06,
+     "d": 2.626467017317285,
+     "d_source": "window",
+     "old_file": "economy__student_loans_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 5408,
+     "sample_id": "economy__student_loans_96_12_4_10events__20251221T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 2.2647696955696576e-07,
+     "c2": 7.893065786609097e-07,
+     "d": 2.4164864253993596,
+     "d_source": "window",
+     "old_file": "economy__student_loans_96_12_4_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "electronic_technology__apple_inc_96_12_4_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 5525,
+     "sample_id": "electronic_technology__apple_inc_96_12_4_10events__20231029T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 2.7764439278407774e-07,
+     "c2": 1.4174220021575146e-06,
+     "d": 5.382585087318381,
+     "d_source": "window",
+     "old_file": "electronic_technology__apple_inc_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 5531,
+     "sample_id": "electronic_technology__apple_inc_96_12_4_10events__20240414T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.2478256637808618e-07,
+     "c2": 7.604499519685183e-07,
+     "d": 5.016368606178732,
+     "d_source": "window",
+     "old_file": "electronic_technology__apple_inc_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 5538,
+     "sample_id": "electronic_technology__apple_inc_96_12_4_10events__20241027T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.1556413092768874e-07,
+     "c2": 6.686879995693183e-07,
+     "d": 5.704749102843077,
+     "d_source": "window",
+     "old_file": "electronic_technology__apple_inc_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 5545,
+     "sample_id": "electronic_technology__apple_inc_96_12_4_10events__20250511T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.59681582150665e-07,
+     "c2": 1.0414526256603764e-06,
+     "d": 7.325724035130513,
+     "d_source": "window",
+     "old_file": "electronic_technology__apple_inc_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 5553,
+     "sample_id": "electronic_technology__apple_inc_96_12_4_10events__20251221T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 6.463035797785829e-07,
+     "c2": 2.201469339784047e-06,
+     "d": 20.793551997408436,
+     "d_source": "window",
+     "old_file": "electronic_technology__apple_inc_96_12_4_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "electronic_technology__meta_platforms_96_12_4_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 5641,
+     "sample_id": "electronic_technology__meta_platforms_96_12_4_10events__20231029T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 4.0235623836750395e-07,
+     "c2": 1.0268377814839493e-06,
+     "d": 7.429990081027475,
+     "d_source": "window",
+     "old_file": "electronic_technology__meta_platforms_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 5647,
+     "sample_id": "electronic_technology__meta_platforms_96_12_4_10events__20240414T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 3.144338171054826e-07,
+     "c2": 1.5904936085346486e-06,
+     "d": 4.79687217245664,
+     "d_source": "window",
+     "old_file": "electronic_technology__meta_platforms_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 5654,
+     "sample_id": "electronic_technology__meta_platforms_96_12_4_10events__20241027T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 3.0954455883606294e-07,
+     "c2": 1.279321792413157e-06,
+     "d": 4.472718226462889,
+     "d_source": "window",
+     "old_file": "electronic_technology__meta_platforms_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 5661,
+     "sample_id": "electronic_technology__meta_platforms_96_12_4_10events__20250511T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 2.570195685275426e-07,
+     "c2": 5.06051400726968e-07,
+     "d": 11.307242486074529,
+     "d_source": "window",
+     "old_file": "electronic_technology__meta_platforms_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 5669,
+     "sample_id": "electronic_technology__meta_platforms_96_12_4_10events__20251221T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 3.0900386270278573e-07,
+     "c2": 6.575144329224973e-07,
+     "d": 46.41354865680518,
+     "d_source": "window",
+     "old_file": "electronic_technology__meta_platforms_96_12_4_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "finance__asset_management_96_12_4_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 5757,
+     "sample_id": "finance__asset_management_96_12_4_10events__20231029T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.31462836277827e-07,
+     "c2": 1.5342657077914173e-06,
+     "d": 4.972668353666426,
+     "d_source": "window",
+     "old_file": "finance__asset_management_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 5763,
+     "sample_id": "finance__asset_management_96_12_4_10events__20240414T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.246618780299459e-07,
+     "c2": 1.2411594885106635e-06,
+     "d": 6.146989651108365,
+     "d_source": "window",
+     "old_file": "finance__asset_management_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 5770,
+     "sample_id": "finance__asset_management_96_12_4_10events__20241027T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.2347759076204874e-07,
+     "c2": 1.3557882779142371e-06,
+     "d": 5.6272757741991715,
+     "d_source": "window",
+     "old_file": "finance__asset_management_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 5777,
+     "sample_id": "finance__asset_management_96_12_4_10events__20250511T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.9049803425078457e-07,
+     "c2": 1.8968820483657345e-06,
+     "d": 8.044142267910788,
+     "d_source": "window",
+     "old_file": "finance__asset_management_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 5785,
+     "sample_id": "finance__asset_management_96_12_4_10events__20251221T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 8.17959645470115e-08,
+     "c2": 4.727319172346254e-07,
+     "d": 16.138945252269465,
+     "d_source": "window",
+     "old_file": "finance__asset_management_96_12_4_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "finance__hedge_funds_96_12_4_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 5873,
+     "sample_id": "finance__hedge_funds_96_12_4_10events__20231029T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 7.280415921425092e-08,
+     "c2": 6.638713137077826e-07,
+     "d": 5.746139631067297,
+     "d_source": "window",
+     "old_file": "finance__hedge_funds_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 5879,
+     "sample_id": "finance__hedge_funds_96_12_4_10events__20240414T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 2.692465330975003e-07,
+     "c2": 1.9045865465502991e-06,
+     "d": 8.011601830401265,
+     "d_source": "window",
+     "old_file": "finance__hedge_funds_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 5886,
+     "sample_id": "finance__hedge_funds_96_12_4_10events__20241027T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 6.561412855907436e-08,
+     "c2": 4.7563271544941496e-07,
+     "d": 8.020258366837899,
+     "d_source": "window",
+     "old_file": "finance__hedge_funds_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 5893,
+     "sample_id": "finance__hedge_funds_96_12_4_10events__20250511T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.2394726167962793e-07,
+     "c2": 8.10060444740231e-07,
+     "d": 9.418302770846418,
+     "d_source": "window",
+     "old_file": "finance__hedge_funds_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 5901,
+     "sample_id": "finance__hedge_funds_96_12_4_10events__20251221T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.7960012033208062e-07,
+     "c2": 1.1969413513197502e-06,
+     "d": 12.748150981395726,
+     "d_source": "window",
+     "old_file": "finance__hedge_funds_96_12_4_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "pets__invasive_species_96_12_4_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 6192,
+     "sample_id": "pets__invasive_species_96_12_4_10events__20231029T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 2.791487704389938e-07,
+     "c2": 1.0105898588491225e-06,
+     "d": 18.873617384055507,
+     "d_source": "window",
+     "old_file": "pets__invasive_species_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 6198,
+     "sample_id": "pets__invasive_species_96_12_4_10events__20240414T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 5.05017194320415e-07,
+     "c2": 2.3313797879394102e-06,
+     "d": 16.362401721757312,
+     "d_source": "window",
+     "old_file": "pets__invasive_species_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 6205,
+     "sample_id": "pets__invasive_species_96_12_4_10events__20241027T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.0808561154099477e-06,
+     "c2": 3.797206585383266e-06,
+     "d": 19.087517736293876,
+     "d_source": "window",
+     "old_file": "pets__invasive_species_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 6212,
+     "sample_id": "pets__invasive_species_96_12_4_10events__20250511T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 2.1817696909950859e-07,
+     "c2": 9.788523342213515e-07,
+     "d": 19.485560447988718,
+     "d_source": "window",
+     "old_file": "pets__invasive_species_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 6220,
+     "sample_id": "pets__invasive_species_96_12_4_10events__20251221T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 3.804426843756818e-07,
+     "c2": 1.142421141657629e-06,
+     "d": 20.03480394326363,
+     "d_source": "window",
+     "old_file": "pets__invasive_species_96_12_4_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "pets__pet_health_96_12_4_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 6308,
+     "sample_id": "pets__pet_health_96_12_4_10events__20231029T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 6.337398267329964e-08,
+     "c2": 1.0553716972035287e-06,
+     "d": 3.6145533139963812,
+     "d_source": "window",
+     "old_file": "pets__pet_health_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 6314,
+     "sample_id": "pets__pet_health_96_12_4_10events__20240414T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 6.167302638914791e-08,
+     "c2": 9.528604521659787e-07,
+     "d": 4.003416509682698,
+     "d_source": "window",
+     "old_file": "pets__pet_health_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 6321,
+     "sample_id": "pets__pet_health_96_12_4_10events__20241027T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.1890392931113841e-07,
+     "c2": 1.7689543579135865e-06,
+     "d": 4.312940295558884,
+     "d_source": "window",
+     "old_file": "pets__pet_health_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 6328,
+     "sample_id": "pets__pet_health_96_12_4_10events__20250511T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.9172111786065305e-07,
+     "c2": 2.339877618203646e-06,
+     "d": 6.52119108443559,
+     "d_source": "window",
+     "old_file": "pets__pet_health_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 6336,
+     "sample_id": "pets__pet_health_96_12_4_10events__20251221T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 3.033795112343708e-07,
+     "c2": 1.4752931957041384e-06,
+     "d": 41.37154324830239,
+     "d_source": "window",
+     "old_file": "pets__pet_health_96_12_4_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "public_health__climate_change_96_12_4_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 6366,
+     "sample_id": "public_health__climate_change_96_12_4_10events__20231029T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.9692116570578515e-06,
+     "c2": 7.955574212014606e-07,
+     "d": 10.489060935353345,
+     "d_source": "window",
+     "old_file": "public_health__climate_change_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 6372,
+     "sample_id": "public_health__climate_change_96_12_4_10events__20240414T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 6.296362213767374e-07,
+     "c2": 6.010987385703616e-07,
+     "d": 3.569741665100649,
+     "d_source": "window",
+     "old_file": "public_health__climate_change_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 6379,
+     "sample_id": "public_health__climate_change_96_12_4_10events__20241027T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 2.4000702260548144e-06,
+     "c2": 1.1425006554796398e-06,
+     "d": 8.34725399790587,
+     "d_source": "window",
+     "old_file": "public_health__climate_change_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 6386,
+     "sample_id": "public_health__climate_change_96_12_4_10events__20250511T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.3396613936165243e-06,
+     "c2": 7.831052878658518e-07,
+     "d": 7.611319409913253,
+     "d_source": "window",
+     "old_file": "public_health__climate_change_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 6394,
+     "sample_id": "public_health__climate_change_96_12_4_10events__20251221T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 2.3548313738893605e-06,
+     "c2": 1.093639315245947e-06,
+     "d": 7.630166684962374,
+     "d_source": "window",
+     "old_file": "public_health__climate_change_96_12_4_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "public_health__infectious_disease_96_12_4_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 6511,
+     "sample_id": "public_health__infectious_disease_96_12_4_10events__20231029T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.9480818650234466e-07,
+     "c2": 1.937244416590337e-06,
+     "d": 7.876543058700025,
+     "d_source": "window",
+     "old_file": "public_health__infectious_disease_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 6517,
+     "sample_id": "public_health__infectious_disease_96_12_4_10events__20240414T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 2.693810216760133e-07,
+     "c2": 2.711774794943091e-06,
+     "d": 8.440296604434783,
+     "d_source": "window",
+     "old_file": "public_health__infectious_disease_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 6524,
+     "sample_id": "public_health__infectious_disease_96_12_4_10events__20241027T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 3.6634411288674034e-07,
+     "c2": 3.661605938792276e-06,
+     "d": 8.334479087901455,
+     "d_source": "window",
+     "old_file": "public_health__infectious_disease_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 6531,
+     "sample_id": "public_health__infectious_disease_96_12_4_10events__20250511T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 3.348010453158237e-07,
+     "c2": 3.0577374617490077e-06,
+     "d": 9.98044420319334,
+     "d_source": "window",
+     "old_file": "public_health__infectious_disease_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 6539,
+     "sample_id": "public_health__infectious_disease_96_12_4_10events__20251221T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.683871766766248e-07,
+     "c2": 1.5234497244402456e-06,
+     "d": 10.015945270597275,
+     "d_source": "window",
+     "old_file": "public_health__infectious_disease_96_12_4_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "public_policy__carbon_emissions_96_12_4_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 6627,
+     "sample_id": "public_policy__carbon_emissions_96_12_4_10events__20231029T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 8.580930358198924e-08,
+     "c2": 3.914138833550891e-07,
+     "d": 9.745942665412105,
+     "d_source": "window",
+     "old_file": "public_policy__carbon_emissions_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 6633,
+     "sample_id": "public_policy__carbon_emissions_96_12_4_10events__20240414T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 2.902301002280628e-07,
+     "c2": 1.1704391432740461e-06,
+     "d": 13.036806868759442,
+     "d_source": "window",
+     "old_file": "public_policy__carbon_emissions_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 6640,
+     "sample_id": "public_policy__carbon_emissions_96_12_4_10events__20241027T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 3.6421609633005845e-07,
+     "c2": 1.0530620448959458e-06,
+     "d": 14.489924061414385,
+     "d_source": "window",
+     "old_file": "public_policy__carbon_emissions_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 6647,
+     "sample_id": "public_policy__carbon_emissions_96_12_4_10events__20250511T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 3.6878807829105373e-07,
+     "c2": 1.3343441395592376e-06,
+     "d": 14.294278187054038,
+     "d_source": "window",
+     "old_file": "public_policy__carbon_emissions_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 6655,
+     "sample_id": "public_policy__carbon_emissions_96_12_4_10events__20251221T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 6.332620340593652e-07,
+     "c2": 2.1280456473743334e-06,
+     "d": 12.548077101786829,
+     "d_source": "window",
+     "old_file": "public_policy__carbon_emissions_96_12_4_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "public_policy__human_rights_96_12_4_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 6714,
+     "sample_id": "public_policy__human_rights_96_12_4_10events__20231029T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 2.160696625877756e-07,
+     "c2": 1.072629946921506e-06,
+     "d": 10.669189154861874,
+     "d_source": "window",
+     "old_file": "public_policy__human_rights_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 6720,
+     "sample_id": "public_policy__human_rights_96_12_4_10events__20240414T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 2.1261277069946555e-07,
+     "c2": 1.2075367246631231e-06,
+     "d": 9.47722049618628,
+     "d_source": "window",
+     "old_file": "public_policy__human_rights_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 6727,
+     "sample_id": "public_policy__human_rights_96_12_4_10events__20241027T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 3.1251630944489913e-07,
+     "c2": 1.5736504559166356e-06,
+     "d": 9.696428457240785,
+     "d_source": "window",
+     "old_file": "public_policy__human_rights_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 6734,
+     "sample_id": "public_policy__human_rights_96_12_4_10events__20250511T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 4.1716639724670176e-07,
+     "c2": 1.8823751376966207e-06,
+     "d": 12.159204154044055,
+     "d_source": "window",
+     "old_file": "public_policy__human_rights_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 6742,
+     "sample_id": "public_policy__human_rights_96_12_4_10events__20251221T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 6.532600999727482e-07,
+     "c2": 3.2931926455812547e-06,
+     "d": 13.90030044216268,
+     "d_source": "window",
+     "old_file": "public_policy__human_rights_96_12_4_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "science__data_breach_96_12_4_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 6975,
+     "sample_id": "science__data_breach_96_12_4_10events__20231029T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.689057944821855e-07,
+     "c2": 8.508622110893622e-07,
+     "d": 4.48333139714952,
+     "d_source": "window",
+     "old_file": "science__data_breach_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 6981,
+     "sample_id": "science__data_breach_96_12_4_10events__20240414T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 3.5797191370263683e-07,
+     "c2": 1.5854624434391209e-06,
+     "d": 9.624188277460078,
+     "d_source": "window",
+     "old_file": "science__data_breach_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 6988,
+     "sample_id": "science__data_breach_96_12_4_10events__20241027T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 2.7334647704682295e-07,
+     "c2": 8.12293443048316e-07,
+     "d": 14.088617721606173,
+     "d_source": "window",
+     "old_file": "science__data_breach_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 6995,
+     "sample_id": "science__data_breach_96_12_4_10events__20250511T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 5.193369550903368e-07,
+     "c2": 1.0074793683791715e-06,
+     "d": 13.252321435790034,
+     "d_source": "window",
+     "old_file": "science__data_breach_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 7003,
+     "sample_id": "science__data_breach_96_12_4_10events__20251221T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.6985135119297645e-07,
+     "c2": 4.7346162100215047e-07,
+     "d": 16.11407174904964,
+     "d_source": "window",
+     "old_file": "science__data_breach_96_12_4_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "science__nobel_prize_96_12_4_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 7120,
+     "sample_id": "science__nobel_prize_96_12_4_10events__20231029T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 3.639798613582509e-07,
+     "c2": 7.39474977421343e-07,
+     "d": 10.317312639644427,
+     "d_source": "window",
+     "old_file": "science__nobel_prize_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 7126,
+     "sample_id": "science__nobel_prize_96_12_4_10events__20240414T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 4.2230839894334217e-07,
+     "c2": 7.377772862742746e-07,
+     "d": 10.34105369355829,
+     "d_source": "window",
+     "old_file": "science__nobel_prize_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 7133,
+     "sample_id": "science__nobel_prize_96_12_4_10events__20241027T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 8.151346964800673e-07,
+     "c2": 1.4235395906945622e-06,
+     "d": 12.058770832595483,
+     "d_source": "window",
+     "old_file": "science__nobel_prize_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 7140,
+     "sample_id": "science__nobel_prize_96_12_4_10events__20250511T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 7.336078983160764e-07,
+     "c2": 1.1971261411534858e-06,
+     "d": 11.949546713857671,
+     "d_source": "window",
+     "old_file": "science__nobel_prize_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 7148,
+     "sample_id": "science__nobel_prize_96_12_4_10events__20251221T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 2.798488405815893e-07,
+     "c2": 2.479878659481131e-07,
+     "d": 46.147789340908574,
+     "d_source": "window",
+     "old_file": "science__nobel_prize_96_12_4_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "shopping__air_conditioner_96_12_4_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 7236,
+     "sample_id": "shopping__air_conditioner_96_12_4_10events__20231029T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.1541060496507963e-06,
+     "c2": 5.449165981404003e-07,
+     "d": 21.00154745869271,
+     "d_source": "window",
+     "old_file": "shopping__air_conditioner_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 7242,
+     "sample_id": "shopping__air_conditioner_96_12_4_10events__20240414T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 5.875680932663286e-07,
+     "c2": 1.369137873832883e-06,
+     "d": 20.896529150927325,
+     "d_source": "window",
+     "old_file": "shopping__air_conditioner_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 7249,
+     "sample_id": "shopping__air_conditioner_96_12_4_10events__20241027T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 2.468565898983815e-06,
+     "c2": 1.0423589788656012e-06,
+     "d": 20.128223948117117,
+     "d_source": "window",
+     "old_file": "shopping__air_conditioner_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 7256,
+     "sample_id": "shopping__air_conditioner_96_12_4_10events__20250511T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 3.7897344179384807e-07,
+     "c2": 1.249602480274657e-06,
+     "d": 18.316371770260314,
+     "d_source": "window",
+     "old_file": "shopping__air_conditioner_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 7264,
+     "sample_id": "shopping__air_conditioner_96_12_4_10events__20251221T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.3797594803273893e-06,
+     "c2": 6.551737562436111e-07,
+     "d": 20.3784725844896,
+     "d_source": "window",
+     "old_file": "shopping__air_conditioner_96_12_4_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "shopping__black_friday_deals_96_12_4_10events": {
+   "verdict": "reinfer",
+   "n_checked": 5,
+   "failed_windows": [
+    "shopping__black_friday_deals_96_12_4_10events__20240414T000000",
+    "shopping__black_friday_deals_96_12_4_10events__20250511T000000"
+   ],
+   "detail": [
+    {
+     "flat_index": 7300,
+     "sample_id": "shopping__black_friday_deals_96_12_4_10events__20240414T000000",
+     "mode": "compare",
+     "passed": false,
+     "c1": 3.102428690676545e-05,
+     "c2": 1.4373413962398823e-06,
+     "d": 14.09934986680828,
+     "d_source": "window",
+     "old_file": "shopping__black_friday_deals_96_12_4_10events__P1.npz",
+     "reason": "c1=3.102e-05 c2=1.437e-06"
+    },
+    {
+     "flat_index": 7314,
+     "sample_id": "shopping__black_friday_deals_96_12_4_10events__20250511T000000",
+     "mode": "compare",
+     "passed": false,
+     "c1": 1.312177095856385e-05,
+     "c2": 1.1457418426854983e-06,
+     "d": 14.774461825129949,
+     "d_source": "window",
+     "old_file": "shopping__black_friday_deals_96_12_4_10events__P1.npz",
+     "reason": "c1=1.312e-05 c2=1.146e-06"
+    }
+   ]
+  },
+  "society__affordable_housing_96_12_4_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 7526,
+     "sample_id": "society__affordable_housing_96_12_4_10events__20231029T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 2.062175413589901e-07,
+     "c2": 2.132967044623944e-06,
+     "d": 7.15378566253949,
+     "d_source": "window",
+     "old_file": "society__affordable_housing_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 7532,
+     "sample_id": "society__affordable_housing_96_12_4_10events__20240414T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 9.782818494574889e-08,
+     "c2": 1.076290589652473e-06,
+     "d": 7.0886009824851115,
+     "d_source": "window",
+     "old_file": "society__affordable_housing_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 7539,
+     "sample_id": "society__affordable_housing_96_12_4_10events__20241027T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.9565663786177034e-07,
+     "c2": 2.4002739472037133e-06,
+     "d": 6.357103146612195,
+     "d_source": "window",
+     "old_file": "society__affordable_housing_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 7546,
+     "sample_id": "society__affordable_housing_96_12_4_10events__20250511T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.9116244544940667e-07,
+     "c2": 2.143970972553171e-06,
+     "d": 7.117068867928238,
+     "d_source": "window",
+     "old_file": "society__affordable_housing_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 7554,
+     "sample_id": "society__affordable_housing_96_12_4_10events__20251221T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 8.794149709494058e-08,
+     "c2": 1.0373105958695789e-06,
+     "d": 7.354975994296355,
+     "d_source": "window",
+     "old_file": "society__affordable_housing_96_12_4_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "society__protest_96_12_4_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 7758,
+     "sample_id": "society__protest_96_12_4_10events__20231029T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.128630419298513e-06,
+     "c2": 2.9679626837823197e-06,
+     "d": 1.767275838370708,
+     "d_source": "window",
+     "old_file": "society__protest_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 7764,
+     "sample_id": "society__protest_96_12_4_10events__20240414T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 2.951454825209533e-07,
+     "c2": 7.252981089068324e-07,
+     "d": 1.6435902436096685,
+     "d_source": "window",
+     "old_file": "society__protest_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 7771,
+     "sample_id": "society__protest_96_12_4_10events__20241027T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 5.281605833521906e-07,
+     "c2": 9.187725992651581e-07,
+     "d": 2.3354714905845744,
+     "d_source": "window",
+     "old_file": "society__protest_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 7778,
+     "sample_id": "society__protest_96_12_4_10events__20250511T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 7.884164592342962e-07,
+     "c2": 1.225145662397685e-06,
+     "d": 3.8920854298249363,
+     "d_source": "window",
+     "old_file": "society__protest_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 7786,
+     "sample_id": "society__protest_96_12_4_10events__20251221T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.1075520745604057e-06,
+     "c2": 4.6900322050457193e-07,
+     "d": 12.200440526360353,
+     "d_source": "window",
+     "old_file": "society__protest_96_12_4_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "traffic__air_travel_96_12_4_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 7816,
+     "sample_id": "traffic__air_travel_96_12_4_10events__20231029T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 2.2941046786200226e-07,
+     "c2": 1.6334232674532208e-06,
+     "d": 9.341601388041322,
+     "d_source": "window",
+     "old_file": "traffic__air_travel_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 7822,
+     "sample_id": "traffic__air_travel_96_12_4_10events__20240414T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.1316573563329865e-07,
+     "c2": 1.025500256837591e-06,
+     "d": 7.439680761053453,
+     "d_source": "window",
+     "old_file": "traffic__air_travel_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 7829,
+     "sample_id": "traffic__air_travel_96_12_4_10events__20241027T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 3.3599289630378916e-07,
+     "c2": 2.7236742134405323e-06,
+     "d": 7.002851601708804,
+     "d_source": "window",
+     "old_file": "traffic__air_travel_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 7836,
+     "sample_id": "traffic__air_travel_96_12_4_10events__20250511T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.886290094628572e-07,
+     "c2": 2.082242273333329e-06,
+     "d": 7.328056517685224,
+     "d_source": "window",
+     "old_file": "traffic__air_travel_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 7844,
+     "sample_id": "traffic__air_travel_96_12_4_10events__20251221T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 3.3394497210223706e-07,
+     "c2": 1.7048612361199381e-06,
+     "d": 26.8504944670345,
+     "d_source": "window",
+     "old_file": "traffic__air_travel_96_12_4_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  },
+  "traffic__traffic_insurance_96_12_4_10events": {
+   "verdict": "reuse",
+   "n_checked": 5,
+   "detail": [
+    {
+     "flat_index": 8048,
+     "sample_id": "traffic__traffic_insurance_96_12_4_10events__20231029T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 7.014181482546858e-08,
+     "c2": 7.022807031576578e-07,
+     "d": 5.43186969038593,
+     "d_source": "window",
+     "old_file": "traffic__traffic_insurance_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 8054,
+     "sample_id": "traffic__traffic_insurance_96_12_4_10events__20240414T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 6.910991406596846e-08,
+     "c2": 6.116578273703367e-07,
+     "d": 6.2366524140225525,
+     "d_source": "window",
+     "old_file": "traffic__traffic_insurance_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 8061,
+     "sample_id": "traffic__traffic_insurance_96_12_4_10events__20241027T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.3524923797198096e-07,
+     "c2": 1.3361447865544737e-06,
+     "d": 5.710005837708633,
+     "d_source": "window",
+     "old_file": "traffic__traffic_insurance_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 8068,
+     "sample_id": "traffic__traffic_insurance_96_12_4_10events__20250511T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 2.9464795560480323e-07,
+     "c2": 2.885034221380461e-06,
+     "d": 7.9334184059689346,
+     "d_source": "window",
+     "old_file": "traffic__traffic_insurance_96_12_4_10events__P1.npz",
+     "reason": null
+    },
+    {
+     "flat_index": 8076,
+     "sample_id": "traffic__traffic_insurance_96_12_4_10events__20251221T000000",
+     "mode": "compare",
+     "passed": true,
+     "c1": 1.954824399101641e-07,
+     "c2": 9.828350741260945e-07,
+     "d": 31.050558662790145,
+     "d_source": "window",
+     "old_file": "traffic__traffic_insurance_96_12_4_10events__P1.npz",
+     "reason": null
+    }
+   ]
+  }
+ },
+ "elapsed_s": 3.4
+}

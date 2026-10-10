@@ -1,0 +1,873 @@
+{
+ "stage": "S3_preflight_final",
+ "created": "2026-10-10T11:56:07",
+ "forward_binding": {
+  "protocol_version": "TimesX-all-native-P1-v1",
+  "run_config": {
+   "arch": "mae_base",
+   "finetune_type": "none",
+   "context_len": 96,
+   "pred_len": 12,
+   "periodicity": 1,
+   "norm_const_r": 0.4,
+   "align_const_c": 0.4,
+   "interpolation": "bilinear",
+   "precision": "fp32",
+   "tf32": false,
+   "image_size": 224,
+   "patch_size": 16,
+   "seed": 2021,
+   "batch_size": 64
+  },
+  "zip_sha256": "9adb9540733c128e05e774e81cf0e238a9cc80b37e99da0c883bee9f57988bcc",
+  "inventory_sha256": "0cb6e73971b0f8b54077ff3df5a332f7dbe34493b337ab0a2b9744aa88c217de",
+  "arrays_sha256": "fb0c0c454afd8f7b9f276b99704450bdc6c99a454c8d774ea8846f729fa9423d",
+  "vars_sha256": "22018d215b0dfe8ccc842846cf5e04bb2050828d993548728c72215681267068",
+  "old_splits_sha256": "d012d68311101ae2540284f0ea15b8ad5fe52980386d735e3720e5f6f0997f90",
+  "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+  "code_md5_forward": {
+   "protocol.py": "fbb3a4b1b61e4275d2e01c33f48000a0",
+   "common.py": "bea7823614f011a24b431bbf7695a27b",
+   "infer_fill.py": "f3c0d73cf41710dbcc3792b40811d332",
+   "preflight.py": "b1c45f3c241b36c9924f250e0c4892ba"
+  },
+  "code_md5_reused_old": {
+   "timesx_data.py": "35ee411bfbd001265f71fbd2a3032f7d",
+   "record_fingerprint.py": "b4b565d40fe99d6b01113148ce660a7d",
+   "metrics_util.py": "a27ab8e5a437c6173a4b04ce7a596424"
+  },
+  "code_md5_new_all": {
+   "protocol.py": "fbb3a4b1b61e4275d2e01c33f48000a0",
+   "common.py": "bea7823614f011a24b431bbf7695a27b",
+   "freeze_full.py": "7b2d1583747dc6c5ffd5c9512d80ffbc",
+   "verify_cache.py": "334390ea0a6350e7ec2039df89033ba9",
+   "preflight.py": "b1c45f3c241b36c9924f250e0c4892ba",
+   "infer_fill.py": "f3c0d73cf41710dbcc3792b40811d332",
+   "assemble.py": "79347e3658d786c095869b73db67bc27",
+   "evaluate.py": "0b92cc0476115d7872488548c037d0c1",
+   "recompute_check.py": "911cf07822f5cfbabb32c0e04c12b35a",
+   "verify_acceptance.py": "4f8792f917db99c2ae9d25665729a8bd",
+   "make_report.py": "e2f45621facf3cc87f84adc0ddb264d0",
+   "run_all.sh": "e2e61f3a5a11e89362dccc86c506b4db",
+   "audit_all.sh": "658bf45ec0f0e6188a2012dbec4314eb",
+   "stage_guard.py": "ad275d7e2a7b4c2c5a6514f29f233c7d"
+  },
+  "env": {
+   "python": "3.12.13",
+   "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.35",
+   "host": "theta",
+   "torch": "2.12.0+cu126",
+   "cuda_available": true,
+   "gpu": "NVIDIA GeForce RTX 3090",
+   "cuda_visible_devices": "1",
+   "numpy": "2.4.4"
+  }
+ },
+ "variables": {
+  "CropsAndStaples__barley_inr_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "CropsAndStaples__canola_cad_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "CropsAndStaples__cocoa_usd_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "CropsAndStaples__cotton_usd_lbs_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "CropsAndStaples__diammonium_usd_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "CropsAndStaples__oat_usd_bu_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "CropsAndStaples__potatoes_eur_100kg_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 2
+  },
+  "CropsAndStaples__rice_usd_cwt_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "CropsAndStaples__sugar_usd_lbs_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "CropsAndStaples__urea_usd_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "CropsAndStaples__wheat_usd_bu_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "Currency__usdtoaud_exchangerate_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "Currency__usdtobrl_exchangerate_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "Currency__usdtocad_exchangerate_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "Currency__usdtochf_exchangerate_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "Currency__usdtogbp_exchangerate_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "Currency__usdtohkd_exchangerate_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "Currency__usdtoinr_exchangerate_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "Currency__usdtokrw_exchangerate_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "Currency__usdtomxn_exchangerate_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "Currency__usdtosgd_exchangerate_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "EnergyAndFuels__bitumen_cny_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "EnergyAndFuels__brent_usd_bbl_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "EnergyAndFuels__coal_usd_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "EnergyAndFuels__ethanol_usd_gal_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "EnergyAndFuels__gasoline_usd_gal_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "EnergyAndFuels__methanol_cny_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "EnergyAndFuels__naphtha_usd_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "EnergyAndFuels__propane_usd_gal_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "EnergyAndFuels__rapeseed_eur_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "EnergyAndFuels__uranium_usd_lbs_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "LivestockAndFoodProducts__beef_brl_kg_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "LivestockAndFoodProducts__butter_eur_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "LivestockAndFoodProducts__cheese_usd_lbs_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "LivestockAndFoodProducts__coffee_usd_lbs_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "LivestockAndFoodProducts__corn_usd_bu_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "LivestockAndFoodProducts__milk_usd_cwt_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "LivestockAndFoodProducts__poultry_brl_kgs_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "LivestockAndFoodProducts__salmon_nok_kg_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "LivestockAndFoodProducts__soybeans_usd_bu_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "LivestockAndFoodProducts__wool_aud_100kg_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "RawMaterialsAndConstruction__aluminum_usd_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "RawMaterialsAndConstruction__copper_usd_lbs_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "RawMaterialsAndConstruction__lead_usd_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "RawMaterialsAndConstruction__lumber_usd_1000_board_feet_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "RawMaterialsAndConstruction__polyethylene_cny_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "RawMaterialsAndConstruction__polypropylene_cny_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "RawMaterialsAndConstruction__rubber_usd_cents_kg_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "RawMaterialsAndConstruction__steel_cny_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "RawMaterialsAndConstruction__tin_usd_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "RawMaterialsAndConstruction__zinc_usd_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "SpecialtyAndAdvancedMaterials__gallium_cny_kg_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "SpecialtyAndAdvancedMaterials__germanium_cny_kg_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "SpecialtyAndAdvancedMaterials__indium_cny_kg_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "SpecialtyAndAdvancedMaterials__magnesium_cny_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "SpecialtyAndAdvancedMaterials__molybdenum_cny_kg_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "SpecialtyAndAdvancedMaterials__polyvinyl_cny_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "SpecialtyAndAdvancedMaterials__tellurium_cny_kg_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "SpecialtyAndAdvancedMaterials__titanium_cny_kg_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 7
+  },
+  "StrategicAndHighValueMaterials__gold_usd_t_oz_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "StrategicAndHighValueMaterials__lithium_cny_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "StrategicAndHighValueMaterials__manganese_cny_mtu_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "StrategicAndHighValueMaterials__neodymium_cny_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "StrategicAndHighValueMaterials__nickel_usd_t_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "StrategicAndHighValueMaterials__palladium_usd_t_oz_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "StrategicAndHighValueMaterials__platinum_usd_t_oz_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "StrategicAndHighValueMaterials__rhodium_usd_t_oz_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "StrategicAndHighValueMaterials__silver_usd_t_oz_96_12_12_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "arts__art_exhibitions_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "arts__broadway_shows_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "arts__comic_con_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "arts__esports_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "arts__film_festivals_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "arts__food_wine_festivals_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "arts__major_league_baseball_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "arts__music_festivals_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "arts__national_basketball_association_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "arts__national_football_league_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "climate__deforestation_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "climate__drought_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "climate__endangered_species_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "climate__flooding_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "climate__global_warming_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "climate__heatwave_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "climate__heavy_rainfall_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "climate__marine_pollution_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "climate__sustainable_fashion_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "climate__water_scarcity_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "economy__cost_of_living_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "economy__federal_budget_deficit_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "economy__government_spending_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "economy__healthcare_costs_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "economy__inflation_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "economy__international_trade_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "economy__minimum_wage_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "economy__student_loans_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "economy__taxes_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "economy__unemployment_rate_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "electronic_technology__alphabet_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "electronic_technology__amazon_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "electronic_technology__apple_inc_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "electronic_technology__artificial_intelligence_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "electronic_technology__consumer_electronics_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "electronic_technology__drones_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "electronic_technology__meta_platforms_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "electronic_technology__microsoft_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "electronic_technology__nvidia_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "electronic_technology__robotics_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "finance__asset_management_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "finance__cryptocurrency_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "finance__financial_regulation_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "finance__goldman_sachs_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "finance__hedge_funds_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "finance__investment_banking_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "finance__mortgage_rates_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "finance__private_equity_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "finance__stock_market_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "finance__venture_capital_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "pets__animal_migration_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "pets__animal_rescue_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "pets__animal_welfare_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "pets__beekeeping_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "pets__biodiversity_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "pets__invasive_species_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "pets__marine_life_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "pets__pest_control_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "pets__pet_adoption_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "pets__pet_health_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "public_health__air_pollution_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "public_health__climate_change_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "public_health__diabetes_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "public_health__drug_overdose_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "public_health__food_safety_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "public_health__hiv_aids_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "public_health__infectious_disease_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "public_health__mental_health_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "public_health__obesity_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "public_health__opioid_crisis_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "public_policy__carbon_emissions_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "public_policy__federal_reserve_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "public_policy__healthcare_policy_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "public_policy__human_rights_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "public_policy__immigration_reform_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "public_policy__national_debt_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "public_policy__presidential_election_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "public_policy__refugee_support_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "public_policy__renewable_energy_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "public_policy__space_exploration_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "public_policy__wildlife_conservation_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "science__cancer_research_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "science__data_breach_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "science__earthquake_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "science__food_recall_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "science__gene_editing_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "science__meteor_shower_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "science__nobel_prize_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "science__quantum_computing_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "science__vaccine_research_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "science__volcanic_eruption_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "shopping__air_conditioner_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "shopping__back_to_school_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "shopping__black_friday_deals_96_12_4_10events": {
+   "verdict": "reinfer",
+   "reason": "preflight dual-criteria failure",
+   "n_checked": 5
+  },
+  "shopping__christmas_gifts_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "shopping__fashion_week_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "shopping__flu_shot_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "shopping__halloween_costumes_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "shopping__organic_food_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "shopping__ski_gear_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "shopping__tax_software_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "society__affordable_housing_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "society__cybersecurity_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "society__data_privacy_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "society__domestic_violence_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "society__gender_equality_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "society__homelessness_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "society__income_inequality_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "society__infrastructure_spending_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "society__protest_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "society__wildfires_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "traffic__air_travel_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "traffic__autonomous_driving_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "traffic__electric_vehicle_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "traffic__formula_1_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "traffic__gas_prices_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "traffic__rocket_launch_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "traffic__tesla_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "traffic__tour_de_france_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  },
+  "traffic__traffic_insurance_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": null,
+   "n_checked": 5
+  },
+  "traffic__used_car_96_12_4_10events": {
+   "verdict": "reuse",
+   "reason": "not sampled (S2 verified)"
+  }
+ },
+ "totals": {
+  "reuse_vars": 189,
+  "reinfer_vars": 1,
+  "reuse_windows": 6386,
+  "fill_windows": 1720
+ }
+}

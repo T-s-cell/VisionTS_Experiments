@@ -1,0 +1,29 @@
+# VERIFY-D round-2 fixes (2026-10-10): source separation / array membership / input guards
+
+== D1 reuse_final(file-less) -> reuse_plan(files) separation
+covered=88 (files resolved via reuse_plan)
+missing-var guard OK
+missing-file guard OK
+D1 PASS
+
+== D2 membership element-wise (grep -qx whole-line would NOT-FOUND)
+in_members results: FOUND; old grep -qx: NOT-FOUND
+D2 PASS
+
+== D3 input/code guards
+fill marker with 202 input guards (6 code, 190 old npz)
+guard fill: UP-TO-DATE
+[guard] fill: input code_md5:protocol.py changed since the marker (c7a803eb1f28… != fbb3a4b1b61e…) — stale
+protocol.py drift -> STALE
+restored: UP-TO-DATE
+
+== D4 sandbox S5 chain regression with all round-2 code
+[run_all] assemble: stale state (.state/s5a_assemble.done failed guard) — re-running
+[run_all] evaluate: stale state (.state/s5b_evaluate.done failed guard) — re-running
+[evaluate] 1,677 pure-cache: 3.254715/1.042067 (delta 9.18e-08/3.04e-07, within_5e-7=True)
+[run_all] recompute: stale state (.state/recompute.done failed guard) — re-running
+[recompute] PASS: d_dev=0.00e+00 var_dev=0.00e+00 agg_dev=0.00e+00 (0.3s)
+[run_all] accept: stale state (.state/accept.done failed guard) — re-running
+  PASS  R6_pure_cache_1677_within_5e-7
+[acceptance] ALL PASS (0.2s)
+D4 done

@@ -1,0 +1,2712 @@
+{
+ "stage": "S2_verify_cache",
+ "created": "2026-10-10T11:27:26",
+ "old_cache_dir": "/home/wlt/MMTS/VisionTS_Experiments/repro_zeroshot_ext/cache",
+ "binding": {
+  "zip_sha256_ok": true,
+  "ckpt_sha256_ok": true,
+  "splits_sha256_ok": true,
+  "splits_sha256": "d012d68311101ae2540284f0ea15b8ad5fe52980386d735e3720e5f6f0997f90",
+  "run_config_ok": {
+   "arch": "mae_base",
+   "finetune_type": "none",
+   "context_len": 96,
+   "pred_len": 12,
+   "norm_const_r": 0.4,
+   "align_const_c": 0.4,
+   "interpolation": "bilinear",
+   "precision": "fp32",
+   "tf32": false
+  },
+  "code_md5_forward_current": {
+   "timesx_data.py": "35ee411bfbd001265f71fbd2a3032f7d",
+   "infer.py": "0703dff207af246379dbc027a320cf31",
+   "record_fingerprint.py": "b4b565d40fe99d6b01113148ce660a7d"
+  },
+  "code_md5_forward_match": true,
+  "code_md5_selection_match": true,
+  "env": {
+   "python": "3.12.13",
+   "platform": "Linux-7.0.0-29-generic-x86_64-with-glibc2.39",
+   "torch": "2.12.0+cu126",
+   "cuda_available": true,
+   "gpu": "NVIDIA L20",
+   "numpy": "2.4.4"
+  }
+ },
+ "entries_check": {
+  "total": 380,
+  "P1": 190,
+  "P5": 69,
+  "P52": 121
+ },
+ "variables": {
+  "CropsAndStaples__barley_inr_t_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 43,
+   "file": "CropsAndStaples__barley_inr_t_96_12_12_10events__P1.npz",
+   "sha256": "d1376baf5e63be3ac29e1e4a3fe1d6dc71c56e61a7d59149f30a5a8e77bc40fc",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "CropsAndStaples__canola_cad_t_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 45,
+   "file": "CropsAndStaples__canola_cad_t_96_12_12_10events__P1.npz",
+   "sha256": "97ba2808bc3986b6e951cd0deccd9be11a05d870ed7d0e6b3c017a87da6cdc3f",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "CropsAndStaples__cocoa_usd_t_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 46,
+   "file": "CropsAndStaples__cocoa_usd_t_96_12_12_10events__P1.npz",
+   "sha256": "31c885f389aeb247f5155702f585b8119641476b78ea60ceae97b8b8248f42cf",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "CropsAndStaples__cotton_usd_lbs_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 46,
+   "file": "CropsAndStaples__cotton_usd_lbs_96_12_12_10events__P1.npz",
+   "sha256": "e6be25b209cb13c786f16465006a66c93e057d38cb76789f27cbda926943915b",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "CropsAndStaples__diammonium_usd_t_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 45,
+   "file": "CropsAndStaples__diammonium_usd_t_96_12_12_10events__P1.npz",
+   "sha256": "398d5745168a58840d2e07ba5a98f18603df05e9ce221540d32c41b0ed4e3947",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "CropsAndStaples__oat_usd_bu_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 46,
+   "file": "CropsAndStaples__oat_usd_bu_96_12_12_10events__P1.npz",
+   "sha256": "7c6679a9e82668ea08f447db26339322b4797893664adde223021a29aefa7cc7",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "CropsAndStaples__potatoes_eur_100kg_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 46,
+   "file": "CropsAndStaples__potatoes_eur_100kg_96_12_12_10events__P1.npz",
+   "sha256": "f5331fe1769304cb89e0fce238f16dfa6a641cbfc115f35b9ccfecc6795c5702",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "CropsAndStaples__rice_usd_cwt_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 49,
+   "file": "CropsAndStaples__rice_usd_cwt_96_12_12_10events__P1.npz",
+   "sha256": "c938e41fe5db644376811665d5498805be322faed1ce7bca675aa9e24067805c",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "CropsAndStaples__sugar_usd_lbs_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 46,
+   "file": "CropsAndStaples__sugar_usd_lbs_96_12_12_10events__P1.npz",
+   "sha256": "c7d69a8978774040bca4b4b608845e67faf15c3f0ecc39afa6706769ecc2c37b",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "CropsAndStaples__urea_usd_t_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 44,
+   "file": "CropsAndStaples__urea_usd_t_96_12_12_10events__P1.npz",
+   "sha256": "1badb4cc83425fb52a14b79335520de92431d634b69f51152510e2f6e5710a77",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "CropsAndStaples__wheat_usd_bu_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 46,
+   "file": "CropsAndStaples__wheat_usd_bu_96_12_12_10events__P1.npz",
+   "sha256": "1aac70ca75290dcea5b116d7180184a724230cc3e8b93151dbbe25cfb9f8b638",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "Currency__usdtoaud_exchangerate_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 46,
+   "file": "Currency__usdtoaud_exchangerate_96_12_12_10events__P1.npz",
+   "sha256": "f665225bea497eb29e177cb5d8553efe2fe858815c1fc3f59249dbe3ce8ccea3",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "Currency__usdtobrl_exchangerate_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 46,
+   "file": "Currency__usdtobrl_exchangerate_96_12_12_10events__P1.npz",
+   "sha256": "ce2b27f2ffd769f7771ada5b1e20da59f5a4e996fb6a30b331c633b35d6429cd",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "Currency__usdtocad_exchangerate_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 46,
+   "file": "Currency__usdtocad_exchangerate_96_12_12_10events__P1.npz",
+   "sha256": "e4eee7d41e1a2f12bab4aa11d06c6c142b6f4b6034811d1ae6fbdf378db4e806",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "Currency__usdtochf_exchangerate_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 46,
+   "file": "Currency__usdtochf_exchangerate_96_12_12_10events__P1.npz",
+   "sha256": "159933f8a75c23e3a042822c76f93fbd3a82340a6be3ec0a1c7616658e41f6e5",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "Currency__usdtogbp_exchangerate_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 49,
+   "file": "Currency__usdtogbp_exchangerate_96_12_12_10events__P1.npz",
+   "sha256": "8a2ac8aa46e4b1a0842dbf9a9ee7a5d328eeabbfc1ed056bbb85e39e89ba73d3",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "Currency__usdtohkd_exchangerate_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 49,
+   "file": "Currency__usdtohkd_exchangerate_96_12_12_10events__P1.npz",
+   "sha256": "8886b9ae5850cb29ed194934eef799edcd70ce771420619989d6bf435d7c3c81",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "Currency__usdtoinr_exchangerate_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 49,
+   "file": "Currency__usdtoinr_exchangerate_96_12_12_10events__P1.npz",
+   "sha256": "b23963bb8e4883afedb06f817b6ec2c4014561846a5624fe9294f4ff888b301e",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "Currency__usdtokrw_exchangerate_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 46,
+   "file": "Currency__usdtokrw_exchangerate_96_12_12_10events__P1.npz",
+   "sha256": "8e945b6b33ef0bb3e68410b9c3e3ace88347be5880be99949395febf24486aa6",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "Currency__usdtomxn_exchangerate_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 49,
+   "file": "Currency__usdtomxn_exchangerate_96_12_12_10events__P1.npz",
+   "sha256": "377e52b3b30043e1c1516019930c294ad498315f3ea897b2497643b9fca0e85e",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "Currency__usdtosgd_exchangerate_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 48,
+   "file": "Currency__usdtosgd_exchangerate_96_12_12_10events__P1.npz",
+   "sha256": "08034db7a0edbac217d1d3bbcc4f0390ad67a1b8c140594bd2f25990f73d1daa",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "EnergyAndFuels__bitumen_cny_t_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 48,
+   "file": "EnergyAndFuels__bitumen_cny_t_96_12_12_10events__P1.npz",
+   "sha256": "01c18f572b1a58d6bd28cb26d1e6f7d9ac741d4792a766904d3fbf2ecd33a3e4",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "EnergyAndFuels__brent_usd_bbl_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 45,
+   "file": "EnergyAndFuels__brent_usd_bbl_96_12_12_10events__P1.npz",
+   "sha256": "646bd2015f6db20354d8b3796aa1a2eb2903e55b1af5a5e0b17b3ea1ee391e25",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "EnergyAndFuels__coal_usd_t_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 49,
+   "file": "EnergyAndFuels__coal_usd_t_96_12_12_10events__P1.npz",
+   "sha256": "13bed72f45748d63a41f4f9594d363373bfbb67875545f91b75034d26257caa2",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "EnergyAndFuels__ethanol_usd_gal_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 46,
+   "file": "EnergyAndFuels__ethanol_usd_gal_96_12_12_10events__P1.npz",
+   "sha256": "c4b58a5c03ac9287236b482c416f9c23dfda2c8f00bf9c866e55434090caf27d",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "EnergyAndFuels__gasoline_usd_gal_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 47,
+   "file": "EnergyAndFuels__gasoline_usd_gal_96_12_12_10events__P1.npz",
+   "sha256": "13c12a8cda84164565222e29cadca83aa62fea0ae267932ea53c3091b57cf4a1",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "EnergyAndFuels__methanol_cny_t_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 44,
+   "file": "EnergyAndFuels__methanol_cny_t_96_12_12_10events__P1.npz",
+   "sha256": "2bac1fc69caded75bfdd309269d2f80e19d14ee66ff6f8e2b48c046310e2c9e3",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "EnergyAndFuels__naphtha_usd_t_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 45,
+   "file": "EnergyAndFuels__naphtha_usd_t_96_12_12_10events__P1.npz",
+   "sha256": "ba82c564ba6e437b48cc33a9126d2cf8cebeca16f56a8ffdf6764ba65fa06be1",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "EnergyAndFuels__propane_usd_gal_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 46,
+   "file": "EnergyAndFuels__propane_usd_gal_96_12_12_10events__P1.npz",
+   "sha256": "a68b8e285ebac3530282a69738e0fd8498e106260d1e0106b4b415db930fb076",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "EnergyAndFuels__rapeseed_eur_t_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 47,
+   "file": "EnergyAndFuels__rapeseed_eur_t_96_12_12_10events__P1.npz",
+   "sha256": "4c991253ca43073b97f61e4ef8b07e8424485cc0f19fa0d40bcc2e917e92c424",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "EnergyAndFuels__uranium_usd_lbs_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 42,
+   "file": "EnergyAndFuels__uranium_usd_lbs_96_12_12_10events__P1.npz",
+   "sha256": "dd0a9a48b8e8a1bdb2a8bdb52daf8bdcb2a9afd9c112bda9c65e9e0f1ca1c264",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "LivestockAndFoodProducts__beef_brl_kg_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 46,
+   "file": "LivestockAndFoodProducts__beef_brl_kg_96_12_12_10events__P1.npz",
+   "sha256": "7a6fcdbeab586cb1423f1a44eeafe237a95df0710b56ccb48fe5991b15182f7d",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "LivestockAndFoodProducts__butter_eur_t_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 44,
+   "file": "LivestockAndFoodProducts__butter_eur_t_96_12_12_10events__P1.npz",
+   "sha256": "1273408e85c5a85d3ae8ced94c253d04566d9a0e81c93c3224403515b1998b4e",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "LivestockAndFoodProducts__cheese_usd_lbs_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 45,
+   "file": "LivestockAndFoodProducts__cheese_usd_lbs_96_12_12_10events__P1.npz",
+   "sha256": "c965e17864b238ed08138b9337b6b41f1c5b27d316e988d3f3d98b0291171f48",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "LivestockAndFoodProducts__coffee_usd_lbs_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 46,
+   "file": "LivestockAndFoodProducts__coffee_usd_lbs_96_12_12_10events__P1.npz",
+   "sha256": "641539e608a29674d3c199a5ce03ca046ae047fa2daa29cf7e04510ced3b2490",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "LivestockAndFoodProducts__corn_usd_bu_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 49,
+   "file": "LivestockAndFoodProducts__corn_usd_bu_96_12_12_10events__P1.npz",
+   "sha256": "ca435df68afdd6fb7a903cea41e867204294341a302ebfd5a6b1b9fee3829a2a",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "LivestockAndFoodProducts__milk_usd_cwt_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 46,
+   "file": "LivestockAndFoodProducts__milk_usd_cwt_96_12_12_10events__P1.npz",
+   "sha256": "d58df4ad99e4f4dd3ae2d4c7f36596eda3c4b92608bfdc03f84d7c228c89ff29",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "LivestockAndFoodProducts__poultry_brl_kgs_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 46,
+   "file": "LivestockAndFoodProducts__poultry_brl_kgs_96_12_12_10events__P1.npz",
+   "sha256": "a46c22ff294938f4559621a09c607bbfe25e5d6c168f8f1208b37beb774e0435",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "LivestockAndFoodProducts__salmon_nok_kg_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 41,
+   "file": "LivestockAndFoodProducts__salmon_nok_kg_96_12_12_10events__P1.npz",
+   "sha256": "f70ab6d05dfa699a2086987ffaa45e4790afe620f9dd9619dcc88b2060730d78",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "LivestockAndFoodProducts__soybeans_usd_bu_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 49,
+   "file": "LivestockAndFoodProducts__soybeans_usd_bu_96_12_12_10events__P1.npz",
+   "sha256": "1fe28afea2889faa7633849afb33ddcf7b6768c68cbd16262d356bbf064d36b3",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "LivestockAndFoodProducts__wool_aud_100kg_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 46,
+   "file": "LivestockAndFoodProducts__wool_aud_100kg_96_12_12_10events__P1.npz",
+   "sha256": "a85b56d669d6dce2521165f6289622298910f44836555711b4810365923a9529",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "RawMaterialsAndConstruction__aluminum_usd_t_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 43,
+   "file": "RawMaterialsAndConstruction__aluminum_usd_t_96_12_12_10events__P1.npz",
+   "sha256": "db38d8005f7c519adb957dbe7b8670a37c6b43b801b4b460bf6c5b728f1e9894",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "RawMaterialsAndConstruction__copper_usd_lbs_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 46,
+   "file": "RawMaterialsAndConstruction__copper_usd_lbs_96_12_12_10events__P1.npz",
+   "sha256": "45a541911a7b66edcf5c9023b4cbcbe58e2931b6b5dc0ab69bc5956f1ab80597",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "RawMaterialsAndConstruction__lead_usd_t_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 49,
+   "file": "RawMaterialsAndConstruction__lead_usd_t_96_12_12_10events__P1.npz",
+   "sha256": "06b47a27d8f452fdd88a26c315514a26fe1a0bc793a633ad3e78f674c54bc735",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "RawMaterialsAndConstruction__lumber_usd_1000_board_feet_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 46,
+   "file": "RawMaterialsAndConstruction__lumber_usd_1000_board_feet_96_12_12_10events__P1.npz",
+   "sha256": "f611f918dea1a3b3b38745072bbb58e40b1e53212604a85a674fe51938e5f772",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "RawMaterialsAndConstruction__polyethylene_cny_t_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 43,
+   "file": "RawMaterialsAndConstruction__polyethylene_cny_t_96_12_12_10events__P1.npz",
+   "sha256": "205d54f34d5d39bdd2d6690df505d2c73b33528588364d45b6d49f00a9278a49",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "RawMaterialsAndConstruction__polypropylene_cny_t_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 45,
+   "file": "RawMaterialsAndConstruction__polypropylene_cny_t_96_12_12_10events__P1.npz",
+   "sha256": "19ecadc75ceea7382ee2fd4e37593726e696110062031368f33cc7b713628f3b",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "RawMaterialsAndConstruction__rubber_usd_cents_kg_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 45,
+   "file": "RawMaterialsAndConstruction__rubber_usd_cents_kg_96_12_12_10events__P1.npz",
+   "sha256": "04eff70f4616d4a8950f90a1ac8da67226f3e714507675f8e9781d1ab057a60e",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "RawMaterialsAndConstruction__steel_cny_t_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 45,
+   "file": "RawMaterialsAndConstruction__steel_cny_t_96_12_12_10events__P1.npz",
+   "sha256": "045b38fbb13ebbf25717f723bf46cb1b8dce41957040bb969e2f3c9776d8a4f3",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "RawMaterialsAndConstruction__tin_usd_t_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 46,
+   "file": "RawMaterialsAndConstruction__tin_usd_t_96_12_12_10events__P1.npz",
+   "sha256": "2a4b75bcfd6a92ca69300670c3077898bde1f862bf0a1e51e230900a38bee58f",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "RawMaterialsAndConstruction__zinc_usd_t_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 45,
+   "file": "RawMaterialsAndConstruction__zinc_usd_t_96_12_12_10events__P1.npz",
+   "sha256": "83d92fe29469ee089aaa12a04038091a2a89f861cc734c1666274dcf453a4bff",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "SpecialtyAndAdvancedMaterials__gallium_cny_kg_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 43,
+   "file": "SpecialtyAndAdvancedMaterials__gallium_cny_kg_96_12_12_10events__P1.npz",
+   "sha256": "7957f473661a8d69a93d0f4c771f7ea4db18b9767f8781bf86de3de58db2449c",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "SpecialtyAndAdvancedMaterials__germanium_cny_kg_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 45,
+   "file": "SpecialtyAndAdvancedMaterials__germanium_cny_kg_96_12_12_10events__P1.npz",
+   "sha256": "803954e4bdef37953ad7ff47d60bc7df93b33e3b3e973ccd87f5b8b8e41ac90e",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "SpecialtyAndAdvancedMaterials__indium_cny_kg_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 46,
+   "file": "SpecialtyAndAdvancedMaterials__indium_cny_kg_96_12_12_10events__P1.npz",
+   "sha256": "6d838339dfea160a8ca13d790ce895770b76dfdb3e55c369e64d2b73576bc26a",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "SpecialtyAndAdvancedMaterials__magnesium_cny_t_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 44,
+   "file": "SpecialtyAndAdvancedMaterials__magnesium_cny_t_96_12_12_10events__P1.npz",
+   "sha256": "5660ea984e97e74877473f9136725123714271ea47489c416d3c5a56de228896",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "SpecialtyAndAdvancedMaterials__molybdenum_cny_kg_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 37,
+   "file": "SpecialtyAndAdvancedMaterials__molybdenum_cny_kg_96_12_12_10events__P1.npz",
+   "sha256": "8f091644c2f107c9ad391c66629342636b97592abcfaad39dd4662a70b759729",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "SpecialtyAndAdvancedMaterials__polyvinyl_cny_t_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 45,
+   "file": "SpecialtyAndAdvancedMaterials__polyvinyl_cny_t_96_12_12_10events__P1.npz",
+   "sha256": "e6f827439aba435729bf8cef2e35adc4cdde5f0eccde72d9388f47783d342c79",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "SpecialtyAndAdvancedMaterials__tellurium_cny_kg_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 45,
+   "file": "SpecialtyAndAdvancedMaterials__tellurium_cny_kg_96_12_12_10events__P1.npz",
+   "sha256": "adb3a8596edc356c810d261220a314dfb1943422b2c85a602e9b08eaeabc684d",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "SpecialtyAndAdvancedMaterials__titanium_cny_kg_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 37,
+   "file": "SpecialtyAndAdvancedMaterials__titanium_cny_kg_96_12_12_10events__P1.npz",
+   "sha256": "bcd4554b1dfaf314c58aa5dc0a870b71e66b3d2766b52516723af5433dcdf8b4",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 47,
+   "file": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__P1.npz",
+   "sha256": "db2c6882c7c553f77c01e979c8a9e275254aa8b8484ebd01139242dd9d9e1fd0",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "StrategicAndHighValueMaterials__gold_usd_t_oz_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 46,
+   "file": "StrategicAndHighValueMaterials__gold_usd_t_oz_96_12_12_10events__P1.npz",
+   "sha256": "c7360a112fff43479af3c09dbba750305c15a7ac03e5661c0d36116802c3d32f",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "StrategicAndHighValueMaterials__lithium_cny_t_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 48,
+   "file": "StrategicAndHighValueMaterials__lithium_cny_t_96_12_12_10events__P1.npz",
+   "sha256": "f2ceaefa9cfb7d9f07a1e69977d02f7db6f03225bb9eaa3eb465400fc0f84f31",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "StrategicAndHighValueMaterials__manganese_cny_mtu_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 44,
+   "file": "StrategicAndHighValueMaterials__manganese_cny_mtu_96_12_12_10events__P1.npz",
+   "sha256": "9bece50e9feb07d6358104be6385842b13bb60ec320a822f2d04eb60bbf37894",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "StrategicAndHighValueMaterials__neodymium_cny_t_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 49,
+   "file": "StrategicAndHighValueMaterials__neodymium_cny_t_96_12_12_10events__P1.npz",
+   "sha256": "13990ab01868b333920d2fb0321398154f812e2880130fcde33a24d25139730c",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "StrategicAndHighValueMaterials__nickel_usd_t_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 46,
+   "file": "StrategicAndHighValueMaterials__nickel_usd_t_96_12_12_10events__P1.npz",
+   "sha256": "59f37d634b6edf88ab9917b584430830ef1417a99abbaec4f7663ddcca1296bf",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "StrategicAndHighValueMaterials__palladium_usd_t_oz_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 46,
+   "file": "StrategicAndHighValueMaterials__palladium_usd_t_oz_96_12_12_10events__P1.npz",
+   "sha256": "5e27fc0f4bf42c1bb7013350ddf2eb0722c77952f56a40884520287c195a74d1",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "StrategicAndHighValueMaterials__platinum_usd_t_oz_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 49,
+   "file": "StrategicAndHighValueMaterials__platinum_usd_t_oz_96_12_12_10events__P1.npz",
+   "sha256": "c2af9fe2398bbbe059e4674ce78f0ca2fed8fb9079f061721e759ef80f05aef2",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "StrategicAndHighValueMaterials__rhodium_usd_t_oz_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 46,
+   "file": "StrategicAndHighValueMaterials__rhodium_usd_t_oz_96_12_12_10events__P1.npz",
+   "sha256": "7a47516459f33172be295201691f80ba58dd9910bf79e44bb89cfb5d49c9e8fb",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "StrategicAndHighValueMaterials__silver_usd_t_oz_96_12_12_10events": {
+   "verdict": "reuse_candidate",
+   "n": 46,
+   "file": "StrategicAndHighValueMaterials__silver_usd_t_oz_96_12_12_10events__P1.npz",
+   "sha256": "38be50d15e5dc7b5603503ac86c35ff3388e7a3b3bfcba05b36a1687c7a65c5f",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "arts__art_exhibitions_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "arts__art_exhibitions_96_12_4_10events__P1.npz",
+   "sha256": "423295d51ded420639b8888c92eff87938031a5b2d13e5c062686b28d0b72e3c",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "arts__broadway_shows_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "arts__broadway_shows_96_12_4_10events__P1.npz",
+   "sha256": "8412b7f3629c022679254a69e0725860d48822b19478947a14131de35012f3cf",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "arts__comic_con_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "arts__comic_con_96_12_4_10events__P1.npz",
+   "sha256": "caee7c6097ec56704fb9305c8d349a497e804a8b3d2c98728a66cbc4d9d5ae3d",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "arts__esports_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "arts__esports_96_12_4_10events__P1.npz",
+   "sha256": "bbcca097a72cbd6018a0ff172b9a09cf44ec88e7ca91928fcda8f771ce6b124c",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "arts__film_festivals_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "arts__film_festivals_96_12_4_10events__P1.npz",
+   "sha256": "639c924511beafc86ca39bc9e2b3ed02d337001628ee1fe34672a8148056525c",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "arts__food_wine_festivals_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 18,
+   "file": "arts__food_wine_festivals_96_12_4_10events__P1.npz",
+   "sha256": "1a8c77074b12be76eb73525c55c9aad47be4d35ebd41bea140fec758fb178c76",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "arts__major_league_baseball_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "arts__major_league_baseball_96_12_4_10events__P1.npz",
+   "sha256": "89066402f874585c89db0601b1c358b99aa40f4aac1b3298276a16b05412ad3d",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "arts__music_festivals_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "arts__music_festivals_96_12_4_10events__P1.npz",
+   "sha256": "c042cea9a535cc340f6aca517a6b606ecdcdb1274194e8905c48edd735c0cf27",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "arts__national_basketball_association_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "arts__national_basketball_association_96_12_4_10events__P1.npz",
+   "sha256": "984ba2c7945917a0a395bd3c4e0785a3a9b7c88cc6f74de77afb931bc3831bbc",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "arts__national_football_league_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "arts__national_football_league_96_12_4_10events__P1.npz",
+   "sha256": "f6b24b77bee62f43ec64eda51b1c0caf287c3c5202ccd70acf47d3cc58991e20",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "climate__deforestation_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "climate__deforestation_96_12_4_10events__P1.npz",
+   "sha256": "3b81122de0f17328ff9b9dd3e051a18582df19cf473061d9179c0ecab2912b27",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "climate__drought_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "climate__drought_96_12_4_10events__P1.npz",
+   "sha256": "b659dd38a88f9daf82d01c2c955283d34a941bb9f1773648b7d0e962d19e19c4",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "climate__endangered_species_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "climate__endangered_species_96_12_4_10events__P1.npz",
+   "sha256": "3ccc1e871a578db0094908c42d04993b570ad5480786cbf556ddde954693ee0f",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "climate__flooding_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "climate__flooding_96_12_4_10events__P1.npz",
+   "sha256": "e106f66eb555f1e431959f5fd1065e398440b9e4b57bc432441c378fbf7f1ea2",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "climate__global_warming_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "climate__global_warming_96_12_4_10events__P1.npz",
+   "sha256": "2c0bd3db89f9bbd86b2adf8dd4429363b07919ac9612cc4d430cbb3a9f0404eb",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "climate__heatwave_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "climate__heatwave_96_12_4_10events__P1.npz",
+   "sha256": "f81ed6e60cfaf96ad7a1cb3ab89391432bbe4c813de9b09a18ef8da12b700293",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "climate__heavy_rainfall_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "climate__heavy_rainfall_96_12_4_10events__P1.npz",
+   "sha256": "b04331709ddf79b461f1d302b02f0b91c5fc89968a3afe8f17c7c7c6d2bda78b",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "climate__marine_pollution_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "climate__marine_pollution_96_12_4_10events__P1.npz",
+   "sha256": "0d3da71420b52fbf5e2ba614039ac1c5456e13e1e3d32b3576d16bcb5a530a12",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "climate__sustainable_fashion_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "climate__sustainable_fashion_96_12_4_10events__P1.npz",
+   "sha256": "229946422a84b18eaa05f5ab79abcccb8c84a724fa7f38c1920fdc5dfc4d7612",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "climate__water_scarcity_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "climate__water_scarcity_96_12_4_10events__P1.npz",
+   "sha256": "fa407d9180147bffd8a2527011ec1a029c6c388a3c4c0416c7077d6a49d1a378",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "economy__cost_of_living_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "economy__cost_of_living_96_12_4_10events__P1.npz",
+   "sha256": "d56d66b856863dc9431b562d0b2b9ce854a700d0116a7ac576ec33bcbfdddfb6",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "economy__federal_budget_deficit_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "economy__federal_budget_deficit_96_12_4_10events__P1.npz",
+   "sha256": "f2d5adb4d779678520bb65261451732b294a5c95de580a33d2a74e44dbf92951",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "economy__government_spending_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "economy__government_spending_96_12_4_10events__P1.npz",
+   "sha256": "bebde8d99caef2ecbf104a9d351d3df79e4f1295c23606f5c18b5f2db1349649",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "economy__healthcare_costs_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "economy__healthcare_costs_96_12_4_10events__P1.npz",
+   "sha256": "7ea804c3b6910fa42c3796ff78dde19d9c1bd2d55eefbfc10474529faff2cfba",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "economy__inflation_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "economy__inflation_96_12_4_10events__P1.npz",
+   "sha256": "f0d39a7b0067db5ff09d266b4acc15d8b06670e0b8375730af75fb79ced78859",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "economy__international_trade_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "economy__international_trade_96_12_4_10events__P1.npz",
+   "sha256": "e387677b33c1380e4eb83a2b83d99160b00a4a5afef0c32a6bff76911f8d7603",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "economy__minimum_wage_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "economy__minimum_wage_96_12_4_10events__P1.npz",
+   "sha256": "e832783f142f1da3d1aa9c7f3bc807b1f9c167eb64832c3f8701570bce66a978",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "economy__student_loans_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "economy__student_loans_96_12_4_10events__P1.npz",
+   "sha256": "93d189b0647c39834e9e54b66edc61a8a99147591213ba38d7d93a0743269d53",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "economy__taxes_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "economy__taxes_96_12_4_10events__P1.npz",
+   "sha256": "dec1f690a157f1c011486d224c2ff0074670b23cf667e4387629b52762012757",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "economy__unemployment_rate_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "economy__unemployment_rate_96_12_4_10events__P1.npz",
+   "sha256": "a6bda3d99f7e9b1b5b60ce46f48e78bc0f81c8dbc3d47f47f4691c09cfba3dab",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "electronic_technology__alphabet_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "electronic_technology__alphabet_96_12_4_10events__P1.npz",
+   "sha256": "9664b754d42f357afb3ac61db8f88dab398ea8f10fe0b06354d839fddcdd6f83",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "electronic_technology__amazon_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "electronic_technology__amazon_96_12_4_10events__P1.npz",
+   "sha256": "c15cdf9f3d67db96827736e977cefa62d33558cf940b24d6db5ff88c2c1ce88d",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "electronic_technology__apple_inc_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "electronic_technology__apple_inc_96_12_4_10events__P1.npz",
+   "sha256": "ff7172bb82b04db392e21ceaceb324fd1e9b465639f176f3fd8a1284dd5f0fb5",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "electronic_technology__artificial_intelligence_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "electronic_technology__artificial_intelligence_96_12_4_10events__P1.npz",
+   "sha256": "eaa26259fcb3cf7566a7ab50f992d9ce74734762f18c6188867614e632271b20",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "electronic_technology__consumer_electronics_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "electronic_technology__consumer_electronics_96_12_4_10events__P1.npz",
+   "sha256": "30c60da4cad8fb05f0b2f0fd4722aee76afc8a03fcfed2b92721c7639a611d5a",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "electronic_technology__drones_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "electronic_technology__drones_96_12_4_10events__P1.npz",
+   "sha256": "aba2ce46735df55b2810268638c9d3a262e7f90224f531d7b30968b192ce4483",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "electronic_technology__meta_platforms_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "electronic_technology__meta_platforms_96_12_4_10events__P1.npz",
+   "sha256": "70bf7ebad908e19c22154ba57fa542ae0dd4ee761355f9b3570f167aaee8c3fc",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "electronic_technology__microsoft_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "electronic_technology__microsoft_96_12_4_10events__P1.npz",
+   "sha256": "65193e8870752be693c409e149f7791dec898fce4895c7986e574cdc0ea2b736",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "electronic_technology__nvidia_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "electronic_technology__nvidia_96_12_4_10events__P1.npz",
+   "sha256": "094282bb612211ae98d1b35058d93310f4b5c95215142b109ef332d5f823c44f",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "electronic_technology__robotics_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "electronic_technology__robotics_96_12_4_10events__P1.npz",
+   "sha256": "592b24e5becf75631dabf02134b11412646ebe77e74ebb222de8d8be4ee2429b",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "finance__asset_management_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "finance__asset_management_96_12_4_10events__P1.npz",
+   "sha256": "9fa5607f30a3a51e46f36e60ae3b1788ee9a4d31fd118d1b2fa3d85b8e378c5a",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "finance__cryptocurrency_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "finance__cryptocurrency_96_12_4_10events__P1.npz",
+   "sha256": "3271ce3bfbf0f53d60d80f2c0937b9dde9bcfd53d01e35f9c45d410b3d2c732c",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "finance__financial_regulation_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "finance__financial_regulation_96_12_4_10events__P1.npz",
+   "sha256": "369de166f054b5100496f1b744629c738a34633c9b4d3403845f34795ef68fc4",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "finance__goldman_sachs_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "finance__goldman_sachs_96_12_4_10events__P1.npz",
+   "sha256": "41b818f874b8c9f67eff1d1fde56b8813dce605b29f4f92f63b5d5e1599421c3",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "finance__hedge_funds_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "finance__hedge_funds_96_12_4_10events__P1.npz",
+   "sha256": "b27062cd3663ea65d9e294dd399adfe443094076009836fa34fa42141472516c",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "finance__investment_banking_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "finance__investment_banking_96_12_4_10events__P1.npz",
+   "sha256": "b6d795475a8cd8915829a789e2e16497b0f10684e8e82a668a3e5d33d6afa92a",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "finance__mortgage_rates_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "finance__mortgage_rates_96_12_4_10events__P1.npz",
+   "sha256": "e3b32484694e749fb394f5aba60df2715c8388fd703dbfd64a46dfd0213b1ffa",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "finance__private_equity_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "finance__private_equity_96_12_4_10events__P1.npz",
+   "sha256": "059d07879e677c0621a2d1de77c4f1889d62d58fcff5e81f7e9e04a24bb59905",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "finance__stock_market_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "finance__stock_market_96_12_4_10events__P1.npz",
+   "sha256": "5e68ba034c73c9f3cb80a2d37e970240a5b95a9fb0ecbfa6b3e3a118d90e0095",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "finance__venture_capital_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "finance__venture_capital_96_12_4_10events__P1.npz",
+   "sha256": "fa78c9c598aa75433d34a79c32075ecbec4cde6d893f83fb39cf7e1b04693ea7",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "pets__animal_migration_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "pets__animal_migration_96_12_4_10events__P1.npz",
+   "sha256": "0daddb061f414e4ce6a5a5c12234d1c861dfe7391760aa203500d0cb87962780",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "pets__animal_rescue_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "pets__animal_rescue_96_12_4_10events__P1.npz",
+   "sha256": "824b2a51ac0a1d80bb46d670c29f1d643c9cbef4a2ad123fad7562343eeddfa5",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "pets__animal_welfare_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "pets__animal_welfare_96_12_4_10events__P1.npz",
+   "sha256": "22467bd98175e77a0181c85cf9513e1fd55444c0ab0db79f83e78e441e5d9739",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "pets__beekeeping_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "pets__beekeeping_96_12_4_10events__P1.npz",
+   "sha256": "1f610da0962e242d14449f5d5edbf1c802daf5332888ef722ec1408f70bba843",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "pets__biodiversity_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "pets__biodiversity_96_12_4_10events__P1.npz",
+   "sha256": "0e4f656532082dd60076eb8b24ea19daba85b57e587d47b789d35239ddb8a964",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "pets__invasive_species_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "pets__invasive_species_96_12_4_10events__P1.npz",
+   "sha256": "d8e2f9ff8ed341c53c950d4c05ad1bfc74c9fe86cc100c358d93c8f022ad2e0e",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "pets__marine_life_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "pets__marine_life_96_12_4_10events__P1.npz",
+   "sha256": "a04b17d80d25688be519fcc7c8248327c3acdcc5576ecca217c7164f60fd7da2",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "pets__pest_control_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "pets__pest_control_96_12_4_10events__P1.npz",
+   "sha256": "0c913d5ffcc1d2fff7bffa0ccb18bf90e78abca9ac3890e0d91b46cbee3c8310",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "pets__pet_adoption_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "pets__pet_adoption_96_12_4_10events__P1.npz",
+   "sha256": "bdbca35bdfcf73190e4eccf49412ed9ba96c55b5465749646757857b803bc146",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "pets__pet_health_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "pets__pet_health_96_12_4_10events__P1.npz",
+   "sha256": "2d43e134144228ef9ed7d8d41b75be9156a838fac85a054cc231bacd2ebfc01a",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "public_health__air_pollution_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "public_health__air_pollution_96_12_4_10events__P1.npz",
+   "sha256": "4a151ee157c71c164842c83b523bb537616db86c5ba66c4289f07d4023f778ca",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "public_health__climate_change_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "public_health__climate_change_96_12_4_10events__P1.npz",
+   "sha256": "88457a379c9d05759afd1bf790288a79fcee1a367bb6d61e7480335f15968447",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "public_health__diabetes_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "public_health__diabetes_96_12_4_10events__P1.npz",
+   "sha256": "e69bdcf67704c376c6d19e6155edcb580412c171ab71eb8bff67326a0693c9f6",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "public_health__drug_overdose_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "public_health__drug_overdose_96_12_4_10events__P1.npz",
+   "sha256": "eaa50b8607bac58cec3f29178f2630457500eeb1fc59dbb6eec62f638a40e2d4",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "public_health__food_safety_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "public_health__food_safety_96_12_4_10events__P1.npz",
+   "sha256": "e8cde4293897581f2b74018a98e617a0db8265a4533c33cfe56cc179f1f7fdda",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "public_health__hiv_aids_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "public_health__hiv_aids_96_12_4_10events__P1.npz",
+   "sha256": "99c9c6eb7ee6ef42d293353f4e0c66dc9408689af6ef2e41ecdaa484cd5726cc",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "public_health__infectious_disease_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "public_health__infectious_disease_96_12_4_10events__P1.npz",
+   "sha256": "fac9493c78747da2bf6a447640dcee40707fe531fe798cabd8438807019d381b",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "public_health__mental_health_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "public_health__mental_health_96_12_4_10events__P1.npz",
+   "sha256": "c00bd40fc0bc98f59969312aa834aa9c5bd1a139b43d72c5df195149846dc013",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "public_health__obesity_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "public_health__obesity_96_12_4_10events__P1.npz",
+   "sha256": "7c9f11ce9564c2e7d6e1441769c001865fb2c2e10a1cb5984cae1c448e8bdcd8",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "public_health__opioid_crisis_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "public_health__opioid_crisis_96_12_4_10events__P1.npz",
+   "sha256": "ec31c2d3829ec098600ef1b47a0f0d3b82764c1c5f489479002864bb032ea094",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "public_policy__carbon_emissions_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "public_policy__carbon_emissions_96_12_4_10events__P1.npz",
+   "sha256": "65ad0d51776b864ffafd33ee709b0f0b38ecf2c0f68ef3e6e04181daf086b683",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "public_policy__federal_reserve_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "public_policy__federal_reserve_96_12_4_10events__P1.npz",
+   "sha256": "e3b1a0c6dd1b86f99d2d4741d36004704013c4587e1d0b6b6cc2f44e33871f06",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "public_policy__healthcare_policy_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "public_policy__healthcare_policy_96_12_4_10events__P1.npz",
+   "sha256": "43060f95210da642ab10df6093bf4a851483df85d350d97c2e39f7ab43723146",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "public_policy__human_rights_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "public_policy__human_rights_96_12_4_10events__P1.npz",
+   "sha256": "f2f312e933c20ca95b81cfcba8360c639588a16d58e66a7dd4f6866d08c047cf",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "public_policy__immigration_reform_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "public_policy__immigration_reform_96_12_4_10events__P1.npz",
+   "sha256": "fd0b03333f6b1c3c476447db2902c39c079b54187e382a561e6867f676b4d55d",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "public_policy__national_debt_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "public_policy__national_debt_96_12_4_10events__P1.npz",
+   "sha256": "6b93f617708b2fb888ef0f9ab4ad058e3619d1cfcf97d0593369ea9d2ba9add3",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "public_policy__presidential_election_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "public_policy__presidential_election_96_12_4_10events__P1.npz",
+   "sha256": "f179d9758377fcfbddac2f4301bbd25ad5e154ddf0b35bf5377c0643e64765ab",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "public_policy__refugee_support_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "public_policy__refugee_support_96_12_4_10events__P1.npz",
+   "sha256": "cc592dce8935b4b7c4cb0f75269047d2254c510cd111b5d5d11f582884b56209",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "public_policy__renewable_energy_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "public_policy__renewable_energy_96_12_4_10events__P1.npz",
+   "sha256": "490108a49997ccaaa5315168656a229e5b5de2318efea6b6d2addd37fd66adaf",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "public_policy__space_exploration_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "public_policy__space_exploration_96_12_4_10events__P1.npz",
+   "sha256": "88afe18e08cbb60ff14be024a12ee6e9491d0688616bfd82d8f7b157dfc609b6",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "public_policy__wildlife_conservation_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "public_policy__wildlife_conservation_96_12_4_10events__P1.npz",
+   "sha256": "f014d3e314e065d8d0b5b16c910183101bf77dbac3f250807f6bb1529de0c0cd",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "science__cancer_research_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "science__cancer_research_96_12_4_10events__P1.npz",
+   "sha256": "17ba5b7ff196a2bd799f364e8002d4d1c74208dc5f6b1644cf468411e0f87bdf",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "science__data_breach_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "science__data_breach_96_12_4_10events__P1.npz",
+   "sha256": "a0e97b8af951b8b4d10ca7309b405f0a2af74e9a97dd7af3e4bbd832dab48960",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "science__earthquake_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "science__earthquake_96_12_4_10events__P1.npz",
+   "sha256": "d9883a15716f988f21ade2aa713ec7fa69024c2b212e8fdcf7e35fbd56c1552f",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "science__food_recall_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "science__food_recall_96_12_4_10events__P1.npz",
+   "sha256": "39b204acc5615095cc21d8be2ce6e4d491a40306074261e878422b047d625d94",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "science__gene_editing_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "science__gene_editing_96_12_4_10events__P1.npz",
+   "sha256": "37dc71fd9bd14cddb168a1133ac0653049f390225ce88852b603cd22fa409c55",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "science__meteor_shower_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "science__meteor_shower_96_12_4_10events__P1.npz",
+   "sha256": "78908e2032c7b128e5c97c0abc76704503fdf9c50c5fb590833e4f937d233a85",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "science__nobel_prize_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "science__nobel_prize_96_12_4_10events__P1.npz",
+   "sha256": "e36e43b46b676cc766d42de7963f9463aada9b904dcce54fae90f9257da76a71",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "science__quantum_computing_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "science__quantum_computing_96_12_4_10events__P1.npz",
+   "sha256": "f932e190c02193acdb1631ea12ad6228ca75abe9a5647d673e41dad99061b64f",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "science__vaccine_research_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "science__vaccine_research_96_12_4_10events__P1.npz",
+   "sha256": "c3a35dc020d47ec35c25ff4fbaf4862a8aa36e1262fd3569c1fde39788ead2e8",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "science__volcanic_eruption_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "science__volcanic_eruption_96_12_4_10events__P1.npz",
+   "sha256": "ce9991ce33002757967087ace6f2da794dccbdfea477fd0a5026ff57b5340e18",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "shopping__air_conditioner_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "shopping__air_conditioner_96_12_4_10events__P1.npz",
+   "sha256": "d0714b30e4997b83c5cda93e5aa7afd97910519f905fe6c7a1720cef118577cd",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "shopping__back_to_school_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "shopping__back_to_school_96_12_4_10events__P1.npz",
+   "sha256": "83f247963266879f8faee8f294512398cf116f1d97f0958e12ae75ccc8f9c1ea",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "shopping__black_friday_deals_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "shopping__black_friday_deals_96_12_4_10events__P1.npz",
+   "sha256": "16e0bf3a5affb041eaa1c62972df989bb632f3867950623014b4dcc2248ee3d3",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "shopping__christmas_gifts_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "shopping__christmas_gifts_96_12_4_10events__P1.npz",
+   "sha256": "4491fca7b5ed681e4479cb18ecfdcb3f70246257c7388e6c7116dafb50116dfc",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "shopping__fashion_week_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "shopping__fashion_week_96_12_4_10events__P1.npz",
+   "sha256": "3dfaa9395fce5ccdea00092884f47cccb732e59a8efea846991a56d79c247558",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "shopping__flu_shot_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "shopping__flu_shot_96_12_4_10events__P1.npz",
+   "sha256": "50e466623ee3c2e312cd9ec75031122ad5d2f00e2ada056b9716232808b77f47",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "shopping__halloween_costumes_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "shopping__halloween_costumes_96_12_4_10events__P1.npz",
+   "sha256": "b604f380b2e22cfbf36f139f31140f357363b5186e1aca0e43fdc308d72ecc88",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "shopping__organic_food_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "shopping__organic_food_96_12_4_10events__P1.npz",
+   "sha256": "91aa26f0cbf9487a6797fb72a80c861a9710586fd3299f39de8790b8a435c792",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "shopping__ski_gear_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "shopping__ski_gear_96_12_4_10events__P1.npz",
+   "sha256": "022fc8253e9aef344c45589909b70b55bed9b01d962e00a076e8b08b378a792c",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "shopping__tax_software_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "shopping__tax_software_96_12_4_10events__P1.npz",
+   "sha256": "5566a04ce810f19387799bf6e1bb6e289f0c44143c961d08da72e34e4f2c207a",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "society__affordable_housing_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "society__affordable_housing_96_12_4_10events__P1.npz",
+   "sha256": "d7f1238343baf82f10aca0e3ea37580c3e0f43184680299386764a0e6765172c",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "society__cybersecurity_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "society__cybersecurity_96_12_4_10events__P1.npz",
+   "sha256": "ea9ef5f3f27b6e2de246bc8aec76dcff0b47b32f52ac130edbdd4f48c8b520d3",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "society__data_privacy_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "society__data_privacy_96_12_4_10events__P1.npz",
+   "sha256": "95928cd1703f7305f698c1b2bfad1b5214ca5332493bf73a0ac8296243dba1cf",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "society__domestic_violence_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "society__domestic_violence_96_12_4_10events__P1.npz",
+   "sha256": "96516e19e6301ffd39e4bea91afb3c2aa64cb30ca63fd0737b108ca8463f4201",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "society__gender_equality_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "society__gender_equality_96_12_4_10events__P1.npz",
+   "sha256": "1b0fd2d5670c743da5ba544877ce77fd118bc05c4908a4b1b59059c11be7ce27",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "society__homelessness_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "society__homelessness_96_12_4_10events__P1.npz",
+   "sha256": "465ace752567a560090aaf1cc3a82961ae78123961c82106bcd84b40d0362767",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "society__income_inequality_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "society__income_inequality_96_12_4_10events__P1.npz",
+   "sha256": "ba74a6058fe91507bd64e4c0ec5bb223d7859985dfa1da066ecc38e668fb69c1",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "society__infrastructure_spending_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "society__infrastructure_spending_96_12_4_10events__P1.npz",
+   "sha256": "7faaf6eb2996c77f3ece5693beb97b4f87f91b1a1c70f63307234bf6adc2afc5",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "society__protest_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "society__protest_96_12_4_10events__P1.npz",
+   "sha256": "a0148de54a431859840ddfaafc3c0044e237cdebfb323ec3db4299e55dcc5221",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "society__wildfires_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "society__wildfires_96_12_4_10events__P1.npz",
+   "sha256": "7f253de16a7827fd9b7fe4358ab3138c4fc1929471488ccbcdf38c048e360ca2",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "traffic__air_travel_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "traffic__air_travel_96_12_4_10events__P1.npz",
+   "sha256": "eb503122c271dbbfd032c4161934fb2e56f847c6fa5220e383bc96f630ff1bc3",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "traffic__autonomous_driving_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "traffic__autonomous_driving_96_12_4_10events__P1.npz",
+   "sha256": "612bd2a262eae2d95871521253c5ba6755e5253de73809d21d7bd4652c53efef",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "traffic__electric_vehicle_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "traffic__electric_vehicle_96_12_4_10events__P1.npz",
+   "sha256": "6bc086446b913b8cfd202ff104b7df1d6459c45867056fb74f7cd5d77618fc1f",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "traffic__formula_1_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "traffic__formula_1_96_12_4_10events__P1.npz",
+   "sha256": "466173687066b4cbc606421441bea80b5e44b19acb134cba846837b620888411",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "traffic__gas_prices_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "traffic__gas_prices_96_12_4_10events__P1.npz",
+   "sha256": "16ee561e535fa8a19b55dc57288c8293b22fad9cd38dcf305e20330eddb3d5c0",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "traffic__rocket_launch_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "traffic__rocket_launch_96_12_4_10events__P1.npz",
+   "sha256": "3cfc07e54bfee57d528c75bba97794c157997006a1d147e9be9201e8d559490b",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "traffic__tesla_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "traffic__tesla_96_12_4_10events__P1.npz",
+   "sha256": "eac7c4e8ef1683a17fd16e0753d52c42ecd31b08c19e84bea83cb4ccb69c1071",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "traffic__tour_de_france_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "traffic__tour_de_france_96_12_4_10events__P1.npz",
+   "sha256": "8745fe6af281c3eb569e742d0c4977af80f42da11e69f8e6699f76c6dd906432",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "traffic__traffic_insurance_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "traffic__traffic_insurance_96_12_4_10events__P1.npz",
+   "sha256": "190ca4728261d507a19b70382bb8855def7fc5b4d06c83bf3f6ef8d218109e69",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  },
+  "traffic__used_car_96_12_4_10events": {
+   "verdict": "reuse_candidate",
+   "n": 27,
+   "file": "traffic__used_car_96_12_4_10events__P1.npz",
+   "sha256": "94acd805e75183b4461c44d40faff1ef44f673b547e64bcf17bacb1a0efebe39",
+   "manifest_geom": {
+    "pad_left": 0,
+    "pad_right": 0,
+    "num_patch_input": 4,
+    "num_patch": 14,
+    "mask_ratio": 0.714285671710968
+   },
+   "issues": []
+  }
+ },
+ "totals": {
+  "reuse_candidate_vars": 190,
+  "pending_vars": 0,
+  "reuse_candidate_windows": 6413,
+  "expected_reuse_windows": 6413
+ },
+ "issues": []
+}

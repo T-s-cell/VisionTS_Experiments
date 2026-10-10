@@ -1,0 +1,5 @@
+# VERIFY-A fill set (sandbox /tmp/vz_sbx, 2026-10-10T11:07:16+08:00)
+case1 all-reuse: covered=6413 fill=1693
+case2 drop CropsAndStaples__barley_inr_t_96_12_12_10events: fill=1736 (+43) == var cached n=43
+case3 no-reuse: fill=8106
+VERIFY-A PASS

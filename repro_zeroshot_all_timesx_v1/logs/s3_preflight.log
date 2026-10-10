@@ -1,0 +1,5 @@
+[preflight] checked=194 (compare=191) failed_vars=1 c1_max=3.102e-05 c2_max=1.015e-05
+[preflight] final: reuse_vars=189 reinfer_vars=1 reuse_windows=6386 fill_windows=1720
+failed variables (whole var re-inferred):
+  - shopping__black_friday_deals_96_12_4_10events
+EXIT=0

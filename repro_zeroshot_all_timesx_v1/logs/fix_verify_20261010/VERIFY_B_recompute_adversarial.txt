@@ -1,0 +1,7 @@
+# VERIFY-B recompute adversarial (sandbox, 2026-10-10T11:07:28+08:00)
+T1 double-d: exit=1 pass=False n_fail=1 first=row 7 (CropsAndStaples__barley_inr_t_96_12_12_10events__20240131T000000): d devi
+T2 target-corrupt: exit=1 pass=False n_fail=9 first=row 3 (CropsAndStaples__barley_inr_t_96_12_12_10events__20231120T000000): target
+T3 identity-swap: exit=1 pass=False n_fail=2 first=row 0: identity mismatch vs inventory (CropsAndStaples__barley_inr_t_96_12_12_10
+T4 duplicate: exit=1 pass=False n_fail=10 first=row 10: duplicate flat_index 9
+T5 clean: exit=0
+VERIFY-B PASS

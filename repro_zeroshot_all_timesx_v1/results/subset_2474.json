@@ -1,0 +1,12 @@
+{
+ "n_windows_manifest": 2474,
+ "n_windows_found": 2474,
+ "n_cache": 2225,
+ "n_new": 249,
+ "overall": {
+  "std_mse": 3.6546997901107083,
+  "std_mae": 1.0490807590358089
+ },
+ "manifest": "/home/wlt/MMTS/VisionTS_Experiments/repro_ln_timesx_v1/manifests/split_manifest.json",
+ "note": "informational: fixed P=1 on the LN fine-tune test split, same scoring rules"
+}

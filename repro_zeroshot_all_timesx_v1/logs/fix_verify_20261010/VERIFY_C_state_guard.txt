@@ -1,0 +1,20 @@
+# VERIFY-C state guard (main repo + sandbox, 2026-10-10T11:07:56+08:00)
+== clean markers -> UP-TO-DATE
+guard freeze: UP-TO-DATE
+guard verify: UP-TO-DATE
+guard sample: UP-TO-DATE
+== tamper frozen/vars.json -> guard must reject
+[guard] freeze: frozen/vars.json sha256 changed since the marker (e47f8efee467… != c3bef1b8cb41…) — stale
+tampered rc=1 (expect 1)
+restored: UP-TO-DATE
+== FORCE_FILL detection through run_stage
+[run_all] fill: forced re-run (FORCE_FILL=1)
+/home/wlt/MMTS/VisionTS_Experiments/repro_zeroshot_all_timesx_v1/reuse_final.json missing — run preflight first
+== input drift in sandbox: tamper preds -> full S5 chain re-run
+[acceptance] ALL PASS (0.2s)
+[run_all] accept: OK
+[run_all] assemble: stale state (.state/s5a_assemble.done failed guard) — re-running
+[run_all] evaluate: stale state (.state/s5b_evaluate.done failed guard) — re-running
+[run_all] recompute: stale state (.state/recompute.done failed guard) — re-running
+[run_all] accept: stale state (.state/accept.done failed guard) — re-running
+[acceptance] ALL PASS (0.2s)

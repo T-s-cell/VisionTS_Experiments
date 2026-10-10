@@ -1,0 +1,1446 @@
+{
+ "protocol_version": "TimesX-all-native-P1-v1",
+ "rule": "per domain (sorted) 2 vars via random.Random('<protocol>|<domain>') from sorted var list; per var 5 evenly spaced windows incl. first/last; plus ALL zero-variance windows (compare when old-cached, else new_only sanity)",
+ "inventory_sha256": "0cb6e73971b0f8b54077ff3df5a332f7dbe34493b337ab0a2b9744aa88c217de",
+ "n_compare": 191,
+ "n_new_only": 3,
+ "domains": {
+  "CropsAndStaples": [
+   "CropsAndStaples__canola_cad_t_96_12_12_10events",
+   "CropsAndStaples__cotton_usd_lbs_96_12_12_10events"
+  ],
+  "Currency": [
+   "Currency__usdtoinr_exchangerate_96_12_12_10events",
+   "Currency__usdtokrw_exchangerate_96_12_12_10events"
+  ],
+  "EnergyAndFuels": [
+   "EnergyAndFuels__methanol_cny_t_96_12_12_10events",
+   "EnergyAndFuels__rapeseed_eur_t_96_12_12_10events"
+  ],
+  "LivestockAndFoodProducts": [
+   "LivestockAndFoodProducts__cheese_usd_lbs_96_12_12_10events",
+   "LivestockAndFoodProducts__milk_usd_cwt_96_12_12_10events"
+  ],
+  "RawMaterialsAndConstruction": [
+   "RawMaterialsAndConstruction__polyethylene_cny_t_96_12_12_10events",
+   "RawMaterialsAndConstruction__steel_cny_t_96_12_12_10events"
+  ],
+  "SpecialtyAndAdvancedMaterials": [
+   "SpecialtyAndAdvancedMaterials__germanium_cny_kg_96_12_12_10events",
+   "SpecialtyAndAdvancedMaterials__polyvinyl_cny_t_96_12_12_10events"
+  ],
+  "StrategicAndHighValueMaterials": [
+   "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events",
+   "StrategicAndHighValueMaterials__gold_usd_t_oz_96_12_12_10events"
+  ],
+  "arts": [
+   "arts__national_basketball_association_96_12_4_10events",
+   "arts__national_football_league_96_12_4_10events"
+  ],
+  "climate": [
+   "climate__deforestation_96_12_4_10events",
+   "climate__endangered_species_96_12_4_10events"
+  ],
+  "economy": [
+   "economy__inflation_96_12_4_10events",
+   "economy__student_loans_96_12_4_10events"
+  ],
+  "electronic_technology": [
+   "electronic_technology__apple_inc_96_12_4_10events",
+   "electronic_technology__meta_platforms_96_12_4_10events"
+  ],
+  "finance": [
+   "finance__asset_management_96_12_4_10events",
+   "finance__hedge_funds_96_12_4_10events"
+  ],
+  "pets": [
+   "pets__invasive_species_96_12_4_10events",
+   "pets__pet_health_96_12_4_10events"
+  ],
+  "public_health": [
+   "public_health__climate_change_96_12_4_10events",
+   "public_health__infectious_disease_96_12_4_10events"
+  ],
+  "public_policy": [
+   "public_policy__carbon_emissions_96_12_4_10events",
+   "public_policy__human_rights_96_12_4_10events"
+  ],
+  "science": [
+   "science__data_breach_96_12_4_10events",
+   "science__nobel_prize_96_12_4_10events"
+  ],
+  "shopping": [
+   "shopping__air_conditioner_96_12_4_10events",
+   "shopping__black_friday_deals_96_12_4_10events"
+  ],
+  "society": [
+   "society__affordable_housing_96_12_4_10events",
+   "society__protest_96_12_4_10events"
+  ],
+  "traffic": [
+   "traffic__air_travel_96_12_4_10events",
+   "traffic__traffic_insurance_96_12_4_10events"
+  ]
+ },
+ "windows": [
+  {
+   "flat_index": 67,
+   "sample_id": "CropsAndStaples__canola_cad_t_96_12_12_10events__20240322T000000",
+   "var_key": "CropsAndStaples__canola_cad_t_96_12_12_10events",
+   "domain": "CropsAndStaples",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 78,
+   "sample_id": "CropsAndStaples__canola_cad_t_96_12_12_10events__20240910T000000",
+   "var_key": "CropsAndStaples__canola_cad_t_96_12_12_10events",
+   "domain": "CropsAndStaples",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 89,
+   "sample_id": "CropsAndStaples__canola_cad_t_96_12_12_10events__20250224T000000",
+   "var_key": "CropsAndStaples__canola_cad_t_96_12_12_10events",
+   "domain": "CropsAndStaples",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 100,
+   "sample_id": "CropsAndStaples__canola_cad_t_96_12_12_10events__20250827T000000",
+   "var_key": "CropsAndStaples__canola_cad_t_96_12_12_10events",
+   "domain": "CropsAndStaples",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 111,
+   "sample_id": "CropsAndStaples__canola_cad_t_96_12_12_10events__20260303T000000",
+   "var_key": "CropsAndStaples__canola_cad_t_96_12_12_10events",
+   "domain": "CropsAndStaples",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 200,
+   "sample_id": "CropsAndStaples__cotton_usd_lbs_96_12_12_10events__20240404T000000",
+   "var_key": "CropsAndStaples__cotton_usd_lbs_96_12_12_10events",
+   "domain": "CropsAndStaples",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 211,
+   "sample_id": "CropsAndStaples__cotton_usd_lbs_96_12_12_10events__20240921T000000",
+   "var_key": "CropsAndStaples__cotton_usd_lbs_96_12_12_10events",
+   "domain": "CropsAndStaples",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 222,
+   "sample_id": "CropsAndStaples__cotton_usd_lbs_96_12_12_10events__20250307T000000",
+   "var_key": "CropsAndStaples__cotton_usd_lbs_96_12_12_10events",
+   "domain": "CropsAndStaples",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 234,
+   "sample_id": "CropsAndStaples__cotton_usd_lbs_96_12_12_10events__20250901T000000",
+   "var_key": "CropsAndStaples__cotton_usd_lbs_96_12_12_10events",
+   "domain": "CropsAndStaples",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 245,
+   "sample_id": "CropsAndStaples__cotton_usd_lbs_96_12_12_10events__20260303T000000",
+   "var_key": "CropsAndStaples__cotton_usd_lbs_96_12_12_10events",
+   "domain": "CropsAndStaples",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 393,
+   "sample_id": "CropsAndStaples__potatoes_eur_100kg_96_12_12_10events__20231018T000000",
+   "var_key": "CropsAndStaples__potatoes_eur_100kg_96_12_12_10events",
+   "domain": "CropsAndStaples",
+   "mode": "new_only"
+  },
+  {
+   "flat_index": 394,
+   "sample_id": "CropsAndStaples__potatoes_eur_100kg_96_12_12_10events__20231103T000000",
+   "var_key": "CropsAndStaples__potatoes_eur_100kg_96_12_12_10events",
+   "domain": "CropsAndStaples",
+   "mode": "new_only"
+  },
+  {
+   "flat_index": 1101,
+   "sample_id": "EnergyAndFuels__methanol_cny_t_96_12_12_10events__20240112T000000",
+   "var_key": "EnergyAndFuels__methanol_cny_t_96_12_12_10events",
+   "domain": "EnergyAndFuels",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 1112,
+   "sample_id": "EnergyAndFuels__methanol_cny_t_96_12_12_10events__20240801T000000",
+   "var_key": "EnergyAndFuels__methanol_cny_t_96_12_12_10events",
+   "domain": "EnergyAndFuels",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 1123,
+   "sample_id": "EnergyAndFuels__methanol_cny_t_96_12_12_10events__20250221T000000",
+   "var_key": "EnergyAndFuels__methanol_cny_t_96_12_12_10events",
+   "domain": "EnergyAndFuels",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 1133,
+   "sample_id": "EnergyAndFuels__methanol_cny_t_96_12_12_10events__20250815T000000",
+   "var_key": "EnergyAndFuels__methanol_cny_t_96_12_12_10events",
+   "domain": "EnergyAndFuels",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 1144,
+   "sample_id": "EnergyAndFuels__methanol_cny_t_96_12_12_10events__20260309T000000",
+   "var_key": "EnergyAndFuels__methanol_cny_t_96_12_12_10events",
+   "domain": "EnergyAndFuels",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 1299,
+   "sample_id": "EnergyAndFuels__rapeseed_eur_t_96_12_12_10events__20240227T000000",
+   "var_key": "EnergyAndFuels__rapeseed_eur_t_96_12_12_10events",
+   "domain": "EnergyAndFuels",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 1311,
+   "sample_id": "EnergyAndFuels__rapeseed_eur_t_96_12_12_10events__20240830T000000",
+   "var_key": "EnergyAndFuels__rapeseed_eur_t_96_12_12_10events",
+   "domain": "EnergyAndFuels",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 1322,
+   "sample_id": "EnergyAndFuels__rapeseed_eur_t_96_12_12_10events__20250208T000000",
+   "var_key": "EnergyAndFuels__rapeseed_eur_t_96_12_12_10events",
+   "domain": "EnergyAndFuels",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 1333,
+   "sample_id": "EnergyAndFuels__rapeseed_eur_t_96_12_12_10events__20250812T000000",
+   "var_key": "EnergyAndFuels__rapeseed_eur_t_96_12_12_10events",
+   "domain": "EnergyAndFuels",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 1345,
+   "sample_id": "EnergyAndFuels__rapeseed_eur_t_96_12_12_10events__20260302T000000",
+   "var_key": "EnergyAndFuels__rapeseed_eur_t_96_12_12_10events",
+   "domain": "EnergyAndFuels",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 1539,
+   "sample_id": "LivestockAndFoodProducts__cheese_usd_lbs_96_12_12_10events__20240315T000000",
+   "var_key": "LivestockAndFoodProducts__cheese_usd_lbs_96_12_12_10events",
+   "domain": "LivestockAndFoodProducts",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 1550,
+   "sample_id": "LivestockAndFoodProducts__cheese_usd_lbs_96_12_12_10events__20240910T000000",
+   "var_key": "LivestockAndFoodProducts__cheese_usd_lbs_96_12_12_10events",
+   "domain": "LivestockAndFoodProducts",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 1561,
+   "sample_id": "LivestockAndFoodProducts__cheese_usd_lbs_96_12_12_10events__20250228T000000",
+   "var_key": "LivestockAndFoodProducts__cheese_usd_lbs_96_12_12_10events",
+   "domain": "LivestockAndFoodProducts",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 1572,
+   "sample_id": "LivestockAndFoodProducts__cheese_usd_lbs_96_12_12_10events__20250901T000000",
+   "var_key": "LivestockAndFoodProducts__cheese_usd_lbs_96_12_12_10events",
+   "domain": "LivestockAndFoodProducts",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 1583,
+   "sample_id": "LivestockAndFoodProducts__cheese_usd_lbs_96_12_12_10events__20260306T000000",
+   "var_key": "LivestockAndFoodProducts__cheese_usd_lbs_96_12_12_10events",
+   "domain": "LivestockAndFoodProducts",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 1755,
+   "sample_id": "LivestockAndFoodProducts__milk_usd_cwt_96_12_12_10events__20240314T000000",
+   "var_key": "LivestockAndFoodProducts__milk_usd_cwt_96_12_12_10events",
+   "domain": "LivestockAndFoodProducts",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 1766,
+   "sample_id": "LivestockAndFoodProducts__milk_usd_cwt_96_12_12_10events__20240910T000000",
+   "var_key": "LivestockAndFoodProducts__milk_usd_cwt_96_12_12_10events",
+   "domain": "LivestockAndFoodProducts",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 1777,
+   "sample_id": "LivestockAndFoodProducts__milk_usd_cwt_96_12_12_10events__20250225T000000",
+   "var_key": "LivestockAndFoodProducts__milk_usd_cwt_96_12_12_10events",
+   "domain": "LivestockAndFoodProducts",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 1789,
+   "sample_id": "LivestockAndFoodProducts__milk_usd_cwt_96_12_12_10events__20250909T000000",
+   "var_key": "LivestockAndFoodProducts__milk_usd_cwt_96_12_12_10events",
+   "domain": "LivestockAndFoodProducts",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 1800,
+   "sample_id": "LivestockAndFoodProducts__milk_usd_cwt_96_12_12_10events__20260309T000000",
+   "var_key": "LivestockAndFoodProducts__milk_usd_cwt_96_12_12_10events",
+   "domain": "LivestockAndFoodProducts",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 2341,
+   "sample_id": "RawMaterialsAndConstruction__polyethylene_cny_t_96_12_12_10events__20240123T000000",
+   "var_key": "RawMaterialsAndConstruction__polyethylene_cny_t_96_12_12_10events",
+   "domain": "RawMaterialsAndConstruction",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 2351,
+   "sample_id": "RawMaterialsAndConstruction__polyethylene_cny_t_96_12_12_10events__20240726T000000",
+   "var_key": "RawMaterialsAndConstruction__polyethylene_cny_t_96_12_12_10events",
+   "domain": "RawMaterialsAndConstruction",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 2362,
+   "sample_id": "RawMaterialsAndConstruction__polyethylene_cny_t_96_12_12_10events__20250217T000000",
+   "var_key": "RawMaterialsAndConstruction__polyethylene_cny_t_96_12_12_10events",
+   "domain": "RawMaterialsAndConstruction",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 2373,
+   "sample_id": "RawMaterialsAndConstruction__polyethylene_cny_t_96_12_12_10events__20250828T000000",
+   "var_key": "RawMaterialsAndConstruction__polyethylene_cny_t_96_12_12_10events",
+   "domain": "RawMaterialsAndConstruction",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 2383,
+   "sample_id": "RawMaterialsAndConstruction__polyethylene_cny_t_96_12_12_10events__20260304T000000",
+   "var_key": "RawMaterialsAndConstruction__polyethylene_cny_t_96_12_12_10events",
+   "domain": "RawMaterialsAndConstruction",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 2530,
+   "sample_id": "RawMaterialsAndConstruction__steel_cny_t_96_12_12_10events__20231226T000000",
+   "var_key": "RawMaterialsAndConstruction__steel_cny_t_96_12_12_10events",
+   "domain": "RawMaterialsAndConstruction",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 2541,
+   "sample_id": "RawMaterialsAndConstruction__steel_cny_t_96_12_12_10events__20240717T000000",
+   "var_key": "RawMaterialsAndConstruction__steel_cny_t_96_12_12_10events",
+   "domain": "RawMaterialsAndConstruction",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 2552,
+   "sample_id": "RawMaterialsAndConstruction__steel_cny_t_96_12_12_10events__20250206T000000",
+   "var_key": "RawMaterialsAndConstruction__steel_cny_t_96_12_12_10events",
+   "domain": "RawMaterialsAndConstruction",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 2563,
+   "sample_id": "RawMaterialsAndConstruction__steel_cny_t_96_12_12_10events__20250819T000000",
+   "var_key": "RawMaterialsAndConstruction__steel_cny_t_96_12_12_10events",
+   "domain": "RawMaterialsAndConstruction",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 2574,
+   "sample_id": "RawMaterialsAndConstruction__steel_cny_t_96_12_12_10events__20260311T000000",
+   "var_key": "RawMaterialsAndConstruction__steel_cny_t_96_12_12_10events",
+   "domain": "RawMaterialsAndConstruction",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 2778,
+   "sample_id": "SpecialtyAndAdvancedMaterials__germanium_cny_kg_96_12_12_10events__20240111T000000",
+   "var_key": "SpecialtyAndAdvancedMaterials__germanium_cny_kg_96_12_12_10events",
+   "domain": "SpecialtyAndAdvancedMaterials",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 2789,
+   "sample_id": "SpecialtyAndAdvancedMaterials__germanium_cny_kg_96_12_12_10events__20240719T000000",
+   "var_key": "SpecialtyAndAdvancedMaterials__germanium_cny_kg_96_12_12_10events",
+   "domain": "SpecialtyAndAdvancedMaterials",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 2800,
+   "sample_id": "SpecialtyAndAdvancedMaterials__germanium_cny_kg_96_12_12_10events__20250210T000000",
+   "var_key": "SpecialtyAndAdvancedMaterials__germanium_cny_kg_96_12_12_10events",
+   "domain": "SpecialtyAndAdvancedMaterials",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 2811,
+   "sample_id": "SpecialtyAndAdvancedMaterials__germanium_cny_kg_96_12_12_10events__20250820T000000",
+   "var_key": "SpecialtyAndAdvancedMaterials__germanium_cny_kg_96_12_12_10events",
+   "domain": "SpecialtyAndAdvancedMaterials",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 2822,
+   "sample_id": "SpecialtyAndAdvancedMaterials__germanium_cny_kg_96_12_12_10events__20260313T000000",
+   "var_key": "SpecialtyAndAdvancedMaterials__germanium_cny_kg_96_12_12_10events",
+   "domain": "SpecialtyAndAdvancedMaterials",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 3004,
+   "sample_id": "SpecialtyAndAdvancedMaterials__polyvinyl_cny_t_96_12_12_10events__20231220T000000",
+   "var_key": "SpecialtyAndAdvancedMaterials__polyvinyl_cny_t_96_12_12_10events",
+   "domain": "SpecialtyAndAdvancedMaterials",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 3015,
+   "sample_id": "SpecialtyAndAdvancedMaterials__polyvinyl_cny_t_96_12_12_10events__20240711T000000",
+   "var_key": "SpecialtyAndAdvancedMaterials__polyvinyl_cny_t_96_12_12_10events",
+   "domain": "SpecialtyAndAdvancedMaterials",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 3026,
+   "sample_id": "SpecialtyAndAdvancedMaterials__polyvinyl_cny_t_96_12_12_10events__20250123T000000",
+   "var_key": "SpecialtyAndAdvancedMaterials__polyvinyl_cny_t_96_12_12_10events",
+   "domain": "SpecialtyAndAdvancedMaterials",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 3037,
+   "sample_id": "SpecialtyAndAdvancedMaterials__polyvinyl_cny_t_96_12_12_10events__20250814T000000",
+   "var_key": "SpecialtyAndAdvancedMaterials__polyvinyl_cny_t_96_12_12_10events",
+   "domain": "SpecialtyAndAdvancedMaterials",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 3048,
+   "sample_id": "SpecialtyAndAdvancedMaterials__polyvinyl_cny_t_96_12_12_10events__20260306T000000",
+   "var_key": "SpecialtyAndAdvancedMaterials__polyvinyl_cny_t_96_12_12_10events",
+   "domain": "SpecialtyAndAdvancedMaterials",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 3174,
+   "sample_id": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__20231122T000000",
+   "var_key": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events",
+   "domain": "StrategicAndHighValueMaterials",
+   "mode": "new_only"
+  },
+  {
+   "flat_index": 3176,
+   "sample_id": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__20231226T000000",
+   "var_key": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events",
+   "domain": "StrategicAndHighValueMaterials",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 3188,
+   "sample_id": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__20240723T000000",
+   "var_key": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events",
+   "domain": "StrategicAndHighValueMaterials",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 3198,
+   "sample_id": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__20250113T000000",
+   "var_key": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events",
+   "domain": "StrategicAndHighValueMaterials",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 3199,
+   "sample_id": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__20250129T000000",
+   "var_key": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events",
+   "domain": "StrategicAndHighValueMaterials",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 3210,
+   "sample_id": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__20250807T000000",
+   "var_key": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events",
+   "domain": "StrategicAndHighValueMaterials",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 3222,
+   "sample_id": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__20260303T000000",
+   "var_key": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events",
+   "domain": "StrategicAndHighValueMaterials",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 3245,
+   "sample_id": "StrategicAndHighValueMaterials__gold_usd_t_oz_96_12_12_10events__20240208T000000",
+   "var_key": "StrategicAndHighValueMaterials__gold_usd_t_oz_96_12_12_10events",
+   "domain": "StrategicAndHighValueMaterials",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 3256,
+   "sample_id": "StrategicAndHighValueMaterials__gold_usd_t_oz_96_12_12_10events__20240812T000000",
+   "var_key": "StrategicAndHighValueMaterials__gold_usd_t_oz_96_12_12_10events",
+   "domain": "StrategicAndHighValueMaterials",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 3267,
+   "sample_id": "StrategicAndHighValueMaterials__gold_usd_t_oz_96_12_12_10events__20250214T000000",
+   "var_key": "StrategicAndHighValueMaterials__gold_usd_t_oz_96_12_12_10events",
+   "domain": "StrategicAndHighValueMaterials",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 3279,
+   "sample_id": "StrategicAndHighValueMaterials__gold_usd_t_oz_96_12_12_10events__20250905T000000",
+   "var_key": "StrategicAndHighValueMaterials__gold_usd_t_oz_96_12_12_10events",
+   "domain": "StrategicAndHighValueMaterials",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 3290,
+   "sample_id": "StrategicAndHighValueMaterials__gold_usd_t_oz_96_12_12_10events__20260312T000000",
+   "var_key": "StrategicAndHighValueMaterials__gold_usd_t_oz_96_12_12_10events",
+   "domain": "StrategicAndHighValueMaterials",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4330,
+   "sample_id": "Currency__usdtoinr_exchangerate_96_12_12_10events__20231129T000000",
+   "var_key": "Currency__usdtoinr_exchangerate_96_12_12_10events",
+   "domain": "Currency",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4342,
+   "sample_id": "Currency__usdtoinr_exchangerate_96_12_12_10events__20240626T000000",
+   "var_key": "Currency__usdtoinr_exchangerate_96_12_12_10events",
+   "domain": "Currency",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4354,
+   "sample_id": "Currency__usdtoinr_exchangerate_96_12_12_10events__20250117T000000",
+   "var_key": "Currency__usdtoinr_exchangerate_96_12_12_10events",
+   "domain": "Currency",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4366,
+   "sample_id": "Currency__usdtoinr_exchangerate_96_12_12_10events__20250812T000000",
+   "var_key": "Currency__usdtoinr_exchangerate_96_12_12_10events",
+   "domain": "Currency",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4378,
+   "sample_id": "Currency__usdtoinr_exchangerate_96_12_12_10events__20260305T000000",
+   "var_key": "Currency__usdtoinr_exchangerate_96_12_12_10events",
+   "domain": "Currency",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4399,
+   "sample_id": "Currency__usdtokrw_exchangerate_96_12_12_10events__20240123T000000",
+   "var_key": "Currency__usdtokrw_exchangerate_96_12_12_10events",
+   "domain": "Currency",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4410,
+   "sample_id": "Currency__usdtokrw_exchangerate_96_12_12_10events__20240730T000000",
+   "var_key": "Currency__usdtokrw_exchangerate_96_12_12_10events",
+   "domain": "Currency",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4421,
+   "sample_id": "Currency__usdtokrw_exchangerate_96_12_12_10events__20250204T000000",
+   "var_key": "Currency__usdtokrw_exchangerate_96_12_12_10events",
+   "domain": "Currency",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4433,
+   "sample_id": "Currency__usdtokrw_exchangerate_96_12_12_10events__20250828T000000",
+   "var_key": "Currency__usdtokrw_exchangerate_96_12_12_10events",
+   "domain": "Currency",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4444,
+   "sample_id": "Currency__usdtokrw_exchangerate_96_12_12_10events__20260305T000000",
+   "var_key": "Currency__usdtokrw_exchangerate_96_12_12_10events",
+   "domain": "Currency",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4829,
+   "sample_id": "arts__national_basketball_association_96_12_4_10events__20231029T000000",
+   "var_key": "arts__national_basketball_association_96_12_4_10events",
+   "domain": "arts",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4835,
+   "sample_id": "arts__national_basketball_association_96_12_4_10events__20240414T000000",
+   "var_key": "arts__national_basketball_association_96_12_4_10events",
+   "domain": "arts",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4842,
+   "sample_id": "arts__national_basketball_association_96_12_4_10events__20241027T000000",
+   "var_key": "arts__national_basketball_association_96_12_4_10events",
+   "domain": "arts",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4849,
+   "sample_id": "arts__national_basketball_association_96_12_4_10events__20250511T000000",
+   "var_key": "arts__national_basketball_association_96_12_4_10events",
+   "domain": "arts",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4857,
+   "sample_id": "arts__national_basketball_association_96_12_4_10events__20251221T000000",
+   "var_key": "arts__national_basketball_association_96_12_4_10events",
+   "domain": "arts",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4858,
+   "sample_id": "arts__national_football_league_96_12_4_10events__20231029T000000",
+   "var_key": "arts__national_football_league_96_12_4_10events",
+   "domain": "arts",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4864,
+   "sample_id": "arts__national_football_league_96_12_4_10events__20240414T000000",
+   "var_key": "arts__national_football_league_96_12_4_10events",
+   "domain": "arts",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4871,
+   "sample_id": "arts__national_football_league_96_12_4_10events__20241027T000000",
+   "var_key": "arts__national_football_league_96_12_4_10events",
+   "domain": "arts",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4878,
+   "sample_id": "arts__national_football_league_96_12_4_10events__20250511T000000",
+   "var_key": "arts__national_football_league_96_12_4_10events",
+   "domain": "arts",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4886,
+   "sample_id": "arts__national_football_league_96_12_4_10events__20251221T000000",
+   "var_key": "arts__national_football_league_96_12_4_10events",
+   "domain": "arts",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4887,
+   "sample_id": "climate__deforestation_96_12_4_10events__20231029T000000",
+   "var_key": "climate__deforestation_96_12_4_10events",
+   "domain": "climate",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4893,
+   "sample_id": "climate__deforestation_96_12_4_10events__20240414T000000",
+   "var_key": "climate__deforestation_96_12_4_10events",
+   "domain": "climate",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4900,
+   "sample_id": "climate__deforestation_96_12_4_10events__20241027T000000",
+   "var_key": "climate__deforestation_96_12_4_10events",
+   "domain": "climate",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4907,
+   "sample_id": "climate__deforestation_96_12_4_10events__20250511T000000",
+   "var_key": "climate__deforestation_96_12_4_10events",
+   "domain": "climate",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4915,
+   "sample_id": "climate__deforestation_96_12_4_10events__20251221T000000",
+   "var_key": "climate__deforestation_96_12_4_10events",
+   "domain": "climate",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4945,
+   "sample_id": "climate__endangered_species_96_12_4_10events__20231029T000000",
+   "var_key": "climate__endangered_species_96_12_4_10events",
+   "domain": "climate",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4951,
+   "sample_id": "climate__endangered_species_96_12_4_10events__20240414T000000",
+   "var_key": "climate__endangered_species_96_12_4_10events",
+   "domain": "climate",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4958,
+   "sample_id": "climate__endangered_species_96_12_4_10events__20241027T000000",
+   "var_key": "climate__endangered_species_96_12_4_10events",
+   "domain": "climate",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4965,
+   "sample_id": "climate__endangered_species_96_12_4_10events__20250511T000000",
+   "var_key": "climate__endangered_species_96_12_4_10events",
+   "domain": "climate",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 4973,
+   "sample_id": "climate__endangered_species_96_12_4_10events__20251221T000000",
+   "var_key": "climate__endangered_species_96_12_4_10events",
+   "domain": "climate",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5293,
+   "sample_id": "economy__inflation_96_12_4_10events__20231029T000000",
+   "var_key": "economy__inflation_96_12_4_10events",
+   "domain": "economy",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5299,
+   "sample_id": "economy__inflation_96_12_4_10events__20240414T000000",
+   "var_key": "economy__inflation_96_12_4_10events",
+   "domain": "economy",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5306,
+   "sample_id": "economy__inflation_96_12_4_10events__20241027T000000",
+   "var_key": "economy__inflation_96_12_4_10events",
+   "domain": "economy",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5313,
+   "sample_id": "economy__inflation_96_12_4_10events__20250511T000000",
+   "var_key": "economy__inflation_96_12_4_10events",
+   "domain": "economy",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5321,
+   "sample_id": "economy__inflation_96_12_4_10events__20251221T000000",
+   "var_key": "economy__inflation_96_12_4_10events",
+   "domain": "economy",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5380,
+   "sample_id": "economy__student_loans_96_12_4_10events__20231029T000000",
+   "var_key": "economy__student_loans_96_12_4_10events",
+   "domain": "economy",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5386,
+   "sample_id": "economy__student_loans_96_12_4_10events__20240414T000000",
+   "var_key": "economy__student_loans_96_12_4_10events",
+   "domain": "economy",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5393,
+   "sample_id": "economy__student_loans_96_12_4_10events__20241027T000000",
+   "var_key": "economy__student_loans_96_12_4_10events",
+   "domain": "economy",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5400,
+   "sample_id": "economy__student_loans_96_12_4_10events__20250511T000000",
+   "var_key": "economy__student_loans_96_12_4_10events",
+   "domain": "economy",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5408,
+   "sample_id": "economy__student_loans_96_12_4_10events__20251221T000000",
+   "var_key": "economy__student_loans_96_12_4_10events",
+   "domain": "economy",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5525,
+   "sample_id": "electronic_technology__apple_inc_96_12_4_10events__20231029T000000",
+   "var_key": "electronic_technology__apple_inc_96_12_4_10events",
+   "domain": "electronic_technology",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5531,
+   "sample_id": "electronic_technology__apple_inc_96_12_4_10events__20240414T000000",
+   "var_key": "electronic_technology__apple_inc_96_12_4_10events",
+   "domain": "electronic_technology",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5538,
+   "sample_id": "electronic_technology__apple_inc_96_12_4_10events__20241027T000000",
+   "var_key": "electronic_technology__apple_inc_96_12_4_10events",
+   "domain": "electronic_technology",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5545,
+   "sample_id": "electronic_technology__apple_inc_96_12_4_10events__20250511T000000",
+   "var_key": "electronic_technology__apple_inc_96_12_4_10events",
+   "domain": "electronic_technology",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5553,
+   "sample_id": "electronic_technology__apple_inc_96_12_4_10events__20251221T000000",
+   "var_key": "electronic_technology__apple_inc_96_12_4_10events",
+   "domain": "electronic_technology",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5641,
+   "sample_id": "electronic_technology__meta_platforms_96_12_4_10events__20231029T000000",
+   "var_key": "electronic_technology__meta_platforms_96_12_4_10events",
+   "domain": "electronic_technology",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5647,
+   "sample_id": "electronic_technology__meta_platforms_96_12_4_10events__20240414T000000",
+   "var_key": "electronic_technology__meta_platforms_96_12_4_10events",
+   "domain": "electronic_technology",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5654,
+   "sample_id": "electronic_technology__meta_platforms_96_12_4_10events__20241027T000000",
+   "var_key": "electronic_technology__meta_platforms_96_12_4_10events",
+   "domain": "electronic_technology",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5661,
+   "sample_id": "electronic_technology__meta_platforms_96_12_4_10events__20250511T000000",
+   "var_key": "electronic_technology__meta_platforms_96_12_4_10events",
+   "domain": "electronic_technology",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5669,
+   "sample_id": "electronic_technology__meta_platforms_96_12_4_10events__20251221T000000",
+   "var_key": "electronic_technology__meta_platforms_96_12_4_10events",
+   "domain": "electronic_technology",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5757,
+   "sample_id": "finance__asset_management_96_12_4_10events__20231029T000000",
+   "var_key": "finance__asset_management_96_12_4_10events",
+   "domain": "finance",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5763,
+   "sample_id": "finance__asset_management_96_12_4_10events__20240414T000000",
+   "var_key": "finance__asset_management_96_12_4_10events",
+   "domain": "finance",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5770,
+   "sample_id": "finance__asset_management_96_12_4_10events__20241027T000000",
+   "var_key": "finance__asset_management_96_12_4_10events",
+   "domain": "finance",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5777,
+   "sample_id": "finance__asset_management_96_12_4_10events__20250511T000000",
+   "var_key": "finance__asset_management_96_12_4_10events",
+   "domain": "finance",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5785,
+   "sample_id": "finance__asset_management_96_12_4_10events__20251221T000000",
+   "var_key": "finance__asset_management_96_12_4_10events",
+   "domain": "finance",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5873,
+   "sample_id": "finance__hedge_funds_96_12_4_10events__20231029T000000",
+   "var_key": "finance__hedge_funds_96_12_4_10events",
+   "domain": "finance",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5879,
+   "sample_id": "finance__hedge_funds_96_12_4_10events__20240414T000000",
+   "var_key": "finance__hedge_funds_96_12_4_10events",
+   "domain": "finance",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5886,
+   "sample_id": "finance__hedge_funds_96_12_4_10events__20241027T000000",
+   "var_key": "finance__hedge_funds_96_12_4_10events",
+   "domain": "finance",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5893,
+   "sample_id": "finance__hedge_funds_96_12_4_10events__20250511T000000",
+   "var_key": "finance__hedge_funds_96_12_4_10events",
+   "domain": "finance",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 5901,
+   "sample_id": "finance__hedge_funds_96_12_4_10events__20251221T000000",
+   "var_key": "finance__hedge_funds_96_12_4_10events",
+   "domain": "finance",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6192,
+   "sample_id": "pets__invasive_species_96_12_4_10events__20231029T000000",
+   "var_key": "pets__invasive_species_96_12_4_10events",
+   "domain": "pets",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6198,
+   "sample_id": "pets__invasive_species_96_12_4_10events__20240414T000000",
+   "var_key": "pets__invasive_species_96_12_4_10events",
+   "domain": "pets",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6205,
+   "sample_id": "pets__invasive_species_96_12_4_10events__20241027T000000",
+   "var_key": "pets__invasive_species_96_12_4_10events",
+   "domain": "pets",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6212,
+   "sample_id": "pets__invasive_species_96_12_4_10events__20250511T000000",
+   "var_key": "pets__invasive_species_96_12_4_10events",
+   "domain": "pets",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6220,
+   "sample_id": "pets__invasive_species_96_12_4_10events__20251221T000000",
+   "var_key": "pets__invasive_species_96_12_4_10events",
+   "domain": "pets",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6308,
+   "sample_id": "pets__pet_health_96_12_4_10events__20231029T000000",
+   "var_key": "pets__pet_health_96_12_4_10events",
+   "domain": "pets",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6314,
+   "sample_id": "pets__pet_health_96_12_4_10events__20240414T000000",
+   "var_key": "pets__pet_health_96_12_4_10events",
+   "domain": "pets",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6321,
+   "sample_id": "pets__pet_health_96_12_4_10events__20241027T000000",
+   "var_key": "pets__pet_health_96_12_4_10events",
+   "domain": "pets",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6328,
+   "sample_id": "pets__pet_health_96_12_4_10events__20250511T000000",
+   "var_key": "pets__pet_health_96_12_4_10events",
+   "domain": "pets",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6336,
+   "sample_id": "pets__pet_health_96_12_4_10events__20251221T000000",
+   "var_key": "pets__pet_health_96_12_4_10events",
+   "domain": "pets",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6366,
+   "sample_id": "public_health__climate_change_96_12_4_10events__20231029T000000",
+   "var_key": "public_health__climate_change_96_12_4_10events",
+   "domain": "public_health",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6372,
+   "sample_id": "public_health__climate_change_96_12_4_10events__20240414T000000",
+   "var_key": "public_health__climate_change_96_12_4_10events",
+   "domain": "public_health",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6379,
+   "sample_id": "public_health__climate_change_96_12_4_10events__20241027T000000",
+   "var_key": "public_health__climate_change_96_12_4_10events",
+   "domain": "public_health",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6386,
+   "sample_id": "public_health__climate_change_96_12_4_10events__20250511T000000",
+   "var_key": "public_health__climate_change_96_12_4_10events",
+   "domain": "public_health",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6394,
+   "sample_id": "public_health__climate_change_96_12_4_10events__20251221T000000",
+   "var_key": "public_health__climate_change_96_12_4_10events",
+   "domain": "public_health",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6511,
+   "sample_id": "public_health__infectious_disease_96_12_4_10events__20231029T000000",
+   "var_key": "public_health__infectious_disease_96_12_4_10events",
+   "domain": "public_health",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6517,
+   "sample_id": "public_health__infectious_disease_96_12_4_10events__20240414T000000",
+   "var_key": "public_health__infectious_disease_96_12_4_10events",
+   "domain": "public_health",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6524,
+   "sample_id": "public_health__infectious_disease_96_12_4_10events__20241027T000000",
+   "var_key": "public_health__infectious_disease_96_12_4_10events",
+   "domain": "public_health",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6531,
+   "sample_id": "public_health__infectious_disease_96_12_4_10events__20250511T000000",
+   "var_key": "public_health__infectious_disease_96_12_4_10events",
+   "domain": "public_health",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6539,
+   "sample_id": "public_health__infectious_disease_96_12_4_10events__20251221T000000",
+   "var_key": "public_health__infectious_disease_96_12_4_10events",
+   "domain": "public_health",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6627,
+   "sample_id": "public_policy__carbon_emissions_96_12_4_10events__20231029T000000",
+   "var_key": "public_policy__carbon_emissions_96_12_4_10events",
+   "domain": "public_policy",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6633,
+   "sample_id": "public_policy__carbon_emissions_96_12_4_10events__20240414T000000",
+   "var_key": "public_policy__carbon_emissions_96_12_4_10events",
+   "domain": "public_policy",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6640,
+   "sample_id": "public_policy__carbon_emissions_96_12_4_10events__20241027T000000",
+   "var_key": "public_policy__carbon_emissions_96_12_4_10events",
+   "domain": "public_policy",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6647,
+   "sample_id": "public_policy__carbon_emissions_96_12_4_10events__20250511T000000",
+   "var_key": "public_policy__carbon_emissions_96_12_4_10events",
+   "domain": "public_policy",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6655,
+   "sample_id": "public_policy__carbon_emissions_96_12_4_10events__20251221T000000",
+   "var_key": "public_policy__carbon_emissions_96_12_4_10events",
+   "domain": "public_policy",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6714,
+   "sample_id": "public_policy__human_rights_96_12_4_10events__20231029T000000",
+   "var_key": "public_policy__human_rights_96_12_4_10events",
+   "domain": "public_policy",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6720,
+   "sample_id": "public_policy__human_rights_96_12_4_10events__20240414T000000",
+   "var_key": "public_policy__human_rights_96_12_4_10events",
+   "domain": "public_policy",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6727,
+   "sample_id": "public_policy__human_rights_96_12_4_10events__20241027T000000",
+   "var_key": "public_policy__human_rights_96_12_4_10events",
+   "domain": "public_policy",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6734,
+   "sample_id": "public_policy__human_rights_96_12_4_10events__20250511T000000",
+   "var_key": "public_policy__human_rights_96_12_4_10events",
+   "domain": "public_policy",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6742,
+   "sample_id": "public_policy__human_rights_96_12_4_10events__20251221T000000",
+   "var_key": "public_policy__human_rights_96_12_4_10events",
+   "domain": "public_policy",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6975,
+   "sample_id": "science__data_breach_96_12_4_10events__20231029T000000",
+   "var_key": "science__data_breach_96_12_4_10events",
+   "domain": "science",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6981,
+   "sample_id": "science__data_breach_96_12_4_10events__20240414T000000",
+   "var_key": "science__data_breach_96_12_4_10events",
+   "domain": "science",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6988,
+   "sample_id": "science__data_breach_96_12_4_10events__20241027T000000",
+   "var_key": "science__data_breach_96_12_4_10events",
+   "domain": "science",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 6995,
+   "sample_id": "science__data_breach_96_12_4_10events__20250511T000000",
+   "var_key": "science__data_breach_96_12_4_10events",
+   "domain": "science",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7003,
+   "sample_id": "science__data_breach_96_12_4_10events__20251221T000000",
+   "var_key": "science__data_breach_96_12_4_10events",
+   "domain": "science",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7120,
+   "sample_id": "science__nobel_prize_96_12_4_10events__20231029T000000",
+   "var_key": "science__nobel_prize_96_12_4_10events",
+   "domain": "science",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7126,
+   "sample_id": "science__nobel_prize_96_12_4_10events__20240414T000000",
+   "var_key": "science__nobel_prize_96_12_4_10events",
+   "domain": "science",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7133,
+   "sample_id": "science__nobel_prize_96_12_4_10events__20241027T000000",
+   "var_key": "science__nobel_prize_96_12_4_10events",
+   "domain": "science",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7140,
+   "sample_id": "science__nobel_prize_96_12_4_10events__20250511T000000",
+   "var_key": "science__nobel_prize_96_12_4_10events",
+   "domain": "science",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7148,
+   "sample_id": "science__nobel_prize_96_12_4_10events__20251221T000000",
+   "var_key": "science__nobel_prize_96_12_4_10events",
+   "domain": "science",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7236,
+   "sample_id": "shopping__air_conditioner_96_12_4_10events__20231029T000000",
+   "var_key": "shopping__air_conditioner_96_12_4_10events",
+   "domain": "shopping",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7242,
+   "sample_id": "shopping__air_conditioner_96_12_4_10events__20240414T000000",
+   "var_key": "shopping__air_conditioner_96_12_4_10events",
+   "domain": "shopping",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7249,
+   "sample_id": "shopping__air_conditioner_96_12_4_10events__20241027T000000",
+   "var_key": "shopping__air_conditioner_96_12_4_10events",
+   "domain": "shopping",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7256,
+   "sample_id": "shopping__air_conditioner_96_12_4_10events__20250511T000000",
+   "var_key": "shopping__air_conditioner_96_12_4_10events",
+   "domain": "shopping",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7264,
+   "sample_id": "shopping__air_conditioner_96_12_4_10events__20251221T000000",
+   "var_key": "shopping__air_conditioner_96_12_4_10events",
+   "domain": "shopping",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7294,
+   "sample_id": "shopping__black_friday_deals_96_12_4_10events__20231029T000000",
+   "var_key": "shopping__black_friday_deals_96_12_4_10events",
+   "domain": "shopping",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7300,
+   "sample_id": "shopping__black_friday_deals_96_12_4_10events__20240414T000000",
+   "var_key": "shopping__black_friday_deals_96_12_4_10events",
+   "domain": "shopping",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7307,
+   "sample_id": "shopping__black_friday_deals_96_12_4_10events__20241027T000000",
+   "var_key": "shopping__black_friday_deals_96_12_4_10events",
+   "domain": "shopping",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7314,
+   "sample_id": "shopping__black_friday_deals_96_12_4_10events__20250511T000000",
+   "var_key": "shopping__black_friday_deals_96_12_4_10events",
+   "domain": "shopping",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7322,
+   "sample_id": "shopping__black_friday_deals_96_12_4_10events__20251221T000000",
+   "var_key": "shopping__black_friday_deals_96_12_4_10events",
+   "domain": "shopping",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7526,
+   "sample_id": "society__affordable_housing_96_12_4_10events__20231029T000000",
+   "var_key": "society__affordable_housing_96_12_4_10events",
+   "domain": "society",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7532,
+   "sample_id": "society__affordable_housing_96_12_4_10events__20240414T000000",
+   "var_key": "society__affordable_housing_96_12_4_10events",
+   "domain": "society",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7539,
+   "sample_id": "society__affordable_housing_96_12_4_10events__20241027T000000",
+   "var_key": "society__affordable_housing_96_12_4_10events",
+   "domain": "society",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7546,
+   "sample_id": "society__affordable_housing_96_12_4_10events__20250511T000000",
+   "var_key": "society__affordable_housing_96_12_4_10events",
+   "domain": "society",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7554,
+   "sample_id": "society__affordable_housing_96_12_4_10events__20251221T000000",
+   "var_key": "society__affordable_housing_96_12_4_10events",
+   "domain": "society",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7758,
+   "sample_id": "society__protest_96_12_4_10events__20231029T000000",
+   "var_key": "society__protest_96_12_4_10events",
+   "domain": "society",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7764,
+   "sample_id": "society__protest_96_12_4_10events__20240414T000000",
+   "var_key": "society__protest_96_12_4_10events",
+   "domain": "society",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7771,
+   "sample_id": "society__protest_96_12_4_10events__20241027T000000",
+   "var_key": "society__protest_96_12_4_10events",
+   "domain": "society",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7778,
+   "sample_id": "society__protest_96_12_4_10events__20250511T000000",
+   "var_key": "society__protest_96_12_4_10events",
+   "domain": "society",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7786,
+   "sample_id": "society__protest_96_12_4_10events__20251221T000000",
+   "var_key": "society__protest_96_12_4_10events",
+   "domain": "society",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7816,
+   "sample_id": "traffic__air_travel_96_12_4_10events__20231029T000000",
+   "var_key": "traffic__air_travel_96_12_4_10events",
+   "domain": "traffic",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7822,
+   "sample_id": "traffic__air_travel_96_12_4_10events__20240414T000000",
+   "var_key": "traffic__air_travel_96_12_4_10events",
+   "domain": "traffic",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7829,
+   "sample_id": "traffic__air_travel_96_12_4_10events__20241027T000000",
+   "var_key": "traffic__air_travel_96_12_4_10events",
+   "domain": "traffic",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7836,
+   "sample_id": "traffic__air_travel_96_12_4_10events__20250511T000000",
+   "var_key": "traffic__air_travel_96_12_4_10events",
+   "domain": "traffic",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 7844,
+   "sample_id": "traffic__air_travel_96_12_4_10events__20251221T000000",
+   "var_key": "traffic__air_travel_96_12_4_10events",
+   "domain": "traffic",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 8048,
+   "sample_id": "traffic__traffic_insurance_96_12_4_10events__20231029T000000",
+   "var_key": "traffic__traffic_insurance_96_12_4_10events",
+   "domain": "traffic",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 8054,
+   "sample_id": "traffic__traffic_insurance_96_12_4_10events__20240414T000000",
+   "var_key": "traffic__traffic_insurance_96_12_4_10events",
+   "domain": "traffic",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 8061,
+   "sample_id": "traffic__traffic_insurance_96_12_4_10events__20241027T000000",
+   "var_key": "traffic__traffic_insurance_96_12_4_10events",
+   "domain": "traffic",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 8068,
+   "sample_id": "traffic__traffic_insurance_96_12_4_10events__20250511T000000",
+   "var_key": "traffic__traffic_insurance_96_12_4_10events",
+   "domain": "traffic",
+   "mode": "compare"
+  },
+  {
+   "flat_index": 8076,
+   "sample_id": "traffic__traffic_insurance_96_12_4_10events__20251221T000000",
+   "var_key": "traffic__traffic_insurance_96_12_4_10events",
+   "domain": "traffic",
+   "mode": "compare"
+  }
+ ],
+ "windows_sha256": "2c7e5b349e3fd4c95b91cb36e20d64bb0169db166a4453bc6d29791ba55c0d75"
+}

@@ -1,0 +1,96 @@
+{
+ "stage": "S1_freeze",
+ "checks": {
+  "n_vars": {
+   "got": 190,
+   "expected": 190,
+   "pass": true
+  },
+  "total": {
+   "got": 8106,
+   "expected": 8106,
+   "pass": true
+  },
+  "test": {
+   "got": 1677,
+   "expected": 1677,
+   "pass": true
+  },
+  "val": {
+   "got": 4736,
+   "expected": 4736,
+   "pass": true
+  },
+  "cross_boundary_removed": {
+   "got": 242,
+   "expected": 242,
+   "pass": true
+  },
+  "train_region": {
+   "got": 1451,
+   "expected": 1451,
+   "pass": true
+  },
+  "past_end_lt_future_start": {
+   "got": "all",
+   "pass": true
+  },
+  "scoring_d_frozen": {
+   "got": {
+    "n_calib_fallback": 4,
+    "n_window": 8102
+   },
+   "pass": true
+  }
+ },
+ "n_domains": 19,
+ "domain_window_counts": {
+  "CropsAndStaples": 724,
+  "EnergyAndFuels": 671,
+  "LivestockAndFoodProducts": 666,
+  "RawMaterialsAndConstruction": 642,
+  "SpecialtyAndAdvancedMaterials": 448,
+  "StrategicAndHighValueMaterials": 715,
+  "Currency": 740,
+  "arts": 281,
+  "climate": 290,
+  "economy": 290,
+  "electronic_technology": 290,
+  "finance": 290,
+  "pets": 290,
+  "public_health": 290,
+  "public_policy": 319,
+  "science": 290,
+  "shopping": 290,
+  "society": 290,
+  "traffic": 290
+ },
+ "zero_variance_census": [
+  {
+   "sample_id": "CropsAndStaples__potatoes_eur_100kg_96_12_12_10events__20231018T000000",
+   "var_key": "CropsAndStaples__potatoes_eur_100kg_96_12_12_10events",
+   "old_split": "train_region"
+  },
+  {
+   "sample_id": "CropsAndStaples__potatoes_eur_100kg_96_12_12_10events__20231103T000000",
+   "var_key": "CropsAndStaples__potatoes_eur_100kg_96_12_12_10events",
+   "old_split": "train_region"
+  },
+  {
+   "sample_id": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__20231122T000000",
+   "var_key": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events",
+   "old_split": "train_region"
+  },
+  {
+   "sample_id": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events__20250113T000000",
+   "var_key": "StrategicAndHighValueMaterials__cobalt_usd_t_96_12_12_10events",
+   "old_split": "val"
+  }
+ ],
+ "artifacts": {
+  "inventory.json": "0cb6e73971b0f8b54077ff3df5a332f7dbe34493b337ab0a2b9744aa88c217de",
+  "vars.json": "22018d215b0dfe8ccc842846cf5e04bb2050828d993548728c72215681267068",
+  "frozen_arrays.npz": "fb0c0c454afd8f7b9f276b99704450bdc6c99a454c8d774ea8846f729fa9423d"
+ },
+ "elapsed_s": 1.2
+}

@@ -1,0 +1,27 @@
+{
+ "stage": "independent_recompute",
+ "created": "2026-10-10T11:58:21",
+ "inputs": {
+  "inventory.json": "0cb6e73971b0f8b54077ff3df5a332f7dbe34493b337ab0a2b9744aa88c217de",
+  "frozen_arrays.npz": "fb0c0c454afd8f7b9f276b99704450bdc6c99a454c8d774ea8846f729fa9423d",
+  "vars.json": "22018d215b0dfe8ccc842846cf5e04bb2050828d993548728c72215681267068",
+  "preds.jsonl.gz": "0ceeb654c3dc78e86aca9c56f7a7ee1f5c8db590785cd23a7e37eb938de041b0"
+ },
+ "flat_index_order_ok": true,
+ "max_rel_dev": {
+  "per_window_d": 0.0,
+  "variable_level": 7.634138065827931e-16,
+  "domain_overall": 2.726926072158218e-16
+ },
+ "tolerances": {
+  "per_window_d": 1e-12,
+  "variable_level": 1e-09,
+  "domain_overall": 1e-12
+ },
+ "n_vars": 190,
+ "n_rows": 8106,
+ "n_failures": 0,
+ "failures": [],
+ "pass": true,
+ "elapsed_s": 0.2
+}

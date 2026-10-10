@@ -1,0 +1,15 @@
+{
+ "stage": "S5a_assemble",
+ "created": "2026-10-10T11:58:20",
+ "totals": {
+  "windows": 8106,
+  "cache": 6386,
+  "new": 1720,
+  "reuse_vars": 189,
+  "reinfer_vars": 1
+ },
+ "expected_fill_windows": 1720,
+ "preds_sha256": "0ceeb654c3dc78e86aca9c56f7a7ee1f5c8db590785cd23a7e37eb938de041b0",
+ "cache_all_manifest_sha256": "d31da8b25645db7ae0e20ebb2ec29590389d2d7fa19f649a2ddedc9d5898abf6",
+ "elapsed_s": 0.6
+}
