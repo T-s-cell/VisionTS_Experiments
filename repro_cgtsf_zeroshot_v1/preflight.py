@@ -203,7 +203,7 @@ def resume_test(model, ckpt_dir):
                 R.quarantine("PTF", 0, why4)
                 qfiles = sorted(os.listdir(P.QUARANTINE_DIR))
                 res["tier2_quarantined"] = qfiles
-                q_ok = (any("PTF__shard000" in x and x.endswith(".npz")
+                q_ok = (any(x.startswith("PTF__shard000.npz.")
                             for x in qfiles)
                         and any(x.endswith(".reason.json") for x in qfiles)
                         and not os.path.isfile(npz))
