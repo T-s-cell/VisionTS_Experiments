@@ -1,0 +1,128 @@
+{
+ "align_const": 0.4,
+ "arch": "mae_base",
+ "aurora": {
+  "archive_commit": "3d20862a35fce5854ab2bd2bc6b0e849bd67da57",
+  "code_commit": "3526c68673d55c8bcd4ae47aed4b950743d3b70f",
+  "metrics_sha256": {
+   "LEU": "31029fd3f809314ac5a8403f35f8be8c6e9c115774742817ef4289e17744e3d5",
+   "MSPG": "c613ddf5e52ee399265ab324c357275225750c675ac012beeddd33af26ef2654",
+   "PTF": "52df03a130db891d2c799d6d95ab1a44197150db49d6ae9d42e9de6b8659bcab"
+  },
+  "seeds": [
+   2021,
+   2022,
+   2023
+  ],
+  "token": "9c164222d4b9"
+ },
+ "batch": 1,
+ "code_md5": {
+  ".gitignore": "f135cc5f5220d2227af33b6024aea697",
+  "README.md": "b95564d3a212dcaeebfcd9c19c0effa3",
+  "audit_pack.py": "db697655425de7c9c5f9fd1cb68b1046",
+  "common.py": "77bd9ae5185ee8a3091b7789d74cce85",
+  "env_report.py": "e62f9ff59a670e1f9a79c5d3b9b18047",
+  "evaluate.py": "37b23869c1151a3931457a607dee9286",
+  "freeze_ref.py": "ba2e3eef203f0d8196070bb052a35c57",
+  "load_cgtsf.py": "1bde2b02101aa3a7625e9bbc91b5ac43",
+  "preflight.py": "8272d1320f2a10b6a018676eb3cb4f8f",
+  "protocol.py": "9b21062f8740e8a3d02bb0489f4c3728",
+  "recompute_check.py": "97edcb62906a559fc999f5ec26cbb376",
+  "run_infer.py": "750e79f14d1e19353c0c3025d3e0421d",
+  "verify_cache.py": "2af1aedd4d1225658db5b6f17caa4cd2",
+  "verify_refs.py": "392f07d28bdf8181c72439b4af7664ee",
+  "watch_and_run_dt.sh": "c753b0edb4ad6ba2fb119e135478bdd1",
+  "wrapper_dt.sh": "c7c858d6969ed0516a70f254074b6e20"
+ },
+ "csv_bytes": {
+  "LEU": 27518933,
+  "MSPG": 48389951,
+  "PTF": 18549020
+ },
+ "csv_sha256": {
+  "LEU": "9f181bb8527c1518bb86f016acb224a167e71cce1368135f78767be069ad7b1c",
+  "MSPG": "7c484a2005351db7d22a1d8477cd51c7b98010defbdfd89b73cdae951489315a",
+  "PTF": "2f8a90f977b48e38f7ce0dae3016de21a2b20bb8657fc2ac803607d26fdf9d3f"
+ },
+ "cublas_workspace_config": ":4096:8",
+ "exp016": {
+  "archive_commit": "0932a5ac841ea399271ce88bde5b607ee0bcb831",
+  "infer_summary_sha256": "634727dcec774241e84ab1cbccf79d8bd10a1d0c438c941d7c9220c0fc4bb686",
+  "metrics_sha256": {
+   "LEU": "5ffe1aa3d900b4cc6f0ad03e020cca46b4679fe7d122f2b94b10aede06099ada",
+   "MSPG": "41217b9636bd05aafad4635ef25ca67c2517a17c571e7ec88a3b63e158af9aea",
+   "PTF": "b40721154afc82af04ac8916444a3a0c0e826d4cb3d6748d1385d89baf45aac0"
+  },
+  "seq_csv_sha256": {
+   "LEU": "56f19be8acf4f01c0b091bc42ee8e3a741cdfb8698cd17cf6107ddda77d33826",
+   "MSPG": "3c9dc26146c4e1fa8b429322d5d98ec5e7f3a3fe08fe39978df1360dc98bd390",
+   "PTF": "ca7239786281b55b289f62df2ee967fdf76d5463006d24daf4b5305b5cb46b81"
+  },
+  "token": "a4c01683793a",
+  "visionts_code_md5": {
+   "visionts/__init__.py": "60249b5b1f0bd22cc6b0bd76e5eee077",
+   "visionts/model.py": "621f3f87b299c4bfeb5a64c87eefaa62",
+   "visionts/models_mae.py": "20edd0d6da5b21455d6c2ffb35de3d43",
+   "visionts/pos_embed.py": "d31375b8ea4a1f1a9803a68b3c292399",
+   "visionts/util.py": "d14f84b9bd2650c5bfdab3128457b540"
+  }
+ },
+ "expected_geometry": {
+  "num_patch_input": 4,
+  "pad_left": 0,
+  "pad_right": 0
+ },
+ "expected_preflight_windows": 230,
+ "expected_windows": {
+  "LEU": 11616,
+  "MSPG": 10557,
+  "PTF": 11520
+ },
+ "finetune_type": "none",
+ "fp64": false,
+ "interpolation": "bilinear",
+ "norm_const": 0.4,
+ "order": [
+  "PTF",
+  "LEU",
+  "MSPG"
+ ],
+ "protocol_name": "diag_cgtsf_visionts_env_v1",
+ "recompute_atol": 1e-12,
+ "recompute_rtol": 1e-12,
+ "repo_commit": "0932a5ac841ea399271ce88bde5b607ee0bcb831",
+ "seed": 2021,
+ "shard_size": 512,
+ "subsets": {
+  "LEU": {
+   "context": 240,
+   "n_seq": 16,
+   "periodicity": 48,
+   "pred": 48
+  },
+  "MSPG": {
+   "context": 480,
+   "n_seq": 27,
+   "periodicity": 96,
+   "pred": 96
+  },
+  "PTF": {
+   "context": 120,
+   "n_seq": 32,
+   "periodicity": 24,
+   "pred": 24
+  }
+ },
+ "tf32": false,
+ "visionts_code_md5": {
+  "visionts/__init__.py": "60249b5b1f0bd22cc6b0bd76e5eee077",
+  "visionts/model.py": "621f3f87b299c4bfeb5a64c87eefaa62",
+  "visionts/models_mae.py": "20edd0d6da5b21455d6c2ffb35de3d43",
+  "visionts/pos_embed.py": "d31375b8ea4a1f1a9803a68b3c292399",
+  "visionts/util.py": "d14f84b9bd2650c5bfdab3128457b540"
+ },
+ "weights_bytes": 447725789,
+ "weights_file": "mae_visualize_vit_base.pth",
+ "weights_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e"
+}
