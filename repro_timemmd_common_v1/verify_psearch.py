@@ -15,7 +15,10 @@ Outputs (small files, next to the arrays):
   psearch_recheck.csv          136 rows
   psearch_recheck_report.json  totals, failures, selection comparison,
                                per-array path/bytes/sha256 manifest
-Exit nonzero on any failure or selection mismatch.
+With --ledger=<original accepted-run psearch/status.json>, the recomputed
+MSE is additionally cross-checked against that ledger (metric-level
+reproduction evidence; the original ledger itself is never used as the
+result). Exit nonzero on any failure or selection mismatch.
 """
 import argparse
 import csv
@@ -33,14 +36,18 @@ from repro_timemmd_common_v1.p_search import combo_fingerprint, \
 
 CSV_COLS = ["domain", "p", "h", "combo", "status", "windows", "mse",
             "mae", "mse_f64", "mae_f64", "ledger_mse", "ledger_abs_diff",
-            "fingerprint_ok", "identity_ok", "npz_bytes", "npz_path",
-            "npz_sha256"]
+            "orig_mse", "orig_abs_diff", "fingerprint_ok", "identity_ok",
+            "npz_bytes", "npz_path", "npz_sha256"]
 
 
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--protocol_dir", default=None)
     ap.add_argument("--out_root", default=None)
+    ap.add_argument("--ledger", default=None,
+                    help="path to the ORIGINAL accepted-run "
+                         "psearch/status.json; recomputed MSE is also "
+                         "cross-checked against it")
     args = ap.parse_args()
 
     setup_deterministic_env()
@@ -48,6 +55,10 @@ def main():
     out_root = Path(args.out_root or P.out_root())
     ps = out_root / "psearch"
     status = load_status(out_root)
+    orig = None
+    orig_path = Path(args.ledger) if args.ledger else None
+    if orig_path is not None:
+        orig = load_json(orig_path)["combos"]
     sel = load_json(out_root / "selected_p.json")
 
     domcache = {}
@@ -103,6 +114,18 @@ def main():
         if not fp_ok:
             failures.append("%s: ledger fingerprint mismatch" % cid)
             ok = False
+        if orig is not None:
+            om = orig.get(cid, {}).get("mse")
+            row["orig_mse"] = om
+            row["orig_abs_diff"] = (abs(mse - om) if om is not None
+                                    else None)
+            if om is None:
+                failures.append("%s: original ledger missing mse" % cid)
+                ok = False
+            elif not row["orig_abs_diff"] <= 1e-12 + 1e-9 * abs(om):
+                failures.append("%s: original ledger mse %.10f != "
+                                "recomputed %.10f" % (cid, om, mse))
+                ok = False
         row["status"] = "ok" if ok else "fail"
 
     by_p = {}
@@ -145,6 +168,16 @@ def main():
         "max_mean_table_abs_diff": max_tab_diff,
         "frozen_selected_p_sha256":
             sha256_of(out_root / "selected_p.json"),
+        "orig_ledger_crosscheck": {
+            "path": str(orig_path) if orig_path else None,
+            "sha256": sha256_of(orig_path) if orig_path else None,
+            "checked": bool(orig is not None),
+            "n_matched": int(sum(1 for r in rows
+                                 if r.get("orig_abs_diff") is not None
+                                 and r["orig_abs_diff"]
+                                 <= 1e-12 + 1e-9 * (r["orig_mse"] or 0)))
+            if orig is not None else None,
+        },
         "failures": failures, "all_pass": not failures,
         "elapsed_s": round(time.time() - t0, 3),
         "arrays_manifest": manifest,
