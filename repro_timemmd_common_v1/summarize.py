@@ -80,8 +80,9 @@ def main():
     lines.append("")
 
     a5 = pf["gates"]["A5"]
+    a2 = pf["gates"]["A2"]
     lines += ["## 成本(实测)", "",
-              "- 预检 A2(4 组合):%.1fs;单窗 %.4f s" % (a5["seconds"],
+              "- 预检 A2(4 组合):%.1fs;单窗 %.4f s" % (a2["seconds"],
                                                         a5["sec_per_window_measured"]),
               "- P 搜索(136 组合,28,868 预测):见 psearch/status.json 合计",
               "- 36 组测试外推 %.0f s;重放外推 %.0f s(实测见 replay_report.json)"

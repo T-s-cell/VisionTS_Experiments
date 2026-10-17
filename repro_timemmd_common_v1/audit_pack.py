@@ -36,7 +36,14 @@ def build_pack(out_dir, tag, stage_dir, extra_files):
             f = Path(f)
             if not f.exists():
                 raise SystemExit("[FATAL] pack source missing: %s" % f)
-            tar.add(f, arcname=str(Path(name) / f.name))
+            if f.is_dir():
+                for p in sorted(f.rglob("*")):
+                    if p.is_file():
+                        tar.add(p, arcname=str(Path(name) /
+                                               f.name /
+                                               p.relative_to(f)))
+            else:
+                tar.add(f, arcname=str(Path(name) / f.name))
     size = tpath.stat().st_size
     if size > LIMIT:
         tpath.unlink()
@@ -98,7 +105,9 @@ def main():
             for jf in sorted(gdir.glob("*.json")):
                 (dst / jf.name).write_text(jf.read_text())
 
-    build_pack(out_dir, "code_protocol", code_stage, [])
+    build_pack(out_dir, "code_protocol", code_stage, [
+        pinfo["protocol_dir"],
+    ])
     build_pack(out_dir, "logs_metrics", logs_stage, [
         out_root / "preflight_report.json",
         out_root / "selected_p.json",
