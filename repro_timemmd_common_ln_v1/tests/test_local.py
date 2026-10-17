@@ -429,6 +429,29 @@ class TestConstantsAndIsolation(unittest.TestCase):
         with self.assertRaises(SystemExit):
             numeric_npz_key({"ln_names": np.array(["a.b"])})
 
+    def test_weighted_batch_mean(self):
+        from repro_timemmd_common_ln_v1.ln_train import weighted_batch_mean
+        self.assertIsNone(weighted_batch_mean([], []))
+        self.assertAlmostEqual(weighted_batch_mean([1.0, 2.0], [3, 1]),
+                               1.25, places=12)
+        exp = (0.4 * 256 + 0.8 * 7) / 263
+        self.assertAlmostEqual(weighted_batch_mean([0.4, 0.8], [256, 7]),
+                               exp, places=12)
+
+    def test_replay_nc_paths_isolated_from_formal(self):
+        from repro_timemmd_common_ln_v1.replay_one import output_paths
+        out = Path("/tmp/whatever")
+        gdir, npz, rep = output_paths(out, "Security", 6, None)
+        self.assertTrue(str(gdir).endswith("runs/Security_H6"))
+        self.assertNotIn("negative_control", str(gdir))
+        self.assertEqual(npz.name, "replay__Security__H6.npz")
+        self.assertEqual(rep.name, "replay_report__Security_H6.json")
+        gdir2, npz2, rep2 = output_paths(out, "Security", 6, "variant_b")
+        self.assertIn("negative_control", str(gdir2))
+        self.assertNotEqual(gdir2, gdir)
+        self.assertIn("variant_b", npz2.name)
+        self.assertIn("variant_b", rep2.name)
+
 
 if __name__ == "__main__":
     unittest.main()

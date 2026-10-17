@@ -26,6 +26,17 @@ def packed_sha(names, arrays):
     return h.hexdigest()
 
 
+def weighted_batch_mean(losses, sizes):
+    """Window-weighted mean of per-logical-batch losses. Each batch loss
+    is SSE/(n*H) with its own denominator, so the epoch mean must weight
+    by window count; a simple batch average mixes unequal scales."""
+    if not losses:
+        return None
+    a = np.asarray(losses, dtype=np.float64)
+    w = np.asarray(sizes, dtype=np.float64)
+    return float((a * w).sum() / w.sum())
+
+
 def train_config(microbatch_final):
     return {
         "optimizer": "adam",
@@ -309,6 +320,7 @@ def train_one_group(pinfo, dom, h, out_dir, microbatch_final=None,
 
     steps = 0
     losses = []
+    sizes = []
     torch.cuda.reset_peak_memory_stats()
     t0 = time.time()
     for lo in range(0, n_train, P.BATCH):
@@ -317,6 +329,7 @@ def train_one_group(pinfo, dom, h, out_dir, microbatch_final=None,
                                       mb)
         steps += 1
         losses.append(bl)
+        sizes.append(len(idx))
     elapsed = time.time() - t0
     peak_mem_mb = int(torch.cuda.max_memory_allocated() >> 20)
     if steps != want_steps:
@@ -338,6 +351,8 @@ def train_one_group(pinfo, dom, h, out_dir, microbatch_final=None,
     gid = P.group_id(dom, h)
     npz_path = out_dir / P.ckpt_npz_name(dom, h)
     meta_path = out_dir / P.ckpt_meta_name(dom, h)
+    mean_w = weighted_batch_mean(losses, sizes)
+    mean_simple = float(np.mean(losses)) if losses else None
     meta_base = {
         "gid": gid, "domain": dom, "h": int(h), "p": p, "L": L,
         "protocol_name": P.PROTOCOL_NAME,
@@ -349,7 +364,8 @@ def train_one_group(pinfo, dom, h, out_dir, microbatch_final=None,
         "steps": steps, "n_train_windows": int(n_train),
         "perm_sha256": perm_sha,
         "final_train_loss": losses[-1] if losses else None,
-        "mean_train_loss": float(np.mean(losses)) if losses else None,
+        "mean_train_loss": mean_w,
+        "mean_batch_loss_simple": mean_simple,
         "first_train_loss": losses[0] if losses else None,
         "freeze_check": chk,
         "digest_before": digest_before, "digest_after": digest_after,
@@ -374,8 +390,10 @@ def train_one_group(pinfo, dom, h, out_dir, microbatch_final=None,
             "train_config": tcfg, "steps": steps,
             "n_train_windows": int(n_train), "perm_sha256": perm_sha,
             "losses": [float(x) for x in losses],
+            "batch_sizes": [int(x) for x in sizes],
             "final_train_loss": losses[-1] if losses else None,
-            "mean_train_loss": float(np.mean(losses)) if losses else None,
+            "mean_train_loss": mean_w,
+            "mean_batch_loss_simple": mean_simple,
             "val_mse": val_mse, "val_mae": val_mae,
             "freeze_check": chk,
             "digest_before": digest_before, "digest_after": digest_after,

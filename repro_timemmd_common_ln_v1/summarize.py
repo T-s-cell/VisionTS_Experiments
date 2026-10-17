@@ -2,9 +2,34 @@
 import argparse
 from pathlib import Path
 
+import numpy as np
+
 from repro_timemmd_common_ln_v1 import protocol as P
 from repro_timemmd_common_ln_v1.common import dump_json, load_json, \
     setup_deterministic_env
+from repro_timemmd_common_ln_v1.ln_train import weighted_batch_mean
+
+
+def train_loss_annotation(out_root, tstat):
+    """status.json of THIS run records mean_train_loss as a simple average
+    of batch losses (unequal denominators). For transparency, recompute
+    the window-weighted value from each group's stored per-batch losses;
+    training code now weights by batch window count going forward."""
+    tl = {}
+    for dom, h in P.all_groups():
+        gid = P.group_id(dom, h)
+        lp = out_root / P.train_log_name(dom, h)
+        if not lp.exists():
+            continue
+        log = load_json(lp)
+        losses = log.get("losses") or []
+        n = int(tstat[gid]["n_train_windows"])
+        sizes = log.get("batch_sizes") or \
+            [P.BATCH] * (n // P.BATCH) + \
+            ([n % P.BATCH] if n % P.BATCH else [])
+        tl[gid] = {"recorded_simple": log.get("mean_train_loss"),
+                   "window_weighted": weighted_batch_mean(losses, sizes)}
+    return tl
 
 
 def main():
@@ -95,6 +120,18 @@ def main():
                  "组均有更新;单步未变化 LN 张量累计 %d 项(记录见 status.json)"
                  % n_unchanged)
     lines.append("- 预检外推:%s" % pf.get("b5", {}).get("note", "n/a"))
+    tl = train_loss_annotation(out_root, tstat)
+    if tl:
+        wv = [v["window_weighted"] for v in tl.values()
+              if v["window_weighted"] is not None]
+        sv = [v["recorded_simple"] for v in tl.values()
+              if v["recorded_simple"] is not None]
+        lines.append("- mean_train_loss 口径:本运行 status.json 记录为各批"
+                     "均值的简单平均;按窗加权重算 36 组均值 %.6f vs 简单"
+                     "平均 %.6f(逐组见 train_loss_weighted.json);训练代码"
+                     "已改为按批窗数加权(不影响梯度与测试结果)"
+                     % (float(np.mean(wv)) if wv else float("nan"),
+                        float(np.mean(sv)) if sv else float("nan")))
     lines.append("")
 
     lines += ["## 验证集 epoch0→epoch1(诊断,报告性)", "",
@@ -129,6 +166,8 @@ def main():
                     if g.get("state") == "done"), ""]
 
     (out_root / "summary.md").write_text("\n".join(lines))
+    if tl:
+        dump_json(out_root / "train_loss_weighted.json", tl)
     dump_json(out_root / "summary.json", {
         "fixed_p": P.FIXED_P,
         "by_domain": ev["by_domain"],
@@ -142,6 +181,7 @@ def main():
                                for g in tstat["groups"].values()),
                   "total_elapsed_s": round(tot_s, 1),
                   "peak_mem_mb": peak},
+        "train_loss_annotation": tl,
         "gates": {"preflight_all_pass": pf["all_pass"],
                   "train_all_done": all(
                       g.get("state") == "done"

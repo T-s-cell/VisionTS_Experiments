@@ -44,15 +44,29 @@ def numeric_npz_key(z):
 
 
 def perturb_verify(pinfo):
-    """Negative control on Security/H6 (smallest group)."""
+    """Negative control on Security/H6 (smallest group). Formal artifacts
+    (replay npz/report, test npz, ckpt npz/meta) are hash-watched before
+    and after both variants: the NC must stay fully inside
+    negative_control/."""
     import shutil
     dom, h = "Security", 6
     out_dir = P.out_root()
     nc = out_dir / "negative_control"
     nc.mkdir(parents=True, exist_ok=True)
+    gid = P.group_id(dom, h)
+    gdir = out_dir / "runs" / gid
+    watch = [out_dir / P.replay_npz_name(dom, h),
+             gdir / ("replay_report__%s.json" % gid),
+             gdir / P.test_npz_name(dom, h),
+             out_dir / P.ckpt_npz_name(dom, h),
+             out_dir / P.ckpt_meta_name(dom, h)]
+
+    def snap():
+        return {str(p): sha256_of(p) for p in watch}
+
+    results = {"formal_hashes_pre": snap()}
     src = out_dir / P.ckpt_npz_name(dom, h)
     meta_src = out_dir / P.ckpt_meta_name(dom, h)
-    results = {}
 
     # variant A: tamper bytes, leave meta untouched -> sha gate must trip
     pa = nc / "naive.npz"
@@ -64,8 +78,11 @@ def perturb_verify(pinfo):
     r = subprocess.run(
         [sys.executable, "-m", "repro_timemmd_common_ln_v1.replay_one",
          "--dom", dom, "--h", str(h), "--ckpt", str(pa),
-         "--meta", str(meta_src)], capture_output=True, text=True)
+         "--meta", str(meta_src), "--nc_tag", "variant_a_naive"],
+        capture_output=True, text=True)
     results["variant_a_naive_detected"] = (r.returncode != 0)
+    results["variant_a_rc"] = r.returncode
+    results["variant_a_stderr_tail"] = r.stderr[-800:]
 
     # variant B: tamper bytes AND recompute meta hashes consistently ->
     # restore succeeds; the numeric replay comparison must catch it
@@ -84,11 +101,19 @@ def perturb_verify(pinfo):
     r = subprocess.run(
         [sys.executable, "-m", "repro_timemmd_common_ln_v1.replay_one",
          "--dom", dom, "--h", str(h), "--ckpt", str(pb),
-         "--meta", str(mb_path)], capture_output=True, text=True)
+         "--meta", str(mb_path), "--nc_tag", "variant_b_consistent"],
+        capture_output=True, text=True)
     # rc==2 means replay comparison failed -> tamper DETECTED
     results["variant_b_consistent_detected"] = (r.returncode == 2)
     results["variant_b_rc"] = r.returncode
     results["variant_b_stderr_tail"] = r.stderr[-800:]
+    b_rep = nc / ("replay_report__variant_b_consistent__%s.json" % gid)
+    if b_rep.exists():
+        results["variant_b_max_abs_diff"] = load_json(b_rep) \
+            .get("max_abs_diff")
+    results["formal_hashes_post"] = snap()
+    results["formal_artifacts_unchanged"] = \
+        (results["formal_hashes_pre"] == results["formal_hashes_post"])
     return results
 
 
@@ -131,12 +156,37 @@ def main():
     if args.perturb_verify:
         pv = perturb_verify(pinfo)
         summary["perturb_verify"] = pv
+        if not pv["formal_artifacts_unchanged"]:
+            dump_json(P.out_root() / "replay_summary.json", summary)
+            print("[FATAL] perturb_verify MODIFIED formal artifacts")
+            raise SystemExit(3)
         if not (pv["variant_a_naive_detected"]
                 and pv["variant_b_consistent_detected"]):
             dump_json(P.out_root() / "replay_summary.json", summary)
             print("[FATAL] perturb_verify NOT detected: %s" % pv)
             raise SystemExit(3)
-        print("PERTURB_VERIFY: both variants detected", flush=True)
+        print("PERTURB_VERIFY: both variants detected, formal artifacts "
+              "unchanged", flush=True)
+
+    # Summary must equal the on-disk reports at exit time (gate added
+    # after the summary/report divergence incident).
+    diverged = []
+    for gid, rep in reports.items():
+        try:
+            d = load_json(P.out_root() / "runs" / gid
+                          / ("replay_report__%s.json" % gid))
+        except Exception:
+            diverged.append(gid)
+            continue
+        if (d.get("all_pass") != rep.get("all_pass")
+                or d.get("max_abs_diff") != rep.get("max_abs_diff")):
+            diverged.append(gid)
+    summary["on_disk_consistent"] = not diverged
+    if diverged:
+        dump_json(P.out_root() / "replay_summary.json", summary)
+        print("[FATAL] on-disk replay reports diverge from summary: %s"
+              % diverged)
+        raise SystemExit(3)
 
     dump_json(P.out_root() / "replay_summary.json", summary)
     print("REPLAY: %d/%d pass, immutability_ok=%s"
