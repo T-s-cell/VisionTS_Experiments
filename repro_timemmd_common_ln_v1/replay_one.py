@@ -13,6 +13,7 @@ from repro_timemmd_common_ln_v1.adapter import build_visionts, configure, \
     freeze_to_ln, predict_split
 from repro_timemmd_common_ln_v1.common import bitwise_equal, dump_json, \
     identity_equal, pred_close, setup_deterministic_env, sha256_of
+from repro_timemmd_common_ln_v1.data_timemmd import DomainData
 from repro_timemmd_common_ln_v1.ln_train import restore_ln_ckpt_strict
 
 
