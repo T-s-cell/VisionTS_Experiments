@@ -64,6 +64,29 @@ def group_fingerprint(pinfo, dom, h, tcfg):
     return hashlib.sha256(j.encode()).hexdigest()
 
 
+def full_guards(pinfo, sel_sha, microbatch_final):
+    """Tier-1 guard set shared by run_train and run_infer (must be
+    byte-identical construction on both sides)."""
+    from repro_timemmd_common_ln_v1 import protocol as P
+    from repro_timemmd_common_ln_v1.common import core_guards
+    g = core_guards(pinfo, P.BATCH, sel_sha, None)
+    g["ln"] = {
+        "microbatch_final": int(microbatch_final),
+        "lr": P.LN_LR, "betas": list(P.LN_BETAS), "eps": P.LN_EPS,
+        "weight_decay": P.LN_WD, "epochs": P.EPOCHS,
+        "seed": P.SEED, "shuffle_seed": P.SEED,
+        "expected_ln_tensors": P.EXPECTED_LN_TENSORS,
+        "expected_ln_scalars": P.EXPECTED_LN_SCALARS,
+        "exp027_selected_p_sha256": P.EXP027_SELECTED_P_SHA256,
+        "exp027_overall_mse": P.EXP027_OVERALL_MSE,
+        "exp027_overall_mae": P.EXP027_OVERALL_MAE,
+        "fixed_p": P.FIXED_P,
+        "train_windows_total": P.TRAIN_WINDOWS_TOTAL,
+        "train_steps_total": P.TRAIN_STEPS_TOTAL,
+    }
+    return g
+
+
 def logical_batch_step(model, X, Y, idx, device, optimizer, microbatch,
                        apply_step=True):
     """One logical batch = zero_grad once -> microbatch backwards -> one

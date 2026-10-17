@@ -17,8 +17,9 @@ from pathlib import Path
 import numpy as np
 
 from repro_timemmd_common_ln_v1 import protocol as P
-from repro_timemmd_common_ln_v1.common import all_finite, core_guards, die, \
-    dump_json, guards_equal, load_json, setup_deterministic_env, sha256_of
+from repro_timemmd_common_ln_v1.common import all_finite, die, dump_json, \
+    guards_equal, load_json, setup_deterministic_env, sha256_of
+from repro_timemmd_common_ln_v1.ln_train import full_guards
 
 
 def group_artifacts_ok(out_dir, dom, h, want_windows):
@@ -65,8 +66,11 @@ def main():
         else None
     if pf is None or not pf.get("all_pass") or pf.get("errors"):
         die("[TIER-1] preflight report missing or not all_pass")
+    microbatch_final = int(pf.get("b5", {}).get("microbatch_final",
+                                                P.MICROBATCH))
 
-    guards = core_guards(pinfo, P.BATCH, pinfo["selected_p_sha256"], None)
+    guards = full_guards(pinfo, pinfo["selected_p_sha256"],
+                         microbatch_final)
     gpath = out_dir / "guards.json"
     if gpath.exists():
         ok, diff = guards_equal(load_json(gpath), guards)

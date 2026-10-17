@@ -19,10 +19,10 @@ from pathlib import Path
 import numpy as np
 
 from repro_timemmd_common_ln_v1 import protocol as P
-from repro_timemmd_common_ln_v1.common import core_guards, die, dump_json, \
+from repro_timemmd_common_ln_v1.common import die, dump_json, \
     guards_equal, load_json, setup_deterministic_env, sha256_of
-from repro_timemmd_common_ln_v1.ln_train import group_fingerprint, \
-    train_config, train_one_group
+from repro_timemmd_common_ln_v1.ln_train import full_guards, \
+    group_fingerprint, train_config, train_one_group
 
 
 def group_artifacts_ok(out_dir, dom, h, want_val):
@@ -104,21 +104,7 @@ def main():
         if sha256_of(sel_dst) != sel_sha:
             die("[TIER-1] selected_p copy failed")
 
-    guards = core_guards(pinfo, P.BATCH, sel_sha, None)
-    guards["ln"] = {
-        "microbatch_final": microbatch_final,
-        "lr": P.LN_LR, "betas": list(P.LN_BETAS), "eps": P.LN_EPS,
-        "weight_decay": P.LN_WD, "epochs": P.EPOCHS,
-        "seed": P.SEED, "shuffle_seed": P.SEED,
-        "expected_ln_tensors": P.EXPECTED_LN_TENSORS,
-        "expected_ln_scalars": P.EXPECTED_LN_SCALARS,
-        "exp027_selected_p_sha256": P.EXP027_SELECTED_P_SHA256,
-        "exp027_overall_mse": P.EXP027_OVERALL_MSE,
-        "exp027_overall_mae": P.EXP027_OVERALL_MAE,
-        "fixed_p": P.FIXED_P,
-        "train_windows_total": P.TRAIN_WINDOWS_TOTAL,
-        "train_steps_total": P.TRAIN_STEPS_TOTAL,
-    }
+    guards = full_guards(pinfo, sel_sha, microbatch_final)
     gpath = out_dir / "guards.json"
     if gpath.exists():
         ok, diff = guards_equal(load_json(gpath), guards)
