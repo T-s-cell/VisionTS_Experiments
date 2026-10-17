@@ -152,8 +152,8 @@ def main():
           % (overall36["mse"], overall36["mae"]))
     if use_tats:
         print("vs TaTS 36-group: dMSE %+.6f (%+.2f%%)"
-              % (result["overall_36group"]["delta_mse"],
-                 100 * result["overall_36group"]["rel_mse"]))
+              % (result["overall_36group_equal"]["delta_mse"],
+                 100 * result["overall_36group_equal"]["rel_mse"]))
 
 
 if __name__ == "__main__":
