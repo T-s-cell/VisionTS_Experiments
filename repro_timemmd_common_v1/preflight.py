@@ -233,7 +233,8 @@ def main():
                     "max violation=%.2e) — investigate, do not reduce "
                     "batch" % (max_abs, max_viol))
     sec_per_win = a2["seconds"] / sum(
-        a2["combos"][P.combo_id(*c)]["windows"] for c in P.PRECHECK)
+        a2["combos"][P.combo_id(c[0], c[2], c[1])]["windows"]
+        for c in P.PRECHECK)
     a5["val_seconds_extrapolated"] = round(P.VAL_WINDOWS_TOTAL *
                                            sec_per_win, 1)
     a5["test_seconds_extrapolated"] = round(P.TEST_WINDOWS_TOTAL *
