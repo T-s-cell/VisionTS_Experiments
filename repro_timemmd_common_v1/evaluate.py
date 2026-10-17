@@ -135,13 +135,13 @@ def main():
                 "vs frozen (%.16f, %.16f)"
                 % (t_mse, t_mae, P.TATS_OVERALL_MSE, P.TATS_OVERALL_MAE))
         result["tats_overall_36group"]["anchor_ok"] = True
-        result["overall_36group"]["delta_mse"] = \
+        result["overall_36group_equal"]["delta_mse"] = \
             overall36["mse"] - t_mse
-        result["overall_36group"]["rel_mse"] = \
+        result["overall_36group_equal"]["rel_mse"] = \
             (overall36["mse"] - t_mse) / t_mse
-        result["overall_36group"]["delta_mae"] = \
+        result["overall_36group_equal"]["delta_mae"] = \
             overall36["mae"] - t_mae
-        result["overall_36group"]["rel_mae"] = \
+        result["overall_36group_equal"]["rel_mae"] = \
             (overall36["mae"] - t_mae) / t_mae
 
     dump_json(out_root / "evaluation.json", result)
