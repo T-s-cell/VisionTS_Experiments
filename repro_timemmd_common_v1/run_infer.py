@@ -76,9 +76,13 @@ def main():
     pf_path = out_root / "preflight_report.json"
     if not pf_path.exists():
         die("[TIER-1] preflight_report.json missing")
-    pf_sha = sha256_of(pf_path)
+    pf = load_json(pf_path)
+    if not pf.get("all_pass") or pf.get("errors"):
+        die("[TIER-1] preflight report is not all_pass; rerun preflight")
+    # NOTE: the report body contains wall-clock timings, so its file sha is
+    # NOT a stable run identity — live-check all_pass above instead.
 
-    guards = core_guards(pinfo, P.BATCH, sel_sha, pf_sha)
+    guards = core_guards(pinfo, P.BATCH, sel_sha, None)
     guards["selected_p"] = selected
     gpath = out_root / "guards.json"
     if gpath.exists():
