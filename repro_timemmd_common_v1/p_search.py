@@ -42,6 +42,7 @@ def save_status(out_root, status):
 
 def run_combo(model, dev, domdata, dom, p, h, out_root):
     from repro_timemmd_common_v1 import protocol as PP
+    (Path(out_root) / "psearch").mkdir(parents=True, exist_ok=True)
     configure(model, PP.TABLE[dom]["L"], h, p)
     sp = domdata.load_split(h, "val")
     seed_everything(PP.SEED)
