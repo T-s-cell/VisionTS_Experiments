@@ -145,10 +145,17 @@ def main():
             % (len(missing), missing[:5]))
 
     sel_path = out_root / "selected_p.json"
-    if sel_path.exists() and not args.force_select:
-        die("[FATAL] %s exists; use --force_select to refreeze"
-            % sel_path)
     selection = select_periods(status)
+    if sel_path.exists() and not args.force_select:
+        old = load_json(sel_path)["selection"]
+        old_sel = {d: old[d]["selected"] for d in old}
+        new_sel = {d: selection[d]["selected"] for d in selection}
+        if old_sel != new_sel:
+            die("[TIER-1] selected_p.json exists with DIFFERENT selection "
+                "%s vs %s; refusing to refreeze" % (old_sel, new_sel))
+        print("SELECTED P UNCHANGED:", new_sel)
+        print("selected_p.json sha256 = %s" % sha256_of(sel_path))
+        return
     payload = {"selection": selection, "seed": P.SEED,
                "protocol_json_sha256": P.PROTOCOL_JSON_SHA256,
                "splits_json_sha256": P.SPLITS_JSON_SHA256,
