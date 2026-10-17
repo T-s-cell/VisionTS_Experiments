@@ -73,10 +73,12 @@ def perturb_verify(pinfo):
     shutil.copyfile(str(pa), str(pb))
     meta = load_json(meta_src)
     names = meta["ln_names"]
-    arr = {npz_key(n): np.load(str(pb))[npz_key(n)] for n in names}
+    raw = np.load(str(pb))
     meta_b = dict(meta)
     meta_b["npz_sha256"] = sha256_of(pb)
-    meta_b["packed_sha256"] = packed_sha(names, arr)
+    meta_b["packed_sha256"] = packed_sha(names,
+                                         {n: raw[npz_key(n)]
+                                          for n in names})
     mb_path = nc / "consistent.meta.json"
     dump_json(mb_path, meta_b)
     r = subprocess.run(
