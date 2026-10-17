@@ -98,10 +98,13 @@ def env_info():
 
 
 def model_state_digest(model):
+    """Digest of learned weights ONLY (named_parameters). Registered buffers
+    like VisionTS's `mask` are derived configuration state (they change with
+    periodicity/context) and are verified by geometry asserts instead."""
     h = hashlib.sha256()
-    for name, buf in sorted(list(model.state_dict().items())):
+    for name, prm in sorted(model.named_parameters()):
         h.update(name.encode())
-        h.update(buf.detach().cpu().numpy().tobytes())
+        h.update(prm.detach().cpu().numpy().tobytes())
     return h.hexdigest()
 
 
