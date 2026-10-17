@@ -420,6 +420,15 @@ class TestConstantsAndIsolation(unittest.TestCase):
         self.assertEqual(P.psearch_val_npz_name("Health", 1, 12),
                          "val__Health__P1__H12.npz")
 
+    def test_numeric_npz_key_skips_strings(self):
+        from repro_timemmd_common_ln_v1.replay_check import numeric_npz_key
+        z = {"ln_names": np.array(["a.b", "c.d"]),
+             "vision_model__norm__bias": np.ones(4, dtype=np.float32),
+             "vision_model__norm__weight": np.ones(4, dtype=np.float32)}
+        self.assertEqual(numeric_npz_key(z), "vision_model__norm__bias")
+        with self.assertRaises(SystemExit):
+            numeric_npz_key({"ln_names": np.array(["a.b"])})
+
 
 if __name__ == "__main__":
     unittest.main()

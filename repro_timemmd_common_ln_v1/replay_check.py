@@ -34,6 +34,15 @@ def run_group(dom, h):
             "error": "rc=%d %s" % (r.returncode, r.stderr[-2000:])}
 
 
+def numeric_npz_key(z):
+    """First sorted float array key in an npz mapping (skips string arrays
+    like ln_names/label_dates). Raises if the npz has no float array."""
+    for k in sorted(z.keys()):
+        if z[k].dtype.kind == "f":
+            return k
+    raise SystemExit("[TIER-1] perturb target: no float array in npz")
+
+
 def perturb_verify(pinfo):
     """Negative control on Security/H6 (smallest group)."""
     import shutil
@@ -49,7 +58,7 @@ def perturb_verify(pinfo):
     pa = nc / "naive.npz"
     shutil.copyfile(str(src), str(pa))
     z = dict(np.load(str(pa)))
-    k0 = sorted(z.keys())[0]
+    k0 = numeric_npz_key(z)
     z[k0] = (z[k0] + np.float32(1e-3)).astype(np.float32)
     np.savez(str(pa), **z)
     r = subprocess.run(
