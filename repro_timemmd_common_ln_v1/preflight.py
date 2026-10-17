@@ -276,6 +276,8 @@ def b3_logical_batch(pinfo, pd):
         # ---- ONE real logical batch step + freeze forensics ----
         before_shas = named_tensor_sha(m)
         before_buf = buffer_digest(m)
+        from repro_timemmd_common_ln_v1.common import model_state_digest
+        digest_before = model_state_digest(m)
         import torch
         torch.cuda.reset_peak_memory_stats()
         t0 = time.time()
@@ -321,6 +323,8 @@ def b3_logical_batch(pinfo, pd):
                 "weights_sha256": pinfo["weights_sha256"],
                 "train_config": train_config(int(P.MICROBATCH)),
                 "steps": 1, "n_train_windows": int(n_train),
+                "digest_before": digest_before,
+                "digest_after": model_state_digest(m),
                 "note": "preflight B3 model after one logical batch step",
             }
             save_ln_ckpt(m, ln_param_names(m),
