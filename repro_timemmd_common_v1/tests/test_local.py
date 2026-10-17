@@ -226,6 +226,71 @@ class TestGuards(unittest.TestCase):
         self.assertEqual(diff, ["code_md5"])
 
 
+class TestPsearchCache(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.mkdtemp(prefix="vts_psearch_")
+        self.pdir, self.splits, _ = write_synth_protocol(self.tmp)
+        self.dd = DomainData(self.pdir, self.splits, "Synth")
+        self.pinfo = {"weights_sha256": "w" * 64}
+        from repro_timemmd_common_v1.p_search import combo_fingerprint
+        self.combo_fingerprint = combo_fingerprint
+
+    def _write_npz(self, path, sp, pred):
+        np.savez_compressed(path, pred=pred, truth=sp["Y"], s=sp["s"],
+                            orig_row=sp["orig_row"],
+                            label_dates=sp["label_dates"],
+                            window_index=sp["window_index"])
+
+    def test_fingerprint_stable_and_discriminating(self):
+        a = self.combo_fingerprint(self.pinfo, "Synth", 3, 4)
+        b = self.combo_fingerprint(self.pinfo, "Synth", 3, 4)
+        self.assertEqual(a, b)
+        self.assertNotEqual(a["weights_sha256"], "")
+        c = self.combo_fingerprint(self.pinfo, "Synth", 3, 8)
+        self.assertNotEqual(a, c)
+        d = self.combo_fingerprint({"weights_sha256": "z" * 64},
+                                   "Synth", 3, 4)
+        self.assertNotEqual(a, d)
+
+    def test_verify_combo_arrays_positive(self):
+        from repro_timemmd_common_v1.p_search import verify_combo_arrays
+        sp = self.dd.load_split(4, "val")
+        pred = np.zeros((2, 4, 1), dtype=np.float32)
+        npz = Path(self.tmp) / "val__Synth__P3__H4.npz"
+        self._write_npz(npz, sp, pred)
+        chk = verify_combo_arrays(npz, sp)
+        self.assertTrue(chk["ok"], chk["reason"])
+        self.assertEqual(chk["windows"], 2)
+
+    def test_verify_combo_array_rejects_tampering(self):
+        from repro_timemmd_common_v1.p_search import verify_combo_arrays
+        sp = self.dd.load_split(4, "val")
+        pred = np.zeros((2, 4, 1), dtype=np.float32)
+        npz = Path(self.tmp) / "val__Synth__P3__H4.npz"
+        self._write_npz(npz, sp, pred)
+        # tampered truth
+        arr = dict(np.load(npz))
+        arr["truth"] = arr["truth"] + np.float32(0.5)
+        np.savez_compressed(npz, **arr)
+        chk = verify_combo_arrays(npz, sp)
+        self.assertFalse(chk["ok"])
+        self.assertIn("truth", chk["reason"])
+        # non-permutation window_index
+        arr = dict(np.load(npz))
+        arr["truth"] = sp["Y"]
+        arr["window_index"] = np.array([0, 0])
+        np.savez_compressed(npz, **arr)
+        chk = verify_combo_arrays(npz, sp)
+        self.assertFalse(chk["ok"])
+        self.assertIn("permutation", chk["reason"])
+        # missing key
+        arr.pop("s")
+        np.savez_compressed(npz, **arr)
+        chk = verify_combo_arrays(npz, sp)
+        self.assertFalse(chk["ok"])
+        self.assertIn("missing key", chk["reason"])
+
+
 class TestAdapterDirect(unittest.TestCase):
     def test_adapter_equals_direct_cpu(self):
         import torch

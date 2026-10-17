@@ -2,10 +2,15 @@
 
   code_protocol : package + visionts source, code_state.json (md5 manifest,
                   commit, weights location), frozen protocol (51 files)
-  logs_metrics  : preflight/selected_p/psearch/status/verify/replay/
-                  evaluation/summary + per-group metrics jsons
-                  (NO prediction arrays)
+  logs_metrics  : preflight/selected_p/verify/replay/evaluation/summary
+                  + psearch_recheck.csv/report + raw run logs + per-group
+                  metrics jsons; psearch/status.json keeps its psearch/
+                  relative path (no basename collision with the test
+                  status.json). NO prediction arrays.
   pred_npz      : 36 cached test npz + replay report
+
+--tags selects which packs to (re)build; omitted packs keep their existing
+files (and sha256 sidecars) untouched.
 
 Named VisionTS_timemmd_common_<content>_<YYYYMMDD>.tar.gz, written to
 --out_dir (default /home/wlt/MMTS/temp when present, else <out>/packs).
@@ -60,6 +65,9 @@ def main():
     ap.add_argument("--protocol_dir", default=None)
     ap.add_argument("--out_root", default=None)
     ap.add_argument("--out_dir", default=None)
+    ap.add_argument("--tags", default="code_protocol,logs_metrics,pred_npz",
+                    help="comma subset of packs to (re)build; skipped "
+                         "packs keep their existing files and sha256")
     args = ap.parse_args()
 
     setup_deterministic_env()
@@ -95,9 +103,16 @@ def main():
         import shutil
         shutil.rmtree(logs_stage)
     (logs_stage / "runs").mkdir(parents=True)
-    for jf in sorted(out_root.glob("*.json")) + \
-            sorted(out_root.glob("*.md")):
-        (logs_stage / jf.name).write_text(jf.read_text())
+    for pat in ("*.json", "*.md", "*.csv", "*.log"):
+        for jf in sorted(out_root.glob(pat)):
+            (logs_stage / jf.name).write_text(jf.read_text())
+    # preserve the psearch/ directory layout (status.json must not collide
+    # with the test-phase out_root/status.json)
+    ps_jsons = sorted((out_root / "psearch").glob("*.json"))
+    if ps_jsons:
+        (logs_stage / "psearch").mkdir(parents=True, exist_ok=True)
+        for jf in ps_jsons:
+            (logs_stage / "psearch" / jf.name).write_text(jf.read_text())
     for gdir in sorted((out_root / "runs").iterdir()):
         if gdir.is_dir():
             dst = logs_stage / "runs" / gdir.name
@@ -105,20 +120,19 @@ def main():
             for jf in sorted(gdir.glob("*.json")):
                 (dst / jf.name).write_text(jf.read_text())
 
-    build_pack(out_dir, "code_protocol", code_stage, [
-        pinfo["protocol_dir"],
-    ])
-    build_pack(out_dir, "logs_metrics", logs_stage, [
-        out_root / "preflight_report.json",
-        out_root / "selected_p.json",
-        out_root / "psearch" / "status.json",
-        out_root / "status.json",
-        out_root / "guards.json",
-    ])
-    build_pack(out_dir, "pred_npz", out_root / "runs", [
-        out_root / "replay_report.json",
-    ])
-    print("AUDIT PACKS DONE -> %s" % out_dir)
+    tags = set(args.tags.split(","))
+    if "code_protocol" in tags:
+        build_pack(out_dir, "code_protocol", code_stage, [
+            pinfo["protocol_dir"],
+        ])
+    if "logs_metrics" in tags:
+        build_pack(out_dir, "logs_metrics", logs_stage, [])
+    if "pred_npz" in tags:
+        build_pack(out_dir, "pred_npz", out_root / "runs", [
+            out_root / "replay_report.json",
+        ])
+    print("AUDIT PACKS DONE (%s) -> %s"
+          % (",".join(sorted(tags)), out_dir))
 
 
 if __name__ == "__main__":

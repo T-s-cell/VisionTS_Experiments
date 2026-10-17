@@ -1,5 +1,8 @@
 """Validation-set period search: 136 combos (domain x P x H), then freeze
-selected_p.json BEFORE any test inference. Combo-level ledger -> resumable.
+selected_p.json BEFORE any test inference. Combo-level ledger -> resumable;
+a cached combo is only skipped when its stored fingerprint (protocol pins,
+weights, code md5, config) matches the current one AND the cached array
+passes integrity checks vs the protocol split.
 
 Selection rule (frozen): per domain, per P -> equal-weight mean of the 4
 per-H standardized val MSE (float32 full-element); argmin; tie -> smaller P.
@@ -14,8 +17,9 @@ import torch
 from repro_timemmd_common_v1 import protocol as P
 from repro_timemmd_common_v1.adapter import build_visionts, configure, \
     predict_split
-from repro_timemmd_common_v1.common import all_finite, die, dump_json, \
-    load_json, seed_everything, setup_deterministic_env, sha256_of
+from repro_timemmd_common_v1.common import all_finite, bitwise_equal, die, \
+    dump_json, load_json, seed_everything, setup_deterministic_env, \
+    sha256_of
 from repro_timemmd_common_v1.data_timemmd import DomainData
 
 
@@ -34,6 +38,54 @@ def load_status(out_root):
     if sp.exists():
         return load_json(sp)
     return {"combos": {}}
+
+
+def combo_fingerprint(pinfo, dom, p, h):
+    """Identity of everything that determines a combo's result. Stored in
+    the ledger at done-time; a skip is only allowed when the stored
+    fingerprint equals the current one AND the cached array passes
+    integrity checks."""
+    return {
+        "protocol_json_sha256": P.PROTOCOL_JSON_SHA256,
+        "splits_json_sha256": P.SPLITS_JSON_SHA256,
+        "weights_sha256": pinfo["weights_sha256"],
+        "code_md5": P.package_code_md5s(),
+        "domain": dom, "p": int(p), "h": int(h),
+        "seed": P.SEED, "batch": P.BATCH,
+        "norm_const": P.NORM_CONST, "align_const": P.ALIGN_CONST,
+        "interpolation": P.INTERPOLATION, "fp64": P.FP64,
+    }
+
+
+def verify_combo_arrays(npz_path, sp):
+    """Integrity of a cached val-combo array vs the protocol split:
+    keys, count, window_index permutation, identity/truth bitwise,
+    finiteness. Independent of status.json metrics."""
+    try:
+        arr = dict(np.load(npz_path))
+    except Exception as e:  # noqa: BLE001
+        return {"ok": False, "reason": "load failed: %r" % e}
+    for k in ("pred", "truth", "s", "orig_row", "label_dates",
+              "window_index"):
+        if k not in arr:
+            return {"ok": False, "reason": "missing key %s" % k}
+    n = arr["pred"].shape[0]
+    if arr["pred"].shape[1:] != sp["Y"].shape[1:]:
+        return {"ok": False, "reason": "pred shape %s != protocol %s"
+                % (arr["pred"].shape[1:], sp["Y"].shape[1:])}
+    if not np.array_equal(np.sort(arr["window_index"]), np.arange(n)):
+        return {"ok": False, "reason": "window_index not permutation"}
+    if n != len(sp["X"]):
+        return {"ok": False, "reason": "count %d != protocol %d"
+                % (n, len(sp["X"]))}
+    for k in ("s", "orig_row", "label_dates"):
+        if not bitwise_equal(arr[k], sp[k]):
+            return {"ok": False, "reason": "%s mismatch vs protocol" % k}
+    if not bitwise_equal(arr["truth"], sp["Y"]):
+        return {"ok": False, "reason": "truth mismatch vs protocol"}
+    if not np.isfinite(arr["pred"].astype(np.float64)).all():
+        return {"ok": False, "reason": "non-finite pred"}
+    return {"ok": True, "reason": "", "windows": int(n)}
 
 
 def save_status(out_root, status):
@@ -111,19 +163,31 @@ def main():
         for dom, p, h in combos:
             cid = P.combo_id(dom, p, h)
             ent = status["combos"].get(cid, {})
-            npz_ok = (out_root / "psearch" /
-                      P.val_npz_name(dom, p, h)).exists()
-            if ent.get("state") == "done" and npz_ok and "mse" in ent:
-                print("SKIP %s (done)" % cid, flush=True)
-                continue
             if dom not in domcache:
                 domcache[dom] = DomainData(pinfo["protocol_dir"],
                                            pinfo["splits"], dom)
+            npz_path = out_root / "psearch" / P.val_npz_name(dom, p, h)
+            fp = combo_fingerprint(pinfo, dom, p, h)
+            if (ent.get("state") == "done" and "mse" in ent
+                    and ent.get("fingerprint") == fp
+                    and npz_path.exists()):
+                chk = verify_combo_arrays(
+                    npz_path, domcache[dom].load_split(h, "val"))
+                if chk["ok"]:
+                    print("SKIP %s (fingerprint+integrity ok, %d windows)"
+                          % (cid, chk["windows"]), flush=True)
+                    continue
+                print("REDO %s: cached array rejected (%s)"
+                      % (cid, chk["reason"]), flush=True)
+            else:
+                print("REDO %s: no cached fingerprint match" % cid,
+                      flush=True)
             status["combos"][cid] = {"state": "running"}
             save_status(out_root, status)
             try:
                 res = run_combo(model, dev, domcache[dom], dom, p, h,
                                 out_root)
+                res["fingerprint"] = fp
                 status["combos"][cid] = res
             except Exception as e:  # noqa: BLE001
                 status["combos"][cid] = {"state": "failed",
