@@ -55,7 +55,7 @@ def perturb_verify(pinfo):
     nc.mkdir(parents=True, exist_ok=True)
     gid = P.group_id(dom, h)
     gdir = out_dir / "runs" / gid
-    watch = [out_dir / P.replay_npz_name(dom, h),
+    watch = [gdir / P.replay_npz_name(dom, h),
              gdir / ("replay_report__%s.json" % gid),
              gdir / P.test_npz_name(dom, h),
              out_dir / P.ckpt_npz_name(dom, h),

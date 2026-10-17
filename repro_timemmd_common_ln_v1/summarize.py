@@ -23,7 +23,7 @@ def train_loss_annotation(out_root, tstat):
             continue
         log = load_json(lp)
         losses = log.get("losses") or []
-        n = int(tstat[gid]["n_train_windows"])
+        n = int(tstat["groups"][gid]["n_train_windows"])
         sizes = log.get("batch_sizes") or \
             [P.BATCH] * (n // P.BATCH) + \
             ([n % P.BATCH] if n % P.BATCH else [])
