@@ -3,6 +3,7 @@ process, then predict the first 8 val windows. Writes pred npz + digests
 for the parent to compare against its in-process model.
 """
 import argparse
+from pathlib import Path
 
 import numpy as np
 
