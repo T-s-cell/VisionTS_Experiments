@@ -380,7 +380,7 @@ def b5_budget(rows):
         if r:
             rate[dom] = r["wall_s"]
     fallback = max(rate.values()) if rate else 30.0
-    est_s = sum(ns * rate.get(g.rsplit("_H", 1)[0], fallback)
+    est_s = sum(ns * rate.get(gid.rsplit("_H", 1)[0], fallback)
                 for gid, ns in steps_by_group.items())
     return {
         "microbatch_final": int(P.MICROBATCH),
