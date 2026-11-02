@@ -149,25 +149,43 @@ def mode_group(ds, h):
 
 
 def mode_cache(ds, h):
-    """User correction 3: per-group ETTm1 cache verification with a real
-    rerun path — never a global abort."""
+    """Freeze-review fix 2: per-group ETTm1 cache verification with a real
+    rerun path — never a global abort. The cached SUCCESS.txt config
+    (L=2304, P=96, r=c=0.4, bs=32, train_epochs=0, seed=2021) is gated
+    (mismatch = data-protocol inconsistency -> stop, locate cause) and
+    recorded into the verification log; missing/corrupt cache arrays
+    downgrade to rerun_needed (rerun just that group) instead of exiting;
+    weights inconsistency still stops."""
     metric = C.load_metric()
     d = C.exp001_dir(ds, h)
     sp = os.path.join(d, "SUCCESS.txt")
+    cfg = {}
     if not os.path.isfile(sp):
         status, reason = "rerun_needed", "EXP-001 SUCCESS.txt missing"
     else:
         rec = C.parse_success(sp)
+        cfg = rec["config"]
+        want_cfg = {"seq_len": "2304", "periodicity": "96",
+                    "pred_len": str(h), "norm_const": "0.4",
+                    "align_const": "0.4", "batch_size": "32",
+                    "train_epochs": "0", "seed": "2021"}
+        bad_cfg = {k: cfg.get(k) for k, w in want_cfg.items()
+                   if cfg.get(k) != w}
         ckpt = os.path.join(C.ROOT, C.CKPT_REL)
         got_sha = C.sha256_of(ckpt)
         if got_sha != C.CKPT_SHA256:
             fail("ckpt sha256 %s != pinned %s — weights changed, locate the "
                  "cause first (rerun cannot legitimize foreign weights)"
                  % (got_sha, C.CKPT_SHA256))
-        if rec["config"].get("ckpt_sha256") != got_sha:
+        if bad_cfg:
+            fail("ETTm1_%d cached SUCCESS config violates the EXP-001/"
+                 "Table-19 protocol (L=2304, P=96, r=c=0.4): %s — data-"
+                 "protocol inconsistency, locate the cause first"
+                 % (h, bad_cfg))
+        if cfg.get("ckpt_sha256") != got_sha:
             status, reason = ("rerun_needed",
                               "EXP-001 recorded ckpt %s != current %s"
-                              % (rec["config"].get("ckpt_sha256"), got_sha))
+                              % (cfg.get("ckpt_sha256"), got_sha))
         else:
             drift = []
             for f in C.FP_FILES:
@@ -180,20 +198,28 @@ def mode_cache(ds, h):
                 reason = "code fingerprint drift vs EXP-001: " + "; ".join(drift)
             else:
                 status, reason = "cache_ok", ""
-    if status == "rerun_needed" and "weights" in reason.lower():
-        fail("ETTm1_%d %s: %s" % (h, status, reason))
 
     ev = {"kind": "exp001_cache_check", "dataset": ds, "horizon": h,
-          "status": status, "reason": reason}
+          "status": status, "reason": reason, "cached_config": cfg,
+          "config_gate": "L=2304 P=96 r=c=0.4 bs=32 train_epochs=0 "
+                         "seed=2021"}
     if status == "cache_ok":
-        arr = verify_freeze_arrays(d, ds, h, metric, "exp001-cache")
-        ev["arrays"] = arr
-        C.merge_json(VERIFY_JSON, "cache_%s_%d" % (ds, h), ev)
-        print("[verify_t22] cache %s_%d OK (EXP-001 reuse): n=%d "
-              "true bitwise (std & EXP-003), metrics==stored, mse=%.6f "
-              "mae=%.6f" % (ds, h, arr["n"], arr["mse"], arr["mae"]))
+        try:
+            arr = verify_freeze_arrays(d, ds, h, metric, "exp001-cache")
+        except SystemExit as e:
+            status = "rerun_needed"
+            reason = "cache arrays missing/corrupt: %s" % e
+            ev["status"], ev["reason"] = status, reason
+        else:
+            ev["arrays"] = arr
+    C.merge_json(VERIFY_JSON, "cache_%s_%d" % (ds, h), ev)
+    if status == "cache_ok":
+        print("[verify_t22] cache %s_%d OK (EXP-001 reuse, config L=2304/"
+              "P=96/r=c=0.4 verified): n=%d true bitwise (std & EXP-003), "
+              "metrics==stored, mse=%.6f mae=%.6f"
+              % (ds, h, ev["arrays"]["n"], ev["arrays"]["mse"],
+                 ev["arrays"]["mae"]))
     else:
-        C.merge_json(VERIFY_JSON, "cache_%s_%d" % (ds, h), ev)
         print("[verify_t22] cache %s_%d %s: %s -> rerun this group"
               % (ds, h, status, reason))
 

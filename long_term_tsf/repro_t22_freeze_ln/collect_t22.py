@@ -118,7 +118,12 @@ def main():
         "Freeze 为单次(seed 2021)推理,逐 H 表只列实测值;表 22 锚点只在数"
         "据集层与总体层给出(3 位小数)。窗口数(用户核对 EXP-031 win_start,"
         "16 组共 109,840 窗):小时 N=2881−H,首预测行 11520;分钟 N=11521−H,"
-        "首预测行 46080,与 L 无关。",
+        "首预测行 46080,与 L 无关。**freq 差异说明**:本实验 Freeze 各组日志"
+        "为 freq=h(run.py 默认,未显式传参),EXP-003 LN 的 ETTm1/ETTm2 为 "
+        "freq=t;freq 只影响 dataloader 的时间标记 x_mark,而 VisionTS 封装"
+        "(`models/VisionTS.py` L25-27)仅把数值历史 x_enc 传入预测器,时间标"
+        "记在封装层即被丢弃,故两侧成像周期同为 P=96、输出不受影响(源码链"
+        "见 README_t22.md「freq 差异说明」)。",
         "",
         "## 1. LN 列自检",
         "",
@@ -143,8 +148,8 @@ def main():
                          "t22_rerun": "本轮补跑"}[a["source"]]))
     L += [
         "", "## 3. 数据集层(4-H 均值)与论文表 22 对照", "",
-        "| 数据集 | Freeze 实测 | 论文 Freeze | |差| | LN 实测 | 论文 LN "
-        "| |差| | Δ=LN−Freeze |",
+        "| 数据集 | Freeze 实测 | 论文 Freeze | 绝对差 | LN 实测 | 论文 LN "
+        "| 绝对差 | Δ=LN−Freeze |",
         "|---|---|---|---|---|---|---|---|",
     ]
     flags = []
@@ -161,12 +166,12 @@ def main():
                 flags.append("%s LN %s 实测 %s vs 论文 %.3f(差 %.4f)"
                              % (ds, metric_name, fmt(m[mi]), pl[mi],
                                 m[mi] - pl[mi]))
-        L.append("| %s | %s/%s | %.3f/%.3f | %.3f/%.3f | %s/%s | %.3f/%.3f "
-                 "| %.3f/%.3f | %s/%s |"
+        L.append("| %s | %s/%s | %.3f/%.3f | %s/%s | %s/%s | %.3f/%.3f "
+                 "| %s/%s | %s/%s |"
                  % (ds, fmt(a[0]), fmt(a[1]), pf[0], pf[1],
-                    abs(a[0] - pf[0]), abs(a[1] - pf[1]),
+                    fmt(abs(a[0] - pf[0])), fmt(abs(a[1] - pf[1])),
                     fmt(m[0]), fmt(m[1]), pl[0], pl[1],
-                    abs(m[0] - pl[0]), abs(m[1] - pl[1]),
+                    fmt(abs(m[0] - pl[0])), fmt(abs(m[1] - pl[1])),
                     fmt(df_), fmt(dm)))
     a, m, pf, pl = fz_overall, ln_overall, C.PAPER_T22_OVERALL["freeze"], \
         C.PAPER_T22_OVERALL["ln"]
@@ -177,12 +182,13 @@ def main():
         if abs(m[mi] - pl[mi]) > 0.001:
             flags.append("总体 LN %s 实测 %s vs 论文 %.3f(差 %.4f)"
                          % (metric_name, fmt(m[mi]), pl[mi], m[mi] - pl[mi]))
-    L += ["| **总体** | %s/%s | %.3f/%.3f | %.3f/%.3f | %s/%s | %.3f/%.3f "
-          "| %.3f/%.3f | **%s/%s** |"
-          % (fmt(a[0]), fmt(a[1]), pf[0], pf[1], abs(a[0] - pf[0]),
-             abs(a[1] - pf[1]), fmt(m[0]), fmt(m[1]), pl[0], pl[1],
-             abs(m[0] - pl[0]), abs(m[1] - pl[1]), fmt(m[0] - a[0]),
-             fmt(m[1] - a[1])),
+    L += ["| **总体** | %s/%s | %.3f/%.3f | %s/%s | %s/%s | %.3f/%.3f "
+          "| %s/%s | **%s/%s** |"
+          % (fmt(a[0]), fmt(a[1]), pf[0], pf[1],
+             fmt(abs(a[0] - pf[0])), fmt(abs(a[1] - pf[1])),
+             fmt(m[0]), fmt(m[1]), pl[0], pl[1],
+             fmt(abs(m[0] - pl[0])), fmt(abs(m[1] - pl[1])),
+             fmt(m[0] - a[0]), fmt(m[1] - a[1])),
           "",
           "## 4. 退步清单(Δ=LN−Freeze > 0,微调后变差)",
           ""]
@@ -209,7 +215,7 @@ def main():
                         name, fmt(a_), fmt(m_), fmt(d)))
     else:
         L.append("无退步项:LN 在全部数据集层与逐 H 项上均不劣于 Freeze。")
-    L += ["", "## 5. 论文对照标注(实测 − 论文,|差|>0.001 逐项列出)", ""]
+    L += ["", "## 5. 论文对照标注(实测 − 论文,绝对差>0.001 逐项列出)", ""]
     if flags:
         for x in flags:
             L.append("- %s" % x)
@@ -229,7 +235,10 @@ def main():
           "N=预期、true 双 bitwise(vs std_array 与 vs EXP-003 seed2021 还原)"
           "、metric 复算==metrics.npy、首预测行 %s)。"
           % "/".join(str(C.first_pred_abs_row0(d)) for d in ("ETTh1", "ETTm1")),
-          "- ETTm1 缓存核验(逐组,缺失/漂移只补跑该组):",
+          "- ETTm1 缓存核验(逐组;缓存 SUCCESS 配置 L=2304/P=96/r=c=0.4/"
+          "bs=32/train_epochs=0/seed=2021 已门禁并写入核验记录 `logs/"
+          "verify_t22.json`;数组缺失/损坏 → rerun_needed 只补跑该组;"
+          "权重或协议不一致 → 停机定位):",
           ] + cache_lines + [
           "- 汇总数值:`summary_t22.csv`(16 组 + 4 数据集 + 总体)。",
           "- Freeze 大数组:`save_t22_freeze/{DS}_{H}/results/_/{pred,true,"

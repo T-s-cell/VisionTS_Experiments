@@ -67,8 +67,10 @@ run_group() {  # run_group <DS> <H>: 推理(指纹一致自动跳过) + 验证
     echo "[run_t22_all] SKIP ${ds}_${h} (done, fingerprint match)"
   else
     echo "[run_t22_all] RUN ${ds}_${h}"
+    # 日志唯一写入方是 run_t22_group.sh 自身(评审收尾 3: 外层不再重定向,
+    # 避免内层 > "$LOG" 截断覆盖外层已写的参数头部)
     GPU_ID=$GPU_ID bash "$REPRO_DIR/run_t22_group.sh" "$ds" "$h" save_t22_freeze \
-      > "$LOGDIR/${ds}_${h}.log" 2>&1 || fail_exit "${ds}_${h} run (see $LOGDIR/${ds}_${h}.log)"
+      || fail_exit "${ds}_${h} run (see $LOGDIR/${ds}_${h}.log)"
     tail -2 "$LOGDIR/${ds}_${h}.log"
   fi
   "$PYTHON" "$REPRO_DIR/verify_t22.py" --group "$ds" "$h" || fail_exit "${ds}_${h} verify"
