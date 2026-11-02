@@ -3,7 +3,7 @@
 日期:2026-11-03 | eta(L20 GPU)| 分支 `repro/ltsf-t35-align-v1`(自 EXP-034 冻结头 `cd063cf`)
 
 - **运行提交**(32 组推理与全部 verify 门禁的执行树,eta 上以该 commit 的 git archive 部署):**`b570bf0280b70c0e38d0e9af8e1955834ca2d8ba`**
-- **归档脚本提交**(本包全部脚本的最终状态;含评审修订,其后脚本再无改动):**`54a5bf8`**
+- **归档脚本提交**(本包全部脚本的最终状态;含评审修订,其后仅 README 链路补记):**`54a5bf82985c522e94844186b0201e20b7154623`**
 - 提交链:158e866 首包 → 65e6d79 冒烟 dtype 修复 → b570bf0 fp_ok 行尾修复 → 688c2eb 出图容错 → e3e63e4 RESULT 行号文案修正 → aeaec65 结果落库(README/RESULT/两表/对照图/verify json/环境快照)→ f862f81 README 链路补记 → 54a5bf8 评审修订(高点归属/c0.6 逐 H ΔMSE/运行摘要数值/docstring 46096→46176;数值与推理零改动,未重跑任何组)
 
 **问题**:固定其余设置,只扫 `--align_const`,实测可见图像宽度(可见 patch 列数 npi)对零样本 MSE 的影响,复现论文图 9(c) 的 ETTm1 子图。沿用 EXP-001 零样本协议与冻结 MAE-base:ETTm1、L=2304、P=96、r=0.4、双线性插值、原始图像方向、features=M、bs=32、seed=2021、train_epochs=0。
