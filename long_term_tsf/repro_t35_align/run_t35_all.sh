@@ -52,7 +52,7 @@ fp_ok() {  # fp_ok <H> <C>: 增强SKIP — SUCCESS 在盘、config 含 align_con
   local h=$1 c=$2
   local S="$ROOT/save_t35_align/c$c/ETTm1_$h/SUCCESS.txt"
   [ -f "$S" ] || return 1
-  grep -q "align_const=$c " "$S" || return 1
+  grep -Eq "align_const=$c( |\$)" "$S" || return 1
   grep -q "seq_len=2304 " "$S" || return 1
   grep -q "periodicity=96 " "$S" || return 1
   grep -q "pred_len=$h " "$S" || return 1
