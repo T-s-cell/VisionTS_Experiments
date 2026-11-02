@@ -8,7 +8,6 @@ the log value round-trips the float32 scalar at full precision.
 """
 import argparse
 import os
-import re
 import sys
 
 import numpy as np
@@ -93,33 +92,28 @@ def check_group_metrics(ds, h, metric):
 
 
 def check_env():
-    import subprocess
     envp = os.path.join(C.REPRO_ZERO_DIR, "logs", "env_snapshot_main.txt")
     problems, notes = [], {}
-    base = {}
-    if os.path.isfile(envp):
-        with open(envp) as f:
-            for line in f:
-                m = re.match(r"^(torch|numpy|timm|Python)\s*(\S+)\s*(.*)$", line)
-                if m:
-                    base[m.group(1)] = (m.group(2) + " " + m.group(3)).strip()
-    else:
+    if not os.path.isfile(envp):
         problems.append("baseline env snapshot missing: %s" % envp)
-    py = subprocess.run([sys.executable, "-V"], capture_output=True,
-                        text=True).stdout.strip()
+        base_text = ""
+    else:
+        with open(envp) as f:
+            base_text = f.read()
+    import platform
     import torch, numpy
-    cur = {"Python": py, "torch": torch.__version__, "numpy": numpy.__version__}
+    cur = {"Python": platform.python_version(),
+           "torch": torch.__version__, "numpy": numpy.__version__}
     try:
         import timm
         cur["timm"] = timm.__version__
     except Exception as e:
         cur["timm"] = "import failed: %s" % e
-    notes["baseline"] = base
     notes["current"] = cur
     for k, v in cur.items():
-        bv = base.get(k)
-        if bv and not bv.startswith(v):
-            problems.append("env %s: baseline=%r current=%r" % (k, bv, v))
+        if v not in base_text:
+            problems.append("env %s: version %r not found in baseline "
+                            "env_snapshot_main.txt" % (k, v))
     return problems, notes
 
 
