@@ -64,9 +64,11 @@ def verify_std_input():
     for ds in C.ETT4:
         c = C.DATASETS[ds]
         cls = DL.Dataset_ETT_minute if c["minute"] else DL.Dataset_ETT_hour
+        # timeenc=1: EXP-001's pandas-2-era path (the timeenc=0 branch uses
+        # df.drop(..., 1), removed in pandas >= 2); data_x is unaffected
         d = cls(root_path=c["root_path"], data_path=c["data_path"],
                 flag="test", size=[c["ctx"], 48, 96], features="M",
-                target="OT", scale=True, timeenc=0,
+                target="OT", scale=True, timeenc=1,
                 freq="t" if c["minute"] else "h")
         data_x = np.asarray(d.data_x)          # f64, scaled test segment
         k = C.month_rows(ds)
