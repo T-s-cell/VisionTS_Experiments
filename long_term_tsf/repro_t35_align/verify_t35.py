@@ -447,7 +447,10 @@ def mode_smoke_hash(h, c):
         geom, actual = probe_geometry(model, h, cc, "smoke-c%s" % C.c_str(cc))
         geoms[cc] = {"expected": geom, "actual": actual}
         bx, out = forward_first_batch(model, h, dev)
-        if not np.array_equal(bx.cpu().numpy(), bx_a.numpy()):
+        # forward path casts to float32; the raw loader batch is float64 —
+        # compare after the same cast (f64->f32 is deterministic)
+        if not np.array_equal(bx.cpu().numpy(),
+                              bx_a.numpy().astype(np.float32)):
             fail("smoke pair c=%s: forward input != shared first batch"
                  % C.c_str(cc))
         rd = C.exp001_dir(h) if cc == C.BASELINE_C else C.group_dir(h, cc)
