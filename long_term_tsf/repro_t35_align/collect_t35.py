@@ -11,7 +11,7 @@ Gates (any failure -> SystemExit):
     recomputed here (npi, input/output sizes, bilinear modes);
   * mandatory smoke evidence present and green (hard gate):
     first_window_ETTm1_96_0.6 (history [43776,46080) + future truth
-    [46080,46096) bitwise, variable order) and smoke_hash_ETTm1_96_0.6
+    [46080,46176) bitwise, variable order) and smoke_hash_ETTm1_96_0.6
     (inputs bitwise identical across the two protocols, both replays
     bitwise vs stored, pinned geometry pairs 5->8 / 224x80->224x128 /
     96x67->96x42, input + two prediction SHA-256 recorded, prediction
