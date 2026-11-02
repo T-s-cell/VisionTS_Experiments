@@ -108,6 +108,10 @@ def process_window(case, win, bi, batch_x, model, CAP, frozen, sel):
     img_disp = img_rec_disp[pos, D.OT_IDX].cpu().numpy().astype(np.float32)
     img_raw = raw[ot_flat].cpu().numpy().astype(np.float32)
     mask_img = mask_full[ot_flat, 0].cpu().numpy().astype(np.float32)
+    # figures show the pipeline's grey (mean over the 3 replicated channels),
+    # matching visionts/model.py L138; npz keeps full 3-channel tensors
+    grey_true, grey_disp, grey_raw = (img_true.mean(0), img_disp.mean(2),
+                                      img_raw.mean(0))
 
     hist = batch_x[pos, -D.HIST_SHOW:, D.OT_IDX].cpu().numpy()
     truth = frozen["true"][win][:, D.OT_IDX]
@@ -150,7 +154,7 @@ def process_window(case, win, bi, batch_x, model, CAP, frozen, sel):
     np.savez_compressed(
         npz_path,
         image_input_true=img_true,          # (3,224,224) masked region = 0
-        image_recon_display=img_disp,       # (224,224,3) visible swapped back
+        image_recon_display=np.transpose(img_disp, (2, 0, 1)),
         image_raw_decoded=img_raw,          # (3,224,224) forecast source
         mask_image_ot=mask_img,             # (224,224) 1=masked patch
         mask_tokens=CAP["mask"][ot_flat].cpu().numpy().astype(np.float32),
@@ -167,7 +171,7 @@ def process_window(case, win, bi, batch_x, model, CAP, frozen, sel):
 
     png_path = os.path.join(save_dir, "%s_win%d.png" % (case, win))
     make_figure(case, win, pos, bi, hist, truth, pred_replay[:, D.OT_IDX],
-                p_naive, p_avg, img_true, img_disp, img_raw, ts, mae_f64,
+                p_naive, p_avg, grey_true, grey_disp, grey_raw, ts, mae_f64,
                 mae_replay, png_path)
     info["figure_png"] = os.path.relpath(png_path, D.ROOT)
     return info, gates_ok
@@ -179,12 +183,12 @@ def make_figure(case, win, pos, bi, hist, truth, p_vts, p_naive, p_avg,
     fig, axes = plt.subplots(1, 4, figsize=(21, 5.2))
 
     for ax, img, title in (
-            (axes[0], img_true[0],
+            (axes[0], img_true,
              "MAE 真实输入 (掩区=0)\n红虚线=可见区边界 x=80"),
-            (axes[1], img_disp,   # (224,224,3) -> transpose to (h,w,c)
+            (axes[1], img_disp,
              "MAE 补全图 (展示版: 可见区换回输入)"),
-            (axes[2], img_raw[0],
-             "原始解码图 (预测来源)\n红带=24×336 图列 [120,124) = 未来96步")):
+            (axes[2], img_raw,
+             "原始解码图 (预测来源, 3通道灰度均值)\n红带=24×336 图列 [120,124) = 未来96步")):
         m = max(2.0, float(np.abs(img).max()))
         ax.imshow(img, cmap="RdBu_r", vmin=-m, vmax=m)
         ax.set_title(title, fontsize=9)
