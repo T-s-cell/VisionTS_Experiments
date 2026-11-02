@@ -54,4 +54,9 @@ PYTHON=/dev_data/wlt/conda/envs/visionts/bin/python bash repro_t22_freeze_ln/run
 
 ## 运行记录
 
-（eta 跑完后回填：运行头 commit、冒烟/main 结果、缓存核验结论、审计包路径与 sha256。）
+- 本地 commit：包 `06dc599e873102be4713547ee310d8cf9ae8f5b4`（运行代码树 == 分支头 `8186258`，即包 + 冒烟期两处 verify 修复：门禁只禁 checkpoint **文件**不禁框架自建的空 `checkpoints/` 脚手架目录、loader 样本为 numpy 数组）。
+- **冒烟（min）**：ETTh1_96 冻结推理 46s、峰值 1.62 GB；全门禁通过（n=2785、true 双 bitwise、metrics 复算==metrics.npy、mse=0.376013/mae=0.379026）；首窗检查通过（loader N=2785，win0 历史 rows [10368,11520) 与 std_array bitwise 一致，L=1152、7 变量顺序正确）；SMOKE_OK 2026-11-02 23:30:36。
+- **main**：其余 11 组全部一次通过（每小时组 ~30-45s、分钟组 ~130-160s，峰值均 1.62 GB）；**ETTm1 四组缓存全部 cache_ok（零补跑）**，全程共 12 组新推理。
+- **结果**：总体 Freeze **0.359538/0.374954**（论文 0.360/0.375，数据集层与总体层 |差| 全部 0.000）；LN 0.332354/0.369860（自检 ≤1e-6 通过）；**Δ=LN−Freeze = −0.027183 MSE / −0.005094 MAE**（微调整体有益）。退步 9 项（集中于 ETTh2 与长 H 的 MAE、H=720 的 MSE，如 ETTh2 数据集层 MAE 0.376165→0.382710）；论文对照标注 3 条（均 LN 列，≤0.0013）。
+- 环境：logs/env_snapshot_{min,main}.txt（Python 3.12.13 / torch 2.12.0+cu126 / L20）。
+- 审计包：`temp/VisionTS_t22_freeze_ln_20261102.tar.gz`，sha256 见同名 `.sha256` sidecar。
