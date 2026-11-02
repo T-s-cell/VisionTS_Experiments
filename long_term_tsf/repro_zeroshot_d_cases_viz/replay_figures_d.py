@@ -184,11 +184,14 @@ def make_figure(case, win, pos, bi, hist, truth, p_vts, p_naive, p_avg,
 
     for ax, img, title in (
             (axes[0], img_true,
-             "MAE 真实输入 (掩区=0)\n红虚线=可见区边界 x=80"),
+             "True MAE input (masked region = 0)\nred dashed = visible "
+             "region edge x=80"),
             (axes[1], img_disp,
-             "MAE 补全图 (展示版: 可见区换回输入)"),
+             "MAE completed image (display blend:\nvisible patches swapped "
+             "back)"),
             (axes[2], img_raw,
-             "原始解码图 (预测来源, 3通道灰度均值)\n红带=24×336 图列 [120,124) = 未来96步")):
+             "Raw decoded image (forecast source,\ngrey = mean of 3 ch)\n"
+             "red band = cols [120,124) of 24x336 = 96 future steps")):
         m = max(2.0, float(np.abs(img).max()))
         ax.imshow(img, cmap="RdBu_r", vmin=-m, vmax=m)
         ax.set_title(title, fontsize=9)
@@ -201,23 +204,23 @@ def make_figure(case, win, pos, bi, hist, truth, p_vts, p_naive, p_avg,
     ax = axes[3]
     xh = np.arange(-D.HIST_SHOW, 0)
     xf = np.arange(0, D.PRED_LEN)
-    ax.plot(xh, hist, color="0.55", lw=0.9, label="近期历史 (标准化)")
-    ax.plot(xf, truth, color="black", lw=2.0, label="真值")
+    ax.plot(xh, hist, color="0.55", lw=0.9, label="recent history (std)")
+    ax.plot(xf, truth, color="black", lw=2.0, label="truth")
     ax.plot(xf, p_vts, color=COL["visionts"], lw=1.4,
-            label="VisionTS (回放) MAE=%.4f" % mae_replay)
+            label="VisionTS (replay) MAE=%.4f" % mae_replay)
     ax.plot(xf, p_naive, color=COL["naive"], lw=1.2, ls="--",
-            label="S-Naïve MAE=%.4f" % mae_f64["naive"])
+            label="S-Naive MAE=%.4f" % mae_f64["naive"])
     ax.plot(xf, p_avg, color=COL["avg"], lw=1.2, ls="--",
             label="S-Avg MAE=%.4f" % mae_f64["avg"])
     ax.axvline(-0.5, color="red", lw=1.0, ls=":")
-    ax.set_xlabel("相对预测起点的步数", fontsize=9)
-    ax.set_title("标准化空间: 近336步历史 + 未来96步", fontsize=10)
-    ax.legend(fontsize=7.5, loc="best")
+    ax.set_xlabel("steps relative to forecast start", fontsize=9)
+    ax.set_title("standardized space: 336 hist + 96 future", fontsize=10)
+    ax.legend(fontsize=7.5, loc="upper left")
     ax.grid(alpha=0.3)
 
     fig.suptitle(
-        "%s 案例: win=%d  起始行 %d (%s) → 末行 %d (%s)  "
-        "batch %d / 批内位 %d  |  OT MAE: vts %.4f, naive %.4f, avg %.4f"
+        "%s case: win=%d  rows %d (%s) -> %d (%s)  batch %d / pos %d  |  "
+        "OT MAE: vts %.4f, naive %.4f, avg %.4f"
         % (case, win, ts["start_row"], ts["start_time"], ts["end_row"],
            ts["end_time"], bi, pos, mae_f64["visionts"], mae_f64["naive"],
            mae_f64["avg"]), fontsize=11)
