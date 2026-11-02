@@ -346,13 +346,15 @@ def main():
     L.append("- 探针几何:每 (H,c) 的 npi/输入输出缩放尺寸 == update_config 精确"
              "公式(collect 内独立复算),两处 Resize 均 bilinear、antialias=False;"
              "H=336/720 有 48 步右填充(pad_right=48)。")
+    fw_t0 = C.first_pred_abs_row0()
     L.append("- **冒烟证据(必查项,硬门禁)**:first_window_ETTm1_96_0.6 — 窗 0 "
-             "历史 [43776,46080) 与未来真值 [46080,46096) 对 std_array 逐位一致,"
+             "历史 [43776,%d) 与未来真值 [%d,%d) 对 std_array 逐位一致,"
              "7 变量顺序正确;smoke_hash_ETTm1_96_0.6 — 两协议首批输入逐位相同,"
              "两路回放各自与落盘 pred.npy[:32] 逐位一致,钉死几何对 npi 5→8、输入 "
              "224×80→224×128、输出 96×67→96×42 实测吻合,输入/两路预测三份 "
              "SHA-256 在录(%s…/%s…/%s…),两路预测哈希不同。"
-             % (sh["input_sha256"][:12], sh["pred_sha256"]["0.4"][:12],
+             % (fw_t0, fw_t0, fw_t0 + 96,
+                sh["input_sha256"][:12], sh["pred_sha256"]["0.4"][:12],
                 sh["pred_sha256"]["0.6"][:12]))
     L.append("- c=0.4 基线四 H 等权自检:实测 %.17g/%.17g vs 钉死 %.17g/%.17g,"
              "差 %.2e/%.2e ≤ 1e-6(硬门禁)。"
