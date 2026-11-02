@@ -189,10 +189,14 @@ def main():
 
     L += ["口径：与 EXP-001 完全一致（同划分、同 sklearn StandardScaler 训练段拟合、"
           "同 7 变量列序、同测试窗 N=4k−H+1、标准化空间、原 metric()）；"
-          "历史 = 预测起点前 L 步 f32 标准化行（与模型所见一致）；"
-          "两基线真值与 EXP-001 true.npy 逐元素 bitwise 相等（16/16 已核对）；"
-          "Seasonal Naïve 手算核对逐位一致，Seasonal Avg 以独立 float64 累加为参考"
-          "（rtol=1e-5, atol=1e-6）核对通过；"
+          "历史 = 预测起点前 L 步 f32 标准化行（与模型所见一致），且历史输入已对 "
+          "EXP-001 原 loader 的完整测试段 data_x（含首窗前 L 步）做 f32 逐元素 "
+          "核验 4/4 通过；Seasonal Naïve 模板 = 直接取历史最后 P 步（不平均），"
+          "Seasonal Avg 模板 = L/P 个完整周期逐相位平均；两基线真值与 EXP-001 "
+          "true.npy 逐元素 bitwise 相等（16/16 已核对）；手算核对仅抽查 "
+          "ETTh1/H96（窗 1000）与 ETTm1/H336（窗 2000，H%P=48）：Naïve 逐位一致，"
+          "Avg 以独立 float64 累加为参考（rtol=1e-5, atol=1e-6）核对通过且参考值"
+          "保留至误差计算结束（handcheck_f64ref.npz/json）；"
           "VisionTS 原P 列 = EXP-001 实测（metrics.npy 复算精确相等）。", ""]
 
     md_path = os.path.join(C.PKG, "RESULT_b4_seasonal.md")
