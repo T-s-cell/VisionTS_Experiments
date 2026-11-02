@@ -1,0 +1,3982 @@
+{
+ "bilinear_ETTh1_96": {
+  "dir": "save_repro_zeroshot/ETTh1_96/results",
+  "n": 2785,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp003": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.352749764919281,
+  "mae": 0.38327986001968384,
+  "first_pred_abs_row0": 11520,
+  "kind": "exp001_bilinear_group",
+  "dataset": "ETTh1",
+  "horizon": 96,
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTh1",
+    "pred_len": "96",
+    "seq_len": "2880",
+    "periodicity": "24",
+    "arch": "mae_base",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTh1.csv",
+    "data": "ETTh1",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "95",
+    "procs)": "19560",
+    "log_metrics": "mse:0.352749764919281,",
+    "finished": "2026-09-25"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "exp031_visionts_column": {
+   "mse": 0.352749764919281,
+   "mae": 0.38327986001968384,
+   "n": 2785,
+   "aligned": true
+  },
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      24,
+      336
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       24,
+       336
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTh1_96_bicubic": {
+  "dir": "save_t18_interp/bicubic/ETTh1_96/results",
+  "n": 2785,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.35084643959999084,
+  "mae": 0.38284382224082947,
+  "first_pred_abs_row0": 11520,
+  "kind": "t18_interp_group",
+  "dataset": "ETTh1",
+  "horizon": 96,
+  "interpolation": "bicubic",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTh1",
+    "pred_len": "96",
+    "seq_len": "2880",
+    "periodicity": "24",
+    "arch": "mae_base",
+    "interpolation": "bicubic",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTh1.csv",
+    "data": "ETTh1",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "52",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 1.5051816701889038,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      24,
+      336
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       24,
+       336
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "first_window_ETTh1_96_bicubic": {
+  "kind": "first_window_check",
+  "dataset": "ETTh1",
+  "horizon": 96,
+  "interpolation": "bicubic",
+  "loader_n": 2785,
+  "history_len": 2880,
+  "history_bitwise_vs_std_array": true,
+  "history_rows": [
+   8640,
+   11520
+  ],
+  "variable_order_check": "all 7 columns bitwise match std_array column order (HUFL, HULL, MUFL, MULL, LUFL, LULL, OT)"
+ },
+ "group_ETTh1_96_nearest": {
+  "dir": "save_t18_interp/nearest/ETTh1_96/results",
+  "n": 2785,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.42621365189552307,
+  "mae": 0.4235250651836395,
+  "first_pred_abs_row0": 11520,
+  "kind": "t18_interp_group",
+  "dataset": "ETTh1",
+  "horizon": 96,
+  "interpolation": "nearest",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTh1",
+    "pred_len": "96",
+    "seq_len": "2880",
+    "periodicity": "24",
+    "arch": "mae_base",
+    "interpolation": "nearest",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTh1.csv",
+    "data": "ETTh1",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "53",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 3.3771018981933594,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      24,
+      336
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       24,
+       336
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "first_window_ETTh1_96_nearest": {
+  "kind": "first_window_check",
+  "dataset": "ETTh1",
+  "horizon": 96,
+  "interpolation": "nearest",
+  "loader_n": 2785,
+  "history_len": 2880,
+  "history_bitwise_vs_std_array": true,
+  "history_rows": [
+   8640,
+   11520
+  ],
+  "variable_order_check": "all 7 columns bitwise match std_array column order (HUFL, HULL, MUFL, MULL, LUFL, LULL, OT)"
+ },
+ "bilinear_ETTh1_192": {
+  "dir": "save_repro_zeroshot/ETTh1_192/results",
+  "n": 2689,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp003": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.39192527532577515,
+  "mae": 0.40975889563560486,
+  "first_pred_abs_row0": 11520,
+  "kind": "exp001_bilinear_group",
+  "dataset": "ETTh1",
+  "horizon": 192,
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTh1",
+    "pred_len": "192",
+    "seq_len": "2880",
+    "periodicity": "24",
+    "arch": "mae_base",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTh1.csv",
+    "data": "ETTh1",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "101",
+    "procs)": "19560",
+    "log_metrics": "mse:0.39192527532577515,",
+    "finished": "2026-09-25"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "exp031_visionts_column": {
+   "mse": 0.39192527532577515,
+   "mae": 0.40975889563560486,
+   "n": 2689,
+   "aligned": true
+  },
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      24,
+      336
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       24,
+       336
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "bilinear_ETTh1_336": {
+  "dir": "save_repro_zeroshot/ETTh1_336/results",
+  "n": 2545,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp003": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.40712490677833557,
+  "mae": 0.4225219786167145,
+  "first_pred_abs_row0": 11520,
+  "kind": "exp001_bilinear_group",
+  "dataset": "ETTh1",
+  "horizon": 336,
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTh1",
+    "pred_len": "336",
+    "seq_len": "2880",
+    "periodicity": "24",
+    "arch": "mae_base",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTh1.csv",
+    "data": "ETTh1",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "91",
+    "procs)": "19560",
+    "log_metrics": "mse:0.40712490677833557,",
+    "finished": "2026-09-25"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "exp031_visionts_column": {
+   "mse": 0.40712490677833557,
+   "mae": 0.4225219786167145,
+   "n": 2545,
+   "aligned": true
+  },
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      24,
+      336
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       24,
+       336
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "bilinear_ETTh1_720": {
+  "dir": "save_repro_zeroshot/ETTh1_720/results",
+  "n": 2161,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp003": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.4061579406261444,
+  "mae": 0.4409675896167755,
+  "first_pred_abs_row0": 11520,
+  "kind": "exp001_bilinear_group",
+  "dataset": "ETTh1",
+  "horizon": 720,
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTh1",
+    "pred_len": "720",
+    "seq_len": "2880",
+    "periodicity": "24",
+    "arch": "mae_base",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTh1.csv",
+    "data": "ETTh1",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "74",
+    "procs)": "19604",
+    "log_metrics": "mse:0.4061579406261444,",
+    "finished": "2026-09-25"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "exp031_visionts_column": {
+   "mse": 0.4061579406261444,
+   "mae": 0.4409675896167755,
+   "n": 2161,
+   "aligned": true
+  },
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 4,
+     "num_patch_output": 10,
+     "input_size": [
+      224,
+      64
+     ],
+     "output_size": [
+      24,
+      420
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       224,
+       64
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       24,
+       420
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "bilinear_ETTh2_96": {
+  "dir": "save_repro_zeroshot/ETTh2_96/results",
+  "n": 2785,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp003": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.2714855372905731,
+  "mae": 0.32843488454818726,
+  "first_pred_abs_row0": 11520,
+  "kind": "exp001_bilinear_group",
+  "dataset": "ETTh2",
+  "horizon": 96,
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTh2",
+    "pred_len": "96",
+    "seq_len": "1728",
+    "periodicity": "24",
+    "arch": "mae_base",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTh2.csv",
+    "data": "ETTh2",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "96",
+    "procs)": "19558",
+    "log_metrics": "mse:0.2714855372905731,",
+    "finished": "2026-09-25"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "exp031_visionts_column": {
+   "mse": 0.2714855372905731,
+   "mae": 0.32843488454818726,
+   "n": 2785,
+   "aligned": true
+  },
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      24,
+      202
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       24,
+       202
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "bilinear_ETTh2_192": {
+  "dir": "save_repro_zeroshot/ETTh2_192/results",
+  "n": 2689,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp003": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.328258752822876,
+  "mae": 0.36679893732070923,
+  "first_pred_abs_row0": 11520,
+  "kind": "exp001_bilinear_group",
+  "dataset": "ETTh2",
+  "horizon": 192,
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTh2",
+    "pred_len": "192",
+    "seq_len": "1728",
+    "periodicity": "24",
+    "arch": "mae_base",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTh2.csv",
+    "data": "ETTh2",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "101",
+    "procs)": "19558",
+    "log_metrics": "mse:0.328258752822876,",
+    "finished": "2026-09-25"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "exp031_visionts_column": {
+   "mse": 0.328258752822876,
+   "mae": 0.36679893732070923,
+   "n": 2689,
+   "aligned": true
+  },
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      24,
+      202
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       24,
+       202
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "bilinear_ETTh2_336": {
+  "dir": "save_repro_zeroshot/ETTh2_336/results",
+  "n": 2545,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp003": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.3449770510196686,
+  "mae": 0.38143184781074524,
+  "first_pred_abs_row0": 11520,
+  "kind": "exp001_bilinear_group",
+  "dataset": "ETTh2",
+  "horizon": 336,
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTh2",
+    "pred_len": "336",
+    "seq_len": "1728",
+    "periodicity": "24",
+    "arch": "mae_base",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTh2.csv",
+    "data": "ETTh2",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "82",
+    "procs)": "19596",
+    "log_metrics": "mse:0.3449770510196686,",
+    "finished": "2026-09-25"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "exp031_visionts_column": {
+   "mse": 0.3449770510196686,
+   "mae": 0.38143184781074524,
+   "n": 2545,
+   "aligned": true
+  },
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 4,
+     "num_patch_output": 10,
+     "input_size": [
+      224,
+      64
+     ],
+     "output_size": [
+      24,
+      252
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       224,
+       64
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       24,
+       252
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "bilinear_ETTh2_720": {
+  "dir": "save_repro_zeroshot/ETTh2_720/results",
+  "n": 2161,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp003": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.38782644271850586,
+  "mae": 0.4217681884765625,
+  "first_pred_abs_row0": 11520,
+  "kind": "exp001_bilinear_group",
+  "dataset": "ETTh2",
+  "horizon": 720,
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTh2",
+    "pred_len": "720",
+    "seq_len": "1728",
+    "periodicity": "24",
+    "arch": "mae_base",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTh2.csv",
+    "data": "ETTh2",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "65",
+    "procs)": "19556",
+    "log_metrics": "mse:0.38782644271850586,",
+    "finished": "2026-09-25"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "exp031_visionts_column": {
+   "mse": 0.38782644271850586,
+   "mae": 0.4217681884765625,
+   "n": 2161,
+   "aligned": true
+  },
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 3,
+     "num_patch_output": 11,
+     "input_size": [
+      224,
+      48
+     ],
+     "output_size": [
+      24,
+      336
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       224,
+       48
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       24,
+       336
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "bilinear_ETTm1_96": {
+  "dir": "save_repro_zeroshot/ETTm1_96/results",
+  "n": 11425,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp003": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.3411028981208801,
+  "mae": 0.34679311513900757,
+  "first_pred_abs_row0": 46080,
+  "kind": "exp001_bilinear_group",
+  "dataset": "ETTm1",
+  "horizon": 96,
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTm1",
+    "pred_len": "96",
+    "seq_len": "2304",
+    "periodicity": "96",
+    "arch": "mae_base",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTm1.csv",
+    "data": "ETTm1",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "375",
+    "procs)": "19556",
+    "log_metrics": "mse:0.3411028981208801,",
+    "finished": "2026-09-25"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "exp031_visionts_column": {
+   "mse": 0.3411028981208801,
+   "mae": 0.34679311513900757,
+   "n": 11425,
+   "aligned": true
+  },
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      96,
+      67
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       96,
+       67
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "bilinear_ETTm1_192": {
+  "dir": "save_repro_zeroshot/ETTm1_192/results",
+  "n": 11329,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp003": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.3597588837146759,
+  "mae": 0.3603294789791107,
+  "first_pred_abs_row0": 46080,
+  "kind": "exp001_bilinear_group",
+  "dataset": "ETTm1",
+  "horizon": 192,
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTm1",
+    "pred_len": "192",
+    "seq_len": "2304",
+    "periodicity": "96",
+    "arch": "mae_base",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTm1.csv",
+    "data": "ETTm1",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "366",
+    "procs)": "19556",
+    "log_metrics": "mse:0.3597588837146759,",
+    "finished": "2026-09-25"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "exp031_visionts_column": {
+   "mse": 0.3597588837146759,
+   "mae": 0.3603294789791107,
+   "n": 11329,
+   "aligned": true
+  },
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      96,
+      67
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       96,
+       67
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "bilinear_ETTm1_336": {
+  "dir": "save_repro_zeroshot/ETTm1_336/results",
+  "n": 11185,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp003": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.37681761384010315,
+  "mae": 0.3739188015460968,
+  "first_pred_abs_row0": 46080,
+  "kind": "exp001_bilinear_group",
+  "dataset": "ETTm1",
+  "horizon": 336,
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTm1",
+    "pred_len": "336",
+    "seq_len": "2304",
+    "periodicity": "96",
+    "arch": "mae_base",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTm1.csv",
+    "data": "ETTm1",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "328",
+    "procs)": "19594",
+    "log_metrics": "mse:0.37681761384010315,",
+    "finished": "2026-09-25"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "exp031_visionts_column": {
+   "mse": 0.37681761384010315,
+   "mae": 0.3739188015460968,
+   "n": 11185,
+   "aligned": true
+  },
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 48,
+     "num_patch_input": 4,
+     "num_patch_output": 10,
+     "input_size": [
+      224,
+      64
+     ],
+     "output_size": [
+      96,
+      84
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       224,
+       64
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       96,
+       84
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "bilinear_ETTm1_720": {
+  "dir": "save_repro_zeroshot/ETTm1_720/results",
+  "n": 10801,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp003": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.4163892865180969,
+  "mae": 0.40544411540031433,
+  "first_pred_abs_row0": 46080,
+  "kind": "exp001_bilinear_group",
+  "dataset": "ETTm1",
+  "horizon": 720,
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTm1",
+    "pred_len": "720",
+    "seq_len": "2304",
+    "periodicity": "96",
+    "arch": "mae_base",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTm1.csv",
+    "data": "ETTm1",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "316",
+    "procs)": "19598",
+    "log_metrics": "mse:0.4163892865180969,",
+    "finished": "2026-09-25"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "exp031_visionts_column": {
+   "mse": 0.4163892865180969,
+   "mae": 0.40544411540031433,
+   "n": 10801,
+   "aligned": true
+  },
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 48,
+     "num_patch_input": 4,
+     "num_patch_output": 10,
+     "input_size": [
+      224,
+      64
+     ],
+     "output_size": [
+      96,
+      84
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       224,
+       64
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       96,
+       84
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "bilinear_ETTm2_96": {
+  "dir": "save_repro_zeroshot/ETTm2_96/results",
+  "n": 11425,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp003": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.22785815596580505,
+  "mae": 0.2823617458343506,
+  "first_pred_abs_row0": 46080,
+  "kind": "exp001_bilinear_group",
+  "dataset": "ETTm2",
+  "horizon": 96,
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTm2",
+    "pred_len": "96",
+    "seq_len": "4032",
+    "periodicity": "96",
+    "arch": "mae_base",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTm2.csv",
+    "data": "ETTm2",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "376",
+    "procs)": "19576",
+    "log_metrics": "mse:0.22785815596580505,",
+    "finished": "2026-09-25"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "exp031_visionts_column": {
+   "mse": 0.22785815596580505,
+   "mae": 0.2823617458343506,
+   "n": 11425,
+   "aligned": true
+  },
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      96,
+      118
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       96,
+       118
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "bilinear_ETTm2_192": {
+  "dir": "save_repro_zeroshot/ETTm2_192/results",
+  "n": 11329,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp003": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.2615295648574829,
+  "mae": 0.30469849705696106,
+  "first_pred_abs_row0": 46080,
+  "kind": "exp001_bilinear_group",
+  "dataset": "ETTm2",
+  "horizon": 192,
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTm2",
+    "pred_len": "192",
+    "seq_len": "4032",
+    "periodicity": "96",
+    "arch": "mae_base",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTm2.csv",
+    "data": "ETTm2",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "365",
+    "procs)": "19576",
+    "log_metrics": "mse:0.2615295648574829,",
+    "finished": "2026-09-25"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "exp031_visionts_column": {
+   "mse": 0.2615295648574829,
+   "mae": 0.30469849705696106,
+   "n": 11329,
+   "aligned": true
+  },
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      96,
+      118
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       96,
+       118
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "bilinear_ETTm2_336": {
+  "dir": "save_repro_zeroshot/ETTm2_336/results",
+  "n": 11185,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp003": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.2931411862373352,
+  "mae": 0.3281802833080292,
+  "first_pred_abs_row0": 46080,
+  "kind": "exp001_bilinear_group",
+  "dataset": "ETTm2",
+  "horizon": 336,
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTm2",
+    "pred_len": "336",
+    "seq_len": "4032",
+    "periodicity": "96",
+    "arch": "mae_base",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTm2.csv",
+    "data": "ETTm2",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "368",
+    "procs)": "19576",
+    "log_metrics": "mse:0.2931411862373352,",
+    "finished": "2026-09-25"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "exp031_visionts_column": {
+   "mse": 0.2931411862373352,
+   "mae": 0.3281802833080292,
+   "n": 11185,
+   "aligned": true
+  },
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 48,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      96,
+      118
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       96,
+       118
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "bilinear_ETTm2_720": {
+  "dir": "save_repro_zeroshot/ETTm2_720/results",
+  "n": 10801,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp003": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.34322240948677063,
+  "mae": 0.37003281712532043,
+  "first_pred_abs_row0": 46080,
+  "kind": "exp001_bilinear_group",
+  "dataset": "ETTm2",
+  "horizon": 720,
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTm2",
+    "pred_len": "720",
+    "seq_len": "4032",
+    "periodicity": "96",
+    "arch": "mae_base",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTm2.csv",
+    "data": "ETTm2",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "316",
+    "procs)": "19604",
+    "log_metrics": "mse:0.34322240948677063,",
+    "finished": "2026-09-25"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "exp031_visionts_column": {
+   "mse": 0.34322240948677063,
+   "mae": 0.37003281712532043,
+   "n": 10801,
+   "aligned": true
+  },
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 48,
+     "num_patch_input": 4,
+     "num_patch_output": 10,
+     "input_size": [
+      224,
+      64
+     ],
+     "output_size": [
+      96,
+      147
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       224,
+       64
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BILINEAR",
+      "size": [
+       96,
+       147
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTh1_192_bicubic": {
+  "dir": "save_t18_interp/bicubic/ETTh1_192/results",
+  "n": 2689,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.39160898327827454,
+  "mae": 0.40948477387428284,
+  "first_pred_abs_row0": 11520,
+  "kind": "t18_interp_group",
+  "dataset": "ETTh1",
+  "horizon": 192,
+  "interpolation": "bicubic",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTh1",
+    "pred_len": "192",
+    "seq_len": "2880",
+    "periodicity": "24",
+    "arch": "mae_base",
+    "interpolation": "bicubic",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTh1.csv",
+    "data": "ETTh1",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "52",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 1.5051816701889038,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      24,
+      336
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       24,
+       336
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTh1_192_nearest": {
+  "dir": "save_t18_interp/nearest/ETTh1_192/results",
+  "n": 2689,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.4495188593864441,
+  "mae": 0.44276440143585205,
+  "first_pred_abs_row0": 11520,
+  "kind": "t18_interp_group",
+  "dataset": "ETTh1",
+  "horizon": 192,
+  "interpolation": "nearest",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTh1",
+    "pred_len": "192",
+    "seq_len": "2880",
+    "periodicity": "24",
+    "arch": "mae_base",
+    "interpolation": "nearest",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTh1.csv",
+    "data": "ETTh1",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "52",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 3.3771018981933594,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      24,
+      336
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       24,
+       336
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTh1_336_bicubic": {
+  "dir": "save_t18_interp/bicubic/ETTh1_336/results",
+  "n": 2545,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.4068852365016937,
+  "mae": 0.4222736060619354,
+  "first_pred_abs_row0": 11520,
+  "kind": "t18_interp_group",
+  "dataset": "ETTh1",
+  "horizon": 336,
+  "interpolation": "bicubic",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTh1",
+    "pred_len": "336",
+    "seq_len": "2880",
+    "periodicity": "24",
+    "arch": "mae_base",
+    "interpolation": "bicubic",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTh1.csv",
+    "data": "ETTh1",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "48",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 1.5051816701889038,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      24,
+      336
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       24,
+       336
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTh1_336_nearest": {
+  "dir": "save_t18_interp/nearest/ETTh1_336/results",
+  "n": 2545,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.451233834028244,
+  "mae": 0.4499126970767975,
+  "first_pred_abs_row0": 11520,
+  "kind": "t18_interp_group",
+  "dataset": "ETTh1",
+  "horizon": 336,
+  "interpolation": "nearest",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTh1",
+    "pred_len": "336",
+    "seq_len": "2880",
+    "periodicity": "24",
+    "arch": "mae_base",
+    "interpolation": "nearest",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTh1.csv",
+    "data": "ETTh1",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "49",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 3.3771018981933594,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      24,
+      336
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       24,
+       336
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTh1_720_bicubic": {
+  "dir": "save_t18_interp/bicubic/ETTh1_720/results",
+  "n": 2161,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.4054192006587982,
+  "mae": 0.4398689568042755,
+  "first_pred_abs_row0": 11520,
+  "kind": "t18_interp_group",
+  "dataset": "ETTh1",
+  "horizon": 720,
+  "interpolation": "bicubic",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTh1",
+    "pred_len": "720",
+    "seq_len": "2880",
+    "periodicity": "24",
+    "arch": "mae_base",
+    "interpolation": "bicubic",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTh1.csv",
+    "data": "ETTh1",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "39",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 0.7884606122970581,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 4,
+     "num_patch_output": 10,
+     "input_size": [
+      224,
+      64
+     ],
+     "output_size": [
+      24,
+      420
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       224,
+       64
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       24,
+       420
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTh1_720_nearest": {
+  "dir": "save_t18_interp/nearest/ETTh1_720/results",
+  "n": 2161,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.45382654666900635,
+  "mae": 0.4697592854499817,
+  "first_pred_abs_row0": 11520,
+  "kind": "t18_interp_group",
+  "dataset": "ETTh1",
+  "horizon": 720,
+  "interpolation": "nearest",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTh1",
+    "pred_len": "720",
+    "seq_len": "2880",
+    "periodicity": "24",
+    "arch": "mae_base",
+    "interpolation": "nearest",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTh1.csv",
+    "data": "ETTh1",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "39",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 2.8602521419525146,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 4,
+     "num_patch_output": 10,
+     "input_size": [
+      224,
+      64
+     ],
+     "output_size": [
+      24,
+      420
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       224,
+       64
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       24,
+       420
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTh2_96_bicubic": {
+  "dir": "save_t18_interp/bicubic/ETTh2_96/results",
+  "n": 2785,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.2741868793964386,
+  "mae": 0.32933199405670166,
+  "first_pred_abs_row0": 11520,
+  "kind": "t18_interp_group",
+  "dataset": "ETTh2",
+  "horizon": 96,
+  "interpolation": "bicubic",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTh2",
+    "pred_len": "96",
+    "seq_len": "1728",
+    "periodicity": "24",
+    "arch": "mae_base",
+    "interpolation": "bicubic",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTh2.csv",
+    "data": "ETTh2",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "52",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 1.762766718864441,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      24,
+      202
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       24,
+       202
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTh2_96_nearest": {
+  "dir": "save_t18_interp/nearest/ETTh2_96/results",
+  "n": 2785,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.2979741394519806,
+  "mae": 0.3493571877479553,
+  "first_pred_abs_row0": 11520,
+  "kind": "t18_interp_group",
+  "dataset": "ETTh2",
+  "horizon": 96,
+  "interpolation": "nearest",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTh2",
+    "pred_len": "96",
+    "seq_len": "1728",
+    "periodicity": "24",
+    "arch": "mae_base",
+    "interpolation": "nearest",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTh2.csv",
+    "data": "ETTh2",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "54",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 2.3529778718948364,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      24,
+      202
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       24,
+       202
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTh2_192_bicubic": {
+  "dir": "save_t18_interp/bicubic/ETTh2_192/results",
+  "n": 2689,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.33039572834968567,
+  "mae": 0.36712074279785156,
+  "first_pred_abs_row0": 11520,
+  "kind": "t18_interp_group",
+  "dataset": "ETTh2",
+  "horizon": 192,
+  "interpolation": "bicubic",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTh2",
+    "pred_len": "192",
+    "seq_len": "1728",
+    "periodicity": "24",
+    "arch": "mae_base",
+    "interpolation": "bicubic",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTh2.csv",
+    "data": "ETTh2",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "53",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 1.762766718864441,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      24,
+      202
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       24,
+       202
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTh2_192_nearest": {
+  "dir": "save_t18_interp/nearest/ETTh2_192/results",
+  "n": 2689,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.3426768183708191,
+  "mae": 0.37969905138015747,
+  "first_pred_abs_row0": 11520,
+  "kind": "t18_interp_group",
+  "dataset": "ETTh2",
+  "horizon": 192,
+  "interpolation": "nearest",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTh2",
+    "pred_len": "192",
+    "seq_len": "1728",
+    "periodicity": "24",
+    "arch": "mae_base",
+    "interpolation": "nearest",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTh2.csv",
+    "data": "ETTh2",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "52",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 2.3529778718948364,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      24,
+      202
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       24,
+       202
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTh2_336_bicubic": {
+  "dir": "save_t18_interp/bicubic/ETTh2_336/results",
+  "n": 2545,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.3448585271835327,
+  "mae": 0.3803345859050751,
+  "first_pred_abs_row0": 11520,
+  "kind": "t18_interp_group",
+  "dataset": "ETTh2",
+  "horizon": 336,
+  "interpolation": "bicubic",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTh2",
+    "pred_len": "336",
+    "seq_len": "1728",
+    "periodicity": "24",
+    "arch": "mae_base",
+    "interpolation": "bicubic",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTh2.csv",
+    "data": "ETTh2",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "45",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 1.6354180574417114,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 4,
+     "num_patch_output": 10,
+     "input_size": [
+      224,
+      64
+     ],
+     "output_size": [
+      24,
+      252
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       224,
+       64
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       24,
+       252
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTh2_336_nearest": {
+  "dir": "save_t18_interp/nearest/ETTh2_336/results",
+  "n": 2545,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.3726876974105835,
+  "mae": 0.4007754921913147,
+  "first_pred_abs_row0": 11520,
+  "kind": "t18_interp_group",
+  "dataset": "ETTh2",
+  "horizon": 336,
+  "interpolation": "nearest",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTh2",
+    "pred_len": "336",
+    "seq_len": "1728",
+    "periodicity": "24",
+    "arch": "mae_base",
+    "interpolation": "nearest",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTh2.csv",
+    "data": "ETTh2",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "46",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 2.6110289096832275,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 4,
+     "num_patch_output": 10,
+     "input_size": [
+      224,
+      64
+     ],
+     "output_size": [
+      24,
+      252
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       224,
+       64
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       24,
+       252
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTh2_720_bicubic": {
+  "dir": "save_t18_interp/bicubic/ETTh2_720/results",
+  "n": 2161,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.3856794536113739,
+  "mae": 0.4194684624671936,
+  "first_pred_abs_row0": 11520,
+  "kind": "t18_interp_group",
+  "dataset": "ETTh2",
+  "horizon": 720,
+  "interpolation": "bicubic",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTh2",
+    "pred_len": "720",
+    "seq_len": "1728",
+    "periodicity": "24",
+    "arch": "mae_base",
+    "interpolation": "bicubic",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTh2.csv",
+    "data": "ETTh2",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "37",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 1.1673882007598877,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 3,
+     "num_patch_output": 11,
+     "input_size": [
+      224,
+      48
+     ],
+     "output_size": [
+      24,
+      336
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       224,
+       48
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       24,
+       336
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTh2_720_nearest": {
+  "dir": "save_t18_interp/nearest/ETTh2_720/results",
+  "n": 2161,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.4039415717124939,
+  "mae": 0.43144819140434265,
+  "first_pred_abs_row0": 11520,
+  "kind": "t18_interp_group",
+  "dataset": "ETTh2",
+  "horizon": 720,
+  "interpolation": "nearest",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTh2",
+    "pred_len": "720",
+    "seq_len": "1728",
+    "periodicity": "24",
+    "arch": "mae_base",
+    "interpolation": "nearest",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTh2.csv",
+    "data": "ETTh2",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "37",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 2.3324379920959473,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 3,
+     "num_patch_output": 11,
+     "input_size": [
+      224,
+      48
+     ],
+     "output_size": [
+      24,
+      336
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       224,
+       48
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       24,
+       336
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTm1_96_bicubic": {
+  "dir": "save_t18_interp/bicubic/ETTm1_96/results",
+  "n": 11425,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.3657299876213074,
+  "mae": 0.3537586033344269,
+  "first_pred_abs_row0": 46080,
+  "kind": "t18_interp_group",
+  "dataset": "ETTm1",
+  "horizon": 96,
+  "interpolation": "bicubic",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTm1",
+    "pred_len": "96",
+    "seq_len": "2304",
+    "periodicity": "96",
+    "arch": "mae_base",
+    "interpolation": "bicubic",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTm1.csv",
+    "data": "ETTm1",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "190",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 1.9434260129928589,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      96,
+      67
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       96,
+       67
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTm1_96_nearest": {
+  "dir": "save_t18_interp/nearest/ETTm1_96/results",
+  "n": 11425,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.39923200011253357,
+  "mae": 0.37372541427612305,
+  "first_pred_abs_row0": 46080,
+  "kind": "t18_interp_group",
+  "dataset": "ETTm1",
+  "horizon": 96,
+  "interpolation": "nearest",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTm1",
+    "pred_len": "96",
+    "seq_len": "2304",
+    "periodicity": "96",
+    "arch": "mae_base",
+    "interpolation": "nearest",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTm1.csv",
+    "data": "ETTm1",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "190",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 3.429249733686447,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      96,
+      67
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       96,
+       67
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTm1_192_bicubic": {
+  "dir": "save_t18_interp/bicubic/ETTm1_192/results",
+  "n": 11329,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.3827686011791229,
+  "mae": 0.3666638433933258,
+  "first_pred_abs_row0": 46080,
+  "kind": "t18_interp_group",
+  "dataset": "ETTm1",
+  "horizon": 192,
+  "interpolation": "bicubic",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTm1",
+    "pred_len": "192",
+    "seq_len": "2304",
+    "periodicity": "96",
+    "arch": "mae_base",
+    "interpolation": "bicubic",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTm1.csv",
+    "data": "ETTm1",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "188",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 1.9587714672088623,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      96,
+      67
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       96,
+       67
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTm1_192_nearest": {
+  "dir": "save_t18_interp/nearest/ETTm1_192/results",
+  "n": 11329,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.39661815762519836,
+  "mae": 0.3756144940853119,
+  "first_pred_abs_row0": 46080,
+  "kind": "t18_interp_group",
+  "dataset": "ETTm1",
+  "horizon": 192,
+  "interpolation": "nearest",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTm1",
+    "pred_len": "192",
+    "seq_len": "2304",
+    "periodicity": "96",
+    "arch": "mae_base",
+    "interpolation": "nearest",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTm1.csv",
+    "data": "ETTm1",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "189",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 3.429249733686447,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      96,
+      67
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       96,
+       67
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTm1_336_bicubic": {
+  "dir": "save_t18_interp/bicubic/ETTm1_336/results",
+  "n": 11185,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.39609870314598083,
+  "mae": 0.3808569014072418,
+  "first_pred_abs_row0": 46080,
+  "kind": "t18_interp_group",
+  "dataset": "ETTm1",
+  "horizon": 336,
+  "interpolation": "bicubic",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTm1",
+    "pred_len": "336",
+    "seq_len": "2304",
+    "periodicity": "96",
+    "arch": "mae_base",
+    "interpolation": "bicubic",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTm1.csv",
+    "data": "ETTm1",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "165",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 1.3957757949829102,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 48,
+     "num_patch_input": 4,
+     "num_patch_output": 10,
+     "input_size": [
+      224,
+      64
+     ],
+     "output_size": [
+      96,
+      84
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       224,
+       64
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       96,
+       84
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTm1_336_nearest": {
+  "dir": "save_t18_interp/nearest/ETTm1_336/results",
+  "n": 11185,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.3858065903186798,
+  "mae": 0.37975621223449707,
+  "first_pred_abs_row0": 46080,
+  "kind": "t18_interp_group",
+  "dataset": "ETTm1",
+  "horizon": 336,
+  "interpolation": "nearest",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTm1",
+    "pred_len": "336",
+    "seq_len": "2304",
+    "periodicity": "96",
+    "arch": "mae_base",
+    "interpolation": "nearest",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTm1.csv",
+    "data": "ETTm1",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "165",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 2.6274380683898926,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 48,
+     "num_patch_input": 4,
+     "num_patch_output": 10,
+     "input_size": [
+      224,
+      64
+     ],
+     "output_size": [
+      96,
+      84
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       224,
+       64
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       96,
+       84
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTm1_720_bicubic": {
+  "dir": "save_t18_interp/bicubic/ETTm1_720/results",
+  "n": 10801,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.4289936423301697,
+  "mae": 0.4094087481498718,
+  "first_pred_abs_row0": 46080,
+  "kind": "t18_interp_group",
+  "dataset": "ETTm1",
+  "horizon": 720,
+  "interpolation": "bicubic",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTm1",
+    "pred_len": "720",
+    "seq_len": "2304",
+    "periodicity": "96",
+    "arch": "mae_base",
+    "interpolation": "bicubic",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTm1.csv",
+    "data": "ETTm1",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "134",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 1.3957757949829102,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 48,
+     "num_patch_input": 4,
+     "num_patch_output": 10,
+     "input_size": [
+      224,
+      64
+     ],
+     "output_size": [
+      96,
+      84
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       224,
+       64
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       96,
+       84
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTm1_720_nearest": {
+  "dir": "save_t18_interp/nearest/ETTm1_720/results",
+  "n": 10801,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.4172658324241638,
+  "mae": 0.408552348613739,
+  "first_pred_abs_row0": 46080,
+  "kind": "t18_interp_group",
+  "dataset": "ETTm1",
+  "horizon": 720,
+  "interpolation": "nearest",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTm1",
+    "pred_len": "720",
+    "seq_len": "2304",
+    "periodicity": "96",
+    "arch": "mae_base",
+    "interpolation": "nearest",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTm1.csv",
+    "data": "ETTm1",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "133",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 2.5737761855125427,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 48,
+     "num_patch_input": 4,
+     "num_patch_output": 10,
+     "input_size": [
+      224,
+      64
+     ],
+     "output_size": [
+      96,
+      84
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       224,
+       64
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       96,
+       84
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTm2_96_bicubic": {
+  "dir": "save_t18_interp/bicubic/ETTm2_96/results",
+  "n": 11425,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.24648210406303406,
+  "mae": 0.295881450176239,
+  "first_pred_abs_row0": 46080,
+  "kind": "t18_interp_group",
+  "dataset": "ETTm2",
+  "horizon": 96,
+  "interpolation": "bicubic",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTm2",
+    "pred_len": "96",
+    "seq_len": "4032",
+    "periodicity": "96",
+    "arch": "mae_base",
+    "interpolation": "bicubic",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTm2.csv",
+    "data": "ETTm2",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "155",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 1.0836663246154785,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      96,
+      118
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       96,
+       118
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTm2_96_nearest": {
+  "dir": "save_t18_interp/nearest/ETTm2_96/results",
+  "n": 11425,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.26390910148620605,
+  "mae": 0.3264223337173462,
+  "first_pred_abs_row0": 46080,
+  "kind": "t18_interp_group",
+  "dataset": "ETTm2",
+  "horizon": 96,
+  "interpolation": "nearest",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTm2",
+    "pred_len": "96",
+    "seq_len": "4032",
+    "periodicity": "96",
+    "arch": "mae_base",
+    "interpolation": "nearest",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTm2.csv",
+    "data": "ETTm2",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "155",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 2.040766716003418,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      96,
+      118
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       96,
+       118
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTm2_192_bicubic": {
+  "dir": "save_t18_interp/bicubic/ETTm2_192/results",
+  "n": 11329,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.27309226989746094,
+  "mae": 0.3129560649394989,
+  "first_pred_abs_row0": 46080,
+  "kind": "t18_interp_group",
+  "dataset": "ETTm2",
+  "horizon": 192,
+  "interpolation": "bicubic",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTm2",
+    "pred_len": "192",
+    "seq_len": "4032",
+    "periodicity": "96",
+    "arch": "mae_base",
+    "interpolation": "bicubic",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTm2.csv",
+    "data": "ETTm2",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "155",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 1.8359044790267944,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      96,
+      118
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       96,
+       118
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTm2_192_nearest": {
+  "dir": "save_t18_interp/nearest/ETTm2_192/results",
+  "n": 11329,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.27314436435699463,
+  "mae": 0.32758933305740356,
+  "first_pred_abs_row0": 46080,
+  "kind": "t18_interp_group",
+  "dataset": "ETTm2",
+  "horizon": 192,
+  "interpolation": "nearest",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTm2",
+    "pred_len": "192",
+    "seq_len": "4032",
+    "periodicity": "96",
+    "arch": "mae_base",
+    "interpolation": "nearest",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTm2.csv",
+    "data": "ETTm2",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "157",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 2.3555662631988525,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 0,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      96,
+      118
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       96,
+       118
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTm2_336_bicubic": {
+  "dir": "save_t18_interp/bicubic/ETTm2_336/results",
+  "n": 11185,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.3025612235069275,
+  "mae": 0.33423104882240295,
+  "first_pred_abs_row0": 46080,
+  "kind": "t18_interp_group",
+  "dataset": "ETTm2",
+  "horizon": 336,
+  "interpolation": "bicubic",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTm2",
+    "pred_len": "336",
+    "seq_len": "4032",
+    "periodicity": "96",
+    "arch": "mae_base",
+    "interpolation": "bicubic",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTm2.csv",
+    "data": "ETTm2",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "154",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 1.8359044790267944,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 48,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      96,
+      118
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       96,
+       118
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTm2_336_nearest": {
+  "dir": "save_t18_interp/nearest/ETTm2_336/results",
+  "n": 11185,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.296621710062027,
+  "mae": 0.34295666217803955,
+  "first_pred_abs_row0": 46080,
+  "kind": "t18_interp_group",
+  "dataset": "ETTm2",
+  "horizon": 336,
+  "interpolation": "nearest",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTm2",
+    "pred_len": "336",
+    "seq_len": "4032",
+    "periodicity": "96",
+    "arch": "mae_base",
+    "interpolation": "nearest",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTm2.csv",
+    "data": "ETTm2",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "154",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 2.3555662631988525,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 48,
+     "num_patch_input": 5,
+     "num_patch_output": 9,
+     "input_size": [
+      224,
+      80
+     ],
+     "output_size": [
+      96,
+      118
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       224,
+       80
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       96,
+       118
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTm2_720_bicubic": {
+  "dir": "save_t18_interp/bicubic/ETTm2_720/results",
+  "n": 10801,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.34282079339027405,
+  "mae": 0.3698031008243561,
+  "first_pred_abs_row0": 46080,
+  "kind": "t18_interp_group",
+  "dataset": "ETTm2",
+  "horizon": 720,
+  "interpolation": "bicubic",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTm2",
+    "pred_len": "720",
+    "seq_len": "4032",
+    "periodicity": "96",
+    "arch": "mae_base",
+    "interpolation": "bicubic",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTm2.csv",
+    "data": "ETTm2",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "153",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 1.6886307001113892,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 48,
+     "num_patch_input": 4,
+     "num_patch_output": 10,
+     "input_size": [
+      224,
+      64
+     ],
+     "output_size": [
+      96,
+      147
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       224,
+       64
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.BICUBIC",
+      "size": [
+       96,
+       147
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ },
+ "group_ETTm2_720_nearest": {
+  "dir": "save_t18_interp/nearest/ETTm2_720/results",
+  "n": 10801,
+  "true_bitwise_vs_std_array": true,
+  "true_bitwise_vs_exp001": true,
+  "metrics_recompute_equals_stored": true,
+  "mse": 0.3343867361545563,
+  "mae": 0.3686909079551697,
+  "first_pred_abs_row0": 46080,
+  "kind": "t18_interp_group",
+  "dataset": "ETTm2",
+  "horizon": 720,
+  "interpolation": "nearest",
+  "fingerprints": {
+   "config": {
+    "dataset": "ETTm2",
+    "pred_len": "720",
+    "seq_len": "4032",
+    "periodicity": "96",
+    "arch": "mae_base",
+    "interpolation": "nearest",
+    "norm_const": "0.4",
+    "align_const": "0.4",
+    "batch_size": "32",
+    "train_epochs": "0",
+    "seed": "2021",
+    "root_path": "./dataset/ETT-small/",
+    "data_path": "ETTm2.csv",
+    "data": "ETTm2",
+    "features": "M",
+    "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+    "wall_time_s": "155",
+    "run_date": "2026-11-03"
+   },
+   "ckpt_sha256": "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e",
+   "md5_all_match": true,
+   "checkpoint_artifacts": []
+  },
+  "pred_bitwise_ne_bilinear": true,
+  "max_abs_diff_vs_bilinear": 2.2932560443878174,
+  "probe": {
+   "batch_size": 32,
+   "pred_bitwise_vs_stored": true,
+   "max_abs_diff": 0.0,
+   "device": "cuda",
+   "geometry": {
+    "expected": {
+     "pad_left": 0,
+     "pad_right": 48,
+     "num_patch_input": 4,
+     "num_patch_output": 10,
+     "input_size": [
+      224,
+      64
+     ],
+     "output_size": [
+      96,
+      147
+     ]
+    },
+    "actual": {
+     "input_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       224,
+       64
+      ],
+      "antialias": false
+     },
+     "output_resize": {
+      "mode": "InterpolationMode.NEAREST",
+      "size": [
+       96,
+       147
+      ],
+      "antialias": false
+     }
+    }
+   }
+  }
+ }
+}

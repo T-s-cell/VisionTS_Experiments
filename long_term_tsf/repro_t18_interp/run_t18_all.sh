@@ -18,6 +18,7 @@ ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 REPRO_DIR="$(cd "$(dirname "$0")" && pwd)"
 LOGDIR="$REPRO_DIR/logs"
 mkdir -p "$LOGDIR"
+rm -f "$LOGDIR/FAILED.txt"  # stale marker from a previous aborted run must not masquerade as this run's failure
 cd "$ROOT"
 
 HORIZONS="96 192 336 720"
