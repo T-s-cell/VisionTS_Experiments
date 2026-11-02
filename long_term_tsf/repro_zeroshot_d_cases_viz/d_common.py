@@ -182,7 +182,11 @@ def md5_of(path):
 
 
 def code_md5():
-    return {f: md5_of(os.path.join(ROOT, f)) for f in FP_FILES}
+    out = {}
+    for f in FP_FILES:
+        base = REPO if f.startswith("visionts/") else ROOT
+        out[f] = md5_of(os.path.join(base, f))
+    return out
 
 
 def dump_json(path, obj):
