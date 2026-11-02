@@ -330,7 +330,8 @@ def main():
                     action="append")
     args = ap.parse_args()
     metric = C.load_metric()
-    groups = C.group_ids() if args.all else [(ds, int(h)) for ds, h in args.group]
+    groups = C.group_ids() if args.all else [
+        (ds, int(h)) for ds, h in (args.group or [])]
     outs = []
     for ds, h in groups:
         outs.append(eval_group(ds, h, metric))
