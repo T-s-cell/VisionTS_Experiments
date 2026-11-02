@@ -1,5 +1,5 @@
 #!/bin/bash
-# EXP-032 P=1 zero-shot queue (16 groups = 4 ETT x 4 pred_lens).
+# EXP-030 P=1 zero-shot queue (16 groups = 4 ETT x 4 pred_lens).
 # 用法: bash run_all_p1.sh [min|main]   (默认 main)
 #   min : preflight + ETTh1_96 冒烟 + probes 三断言
 #   main: preflight + 要求 ETTh1_96/PROBES_OK.txt 后跑完全部 16 组(已完成且指纹一致者跳过)

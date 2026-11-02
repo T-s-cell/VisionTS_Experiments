@@ -1,4 +1,4 @@
-"""EXP-032 per-group probes (run right after each P=1 inference).
+"""EXP-030 per-group probes (run right after each P=1 inference).
 Three acceptance assertions per group:
   A. P actually enters the imaging pipeline: the pre-interpolation 2D
      segmentation shape recorded on the real forward path equals

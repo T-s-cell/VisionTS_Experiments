@@ -1,5 +1,5 @@
 #!/bin/bash
-# EXP-032: single P=1 zero-shot run, mirroring EXP-001 run_one.sh.
+# EXP-030: single P=1 zero-shot run, mirroring EXP-001 run_one.sh.
 # Only delta vs EXP-001: periodicity=1 (imaging period), save dir, and the
 # launcher records the real-path segmentation shape (infer_one_p1.py).
 # 用法: bash run_one_p1.sh <DATASET> <PRED_LEN> <SAVE_DIR>

@@ -1,4 +1,4 @@
-"""EXP-032 post evaluation (numpy-only, run after probes OK per group).
+"""EXP-030 post evaluation (numpy-only, run after probes OK per group).
 Per group: recompute standardized MSE/MAE with the original metric()
 (== metrics.npy exact), read the F3-verified baseline metrics, and save
   - arr_<DS>_<H>.npz (in the P=1 run dir): pred, truth, window_index,

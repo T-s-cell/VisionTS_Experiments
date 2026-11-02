@@ -1,4 +1,4 @@
-"""EXP-032 summary: paper A.2 Table 7 vs measured (P=1 and original-P).
+"""EXP-030 summary: paper A.2 Table 7 vs measured (P=1 and original-P).
 Reads the 16 metrics_<DS>_<H>.json produced by post_eval.py, averages the
 four unrounded horizon values per dataset, then the four datasets, and
 writes summary_a2_p1.csv + RESULT_a2_p1.md (paper / measured / delta and
@@ -91,7 +91,7 @@ def main():
         w.writerow(avg_row)
 
     # ---- markdown ----
-    L = ["# EXP-032｜VisionTS A.2 表 7 复现：P=1 vs 原周期 P（零样本，ETT 4 数据集 × 4H）", ""]
+    L = ["# EXP-030｜VisionTS A.2 表 7 复现：P=1 vs 原周期 P（零样本，ETT 4 数据集 × 4H）", ""]
     L += ["## 1. 逐数据集（4H 未舍入等权平均）vs 论文表 7", "",
           "| 数据集 | 原P | 论文 原 P MSE/MAE | 实测 原 P MSE/MAE | Δ | 论文 P=1 MSE/MAE | 实测 P=1 MSE/MAE | Δ |",
           "|---|---:|---:|---:|---:|---:|---:|---:|"]

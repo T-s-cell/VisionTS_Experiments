@@ -1,4 +1,4 @@
-"""EXP-032 preflight on the server. All checks read-only; exits non-zero on
+"""EXP-030 preflight on the server. All checks read-only; exits non-zero on
 any failure. F0: EXP-001 baseline groups on disk + code fingerprints
 (recompute the run_one.sh md5 list and compare to baseline SUCCESS.txt).
 F1: MAE weights sha256. F2: env matches EXP-001 env_snapshot_main.txt.
