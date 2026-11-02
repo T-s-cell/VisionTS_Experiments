@@ -56,6 +56,8 @@ def fingerprint_continuity():
 
 
 def verify_std_input():
+    if C.ROOT not in sys.path:
+        sys.path.insert(0, C.ROOT)
     from data_provider import data_loader as DL
     rec = {}
     problems = []
