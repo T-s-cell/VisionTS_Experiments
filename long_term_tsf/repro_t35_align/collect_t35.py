@@ -443,9 +443,11 @@ def main():
     try:
         make_figure(mean_rows, FIG_PNG)
         fig_msg = "fig9c_compare.png written"
-    except ImportError as e:
-        fig_msg = ("FIGURE SKIPPED (matplotlib unavailable: %s) — install "
-                   "then rerun `python3 collect_t35.py --fig`" % e)
+    except (ImportError, OSError) as e:
+        # numbers are already written above; S6 completion still needs the png
+        fig_msg = ("FIGURE SKIPPED (%s: %s) — provide the paper panel jpg / "
+                   "matplotlib, then rerun `python3 collect_t35.py --fig`"
+                   % (type(e).__name__, e))
     print("[collect_t35] OK: %d records green, smoke evidence green, "
           "self-check %.2e/%.2e <= 1e-6" % (n_groups, dmse, dmae))
     print("[collect_t35] c-sweep 4H-mean MSE: %s"
