@@ -40,10 +40,14 @@ def fail(msg):
 
 
 def check_run_dir_clean(run_dir):
-    arts = (glob.glob(os.path.join(run_dir, "**", "*.pth"), recursive=True)
-            + glob.glob(os.path.join(run_dir, "**", "checkpoint*"),
-                        recursive=True))
-    return [os.path.relpath(a, run_dir) for a in arts]
+    """No weight/checkpoint FILES anywhere; the empty checkpoints/<model_id>/
+    scaffolding dir is framework behavior (EXP-001 dirs have it too)."""
+    arts = []
+    for pat in ("**/*.pth", "**/*.ckpt", "**/*.bin", "checkpoints/**"):
+        for p in glob.glob(os.path.join(run_dir, pat), recursive=True):
+            if os.path.isfile(p):
+                arts.append(os.path.relpath(p, run_dir))
+    return arts
 
 
 def verify_freeze_arrays(dir_, ds, h, metric, label):
@@ -220,7 +224,7 @@ def mode_first_window(ds, h):
     if n != n_exp:
         fail("%s_%d loader N=%d != expected %d" % (ds, h, n, n_exp))
     sample = loader.dataset[0]
-    seq_x = sample[0].numpy().astype(np.float32)  # (L, 7)
+    seq_x = np.asarray(sample[0]).astype(np.float32)  # (L, 7)
     if seq_x.shape != (c["ctx"], 7):
         fail("%s_%d window0 history shape %s != (%d, 7)"
              % (ds, h, seq_x.shape, c["ctx"]))
