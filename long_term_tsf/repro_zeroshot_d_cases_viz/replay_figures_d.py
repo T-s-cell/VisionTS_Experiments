@@ -226,6 +226,7 @@ def main():
     sel = D.select_windows()
     wins = {c: sel[c]["window_index"] for c in ("success", "failure")}
     os.chdir(D.ROOT)
+    sys.path.insert(0, D.ROOT)
 
     ckpt = os.path.join(D.ROOT, "..", "ckpt", "mae_visualize_vit_base.pth")
     assert os.path.isfile(ckpt), ckpt
