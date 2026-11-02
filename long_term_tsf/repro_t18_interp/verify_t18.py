@@ -173,7 +173,7 @@ def run_probe(ds, h, interp, run_dir, label):
         features="M", target="OT", scale=True, embed="timeF", freq="h",
         seq_len=c["ctx"], label_len=48, pred_len=h, seasonal_patterns=None,
         batch_size=32, num_workers=0,
-        vm_arch="mae_base", vm_ckpt=C.CKPT_REL, vm_pretrained=1,
+        vm_arch="mae_base", vm_ckpt=C.CKPT_DIR_REL, vm_pretrained=1,
         ft_type="ln", interpolation=interp,
         norm_const=0.4, align_const=0.4, periodicity=c["period"])
     os.chdir(C.ROOT)

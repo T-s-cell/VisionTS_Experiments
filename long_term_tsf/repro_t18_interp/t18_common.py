@@ -64,6 +64,7 @@ DATASETS_T8 = {
 }
 
 CKPT_REL = "../ckpt/mae_visualize_vit_base.pth"
+CKPT_DIR_REL = "../ckpt/"  # --vm_ckpt takes the DIR (EXP-001 protocol); VisionTS joins the filename
 CKPT_SHA256 = "c551c37b63a221a3e6d7d7f49e96f34078c9b183f788bedc0387493521bade0e"
 CKPT_BYTES = 447725789
 
