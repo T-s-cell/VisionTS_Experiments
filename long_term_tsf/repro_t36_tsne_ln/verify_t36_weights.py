@@ -8,10 +8,11 @@ Per dataset (ETTm1 / Electricity / Weather, H=96 seed=2021):
   3. strict checkpoint reload (keys 'vm.*'), first test batch forward in the
      job's own data order/batch -> max|pred - saved pred.npy[:B]| <= 1e-4;
   4. splice evidence: 50 encoder-LN keys present in the checkpoint; every
-     non-LN vision_model tensor (params+buffers, encoder and decoder)
-     bitwise == frozen MAE; at least one encoder-LN key differs, per-key
-     max|delta| recorded; splicing into a fresh frozen model lands each key
-     bitwise-equal to the source checkpoint.
+     non-LN ENCODER tensor bitwise == frozen MAE (decoder tensors are out of
+     scope: EXP-003's ft_type='ln' also trained the 34 decoder LNs, and
+     feature extraction never touches the decoder); at least one encoder-LN
+     key differs, per-key max|delta| recorded; splicing into a fresh frozen
+     model lands each key bitwise-equal to the source checkpoint.
 
 All four weight files (frozen + 3 LN) are sha256-recorded. Merges into
 logs/verify_t36.json section 'weights'.
@@ -127,8 +128,8 @@ def splice_evidence(ds):
         if not k.startswith("vision_model."):
             continue
         mae_k = k[len("vision_model."):]
-        if mae_k not in mae:
-            continue
+        if mae_k not in mae or mae_k.startswith("decoder"):
+            continue  # decoder LNs were trained in EXP-003; encoder-only scope
         if k in C.ENC_LN_KEYS:
             enc_delta[k] = float((src[k].float() - mae[mae_k].float()).abs().max())
         else:
@@ -137,7 +138,7 @@ def splice_evidence(ds):
             else:
                 nonln_diff.append(k)
     if nonln_diff:
-        fail("%s non-LN vision_model tensors differ from frozen: %s..."
+        fail("%s non-LN encoder tensors differ from frozen: %s..."
              % (ds, nonln_diff[:5]))
     changed = {k: v for k, v in enc_delta.items() if v > 0.0}
     if not changed:

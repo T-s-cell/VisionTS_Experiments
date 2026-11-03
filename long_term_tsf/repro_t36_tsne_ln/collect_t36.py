@@ -44,7 +44,7 @@ def check_gates(vj):
         if sec["nonln_bitwise_equal"] <= 0:
             fail("%s non-LN bitwise gate" % ds)
         g.append("weights/%s: probe max|d|=%.3e (B=%d), %d/%d LN keys changed "
-                 "(max %.3e), non-LN bitwise==frozen, ckpt %s"
+                 "(max %.3e), encoder non-LN bitwise==frozen, ckpt %s"
                  % (ds, d, sec["batch"], sec["n_changed"], sec["enc_ln_keys"],
                     sec["max_delta"], sec["ckpt_sha256"][:16] + "..."))
 
