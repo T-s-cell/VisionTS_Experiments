@@ -118,9 +118,10 @@ def main():
          ia["called"] == 1 and ir["called"] == 1,
          "VisionTS constructed once per arm")
 
-    # BG5 RNG equality
-    for key in ("rng_after_init", "rng_at_train_entry"):
-        a, r = recs["all"][key], recs["rand"][key]
+    # BG5 RNG equality (rng_after_init lives under rec["init"])
+    for key, path in (("rng_after_init", lambda r: r["init"][key]),
+                      ("rng_at_train_entry", lambda r: r[key])):
+        a, r = path(recs["all"]), path(recs["rand"])
         gate(gates, "BG5_%s" % key, a == r,
              "identical across arms (%s)" % ",".join(sorted(a)))
 
