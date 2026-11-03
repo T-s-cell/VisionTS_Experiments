@@ -202,7 +202,10 @@ def main():
 
     def dl_iter_wrapper(self):
         it = _dl_iter(self)
-        if getattr(self.dataset, "flag", None) != "train":
+        # train loader is the only one with shuffle=True -> RandomSampler
+        # (exp_univariate._get_data); the univariate view dataset carries no
+        # .flag attribute, so that identity check would never fire
+        if not isinstance(getattr(self, "sampler", None), tud.RandomSampler):
             return it
 
         def gen():
