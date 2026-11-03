@@ -1,7 +1,7 @@
 # EXP-037 README: 双试点(FRED-MD/NN5 Daily Monash 零样本 + ETTh1 All vs Rand-VM 全量训练)
 
 分支 `repro/ltsf-t37-pilot-v1`;eta 上执行代码 = `git archive afd871f9eedaf2f1f777f84ba37c241dd108813a`,
-本仓库头 commit `b791be2`(在其上追加本 README 与三个 G4 诊断脚本,均不入运行路径)。
+在其上追加本 README 与三个 G4 诊断脚本入库(commit `b791be2`),均不入运行路径。
 执行机 eta(`/dev_data/wlt/VisionTS_Experiments`,env `/dev_data/wlt/conda/envs/visionts/bin/python`,
 python 3.12.10,torch 2.12.0+cu126,gluonts 0.17.0,numpy 2.x,pandas 2.2+,GPU L20 46GB,与租户共跑)。
 上游文件(`eval_gluonts/`、`repro_fullshot/`、`visionts/`、模型源码)**零改动**;全部接入走本包
