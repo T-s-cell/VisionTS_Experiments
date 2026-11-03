@@ -16,7 +16,7 @@ GPU_ID=${GPU_ID:-0}
 export CUDA_VISIBLE_DEVICES=$GPU_ID
 
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"          # long_term_tsf/
-REPRO_DIR="$(cd "$0" && pwd)"                     # repro dir (real path)
+REPRO_DIR="$(cd "$(dirname "$0")" && pwd)"        # repro dir
 LOGDIR="$REPRO_DIR/logs"
 mkdir -p "$LOGDIR"
 rm -f "$LOGDIR/FAILED.txt"
