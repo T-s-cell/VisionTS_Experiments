@@ -1,6 +1,7 @@
 # EXP-037 README: 双试点(FRED-MD/NN5 Daily Monash 零样本 + ETTh1 All vs Rand-VM 全量训练)
 
-分支 `repro/ltsf-t37-pilot-v1`,本地 commit `afd871f9eedaf2f1f777f84ba37c241dd108813a`(含本 README 与三个 G4 诊断脚本)。
+分支 `repro/ltsf-t37-pilot-v1`;eta 上执行代码 = `git archive afd871f9eedaf2f1f777f84ba37c241dd108813a`,
+本仓库头 commit `b791be2`(在其上追加本 README 与三个 G4 诊断脚本,均不入运行路径)。
 执行机 eta(`/dev_data/wlt/VisionTS_Experiments`,env `/dev_data/wlt/conda/envs/visionts/bin/python`,
 python 3.12.10,torch 2.12.0+cu126,gluonts 0.17.0,numpy 2.x,pandas 2.2+,GPU L20 46GB,与租户共跑)。
 上游文件(`eval_gluonts/`、`repro_fullshot/`、`visionts/`、模型源码)**零改动**;全部接入走本包
@@ -193,4 +194,4 @@ PYTHON=/dev_data/wlt/conda/envs/visionts/bin/python GPU_ID=0 \
 
 - 审计包 `temp/VisionTS_t37_pilot_20261104.tar.gz`(<50 MB,不含 npy/权重/Monash 原始数据)+ sha256 sidecar。
 - RESULT:`logs/RESULT_t37_pilot.md` + `logs/summary_t37.csv`(collect_t37.py 生成,每个数字溯源)。
-- 本地 commit `afd871f9…` 于分支 `repro/ltsf-t37-pilot-v1`;**推送与扩跑待用户复审本包后进行**。
+- 本地分支 `repro/ltsf-t37-pilot-v1` 头 commit `b791be2`(运行代码 = `afd871f9…` 的 git archive);**推送与扩跑待用户复审本包后进行**。
