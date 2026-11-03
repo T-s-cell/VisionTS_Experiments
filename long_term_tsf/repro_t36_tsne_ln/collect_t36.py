@@ -89,6 +89,29 @@ def check_gates(vj):
     return g
 
 
+def tsne_2d_descriptive():
+    """Panel-internal 2D 30-NN ImageNet proportion (descriptive only).
+
+    The high-dim metric saturates at 0 in all four conditions (modality gap
+    dominates raw 54,528-dim features), so this mirrors what each t-SNE panel
+    actually shows: each TS sample's 30 nearest neighbours within its own
+    panel's 2D coordinates, fraction that are ImageNet rows.
+    """
+    prop = {}
+    for cond in C.COND_LIST:
+        path = C.ORIG_COORDS if cond == "frozen" else os.path.join(C.PKG, "coords_%s_1900x2.npy" % cond)
+        c = np.load(path).astype(np.float64)
+        assert c.shape == (1900, 2)
+        d2 = ((c[:, None, :] - c[None, :, :]) ** 2).sum(-1)
+        np.fill_diagonal(d2, np.inf)
+        prop[cond] = {}
+        for g in C.GROUPS[1:]:
+            s0, s1 = C.group_spans()[g]
+            idx = np.argpartition(d2[s0:s1], C.N_NEIGHBORS, axis=1)[:, :C.N_NEIGHBORS]
+            prop[cond][g] = float((idx < 1000).sum()) / C.NN_DENOM
+    return prop
+
+
 def check_nn_consistency(base_nn_npz, base_table):
     flat = dict(np.load(base_nn_npz))
     neighbors = {}
@@ -124,6 +147,24 @@ def md_table(nn_summary):
             v = "%.4f" % pr[cond][g]
             if cond != "frozen":
                 v += " (%+.2f pp)" % pp[cond][g]
+            cells.append(v)
+        rows.append("| " + " | ".join(cells) + " |")
+    return "\n".join(rows)
+
+
+def md_table_2d(desc):
+    order = ["ettm1_ln", "ecl_ln", "weather_ln"]
+    heads = ["encoder"] + C.GROUPS[1:]
+    rows = ["| " + " | ".join(heads) + " |",
+            "|" + "---|" * len(heads)]
+    label = {"frozen": "Frozen (EXP-002, 归档坐标)",
+             "ettm1_ln": "ETTm1-LN", "ecl_ln": "Electricity-LN", "weather_ln": "Weather-LN"}
+    for cond in ["frozen"] + order:
+        cells = [label[cond]]
+        for g in C.GROUPS[1:]:
+            v = "%.4f" % desc[cond][g]
+            if cond != "frozen":
+                v += " (%+.2f pp)" % ((desc[cond][g] - desc["frozen"][g]) * 100.0)
             cells.append(v)
         rows.append("| " + " | ".join(cells) + " |")
     return "\n".join(rows)
@@ -186,19 +227,21 @@ def main():
         f.write("\n".join(out_lines) + "\n")
 
     stamp = args.stamp or "COMMIT_PENDING"
-    domain_lines = []
+    desc = tsne_2d_descriptive()
+    domain_lines = ["高维原始特征空间四条件全部 0/9,000(模态鸿沟主导,见上);"
+                    "以下按各面板 2D 局部交叠(描述性,括号为相对冻结的百分点)判读。"]
     for cond in ("ettm1_ln", "ecl_ln", "weather_ln"):
         src = C.COND_SOURCE[cond]
-        own = nn_summary["pp_vs_frozen"][cond][src]
+        own = (desc[cond][src] - desc["frozen"][src]) * 100.0
         others = [g for g in C.GROUPS[1:] if g != src]
 
         def dir_word(v):
             return "上升" if v > 0 else ("下降" if v < 0 else "不变")
 
-        parts = ["%s-LN(训练域 %s): ImageNet 占比 %s %+.2f pp"
+        parts = ["%s-LN(训练域 %s): 面板内 ImageNet 占比 %s %+.2f pp"
                  % (label_short(cond), src, dir_word(own), own)]
         for g in others:
-            v = nn_summary["pp_vs_frozen"][cond][g]
+            v = (desc[cond][g] - desc["frozen"][g]) * 100.0
             parts.append("迁移域 %s %+.2f pp(%s)" % (g, v, dir_word(v)))
         domain_lines.append("- " + "; ".join(parts) + "。")
 
@@ -233,6 +276,20 @@ def main():
     md.append(md_table(nn_summary))
     md.append("")
     md.append("括号为相对冻结的百分点变化。邻域在**该编码器的全部 1,900 个特征**内取(排除自身,按全局行号),不限于同组。")
+    md.append("")
+    if all(nn_summary["proportions"][c][g] == 0.0 for c in C.COND_LIST for g in C.GROUPS[1:]):
+        md.append("**高维结果饱和:4 编码器 × 3 时序来源全部 12 格均为 0/9,000。**"
+                  "在原始 54,528 维特征空间,每个时序样本的 30 近邻全部是时序样本"
+                  "(冻结编码器下抽查行最近 ImageNet 距离约为最近时序距离的 1.4–3.3 倍;"
+                  "独立复算与 nn_neighbors.npz 一致)。模态鸿沟主导原始特征,"
+                  "该高维指标在本设置下不区分四套编码器,微调的变化量恒为 ±0 pp,照实记录。")
+        md.append("")
+    md.append("## 二维面板内 30-NN ImageNet 占比(t-SNE 坐标空间,描述性)")
+    md.append("")
+    md.append(md_table_2d(desc))
+    md.append("")
+    md.append("同一 30-NN 算法用在各面板自己的 2D 坐标上,刻画图面所见;各面板独立拟合,"
+              "数值跨面板仅作方向参考,不构成显著性检验,也不替代高维表。")
     md.append("")
     md.append("## 判读(训练域 vs 迁移域)")
     md.append("")
