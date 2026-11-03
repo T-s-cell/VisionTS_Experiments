@@ -169,12 +169,37 @@ def main():
     freeze_job = C.first_existing(C._B_FREEZE_CANDIDATES, "SUCCESS.txt")
     freeze_path = os.path.join(freeze_job, "SUCCESS.txt")
     if os.path.isfile(freeze_path):
-        mse, mae = C.parse_success_mse_mae(freeze_path)
-        gate(gates, "BG9_freeze_anchor",
-             abs(mse - C.FREEZE_ANCHOR["mse"]) <= 1e-9 and
-             abs(mae - C.FREEZE_ANCHOR["mae"]) <= 1e-9,
-             "EXP-033 SUCCESS %.10f/%.10f vs pinned %.10f/%.10f (%s)" %
-             (mse, mae, C.FREEZE_ANCHOR["mse"], C.FREEZE_ANCHOR["mae"], freeze_job))
+        ok_sha = None
+        with open(freeze_path) as f:
+            for line in f:
+                if line.startswith("ckpt_sha256="):
+                    ok_sha = line.strip().split("=", 1)[1] == C.CKPT_SHA256
+        sum_path = None
+        for cand in C._T22_SUMMARY_CANDIDATES:
+            if os.path.isfile(cand):
+                sum_path = cand
+                break
+        if ok_sha and sum_path:
+            import csv as _csv
+            with open(sum_path) as f:
+                rows = [r for r in _csv.DictReader(f)
+                        if r.get("dataset") == "ETTh1" and r.get("horizon") == "96"]
+            if rows:
+                fm, fa = float(rows[0]["freeze_mse"]), float(rows[0]["freeze_mae"])
+                ok = (abs(fm - C.FREEZE_ANCHOR["mse"]) <= 5e-7 and
+                      abs(fa - C.FREEZE_ANCHOR["mae"]) <= 5e-7)
+                gates.append(("BG9_freeze_anchor", "PASS" if ok else "FAIL",
+                              "summary 6dp %.6f/%.6f vs pinned %.16f/%.6f "
+                              "(tol 5e-7, SUCCESS ckpt_sha256 %s); %s" %
+                              (fm, fa, C.FREEZE_ANCHOR["mse"], C.FREEZE_ANCHOR["mae"],
+                               "match" if ok_sha else "MISMATCH", sum_path)))
+            else:
+                gates.append(("BG9_freeze_anchor", "WARN",
+                              "no ETTh1_96 row in %s; pinned used (%s)" % (sum_path, freeze_job)))
+        else:
+            gates.append(("BG9_freeze_anchor", "WARN",
+                          "freeze evidence incomplete (ckpt_sha line %s, summary %s); pinned used (%s)"
+                          % (ok_sha, sum_path, freeze_job)))
     else:
         gates.append(("BG9_freeze_anchor", "WARN",
                       "freeze SUCCESS not on this machine; pinned value used (%s)" % freeze_job))

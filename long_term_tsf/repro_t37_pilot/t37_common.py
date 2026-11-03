@@ -147,6 +147,12 @@ _B_FREEZE_CANDIDATES = [
     os.path.join(ROOT, "save_t22_freeze", "ETTh1_96"),
     os.path.join(REPO_ROOT, "save_t22_freeze", "ETTh1_96"),
 ]
+# EXP-033 SUCCESS.txt is a config/md5 fingerprint without metrics; the
+# freeze metrics live in the t22 summary csv (rounded to 6dp)
+_T22_SUMMARY_CANDIDATES = [
+    os.path.join(ROOT, "repro_t22_freeze_ln", "summary_t22.csv"),
+    os.path.join(REPO_ROOT, "repro_t22_freeze_ln", "summary_t22.csv"),
+]
 
 
 def first_existing(paths, tail):
