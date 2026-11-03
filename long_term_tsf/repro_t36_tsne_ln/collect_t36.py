@@ -266,10 +266,10 @@ def main():
         s = vj["weights"][ds]
         md.append("| %s | %s | %.3e (B=%d) | %d/50 | %s |" % (ds, cfgs[ds], s["max_abs_diff"], s["batch"], s["n_changed"], s["ckpt_sha256"][:16]))
     md.append("")
-    md.append("锚点(SUCCESS 未舍入):ETTm1 %.16g/%.16g、Electricity %.16g/%.16g、Weather %.16g/%.16g。"
-              % (C.ANCHORS["ETTm1"]["mse"], C.ANCHORS["ETTm1"]["mae"],
-                 C.ANCHORS["Electricity"]["mse"], C.ANCHORS["Electricity"]["mae"],
-                 C.ANCHORS["Weather"]["mse"], C.ANCHORS["Weather"]["mae"]))
+    md.append("锚点(SUCCESS 未舍入):ETTm1 %s/%s、Electricity %s/%s、Weather %s/%s。"
+              % (repr(C.ANCHORS["ETTm1"]["mse"]), repr(C.ANCHORS["ETTm1"]["mae"]),
+                 repr(C.ANCHORS["Electricity"]["mse"]), repr(C.ANCHORS["Electricity"]["mae"]),
+                 repr(C.ANCHORS["Weather"]["mse"]), repr(C.ANCHORS["Weather"]["mae"])))
     md.append("")
     md.append("## 高维 30-NN ImageNet 占比(欧氏距离,分母 9,000)")
     md.append("")
@@ -299,8 +299,12 @@ def main():
     md.append("")
     md.append("## 大件(留在 eta,不入包)")
     md.append("")
-    md.append("- 四条件特征:%s(每份 1900x54528 f32;frozen 与 EXP-002 原件 %s 逐位一致)" % (C.SAVE_BASE, C.ORIG_FEATURES))
-    md.append("- 权重:三份 EXP-003 checkpoint.pth(%s_96_seed2021/checkpoints/_/)+ 冻结 ckpt(%s)" % ("、".join(C.EXP003_DS), C.CKPT_PATH))
+    eta_root = "/dev_data/wlt/VisionTS_Experiments"
+    md.append("- 四条件特征:%s/long_term_tsf/save_t36_tsne(每份 1900x54528 f32;"
+              "frozen 与 EXP-002 原件 %s/repro_fig7/outputs/features_1900x54528.npy 逐位一致)"
+              % (eta_root, eta_root))
+    md.append("- 权重:三份 EXP-003 checkpoint.pth(%s/long_term_tsf/save_fullshot/{ETTm1,Electricity,Weather}_96_seed2021/checkpoints/_/)"
+              "+ 冻结 ckpt(%s/ckpt/mae_visualize_vit_base.pth,sha256 %s)" % (eta_root, eta_root, C.CKPT_SHA256))
     md.append("- ImageNet 原图:/dev_data/wlt/data/ImageNet/val(50,000 张)")
     md.append("")
     with open(os.path.join(C.PKG, "RESULT_t36_tsne_ln.md"), "w") as f:
