@@ -1,0 +1,13 @@
+encoder,ts_source,n_samples,imagenet_neighbors,denominator,proportion,pp_vs_frozen
+frozen,ETTm1,300,0,9000,0.000000,
+frozen,Weather,300,0,9000,0.000000,
+frozen,Electricity,300,0,9000,0.000000,
+ettm1_ln,ETTm1,300,0,9000,0.000000,0.0000
+ettm1_ln,Weather,300,0,9000,0.000000,0.0000
+ettm1_ln,Electricity,300,0,9000,0.000000,0.0000
+ecl_ln,ETTm1,300,0,9000,0.000000,0.0000
+ecl_ln,Weather,300,0,9000,0.000000,0.0000
+ecl_ln,Electricity,300,0,9000,0.000000,0.0000
+weather_ln,ETTm1,300,0,9000,0.000000,0.0000
+weather_ln,Weather,300,0,9000,0.000000,0.0000
+weather_ln,Electricity,300,0,9000,0.000000,0.0000

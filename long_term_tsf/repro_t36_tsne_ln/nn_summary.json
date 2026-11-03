@@ -1,0 +1,63 @@
+{
+ "n_neighbors": 30,
+ "denominator_per_cell": 9000,
+ "distance": "euclidean on raw 54528-dim features, float64 computation",
+ "proportions": {
+  "frozen": {
+   "ETTm1": 0.0,
+   "Weather": 0.0,
+   "Electricity": 0.0
+  },
+  "ettm1_ln": {
+   "ETTm1": 0.0,
+   "Weather": 0.0,
+   "Electricity": 0.0
+  },
+  "ecl_ln": {
+   "ETTm1": 0.0,
+   "Weather": 0.0,
+   "Electricity": 0.0
+  },
+  "weather_ln": {
+   "ETTm1": 0.0,
+   "Weather": 0.0,
+   "Electricity": 0.0
+  }
+ },
+ "pp_vs_frozen": {
+  "ettm1_ln": {
+   "ETTm1": 0.0,
+   "Weather": 0.0,
+   "Electricity": 0.0
+  },
+  "ecl_ln": {
+   "ETTm1": 0.0,
+   "Weather": 0.0,
+   "Electricity": 0.0
+  },
+  "weather_ln": {
+   "ETTm1": 0.0,
+   "Weather": 0.0,
+   "Electricity": 0.0
+  }
+ },
+ "neighbors_npz": "/dev_data/wlt/VisionTS_Experiments/long_term_tsf/save_t36_tsne/nn_neighbors.npz",
+ "row_spans": {
+  "ImageNet": [
+   0,
+   1000
+  ],
+  "ETTm1": [
+   1000,
+   1300
+  ],
+  "Weather": [
+   1300,
+   1600
+  ],
+  "Electricity": [
+   1600,
+   1900
+  ]
+ }
+}
