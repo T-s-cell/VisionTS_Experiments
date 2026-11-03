@@ -96,8 +96,21 @@ def check_gates(vj):
     nn = vj.get("nn")
     if not nn:
         fail("nn section missing")
+    dr = vj.get("dist_ratio", {})
+    if not dr.get("all_rows_d_im_gt_d_ts"):
+        fail("dist_ratio gate: not every TS row has d_im > d_ts")
+    pc = dr["per_cond"]
     g.append("NN: 30-NN over all 1,900 features, self excluded by global row, "
              "denominator 300x30=9000 per cell; neighbour row indices archived")
+    g.append("dist_ratio: nn_distance_ratios.npz (900 TS rows x 4 conditions): "
+             "nearest-ImageNet distance > nearest-TS distance on every row "
+             "(3,600/3,600; finite ratio min %.3f-%.3f, median %.3f-%.3f; "
+             "%d rows with d_ts==0 across LN conds)"
+             % (min(s["ratio_min_finite"] for s in pc.values()),
+                max(s["ratio_min_finite"] for s in pc.values()),
+                min(s["ratio_median_finite"] for s in pc.values()),
+                max(s["ratio_median_finite"] for s in pc.values()),
+                sum(s["n_dts_zero"] for s in pc.values())))
     return g
 
 
@@ -122,6 +135,30 @@ def tsne_2d_descriptive():
             idx = np.argpartition(d2[s0:s1], C.N_NEIGHBORS, axis=1)[:, :C.N_NEIGHBORS]
             prop[cond][g] = float((idx < 1000).sum()) / C.NN_DENOM
     return prop
+
+
+def check_dist_ratio_npz(path, dr):
+    """Stamp-mode check of the per-row nearest-neighbour distance evidence:
+    row indices, recomputed ratios and counters must match the verify json."""
+    flat = dict(np.load(path))
+    per = dr["per_cond"]
+    for cond in C.COND_LIST:
+        rows = flat["%s_rows" % cond]
+        d_im = flat["%s_d_im" % cond]
+        d_ts = flat["%s_d_ts" % cond]
+        if rows.size != 900 or not (rows == np.arange(1000, 1900)).all():
+            fail("dist_ratio %s rows not 1000..1899" % cond)
+        if not np.isfinite(d_im).all() or not np.isfinite(d_ts).all():
+            fail("dist_ratio %s non-finite distances" % cond)
+        with np.errstate(divide="ignore", invalid="ignore"):
+            ratio = np.where(d_ts > 0.0, d_im / d_ts, np.inf)
+        pos = ratio[np.isfinite(ratio)]
+        if int((d_im > d_ts).sum()) != per[cond]["n_d_im_gt_d_ts"] or \
+                per[cond]["n_d_im_gt_d_ts"] != 900:
+            fail("dist_ratio %s d_im>d_ts counter mismatch" % cond)
+        if abs(float(pos.min()) - per[cond]["ratio_min_finite"]) > 0 or \
+                abs(float(np.median(pos)) - per[cond]["ratio_median_finite"]) > 0:
+            fail("dist_ratio %s ratio min/median mismatch" % cond)
 
 
 def check_nn_consistency(base_nn_npz, base_table):
@@ -202,7 +239,8 @@ def main():
 
     # stage the small evidence artifacts next to this script (no-op when the
     # files were already pulled into a local PKG copy)
-    for name in ["nn_neighbors.npz", "nn_table.csv", "nn_summary.json"] + \
+    for name in ["nn_neighbors.npz", "nn_table.csv", "nn_summary.json",
+                 "nn_distance_ratios.npz"] + \
                 ["coords_%s_1900x2.npy" % c for c in ("ettm1_ln", "ecl_ln", "weather_ln")]:
         src = os.path.join(C.SAVE_BASE, name)
         dst = os.path.join(C.PKG, name)
@@ -215,6 +253,14 @@ def main():
     prop = check_nn_consistency(nn_npz, nn_table)
     if prop != nn_summary["proportions"]:
         fail("nn_summary proportions != recomputed")
+
+    dr = vj.get("dist_ratio", {})
+    dr_path = os.path.join(C.PKG, "nn_distance_ratios.npz")
+    if not os.path.isfile(dr_path):
+        fail("missing nn_distance_ratios.npz in PKG")
+    if C.sha256_of(dr_path) != dr.get("npz_sha256"):
+        fail("nn_distance_ratios.npz sha mismatch vs verify json")
+    check_dist_ratio_npz(dr_path, dr)
 
     for cond in ("ettm1_ln", "ecl_ln", "weather_ln"):
         p = os.path.join(C.PKG, "coords_%s_1900x2.npy" % cond)
@@ -289,12 +335,21 @@ def main():
     md.append("")
     md.append("括号为相对冻结的百分点变化。邻域在**该编码器的全部 1,900 个特征**内取(排除自身,按全局行号),不限于同组。")
     md.append("")
-    if all(nn_summary["proportions"][c][g] == 0.0 for c in C.COND_LIST for g in C.GROUPS[1:]):
+    if all(nn_summary["proportions"][c][g] == 0.0 for c in C.COND_LIST for g in C.GROUPS[1:]) \
+            and dr.get("all_rows_d_im_gt_d_ts"):
+        pc = dr["per_cond"]
+        mins = [pc[c]["ratio_min_finite"] for c in C.COND_LIST]
+        meds = [pc[c]["ratio_median_finite"] for c in C.COND_LIST]
+        n_zero = sum(pc[c]["n_dts_zero"] for c in C.COND_LIST)
         md.append("**高维结果饱和:4 编码器 × 3 时序来源全部 12 格均为 0/9,000。**"
-                  "在原始 54,528 维特征空间,每个时序样本的 30 近邻全部是时序样本"
-                  "(冻结编码器下抽查行最近 ImageNet 距离约为最近时序距离的 1.4–3.3 倍;"
-                  "独立复算与 nn_neighbors.npz 一致)。模态鸿沟主导原始特征,"
-                  "该高维指标在本设置下不区分四套编码器,微调的变化量恒为 ±0 pp,照实记录。")
+                  "在原始 54,528 维特征空间,每个时序样本的 30 近邻全部是时序样本:"
+                  "逐行归档证据 `nn_distance_ratios.npz`(900 个时序行 × 4 条件,全局行号 1000–1899,"
+                  "float64 距离,自排除)显示每个时序行到最近 ImageNet 样本的欧氏距离都**大于**"
+                  "到最近其他时序样本的距离(3,600/3,600 行;有限比值 min %.3f–%.3f、median %.3f–%.3f;"
+                  "另有 %d 行最近时序距离为 0,即特征完全重复的时序样本对,比值记为无穷、不入有限统计)。"
+                  "模态鸿沟主导原始特征,该高维指标在本设置下不区分四套编码器,"
+                  "微调的变化量恒为 ±0 pp,照实记录。"
+                  % (min(mins), max(mins), min(meds), max(meds), n_zero))
         md.append("")
     md.append("## 二维面板内 30-NN ImageNet 占比(t-SNE 坐标空间,描述性)")
     md.append("")
