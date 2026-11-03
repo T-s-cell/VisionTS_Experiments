@@ -55,7 +55,17 @@ def main():
                                                         mrec["p_check"])
 
     os.chdir(C.EVAL_GLUONTS)
+    # sys.path[0] is this package dir under script execution; make the
+    # official harness modules the only candidates, and prove it.
+    if C.EVAL_GLUONTS not in sys.path:
+        sys.path.insert(0, C.EVAL_GLUONTS)
     import run
+    import dataset as eval_dataset_mod
+    assert os.path.samefile(run.__file__,
+                            os.path.join(C.EVAL_GLUONTS, "run.py")), run.__file__
+    assert os.path.samefile(eval_dataset_mod.__file__,
+                            os.path.join(C.EVAL_GLUONTS, "dataset.py")), \
+        eval_dataset_mod.__file__
     from gluonts.model.forecast import SampleForecast
     from gluonts.ev.metrics import MAE, MASE, MSE, ND, NRMSE, SMAPE
     from gluonts.model.evaluation import evaluate_forecasts

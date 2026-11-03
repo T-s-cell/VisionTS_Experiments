@@ -126,12 +126,23 @@ def main():
     # time (eval_gluonts/dataset.py rebinds _tsf_datasets.generate_forecasting_dataset
     # but only the additional_datasets recipes use that local function).
     # We replace the recipe key AFTER `import run` and record provenance.
+    # Script-mode sys.path[0] is THIS package dir, not the chdir'd cwd —
+    # insert eval_gluonts explicitly and assert identity (a stray site-packages
+    # module named run/dataset would silently poison every later gate).
+    if C.EVAL_GLUONTS not in sys.path:
+        sys.path.insert(0, C.EVAL_GLUONTS)
     import run
+    import dataset as eval_dataset_mod
+    assert os.path.samefile(run.__file__,
+                            os.path.join(C.EVAL_GLUONTS, "run.py")), run.__file__
+    assert os.path.samefile(eval_dataset_mod.__file__,
+                            os.path.join(C.EVAL_GLUONTS, "dataset.py")), \
+        eval_dataset_mod.__file__
     import gluonts.dataset.repository._tsf_datasets as tsf_mod
     import gluonts.dataset.repository.datasets as gds
     _gen = {"fired": False}
     orig_recipe = gds.dataset_recipes[ds]
-    local_gen = sys.modules["dataset"].generate_forecasting_dataset
+    local_gen = eval_dataset_mod.generate_forecasting_dataset
 
     def probe_recipe(*args, **kwargs):
         from tempfile import TemporaryDirectory

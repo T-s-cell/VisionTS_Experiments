@@ -101,7 +101,10 @@ def main():
     for k, v in exp003_args.items():
         if k in SKIP:
             continue
-        argv += ["--%s" % k, str(v)]
+        if isinstance(v, (list, tuple)):  # nargs='+' args (e.g. p_hidden_dims)
+            argv += ["--%s" % k] + [str(x) for x in v]
+        else:
+            argv += ["--%s" % k, str(v)]
     argv += ["--model_id", job,
              "--save_dir", save_dir,
              "--ft_type", "full",
@@ -121,6 +124,9 @@ def main():
 
     init_rec = {"called": 0}
     import visionts.model as vmodel
+    assert os.path.samefile(vmodel.__file__,
+                            os.path.join(C.REPO_ROOT, "visionts", "model.py")), \
+        vmodel.__file__
     _vinit = vmodel.VisionTS.__init__
 
     def vinit_wrapper(self, arch="mae_base", finetune_type="ln",
@@ -157,6 +163,9 @@ def main():
     vmodel.VisionTS.__init__ = vinit_wrapper
 
     import exp_univariate as eu
+    assert os.path.samefile(eu.__file__,
+                            os.path.join(C.REPO_ROOT, "repro_fullshot",
+                                         "exp_univariate.py")), eu.__file__
     _einit = eu.Exp_Univariate.__init__
 
     def einit_wrapper(self, *a, **kw):
@@ -214,6 +223,9 @@ def main():
     t0 = time.time()
     sys.argv = argv
     import run_train
+    assert os.path.samefile(run_train.__file__,
+                            os.path.join(C.REPO_ROOT, "repro_fullshot",
+                                         "run_train.py")), run_train.__file__
     assert init_rec["called"] == 0, "VisionTS constructed before hooks were armed"
     rc = run_train.main()
     wall = time.time() - t0
