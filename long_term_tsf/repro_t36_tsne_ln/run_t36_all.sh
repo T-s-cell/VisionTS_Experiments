@@ -76,10 +76,11 @@ for g in C.GROUPS:
 import sklearn
 need(sklearn.__version__ == C.SKLEARN_PIN,
      "sklearn %s != pinned %s" % (sklearn.__version__, C.SKLEARN_PIN))
-import torch
+import torch, glob
 need(torch.cuda.is_available(), "CUDA GPU")
-n_val = len(os.listdir("/dev_data/wlt/data/ImageNet/val"))
-need(n_val == 50000, "ImageNet val dir has %d files" % n_val)
+# count only the dataset files: the dir also holds a benign ".extract_done" marker
+n_val = len(glob.glob("/dev_data/wlt/data/ImageNet/val/ILSVRC2012_val_*.JPEG"))
+need(n_val == 50000, "ImageNet val has %d ILSVRC2012_val_*.JPEG files" % n_val)
 print("[preflight] OK (ckpt/3x EXP-003 jobs/EXP-002 artifacts/ImageNet/sklearn/CUDA)")
 EOF
   "$PYTHON" "$REPRO_DIR/extract_features_t36.py" --help >/dev/null 2>&1 || fail_exit "extract script import"
