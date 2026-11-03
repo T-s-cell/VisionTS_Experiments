@@ -1,6 +1,6 @@
 # EXP-036 结果:VisionTS 微调 LayerNorm 前后的 t-SNE 对照(1,900 固定样本)
 
-日期:2026-11-03 | commit `3b0658d` | 分支 repro/ltsf-t36-tsne-ln-v1 | 冻结 MAE-base(sha256 c551c37b63a221a3…)
+日期:2026-11-03 | commit `38e59fc` | 分支 repro/ltsf-t36-tsne-ln-v1 | 冻结 MAE-base(sha256 c551c37b63a221a3…)
 
 问题:让冻结编码器与三套 EXP-003 编码器-LN 微调权重(ETTm1/Electricity/Weather,H=96、seed=2021 最佳验证 checkpoint)看**完全相同的 1,900 个输入**(EXP-002 归档抽样清单:ImageNet 1,000 + ETTm1/Weather/Electricity 各 300),局部交叠如何变化。四条件输入逐批哈希一致;仅编码器 50 个 LN 张量来自各自 checkpoint,其余参数与冻结逐位一致。
 
@@ -13,6 +13,7 @@
 - extract: 50 spliced encoder-LN keys bitwise == source checkpoint in every LN condition; ids_keep == archived mask_ref
 - t-SNE: 3 LN conditions, EXP-002 params verbatim, sklearn 1.9.1; frozen panel = archived EXP-002 coords (sha d4706007477d1278...)
 - NN: 30-NN over all 1,900 features, self excluded by global row, denominator 300x30=9000 per cell; neighbour row indices archived
+- dist_ratio: nn_distance_ratios.npz (900 TS rows x 4 conditions): nearest-ImageNet distance > nearest-TS distance on every row (3,600/3,600; finite ratio min 1.220-1.251, median 1.813-1.841; 6 rows with d_ts==0 across LN conds)
 
 ## 权重来源与回放
 
@@ -35,7 +36,7 @@
 
 括号为相对冻结的百分点变化。邻域在**该编码器的全部 1,900 个特征**内取(排除自身,按全局行号),不限于同组。
 
-**高维结果饱和:4 编码器 × 3 时序来源全部 12 格均为 0/9,000。**在原始 54,528 维特征空间,每个时序样本的 30 近邻全部是时序样本(冻结编码器下抽查行最近 ImageNet 距离约为最近时序距离的 1.4–3.3 倍;独立复算与 nn_neighbors.npz 一致)。模态鸿沟主导原始特征,该高维指标在本设置下不区分四套编码器,微调的变化量恒为 ±0 pp,照实记录。
+**高维结果饱和:4 编码器 × 3 时序来源全部 12 格均为 0/9,000。**在原始 54,528 维特征空间,每个时序样本的 30 近邻全部是时序样本:逐行归档证据 `nn_distance_ratios.npz`(900 个时序行 × 4 条件,全局行号 1000–1899,float64 距离,自排除)显示每个时序行到最近 ImageNet 样本的欧氏距离都**大于**到最近其他时序样本的距离(3,600/3,600 行;有限比值 min 1.220–1.251、median 1.813–1.841;另有 6 行最近时序距离为 0,即特征完全重复的时序样本对,比值记为无穷、不入有限统计)。模态鸿沟主导原始特征,该高维指标在本设置下不区分四套编码器,微调的变化量恒为 ±0 pp,照实记录。
 
 ## 二维面板内 30-NN ImageNet 占比(t-SNE 坐标空间,描述性)
 

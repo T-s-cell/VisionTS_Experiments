@@ -1,7 +1,7 @@
 # EXP-036:VisionTS 微调 LayerNorm 前后的 t-SNE 对照(1,900 固定样本)
 
-日期:2026-11-03 | 分支 `repro/ltsf-t36-tsne-ln-v1` | 证据/落章 commit `3b0658d1550c798b56186947bd2c1da2727984fc`
-(代码 52069fc + 驱动修复 58c266a/5a82e44/04aeb0a + 判读口径 b9942cc + eta 证据 3b0658d;RESULT 由此头落章)
+日期:2026-11-03 | 分支 `repro/ltsf-t36-tsne-ln-v1` | 证据/落章 commit `38e59fc`(审计修订:逐行最近邻距离证据;此前基线证据 3b0658d)
+(代码 52069fc + 驱动修复 58c266a/5a82e44/04aeb0a + 判读口径 b9942cc + eta 证据 3b0658d + 审计修订 38e59fc;RESULT 由此头落章)
 
 ## 问题
 
@@ -37,11 +37,12 @@ LN 拼接口径:EXP-003 以 `ft_type='ln'` 训练了编码器+解码器共 84 �
 2. **拼接核验**:每条件 50/50 编码器 LN 键在来源 checkpoint 中齐全、拼入后与来源逐位相等;50 键全部相对冻结发生变化(逐键 max|Δ| 在 verify json);**编码器非 LN 张量(101 个,参数+buffer)与冻结逐位一致**;
 3. **输入固定**:四条件逐批输入张量 + 掩码 noise SHA-256 完全相同(`input_hashes_*.json`);ids_keep 与归档 `mask_ref.json` 断言相等;
 4. **特征核验**:frozen 特征与 EXP-002 原件**逐位一致**(新抽 sha256 `5ac9bbd2…` == 原件 `5ac9bbd2…`,np.array_equal max|Δ|=0);四份特征均 (1900,54528) f32 全有限;
-5. **t-SNE**:三套 LN 条件用 EXP-002 原参数(sklearn 1.9.1,`perplexity=30, learning_rate=200, init='pca', early_exaggeration=12, max_iter=1000, random_state=2021, metric='euclidean'`,输入原始 54,528 维,无预降维);frozen 面板直接复用归档坐标(sha256 `d4706007477d1278…`),未重跑。
+5. **t-SNE**:三套 LN 条件用 EXP-002 原参数(sklearn 1.9.1,`perplexity=30, learning_rate=200, init='pca', early_exaggeration=12, max_iter=1000, random_state=2021, metric='euclidean'`,输入原始 54,528 维,无预降维);frozen 面板直接复用归档坐标(sha256 `d4706007477d1278…`),未重跑;
+6. **高维距离逐行证据(审计修订)**:`nn_distance_ratios.npz`——900 时序行 × 4 条件,每行到最近 ImageNet 样本与最近其他时序样本的 float64 欧氏距离(自排除,行号 1000–1899 归档);**3,600/3,600 行 d_im > d_ts**,有限比值 min 1.220–1.251 / median 1.813–1.841;6 行(每 LN 条件 2 行)d_ts=0 为特征完全重复的时序样本对,比值记无穷不入统计;collect 落章时复算 npz 行号/比值/计数与 verify json 逐项相等。
 
 ## 结果摘要(照实)
 
-- **高维 30-NN ImageNet 占比(分母 9,000):4 编码器 × 3 时序来源全部 12 格 = 0/9,000。** 原始 54,528 维空间模态鸿沟主导(冻结下抽查行最近 ImageNet 距离约为最近时序距离的 1.4–3.3 倍,独立复算一致),该指标在本设置下饱和,不区分四套编码器(±0 pp)。
+- **高维 30-NN ImageNet 占比(分母 9,000):4 编码器 × 3 时序来源全部 12 格 = 0/9,000。** 原始 54,528 维空间模态鸿沟主导:逐行归档证据(`nn_distance_ratios.npz`)显示 3,600/3,600 行的最近 ImageNet 距离均大于最近时序距离(有限比值 min 1.220–1.251 / median 1.813–1.841),该指标在本设置下饱和,不区分四套编码器(±0 pp)。
 - **二维面板内 30-NN ImageNet 占比(描述性,相对冻结的百分点)**:ETTm1-LN 面板训练域 +2.92 pp / Electricity +5.17 pp / Weather −1.32 pp;Electricity-LN 面板训练域 +9.88 pp / ETTm1 +2.73 pp / Weather +1.87 pp;Weather-LN 面板训练域 +0.46 pp / ETTm1 −3.60 pp / Electricity +1.99 pp。各面板独立拟合,数值仅作面板内方向参考。
 
 ## 运行命令
@@ -52,6 +53,8 @@ PYTHON=/dev_data/wlt/conda/envs/visionts/bin/python GPU_ID=0 \
   bash repro_t36_tsne_ln/run_t36_all.sh min    # 权重三连核对+冒烟(frozen/ettm1_ln+t-SNE)
 PYTHON=/dev_data/wlt/conda/envs/visionts/bin/python GPU_ID=0 \
   bash repro_t36_tsne_ln/run_t36_all.sh main   # 其余两条件+NN 表+2x2 图+collect
+# 高维逐行距离证据(纯 CPU numpy,审计修订新增;只需已落盘特征)
+python repro_t36_tsne_ln/nn_distance_ratios_t36.py
 # 本地落章(拉回证据件后)
 python collect_t36.py --stamp <证据 commit sha>
 ```
@@ -76,4 +79,4 @@ python collect_t36.py --stamp <证据 commit sha>
 
 eta:Python 3.12.13 / numpy 2.4.4 / torch 2.12.0+cu126 / scikit-learn **1.9.1**(与 EXP-002 env.json 一致;快照 `logs/env_snapshot_{min,main}.txt`)。
 
-审计包:`temp/VisionTS_t36_tsne_ln_20261103.tar.gz`——脚本、logs(nohup/env/verify json)、SMOKE 标记、输入哈希、特征 sha sidecar、3 套 2D 坐标、NN 表/邻居行号/summary、`summary_t36.csv`、`RESULT_t36_tsne_ln.md`、图 PNG/PDF,以及 `exp002_refs/`(归档 meta.csv、groups.npy、抽样清单、tsne_params.json、mask_ref.json、sanity_report.txt、冻结坐标副本——包内 `python collect_t36.py --stamp <sha>` 可独立复验全部门禁);**不含** features npy(4×414 MB)、任何 checkpoint、ImageNet 原图。包 sha 见同名 `.sha256` sidecar(不内嵌于本 README)。
+审计包:`temp/VisionTS_t36_tsne_ln_20261103.tar.gz`——脚本、logs(nohup/env/verify json)、SMOKE 标记、输入哈希、特征 sha sidecar、3 套 2D 坐标、NN 表/邻居行号/summary、逐行距离证据 `nn_distance_ratios.npz`、`summary_t36.csv`、`RESULT_t36_tsne_ln.md`、图 PNG/PDF,以及 `exp002_refs/`(归档 meta.csv、groups.npy、抽样清单、tsne_params.json、mask_ref.json、sanity_report.txt、冻结坐标副本——包内 `python collect_t36.py --stamp <sha>` 可独立复验全部门禁);**不含** features npy(4×414 MB)、任何 checkpoint、ImageNet 原图。包 sha 见同名 `.sha256` sidecar(不内嵌于本 README)。
