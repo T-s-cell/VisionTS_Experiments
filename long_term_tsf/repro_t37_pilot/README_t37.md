@@ -249,8 +249,9 @@ HOME=/dev_data/wlt/t37_author_home /dev_data/wlt/conda/envs/visionts_t37author/b
 
 ## 9. 交付物
 
-- 审计包 `temp/VisionTS_t37_pilot_20261104.tar.gz`(v2,含本轮作者环境对照与修包产物;
-  <50 MB,不含 npy/权重/Monash 原始数据)+ sha256 sidecar(v2 sha 以 `temp/*.sha256` 与交付消息为准)。
+- 审计包 `temp/VisionTS_t37_pilot_20261104.tar.gz`(v3,含作者环境对照、修包与 2026-11-04
+  统计/归因修订:贡献率公式 ÷107、双环境计数 55 低/52 高、整套软件环境归因、双环境 FRED-MD 表入 RESULT;
+  <50 MB,不含 npy/权重/Monash 原始数据)+ sha256 sidecar(v3 sha 以 `temp/*.sha256` 与交付消息为准)。
 - RESULT:`logs/RESULT_t37_pilot.md` + `logs/summary_t37.csv`(collect_t37.py 生成,每个数字溯源)。
 - 本地分支 `repro/ltsf-t37-pilot-v1`;运行代码 = `afd871f9…` 的 git archive,后续 commit
-  (G4 诊断/README/修包/作者环境对照)不入运行路径;**推送与扩跑待用户复审本包后进行**。
+  (G4 诊断/README/修包/作者环境对照/统计修正 b1cf6de)不入运行路径;**推送与扩跑待用户复审本包后进行**。
