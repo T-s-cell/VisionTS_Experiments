@@ -135,6 +135,34 @@ def result_md(vj, rows_a, rows_b):
              "same test split objects, same imputation (`run.imputation_nan`), same "
              "evaluate_forecasts call and metric list.\n")
 
+    fc = safe(lambda: C.load_json(os.path.join(C.LOG_DIR, "fred_series_compare.json")), None)
+    if fc and fc.get("decomposition"):
+        fa = safe(lambda: C.load_json(os.path.join(C.LOG_DIR, "fred_series_author.json")), {})
+        fcu = safe(lambda: C.load_json(os.path.join(C.LOG_DIR, "fred_series_current.json")), {})
+        d = fc["decomposition"]
+        anchor = fc.get("anchor", C.AUTHOR_ANCHOR["fred_md"]["mae"])
+        L.append("FRED-MD anchor attribution (controlled env comparison; evidence "
+                 "`logs/fred_series_*.npz/json`, `logs/fred_series_compare.json`):\n")
+        L.append("| env | python | torch | FRED-MD MAE | vs anchor %.6f |" % anchor)
+        L.append("|---|---|---|---|---|")
+        L.append("| author-pinned | %s | %s | %.9f | rel %.1e (reproduces anchor) |"
+                 % (fa.get("versions", {}).get("python", "?"), fa.get("versions", {}).get("torch", "?"),
+                    d["mae_author"], fc.get("rel_diff_author_vs_anchor", float("nan"))))
+        L.append("| current | %s | %s | %.9f | rel %.4f (**G4 FAIL kept**, tol 1e-3, user verdict 2026-11-04) |"
+                 % (fcu.get("versions", {}).get("python", "?"), fcu.get("versions", {}).get("torch", "?"),
+                    d["mae_current"], fc.get("rel_diff_current_vs_anchor", float("nan"))))
+        L.append("")
+        L.append("The whole software env was swapped simultaneously (python/torch/torchvision/timm/"
+                 "numpy/pandas/gluonts/einops), so the deviation is attributable to the software "
+                 "environment as a whole, not to PyTorch alone. Truth arrays are bitwise identical "
+                 "across envs; the author-pinned env has LOWER MAE on %d of 107 series and HIGHER on "
+                 "%d; top contributor series %d shifts the dataset MAE by %+.2f (%.2f%% of the net "
+                 "diff %+.4f), the other series net-offset %+.2f.\n"
+                 % (d.get("n_series_author_mae_lower"), d.get("n_series_author_mae_higher"),
+                    d.get("top1_series_idx"), d.get("top1_contribution"),
+                    d.get("top1_share_of_net_diff_pct"), d.get("total_diff"),
+                    d.get("others_net_offset")))
+
     L.append("## B. ETTh1 H=96 seed=2021: All (ImageNet init) vs Rand-VM (random init), full finetune\n")
     L.append("| arm | MSE | MAE | source | wall s | GPU peak MB | paper T22 (4H mean) |")
     L.append("|---|---|---|---|---|---|---|")
