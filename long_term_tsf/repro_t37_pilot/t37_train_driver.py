@@ -52,8 +52,11 @@ def rng_hashes():
         parts["torch_cuda"] = C.sha256_bytes(
             torch.cuda.get_rng_state().numpy().tobytes())
     nps = np.random.get_state()
-    parts["numpy"] = C.sha256_bytes(np.concatenate([np.asarray([nps[0], nps[1]], dtype=np.int64),
-                                                    nps[2]]).tobytes())
+    _nh = hashlib.sha256()
+    _nh.update(nps[0].encode())
+    _nh.update(np.ascontiguousarray(nps[1], dtype=np.uint32).tobytes())
+    _nh.update(np.asarray(nps[2:], dtype=np.int64).tobytes())
+    parts["numpy"] = _nh.hexdigest()
     py = random.getstate()
     parts["python"] = C.sha256_bytes(np.asarray(py[1], dtype=np.int32).tobytes())
     return parts
@@ -219,6 +222,7 @@ def main():
     # ---- zero-change formal training ------------------------------------
     # run_train is imported AFTER the hooks are installed; importing it
     # never triggers training (main() is called explicitly below).
+    torch.zeros(1, device="cuda:%d" % dargs.gpu)  # lazy-init before peak reset
     torch.cuda.reset_peak_memory_stats(dargs.gpu)
     t0 = time.time()
     sys.argv = argv

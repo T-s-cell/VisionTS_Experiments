@@ -231,7 +231,9 @@ def main():
     tee = Tee(sys.__stdout__)
     sys.stdout = tee
     try:
-        torch.cuda.reset_peak_memory_stats(args.gpu)
+        if torch.cuda.is_available():
+            torch.zeros(1, device="cuda:%d" % args.gpu)  # lazy-init: torch>=2.6 rejects reset before first alloc
+            torch.cuda.reset_peak_memory_stats(args.gpu)
         run.evaluate(
             ds,
             C.vision_csv(ds),
