@@ -28,7 +28,7 @@ mkdir -p "$LOGS"
 
 log() { echo "[$(date '+%F %T')] $*"; }
 fail() { log "FAILED: $*"; echo "[$(date '+%F %T')] $1: $*" >> "$FAILED"; }
-clear_stage() { grep -v "^\\[$1\\]" "$FAILED" > "$FAILED.tmp" 2>/dev/null && mv "$FAILED.tmp" "$FAILED" || true; }
+clear_stage() { grep -v "] $1: " "$FAILED" > "$FAILED.tmp" 2>/dev/null && mv "$FAILED.tmp" "$FAILED" || true; }
 
 env_snapshot() {
   $PYTHON -c "import sys,torch,numpy,gluonts,sklearn;print('python',sys.version.split()[0]);print('torch',torch.__version__);print('numpy',numpy.__version__);print('gluonts',gluonts.__version__);print('sklearn',sklearn.__version__);print('cuda',torch.cuda.is_available())" \

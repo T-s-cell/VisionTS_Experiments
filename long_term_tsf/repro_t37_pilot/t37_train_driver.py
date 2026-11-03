@@ -58,7 +58,7 @@ def rng_hashes():
     _nh.update(np.asarray(nps[2:], dtype=np.int64).tobytes())
     parts["numpy"] = _nh.hexdigest()
     py = random.getstate()
-    parts["python"] = C.sha256_bytes(np.asarray(py[1], dtype=np.int32).tobytes())
+    parts["python"] = C.sha256_bytes(np.asarray(py[1], dtype=np.uint64).tobytes())
     return parts
 
 

@@ -145,12 +145,13 @@ def main():
     local_gen = eval_dataset_mod.generate_forecasting_dataset
 
     def probe_recipe(*args, **kwargs):
+        from pathlib import Path
         from tempfile import TemporaryDirectory
         from zipfile import ZipFile
         from gluonts.dataset.repository._tsf_datasets import TSFReader
         entry = tsf_mod.datasets[ds]
         with TemporaryDirectory() as td:
-            zpath = entry.download(td)
+            zpath = entry.download(Path(td))
             with ZipFile(zpath) as archive:
                 archive.extractall(path=td)
                 meta, raw = TSFReader(os.path.join(td, archive.namelist()[0])).read()
