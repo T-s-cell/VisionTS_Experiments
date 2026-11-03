@@ -25,6 +25,18 @@ def fail(msg):
     raise SystemExit("[collect_t36] FAIL: %s" % msg)
 
 
+def orig_coords_path():
+    """Archived EXP-002 frozen coords: repo file, or the copy shipped in the
+    audit package (exp002_refs/ next to the package's repro dir)."""
+    pkg_copy = os.path.abspath(os.path.join(C.PKG, "..", "exp002_refs",
+                                            "tsne_coords_1900x2.npy"))
+    if os.path.isfile(C.ORIG_COORDS):
+        return C.ORIG_COORDS
+    if os.path.isfile(pkg_copy):
+        return pkg_copy
+    fail("archived coords not found at %s or %s" % (C.ORIG_COORDS, pkg_copy))
+
+
 def check_gates(vj):
     g = []
 
@@ -79,7 +91,7 @@ def check_gates(vj):
         fail("frozen must reuse archived coords, not a fresh t-SNE")
     g.append("t-SNE: 3 LN conditions, EXP-002 params verbatim, sklearn %s; "
              "frozen panel = archived EXP-002 coords (sha %s...)"
-             % (C.SKLEARN_PIN, C.sha256_of(C.ORIG_COORDS)[:16]))
+             % (C.SKLEARN_PIN, C.sha256_of(orig_coords_path())[:16]))
 
     nn = vj.get("nn")
     if not nn:
@@ -99,7 +111,7 @@ def tsne_2d_descriptive():
     """
     prop = {}
     for cond in C.COND_LIST:
-        path = C.ORIG_COORDS if cond == "frozen" else os.path.join(C.PKG, "coords_%s_1900x2.npy" % cond)
+        path = orig_coords_path() if cond == "frozen" else os.path.join(C.PKG, "coords_%s_1900x2.npy" % cond)
         c = np.load(path).astype(np.float64)
         assert c.shape == (1900, 2)
         d2 = ((c[:, None, :] - c[None, :, :]) ** 2).sum(-1)

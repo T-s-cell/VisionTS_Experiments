@@ -76,4 +76,4 @@ python collect_t36.py --stamp <证据 commit sha>
 
 eta:Python 3.12.13 / numpy 2.4.4 / torch 2.12.0+cu126 / scikit-learn **1.9.1**(与 EXP-002 env.json 一致;快照 `logs/env_snapshot_{min,main}.txt`)。
 
-审计包:`temp/VisionTS_t36_tsne_ln_20261103.tar.gz`——脚本、logs(nohup/env/verify json)、SMOKE 标记、输入哈希、特征 sha sidecar、3 套 2D 坐标、NN 表/邻居行号/summary、`summary_t36.csv`、`RESULT_t36_tsne_ln.md`、图 PNG/PDF;**不含** features npy(4×414 MB)、任何 checkpoint、ImageNet 原图。包 sha 见同名 `.sha256` sidecar(不内嵌于本 README)。
+审计包:`temp/VisionTS_t36_tsne_ln_20261103.tar.gz`——脚本、logs(nohup/env/verify json)、SMOKE 标记、输入哈希、特征 sha sidecar、3 套 2D 坐标、NN 表/邻居行号/summary、`summary_t36.csv`、`RESULT_t36_tsne_ln.md`、图 PNG/PDF,以及 `exp002_refs/`(归档 meta.csv、groups.npy、抽样清单、tsne_params.json、mask_ref.json、sanity_report.txt、冻结坐标副本——包内 `python collect_t36.py --stamp <sha>` 可独立复验全部门禁);**不含** features npy(4×414 MB)、任何 checkpoint、ImageNet 原图。包 sha 见同名 `.sha256` sidecar(不内嵌于本 README)。
