@@ -4,8 +4,10 @@ every present subset passes all gates; a missing/crashed subset is a FAIL.
 
 Gates per subset:
   G1 pred_len runtime check OK and == raw-benchmark horizon (12 / 56)
-  G2 raw .tsf meta really carried forecast_horizon == that value (i.e. the
-     prediction length did NOT come from the frequency fallback)
+  G2 pred_len source proven per subset: nn5 raw .tsf carried
+     forecast_horizon == 56; fred_md .tsf carries none, so pred_len==12
+     came from the official frequency fallback ("M":12; pandas>=2.2 alias
+     shim ME->12 recorded, same value as the author's env)
   G3 autotune accepted P == paper Table 6 periodicity (1 / 7)
   G4 VisionTS MAE vs author precomputed anchor, rel diff <= 1e-3
      (MSE recorded alongside; MAE is the gate)
@@ -36,16 +38,25 @@ def check(ds, gates):
                   "got %s want %d" % (got_pred, expect["pred_len"])))
 
     gen = rec.get("generation", {})
-    ok = gen.get("has_forecast_horizon") is True and \
-        gen.get("forecast_horizon") == expect["pred_len"]
-    gates.append((ds, "G2_raw_horizon", "PASS" if ok else "FAIL",
-                  "has_fh=%s fh=%s freq=%s recipe=%s%s" %
-                  (gen.get("has_forecast_horizon"),
-                   gen.get("forecast_horizon"),
-                   gen.get("raw_frequency"),
-                   gen.get("recipe_orig_module", "?"),
-                   " (eval-local gen!)" if gen.get("recipe_orig_is_eval_local_gen")
-                   else "")))
+    if expect["horizon_source"] == "raw_tsf_forecast_horizon":
+        ok = gen.get("has_forecast_horizon") is True and \
+            gen.get("forecast_horizon") == expect["pred_len"]
+        detail = "has_fh=%s fh=%s freq=%s recipe=%s%s" % (
+            gen.get("has_forecast_horizon"), gen.get("forecast_horizon"),
+            gen.get("raw_frequency"), gen.get("recipe_orig_module", "?"),
+            " (eval-local gen!)" if gen.get("recipe_orig_is_eval_local_gen") else "")
+    else:
+        # pred_len legitimately comes from the official frequency fallback
+        # (raw .tsf has no forecast_horizon); require the runtime pred_len
+        # and the shim record to match the official map value
+        fc = gen.get("fallback_compat") or {}
+        ok = gen.get("has_forecast_horizon") is False and \
+            rec.get("split", {}).get("meta_prediction_length") == expect["pred_len"] and \
+            fc.get("value") == expect["pred_len"]
+        detail = "no raw horizon (official fallback %s); freq=%s offset=%s recipe=%s" % (
+            fc.get("value"), gen.get("raw_frequency"), fc.get("offset_name"),
+            gen.get("recipe_orig_module", "?"))
+    gates.append((ds, "G2_pred_len_source", "PASS" if ok else "FAIL", detail))
 
     acc = rec.get("autotune", {}).get("accepted_p")
     ok = acc == expect["p"]

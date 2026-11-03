@@ -27,7 +27,7 @@ def build_rows_a(vj):
         rows.append({
             "task": "A_monash", "item": ds,
             "pred_len": s.get("pred_len"), "pred_len_expect": meta["pred_len"],
-            "horizon_source": "raw_tsf_forecast_horizon",
+            "horizon_source": meta["horizon_source"],
             "n_series": s.get("n_series"),
             "autotune_P": s.get("autotune_p"), "P_expect": meta["p"],
             "visionts_mae": s.get("visionts_mae"),

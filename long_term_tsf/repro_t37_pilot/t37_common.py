@@ -78,11 +78,16 @@ AUTHOR_ANCHOR = {
 }
 # raw-benchmark expectation (user correction: NN5 horizon = 56, not the 30
 # frequency-fallback default); context = code-computed convert_context_len,
-# never hardcoded here
+# never hardcoded here. horizon_source records WHERE pred_len must come
+# from: nn5 .tsf carries forecast_horizon=56; fred_md .tsf carries NO
+# forecast_horizon -> official frequency fallback ("M":12), which on this
+# env needs a pandas>=2.2 alias shim (M renamed ME) with the same value 12.
 SUBSETS = {
     "fred_md": {"p": 1, "pred_len": 12,
+                "horizon_source": "freq_fallback_M_12",
                 "series_info": 107},   # Moirai paper: 107 monthly series
     "nn5_daily_without_missing": {"p": 7, "pred_len": 56,
+                                  "horizon_source": "raw_tsf_forecast_horizon",
                                   "series_info": 111},  # 111 daily series
 }
 CSV_COLUMNS = ["dataset", "MSE[mean]", "MAE[0.5]", "sMAPE[0.5]",

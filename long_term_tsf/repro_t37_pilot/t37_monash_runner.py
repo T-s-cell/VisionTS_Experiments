@@ -140,7 +140,32 @@ def main():
         eval_dataset_mod.__file__
     import gluonts.dataset.repository._tsf_datasets as tsf_mod
     import gluonts.dataset.repository.datasets as gds
-    _gen = {"fired": False}
+    _gen = {"fired": False, "fallback_compat": None}
+
+    # pandas>=2.2 renamed the month/year END aliases (M->ME, Y->YE): the
+    # official fallback map keys ("M":12, "Y":4) never match to_offset's
+    # name on this env and the official code raises. Shim applies ONLY the
+    # renamed keys with the OFFICIAL values (ME->12, YE->4); fred_md's raw
+    # .tsf carries no forecast_horizon, so this fallback is pred_len's true
+    # source — same value as the author's pandas<2.2 run. Recorded as
+    # environment-compat evidence.
+    _orig_fallback = eval_dataset_mod.default_prediction_length_from_frequency
+
+    def fallback_compat(freq):
+        try:
+            return _orig_fallback(freq)
+        except ValueError:
+            from pandas.tseries.frequencies import to_offset
+            name = str(to_offset(freq).name)
+            alias = {"ME": 12, "YE": 4}
+            if name not in alias:
+                raise
+            _gen["fallback_compat"] = {"requested_freq": str(freq),
+                                       "offset_name": name, "value": alias[name]}
+            return alias[name]
+
+    eval_dataset_mod.default_prediction_length_from_frequency = fallback_compat
+    tsf_mod.default_prediction_length_from_frequency = fallback_compat
     orig_recipe = gds.dataset_recipes[ds]
     local_gen = eval_dataset_mod.generate_forecasting_dataset
 
@@ -245,6 +270,16 @@ def main():
             batch_size=C.MONASH_BATCH,
             periodicity="autotune",
         )
+    except Exception as exc:
+        # crash-safe: the probe/split evidence already gathered must survive
+        sys.stdout = tee._streams[0]
+        rec["generation"] = dict(_gen)
+        if _split:
+            rec["split"] = dict(_split)
+        rec["error"] = "%s: %s" % (type(exc).__name__, exc)
+        rec["finished"] = C.time_str()
+        C.dump_json(C.monash_json(ds), rec)
+        raise
     finally:
         sys.stdout = tee._streams[0]
 
