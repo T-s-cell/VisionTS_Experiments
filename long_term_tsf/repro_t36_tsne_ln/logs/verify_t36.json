@@ -440,5 +440,40 @@
     "Electricity": 0.0
    }
   }
+ },
+ "dist_ratio": {
+  "npz": "/dev_data/wlt/VisionTS_Experiments/long_term_tsf/save_t36_tsne/nn_distance_ratios.npz",
+  "npz_sha256": "8b27b62cf965209412624cc8d34ef0ed755aad9553550bbc138a4547f26478d0",
+  "per_cond": {
+   "frozen": {
+    "n_rows": 900,
+    "n_d_im_gt_d_ts": 900,
+    "n_dts_zero": 0,
+    "ratio_min_finite": 1.2209604267730503,
+    "ratio_median_finite": 1.820873148496708
+   },
+   "ettm1_ln": {
+    "n_rows": 900,
+    "n_d_im_gt_d_ts": 900,
+    "n_dts_zero": 2,
+    "ratio_min_finite": 1.2370267829490884,
+    "ratio_median_finite": 1.8388768910955804
+   },
+   "ecl_ln": {
+    "n_rows": 900,
+    "n_d_im_gt_d_ts": 900,
+    "n_dts_zero": 2,
+    "ratio_min_finite": 1.2195686669632386,
+    "ratio_median_finite": 1.8407524672128042
+   },
+   "weather_ln": {
+    "n_rows": 900,
+    "n_d_im_gt_d_ts": 900,
+    "n_dts_zero": 2,
+    "ratio_min_finite": 1.2512854231499932,
+    "ratio_median_finite": 1.8134330153626879
+   }
+  },
+  "all_rows_d_im_gt_d_ts": true
  }
 }
