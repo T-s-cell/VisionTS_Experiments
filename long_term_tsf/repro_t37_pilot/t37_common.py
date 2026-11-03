@@ -107,7 +107,16 @@ def vision_csv(ds):
 
 
 def naive_csv(ds):
-    return os.path.join(SAVE_A_BASE, "naive_monash_%s.csv" % ds)
+    return os.path.join(SAVE_A_BASE, "naive_monash_%s.csv" % ds)  # legacy ambiguous name (removed)
+
+
+def naive_n_csv(ds, tag):
+    """tag in {n1, n2}: distinct files so N2 can no longer overwrite N1
+    (user verdict 2026-11-04)."""
+    return os.path.join(SAVE_A_BASE, "naive_%s_monash_%s.csv" % (tag, ds))
+
+
+RECOMPUTE_F64_JSON = os.path.join(LOG_DIR, "recompute_f64.json")
 
 
 def gluonts_cache():

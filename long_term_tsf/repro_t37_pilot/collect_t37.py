@@ -125,7 +125,9 @@ def result_md(vj, rows_a, rows_b):
     L.append("")
     L.append("Evidence: `logs/monash_<ds>.json` (split/pred_len/raw .tsf horizon/data version/"
              "autotune events), `logs/naive_<ds>.json` (N1/N2 + window-alignment check), "
-             "`save_t37_monash/visionts_monash_<ds>.csv`, `save_t37_monash/naive_monash_<ds>.csv`; "
+             "`save_t37_monash/visionts_monash_<ds>.csv`, `save_t37_monash/naive_n{1,2}_monash_<ds>.csv` "
+             "(N1/N2 exported separately from `logs/naive_<ds>.json`; the single naive_monash_<ds>.csv "
+             "was ambiguous and removed per user verdict 2026-11-04); "
              "gates in `logs/verify_t37.json` (section monash).\n")
     L.append("Definitions: N1 = last imputed value repeated (Monash benchmark 'Naive' per "
              "Woo et al. 2024 / Godahewa et al. 2021; primary denominator); N2 = seasonal-naive "
