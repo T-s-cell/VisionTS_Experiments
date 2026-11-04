@@ -92,7 +92,7 @@ q = subprocess.check_output(
     ["nvidia-smi", "--query-gpu=memory.free,memory.total",
      "--format=csv,noheader,nounits"]).decode()
 free, total = [float(x) for x in q.strip().splitlines()[0].split(",")]
-out["gpu_free_gb"] = round(free / 1024 ** 2, 2)  # nvidia-smi returns MiB
+out["gpu_free_gb"] = round(free / 1024, 2)  # nvidia-smi returns MiB
 assert free / total > 0.15, "GPU mostly occupied (free %.1f GB)" % (free / 1024 ** 2)
 du = shutil.disk_usage(C.ROOT)
 out["disk_free_gb"] = round(du.free / 1024 ** 3, 2)
@@ -285,7 +285,7 @@ q = subprocess.check_output(
     ["nvidia-smi", "--query-gpu=memory.free,memory.total",
      "--format=csv,noheader,nounits"]).decode()
 free, total = [float(x) for x in q.strip().splitlines()[0].split(",")]
-out["gpu_free_gb"] = round(free / 1024 ** 2, 2)  # nvidia-smi returns MiB
+out["gpu_free_gb"] = round(free / 1024, 2)  # nvidia-smi returns MiB
 assert free / total > 0.15, "GPU mostly occupied"
 du = shutil.disk_usage(C.ROOT)
 assert du.free > 20 * 1024 ** 3, "less than 20 GB free"
