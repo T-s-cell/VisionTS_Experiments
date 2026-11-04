@@ -424,6 +424,7 @@ def main():
                                "shape": list(final_capture["matrix"].shape)}
 
     # ---- checks ----------------------------------------------------------
+    pred_len_got = _split.get("meta_prediction_length")
     rule_val, rule_src = rule_pred_len(ds, dict(_gen))
     rec["pred_rule"] = {"expected": rule_val, "source": rule_src}
     checks = {}
