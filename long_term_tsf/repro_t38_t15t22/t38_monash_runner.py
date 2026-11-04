@@ -371,14 +371,16 @@ def main():
         os.remove(C.vision_csv(ds))
     cache = C.gluonts_cache()
     before = snapshot_dir(cache)
+    if torch.cuda.is_available():
+        # CUDA context init (~2s) is runner-side overhead: keep it out of
+        # the timed window so phase buckets close to <1% of wall
+        torch.zeros(1, device="cuda:%d" % args.gpu)
+        torch.cuda.reset_peak_memory_stats(args.gpu)
     t0 = time.time()
 
     tee = Tee(sys.__stdout__)
     sys.stdout = tee
     try:
-        if torch.cuda.is_available():
-            torch.zeros(1, device="cuda:%d" % args.gpu)
-            torch.cuda.reset_peak_memory_stats(args.gpu)
         ph_t["t0"] = t0
         # official entry wraps evaluate() in torch.no_grad() (run.py:214);
         # in-process replay must do the same or activation graphs of every
@@ -431,7 +433,12 @@ def main():
     elif n_calls == 1:
         phase["autotune"] = None
         phase["inference"] = fc_log[0]["wall_sec"]
-    phase["eval"] = eval_state.get("wall_sec")
+    # eval bucket = evaluate_forecasts + official post-processing (forecast
+    # object building, result frame, CSV append) up to evaluate() return
+    if "eval0" in ph_t:
+        phase["eval"] = (t0 + wall) - ph_t["eval0"]
+    else:
+        phase["eval"] = eval_state.get("wall_sec")
     booked = sum(v for v in (phase["model_init"], phase["download"],
                              phase["prep"], phase["autotune"],
                              phase["inference"], phase["eval"]) if v)
