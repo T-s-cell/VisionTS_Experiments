@@ -187,6 +187,13 @@ a_collect() {
   local rc=$?
   cat "$LOGS/collect_monash.log"
   [ $rc -ne 0 ] && fail "a_collect" "collect"
+  # author env has no matplotlib: regenerate post-processing under the
+  # current env (collect is pure json->csv/md/png, env-independent) so the
+  # fig5 chart lands in the deliverable
+  if [ ! -f "$LOGS/fig5_monash_ratio.png" ] && [ -n "$PYTHON_B" ]; then
+    "$PYTHON_B" "$PKG_DIR/collect_t38_monash.py" >> "$LOGS/collect_monash.log" 2>&1
+    grep -a 'fig5' "$LOGS/collect_monash.log" | tail -1
+  fi
   return $rc
 }
 

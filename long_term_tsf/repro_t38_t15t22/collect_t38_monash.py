@@ -299,7 +299,8 @@ def result_md(rows, subs, vj):
     L.append("Download=gluonts test-split getter (first-time raw download "
              "or cache load); prep=imputation+autotune-set-up up to the "
              "first forecast call; autotune=validation forecast calls; "
-             "inference=final test forecast; eval=gluonts evaluator. "
+             "inference=final test forecast + forecast-object building; "
+             "eval=gluonts evaluator. "
              "residual<1%% asserted by gate G11.\n")
 
     L.append("## Anomaly list\n")
