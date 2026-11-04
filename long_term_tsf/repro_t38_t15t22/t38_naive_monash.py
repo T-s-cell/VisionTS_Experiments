@@ -107,7 +107,7 @@ def main():
     metrics = [MSE(), MAE(), SMAPE(), MASE(), ND(), NRMSE()]
     out = {"dataset": ds, "P": p, "pred_len": pred_len, "n_series": n_series,
            "env": mrec.get("env"),
-           "start_type": str(type(test_data.input[0]["start"])),
+           "start_type": str(type(next(iter(test_data.input))["start"])),
            "n1_def": "last imputed value repeated (Monash/Woo2024 Naive; "
                      "primary)",
            "n2_def": "last season (P=%d) tiled over horizon (sensitivity)" % p,
