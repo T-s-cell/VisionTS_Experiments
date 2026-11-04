@@ -101,6 +101,8 @@ def rule_pred_len(ds, gen):
         return C.HARD_OVERRIDE[ds], "hard_override"
     if gen.get("has_forecast_horizon"):
         return int(gen["forecast_horizon"]), "raw_tsf"
+    if ds in C.M4_SUBSETS and gen.get("m4_recipe_prediction_length"):
+        return int(gen["m4_recipe_prediction_length"]), "m4_recipe_constant"
     name = gen.get("freq_offset_name")
     if name in C.FALLBACK_MAP:
         return C.FALLBACK_MAP[name], "freq_fallback"
@@ -186,6 +188,8 @@ def main():
                 "raw_frequency": "M4 native (%s)" % ds,
                 "has_forecast_horizon": None,
                 "forecast_horizon": None,
+                "m4_recipe_prediction_length":
+                    orig_recipe.keywords.get("prediction_length"),
             })
             try:
                 attr_hits = {}
