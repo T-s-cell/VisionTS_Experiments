@@ -342,16 +342,20 @@ def main():
             torch.zeros(1, device="cuda:%d" % args.gpu)
             torch.cuda.reset_peak_memory_stats(args.gpu)
         ph_t["t0"] = t0
-        run.evaluate(
-            ds,
-            C.vision_csv(ds),
-            context_len=C.MONASH_CONTEXT,
-            no_periodicity_context_len=C.MONASH_NO_P_CONTEXT,
-            device="cuda:%d" % args.gpu,
-            checkpoint_dir="../ckpt/",
-            batch_size=C.MONASH_BATCH,
-            periodicity="autotune",
-        )
+        # official entry wraps evaluate() in torch.no_grad() (run.py:214);
+        # in-process replay must do the same or activation graphs of every
+        # forecast batch are retained (m4_monthly 94 batches -> 42GB OOM)
+        with torch.no_grad():
+            run.evaluate(
+                ds,
+                C.vision_csv(ds),
+                context_len=C.MONASH_CONTEXT,
+                no_periodicity_context_len=C.MONASH_NO_P_CONTEXT,
+                device="cuda:%d" % args.gpu,
+                checkpoint_dir="../ckpt/",
+                batch_size=C.MONASH_BATCH,
+                periodicity="autotune",
+            )
     except Exception as exc:
         sys.stdout = tee._streams[0]
         rec["generation"] = dict(_gen)
