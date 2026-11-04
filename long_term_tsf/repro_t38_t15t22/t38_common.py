@@ -61,7 +61,7 @@ A_OK = os.path.join(PKG, "A_OK")
 B_OK = os.path.join(PKG, "B_OK")
 FAILED_TXT = os.path.join(LOG_DIR, "FAILED.txt")
 
-for _p in (ROOT, os.path.join(ROOT, "repro_t22_freeze_ln"),
+for _p in (REPO_ROOT, ROOT, os.path.join(ROOT, "repro_t22_freeze_ln"),
            os.path.join(REPO_ROOT, "repro_fullshot")):
     if _p not in sys.path:
         sys.path.insert(0, _p)
