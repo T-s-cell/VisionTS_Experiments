@@ -66,11 +66,13 @@ out["gluonts"] = gluonts.__version__
 assert gluonts.__version__.startswith("0.14"), \
     "author env must carry gluonts 0.14.x, got %s" % gluonts.__version__
 from gluonts.dataset.repository import datasets as gds
+import dataset  # official module; registers the Monash recipes, then check
 missing = [ds for ds in C.MONASH_ORDER if ds not in gds.dataset_recipes]
 assert not missing, "recipes missing in this gluonts: %s" % missing
-import dataset  # official module; raises on incompatible gluonts API
 import run
 out["import_dataset_run"] = "OK"
+out["recipes_30"] = len([ds for ds in C.MONASH_ORDER
+                         if ds in gds.dataset_recipes])
 import numpy as np
 import pandas as pd
 import torch
