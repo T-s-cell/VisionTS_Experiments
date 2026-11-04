@@ -3,7 +3,7 @@
 分支 `repro/ltsf-t37-pilot-v1`;eta 上执行代码 = `git archive afd871f9eedaf2f1f777f84ba37c241dd108813a`,
 在其上追加本 README 与三个 G4 诊断脚本入库(commit `b791be2`),均不入运行路径。
 执行机 eta(`/dev_data/wlt/VisionTS_Experiments`,env `/dev_data/wlt/conda/envs/visionts/bin/python`,
-python 3.12.10,torch 2.12.0+cu126,gluonts 0.17.0,numpy 2.x,pandas 2.2+,GPU L20 46GB,与租户共跑)。
+python 3.12.13,torch 2.12.0+cu126,gluonts 0.17.0,numpy 2.x,pandas 2.2+,GPU L20 46GB,与租户共跑)。
 上游文件(`eval_gluonts/`、`repro_fullshot/`、`visionts/`、模型源码)**零改动**;全部接入走本包
 observation-only wrapper/patch,逐一记录在 `t37_monash_runner.py` docstring 与各脚本。
 
@@ -142,7 +142,7 @@ torch 1.7.1+cu110 经 PTX JIT 在 L20 上运行)。同一权重、同一 107 序
 | 环境 | MAE(f64) | vs 锚 1893.668241959648 |
 |---|---|---|
 | 当前(visionts env,torch 2.12.0+cu126) | 1807.417940070 | rel **4.5547e-02** |
-| **作者钉定(visionts_t37author)** | **1893.668241960** | **rel 0.0000e+00(MSE 228818192.977 亦同,逐位复现)** |
+| **作者钉定(visionts_t37author)** | **1893.668241960** | **rel 0.0000e+00,MAE 逐位复现**(MSE 228818192.976572067 与锚 228818192.9765722 差 −1.19e-7,浮点尾部,非逐位) |
 
 → **更换整套软件环境后,在原 GPU 上逐位复现了作者 MAE;4.56% 差额归因于软件环境整体**
 (python/torch/torchvision/timm/numpy/pandas/gluonts 同时更换,**不能单独归因于 PyTorch**),
@@ -249,9 +249,11 @@ HOME=/dev_data/wlt/t37_author_home /dev_data/wlt/conda/envs/visionts_t37author/b
 
 ## 9. 交付物
 
-- 审计包 `temp/VisionTS_t37_pilot_20261104.tar.gz`(v3,含作者环境对照、修包与 2026-11-04
-  统计/归因修订:贡献率公式 ÷107、双环境计数 55 低/52 高、整套软件环境归因、双环境 FRED-MD 表入 RESULT;
-  <50 MB,不含 npy/权重/Monash 原始数据)+ sha256 sidecar(v3 sha 以 `temp/*.sha256` 与交付消息为准)。
+- 审计包 `temp/VisionTS_t37_pilot_20261104.tar.gz`(v4 终版:作者环境对照、修包、2026-11-04
+  统计/归因修订[贡献率公式 ÷107、双环境计数 55 低/52 高、整套软件环境归因、双环境 FRED-MD 表入 RESULT]
+  与两处勘误[当前 python 3.12.13;作者环境仅 MAE 逐位复现,MSE 差 −1.19e-7];
+  <50 MB,不含 npy/权重/Monash 原始数据)+ sha256 sidecar(v4 sha 以 `temp/*.sha256` 与交付消息为准;
+  2026-11-04 用户核准冻结并授权提交推送)。
 - RESULT:`logs/RESULT_t37_pilot.md` + `logs/summary_t37.csv`(collect_t37.py 生成,每个数字溯源)。
 - 本地分支 `repro/ltsf-t37-pilot-v1`;运行代码 = `afd871f9…` 的 git archive,后续 commit
-  (G4 诊断/README/修包/作者环境对照/统计修正 b1cf6de)不入运行路径;**推送与扩跑待用户复审本包后进行**。
+  (G4 诊断/README/修包/作者环境对照/统计修正/勘误)不入运行路径。
