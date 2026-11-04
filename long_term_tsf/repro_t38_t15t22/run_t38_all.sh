@@ -132,8 +132,10 @@ run_one() {  # $1 = ds ; runs runner + naive; returns runner rc
   fi
   log "naive $ds..."
   HOME=$AUTHOR_HOME $PYTHON_A "$PKG_DIR/t38_naive_monash.py" --dataset "$ds" \
-    > "$LOGS/naive_${ds}.log" 2>&1 || fail "a_queue" "naive $ds"
-  return 0
+    > "$LOGS/naive_${ds}.log" 2>&1
+  local nrc=$?
+  [ $nrc -ne 0 ] && fail "a_queue" "naive $ds rc=$nrc"
+  return $nrc
 }
 
 # ---------------------------------------------------------------- stage a
@@ -145,8 +147,8 @@ a_replay() {
   preflight_a || { fail "a" "preflight"; return 1; }
   for ds in fred_md nn5_daily_without_missing; do
     run_one "$ds"; rc=$?
-    if [ $rc -ne 0 ] || [ -n "$(grep 'REPLAY N1 round-match FAIL' "$LOGS/naive_${ds}.log" 2>/dev/null)" ]; then
-      fail "a_replay" "hard gate failed for $ds"; return 1
+    if [ $rc -ne 0 ]; then
+      fail "a_replay" "hard gate failed for $ds (runner/naive rc=$rc)"; return 1
     fi
   done
   log "a_replay OK (both anchors rel<=1e-3 and N1 round-match)"

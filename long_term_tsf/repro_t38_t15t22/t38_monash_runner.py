@@ -366,6 +366,8 @@ def main():
 
     wall = time.time() - t0
     after = snapshot_dir(cache)
+    rec["generation"] = dict(_gen)
+    rec["split"] = dict(_split)
 
     # ---- assemble phase timing ------------------------------------------
     n_calls = fc_counter["n"]
