@@ -17,7 +17,8 @@ Evidence per subset (logs/monash_<ds>.json):
     nn5_daily, cif_2016_6, cif_2016_12) hard-exit on mismatch; every other
     subset records the check as evidence (user correction #1: all 30 code
     subsets get an independent H check vs the actual test windows).
-  - phase timing: model_init / download / prep / autotune (validation) /
+  - phase timing: model_init (t0 -> download entry; covers VisionTS() +
+    its .to(device) H2D copy) / download / prep / autotune (validation) /
     inference (final forecast) / eval; residual must stay <1% of wall
     (user: download, validation and inference timed separately).
   - context three-value check: configured (1000/300), rounded
@@ -379,6 +380,11 @@ def main():
 
     # ---- assemble phase timing ------------------------------------------
     n_calls = fc_counter["n"]
+    # model_init = everything before the dataset fetch (official line
+    # `VisionTS(...).to(device)` — the H2D copy sits outside the patched
+    # constructor, so bucket from t0 to download entry instead)
+    if "download0" in ph_t:
+        phase["model_init"] = ph_t["download0"] - ph_t["t0"]
     ph_t["prep0"] = ph_t.get("download1", ph_t.get("t0", wall))
     phase["download"] = (ph_t.get("download1", t0) - ph_t.get("download0", t0)) \
         if "download0" in ph_t else None
