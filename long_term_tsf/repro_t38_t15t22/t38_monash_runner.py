@@ -221,7 +221,7 @@ def main():
                 "source_record": str(getattr(entry, "record", None)),
                 "downloaded_bytes": os.path.getsize(zpath),
                 "download_sha256": C.sha256_of(zpath),
-                "raw_frequency": str(meta.frequency),
+                "raw_frequency": str(getattr(meta, "frequency", None)),
                 "freq_offset_name": offset_name,
                 "has_forecast_horizon": hasattr(meta, "forecast_horizon"),
                 "forecast_horizon": int(getattr(meta, "forecast_horizon", -1)),
