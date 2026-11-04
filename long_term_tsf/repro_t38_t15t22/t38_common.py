@@ -103,6 +103,11 @@ QUEUE = ["tourism_monthly"] + [ds for ds in MONASH_ORDER
 # M4 subsets download from GitHub M4-methods (gluonts _m4.py), not zenodo:
 # raw-zip probes do not apply; provenance + cache diff instead.
 M4_SUBSETS = {"m4_monthly", "m4_weekly", "m4_daily", "m4_hourly"}
+# local mirror of the M4-methods Dataset/{Train,Test} CSVs (same URLs,
+# fetched via network mirror on 2026-11-04 after GitHub direct access
+# stalled from eta); the runner redirects the generator's pd.read_csv to
+# these files when present and records bytes+sha256 per file
+M4_MIRROR_DIR = os.environ.get("T38_M4_MIRROR", "/dev_data/wlt/m4_mirror")
 
 # official get_gluonts_test_dataset hard overrides (dataset.py:403-406)
 HARD_OVERRIDE = {"australian_electricity_demand": 336, "pedestrian_counts": 24}

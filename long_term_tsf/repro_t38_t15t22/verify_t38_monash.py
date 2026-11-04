@@ -140,9 +140,12 @@ def subset_gates(ds, vj_gates, anomalies):
     if ds in C.M4_SUBSETS:
         ok = bool(gen.get("recipe_provenance")) and \
             "n_files_new_or_changed" in dv
-        detail = "M4 provenance: %s; cache diff files=%s" % \
+        mir = gen.get("m4_local_mirror")
+        detail = "M4 provenance: %s; cache diff files=%s%s" % \
                  (gen.get("recipe_provenance"),
-                  dv.get("n_files_new_or_changed"))
+                  dv.get("n_files_new_or_changed"),
+                  "; local mirror n=%d sha in json" % mir["n_files"]
+                  if mir else "")
     else:
         ok = gen.get("download_sha256") is not None and \
              gen.get("downloaded_bytes") is not None and \

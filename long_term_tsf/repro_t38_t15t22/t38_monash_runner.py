@@ -7,7 +7,10 @@ Run: python t38_monash_runner.py --dataset <name> [--gpu 0]
 (cwd-independent; chdirs to eval_gluonts, exactly like run_monash.sh)
 
 Evidence per subset (logs/monash_<ds>.json):
-  - probe: TSF subsets -> raw zip bytes+sha256, meta (frequency,
+  - probe: TSF subsets -> raw zip bytes+sha256, meta; M4 subsets ->
+    provenance (+ optional local-mirror read_csv redirect, bytes+sha256
+    recorded per file; same URLs, synced 2026-11-04 after GitHub direct
+    access stalled from eta),
     forecast_horizon presence/value, converted offset name, raw series
     count). M4 subsets (GitHub M4-methods, no zenodo zip) -> recipe
     provenance + cache diff instead.
@@ -206,6 +209,36 @@ def main():
             except Exception as e:  # best effort only
                 _gen["m4_length_maps_error"] = str(e)
             _gen["fired"] = True
+            # local mirror: same-URL files synced from a network mirror;
+            # redirect the generator's pd.read_csv and record bytes+sha256
+            mir = C.M4_MIRROR_DIR
+            if os.path.isdir(mir):
+                import pandas as _pd
+                orig_read_csv = _pd.read_csv
+                urlpfx = ("https://github.com/M4Competition/M4-methods/"
+                          "raw/master/Dataset/")
+                hits = []
+
+                def read_csv_mirror(path, *a, **k):
+                    if isinstance(path, str) and path.startswith(urlpfx):
+                        lp = os.path.join(mir,
+                                          path[len(urlpfx):])
+                        if os.path.isfile(lp):
+                            hits.append({"url": path, "local": lp,
+                                         "bytes": os.path.getsize(lp),
+                                         "sha256": C.sha256_of(lp)})
+                            return orig_read_csv(lp, *a, **k)
+                    return orig_read_csv(path, *a, **k)
+
+                _pd.read_csv = read_csv_mirror
+                try:
+                    return orig_recipe(*args_, **kwargs_)
+                finally:
+                    _pd.read_csv = orig_read_csv
+                    if hits:
+                        _gen["m4_local_mirror"] = {"dir": mir,
+                                                   "n_files": len(hits),
+                                                   "files": hits}
             return orig_recipe(*args_, **kwargs_)
         from gluonts.dataset.repository._tsf_datasets import TSFReader
         entry = tsf_mod.datasets[ds]
