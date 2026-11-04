@@ -425,16 +425,20 @@ def main():
         if "download0" in ph_t else None
     first_fc = ph_t.get("fc1")
     phase["prep"] = (first_fc - ph_t["prep0"]) if first_fc else None
-    if n_calls >= 2:
-        # autotune window = fc1 start -> final-call start (each candidate's
-        # forecast wall is INSIDE this interval, so it needs no subtraction)
+    if n_calls >= 2 and "eval0" in ph_t:
+        # autotune window = fc1 start -> final-call start; inference bucket =
+        # final-call start -> evaluate_forecasts entry. The latter covers the
+        # final forecast AND the official per-series SampleForecast building
+        # loop over lazy gluonts records, which scales with n_series and was
+        # previously unbooked (the residual source in passes 1-3).
         phase["autotune"] = ph_t["fc%d" % n_calls] - ph_t["fc1"]
-        phase["inference"] = fc_log[-1]["wall_sec"]
+        phase["inference"] = ph_t["eval0"] - ph_t["fc%d" % n_calls]
     elif n_calls == 1:
         phase["autotune"] = None
-        phase["inference"] = fc_log[0]["wall_sec"]
-    # eval bucket = evaluate_forecasts + official post-processing (forecast
-    # object building, result frame, CSV append) up to evaluate() return
+        phase["inference"] = (ph_t["eval0"] - ph_t["fc1"]) \
+            if "eval0" in ph_t else fc_log[0]["wall_sec"]
+    # eval bucket = evaluate_forecasts + official post-processing (result
+    # frame, CSV append) up to evaluate() return
     if "eval0" in ph_t:
         phase["eval"] = (t0 + wall) - ph_t["eval0"]
     else:
@@ -447,6 +451,7 @@ def main():
                      "residual_sec": residual,
                      "residual_frac": residual / wall if wall else None,
                      "n_forecast_calls": n_calls,
+                     "ph_t_raw": {k: round(v, 4) for k, v in ph_t.items()},
                      "forecast_calls": fc_log,
                      "eval_n_forecasts": eval_state.get("n_forecasts")}
     if torch.cuda.is_available():
