@@ -66,10 +66,18 @@ out["gluonts"] = gluonts.__version__
 assert gluonts.__version__.startswith("0.14"), \
     "author env must carry gluonts 0.14.x, got %s" % gluonts.__version__
 from gluonts.dataset.repository import datasets as gds
+# t38_common prepends long_term_tsf/ to sys.path, so the official
+# eval_gluonts modules must be front-inserted EXPLICITLY (else `import
+# run` resolves to long_term_tsf/run.py, the training entry)
+sys.path.insert(0, os.path.join(repo, "eval_gluonts"))
 import dataset  # official module; registers the Monash recipes, then check
+import run
+assert os.path.samefile(run.__file__, os.path.join(repo, "eval_gluonts", "run.py")), \
+    "run resolved to %s (not eval_gluonts)" % run.__file__
+assert os.path.samefile(dataset.__file__, os.path.join(repo, "eval_gluonts", "dataset.py")), \
+    "dataset resolved to %s (not eval_gluonts)" % dataset.__file__
 missing = [ds for ds in C.MONASH_ORDER if ds not in gds.dataset_recipes]
 assert not missing, "recipes missing in this gluonts: %s" % missing
-import run
 out["import_dataset_run"] = "OK"
 out["recipes_30"] = len([ds for ds in C.MONASH_ORDER
                          if ds in gds.dataset_recipes])
