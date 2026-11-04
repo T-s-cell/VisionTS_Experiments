@@ -87,7 +87,11 @@ import torch
 assert torch.cuda.is_available(), "CUDA not available"
 z = torch.zeros(64, 64, device="cuda:0", dtype=torch.float64)
 out["cuda_fp64"] = bool(z.isfinite().all().item())
-free, total = torch.cuda.mem_get_info(0)
+import subprocess
+q = subprocess.check_output(
+    ["nvidia-smi", "--query-gpu=memory.free,memory.total",
+     "--format=csv,noheader,nounits"]).decode()
+free, total = [float(x) for x in q.strip().splitlines()[0].split(",")]
 out["gpu_free_gb"] = round(free / 1024 ** 3, 2)
 assert free / total > 0.15, "GPU mostly occupied (free %.1f GB)" % (free / 1024 ** 3)
 du = shutil.disk_usage(C.ROOT)
@@ -267,7 +271,11 @@ assert out["ckpt_sha256"] == C.CKPT_SHA256
 assert os.path.getsize(ckpt) == C.CKPT_BYTES
 import torch
 assert torch.cuda.is_available()
-free, total = torch.cuda.mem_get_info(0)
+import subprocess
+q = subprocess.check_output(
+    ["nvidia-smi", "--query-gpu=memory.free,memory.total",
+     "--format=csv,noheader,nounits"]).decode()
+free, total = [float(x) for x in q.strip().splitlines()[0].split(",")]
 out["gpu_free_gb"] = round(free / 1024 ** 3, 2)
 assert free / total > 0.15, "GPU mostly occupied"
 du = shutil.disk_usage(C.ROOT)
