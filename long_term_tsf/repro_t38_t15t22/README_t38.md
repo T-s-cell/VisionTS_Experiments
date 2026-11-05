@@ -69,8 +69,14 @@ nv==90 硬检查,修首轮 "metric CSVs in pack = 0" 的检查顺序错误):
    列出,改为在数据集 4H 均值层逐数据集列出(ETTh1/ETTh2/ETTm1/ETTm2
    各自 dMSE),并标注"单种子观测;种子散布由 EXP-039 量化"。
 3. **交付动作**:eta 重跑 b_collect 重生成 `RESULT_t38_ett.md`,包 A/B 重打
-   (新 sidecar,sha 见下方交付记录——重打后上文的"终版 sha"两行即作废,
-   以三轮 sha 为准)。门禁与数值不动,仅文档口径。
+   (新 sidecar)。门禁与数值不动,仅文档口径。三轮终版包与 sha(双端核对
+   一致,`.sha256` sidecar 为准;上文"终版 sha"两行即作废):
+   - A `temp/VisionTS_t38_monash_t15_20261105.tar.gz`,1,264,974 字节,
+     sha256 `0e899c7db959975624310e9f9068ae3bf3e8b40040cf7ba92bfbdb905f7b95e6`;
+   - B `temp/VisionTS_t38_ett_t22_20261105.tar.gz`,566,061 字节,
+     sha256 `6a27e2987c1d53d74e16d4a50a56ffd18b25a57465d81bdfde31e2694398c230`。
+   注:包内嵌 README 打自本轮打包时点(不含本 sha 记录),以 repo 侧
+   README 与 sidecar 为准。
 
 ## 1. A 线口径(Monash Table 15 / 图 5)
 
