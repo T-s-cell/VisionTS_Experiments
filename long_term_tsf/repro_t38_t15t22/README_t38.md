@@ -16,8 +16,8 @@ observation-only wrapper/patch,逐一记录在 `t38_monash_runner.py` docstring 
 
 | 任务 | 状态 | 关键数字 |
 |---|---|---|
-| A. Monash 表 15 全量(29 论文行) | «TBD-A» | «TBD-A-geomean» |
-| B. 表 22 四 ETT(All vs Rand-VM,seed 2021) | «TBD-B» | «TBD-B-headline» |
+| A. Monash 表 15 全量(29 论文行) | **完成,门禁 300/302 全过(0 硬失败;2 项为 CIF G6 设计内 SKIP)** | 30 子集锚 rel 全部 ≤1e-3(最差 sunspot 7.879e-04);29 比值几何均值 **0.7367** vs 论文 0.729(rel 1.05% < 2% WARN 线);CIF 池化行 vs 池化锚 rel 2.05e-04 |
+| B. 表 22 四 ETT(All vs Rand-VM,seed 2021) | **完成,门禁 430/430 全过(0 FAIL)** | 30 臂 sampler 长度全部 == 公式;4H 平均层 LN 列 Δ≤0.0009、Freeze 列 Δ≤0.0007(逐数据集);Overall LN 0.3325/0.3700 vs 论文 0.333/0.369,Freeze 0.3595/0.3750 vs 0.360/0.375;All 列 Overall 0.4283 vs 论文 0.417(+0.011);Rand-VM(单种子全量重训设定)Overall 0.4759;ETTh1 All 比 Rand 低 24.54% MSE(预训练收益最强) |
 
 ## 1. A 线口径(Monash Table 15 / 图 5)
 
@@ -131,8 +131,8 @@ bash long_term_tsf/repro_t38_t15t22/retry_failed_a.sh <ds...>
 
 ## 7. 交付物
 
-- 包 A `temp/VisionTS_t38_monash_t15_<日期>.tar.gz`(<50 MB)+ sha256 sidecar;
-- 包 B `temp/VisionTS_t38_ett_t22_<日期>.tar.gz`(<50 MB,不含 npy/ckpt)+ sidecar;
+- 包 A `temp/VisionTS_t38_monash_t15_20261105.tar.gz`(1,176,424 B)+ sha256 sidecar;
+- 包 B `temp/VisionTS_t38_ett_t22_20261105.tar.gz`(540,283 B,不含 npy/ckpt)+ sidecar;
 - `logs/summary_t38_monash.csv` / `logs/RESULT_t38_monash.md`(含异常清单与 EXP-037
   现环境 FRED-MD 1807.417940 + G4 FAIL 的单独保留段);
 - `logs/summary_t38_ett.csv` / `logs/RESULT_t38_ett.md`(含预算表);
@@ -148,7 +148,11 @@ bash long_term_tsf/repro_t38_t15t22/retry_failed_a.sh <ds...>
   [Monthly 48000/Weekly 359/Daily 4227/Hourly 414] 与聚合 md5 后 scp 至
   eta `/dev_data/wlt/m4_mirror`,runner 在 recipe 执行期临时重定向 pd.read_csv 并逐文件
   记录 bytes+sha256)→ `1fc241c`(CUDA 上下文初始化移出计时窗;eval 桶延伸到
-  evaluate() 返回,覆盖官方后处理)。全程逐次 md5 比对热部署。
+  evaluate() 返回,覆盖官方后处理)→ `3fa8c5e`(inference 桶 = 末次 forecast 起点 →
+  evaluate_forecasts 入口,覆盖官方逐序列 SampleForecast 构建;timing 存 ph_t_raw)。
+  另 `7b79bb9`(a_collect fig5 环境回退)、`a124b18`(gpu_free_gb 单位)、
+  `a021cbc`(t38_common 补 REPO_ROOT 进 sys.path,修 B 线 visionts 导入)。
+  全程逐次 md5 比对热部署。
 - 数值确定性:跨遍重跑全部子集 MAE 逐位一致(如 m4_weekly 404.238371、weather
   2.062314、kdd/traffic_weekly/rideshare/hospital/temp_rain 锚 rel 0.000e+00),
   runner 修订只影响计时/归因簿记,不改前向数学。
@@ -158,5 +162,40 @@ bash long_term_tsf/repro_t38_t15t22/retry_failed_a.sh <ds...>
   `logs/watchdog_a.log`,GPU 推理相 CPU 高不误杀。
 - 队列执行:pass1(21:40)27/30;m3_monthly/m3_other/sunspot 重试修复;pass2(23:16)
   M4 3/4;m4_daily 经镜像于 pass3(23:55)完成 → 30/30。
-- «TBD-LOG-A»(A 线收尾补:最终 verify/collect 摘要、包 sha)
-- «TBD-LOG-B»(B 线收尾补:pilot 实测、30 组耗时/峰值、verify/collect 摘要)
+- G11 相位残差修复链:pass1 残差 2.5-40%(`.to(device)` 与 CUDA 上下文初始化未入桶)
+  → `044b1d9`+`1fc241c` → 1.4-2.6%;pass4 `3fa8c5e` 把"末次预报+SampleForecast 对象
+  构建"区间并入 inference 桶并记录原始相位时间戳(`ph_t_raw`)→ 残差全部 ≈0
+  (residual_frac 0.0000,G11 全过)。
+- pass4(2026-11-05 01:42 启动):M4 经本地镜像分钟级完成;28/30 于 02:34 完成,
+  sunspot/us_births 遇 zenodo 504 → `retry_failed_a.sh` 重试成功(fail=0)。
+- 最终 verify:**302 门 300 过 / 0 硬失败 / 0 flag**(2 项非过 = CIF G6 设计内 SKIP);
+  geomean 0.736658 vs 0.729(rel 0.0105,无 WARN);CIF 池化 VTS 570790.05 vs
+  池化锚 rel 2.05e-04(硬门过);论文印刷位 round_match=False 为 documented flag。
+- 异常清单 22 项:21 项 context_truncation(短序列子集实际喂入 context < 取整期望,
+  作者侧同样截断,文档化不设门)+ 1 项 cif_paper_print(论文印刷末位问题,§1)。
+- 图 5:`logs/fig5_monash_ratio.png`(29 行,log 轴,0.729 参考线;作者 env 无
+  matplotlib,collect 在当前 env 下重跑生成,collect 为纯 json 后处理与 env 无关)。
+- 包 A:`temp/VisionTS_t38_monash_t15_20261105.tar.gz`(1,176,424 B < 50MB)
+  sha256 `023a66a7c04d4375154350a594078b95f625eb3c5871f018bf6d3182c7c39cba`
+  (sidecar 同值,本地/eta 双侧校验一致)。
+- B 线运行记录:
+- B 线执行:b_all 于 03:17 启动;首启因 t38_common 漏 REPO_ROOT(visionts 导入失败,
+  `a021cbc` 修复)重启于 03:20;pilot ETTm1_96 双臂(计入 30)MSE all 0.35602/rand
+  0.38267,sampler 225127 == 公式,单臂 wall 1361/1354 s;队列 04:06-10:03 顺序
+  ETTh1 192/336/720 → ETTh2 96-720 → ETTm2 96-720 → ETTm1 192/336/720,每 config
+  先 all 后 rand,30/30 无失败。
+- 实测预算(train 相 s/batch):ETTh1 1.244、ETTh2 1.388、ETTm1 1.380、ETTm2 1.379
+  (RESULT_t38_ett.md 预算表;T1 含 30 臂 train/vali/test 三相 wall 与分相 GPU 峰值)。
+  全程 ~6.7 h,远低于 22-24 h 保守预算。
+- 最终 b_verify:**430/430 门全过(0 FAIL)**——BG1 指纹 4 件、BG2 true.npy 逐位
+  == EXP-003、BG3 float64 复算 ≤1e-6、BG4 init 逐键(All 全等 ckpt/Rand 全不等、
+  两臂 init hash 互异)、BG5 RNG 态、BG6 采样索引 sha 两臂一致+恰 1 次+长度==公式、
+  BG7 首批张量一致、BG8 终 ckpt sha、BG9 LN16==EXP-003 SUCCESS 逐字/Freeze16、
+  BG10 复用对证据;复用对 ETTh1_96(All 0.4469/0.4181,Rand 0.6962/0.5583)入表。
+- 聚合(4H 等权,论文表 22 对照层):逐数据集 LN Δ≤0.0009 / Freeze Δ≤0.0007;
+  Overall All 0.4283/0.4190(论文 0.417/0.414)、Rand 0.4759/0.4615、LN 0.3325/0.3700
+  (0.333/0.369)、Freeze 0.3595/0.3750(0.360/0.375)。**声明**:单种子(2021)+
+  Rand-VM 全量训练为本次对照设定;论文 LN 列为 3-seed 均值不可 3dp 比较。
+- 包 B:`temp/VisionTS_t38_ett_t22_20261105.tar.gz`(540,283 B < 50MB)
+  sha256 `25b0c3b16731ffd8808d11f92bf400d84c0a51d687e26e6d9971a4f1c2de53e9`
+  (sidecar 同值,本地/eta 双侧校验一致)。
