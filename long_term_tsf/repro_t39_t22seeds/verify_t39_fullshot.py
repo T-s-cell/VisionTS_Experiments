@@ -380,8 +380,8 @@ def check_bg10(rows):
             ok_all &= gate(rows, "BG10_t38[%s_%d_%s]" % (ds, h, arm), ok,
                            "t38 seed2021 evidence complete (mse/mae/seed)")
             n_ok += int(ok)
-    gate(rows, "BG10_t38_coverage", n_ok == 30,
-         "%d/30 t38 train jsons usable" % n_ok)
+    gate(rows, "BG10_t38_coverage", n_ok == 32,
+         "%d/32 seed-2021 train jsons usable (30 t38 + 2 t37 reuse)" % n_ok)
     return ok_all
 
 

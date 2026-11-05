@@ -194,7 +194,7 @@ for (ds, h) in X.CONFIGS:
         assert isinstance(rec["success"]["mse"], float)
         n38 += 1
 out["t38_jsons_present"] = n38
-assert n38 == 30
+assert n38 == 32  # 16 configs x 2 arms (30 t38 + 2 t37 reuse for ETTh1_96)
 # save_t39_full state (first launch expects absent/empty; resume counts)
 save = X.SAVE_B_BASE
 if os.path.isdir(save):
@@ -221,7 +221,7 @@ assert du.free > 20 * 1024 ** 3, "less than 20 GB free"
 out["finished"] = C.time_str()
 with open(os.path.join(X.LOG_DIR, "preflight.json"), "w") as fh:
     json.dump(out, fh, indent=1)
-print("PREFLIGHT_OK free=%.1fGB disk=%.0fGB ln48=OK t38=30/30 tasks=64"
+print("PREFLIGHT_OK free=%.1fGB disk=%.0fGB ln48=OK t38=32/32 tasks=64"
       % (out["gpu_free_gb"], out["disk_free_gb"]))
 EOF
   rc=$?
