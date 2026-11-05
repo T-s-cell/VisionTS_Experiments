@@ -118,12 +118,12 @@ def budget_md(rows):
             for arm in C.B_ARMS:
                 if r.get("%s_train_s" % arm) is None:
                     left.append((r["h"], C.expected_train_batches(ds, r["h"])))
-        if left and sb:
+        if sb:
             est = sum(b for _, b in left) * sb / 3600.0
             total_left_h += est
             L.append("| %s | %.3f | %s | %d (%s) | %.2f h |" %
                      (ds, sb, src, len(left),
-                      ",".join(str(h) for h, _ in left), est))
+                      ",".join(str(h) for h, _ in left) or "-", est))
         else:
             L.append("| %s | n/a | - | %d | n/a |" %
                      (ds, len(left)))
