@@ -127,29 +127,37 @@ def paper_diff_analysis(rows, per_ds, ov):
              "configs and beats Rand-VM in %d/%d configs — the LN-adapter "
              "path dominates every configuration in this round." %
              (all14, n, ln_beats_rand, n))
-    L.append("- Gap attribution (declared setting differences): (a) our "
-             "All/Rand numbers are a SINGLE seed (2021) while the paper "
-             "reports seed means, so ±0.01-level scatter is expected "
-             "(per-config All-vs-paper dMSE spans −0.004…+0.026 with no "
-             "dataset-level bias on ETTh2); (b) the paper does not "
+    L.append("- Gap attribution (candidate explanations, NOT verified "
+             "within this round): (a) our All/Rand numbers are a SINGLE "
+             "seed (2021) while the paper reports seed means — "
+             "per-config All-vs-paper dMSE spans −0.004…+0.026 with no "
+             "dataset-level bias on ETTh2; (b) the paper does not "
              "disclose the Rand-VM trainable set — our Rand-VM full "
              "finetune is this round's declared setting and the ETTh1 "
              "Rand gap (+0.208 at 4H mean) shows the result is highly "
-             "sensitive to that undisclosed choice; (c) LN/Freeze columns "
-             "are pinned audited values (EXP-003 / EXP-033), so they "
-             "match the paper to the printing precision by construction.")
+             "sensitive to that undisclosed choice. LN/Freeze columns "
+             "adopt the EXP-003 / EXP-033 audited values as baselines; "
+             "their agreement with the paper at the 4H-mean layer is an "
+             "observed outcome (max |dMSE|: LN %.5f, Freeze %.5f), not "
+             "an identity." %
+             (max(abs(per_ds[ds]["ln"]["mse"] - C.PAPER_T22[ds]["ln"][0])
+                  for ds in C.ETT4 if ds in per_ds),
+              max(abs(per_ds[ds]["freeze"]["mse"] -
+                      C.PAPER_T22[ds]["freeze"][0])
+                  for ds in C.ETT4 if ds in per_ds)))
     L.append("")
     return L
 
 
 def budget_md(rows):
-    """Measured s/batch per dataset from completed arms -> remaining-arms
-    budget estimate (train phase only; vali+test add a small constant).
-    The reused ETTh1_96 pair is NOT pending work (frozen EXP-037 archive,
-    counted as done; reviewer correction #3)."""
-    L = ["## Budget (measured train s/batch per dataset)\n"]
-    L.append("| dataset | measured s/batch | from | remaining arms | "
-             "est train h remaining (per arm x batches x s/batch) |")
+    """Measured PURE-train s/batch per dataset from completed arms
+    (train_wall - vali_wall, same convention as the T1 train* column)
+    -> remaining-arms budget estimate. The reused ETTh1_96 pair is NOT
+    pending work (frozen EXP-037 archive, counted as done)."""
+    L = ["## Budget (measured pure-train s/batch per dataset, "
+         "train_wall − vali_wall)\n"]
+    L.append("| dataset | measured pure-train s/batch | from | remaining "
+             "arms | est train h remaining (per arm x batches x s/batch) |")
     L.append("|---|---|---|---|---|")
     total_left_h = 0.0
     for ds in C.ETT4:
@@ -158,9 +166,11 @@ def budget_md(rows):
             if r["ds"] != ds:
                 continue
             for arm in C.B_ARMS:
-                w, b = r.get("%s_train_s" % arm), r.get("%s_train_batches" % arm)
-                if w and b:
-                    sb, src = w / b, "%s_%d_%s" % (ds, r["h"], arm)
+                w = r.get("%s_train_s" % arm)
+                v = r.get("%s_vali_s" % arm)
+                b = r.get("%s_train_batches" % arm)
+                if w and v is not None and b:
+                    sb, src = (w - v) / b, "%s_%d_%s" % (ds, r["h"], arm)
                     break
             if sb:
                 break
@@ -256,16 +266,15 @@ def result_md(rows, vj):
         if "all" in per_ds.get("ETTh1", {}) and \
                 "rand" in per_ds.get("ETTh1", {}):
             L.append("Pretrained-vs-random headline (dataset-level 4H "
-                     "means): " + "; ".join(
+                     "means, % change relative to Rand): " + "; ".join(
                          "%s All %.4f vs Rand %.4f (All %s by %.2f%% MSE)"
                          % (ds, per_ds[ds]["all"]["mse"],
                             per_ds[ds]["rand"]["mse"],
                             "lower" if per_ds[ds]["all"]["mse"] <
                             per_ds[ds]["rand"]["mse"] else "HIGHER",
-                            100.0 * abs(per_ds[ds]["all"]["mse"] -
-                                        per_ds[ds]["rand"]["mse"]) /
-                            max(per_ds[ds]["all"]["mse"],
-                                per_ds[ds]["rand"]["mse"]))
+                            100.0 * (per_ds[ds]["all"]["mse"] -
+                                     per_ds[ds]["rand"]["mse"]) /
+                            per_ds[ds]["rand"]["mse"])
                          for ds in C.ETT4 if ds in per_ds) + "\n")
 
     L.extend(paper_diff_analysis(rows, per_ds,
@@ -273,10 +282,14 @@ def result_md(rows, vj):
     L.extend(budget_md(rows))
 
     L.append("## Gates and anomalies\n")
-    fails = [g for g in vj_fs.get("gates", []) if g["verdict"] == "FAIL"]
+    gates = vj_fs.get("gates", [])
+    fails = [g for g in gates if g["verdict"] == "FAIL"]
     if not fails:
-        L.append("All hard gates pass (BG1-BG10 over 15 new configs x 2 "
-                 "arms + reuse pair); see verify_t38.json.\n")
+        L.append("All %d gates pass (%d/%d PASS, 0 FAIL; BG1-BG10 over "
+                 "15 new configs x 2 arms + reuse pair); see "
+                 "verify_t38.json.\n" %
+                 (len(gates), sum(1 for g in gates
+                                  if g["verdict"] == "PASS"), len(gates)))
     else:
         for g in fails:
             L.append("- [FAIL] %s: %s" % (g["gate"], g["detail"]))
