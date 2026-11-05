@@ -170,10 +170,11 @@ bash long_term_tsf/repro_t38_t15t22/retry_failed_a.sh <ds...>
 
 ## 7. 交付物
 
-- 包 A `temp/VisionTS_t38_monash_t15_20261105.tar.gz` + sha256 sidecar;
-- 包 B `temp/VisionTS_t38_ett_t22_20261105.tar.gz`(不含 npy/ckpt)+ sidecar;
-  二轮修订后重打,终版大小与 sha256 见同目录 `.sha256` sidecar及本仓
-  README 交付记录(打包内 README 以 sidecar 口径自洽);
+- 包 A `temp/VisionTS_t38_monash_t15_20261105.tar.gz`(1,264,285 B,sha256
+  `c1d8741f…`)+ sha256 sidecar;
+- 包 B `temp/VisionTS_t38_ett_t22_20261105.tar.gz`(565,386 B,不含 npy/ckpt,
+  sha256 `fa1277f5…`)+ sidecar;
+  二轮修订后重打,终版完整 sha 见 §8(打包内 README 以 sidecar 口径自洽);
 - `logs/summary_t38_monash.csv` / `logs/RESULT_t38_monash.md`(含异常清单与 EXP-037
   现环境 FRED-MD 1807.417940 + G4 FAIL 的单独保留段);
 - `logs/summary_t38_ett.csv` / `logs/RESULT_t38_ett.md`(含预算表);
@@ -218,8 +219,9 @@ bash long_term_tsf/repro_t38_t15t22/retry_failed_a.sh <ds...>
 - 图 5:`logs/fig5_monash_ratio.png`(29 行,log 轴,0.729 参考线;作者 env 无
   matplotlib,collect 在当前 env 下重跑生成,collect 为纯 json 后处理与 env 无关)。
 - 包 A:`temp/VisionTS_t38_monash_t15_20261105.tar.gz`(<50MB;二轮修订后重打,
-  首版 sha 023a66a7…、一轮修订版 3454a34f… 均已作废;终版大小与 sha256 以
-  同目录 `.sha256` sidecar 为准,本地/eta 双侧校验一致)。
+  首版 sha 023a66a7…、一轮修订版 3454a34f… 均已作废;**终版 sha256 =
+  c1d8741f1e7d370d95fc5c21ef3eef6ce4d90921d1c46a703eee938d80bad511**,
+  本地/eta 双侧校验一致)。
 - B 线运行记录:
 - B 线执行:b_all 于 03:17 启动;首启因 t38_common 漏 REPO_ROOT(visionts 导入失败,
   `a021cbc` 修复)重启于 03:20;pilot ETTm1_96 双臂(计入 30)MSE all 0.35602/rand
@@ -243,5 +245,6 @@ bash long_term_tsf/repro_t38_t15t22/retry_failed_a.sh <ds...>
   Rand-VM 全量训练为本次对照设定;论文 LN 列为 3-seed 均值不可 3dp 比较;
   All/Rand 与论文的差距归因(单种子散布、Rand-VM 可训练集未披露)为**待验证解释**。
 - 包 B:`temp/VisionTS_t38_ett_t22_20261105.tar.gz`(<50MB,不含 npy/ckpt;
-  二轮修订后重打,终版大小与 sha256 以同目录 `.sha256` sidecar 为准,
-  本地/eta 双侧校验一致)。
+  二轮修订后重打,首版 sha 25b0c3b1…、一轮修订版 48d33240… 均已作废;
+  **终版 sha256 = fa1277f553c581eb0398c6507b6cf7fc97a9236b5868c9e2a483
+  ccd9d4590630**,本地/eta 双侧校验一致)。
