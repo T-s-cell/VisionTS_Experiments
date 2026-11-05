@@ -17,9 +17,9 @@ observation-only wrapper/patch,逐一记录在 `t38_monash_runner.py` docstring 
 | 任务 | 状态 | 关键数字 |
 |---|---|---|
 | A. Monash 表 15 全量(29 论文行) | **完成,门禁 300/302 全过(0 硬失败;2 项为 CIF G6 设计内 SKIP)** | 30 子集锚 rel 全部 ≤1e-3(最差 sunspot 7.879e-04);29 比值几何均值 **0.7367** vs 论文 0.729(rel 1.05% < 2% WARN 线);CIF 池化行 vs 池化锚 rel 2.05e-04 |
-| B. 表 22 四 ETT(All vs Rand-VM,seed 2021) | **完成,门禁 430/430 全过(0 FAIL)** | 30 臂 sampler 长度全部 == 公式;4H 平均层 LN 列 Δ≤0.0009、Freeze 列 Δ≤0.0007(逐数据集);Overall LN 0.3325/0.3700 vs 论文 0.333/0.369,Freeze 0.3595/0.3750 vs 0.360/0.375;All 列 Overall 0.4283 vs 论文 0.417(+0.011);Rand-VM(单种子全量重训设定)Overall 0.4759;ETTh1 All 比 Rand 低 24.54% MSE(预训练收益最强) |
+| B. 表 22 四 ETT(All vs Rand-VM,seed 2021) | **完成,门禁 432/432 全过(0 FAIL)** | 30 臂 sampler 长度全部 == 公式;4H 平均层 LN 列最大 \|Δ\| 0.00237(ETTm1)、Freeze 列最大 \|Δ\| 0.00049(ETTm2);Overall LN 0.3325/0.3700 vs 论文 0.333/0.369,Freeze 0.3595/0.3750 vs 0.360/0.375;All 列 Overall 0.4283 vs 论文 0.417(+0.011);Rand-VM(单种子全量重训设定)Overall 0.4759;All-vs-Rand(相对 Rand)ETTh1 低 24.54%、ETTh2 低 4.24%、ETTm2 低 1.54%,**ETTm1 高 3.33%**(单种子下预训练收益不单调) |
 
-## 复审修订(2026-11-05,commit `85fbe63f2db229f58139b87d30b613ef4d984520`;打包态代码头 = `6357345d9753f31d180e5c2f2d8c80f9b35ea8ec`,其后仅本 README 文档性提交)
+## 复审修订(2026-11-05,commit `85fbe63f2db229f58139b87d30b613ef4d984520`;二轮收尾 `dc3c253`+`9acaada`;打包态代码头 = `9acaadae643af0f509cbceeff39c2082e234401a`,其后仅本 README 文档性提交)
 
 按用户复审 4 项缺项逐项落地,全部基于既有产物复算/修正,不重训
 (另含打包修复 `6357345`:pack_a 文件清单先追加 90 个指标 CSV 再做
@@ -44,6 +44,19 @@ nv==90 硬检查,修首轮 "metric CSVs in pack = 0" 的检查顺序错误):
    (visionts_monash_<ds> + naive_n1/n2;旧包因路径缺前缀静默漏收,现打包时
    硬校验 ==90);包 B 补复用两组原始证据(t37 train json/SUCCESS/fingerprint)
    与 `recompute_f64.json`;两包均含本 README;打包 sha 以 sidecar 为准。
+
+### 二轮收尾(2026-11-05 复审通过后,冻结前;`dc3c253`+`9acaada`)
+
+1. **归因口径收紧**:Paper-difference analysis 中"单种子波动""Rand-VM 训练
+   设定差异"明确标注为**待验证解释(candidate explanations, NOT verified)**;
+   删除"LN/Freeze 因引用冻结值而必然匹配论文(by construction)"的表述,
+   改为观测事实:4H 层 max |ΔMSE| LN **0.00237**、Freeze **0.00049**。
+2. **残留数字修正**:门禁 **432/432**(原 430 漏计复用对 BG3_metrics_f64
+   两门);LN 数据集层最大 Δ 0.00237(ETTm1,原误记 0.0009);ETTm1 All
+   相对 Rand **高 3.33%**(分母统一改为 Rand);预算表 s/batch 改纯训练
+   (train_wall − vali_wall,与 T1 train\* 同口径);RESULT 门数行改为动态
+   n/n(432/432)。
+3. **补传校验文件**:两包重打后,`.sha256` sidecar 与包同放 `temp/` 一并交付。
 
 ## 1. A 线口径(Monash Table 15 / 图 5)
 
@@ -157,15 +170,16 @@ bash long_term_tsf/repro_t38_t15t22/retry_failed_a.sh <ds...>
 
 ## 7. 交付物
 
-- 包 A `temp/VisionTS_t38_monash_t15_20261105.tar.gz`(1,263,504 B,sha256
-  `3454a34f…`)+ sha256 sidecar;
-- 包 B `temp/VisionTS_t38_ett_t22_20261105.tar.gz`(564,485 B,不含 npy/ckpt,
-  sha256 `48d33240…`)+ sidecar;
+- 包 A `temp/VisionTS_t38_monash_t15_20261105.tar.gz` + sha256 sidecar;
+- 包 B `temp/VisionTS_t38_ett_t22_20261105.tar.gz`(不含 npy/ckpt)+ sidecar;
+  二轮修订后重打,终版大小与 sha256 见同目录 `.sha256` sidecar及本仓
+  README 交付记录(打包内 README 以 sidecar 口径自洽);
 - `logs/summary_t38_monash.csv` / `logs/RESULT_t38_monash.md`(含异常清单与 EXP-037
   现环境 FRED-MD 1807.417940 + G4 FAIL 的单独保留段);
 - `logs/summary_t38_ett.csv` / `logs/RESULT_t38_ett.md`(含预算表);
 - 图 5 对照 `logs/fig5_monash_ratio.png`。
-- 本地提交;**推送与增加种子待用户复审(本轮不推送)**。
+- **已冻结,分支已推送**(用户 2026-11-05 复审数值验收合格并批准推送;
+  增加种子仍属后续可选工作,未排期)。
 
 ## 8. 运行记录(执行代码 commit)
 
@@ -203,27 +217,31 @@ bash long_term_tsf/repro_t38_t15t22/retry_failed_a.sh <ds...>
   作者侧同样截断,文档化不设门)+ 1 项 cif_paper_print(论文印刷末位问题,§1)。
 - 图 5:`logs/fig5_monash_ratio.png`(29 行,log 轴,0.729 参考线;作者 env 无
   matplotlib,collect 在当前 env 下重跑生成,collect 为纯 json 后处理与 env 无关)。
-- 包 A:`temp/VisionTS_t38_monash_t15_20261105.tar.gz`(<50MB;复审修订后重打,
-  首版 sha 023a66a7…,**终版 sha256 = 3454a34f99f0eae02c2bb9e391fef3a9270
-  774a717c14704e61e6e3a3856410**,本地/eta 双侧校验一致)。
+- 包 A:`temp/VisionTS_t38_monash_t15_20261105.tar.gz`(<50MB;二轮修订后重打,
+  首版 sha 023a66a7…、一轮修订版 3454a34f… 均已作废;终版大小与 sha256 以
+  同目录 `.sha256` sidecar 为准,本地/eta 双侧校验一致)。
 - B 线运行记录:
 - B 线执行:b_all 于 03:17 启动;首启因 t38_common 漏 REPO_ROOT(visionts 导入失败,
   `a021cbc` 修复)重启于 03:20;pilot ETTm1_96 双臂(计入 30)MSE all 0.35602/rand
   0.38267,sampler 225127 == 公式,单臂 wall 1361/1354 s;队列 04:06-10:03 顺序
   ETTh1 192/336/720 → ETTh2 96-720 → ETTm2 96-720 → ETTm1 192/336/720,每 config
   先 all 后 rand,30/30 无失败。
-- 实测预算(train 相 s/batch):ETTh1 1.244、ETTh2 1.388、ETTm1 1.380、ETTm2 1.379
+- 实测预算(纯训练 s/batch = train_wall − vali_wall,二轮修正口径):
+  ETTh1 1.092、ETTh2 1.217、ETTm1 1.217、ETTm2 1.224
   (RESULT_t38_ett.md 预算表;T1 含 30 臂 train/vali/test 三相 wall 与分相 GPU 峰值)。
   全程 ~6.7 h,远低于 22-24 h 保守预算。
-- 最终 b_verify:**430/430 门全过(0 FAIL)**——BG1 指纹 4 件、BG2 true.npy 逐位
-  == EXP-003、BG3 float64 复算 ≤1e-6、BG4 init 逐键(All 全等 ckpt/Rand 全不等、
-  两臂 init hash 互异)、BG5 RNG 态、BG6 采样索引 sha 两臂一致+恰 1 次+长度==公式、
-  BG7 首批张量一致、BG8 终 ckpt sha、BG9 LN16==EXP-003 SUCCESS 逐字/Freeze16、
-  BG10 复用对证据;复用对 ETTh1_96(All 0.4469/0.4181,Rand 0.6962/0.5583)入表。
-- 聚合(4H 等权,论文表 22 对照层):逐数据集 LN Δ≤0.0009 / Freeze Δ≤0.0007;
+- 最终 b_verify:**432/432 门全过(0 FAIL)**——BG1 指纹 4 件、BG2 true.npy 逐位
+  == EXP-003、BG3 float64 复算 ≤1e-6(30 新组)+ 复用对 BG3_metrics_f64 两门、
+  BG4 init 逐键(All 全等 ckpt/Rand 全不等、两臂 init hash 互异)、BG5 RNG 态、
+  BG6 采样索引 sha 两臂一致+恰 1 次+长度==公式、BG7 首批张量一致、BG8 终 ckpt sha、
+  BG9 LN16==EXP-003 SUCCESS 逐字/Freeze16、BG10 复用对证据;复用对 ETTh1_96
+  (All 0.4469/0.4181,Rand 0.6962/0.5583)入表。
+- 聚合(4H 等权,论文表 22 对照层):LN 数据集层最大 |Δ| 0.00237(ETTm1)/
+  Freeze 最大 |Δ| 0.00049(ETTm2),均为观测结果而非构造恒等;
   Overall All 0.4283/0.4190(论文 0.417/0.414)、Rand 0.4759/0.4615、LN 0.3325/0.3700
   (0.333/0.369)、Freeze 0.3595/0.3750(0.360/0.375)。**声明**:单种子(2021)+
-  Rand-VM 全量训练为本次对照设定;论文 LN 列为 3-seed 均值不可 3dp 比较。
+  Rand-VM 全量训练为本次对照设定;论文 LN 列为 3-seed 均值不可 3dp 比较;
+  All/Rand 与论文的差距归因(单种子散布、Rand-VM 可训练集未披露)为**待验证解释**。
 - 包 B:`temp/VisionTS_t38_ett_t22_20261105.tar.gz`(<50MB,不含 npy/ckpt;
-  复审修订后重打,首版 sha 25b0c3b1…,**终版 sha256 = 48d3324062c844f373df2a
-  a9afad9ab427626b7b12d3229acf22f352ea624c5b**,本地/eta 双侧校验一致)。
+  二轮修订后重打,终版大小与 sha256 以同目录 `.sha256` sidecar 为准,
+  本地/eta 双侧校验一致)。
