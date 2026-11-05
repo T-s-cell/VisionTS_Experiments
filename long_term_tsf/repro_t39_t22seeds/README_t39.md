@@ -80,6 +80,16 @@ cross-check <= 1e-6 + LN overall anchor 0.3323544589802623 /
 0.36986022753020126 + Freeze16 coverage / BG10 EXP-038 provenance
 (30 t38 jsons + 2 t37 reuse).
 
+Known incidents (all fixed BEFORE the queue launched; scene preserved
+in `logs/FAILED.txt`): three early smoke-verify FAILs during bring-up —
+driver import-order (fixed ac2bed6), BG4 trainable-list gate compared
+unhashable lists via set() (fixed 38612b9), and the cross-seed gates
+expected arm-differences within a seed, which is impossible by design
+(arms share the seed's RNG stream; fixed d9687e4 by comparing per-seed
+representatives, 3-way pairwise distinct). Final smoke after the fixes:
+**147/147 gates pass (0 FAIL)** at 2026-11-05 14:24, then the queue
+started.
+
 ## Budget
 
 Pure-train estimate from EXP-038 measured s/batch (train_wall −
@@ -87,12 +97,20 @@ vali_wall; ETTh1 1.092 / ETTh2 1.217 / ETTm1 1.217 / ETTm2 1.224
 s/batch; batches hourly 202/199/195/185, ETTm1 879/876/872/862, ETTm2
 910/908/904/893): ~11.7 h pure training for 64 arms; + vali/test
 (ETTm ~290 s/run, hourly ~100 s/run) and startup ≈ **15–16 h total
-wall clock**. Refreshed from the smoke runs' measurements at launch.
+wall clock**. Smoke-measured refresh at launch (2026-11-05): ETTh1_96
+this round 1.19–1.22 s/batch (in line with the estimate), remaining
+queue 33,856 batches ≈ 11.3 h pure train.
 
 ## Environment and reproducibility
 
-- eta L20, conda env `visionts` (same env as EXP-038 B-line).
-- Launch: `PYTHON_B=... GPU_ID=0 nohup bash repro_t39_t22seeds/run_t39_all.sh all > repro_t39_t22seeds/logs/all.out 2>&1 &`
+- eta L20, conda env `visionts` (same env as EXP-038 B-line,
+  `/dev_data/wlt/conda/envs/visionts/bin/python`, torch 2.12.0+cu126).
+- Actual commands used (from `long_term_tsf/` inside the repo checkout
+  at `/dev_data/wlt/VisionTS_Experiments`):
+  `PYTHON_B=/dev_data/wlt/conda/envs/visionts/bin/python GPU_ID=0 bash repro_t39_t22seeds/run_t39_all.sh smoke`
+  (2026-11-05 14:24, green), then the same with stage `queue` under
+  `nohup` (output `logs/queue_all.out`); `verify`, `collect`, `pack`
+  run after the queue drains.
 - Frozen ckpt sha256 `c551c37b...`; 4 ETT CSV sha pinned via each
   config's EXP-003 fingerprint; 12 training-tree files md5-checked
   against EXP-003 in preflight.
