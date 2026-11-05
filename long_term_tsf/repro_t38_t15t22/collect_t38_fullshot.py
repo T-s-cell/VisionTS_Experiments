@@ -61,7 +61,8 @@ def build_rows():
                 row["%s_test_peak_mb" % arm] = ph.get("test_peak_mb")
                 row["%s_train_batches" % arm] = \
                     rec.get("sampler_len_check", {}).get(
-                        "expected_train_batches")
+                        "expected_train_batches",
+                        rec.get("expected_train_batches"))
                 row["%s_ckpt_sha16" % arm] = rec["final_ckpt_sha256"][:16]
             else:
                 for k in ("mse", "mae", "wall_s", "train_s", "vali_s",
