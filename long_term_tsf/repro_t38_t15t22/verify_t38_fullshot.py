@@ -46,6 +46,9 @@ import t22_common as T
 CONFIGS = [(ds, h) for ds in C.ETT4 for h in C.HORIZONS
            if not (ds == "ETTh1" and h == 96)]
 
+# float64 recompute evidence for every covered record (30 new + 2 reuse)
+F64_REC = []
+
 
 def gate(rows, key, ok, detail):
     rows.append({"gate": key, "verdict": "PASS" if ok else "FAIL",
@@ -104,17 +107,24 @@ def check_config(ds, h, rows, summary):
              (true.shape, bool(np.array_equal(true, true003))))
         pr = pred[..., 0].reshape(n, 7, h).transpose(0, 2, 1)
         tr = true[..., 0].reshape(n, 7, h).transpose(0, 2, 1)
-        m = T.metrics_from_arrays(metric, pr, tr)
+        # reviewer correction: cast BOTH arrays to float64 BEFORE the metric
+        # (the old path computed in float32 and only cast the results)
+        m = T.metrics_from_arrays(metric, pr.astype(np.float64),
+                                  tr.astype(np.float64))
         succ = recs[arm]["success"]
         dmse = abs(float(m[1]) - succ["mse"])
         dmae = abs(float(m[0]) - succ["mae"])
         gate(rows, "BG3_metrics[%s_%s]" % (tag, arm),
              dmse <= C.METRIC_TOL and dmae <= C.METRIC_TOL,
-             "recomp %.10f/%.10f vs SUCCESS %.10f/%.10f (d %.2e/%.2e)" %
+             "f64 recomp %.10f/%.10f vs SUCCESS %.10f/%.10f (d %.2e/%.2e)" %
              (m[1], m[0], succ["mse"], succ["mae"], dmse, dmae))
         summary.setdefault(ds, {}).setdefault(h, {})[arm] = {
             "mse": succ["mse"], "mae": succ["mae"],
             "mse_recomp": float(m[1]), "mae_recomp": float(m[0])}
+        F64_REC.append({"ds": ds, "h": h, "arm": arm, "source": "this run",
+                        "mse_f64": float(m[1]), "mae_f64": float(m[0]),
+                        "mse_success": succ["mse"], "mae_success": succ["mae"],
+                        "d_mse": dmse, "d_mae": dmae})
 
     ia, ir = recs["all"]["init"], recs["rand"]["init"]
     gate(rows, "BG4_all_eq_ckpt[%s]" % tag,
@@ -247,9 +257,12 @@ def check_reuse_pair(rows, summary):
     exp003_true = os.path.join(C.exp003_job("ETTh1", 96), "results", "_",
                                "true.npy")
     t003 = np.load(exp003_true)
+    metric = T.load_metric()
+    n96 = C.expected_n_windows("ETTh1", 96)
     for arm in C.B_ARMS:
         jp = C.t37_job_dir(arm)
-        tp = os.path.join(jp, "results", "_", "true.npy")
+        rd = os.path.join(jp, "results", "_")
+        tp = os.path.join(rd, "true.npy")
         if not os.path.isfile(tp):
             okall &= gate(rows, "BG2_truth_bitwise[%s_%s]" % (tag, arm),
                           False, "t37 true.npy missing: %s" % tp)
@@ -258,6 +271,32 @@ def check_reuse_pair(rows, summary):
         okall &= gate(rows, "BG2_truth_bitwise[%s_%s]" % (tag, arm),
                       t.shape == t003.shape and np.array_equal(t, t003),
                       "t37 true %s bitwise==EXP-003" % (t.shape,))
+        # float64 metric recompute for the reused pair as well (reviewer
+        # correction: BG3 coverage = 30 new + 2 reuse records)
+        pp = os.path.join(rd, "pred.npy")
+        if not os.path.isfile(pp):
+            okall &= gate(rows, "BG3_metrics_f64[%s_%s]" % (tag, arm),
+                          False, "t37 pred.npy missing: %s" % pp)
+            continue
+        pred = np.load(pp)
+        pr = pred[..., 0].reshape(n96, 7, 96).transpose(0, 2, 1)
+        tr = t[..., 0].reshape(n96, 7, 96).transpose(0, 2, 1)
+        m = T.metrics_from_arrays(metric, pr.astype(np.float64),
+                                  tr.astype(np.float64))
+        succ = C.load_json(C.t37_train_json(arm))["success"]
+        dmse = abs(float(m[1]) - succ["mse"])
+        dmae = abs(float(m[0]) - succ["mae"])
+        okall &= gate(rows, "BG3_metrics_f64[%s_%s]" % (tag, arm),
+                      dmse <= C.METRIC_TOL and dmae <= C.METRIC_TOL,
+                      "t37 arrays f64 recomp %.10f/%.10f vs SUCCESS "
+                      "%.10f/%.10f (d %.2e/%.2e)" %
+                      (m[1], m[0], succ["mse"], succ["mae"], dmse, dmae))
+        F64_REC.append({"ds": "ETTh1", "h": 96, "arm": arm,
+                        "source": "EXP-037 frozen reuse",
+                        "mse_f64": float(m[1]), "mae_f64": float(m[0]),
+                        "mse_success": succ["mse"],
+                        "mae_success": succ["mae"],
+                        "d_mse": dmse, "d_mae": dmae})
     if vals:
         summary.setdefault("ETTh1", {}).setdefault(96, {}).update(vals)
     return okall
@@ -347,12 +386,27 @@ def main():
     for ds, h in [(ds, h) for ds in C.ETT4 for h in C.HORIZONS]:
         for arm in C.B_ARMS:
             p = C.train_json(ds, h, arm)
-            if os.path.isfile(p):
-                rec = C.load_json(p)
-                out["timing"]["%s_%d_%s" % (ds, h, arm)] = rec["timing"]
-                out["gpu_peak"]["%s_%d_%s" % (ds, h, arm)] = rec.get(
-                    "gpu_peak")
+            if not os.path.isfile(p):
+                continue
+            rec = C.load_json(p)
+            out["timing"]["%s_%d_%s" % (ds, h, arm)] = rec["timing"]
+            # per-phase CUDA peaks from the observation-only wrappers; the
+            # driver's single rec["gpu_peak"] only reflects the last phase
+            # (test) because reset_peak runs at every phase boundary
+            ph = rec.get("phases", {})
+            peaks = {"train_peak_mb": ph.get("train_peak_mb"),
+                     "vali_peak_mb": ph.get("vali_peak_mb"),
+                     "test_peak_mb": ph.get("test_peak_mb")}
+            vals = [v for v in peaks.values() if v is not None]
+            peaks["overall_max_mb"] = max(vals) if vals else None
+            out["gpu_peak"]["%s_%d_%s" % (ds, h, arm)] = peaks
+    out["recompute_f64"] = {
+        "n_records": len(F64_REC), "coverage_ok": len(F64_REC) == 32,
+        "tol": C.METRIC_TOL, "records": F64_REC}
     C.merge_json(C.VERIFY_JSON, "fullshot", out)
+    with open(os.path.join(C.LOG_DIR, "recompute_f64.json"), "w") as fh:
+        import json
+        json.dump(out["recompute_f64"], fh, indent=1)
     for g in rows:
         if g["verdict"] == "FAIL":
             print("[t38][B][FAIL] %s %s" % (g["gate"], g["detail"]))

@@ -204,11 +204,14 @@ pack_a() {
   log "packing A -> $out"
   ( cd "$REPO_DIR" && : > "$list" && \
     for f in t38_common.py t38_monash_runner.py t38_naive_monash.py \
-             verify_t38_monash.py collect_t38_monash.py run_t38_all.sh; do
+             verify_t38_monash.py collect_t38_monash.py run_t38_all.sh \
+             README_t38.md; do
       echo "long_term_tsf/repro_t38_t15t22/$f" >> "$list"
     done
     find long_term_tsf/repro_t38_t15t22/logs -maxdepth 1 \
          \( -name '*.json' -o -name '*.md' -o -name '*.csv' \) >> "$list"
+    nv=$(grep -c 'save_t38_monash/.*\.csv$' "$list")
+    [ "$nv" -eq 90 ] || { fail "pack_a" "metric CSVs in pack = $nv (want 90)"; return 1; }
     [ -f long_term_tsf/repro_t38_t15t22/logs/fig5_monash_ratio.png ] && \
       echo "long_term_tsf/repro_t38_t15t22/logs/fig5_monash_ratio.png" >> "$list"
     for f in long_term_tsf/repro_t38_t15t22/logs/runner_*.log \
@@ -218,9 +221,10 @@ pack_a() {
       [ -f "${f}.gz" ] || gzip -k "$f"
       echo "${f}.gz" >> "$list"
     done
-    ls save_t38_monash/visionts_monash_*.csv \
-       save_t38_monash/naive_n1_monash_*.csv \
-       save_t38_monash/naive_n2_monash_*.csv >> "$list" 2>/dev/null || true
+    ls long_term_tsf/save_t38_monash/visionts_monash_*.csv \
+       long_term_tsf/save_t38_monash/naive_n1_monash_*.csv \
+       long_term_tsf/save_t38_monash/naive_n2_monash_*.csv >> "$list" \
+       2>/dev/null || true
     sort -u "$list" -o "$list"
     tar czf "$out" -T "$list" )
   local rc=$?
@@ -372,14 +376,24 @@ pack_b() {
   log "packing B -> $out"
   ( cd "$REPO_DIR" && : > "$list" && \
     for f in t38_common.py t38_train_driver.py verify_t38_fullshot.py \
-             collect_t38_fullshot.py run_t38_all.sh; do
+             collect_t38_fullshot.py run_t38_all.sh README_t38.md; do
       echo "long_term_tsf/repro_t38_t15t22/$f" >> "$list"
     done
     find long_term_tsf/repro_t38_t15t22/logs -maxdepth 1 -name 'train_*.json' >> "$list"
     for f in verify_t38.json summary_t38_ett.csv RESULT_t38_ett.md \
-             preflight_b.json; do
+             preflight_b.json recompute_f64.json; do
       [ -f "long_term_tsf/repro_t38_t15t22/logs/$f" ] && \
         echo "long_term_tsf/repro_t38_t15t22/logs/$f" >> "$list"
+    done
+    # reused ETTh1_96 pair raw evidence (frozen EXP-037 archive, read-only)
+    for f in long_term_tsf/repro_t37_pilot/logs/train_all.json \
+             long_term_tsf/repro_t37_pilot/logs/train_rand.json \
+             long_term_tsf/save_t37_full/ETTh1_96_seed2021_all/SUCCESS.txt \
+             long_term_tsf/save_t37_full/ETTh1_96_seed2021_rand/SUCCESS.txt \
+             long_term_tsf/save_t37_full/ETTh1_96_seed2021_all/fingerprint.json \
+             long_term_tsf/save_t37_full/ETTh1_96_seed2021_rand/fingerprint.json; do
+      if [ ! -f "$f" ]; then fail "pack_b" "reuse evidence missing: $f"; return 1; fi
+      echo "$f" >> "$list"
     done
     for f in long_term_tsf/repro_t38_t15t22/logs/train_*.log \
              long_term_tsf/repro_t38_t15t22/logs/preflight_b.log; do
