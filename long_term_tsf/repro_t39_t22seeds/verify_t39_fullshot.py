@@ -151,9 +151,8 @@ def check_arm_seed(ds, h, arm, s, rows, summary):
 
 
 def check_seed_pair(ds, h, s, rows, recs21):
-    """Cross-arm gates at one seed, plus cross-seed inequality gates
-    against the archived seed-2021 evidence (recs21[arm] or None for
-    configs ETTh1_96 uses t37; others use t38 logs)."""
+    """Same-seed cross-arm gates; recs21 (archived 2021 evidence or None)
+    feeds only the cross-seed trainable-list consistency check."""
     tag = "%s_%d_s%d" % (ds, h, s)
     recs = {}
     for arm in C.B_ARMS:
@@ -200,17 +199,6 @@ def check_seed_pair(ds, h, s, rows, recs21):
         r = ir[key] if key == "rng_after_init" else recs["rand"][key]
         gate(rows, "BG5_%s_same_seed[%s]" % (key, tag), a == r,
              "identical across arms at seed %d" % s)
-        if ok21:
-            b = (s21_a["init"][key] if key == "rng_after_init"
-                 else s21_a[key])
-            c = (s21_r["init"][key] if key == "rng_after_init"
-                 else s21_r[key])
-            sub_ok = all(len({a[k], r[k], b[k], c[k]}) == 3
-                         for k in a) and set(a) == set(b)
-            gate(rows, "BG5_%s_cross_seed_differs[%s]" % (key, tag),
-                 sub_ok,
-                 "all %d sub-states pairwise distinct across seeds "
-                 "2021/2022/2023" % len(a))
 
     sa, sr = recs["all"]["sampler"], recs["rand"]["sampler"]
     exp_epoch = C.expected_epoch_len(ds, h)
@@ -225,14 +213,6 @@ def check_seed_pair(ds, h, s, rows, recs21):
          "n_idx %d/%d expect %d" % (ea["n"], er["n"], exp_epoch))
     gate(rows, "BG6_order_same_seed[%s]" % tag, ea["sha256"] == er["sha256"],
          "epoch index sha %s... equal across arms" % ea["sha256"][:16])
-    if ok21:
-        e21_a = s21_a["sampler"]["iters"][0]
-        e21_r = s21_r["sampler"]["iters"][0]
-        gate(rows, "BG6_order_cross_seed_differs[%s]" % tag,
-             len({ea["sha256"], er["sha256"], e21_a["sha256"],
-                  e21_r["sha256"]}) == 2
-             and ea["sha256"] != e21_a["sha256"],
-             "2022/2023 orders differ from 2021 (arms-in-seed equal)")
 
     fa, fr = recs["all"]["first_batch"], recs["rand"]["first_batch"]
     ok = fa.get("done") and fr.get("done") and \
@@ -240,15 +220,6 @@ def check_seed_pair(ds, h, s, rows, recs21):
         [t["sha256"] for t in fr["tensors"]]
     gate(rows, "BG7_first_batch_same_seed[%s]" % tag, ok,
          "tensors %s" % [t["shape"] for t in fa.get("tensors", [])])
-    if ok21:
-        f21a = s21_a["first_batch"]
-        f21r = s21_r["first_batch"]
-        gate(rows, "BG7_first_batch_cross_seed_differs[%s]" % tag,
-             [t["sha256"] for t in fa["tensors"]] !=
-             [t["sha256"] for t in f21a["tensors"]]
-             and [t["sha256"] for t in f21r["tensors"]] !=
-             [t["sha256"] for t in f21a["tensors"]],
-             "first-batch hashes differ from seed 2021")
 
     for arm in C.B_ARMS:
         sc = recs[arm]["sampler_len_check"]
@@ -256,6 +227,64 @@ def check_seed_pair(ds, h, s, rows, recs21):
              "sampler %d vs formula %d" % (sc["got"],
                                            sc["expected_epoch_len"]))
     return True
+
+
+def check_cross_seed(ds, h, rows, recs_by_seed):
+    """Cross-seed inequality gates (arms are EQUAL within a seed by
+    design, so all comparisons are between per-seed representatives):
+    3 seeds -> pairwise-distinct RNG sub-states, sampler orders and
+    first-batch tensor hashes; the archived 2021 pair must also show
+    arm equality (b==c) as evidence provenance."""
+    tag = "%s_%d" % (ds, h)
+    rs = recs_by_seed
+    if not all(s in rs and len(rs[s]) == 2 for s in X.LN_KEYS_SEEDS):
+        gate(rows, "BGX_evidence_presence[%s]" % tag, False,
+             "evidence incomplete for some seed: %s" %
+             sorted({s: len(v) for s, v in rs.items()}.items()))
+        return
+    gate(rows, "BGX_evidence_presence[%s]" % tag, True,
+         "all 3 seeds x 2 arms archived evidence present")
+
+    def rep(key, s):   # per-seed representative (all arm) + equality check
+        a = rs[s]["all"]["init"][key] if key == "rng_after_init" \
+            else rs[s]["all"][key]
+        r = rs[s]["rand"]["init"][key] if key == "rng_after_init" \
+            else rs[s]["rand"][key]
+        return a, r
+
+    for key in ("rng_after_init", "rng_at_train_entry"):
+        states = {}
+        arms_equal_21 = True
+        for s in X.LN_KEYS_SEEDS:
+            a, r = rep(key, s)
+            states[s] = a
+            if s == 2021:
+                arms_equal_21 = (a == r)
+        sub_ok = arms_equal_21 and all(
+            len({states[s][k] for s in X.LN_KEYS_SEEDS}) == 3
+            for k in states[2021]) and \
+            set(states[2021]) == set(states[2022]) == set(states[2023])
+        gate(rows, "BG5_%s_cross_seed_differs[%s]" % (key, tag), sub_ok,
+             "all %d sub-states: 2021 arms equal, 3 seeds pairwise "
+             "distinct" % len(states[2021]))
+
+    orders = {s: rs[s]["all"]["sampler"]["iters"][0]["sha256"]
+              for s in X.LN_KEYS_SEEDS}
+    order_arms21 = orders[2021] == rs[2021]["rand"]["sampler"]["iters"][0]["sha256"]
+    gate(rows, "BG6_order_cross_seed_differs[%s]" % tag,
+         order_arms21 and len(set(orders.values())) == 3,
+         "3 distinct epoch-index shas (2021 arms equal), e.g. 2021 %s... "
+         "2022 %s... 2023 %s..." % (orders[2021][:12], orders[2022][:12],
+                                    orders[2023][:12]))
+
+    def fb(s):
+        return [t["sha256"] for t in rs[s]["all"]["first_batch"]["tensors"]]
+    fb_arms21 = fb(2021) == [t["sha256"] for t in
+                             rs[2021]["rand"]["first_batch"]["tensors"]]
+    fbs = {s: tuple(fb(s)) for s in X.LN_KEYS_SEEDS}
+    gate(rows, "BG7_first_batch_cross_seed_differs[%s]" % tag,
+         fb_arms21 and len(set(fbs.values())) == 3,
+         "3 distinct first-batch hash tuples (2021 arms equal)")
 
 
 def final_ckpt_path(ds, h, arm, s):
@@ -494,10 +523,17 @@ def main():
             p21 = X.t38_train_json(ds, h, arm)
             if os.path.isfile(p21):
                 recs21[arm] = C.load_json(p21)
+        recs_by_seed = {2021: recs21}
         for s in X.SEEDS:
+            recs_s = {}
             for arm in C.B_ARMS:
                 check_arm_seed(ds, h, arm, s, rows, summary)
+                p = X.train_json(ds, h, arm, s)
+                if os.path.isfile(p):
+                    recs_s[arm] = C.load_json(p)
+            recs_by_seed[s] = recs_s
             check_seed_pair(ds, h, s, rows, recs21)
+        check_cross_seed(ds, h, rows, recs_by_seed)
         check_bg8(ds, h, rows, _CACHE)
     check_bg9(rows)
     check_bg10(rows)
