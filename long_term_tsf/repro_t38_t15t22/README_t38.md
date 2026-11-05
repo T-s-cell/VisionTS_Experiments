@@ -19,9 +19,11 @@ observation-only wrapper/patch,逐一记录在 `t38_monash_runner.py` docstring 
 | A. Monash 表 15 全量(29 论文行) | **完成,门禁 300/302 全过(0 硬失败;2 项为 CIF G6 设计内 SKIP)** | 30 子集锚 rel 全部 ≤1e-3(最差 sunspot 7.879e-04);29 比值几何均值 **0.7367** vs 论文 0.729(rel 1.05% < 2% WARN 线);CIF 池化行 vs 池化锚 rel 2.05e-04 |
 | B. 表 22 四 ETT(All vs Rand-VM,seed 2021) | **完成,门禁 430/430 全过(0 FAIL)** | 30 臂 sampler 长度全部 == 公式;4H 平均层 LN 列 Δ≤0.0009、Freeze 列 Δ≤0.0007(逐数据集);Overall LN 0.3325/0.3700 vs 论文 0.333/0.369,Freeze 0.3595/0.3750 vs 0.360/0.375;All 列 Overall 0.4283 vs 论文 0.417(+0.011);Rand-VM(单种子全量重训设定)Overall 0.4759;ETTh1 All 比 Rand 低 24.54% MSE(预训练收益最强) |
 
-## 复审修订(2026-11-05,commit `85fbe63f2db229f58139b87d30b613ef4d984520`)
+## 复审修订(2026-11-05,commit `85fbe63f2db229f58139b87d30b613ef4d984520`;打包态代码头 = `6357345d9753f31d180e5c2f2d8c80f9b35ea8ec`,其后仅本 README 文档性提交)
 
-按用户复审 4 项缺项逐项落地,全部基于既有产物复算/修正,不重训:
+按用户复审 4 项缺项逐项落地,全部基于既有产物复算/修正,不重训
+(另含打包修复 `6357345`:pack_a 文件清单先追加 90 个指标 CSV 再做
+nv==90 硬检查,修首轮 "metric CSVs in pack = 0" 的检查顺序错误):
 
 1. **BG3 真 float64 复算**:旧路径在 float32 数组上调 metric 后仅转型结果;
    修正为 pred/true **先 astype(float64) 再计算**,覆盖新增 30 组(verify BG3)
