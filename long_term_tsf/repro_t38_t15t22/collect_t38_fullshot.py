@@ -272,9 +272,9 @@ def result_md(rows, vj):
                             per_ds[ds]["rand"]["mse"],
                             "lower" if per_ds[ds]["all"]["mse"] <
                             per_ds[ds]["rand"]["mse"] else "HIGHER",
-                            100.0 * (per_ds[ds]["all"]["mse"] -
-                                     per_ds[ds]["rand"]["mse"]) /
-                            per_ds[ds]["rand"]["mse"])
+                            abs(100.0 * (per_ds[ds]["all"]["mse"] -
+                                         per_ds[ds]["rand"]["mse"]) /
+                                per_ds[ds]["rand"]["mse"]))
                          for ds in C.ETT4 if ds in per_ds) + "\n")
 
     L.extend(paper_diff_analysis(rows, per_ds,
