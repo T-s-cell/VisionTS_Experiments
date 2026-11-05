@@ -210,6 +210,10 @@ pack_a() {
     done
     find long_term_tsf/repro_t38_t15t22/logs -maxdepth 1 \
          \( -name '*.json' -o -name '*.md' -o -name '*.csv' \) >> "$list"
+    ls long_term_tsf/save_t38_monash/visionts_monash_*.csv \
+       long_term_tsf/save_t38_monash/naive_n1_monash_*.csv \
+       long_term_tsf/save_t38_monash/naive_n2_monash_*.csv >> "$list" \
+       2>/dev/null || true
     nv=$(grep -c 'save_t38_monash/.*\.csv$' "$list")
     [ "$nv" -eq 90 ] || { fail "pack_a" "metric CSVs in pack = $nv (want 90)"; return 1; }
     [ -f long_term_tsf/repro_t38_t15t22/logs/fig5_monash_ratio.png ] && \
@@ -221,10 +225,6 @@ pack_a() {
       [ -f "${f}.gz" ] || gzip -k "$f"
       echo "${f}.gz" >> "$list"
     done
-    ls long_term_tsf/save_t38_monash/visionts_monash_*.csv \
-       long_term_tsf/save_t38_monash/naive_n1_monash_*.csv \
-       long_term_tsf/save_t38_monash/naive_n2_monash_*.csv >> "$list" \
-       2>/dev/null || true
     sort -u "$list" -o "$list"
     tar czf "$out" -T "$list" )
   local rc=$?
