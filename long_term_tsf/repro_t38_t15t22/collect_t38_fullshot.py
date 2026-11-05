@@ -127,20 +127,25 @@ def paper_diff_analysis(rows, per_ds, ov):
              "configs and beats Rand-VM in %d/%d configs — the LN-adapter "
              "path dominates every configuration in this round." %
              (all14, n, ln_beats_rand, n))
-    L.append("- Gap attribution (candidate explanations, NOT verified "
-             "within this round): (a) our All/Rand numbers are a SINGLE "
-             "seed (2021) while the paper reports seed means — "
-             "per-config All-vs-paper dMSE spans −0.004…+0.026 with no "
-             "dataset-level bias on ETTh2; (b) the paper does not "
-             "disclose the Rand-VM trainable set — our Rand-VM full "
-             "finetune is this round's declared setting and the ETTh1 "
-             "Rand gap (+0.208 at 4H mean) shows the result is highly "
-             "sensitive to that undisclosed choice. LN/Freeze columns "
-             "adopt the EXP-003 / EXP-033 audited values as baselines; "
-             "their agreement with the paper at the 4H-mean layer is an "
-             "observed outcome (max |dMSE|: LN %.5f, Freeze %.5f), not "
-             "an identity." %
-             (max(abs(per_ds[ds]["ln"]["mse"] - C.PAPER_T22[ds]["ln"][0])
+    L.append("- Gap analysis (candidate explanations only; the cause of "
+             "the gaps vs paper REMAINS UNDETERMINED — EXP-039 tests "
+             "their cross-seed stability): (a) our All/Rand numbers are "
+             "a SINGLE seed (2021) while the paper reports seed means — "
+             "at the DATASET-4H-MEAN layer the All-vs-paper dMSE spans "
+             "%s (single-seed observation; the seed scatter is "
+             "quantified by EXP-039); (b) the paper does not disclose "
+             "the Rand-VM trainable set — our Rand-VM full finetune is "
+             "this round's declared setting, and the ETTh1 Rand gap "
+             "(+0.208 at the 4H mean) is a candidate explanation "
+             "compatible with that undisclosed choice. LN/Freeze "
+             "columns adopt the EXP-003 / EXP-033 audited values as "
+             "baselines; their agreement with the paper at the 4H-mean "
+             "layer is an observed outcome (max |dMSE|: LN %.5f, "
+             "Freeze %.5f), not an identity." %
+             (" ".join("%s %+.3f" % (ds, per_ds[ds]["all"]["mse"]
+                                     - C.PAPER_T22[ds]["all"][0])
+                       for ds in C.ETT4 if ds in per_ds),
+              max(abs(per_ds[ds]["ln"]["mse"] - C.PAPER_T22[ds]["ln"][0])
                   for ds in C.ETT4 if ds in per_ds),
               max(abs(per_ds[ds]["freeze"]["mse"] -
                       C.PAPER_T22[ds]["freeze"][0])

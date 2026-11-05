@@ -58,6 +58,20 @@ nv==90 硬检查,修首轮 "metric CSVs in pack = 0" 的检查顺序错误):
    n/n(432/432)。
 3. **补传校验文件**:两包重打后,`.sha256` sidecar 与包同放 `temp/` 一并交付。
 
+### 三轮交付期修正(2026-11-05,随 EXP-039 交付;用户指示)
+
+1. **归因句改为"差距原因尚未确定"**:Paper-difference analysis 中候选解释
+   (a)(b) 的定性改为"the cause of the gaps vs paper REMAINS UNDETERMINED —
+   EXP-039 tests their cross-seed stability";删除"shows the result is
+   highly sensitive to that undisclosed choice"的强因果表述,改为"is a
+   candidate explanation compatible with that undisclosed choice"。
+2. **"per-config"改为数据集四H均值口径**:单种子 dMSE 跨度不再逐 config
+   列出,改为在数据集 4H 均值层逐数据集列出(ETTh1/ETTh2/ETTm1/ETTm2
+   各自 dMSE),并标注"单种子观测;种子散布由 EXP-039 量化"。
+3. **交付动作**:eta 重跑 b_collect 重生成 `RESULT_t38_ett.md`,包 A/B 重打
+   (新 sidecar,sha 见下方交付记录——重打后上文的"终版 sha"两行即作废,
+   以三轮 sha 为准)。门禁与数值不动,仅文档口径。
+
 ## 1. A 线口径(Monash Table 15 / 图 5)
 
 - 官方入口 `eval_gluonts/run.py` `evaluate()` 进程内重放,flags 同 `run_monash.sh`:
