@@ -323,7 +323,9 @@ pack() {
       echo "long_term_tsf/repro_t39_t22seeds/$f" >> "$list"
     done
     find long_term_tsf/repro_t39_t22seeds/logs -maxdepth 1 \
-         -name 'train_*_s20*.json' >> "$list"
+         -name 'train_*_seed20*.json' >> "$list"
+    ntr=$(grep -c 'train_.*_seed20.*\.json$' "$list")
+    [ "$ntr" -eq 60 ] || { fail "pack" "train jsons in pack = $ntr (want 60)"; return 1; }
     for f in verify_t39.json verify_t39_smoke.json recompute_f64.json \
              recompute_f64_smoke.json summary_t39_ett.csv RESULT_t39_ett.md \
              fig_t39_seed_effect.png preflight.json; do
