@@ -88,7 +88,11 @@ expected arm-differences within a seed, which is impossible by design
 (arms share the seed's RNG stream; fixed d9687e4 by comparing per-seed
 representatives, 3-way pairwise distinct). Final smoke after the fixes:
 **147/147 gates pass (0 FAIL)** at 2026-11-05 14:24, then the queue
-started.
+started (which itself added ZERO failures). The first full verify had
+5 FAILs, all one class: seed-2021 archive metrics were not fed into
+the aggregation summary (fixed d6a78e3); the re-run was 1095/1095.
+The first pack shipped 0 of this round's train jsons (glob pattern
+mismatch, fixed 56b7215 + hard count 64, b9ee00d).
 
 ## Budget
 
@@ -114,22 +118,63 @@ queue 33,856 batches ≈ 11.3 h pure train.
 - Frozen ckpt sha256 `c551c37b...`; 4 ETT CSV sha pinned via each
   config's EXP-003 fingerprint; 12 training-tree files md5-checked
   against EXP-003 in preflight.
-- Commit SHA (this round): `<<FILL_AT_COMMIT>>` (branch
-  `repro/ltsf-t39-t22seeds`, based on EXP-038 head `8ca98a0`).
+- Commit SHA (this round): code-final `b9ee00d` (pack-fix); results
+  README follows as a docs-only commit; branch
+  `repro/ltsf-t39-t22seeds`, based on EXP-038 head `8ca98a0`.
 - Big artifacts stay on eta: `long_term_tsf/save_t39_full/`
   (64 job dirs: ckpt/pred/true), `logs/train_*.json` evidence is in
   the pack; the pack carries NO npy/ckpt.
 
 ## Results
 
-<<TO BE FILLED AFTER QUEUE+VERIFY+COLLECT>>
+Gates: **1095/1095 PASS (0 FAIL)** over 64 arms (BG0-BG10) + LN48
+triple anchor + Freeze16 + EXP-038 provenance; f64 recompute 64/64
+coverage, all |d| <= 1e-6 (`logs/verify_t39.json`,
+`logs/recompute_f64.json`).
+
+Overall layer (4 datasets equal-weight; cross-seed mean ± std ddof=1,
+n=3; paper Table 22 in parentheses):
+
+| col | MSE | MAE |
+|---|---|---|
+| All | 0.4237±0.0040 (0.417) | 0.4163±0.0023 (0.414) |
+| Rand-VM | 0.4733±0.0030 (0.417) | 0.4598±0.0027 (0.414) |
+| LN | 0.3324±0.0006 (0.333) | 0.3699±0.0003 (0.369) |
+| Freeze | 0.3595 (0.360) | 0.3750 (0.375) |
+
+Key cross-seed findings (all direction-consistent 3/3 seeds; details
+and per-seed values in `RESULT_t39_ett.md` T2-T5):
+
+1. **Pretrained benefit is stable**: overall All − Rand per seed
+   −10.00% / −11.08% / −10.40% (s2021/2022/2023); per dataset:
+   ETTh1 −0.198±0.015, ETTh2 −0.018±0.003, ETTm2 −0.010±0.007 MSE,
+   but **ETTm1 reversed in 3/3 seeds** (All worse than Rand
+   +3.33% / +8.01% / +8.86%).
+2. **LN advantage is stable**: LN − All overall per seed
+   −22.37% / −21.05% / −21.23%; direction-consistent on all 4 datasets.
+3. **EXP-038 anomalies persist across seeds**: ETTh1 Rand vs paper
+   4H-mean deviations +0.208/+0.220/+0.193; ETTm1 All-worse-than-Rand
+   3/3 seeds. Seed scatter is small (dataset-layer std <= 0.018 MSE),
+   so the single-seed EXP-038 picture is cross-seed stable within
+   these three seeds.
+4. **Gaps vs paper remain undetermined**: All +0.0067, Rand +0.0563
+   overall dMSE; the cause is not identified this round — these seeds
+   only quantify its cross-seed stability.
+
+Budget: measured pure-train 1.19–1.31 s/batch by dataset; queue of 60
+ran 2026-11-05 14:26 → 2026-11-06 04:25 (~14 h wall).
 
 ## Delivery
 
-- Pack: `temp/VisionTS_t39_t22seeds_<date>.tar.gz` (<50MB) + `.sha256`
-  sidecar. In-pack wording: the sha in any README inside the pack is
-  the sidecar value quoted as provenance; the authoritative sha is the
-  sidecar file itself and this repo README's delivery record.
+- Pack: `temp/VisionTS_t39_t22seeds_20261106.tar.gz` (1,171,037 bytes,
+  275 files: 64 train jsons, 96 LN evidence, 30 t38 + 2 t37 provenance
+  jsons, verify/recompute/summary/RESULT/fig, code + README) +
+  `.sha256` sidecar. The authoritative sha is the sidecar file and the
+  repo-side delivery record; an in-pack README lags the final docs
+  commit by construction.
+- Delivery also includes the REPACKED EXP-038 pair (round-3 wording):
+  A `0e899c7d…`, B `6a27e298…` — recorded in
+  `repro_t38_t15t22/README_t38.md`.
 - EXP-038 wording fix (user correction 2026-11-05) delivered together:
   "per-config" -> dataset-4H-mean framing; gap attribution -> "the
   cause remains undetermined; this round tests cross-seed stability".
