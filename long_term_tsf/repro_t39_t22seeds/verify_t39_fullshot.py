@@ -185,10 +185,12 @@ def check_seed_pair(ds, h, s, rows, recs21):
     if ok21:
         lists[2021] = (s21_a["init"]["trainable_names"],
                        s21_a["init"]["trainable_count"])
-    vals = set(v for v, _ in lists.values())
+    names_ref = ia["trainable_names"]
+    all_same = all(v[0] == names_ref for v in lists.values())
     gate(rows, "BG4_trainable_lists_consistent[%s]" % tag,
          ia["trainable_names"] == ir["trainable_names"]
-         and len(vals) == 1 and ok21,
+         and all_same and len({v[1] for v in lists.values()}) == 1
+         and ok21,
          "%d trainable params; identical lists across arms%s" %
          (ia["trainable_count"],
           " and seeds 2021/2022/2023" if ok21 else " (2021 evidence miss)"))
