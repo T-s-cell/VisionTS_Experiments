@@ -30,8 +30,8 @@ import time
 
 import numpy as np
 
+import t39_common as X   # first: fixes sys.path for the t38 package
 import t38_common as C
-import t39_common as X
 
 
 def log(msg):

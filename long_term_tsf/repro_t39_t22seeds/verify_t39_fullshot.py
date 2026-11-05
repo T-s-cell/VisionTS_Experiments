@@ -499,8 +499,13 @@ def main():
         check_bg8(ds, h, rows, _CACHE)
     check_bg9(rows)
     check_bg10(rows)
-    per_seed_ds, per_seed_ov, agg_ds, agg_ov, cmp_rows = \
-        aggregate(summary, rows)
+    if args.smoke:
+        # aggregation is report-level; smoke gates only the smoke config
+        per_seed_ds, per_seed_ov, agg_ds, agg_ov, cmp_rows = \
+            {}, {}, {}, {}, []
+    else:
+        per_seed_ds, per_seed_ov, agg_ds, agg_ov, cmp_rows = \
+            aggregate(summary, rows)
 
     n_fail = sum(1 for g in rows if g["verdict"] == "FAIL")
     expected_f64 = 4 if args.smoke else 64
