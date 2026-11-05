@@ -19,6 +19,30 @@ observation-only wrapper/patch,逐一记录在 `t38_monash_runner.py` docstring 
 | A. Monash 表 15 全量(29 论文行) | **完成,门禁 300/302 全过(0 硬失败;2 项为 CIF G6 设计内 SKIP)** | 30 子集锚 rel 全部 ≤1e-3(最差 sunspot 7.879e-04);29 比值几何均值 **0.7367** vs 论文 0.729(rel 1.05% < 2% WARN 线);CIF 池化行 vs 池化锚 rel 2.05e-04 |
 | B. 表 22 四 ETT(All vs Rand-VM,seed 2021) | **完成,门禁 430/430 全过(0 FAIL)** | 30 臂 sampler 长度全部 == 公式;4H 平均层 LN 列 Δ≤0.0009、Freeze 列 Δ≤0.0007(逐数据集);Overall LN 0.3325/0.3700 vs 论文 0.333/0.369,Freeze 0.3595/0.3750 vs 0.360/0.375;All 列 Overall 0.4283 vs 论文 0.417(+0.011);Rand-VM(单种子全量重训设定)Overall 0.4759;ETTh1 All 比 Rand 低 24.54% MSE(预训练收益最强) |
 
+## 复审修订(2026-11-05,commit `85fbe63f2db229f58139b87d30b613ef4d984520`)
+
+按用户复审 4 项缺项逐项落地,全部基于既有产物复算/修正,不重训:
+
+1. **BG3 真 float64 复算**:旧路径在 float32 数组上调 metric 后仅转型结果;
+   修正为 pred/true **先 astype(float64) 再计算**,覆盖新增 30 组(verify BG3)
+   与复用 2 组(新增 BG3_metrics_f64,t37 归档 pred/true 同法);核验记录落
+   `logs/recompute_f64.json`(32 条,含 mse/mae_f64、SUCCESS 值、Δ)并并入
+   verify_t38.json fullshot 节。注意:SUCCESS 由官方代码在 fp32 下计算,f64
+   复算允许 ≤1e-6(METRIC_TOL)级差异。
+2. **Monash 总分差异分析**:RESULT_t38_monash.md 新增"Geomean print-precision
+   analysis"段——论文印刷值复算 geomean = **0.728579(→0.729)**,未舍入实测
+   0.736658(rel 1.05%);主因 Traffic Hourly 2dp 印刷(0.01/0.03)使该行
+   印刷比仅一位有效数字。未舍入实测汇总保持为主报告数字。
+3. **ETT 报告修正**:T1 计时列改为 train\* = train_wall − vali_wall(官方
+   train() 在 epoch 内调 vali,原列重复计时);gpu_peak 改为三相峰值 + overall
+   max(原 driver 单值只反映末次 test 相);预算表不再把复用 ETTh1_96 两臂列为
+   待跑;新增 Paper-difference analysis 段(All 0.4283/Rand 0.4759 vs 论文
+   0.417;LN 在 16/16 config MSE 上同时优于 All 与 Rand)。
+4. **审计包补齐**:包 A 补 `save_t38_monash/` 90 个原始指标 CSV
+   (visionts_monash_<ds> + naive_n1/n2;旧包因路径缺前缀静默漏收,现打包时
+   硬校验 ==90);包 B 补复用两组原始证据(t37 train json/SUCCESS/fingerprint)
+   与 `recompute_f64.json`;两包均含本 README;打包 sha 以 sidecar 为准。
+
 ## 1. A 线口径(Monash Table 15 / 图 5)
 
 - 官方入口 `eval_gluonts/run.py` `evaluate()` 进程内重放,flags 同 `run_monash.sh`:
@@ -175,9 +199,9 @@ bash long_term_tsf/repro_t38_t15t22/retry_failed_a.sh <ds...>
   作者侧同样截断,文档化不设门)+ 1 项 cif_paper_print(论文印刷末位问题,§1)。
 - 图 5:`logs/fig5_monash_ratio.png`(29 行,log 轴,0.729 参考线;作者 env 无
   matplotlib,collect 在当前 env 下重跑生成,collect 为纯 json 后处理与 env 无关)。
-- 包 A:`temp/VisionTS_t38_monash_t15_20261105.tar.gz`(1,176,424 B < 50MB)
-  sha256 `023a66a7c04d4375154350a594078b95f625eb3c5871f018bf6d3182c7c39cba`
-  (sidecar 同值,本地/eta 双侧校验一致)。
+- 包 A:`temp/VisionTS_t38_monash_t15_20261105.tar.gz`(<50MB;复审修订后重打,
+  首版 sha 023a66a7…,**终版 sha 以同目录 .sha256 sidecar 为准**,本地/eta
+  双侧校验一致)。
 - B 线运行记录:
 - B 线执行:b_all 于 03:17 启动;首启因 t38_common 漏 REPO_ROOT(visionts 导入失败,
   `a021cbc` 修复)重启于 03:20;pilot ETTm1_96 双臂(计入 30)MSE all 0.35602/rand
@@ -196,6 +220,6 @@ bash long_term_tsf/repro_t38_t15t22/retry_failed_a.sh <ds...>
   Overall All 0.4283/0.4190(论文 0.417/0.414)、Rand 0.4759/0.4615、LN 0.3325/0.3700
   (0.333/0.369)、Freeze 0.3595/0.3750(0.360/0.375)。**声明**:单种子(2021)+
   Rand-VM 全量训练为本次对照设定;论文 LN 列为 3-seed 均值不可 3dp 比较。
-- 包 B:`temp/VisionTS_t38_ett_t22_20261105.tar.gz`(540,283 B < 50MB)
-  sha256 `25b0c3b16731ffd8808d11f92bf400d84c0a51d687e26e6d9971a4f1c2de53e9`
-  (sidecar 同值,本地/eta 双侧校验一致)。
+- 包 B:`temp/VisionTS_t38_ett_t22_20261105.tar.gz`(<50MB,不含 npy/ckpt;
+  复审修订后重打,首版 sha 25b0c3b1…,**终版 sha 以同目录 .sha256 sidecar
+  为准**,本地/eta 双侧校验一致)。
