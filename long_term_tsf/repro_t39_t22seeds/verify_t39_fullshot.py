@@ -523,6 +523,9 @@ def main():
             p21 = X.t38_train_json(ds, h, arm)
             if os.path.isfile(p21):
                 recs21[arm] = C.load_json(p21)
+                summary[(ds, h)][(arm, 2021)] = {
+                    "mse": recs21[arm]["success"]["mse"],
+                    "mae": recs21[arm]["success"]["mae"]}
         recs_by_seed = {2021: recs21}
         for s in X.SEEDS:
             recs_s = {}
