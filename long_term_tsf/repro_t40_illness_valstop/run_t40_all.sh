@@ -106,7 +106,8 @@ stage_collect() {
 stage_pack() {
     local OUT="temp_t40_pack"
     rm -rf "$OUT" && mkdir -p "$OUT/repro_t40_illness_valstop/logs"
-    cp "$PKG_DIR"/*.py "$PKG_DIR/run_t40_all.sh" "$OUT/repro_t40_illness_valstop/"
+    cp "$PKG_DIR"/*.py "$PKG_DIR/run_t40_all.sh" "$PKG_DIR"/README_t40.md \
+       "$OUT/repro_t40_illness_valstop/"
     cp "$PKG_DIR"/logs/*.json "$PKG_DIR"/logs/*.csv \
        "$PKG_DIR"/logs/*.md "$PKG_DIR"/logs/*.png \
        "$OUT/repro_t40_illness_valstop/logs/" 2>/dev/null

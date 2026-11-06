@@ -118,7 +118,25 @@ smoke gate passes (docs-only commits afterwards if any).
 
 ## Results
 
-(filled after queue/verify/collect)
+全链一次通过(2026-11-07,eta;12/12 任务 SUCCESS,共用轨迹):
+
+- **verify TG1-TG10:1093/1093 ALL PASS**(TG2 同环境对照轮
+  ctrl-vs-main 逐位轨迹等价在冒烟硬门 59/59 已证;TG4 true.npy 与
+  EXP-003 逐位一致;TG5 f64 复算 ≤1e-6;TG6 144/144 状态机重放 +
+  锁定 ckpt 重算;TG7 锁定后不变;TG9 lr 双记录;TG10 134/134)。
+- **总体(4-H 等权,3 种子)**:A 1.8783±0.0010 / B 1.8796±0.0042 /
+  C 1.8775±0.0061(论文 1.899;EXP-003 归档 1.8778)。**三条规则
+  总体相差 ≤0.07%,方向一致性均为 NO** —— 验证/模型选择/早停机制
+  在 H24-60 上不构成对论文差距的解释(受控诊断观察,不作归因)。
+- **B(官方等权批均值)在 H24 偏离最大**:best epoch 2/3/5(A 为
+  15/14/6),seed2021 test MSE 2.0273 vs A 1.9852(+2.1%);H60 则
+  反向(B 偏好晚期 epoch 16-19,MSE 略优于 A −0.9%)。H36/48 A=B
+  逐位同(同轨迹同选择 → 同一锁定 ckpt)。
+- **预算**:12 任务总训练墙钟 43.0 min(H24 301 s、H36 114 s、
+  H48 119 s、H60 325 s 每任务均值;全部早停,E17-22 内锁定)。
+- 曲线/图表:`logs/summary_t40.csv`(36 行)、
+  `logs/fig_t40_valstop.png`、RESULT 全表;theta 归档曲线仅参考
+  (TG3 并排,无阈值)。
 
 ## Delivery
 
