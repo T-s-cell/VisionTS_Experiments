@@ -50,11 +50,13 @@ def arm_rec(ds, h, arm, s):
 
 
 FIELDS = ["task", "ds", "h", "seed",
-          "all_source", "all_mse", "all_mae", "all_train_s", "all_vali_s",
+          "all_source", "all_mse", "all_mae", "all_train_s",
+          "all_train_pure_s", "all_vali_s",
           "all_test_s", "all_train_peak_mb", "all_train_batches",
           "all_ckpt_sha16",
           "rand_source", "rand_mse", "rand_mae", "rand_train_s",
-          "rand_vali_s", "rand_test_s", "rand_train_peak_mb",
+          "rand_train_pure_s", "rand_vali_s",
+          "rand_test_s", "rand_train_peak_mb",
           "rand_train_batches", "rand_ckpt_sha16",
           "ln_mse", "ln_mae", "ln_source",
           "freeze_mse", "freeze_mae", "freeze_source"]
@@ -81,6 +83,7 @@ def build_rows():
                     row["%s_mae" % arm] = rec["success"]["mae"]
                     ph = rec.get("phases", {})
                     row["%s_train_s" % arm] = ph.get("train_wall")
+                    row["%s_train_pure_s" % arm] = train_pure(row, arm)
                     row["%s_vali_s" % arm] = ph.get("vali_wall")
                     row["%s_test_s" % arm] = ph.get("test_wall")
                     row["%s_train_peak_mb" % arm] = ph.get("train_peak_mb")
@@ -91,7 +94,8 @@ def build_rows():
                     row["%s_ckpt_sha16" % arm] = \
                         rec["final_ckpt_sha256"][:16]
                 else:
-                    for k in ("mse", "mae", "train_s", "vali_s", "test_s",
+                    for k in ("mse", "mae", "train_s", "train_pure_s",
+                              "vali_s", "test_s",
                               "train_peak_mb", "train_batches",
                               "ckpt_sha16"):
                         row["%s_%s" % (arm, k)] = None
@@ -220,8 +224,14 @@ def result_md(rows, vj):
              "LN per seed; Freeze shared)\n")
     L.append("Timing columns for seed rows: train* = train_wall − vali_wall "
              "(pure training; the official train() calls vali() inside the "
-             "epoch loop). The seed-2021 All/Rand pair of ETTh1_96 comes "
-             "from the frozen EXP-037 archive (no phase timing, n/a).\n")
+             "epoch loop). In summary_t39_ett.csv, <arm>_train_s is the RAW "
+             "train_wall and therefore INCLUDES the in-loop validation time; "
+             "<arm>_train_pure_s = train_wall − vali_wall is the pure "
+             "training figure used in this report. The seed-2021 All/Rand "
+             "pair of ETTh1_96 comes from the frozen EXP-037 archive (no "
+             "phase timing, n/a). Freeze is a single frozen inference "
+             "(seed-independent) and is therefore shown as ONE value, not "
+             "a seed mean±std.\n")
     by_key = {(r["ds"], r["h"], r["seed"]): r for r in rows}
     L.append("| ds | H | seed | All MSE/MAE | Rand-VM MSE/MAE | "
              "LN MSE/MAE | Freeze MSE/MAE | All train*/vali/test s | "
@@ -257,11 +267,21 @@ def result_md(rows, vj):
                 a = agg_ds[ds][k]
                 pm, pa = C.PAPER_T22[ds][k]
                 d = a["mse_mean"] - pm if a["mse_mean"] is not None else None
-                L.append("| %s | %s | %s±%s | %s±%s | %.3f/%.3f | %s | %s |" %
-                         (ds, k, fmt(a["mse_mean"]), fmt(a["mse_std"]),
-                          fmt(a["mae_mean"]), fmt(a["mae_std"]), pm, pa,
+                if k == "freeze":
+                    mse_cell = fmt(a["mse_mean"])
+                    mae_cell = fmt(a["mae_mean"])
+                    per_seed = "single frozen inference"
+                else:
+                    mse_cell = "%s±%s" % (fmt(a["mse_mean"]),
+                                          fmt(a["mse_std"]))
+                    mae_cell = "%s±%s" % (fmt(a["mae_mean"]),
+                                          fmt(a["mae_std"]))
+                    per_seed = "/".join("%.4f" % v
+                                        for v in a["per_seed_mse"])
+                L.append("| %s | %s | %s | %s | %.3f/%.3f | %s | %s |" %
+                         (ds, k, mse_cell, mae_cell, pm, pa,
                           fmt(d, 4) if d is not None else "n/a",
-                          "/".join("%.4f" % v for v in a["per_seed_mse"])))
+                          per_seed))
         L.append("")
 
     # ---- T3: overall layer --------------------------------------------
@@ -274,11 +294,17 @@ def result_md(rows, vj):
         for k in ("all", "rand", "ln", "freeze"):
             a = agg_ov[k]
             pm, pa = C.PAPER_T22_OVERALL[k]
-            L.append("| %s | %s±%s | %s±%s | %.3f/%.3f | %+.4f | %s |" %
-                     (k, fmt(a["mse_mean"]), fmt(a["mse_std"]),
-                      fmt(a["mae_mean"]), fmt(a["mae_std"]), pm, pa,
-                      a["mse_mean"] - pm,
-                      "/".join("%.4f" % v for v in a["per_seed_mse"])))
+            if k == "freeze":
+                mse_cell = fmt(a["mse_mean"])
+                mae_cell = fmt(a["mae_mean"])
+                per_seed = "single frozen inference"
+            else:
+                mse_cell = "%s±%s" % (fmt(a["mse_mean"]), fmt(a["mse_std"]))
+                mae_cell = "%s±%s" % (fmt(a["mae_mean"]), fmt(a["mae_std"]))
+                per_seed = "/".join("%.4f" % v for v in a["per_seed_mse"])
+            L.append("| %s | %s | %s | %.3f/%.3f | %+.4f | %s |" %
+                     (k, mse_cell, mae_cell, pm, pa,
+                      a["mse_mean"] - pm, per_seed))
         L.append("")
 
     # ---- paired diffs ---------------------------------------------------
@@ -510,6 +536,7 @@ def selfcheck():
                           "%s_mse" % arm: 0.45 + 0.01 * (s - 2021),
                           "%s_mae" % arm: 0.42,
                           "%s_train_s" % arm: 800.0,
+                          "%s_train_pure_s" % arm: 740.0,
                           "%s_vali_s" % arm: 60.0, "%s_test_s" % arm: 40.0,
                           "%s_train_peak_mb" % arm: 5000.0,
                           "%s_train_batches" % arm: 200,

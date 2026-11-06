@@ -84,10 +84,22 @@ try:
     assert rec.get("requested_seed") == seed
 except Exception as e:
     why("train json incomplete: %s" % e); sys.exit(0)
+try:
+    fpj = C.load_json(os.path.join(jd, "fingerprint.json"))
+    assert fpj == rec["fingerprint"], "job-dir fingerprint != train json"
+    assert fpj.get("seed") == seed and fpj.get("args", {}).get("seed") == seed
+    assert all(isinstance(fpj.get(k), str) and fpj[k]
+               for k in ("code_md5", "data_sha256", "ckpt_sha256"))
+except Exception as e:
+    why("fingerprint incomplete: %s" % e); sys.exit(0)
 rd = os.path.join(jd, "results", "_")
 for f in ("pred.npy", "true.npy"):
-    if not os.path.isfile(os.path.join(rd, f)):
-        why("missing %s" % f); sys.exit(0)
+    q = os.path.join(rd, f)
+    if not os.path.isfile(q) or os.path.getsize(q) <= 0:
+        why("missing/empty %s" % f); sys.exit(0)
+    with open(q, "rb") as fh:
+        if fh.read(6) != b"\x93NUMPY":
+            why("invalid npy header: %s" % f); sys.exit(0)
 ck = os.path.join(jd, "checkpoints", "_", "checkpoint.pth")
 if not os.path.isfile(ck):
     why("missing final checkpoint"); sys.exit(0)
@@ -113,7 +125,8 @@ run_one() {  # $1 = DS_H, $2 = arm, $3 = seed
     return 0
   fi
   if [[ "$decision" == MOVE:* ]]; then
-    job_move_aside "${decision#MOVE:}"
+    local mdir=${decision#MOVE:}
+    job_move_aside "${mdir%%$'\t'*}"
   fi
   log "training $tag..."
   $PYTHON_B "$PKG_DIR/t39_train_driver.py" --config "$cfg" --arm "$arm" \
