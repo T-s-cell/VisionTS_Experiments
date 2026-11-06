@@ -123,5 +123,11 @@ eta,`t38_logs_base()` 以 fred_md.json 为标记解析。
 
 ## Delivery
 
-(pack + sidecar sha recorded after collect; sha lives ONLY in the
-sidecar and this repo's delivery record, never in the in-pack README)
+- 包:`temp/temp_t41_pack.tar.gz`(1,276,606 bytes,<50MB;含 9 代码
+  文件 + runner、logs(json/csv/md/png)、job_records(manifest/params/
+  nn 表/coords×4 等;特征 npy / windows npz / 邻居 npz 留 eta))。
+- sidecar:`temp/temp_t41_pack.tar.gz.sha256` =
+  `3655a114b7888eddb5e93a3d91371d085da99d798c240d4691c3ff28d1d05325`
+  (sha 只记 sidecar 与本交付记录,不入包内 README)。
+- 代码冻结头:`be5b833`(分支 `repro/ltsf-t40-t41`;包内 README 滞后
+  终版文档提交,属已知口径)。
