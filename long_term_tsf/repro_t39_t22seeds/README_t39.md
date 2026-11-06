@@ -92,7 +92,18 @@ started (which itself added ZERO failures). The first full verify had
 5 FAILs, all one class: seed-2021 archive metrics were not fed into
 the aggregation summary (fixed d6a78e3); the re-run was 1095/1095.
 The first pack shipped 0 of this round's train jsons (glob pattern
-mismatch, fixed 56b7215 + hard count 64, b9ee00d).
+mismatch, fixed 56b7215 + hard count 64, b9ee00d). Post-review
+hardening of the re-entry check (f7be1ed) initially mis-typed the
+fingerprint provenance keys as strings — they are dict-valued maps —
+so one re-entry test moved the four smoke dirs aside and retrained
+them; the training is NOT bitwise deterministic across runs
+(differed ~1e-5), so the ORIGINAL archived evidence was restored
+verbatim (dirs from `.failed/`, the overwritten smoke train jsons and
+logs restored from the delivered pack, bitwise sha-checked), the
+partial rerun scene is preserved under `save_t39_full/.failed/rerunA_*`,
+and the check was fixed in 7f114e3 + 525427a. Final re-entry test:
+**64 tasks considered, 64 skipped as complete** (strict checks pass on
+all originals).
 
 ## Budget
 
@@ -118,9 +129,10 @@ queue 33,856 batches ≈ 11.3 h pure train.
 - Frozen ckpt sha256 `c551c37b...`; 4 ETT CSV sha pinned via each
   config's EXP-003 fingerprint; 12 training-tree files md5-checked
   against EXP-003 in preflight.
-- Commit SHA (this round): code-final `b9ee00d` (pack-fix); results
-  README follows as a docs-only commit; branch
-  `repro/ltsf-t39-t22seeds`, based on EXP-038 head `8ca98a0`.
+- Commit SHA (this round): code-freeze head
+  **`525427a2bda02a7fec5d2d55b4a46bb5ec90ea8f`** (branch
+  `repro/ltsf-t39-t22seeds`, based on EXP-038 head `8ca98a0`; the
+  results README is a docs-only commit on top).
 - Big artifacts stay on eta: `long_term_tsf/save_t39_full/`
   (64 job dirs: ckpt/pred/true), `logs/train_*.json` evidence is in
   the pack; the pack carries NO npy/ckpt.
@@ -166,12 +178,23 @@ ran 2026-11-05 14:26 → 2026-11-06 04:25 (~14 h wall).
 
 ## Delivery
 
-- Pack: `temp/VisionTS_t39_t22seeds_20261106.tar.gz` (1,171,037 bytes,
-  275 files: 64 train jsons, 96 LN evidence, 30 t38 + 2 t37 provenance
-  jsons, verify/recompute/summary/RESULT/fig, code + README) +
-  `.sha256` sidecar. The authoritative sha is the sidecar file and the
-  repo-side delivery record; an in-pack README lags the final docs
-  commit by construction.
+- Pack: `temp/VisionTS_t39_t22seeds_20261106.tar.gz` (1,182,190 bytes,
+  277 files: 64 train jsons, 96 LN evidence, 30 t38 + 2 t37 provenance
+  jsons, verify/recompute/summary/RESULT/fig, code + README; the
+  import-time deps `repro_t38_t15t22/t38_common.py` and
+  `repro_t22_freeze_ln/t22_common.py` are packed at their canonical
+  relative paths so the tree is importable standalone — verified) +
+  `.sha256` sidecar, sha256
+  **`b161a4b590e652f686209f1e43b0e82e327e988aa411f506f29c8851831a9863`**
+  (double-ended verified). The authoritative sha is the sidecar file
+  and this repo-side delivery record; an in-pack README lags the
+  final docs commit by construction.
+- Presentation caliber (per user review): Freeze is a single frozen
+  inference and is shown as ONE value (no ±0.0000, labeled "single
+  frozen inference"); in `summary_t39_ett.csv` the `<arm>_train_s`
+  column is the RAW train_wall INCLUDING in-loop validation, and
+  `<arm>_train_pure_s = train_wall − vali_wall` is the pure-training
+  figure used in the report.
 - Delivery also includes the REPACKED EXP-038 pair (round-3 wording):
   A `0e899c7d…`, B `6a27e298…` — recorded in
   `repro_t38_t15t22/README_t38.md`.
