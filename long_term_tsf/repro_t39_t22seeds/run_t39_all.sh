@@ -335,6 +335,14 @@ pack() {
              collect_t39_fullshot.py run_t39_all.sh README_t39.md; do
       echo "long_term_tsf/repro_t39_t22seeds/$f" >> "$list"
     done
+    # import-time deps (t39_common -> t38_common -> t22_common); packed
+    # at their canonical relative paths so the tree is importable
+    # standalone (sys.path fixes are __file__-relative)
+    for f in long_term_tsf/repro_t38_t15t22/t38_common.py \
+             long_term_tsf/repro_t22_freeze_ln/t22_common.py; do
+      [ -f "$f" ] || { fail "pack" "dep missing: $f"; return 1; }
+      echo "$f" >> "$list"
+    done
     find long_term_tsf/repro_t39_t22seeds/logs -maxdepth 1 \
          -name 'train_*_seed20*.json' >> "$list"
     ntr=$(grep -c 'train_.*_seed20.*\.json$' "$list")
