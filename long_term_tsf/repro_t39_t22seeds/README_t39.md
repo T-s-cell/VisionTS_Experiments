@@ -203,3 +203,45 @@ ran 2026-11-05 14:26 → 2026-11-06 04:25 (~14 h wall).
   cause remains undetermined; this round tests cross-seed stability".
   EXP-038 packs A/B are REPACKED after that fix (new sidecars, sha
   recorded in `repro_t38_t15t22/README_t38.md`).
+
+## Archival closing round (2026-11-07, numbers unchanged, no retraining)
+
+Post-delivery review found the delivered CSV's `*_train_pure_s` columns
+empty (root cause: `build_rows` computed `train_pure(row, arm)` before
+`vali_s` was set; RESULT values were always correct — the report
+recomputes on completed rows). Closing fixes (code head
+**`512073d`**, this README is a docs-only commit on top):
+
+1. `collect_t39_fullshot.py`: `vali_s` assigned before `train_pure_s`,
+   with a row-level post-condition `pure == train_s − vali_s`.
+2. New `check_t39_reentry.py` (single implementation behind
+   `job_decide`): independent anchors vs the config's EXP-003
+   fingerprint (code_md5 / data_sha256 / ckpt_sha256 dict maps),
+   full config pin — whitelisted keys pinned to per-arm expected
+   values (model_id=job, save_dir=abs(job dir), ft_type=full,
+   vm_pretrained=1|0 by arm, gpu=0, seed=<s>), arrays ACTUALLY loaded
+   (shape == EXP-003 archived, all-finite), checkpoint FILE sha256 ==
+   the DELIVERED train json's `final_ckpt_sha256` FIRST, then
+   torch.load(weights_only=False) + state_dict tensor digest vs a
+   one-time accepted manifest (`accepted_ckpt_digests.json`,
+   generated read-only, itself gated on the delivered file sha).
+3. New READ-ONLY `check` stage: NEVER moves dirs, NEVER retrains (the
+   archival verification deliberately does not enter the queue).
+
+Evidence: `check` = **64/64 PASS** (`logs/reentry_check_t39.json`);
+`verify` re-run = **1095/1095 (0 FAIL)**; `collect` re-run — RESULT
+**byte-identical** to the delivered 20261106 pack (sha256
+`6756d990…fbe87db0` matched before/after); regenerated CSV has 94/96
+pure cells filled with 0 arithmetic mismatches — the 2 empty cells are
+the reused ETTh1_96 seed-2021 pair (EXP-037/038 archive records carry
+no timing data; source column says so).
+
+Closing pack (supersedes the 20261106 pack; its sha `b161a4b5…` is
+void from here on): `temp/VisionTS_t39_t22seeds_20261107.tar.gz`
+(1,193,294 bytes, 281 files — adds check_t39_reentry.py,
+accepted_ckpt_digests.json, reentry_check_t39.json) + `.sha256`
+sidecar, sha256
+**`e45dd9ce5c1cbc93fa7f033cfccb62c19d197fe7b31657828b3f9b9db0a22f8c`**
+(double-ended verified). The pack sha lives ONLY in the sidecar and
+this delivery record, never in the in-pack README (a pack cannot
+contain its own hash).
