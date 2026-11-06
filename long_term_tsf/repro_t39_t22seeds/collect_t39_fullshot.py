@@ -83,8 +83,12 @@ def build_rows():
                     row["%s_mae" % arm] = rec["success"]["mae"]
                     ph = rec.get("phases", {})
                     row["%s_train_s" % arm] = ph.get("train_wall")
-                    row["%s_train_pure_s" % arm] = train_pure(row, arm)
                     row["%s_vali_s" % arm] = ph.get("vali_wall")
+                    row["%s_train_pure_s" % arm] = train_pure(row, arm)
+                    tw, vv = row["%s_train_s" % arm], row["%s_vali_s" % arm]
+                    if row["%s_train_pure_s" % arm] is not None:
+                        assert abs(row["%s_train_pure_s" % arm]
+                                   - (tw - vv)) <= 1e-9, (ds, h, arm, s)
                     row["%s_test_s" % arm] = ph.get("test_wall")
                     row["%s_train_peak_mb" % arm] = ph.get("train_peak_mb")
                     row["%s_train_batches" % arm] = \

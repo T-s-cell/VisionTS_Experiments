@@ -51,60 +51,26 @@ for ds, h, arm, s in tasks:
 EOF
 }
 
-# resume completeness: prints SKIP / MOVE:<dir> / RUN for one task
+# resume completeness: prints SKIP / MOVE:<dir> / RUN for one task.
+# Delegates to check_t39_reentry.py (one shared implementation: the
+# queue's decide mode, the READ-ONLY --all archival check, and the
+# accepted-digest generation all run the same per-task checks).
 job_decide() {  # $1 = DS_H, $2 = arm, $3 = seed
-  $PYTHON_B - "$PKG_DIR" "$1" "$2" "$3" <<'EOF'
-import json, os, shutil, sys, time
-pkg, cfg, arm, seed = sys.argv[1], sys.argv[2], sys.argv[3], int(sys.argv[4])
-sys.path.insert(0, pkg)
-import t39_common as X   # first: fixes sys.path for the t38 package
-import t38_common as C
-ds, h = cfg.rsplit("_", 1)
-h = int(h)
-jd = X.b_job_dir(ds, h, arm, seed)
-if not os.path.isdir(jd):
-    print("RUN"); sys.exit(0)
-succ = os.path.join(jd, "SUCCESS.txt")
-def why(msg):
-    print("MOVE:%s\t%s" % (jd, msg))
-if not os.path.isfile(succ):
-    why("no SUCCESS.txt"); sys.exit(0)
-try:
-    s = C.load_json(succ)
-    assert isinstance(s.get("mse"), float) and isinstance(s.get("mae"), float)
-    assert s.get("seed") == seed
-except Exception as e:
-    why("SUCCESS unreadable: %s" % e); sys.exit(0)
-p = X.train_json(ds, h, arm, seed)
-try:
-    rec = C.load_json(p)
-    assert rec["success"]["mse"] == s["mse"]
-    assert rec["fingerprint"]["seed"] == seed
-    assert rec["fingerprint"]["args"]["seed"] == seed
-    assert rec.get("requested_seed") == seed
-except Exception as e:
-    why("train json incomplete: %s" % e); sys.exit(0)
-try:
-    fpj = C.load_json(os.path.join(jd, "fingerprint.json"))
-    assert fpj == rec["fingerprint"], "job-dir fingerprint != train json"
-    assert fpj.get("seed") == seed and fpj.get("args", {}).get("seed") == seed
-    # all three are dict-valued maps (file md5 / dataset sha / ckpt sha)
-    assert all(fpj.get(k) for k in ("code_md5", "data_sha256", "ckpt_sha256"))
-except Exception as e:
-    why("fingerprint incomplete: %s" % e); sys.exit(0)
-rd = os.path.join(jd, "results", "_")
-for f in ("pred.npy", "true.npy"):
-    q = os.path.join(rd, f)
-    if not os.path.isfile(q) or os.path.getsize(q) <= 0:
-        why("missing/empty %s" % f); sys.exit(0)
-    with open(q, "rb") as fh:
-        if fh.read(6) != b"\x93NUMPY":
-            why("invalid npy header: %s" % f); sys.exit(0)
-ck = os.path.join(jd, "checkpoints", "_", "checkpoint.pth")
-if not os.path.isfile(ck):
-    why("missing final checkpoint"); sys.exit(0)
-print("SKIP\tmse=%.6f mae=%.6f json=%s" % (s["mse"], s["mae"], os.path.basename(p)))
-EOF
+  $PYTHON_B "$PKG_DIR/check_t39_reentry.py" --one "$1" "$2" "$3" "$PKG_DIR"
+}
+
+# READ-ONLY archival verification (closing round 2026-11-07): generates
+# accepted checkpoint digests (hard-gated on the DELIVERED train json's
+# final_ckpt_sha256 BEFORE digesting) then verifies all 64 tasks without
+# moving anything.  This stage NEVER moves dirs nor retrains.
+check_stage() {
+  log "check: generating accepted checkpoint digests (read-only)"
+  "$PYTHON_B" "$PKG_DIR/check_t39_reentry.py" --generate-accepted "$PKG_DIR" \
+    || { fail "check: digest generation failed"; exit 1; }
+  log "check: verifying all 64 tasks (read-only, no MOVE, no retrain)"
+  "$PYTHON_B" "$PKG_DIR/check_t39_reentry.py" --all "$PKG_DIR" \
+    || { fail "check: re-entry verification had FAILs"; exit 1; }
+  log "check: 64/64 PASS"
 }
 
 job_move_aside() {  # $1 = job dir; preserve the failed scene
@@ -332,7 +298,8 @@ pack() {
   log "packing -> $out"
   ( cd "$REPO_DIR" && : > "$list" && \
     for f in t39_common.py t39_train_driver.py verify_t39_fullshot.py \
-             collect_t39_fullshot.py run_t39_all.sh README_t39.md; do
+             collect_t39_fullshot.py check_t39_reentry.py run_t39_all.sh \
+             README_t39.md; do
       echo "long_term_tsf/repro_t39_t22seeds/$f" >> "$list"
     done
     # import-time deps (t39_common -> t38_common -> t22_common); packed
@@ -349,7 +316,8 @@ pack() {
     [ "$ntr" -eq 64 ] || { fail "pack" "train jsons in pack = $ntr (want 64: smoke 4 + queue 60)"; return 1; }
     for f in verify_t39.json verify_t39_smoke.json recompute_f64.json \
              recompute_f64_smoke.json summary_t39_ett.csv RESULT_t39_ett.md \
-             fig_t39_seed_effect.png preflight.json; do
+             fig_t39_seed_effect.png preflight.json \
+             accepted_ckpt_digests.json reentry_check_t39.json; do
       [ -f "long_term_tsf/repro_t39_t22seeds/logs/$f" ] && \
         echo "long_term_tsf/repro_t39_t22seeds/logs/$f" >> "$list"
     done
@@ -420,6 +388,7 @@ case "${1:-}" in
   preflight) preflight; exit $? ;;
   smoke) smoke; exit $? ;;
   queue) queue; exit $? ;;
+  check) check_stage; exit $? ;;
   verify) verify_stage; exit $? ;;
   collect) collect_stage; exit $? ;;
   pack) pack; exit $? ;;
