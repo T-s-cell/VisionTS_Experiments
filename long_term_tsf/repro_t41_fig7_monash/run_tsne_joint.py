@@ -54,16 +54,20 @@ def main():
     frozen = np.load(fp)
     assert frozen.shape == (1900, X.FEATURE_DIM), frozen.shape
     assert frozen.dtype == np.float32
+    manifest = X.load_json(X.MANIFEST_JSON) \
+        if os.path.isfile(X.MANIFEST_JSON) else {}
+    smoke = str(manifest.get("mode", "")).startswith("SMOKE")
     mon = np.load(X.FEATURES_MONASH)
-    assert mon.shape == (X.N_MONASH, X.FEATURE_DIM), mon.shape
+    assert mon.shape == ((X.N_MONASH if not smoke else len(
+        manifest.get("samples", []))), X.FEATURE_DIM), mon.shape
     assert mon.dtype == np.float32
     assert np.isfinite(frozen).all() and np.isfinite(mon).all()
     merged = np.vstack([frozen, mon]).astype(np.float32)
-    assert merged.shape == (2200, X.FEATURE_DIM)
+    assert merged.shape == (1900 + mon.shape[0], X.FEATURE_DIM)
     assert np.array_equal(merged[:1900], frozen), \
         "merged[:1900] != frozen features (row drift)"
-    X.log("merged %s; frozen rows verified element-identical"
-          % (merged.shape,))
+    X.log("merged %s (mode=%s); frozen rows verified element-identical"
+          % (merged.shape, manifest.get("mode")))
 
     runs = {}
     for rs in a.rs:

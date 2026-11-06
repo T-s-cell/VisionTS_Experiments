@@ -66,7 +66,10 @@ def main():
 
     manifest = X.load_json(X.MANIFEST_JSON)
     samples = manifest["samples"]
-    assert len(samples) == X.N_MONASH, "manifest has %d samples" % len(samples)
+    smoke = str(manifest.get("mode", "")).startswith("SMOKE")
+    assert len(samples) == (X.N_MONASH if not smoke else len(samples)), \
+        "manifest has %d samples (mode %s)" % (
+            len(samples), manifest.get("mode"))
     wins = np.load(X.WINDOWS_NPZ)
     assert set(wins.files) == {"win_%d" % s["k"] for s in samples}
 
@@ -92,7 +95,7 @@ def main():
         groups.setdefault((s["subset"], s["L_eff"], s["H"], s["P"]), []).append(s)
     X.log("%d samples in %d geometry groups" % (len(samples), len(groups)))
 
-    feats = np.zeros((X.N_MONASH, X.FEATURE_DIM), dtype=np.float32)
+    feats = np.zeros((len(samples), X.FEATURE_DIM), dtype=np.float32)
     row_of = {s["k"]: i for i, s in enumerate(samples)}
     n_cfg_calls = 0
     for (ds, l_eff, h, p), ss in sorted(groups.items(), key=lambda kv: kv[1][0]["k"]):
@@ -110,7 +113,7 @@ def main():
             image = F7.build_ts_image(model, x)
             noise = ref_noise.repeat(image.shape[0], 1).to(device)
             ik = torch.argsort(noise, dim=1)[:, :X.NUM_VISIBLE]
-            assert torch.equal(ik, ref_ids.to(device)), \
+            assert torch.equal(ik, ref_ids.to(device).expand_as(ik)), \
                 "%s batch %d: fixed-reference mask drift" % (ds, b0)
             with torch.no_grad():
                 out, _, _ = model.vision_model.forward_encoder(
@@ -130,6 +133,8 @@ def main():
         "python": sys.version.split()[0], "torch": torch.__version__,
         "numpy": np.__version__,
         "gpu": torch.cuda.get_device_name(0),
+        "manifest_mode": manifest.get("mode"),
+        "n_samples": len(samples),
         "ckpt_path": ckpt, "ckpt_sha256": ck_sha,
         "frozen_features_sha256": sha,
         "mask_ratio": X.MASK_RATIO_PIN,

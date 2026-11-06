@@ -207,7 +207,16 @@ def main():
     log("%s rules=%s job_dir=%s" % (job, "+".join(rules), jd))
 
     # ---- seed exactly like run_train.py, BEFORE model construction -----
+    # Deterministic-kernel mode: the TG2 ctrl-vs-main hard gate compares
+    # parameter trajectories BITWISE; stock CUDA kernels (atomics) are
+    # run-to-run nondeterministic, so both rounds pin deterministic
+    # kernel selection (recorded in the fingerprint; training math is
+    # unchanged).
+    os.environ.setdefault("CUBLAS_WORKSPACE_CONFIG", ":4096:8")
     import torch
+    torch.backends.cudnn.deterministic = True
+    torch.backends.cudnn.benchmark = False
+    torch.use_deterministic_algorithms(True)
     import torch.nn as nn
     from torch.utils.data import DataLoader, default_collate
     random.seed(seed)
@@ -221,11 +230,18 @@ def main():
            "gpu": torch.cuda.get_device_name(args_cli.gpu)
            if torch.cuda.is_available() else "cpu",
            "env": {"python": sys.version.split()[0],
-                   "torch": torch.__version__, "numpy": np.__version__}}
+                   "torch": torch.__version__, "numpy": np.__version__,
+                   "deterministic": {
+                       "cublas_workspace_config":
+                           os.environ["CUBLAS_WORKSPACE_CONFIG"],
+                       "cudnn_deterministic": True,
+                       "cudnn_benchmark": False,
+                       "use_deterministic_algorithms": True,
+                       "why": "TG2 ctrl-vs-main bitwise trajectory gate"}}}
 
     # fingerprint BEFORE training (run_train order), relative-path form
     repo_root = X.REPO_ROOT
-    csv_rel = os.path.join(args.root_path, args.data_path)
+    csv_rel = os.path.normpath(os.path.join(args.root_path, args.data_path))
     ckpt_key = os.path.join(args.vm_ckpt, "mae_visualize_vit_base.pth")
     code_md5 = {}
     for rel in ["repro_fullshot/run_train.py",

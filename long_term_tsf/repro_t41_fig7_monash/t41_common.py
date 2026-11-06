@@ -252,8 +252,9 @@ def redistribute(quota, capacities):
     """Deficit redistribution chain: rows whose capacity cannot fill their
     quota hand the shortfall to rows with the largest spare capacity
     (ties by PAPER_T15_ORDER order); iterated to a fixed point.
-    Returns (final_quota, transfers)."""
-    order = T38.PAPER_T15_ORDER
+    Only rows present in `quota` participate (smoke runs restrict to
+    3 rows).  Returns (final_quota, transfers, unmet)."""
+    order = [r for r in T38.PAPER_T15_ORDER if r in quota]
     q = dict(quota)
     transfers = []
     while True:

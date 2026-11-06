@@ -281,7 +281,11 @@ def main():
             scores = R["npz"]["%s_val" % r].tolist()
             improved_rec = R["npz"]["%s_improved" % r].tolist()
             counter_rec = R["npz"]["%s_counter" % r].tolist()
-            flags, best_ep, trig = replay_state_machine(scores)
+            # the real state machine stops receiving calls once the rule
+            # locks, while curve[r]["val"] keeps recording to the end of
+            # the shared trajectory — replay only the calls that happened
+            n_calls = len(improved_rec)
+            flags, best_ep, trig = replay_state_machine(scores[:n_calls])
             g6.check(flags == improved_rec,
                      "illness_%d_seed%d %s: state-machine replay improved "
                      "flags != recorded" % (h, s, r))

@@ -87,6 +87,18 @@ recorded) / TG8 36-unit coverage / TG9 lr dual record (both formulas,
 NaN only on the all-locked break epoch) / TG10 re-entry completeness
 (read-only).
 
+Deterministic-kernel mode (empirical fix, recorded in every
+fingerprint/env): stock CUDA kernels are run-to-run nondeterministic
+(atomic backward kernels), which broke TG2's BITWISE state-digest
+equality between the two rounds.  Both rounds therefore pin
+`CUBLAS_WORKSPACE_CONFIG=:4096:8`, `cudnn.deterministic=True`,
+`cudnn.benchmark=False`, `torch.use_deterministic_algorithms(True)`.
+Training math is unchanged; kernel selection is deterministic so the
+ctrl-vs-main comparison is a true isolation proof.  This is an
+eta-environment execution setting, not a recipe change (EXP-003 ran on
+theta without these flags; agreement with EXP-003 is proven by AG7 and
+the A-rule test agreement, not by bitwise trajectory equality).
+
 ## Budget
 
 EXP-003 illness epochs are fast (archived runs early-stopped at epoch

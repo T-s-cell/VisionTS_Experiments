@@ -24,9 +24,10 @@ def main():
     frozen = np.load(fp)
     assert frozen.shape == (1900, X.FEATURE_DIM)
     mon = np.load(X.FEATURES_MONASH)
-    assert mon.shape == (X.N_MONASH, X.FEATURE_DIM)
+    n_mon = mon.shape[0]
+    assert mon.shape[1] == X.FEATURE_DIM
     merged = np.vstack([frozen, mon]).astype(np.float64)
-    assert merged.shape == (2200, X.FEATURE_DIM)
+    assert merged.shape == (1900 + n_mon, X.FEATURE_DIM)
 
     sq = (merged ** 2).sum(1)
     d2 = sq[:, None] + sq[None, :] - 2.0 * (merged @ merged.T)
@@ -38,9 +39,10 @@ def main():
     neighbors, proportions = {}, {}
     for g in X.TS_SOURCES:
         s0, s1 = X.SPANS[g]
-        idx = np.argpartition(dist[s0:s1], X.N_NEIGHBORS,
+        r1 = min(s1, 1900 + n_mon)   # smoke runs have fewer Monash rows
+        idx = np.argpartition(dist[s0:r1], X.N_NEIGHBORS,
                               axis=1)[:, :X.N_NEIGHBORS].astype(np.int32)
-        assert (idx != np.arange(s0, s1)[:, None]).all(), \
+        assert (idx != np.arange(s0, r1)[:, None]).all(), \
             "self in neighbours for %s" % g
         neighbors[g] = idx
         num = int(((idx >= s_im[0]) & (idx < s_im[1])).sum())
@@ -55,9 +57,10 @@ def main():
     lines = ["ts_source,n_rows,imagenet_neighbors,denominator,proportion"]
     for g in X.TS_SOURCES:
         p = proportions[g]
-        lines.append("%s,%d,%d,%d,%.6f" % (g, X.SPANS[g][1] - X.SPANS[g][0],
-                                           p["numerator_imagenet_neighbors"],
-                                           p["denominator"], p["proportion"]))
+        lines.append("%s,%d,%d,%d,%.6f" % (
+            g, min(X.SPANS[g][1], 1900 + n_mon) - X.SPANS[g][0],
+            p["numerator_imagenet_neighbors"],
+            p["denominator"], p["proportion"]))
     with open(os.path.join(X.SAVE_BASE, "nn_table.csv"), "w") as f:
         f.write("\n".join(lines) + "\n")
 
@@ -65,7 +68,7 @@ def main():
         "n_neighbors": X.N_NEIGHBORS,
         "distance": "euclidean on raw 54528-dim features, float64 computation",
         "self_exclusion": "fill_diagonal(inf) + per-source assert",
-        "rows_total": 2200, "imagenet_rows": [0, 1000],
+        "rows_total": 1900 + n_mon, "imagenet_rows": [0, 1000],
         "proportions": proportions,
         "neighbors_npz": os.path.join(X.SAVE_BASE, "nn_neighbors.npz"),
         "row_spans": {g: list(v) for g, v in X.SPANS.items()},

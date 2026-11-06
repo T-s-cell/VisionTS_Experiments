@@ -201,11 +201,13 @@ def main():
         want_rows = 2200 if not smoke else 1900 + len(samples)
         g.check(e1.shape == (want_rows, 2) and np.array_equal(e1, e2),
                 "rs2021 refit coords bitwise equal (%d rows)" % want_rows)
-        for rs in X.STABILITY_SEEDS:
-            p = os.path.join(X.SAVE_BASE, "tsne_coords_2200x2_rs%d.npy" % rs)
-            g.check(os.path.isfile(p) and
-                    np.load(p).shape == (want_rows, 2),
-                    "stability rs%d coords present" % rs)
+        if not smoke:
+            for rs in X.STABILITY_SEEDS:
+                p = os.path.join(X.SAVE_BASE,
+                                 "tsne_coords_2200x2_rs%d.npy" % rs)
+                g.check(os.path.isfile(p) and
+                        np.load(p).shape == (want_rows, 2),
+                        "stability rs%d coords present" % rs)
         tp = X.load_json(os.path.join(X.SAVE_BASE, "tsne_params.json")) \
             if os.path.isfile(os.path.join(X.SAVE_BASE,
                                            "tsne_params.json")) else {}
@@ -223,13 +225,15 @@ def main():
     if os.path.isfile(npz_p) and os.path.isfile(summ_p):
         flat = np.load(npz_p)
         summ = X.load_json(summ_p)
+        n_mon = 300 if not smoke else len(samples)
         all_ok, recomputed = True, {}
         for src in X.TS_SOURCES:
             idx = flat["Monash__%s" % src]
-            s0, s1 = X.SPANS[src]
-            g.check(idx.shape == (s1 - s0, X.N_NEIGHBORS),
+            s0 = X.SPANS[src][0]
+            r1 = min(X.SPANS[src][1], 1900 + n_mon)
+            g.check(idx.shape == (r1 - s0, X.N_NEIGHBORS),
                     "%s neighbour matrix shape" % src)
-            if not (idx != np.arange(s0, s1)[:, None]).all():
+            if not (idx != np.arange(s0, r1)[:, None]).all():
                 all_ok = False
             num = int(((idx >= 0) & (idx < 1000)).sum())
             den = idx.shape[0] * X.N_NEIGHBORS
@@ -241,10 +245,13 @@ def main():
                      summ["proportions"][s]["numerator_imagenet_neighbors"]
                      for s in X.TS_SOURCES)
         g.check(rec_ok, "recomputed numerators == recorded")
+        span_now = {s: (X.SPANS[s][0], min(X.SPANS[s][1], 1900 + n_mon))
+                    for s in X.TS_SOURCES}
         den_ok = all(recomputed[s]["denominator"] ==
                      summ["proportions"][s]["denominator"] ==
-                     X.NN_DENOM_PER_SOURCE for s in X.TS_SOURCES)
-        g.check(den_ok, "denominators == n_source x 30 == 9000")
+                     (span_now[s][1] - span_now[s][0]) * X.N_NEIGHBORS
+                     for s in X.TS_SOURCES)
+        g.check(den_ok, "denominators == n_source x 30 (full mode: 9000)")
     else:
         g.check(False, "nn artifacts missing")
 
@@ -257,7 +264,8 @@ def main():
         g.check(os.path.isfile(os.path.join(X.SAVE_BASE, rel)),
                 "artefact %s" % rel)
     fig_p = os.path.join(X.LOG_DIR, "fig41_tsne_monash.png")
-    g.check(os.path.isfile(fig_p), "figure present")
+    if not smoke:
+        g.check(os.path.isfile(fig_p), "figure present")
 
     for name, gate in gates.items():
         rec["gates"][name] = {"ok": gate.ok, "n_checks": len(gate.checks),
