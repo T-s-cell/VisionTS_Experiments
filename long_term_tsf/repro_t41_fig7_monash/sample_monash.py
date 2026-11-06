@@ -15,8 +15,12 @@ round(1000/P)*P; L_eff = min(L_config, N_in) with N_in = len(series) (the
 official test input = series[:-H]); short histories are KEPT and flagged.
 
 Candidate windows per series: stride-1 [s, s+L_eff), end <= N_in; selected
-windows within a series are pairwise non-overlapping.  NaN windows are
-forward-filled with the official imputation_nan (raw NaN counts recorded).
+windows within a series are pairwise non-overlapping.  Draw per subset:
+random-greedy first; on shortfall the subset's greedy picks are DISCARDED
+and redrawn by pure stride-L_eff packing (which always achieves the
+X.max_windows capacity that redistribution budgets against).  CIF spillover
+flows to the sibling subset.  NaN windows are forward-filled with the
+official imputation_nan (raw NaN counts recorded).
 
 Outputs (save_t41_monash/):
   monash_manifest.json  subset/row/sample records (H/P/L_eff per sample)
@@ -72,6 +76,44 @@ def subset_facts(ds):
         "%s: no archived accepted_p (fail-stop)" % ds
     return {"H": h, "P": acc, "P_table": T38.EXPECTED_P[ds],
             "archive": p, "split": rec.get("split", {})}
+
+
+def draw_subset(f, n_target, seed_parts):
+    """Random-greedy over stride-1 candidates; on shortfall DISCARD the
+    greedy picks and redraw by pure stride-L_eff packing — packing always
+    achieves sum(max_windows(N_in, L_eff)) (the same capacity redistribution
+    budgeted against), so min(n_target, capacity) is guaranteed."""
+    rs = np.random.RandomState(X.derived_seed(*seed_parts))
+    l_effs = f["l_eff"]
+    cands = []
+    for si, l_eff in enumerate(l_effs):
+        n_in = len(f["series"][si])
+        if l_eff <= 0:
+            continue
+        cands.extend((si, st) for st in range(0, n_in - l_eff + 1))
+    rs.shuffle(cands)
+    used, got = {}, []
+    for si, st in cands:            # random-greedy pass
+        if len(got) >= n_target:
+            break
+        lo, hi = st - l_effs[si] + 1, st + l_effs[si] - 1
+        if any(not (hi < a0 or lo > a1) for a0, a1 in used.get(si, [])):
+            continue
+        used.setdefault(si, []).append((st, st + l_effs[si] - 1))
+        got.append((si, st, "random_greedy"))
+    if len(got) < n_target:
+        used, got = {}, []          # greedy fragments series space: discard
+        for si, l_eff in enumerate(l_effs):
+            n_in = len(f["series"][si])
+            if l_eff <= 0:
+                continue
+            for st in range(0, n_in - l_eff + 1, l_eff):
+                if len(got) >= n_target:
+                    break
+                got.append((si, st, "packing"))
+            if len(got) >= n_target:
+                break
+    return got
 
 
 def main():
@@ -140,56 +182,24 @@ def main():
     for row in rows:
         want = q_final[row]
         subsets_row = X.row_subsets(row)
-        if row == "CIF_2016_POOLED":
-            per = {subsets_row[0]: want // 2, subsets_row[1]: want - want // 2}
-        else:
-            per = {subsets_row[0]: want}
         chosen = []
-        for ds in subsets_row:
-            f = subsets[ds]
-            n_target = per[ds]
-            rs = np.random.RandomState(X.derived_seed("t41", "draw", row, ds,
-                                                      X.SEED))
-            cands = []
-            for si, l_eff in enumerate(f["l_eff"]):
-                n_in = len(f["series"][si])
-                if l_eff <= 0:
-                    continue
-                cands.extend((si, st) for st in range(0, n_in - l_eff + 1))
-            rs.shuffle(cands)
-            used = {}
-            got = []
-            for si, st in cands:            # random-greedy pass
-                if len(got) >= n_target:
-                    break
-                lo, hi = st - f["l_eff"][si] + 1, st + f["l_eff"][si] - 1
-                if any(not (hi < a0 or lo > a1) for a0, a1 in used.get(si, [])):
-                    continue
-                used.setdefault(si, []).append((st, st + f["l_eff"][si] - 1))
-                got.append((si, st, "random_greedy"))
-            if len(got) < n_target:         # deterministic packing fill
-                for si, l_eff in enumerate(f["l_eff"]):
-                    n_in = len(f["series"][si])
-                    if l_eff <= 0:
-                        continue
-                    for st in range(0, n_in - l_eff + 1, l_eff):
-                        if len(got) >= n_target:
-                            break
-                        lo, hi = st, st + l_eff - 1
-                        if any(not (hi < a0 or lo > a1)
-                               for a0, a1 in used.get(si, [])):
-                            continue
-                        used.setdefault(si, []).append((lo, hi))
-                        got.append((si, st, "packing_fill"))
-                    if len(got) >= n_target:
-                        break
-            spill = n_target - len(got)
-            chosen.extend((ds, si, st, how) for si, st, how in got)
-            if spill:
-                X.log("%s/%s short by %d (spillover)" % (row, ds, spill))
-        if len(chosen) < want:
-            raise SystemExit("[t41-sample] row %s got %d < %d"
-                             % (row, len(chosen), want))
+        n_first = want // 2 if row == "CIF_2016_POOLED" else want
+        ds0 = subsets_row[0]
+        got0 = draw_subset(subsets[ds0], n_first,
+                           ("t41", "draw", row, ds0, X.SEED))
+        chosen.extend((ds0, si, st, how) for si, st, how in got0)
+        remaining = want - len(got0)
+        if remaining and len(subsets_row) > 1:
+            ds1 = subsets_row[1]
+            X.log("%s/%s short by %d (spillover to %s)"
+                  % (row, ds0, remaining, ds1))
+            got1 = draw_subset(subsets[ds1], remaining,
+                               ("t41", "draw", row, ds1, X.SEED))
+            chosen.extend((ds1, si, st, how) for si, st, how in got1)
+            remaining -= len(got1)
+        if remaining:
+            raise SystemExit("[t41-sample] row %s short by %d "
+                             "(capacity budget violated)" % (row, remaining))
         for ds, si, st, how in chosen:
             f = subsets[ds]
             l_eff = f["l_eff"][si]
