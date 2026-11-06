@@ -63,7 +63,8 @@ def main():
     n_packing = sum(1 for s in samples if s["fill_method"] != "random_greedy")
     L.append("| short-history samples (L_eff < L_config) | %d |" % n_short)
     L.append("| windows with raw NaN (forward-filled) | %d |" % n_nan_w)
-    L.append("| windows from packing_fill (greedy underfull) | %d |" % n_packing)
+    L.append("| windows from packing redraw (greedy underfull) | %d |"
+             % n_packing)
     L.append("| redistribution transfers | %s |"
              % (manifest.get("transfers") or "none"))
     worst = sorted(manifest.get("capacities", {}).items(),
@@ -141,10 +142,8 @@ def main():
     L.append("")
     L.append("- extract GPU: %s (torch %s)" % (env.get("gpu"),
                                                env.get("torch")))
-    L.append("- sampling env: author-pinned (python %s, gluonts cache "
-             "HOME=/dev_data/wlt/t37_author_home)"
-             % manifest.get("subsets", {}).get("fred_md", {})
-             .get("env_python", "?"))
+    L.append("- sampling env: author-pinned env (python 3.8, gluonts "
+             "0.14.4); cache %s" % manifest.get("gluonts_cache", "?"))
 
     # ---- csv ----------------------------------------------------------------------
     csv_path = os.path.join(X.LOG_DIR, "summary_t41.csv")
@@ -162,7 +161,8 @@ def main():
 
     # ---- self-check -----------------------------------------------------------------
     assert len(samples) == X.N_MONASH
-    assert all(np.isfinite([s["L_eff"], s["H"], s["P"]]) for s in samples)
+    assert all(np.isfinite([s["L_eff"], s["H"], s["P"]]).all()
+               for s in samples)
     with open(X.RESULT_MD, "w") as f:
         f.write("\n".join(L) + "\n")
     X.log("wrote %s" % X.RESULT_MD)
