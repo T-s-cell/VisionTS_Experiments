@@ -88,9 +88,8 @@ try:
     fpj = C.load_json(os.path.join(jd, "fingerprint.json"))
     assert fpj == rec["fingerprint"], "job-dir fingerprint != train json"
     assert fpj.get("seed") == seed and fpj.get("args", {}).get("seed") == seed
-    assert all(isinstance(fpj.get(k), str) and fpj[k]
-               for k in ("code_md5", "ckpt_sha256"))
-    assert fpj.get("data_sha256")  # dict {dataset: sha256}
+    # all three are dict-valued maps (file md5 / dataset sha / ckpt sha)
+    assert all(fpj.get(k) for k in ("code_md5", "data_sha256", "ckpt_sha256"))
 except Exception as e:
     why("fingerprint incomplete: %s" % e); sys.exit(0)
 rd = os.path.join(jd, "results", "_")
