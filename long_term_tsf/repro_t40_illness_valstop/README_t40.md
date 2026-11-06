@@ -140,5 +140,12 @@ smoke gate passes (docs-only commits afterwards if any).
 
 ## Delivery
 
-(pack + sidecar sha recorded after collect; sha lives ONLY in the
-sidecar and this repo's delivery record, never in the in-pack README)
+- 包:`temp/temp_t40_pack.tar.gz`(385,378 bytes,<50MB;9 代码文件 +
+  README + runner、logs(audit/verify/RESULT/csv/图/recompute)、
+  job_records(12 任务 × curves/trajectory/phases/lock_events/
+  rng_audit/args/fingerprint/SUCCESS;**ckpt 留 eta 不入包**)。
+- sidecar:`temp/temp_t40_pack.tar.gz.sha256` =
+  `aff4b4bee3f7c2866dfe183c9721125acf2457dbdfdc7604d687d6cfec1b9fac`
+  (sha 只记 sidecar 与本交付记录,不入包内 README)。
+- 代码冻结头:`e877ed4`(分支 `repro/ltsf-t40-t41`;包内 README 滞后
+  终版文档提交,属已知口径)。
