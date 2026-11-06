@@ -11,7 +11,6 @@ Reporting discipline (frozen):
   - theta archived curves are cross-environment REFERENCE ONLY.
 """
 import csv
-import json
 import os
 import sys
 

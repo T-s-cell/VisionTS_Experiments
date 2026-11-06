@@ -1,0 +1,108 @@
+# EXP-041: 补齐论文图 7 — Monash t-SNE 行
+
+论文 Fig.7(MAE 编码器 2 维 t-SNE:ImageNet + Monash + Weather +
+Electricity + ETTm1)在 EXP-002 复现时缺 Monash 来源(只有 1,900 =
+ImageNet 1000 + ETTm1/Weather/Electricity 各 300)。EXP-041 以 EXP-002
+机制补齐 Monash 300 行,联合重拟合 2,200×54528。**冻结资产零重采样、
+零重提取**:EXP-002 的 sampling_lists 与 features_1900x54528.npy(文件
+sha `5ac9bbd2…` 钉定)原样复用;EXP-002 的 1,900 行坐标不外推,而是整
+体重进拟合。
+
+## 记号(冻结)
+
+| 记号 | 含义 | 来源 |
+|---|---|---|
+| H | 预测长度 | EXP-038 归档 `pred_rule.expected` × gluonts metadata 交叉核对(不一致 fail-stop) |
+| P | 选出的周期 | EXP-038 归档 `autotune.accepted_p`(缺则 fail-stop;Table 6 的 EXPECTED_P 仅作对照记录) |
+| L_config | 配置上下文 | P==1 → 300,否则 round(1000/P)×P(官方 convert_context_len 公式) |
+| L_eff | 逐样本实际输入历史 | min(L_config, N−H);官方短历史保留(NN5 Daily 735 类),记 `short_history` |
+
+## 采样(sample_monash.py,author 环境)
+
+- 29 论文行 × floor(300/29)=10 = 290;余 10 给容量最大的 10 行(并列按
+  PAPER_T15_ORDER 序)。容量 = Σ_series 每序列最大互不重叠窗口数
+  `(N_in−L_eff)//L_eff + 1`。
+- 缺额重分配链:容量 < 配额的行把缺口按"余量降序、并列按行序"转给
+  其他行,迭代至不动点;仍不足则如实报错停线。
+- CIF_2016_POOLED 行从 cif_2016_6/cif_2016_12 确定性 50/50 拆分(不足
+  溢出记录)。
+- 每行候选 = 逐序列 stride-1 窗 [s, s+L_eff),end ≤ N_in;随机贪心
+  (seed 2021 sha256 派生)接受同序列互不重叠窗;不足时确定性 stride-
+  L_eff 装箱补齐(记 fill_method)。
+- 缺值 = 官方 `imputation_nan` 前向填充,逐窗记录原始 NaN 数。
+- 逐子集与 EXP-038 归档 split 统计(n_series/min/median/max)硬核对
+  ——缓存身份证据。
+- gluonts 序列取自 t38 同款缓存(HOME=/dev_data/wlt/t37_author_home,
+  author 环境 visionts_t37author,py3.8.20),regenerate=False 读缓存。
+
+## 特征提取(extract_features_monash.py,visionts 环境)
+
+- 前置硬门:冻结 1900 特征文件 sha == `5ac9bbd2…`,先于一切模型工作。
+- 逐几何组 (subset, L_eff, H, P) 调 `update_config`;**掩码与几何解耦**:
+  mask_ref.json 的 ids_keep_order(左 5 列 70 patches,行主序)编码为
+  固定参考噪声张量(可见=0/其余=1)直接传入 forward_encoder,mask_ratio
+  钉定 0.6428571343421936(9/14);逐批 assert argsort(noise)[:70] ==
+  mask_ref ids。Monash 各子集 num_patch_input 在 3-5 浮动
+  (input_ratio×14×0.4),结构化 model.mask 不可跨几何复用——此即统一
+  左 5 列掩码无法从几何推导的陷阱,参考噪声张量绕开。
+- build_ts_image 逐字复刻 VisionTS.forward 步骤 1-4(repro_fig7/common.py);
+  keep = CLS + 70 可见 patch → (300, 54528) float32;有限性 assert。
+
+## t-SNE / 30-NN
+
+- `run_tsne_joint.py`:vstack(冻结1900, monash300) →
+  **np.array_equal(merged[:1900], 冻结数组) 逐元素核对**(文件 sha 与数
+  组字节不混比);参数 = EXP-002 run_tsne.py:23-27 逐字
+  (perplexity=30, lr=200, init='pca', ee=12, max_iter=1000, euclidean,
+  无预降维);rs=2021 主图 **拟合并复拟合逐位一致**(FG5)→
+  coords×2 + rs2022/2023 稳定性 → coords×2 + params json。
+- `nn_metric_t41.py`:4 个时序源 × 冻结编码器单元;2200×2200 float64
+  欧氏;fill_diagonal inf + assert 自排除;分子 = 该源每行 30-NN(全体
+  2200 行)中 ImageNet 邻居数,分母 = n_source×30 = 9000;邻居索引存
+  npz 供独立复算。
+
+## 门禁
+
+preflight(部署 md5 / sklearn 1.9.* 钉定 / 冻结特征 sha / sampling_lists
+在位+sha 记录 / mask_ref / t38 归档 30 份探测)→ **smoke 硬门**
+(3 行×2 样本端到端:sample→extract→(1900+6) 点试拟合(含复拟合逐位)→
+NN sanity→verify --smoke)→ queue(全 300 采样+提取 + rs2021×2 +
+rs2022/2023 拟合 + 30-NN)→ verify(FG1-FG7)→ collect → pack
+(<50MB,不含特征 npy / windows npz / 邻居 npz;coords ~35KB/个入包)。
+
+FG1 冻结资产未动(特征 sha + sampling_lists sha 与 preflight 记录一致
++ ckpt sha)/ FG2 manifest 完整一致(300、配额=重分配后配额、H×metadata、
+P、L_eff=min(L_config,N−H)、end≤N_in、同序列不重叠、short_history/
+NaN 记账)/ FG3 输入哈希 + **首批 32 样本重提取逐位一致** + 机制记录 /
+FG4 五组跨距不重叠且并集=[0,2200) / FG5 array_equal 1900 行核对 + 同
+rs 复拟合 coords 逐位同 / FG6 30-NN 自排除 + 分母 9000 + 数值复算一致 /
+FG7 产物齐全(coords×4、params、图、nn 表、RESULT)。
+
+## 论文对照锚
+
+- 原文:`audit_supplement/paper/VisionTS_paper_full.md` L128(图题)/
+  L136(ETTm1 右上、Monash 左下且与 ImageNet 显著分离、ImageNet 集中
+  而时序散布)。
+- 原图资产:`audit_supplement/paper/images/50bcc728….jpg`
+  (sha `b9dc92e1…`,76,419 bytes);对照图为定性并排,无数值阈值。
+- **补充设定披露(冻结)**:Monash 采样规则为本轮补充设定;统一左 5 列
+  掩码是可视化设定,异于原预测几何(逐子集 update_config 的自身掩码);
+  2D 交叠仅定性声明,不作预测/因果推断;与原图不一致处如实保留。
+
+## Environment
+
+eta L20;visionts env(`/dev_data/wlt/conda/envs/visionts/bin/python`,
+torch 2.12.0+cu126,sklearn 钉定 1.9.*)为提取/t-SNE/NN 环境;author
+环境(`visionts_t37author`,py3.8.20,gluonts 0.14.4)仅采样;GPU_ID=0,
+repo checkout `/dev_data/wlt/VisionTS_Experiments`;CWD 无契约(脚本
+自带 sys.path 引导)。t38 归档(30 份 `logs/monash_<ds>.json`)只在
+eta,`t38_logs_base()` 以 fred_md.json 为标记解析。
+
+## Results
+
+(filled after queue/verify/collect)
+
+## Delivery
+
+(pack + sidecar sha recorded after collect; sha lives ONLY in the
+sidecar and this repo's delivery record, never in the in-pack README)

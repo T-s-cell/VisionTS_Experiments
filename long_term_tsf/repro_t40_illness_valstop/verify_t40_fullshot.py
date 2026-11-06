@@ -335,6 +335,7 @@ def main():
         R = load_job_records(X, C, h, s, "main")
         args0 = C.load_json(os.path.join(R["jd"], "args.json"))
         args0["use_gpu"] = True
+        args0["gpu"] = 0   # eta remap (archived H48/H60 carried theta gpu=1)
         from exp_univariate import Exp_Univariate
         exp = Exp_Univariate(argparse.Namespace(**args0))
         val_data, _ = data_provider(exp.args, "val")

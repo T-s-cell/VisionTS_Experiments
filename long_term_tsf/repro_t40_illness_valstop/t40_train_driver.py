@@ -57,6 +57,10 @@ def log(msg):
     print("[%s] %s" % (time.strftime("%H:%M:%S"), msg), flush=True)
 
 
+def _sha_bytes(b):
+    return hashlib.sha256(b).hexdigest()
+
+
 # ---- four-state RNG snapshots ---------------------------------------------
 def rng_snapshot():
     import torch
@@ -191,11 +195,14 @@ def main():
 
     os.chdir(X.ROOT)   # long_term_tsf — EXP-003 CWD contract
 
-    # ---- replay args: delta keys EXACTLY {model_id, save_dir} ----------
+    # ---- replay args: delta keys EXACTLY {model_id, save_dir, gpu} -----
+    # (gpu is an environment fact: EXP-003 theta ran H48/H60 on cuda:1;
+    #  eta maps everything to cuda:0 via CUDA_VISIBLE_DEVICES)
     args = argparse.Namespace(**json.loads(json.dumps(exp003_args)))
     args.model_id = job
     args.save_dir = jd
     args.use_gpu = True
+    args.gpu = 0
 
     log("%s rules=%s job_dir=%s" % (job, "+".join(rules), jd))
 
@@ -259,13 +266,14 @@ def main():
             raise RuntimeError("base vali path must not run in EXP-040")
 
     exp = T40Exp(args)
-    sd = exp.model.vision_model.state_dict()
+    vm = exp.model.vm.vision_model   # wrapper.Model -> vm: VisionTS -> MAE ViT
+    sd = vm.state_dict()
     ck = torch.load(ckpt_path, map_location="cpu", weights_only=False)["model"]
     eq = sum(1 for k in ck if k in sd and sd[k].shape == ck[k].shape
              and torch.equal(sd[k].cpu(), ck[k].cpu()))
     assert eq == len(ck), "vision_model init != frozen ckpt (%d/%d)" % (
         eq, len(ck))
-    trainable = sorted(n for n, p in exp.model.vision_model.named_parameters()
+    trainable = sorted(n for n, p in vm.named_parameters()
                        if p.requires_grad)
     rec["init"] = {"vision_model_vs_ckpt": {"n_keys": len(ck),
                                             "n_equal": eq,
@@ -298,8 +306,10 @@ def main():
                            generator=gen_ab)
 
     # train-loader order recorder (delegating proxy, no RNG change)
+    # (torch 2.12 guards DataLoader.__setattr__ post-init; torch itself
+    # stores these attrs via object.__setattr__, so we swap the same way)
     recorder = OrderRecorder(train_loader.batch_sampler)
-    train_loader.batch_sampler = recorder
+    object.__setattr__(train_loader, "batch_sampler", recorder)
 
     model_optim = exp._select_optimizer()
     criterion = nn.MSELoss()

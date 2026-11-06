@@ -209,6 +209,7 @@ def main():
         args0 = C.load_json(os.path.join(d, "args.json"))
         args0["save_dir"] = os.path.abspath(d)
         args0["use_gpu"] = True
+        args0["gpu"] = 0   # archived H48/H60 ran on theta cuda:1; eta remap
         exp = Exp_Univariate(argparse.Namespace(**args0))
         ck = os.path.join(d, "checkpoints", "_", "checkpoint.pth")
         sd_t = torch.load(ck, map_location="cpu", weights_only=False)
@@ -236,7 +237,7 @@ def main():
                 trues.append(batch_y.detach().cpu().numpy().astype(np.float64))
         preds = np.concatenate(preds, 0)
         trues = np.concatenate(trues, 0)
-        _, mse64, _, _, mae64 = metric(preds, trues)
+        mae64, mse64, _, _, _ = metric(preds, trues)
         ref_true = np.load(os.path.join(d, "results", "_", "true.npy"))
         true_bitwise = bool(np.array_equal(
             trues.astype(np.float32), ref_true))
