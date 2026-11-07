@@ -135,22 +135,25 @@ smoke gate passes (docs-only commits afterwards if any).
   反向(B 偏好晚期 epoch 16-19,MSE 略优于 A −0.9%)。H36/48 A=B
   逐位同(同轨迹同选择 → 同一锁定 ckpt)。
 - **预算**:12 任务总训练墙钟 43.0 min(H24 301 s、H36 114 s、
-  H48 119 s、H60 325 s 每任务均值;全部早停,E17-22 内锁定)。
+  H48 119 s、H60 325 s 每任务均值;36/36 规则单元全部触发锁定,
+  实际锁定轮次范围 E5–E22,逐任务逐规则见 RESULT T4)。
 - 曲线/图表:`logs/summary_t40.csv`(36 行)、
   `logs/fig_t40_valstop.png`、RESULT 全表;theta 归档曲线仅参考
   (TG3 并排,无阈值)。
 
 ## Delivery
 
-- 包(评审修正版 v2):`temp/temp_t40_pack.tar.gz`(392,729 bytes,
-  <50MB;9 代码文件 + README + runner、logs(audit/verify/RESULT/csv/
-  图/recompute)、job_records(12 任务 × curves/trajectory/phases/
+- 包(当前版 v3):`temp/temp_t40_pack.tar.gz` + 同名 sidecar
+  `.sha256`(**包 sha 只记 sidecar 与仓库交付记录,不入包内 README**;
+  v3 为纯文档重打包:README 预算行锁定轮次口径修正为实际的 E5–E22,
+  全部实验工件与 v2 逐字节相同,代码冻结头不变)。
+- 包内容:9 代码文件 + README + runner、logs(audit/verify/RESULT/
+  csv/图/recompute)、job_records(12 任务 × curves/trajectory/phases/
   lock_events/rng_audit/args/fingerprint/SUCCESS)+ **job_records_ctrl
-  (A-only 对照轮同款 8 件,TG2 证据)**;ckpt 留 eta 不入包)。
-- sidecar:`temp/temp_t40_pack.tar.gz.sha256` =
+  (A-only 对照轮同款 8 件,TG2 证据)**;ckpt 留 eta 不入包。
+- 包历史:v1 sha `aff4b4be…` 作废;v2(评审修正版)sha
   `869cacb50a354fa1db0f1f368f53a74b61de87d8b61de58ea14c54f8eff4bcc0`
-  (v1 sha `aff4b4be…` 作废;sha 只记 sidecar 与本交付记录,不入包内
-  README)。
+  (392,729 bytes)被 v3 取代。
 - 代码冻结头(完整 40 位):`7e7fa5b9146fd2ebca0170c5f4842f13f2e6cb88`
-  (分支 `repro/ltsf-t40-t41`;包内 README 滞后终版文档提交,属已知
-  口径)。
+  (分支 `repro/ltsf-t40-t41`;其后均为文档提交,包内 README 滞后
+  终版交付记录提交,属已知口径)。

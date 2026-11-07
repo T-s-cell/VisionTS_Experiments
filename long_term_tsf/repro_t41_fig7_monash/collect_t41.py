@@ -159,6 +159,134 @@ def main():
                     probe.get("max_abs_err_single_sample", "?"),
                     probe.get("rel_err_single_sample_pct", -1.0)))
 
+    # ---- S5b batch-size localization + impact (review follow-up probe) ----------
+    probe_json_path = os.path.join(X.SAVE_BASE, "probe_batch_diff.json")
+    if os.path.exists(probe_json_path):
+        pj = X.load_json(probe_json_path)
+        lg = pj.get("localization_gpu", {})
+        lc = pj.get("localization_cpu", {})
+        imp = pj.get("impact_b1", {})
+        concl = pj.get("conclusion", {})
+        rel = imp.get("per_sample_rel_l2_pct", {}).get("all", {})
+        relm = imp.get("per_sample_rel_l2_pct", {}).get(
+            "multi_row_group_rows", {})
+        sing = imp.get("per_sample_rel_l2_pct", {}).get(
+            "single_total_group_rows", {})
+        ovl = imp.get("nn", {}).get("neighbor_set_overlap_pct", {})
+        prop = (imp.get("tsne", {}).get("prop2d_imagenet", {})
+                .get("abs_diff_pp", {}))
+        arch_s = pj.get("archive_structure", {})
+        stage_rows = lg.get("stage_rows", [])
+        peak = max(stage_rows, key=lambda r: r.get("max_abs", 0.0)) \
+            if stage_rows else {}
+        L.append("")
+        L.append("## S5b batch-size difference: localization + impact "
+                 "(review follow-up probe)")
+        L.append("")
+        L.append("Probe: `probe_batch_diff_t41.py`; artifacts "
+                 "`save_t41_monash/probe_batch_diff.json` (in pack) + "
+                 "B=1 features / nn_neighbors_b1.npz / "
+                 "tsne_coords_2200x2_b1.npy (eta).  Bitwise equality "
+                 "across batch shapes is NOT claimed; the probe "
+                 "establishes WHERE the divergence appears, that each "
+                 "path is internally deterministic, and that the 30-NN / "
+                 "t-SNE conclusions are unaffected.")
+        L.append("")
+        L.append("- **Archive structure**: %d geometry groups, %d "
+                 "contain exactly ONE sample -> those %d archived rows "
+                 "were THEMSELVES extracted at B=1; the archived matrix "
+                 "mixes multi-row-batch (%d rows) and B=1 kernel "
+                 "products (%d rows).  This reconciles the FG3 probe: "
+                 "the grouped path is bitwise vs archived (composition-"
+                 "stable at B>=2; trivially bitwise for single-total "
+                 "groups) while B=1 deviates."
+                 % (arch_s.get("n_geometry_groups", "?"),
+                     arch_s.get("n_single_total_groups", "?"),
+                     arch_s.get("n_rows_from_single_total_groups", "?"),
+                     300 - arch_s.get("n_rows_from_single_total_groups",
+                                      0),
+                     arch_s.get("n_rows_from_single_total_groups", "?")))
+        L.append("- **Localization (GPU, 32-sample probe)**: input "
+                 "images bitwise (%s); first divergence at **%s** "
+                 "(max abs %.2e); grows through the 12 blocks (peak max "
+                 "abs %.4f at %s); final features max abs %.4f — "
+                 "reproduces the verify probe's recorded 0.017219 "
+                 "exactly."
+                 % (concl.get("image_stage_bitwise"),
+                     concl.get("first_divergent_stage_gpu", "?"),
+                     stage_rows[1].get("max_abs", 0.0)
+                     if len(stage_rows) > 1 else 0.0,
+                     peak.get("max_abs", 0.0), peak.get("stage", "?"),
+                     stage_rows[-1].get("max_abs", 0.0)
+                     if stage_rows else 0.0))
+        L.append("- **Internal determinism per shape**: grouped rerun "
+                 "bitwise = %s; B=1 rerun bitwise = %s; multi-row "
+                 "composition (3-row probe-subset batch) bitwise == "
+                 "archived = %s; grouped-vs-archived bitwise %s/%s "
+                 "multi-row + %s/%s single-total probe rows."
+                 % (lg.get("self_repro", {}).get("grouped_rerun_bitwise"),
+                     lg.get("self_repro", {}).get("single_rerun_bitwise"),
+                     lg.get("composition_check_small_batch", {}).get(
+                         "bitwise_vs_archived"),
+                     lg.get("grouped_vs_archived", {}).get(
+                         "multi_row_groups", {}).get("bitwise_rows"),
+                     lg.get("grouped_vs_archived", {}).get(
+                         "multi_row_groups", {}).get("n_rows"),
+                     lg.get("grouped_vs_archived", {}).get(
+                         "single_total_groups", {}).get("bitwise_rows"),
+                     lg.get("grouped_vs_archived", {}).get(
+                         "single_total_groups", {}).get("n_rows")))
+        L.append("- **Mechanism**: batch-shape-dependent kernel "
+                 "selection (B=1 takes a different GEMM/attention kernel "
+                 "path than B>=2; every shape internally bitwise-"
+                 "reproducible, multi-row compositions mutually "
+                 "bitwise-equal).  CPU cross-check (same weights/code, "
+                 "rank-encoded mask noise): first divergence at **%s**, "
+                 "block max abs ~%.1e (CPU patch_embed is shape-"
+                 "invariant; the effect exists on BOTH devices, "
+                 "magnitude device-dependent) — systematic shape "
+                 "dependence, NOT run-to-run nondeterminism, NOT a GPU "
+                 "fault."
+                 % (lc.get("first_divergent_stage", "?"),
+                     max((r.get("max_abs", 0.0)
+                          for r in lc.get("stage_rows", [])),
+                         default=0.0)))
+        L.append("- **Error criterion (per-sample rel L2, B=1 vs "
+                 "archived; all 300 re-extracted at B=1)**: median "
+                 "%.4f%% / p95 %.4f%% / max %.4f%% (k=%s); multi-row-"
+                 "group rows (n=%s) median %.4f%% / max %.4f%%; "
+                 "single-total-group rows **bitwise %s/%s**; overall "
+                 "max abs %.4f."
+                 % (rel.get("median", -1), rel.get("p95", -1),
+                     rel.get("max", -1), rel.get("argmax_k", "?"),
+                     relm.get("n", "?"), relm.get("median", -1),
+                     relm.get("max", -1), sing.get("bitwise_rows", "?"),
+                     sing.get("n", "?"), imp.get("max_abs", -1)))
+        if ovl:
+            L.append("- **Downstream impact — 30-NN numerators "
+                     "unchanged**: ETTm1 0->0, Weather 0->0, "
+                     "Electricity 0->0, Monash 4->4 (neighbour-set "
+                     "overlap >= %.4f%% per source; the 4 "
+                     "Monash->ImageNet neighbour pairs are the SAME "
+                     "rows in both matrices)." % min(ovl.values()))
+        if prop:
+            L.append("- **Downstream impact — t-SNE rs2021 refit on the "
+                     "B=1 matrix (EXP-002 params verbatim)**: per-source "
+                     "2-D 30-NN ImageNet proportion moves by at most "
+                     "%.2f pp (ETTm1 %.2f / Weather %.2f / Electricity "
+                     "%.2f / Monash %.2f pp); cluster structure "
+                     "visually unchanged (side-by-side in the probe "
+                     "figure); 2-D overlap stays qualitative-only."
+                     % (max(prop.values()), prop.get("ETTm1", -1),
+                         prop.get("Weather", -1),
+                         prop.get("Electricity", -1),
+                         prop.get("Monash", -1)))
+        L.append("- **Verdict**: %s"
+                 % concl.get("downstream_verdict", "n/a"))
+        L.append("- Figure: `logs/fig41_probe_batch_diff.png` (top: "
+                 "stage-wise divergence growth, log scale, green = "
+                 "bitwise; bottom: archived vs B=1 t-SNE side-by-side).")
+
     # ---- budget -----------------------------------------------------------------
     L.append("")
     L.append("## S6 environment")

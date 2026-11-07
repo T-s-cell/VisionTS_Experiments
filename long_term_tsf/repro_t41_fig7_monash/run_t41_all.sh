@@ -118,6 +118,11 @@ stage_pack() {
     # be recomputed independently from the pack)
     cp "$SB"/tsne_coords_2200x2*.npy "$SB"/nn_neighbors.npz \
        "$OUT/repro_t41_fig7_monash/job_records/" 2>/dev/null
+    # v3: review follow-up probe artifacts (json is small; nn_neighbors_b1
+    # allows independent recomputation of the B=1 30-NN table)
+    cp "$SB"/probe_batch_diff.json "$SB"/nn_table_b1.csv \
+       "$SB"/nn_neighbors_b1.npz \
+       "$OUT/repro_t41_fig7_monash/job_records/" 2>/dev/null
     # features npy / windows npz stay on eta (NOT packed)
     local tarball
     tarball="${OUT}.tar.gz"
