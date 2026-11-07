@@ -11,8 +11,11 @@
        N_in); same-series selected windows pairwise non-overlapping;
        short_history flag == (L_eff < L_config); NaN bookkeeping consistent
   FG3  extraction drift: input_hashes match windows.npz byte digests;
-       re-extract the FIRST 32-sample batch and compare bitwise;
-       extract_env records the fixed-reference-noise mechanism
+       probe the FIRST 32 samples (by k) re-extracted BOTH in grouped
+       batches (archived schedule — HARD bitwise gate) and per-sample
+       (batch=1 — deviation recorded as a batch-size kernel effect,
+       abs + RMS-relative); extract_env records the
+       fixed-reference-noise mechanism
   FG4  five group spans disjoint, union == [0, 2200)
   FG5  joint-fit determinism: merged[:1900] element-equal to the frozen
        array; rs2021 refit coords bitwise equal (recheck npy)
@@ -170,8 +173,16 @@ def main():
                 feats.dtype == np.float32 and np.isfinite(feats).all(),
                 "monash features shape/dtype/finite")
         if not smoke and os.path.isfile(X.mask_ref_path()):
-            ok_probe, why = reextract_probe(samples, wins, feats)
-            g.check(ok_probe, "first-batch re-extraction bitwise equal" +
+            ok_probe, why, probe = reextract_probe(samples, wins, feats)
+            rec["probe_reextract"] = probe
+            g.check(ok_probe,
+                    "batch-invariance probe: %d samples; grouped-schedule "
+                    "re-extraction bitwise == archived (err %s); B=1 "
+                    "deviation RECORDED: abs %s, rel %.4f%%" %
+                    (probe.get("n_probe_samples", 0),
+                     probe.get("max_abs_err_grouped_batch", "?"),
+                     probe.get("max_abs_err_single_sample", "?"),
+                     probe.get("rel_err_single_sample_pct", -1.0)) +
                     ("" if ok_probe else " (%s)" % why))
 
     # ---- FG4 spans ----------------------------------------------------------
@@ -287,8 +298,27 @@ def main():
 
 
 def reextract_probe(samples, wins, feats):
-    """Batch-invariance probe: re-run the FIRST 32-sample group through
-    the same geometry + fixed reference noise and compare bitwise."""
+    """Batch-invariance probe over the FIRST 32 samples (by global k,
+    spanning all their geometry groups): every sample is re-extracted
+    TWICE — (ii) inside its geometry group's grouped batch (the archived
+    extraction schedule, batch<=32) and (i) alone (batch size 1) — both
+    compared against the archived features.  HARD criterion: the grouped
+    path must be BITWISE equal (schedule reproducibility of the
+    archive).  The B=1 path is RECORDED as an observation: encoder
+    forwards are not bitwise-invariant to batch size (kernel selection),
+    so its max abs + RMS-relative errors are reported, never silently
+    dropped."""
+    info = {"n_probe_samples": 0, "n_single_extractions": 0,
+            "n_geometry_groups": 0,
+            "max_abs_err_grouped_batch": None,
+            "bitwise_equal_grouped": False,
+            "max_abs_err_single_sample": None,
+            "rel_err_single_sample_pct": None,
+            "single_matches_grouped": False,
+            "note": "grouped path = archived schedule (hard bitwise "
+                    "gate); B=1 deviation is a recorded observation "
+                    "(batch-size-dependent kernel selection), not a "
+                    "gate"}
     try:
         import torch
         sys.path.insert(0, X.fig7_base())
@@ -297,38 +327,80 @@ def reextract_probe(samples, wins, feats):
         ids_ref = ref["ids_keep_order"]
         F7.set_seeds()
         if not torch.cuda.is_available():
-            return False, "no GPU"
+            return False, "no GPU", info
         model = F7.load_model().eval().to("cuda")
         ref_noise = torch.ones(1, X.TOTAL_PATCHES, dtype=torch.float32)
         ref_noise[0, torch.tensor(ids_ref, dtype=torch.long)] = 0.0
-        chunk = sorted(
-            (s for s in samples
-             if (s["subset"], s["L_eff"], s["H"], s["P"]) ==
-             (samples[0]["subset"], samples[0]["L_eff"], samples[0]["H"],
-              samples[0]["P"])),
-            key=lambda s: s["k"])[:F7.BATCH]
-        s0 = chunk[0]
-        model.update_config(context_len=s0["L_eff"], pred_len=s0["H"],
-                            periodicity=s0["P"], norm_const=F7.NORM_CONST,
-                            align_const=F7.ALIGN_CONST,
-                            interpolation="bilinear")
-        x = torch.stack([
-            torch.as_tensor(np.ascontiguousarray(wins["win_%d" % s["k"]]),
-                            dtype=torch.float32)
-            for s in chunk]).unsqueeze(-1).to("cuda")
-        image = F7.build_ts_image(model, x)
-        noise = ref_noise.repeat(image.shape[0], 1).to("cuda")
-        with torch.no_grad():
-            out, _, _ = model.vision_model.forward_encoder(
-                image, X.MASK_RATIO_PIN, noise)
-        flat = out.flatten(1).to(torch.float32).cpu().numpy()
-        want = feats[[s["k"] for s in chunk]]
-        same = flat.shape == want.shape and np.array_equal(flat, want)
+        ref_ids = torch.tensor([ids_ref], dtype=torch.long)
+        probe = sorted(samples, key=lambda s: s["k"])[:32]
+        info["n_probe_samples"] = len(probe)
+        groups = {}
+        for s in probe:
+            groups.setdefault((s["subset"], s["L_eff"], s["H"], s["P"]),
+                              []).append(s)
+        info["n_geometry_groups"] = len(groups)
+        err_single, err_grouped = 0.0, 0.0
+        rel_single = 0.0
+        for (ds, l_eff, h, p), ss in sorted(groups.items(),
+                                            key=lambda kv: kv[1][0]["k"]):
+            model.update_config(context_len=l_eff, pred_len=h, periodicity=p,
+                                norm_const=F7.NORM_CONST,
+                                align_const=F7.ALIGN_CONST,
+                                interpolation="bilinear")
+            # (ii) grouped batch — the archived extraction schedule
+            x = torch.stack([
+                torch.as_tensor(np.ascontiguousarray(wins["win_%d" % s["k"]]),
+                                dtype=torch.float32)
+                for s in ss]).unsqueeze(-1).to("cuda")
+            image = F7.build_ts_image(model, x)
+            noise = ref_noise.repeat(image.shape[0], 1).to("cuda")
+            ik = torch.argsort(noise, dim=1)[:, :X.NUM_VISIBLE]
+            assert torch.equal(ik, ref_ids.to("cuda").expand_as(ik))
+            with torch.no_grad():
+                out, _, _ = model.vision_model.forward_encoder(
+                    image, X.MASK_RATIO_PIN, noise)
+            flat = out.flatten(1).to(torch.float32).cpu().numpy()
+            want = feats[[s["k"] for s in ss]]
+            if flat.shape != want.shape:
+                err_grouped = float("inf")
+            else:
+                err_grouped = max(err_grouped,
+                                  float(np.max(np.abs(flat - want))))
+            # (i) per-sample batch size 1
+            for s in ss:
+                x1 = torch.as_tensor(
+                    np.ascontiguousarray(wins["win_%d" % s["k"]]),
+                    dtype=torch.float32).unsqueeze(0).unsqueeze(-1).to("cuda")
+                image1 = F7.build_ts_image(model, x1)
+                noise1 = ref_noise.repeat(1, 1).to("cuda")
+                with torch.no_grad():
+                    out1, _, _ = model.vision_model.forward_encoder(
+                        image1, X.MASK_RATIO_PIN, noise1)
+                flat1 = out1.flatten(1).to(torch.float32).cpu().numpy()
+                want1 = feats[s["k"]:s["k"] + 1]
+                info["n_single_extractions"] += 1
+                if flat1.shape != want1.shape:
+                    err_single = float("inf")
+                else:
+                    d = float(np.max(np.abs(flat1 - want1)))
+                    err_single = max(err_single, d)
+                    rms = float(np.sqrt(np.mean(want1 ** 2)))
+                    if rms > 0:
+                        rel_single = max(rel_single, d / rms * 100.0)
+        info["max_abs_err_grouped_batch"] = err_grouped
+        info["bitwise_equal_grouped"] = bool(err_grouped == 0.0)
+        info["max_abs_err_single_sample"] = err_single
+        info["rel_err_single_sample_pct"] = rel_single
+        info["single_matches_grouped"] = bool(err_single == 0.0)
+        ok = err_grouped == 0.0 and info["n_probe_samples"] == 32
         del model
         torch.cuda.empty_cache()
-        return same, "" if same else "re-extracted features differ"
+        return ok, "" if ok else \
+            ("grouped re-extraction differs: %r" % err_grouped
+             if err_grouped != 0.0 else "probe covered %d < 32 samples"
+             % info["n_probe_samples"]), info
     except Exception as e:
-        return False, "%s: %s" % (type(e).__name__, e)
+        return False, "%s: %s" % (type(e).__name__, e), info
 
 
 if __name__ == "__main__":

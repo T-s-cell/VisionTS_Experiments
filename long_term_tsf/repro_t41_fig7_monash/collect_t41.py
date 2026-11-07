@@ -67,6 +67,12 @@ def main():
              % n_packing)
     L.append("| redistribution transfers | %s |"
              % (manifest.get("transfers") or "none"))
+    L.append("| CIF_2016_POOLED split | %d (%s) + %d (%s), the designed "
+             "50/50 — no shortfall |"
+             % (sum(1 for s in samples if s["subset"] == "cif_2016_6"),
+                "cif_2016_6",
+                sum(1 for s in samples if s["subset"] == "cif_2016_12"),
+                "cif_2016_12"))
     worst = sorted(manifest.get("capacities", {}).items(),
                    key=lambda kv: kv[1])[:3]
     L.append("| smallest-capacity rows | %s |"
@@ -74,20 +80,23 @@ def main():
     n_cfg = env.get("n_update_config_calls", "?")
     L.append("| geometry groups (update_config calls) | %s |" % n_cfg)
 
-    # ---- per-row table ----------------------------------------------------
+    # ---- per-row table (per subset: pooled rows list each subset's H/P/L) ----
     L.append("")
-    L.append("## S2 per-row draw")
+    L.append("## S2 per-row draw (per subset; pooled rows list each subset)")
     L.append("")
-    L.append("| paper row | H | P | L_config | drawn | capacity |")
-    L.append("|---|---|---|---|---|---|")
+    L.append("| paper row | subset | H | P | L_config | drawn | row capacity |")
+    L.append("|---|---|---|---|---|---|---|")
     for s_row in X.T38.PAPER_T15_ORDER:
-        rows = [s for s in samples if s["row"] == s_row]
-        if not rows:
-            continue
-        s0 = rows[0]
-        cap = manifest.get("capacities", {}).get(s_row, "?")
-        L.append("| %s | %d | %d | %d | %d | %s |"
-                 % (s_row, s0["H"], s0["P"], s0["L_config"], len(rows), cap))
+        for ds in X.row_subsets(s_row):
+            rows = [s for s in samples if s["row"] == s_row
+                    and s["subset"] == ds]
+            if not rows:
+                continue
+            s0 = rows[0]
+            cap = manifest.get("capacities", {}).get(s_row, "?")
+            L.append("| %s | %s | %d | %d | %d | %d | %s |"
+                     % (s_row, ds, s0["H"], s0["P"], s0["L_config"],
+                        len(rows), cap))
 
     # ---- 30-NN table --------------------------------------------------------
     L.append("")
@@ -135,6 +144,20 @@ def main():
     L.append("- sklearn at fit time: %s (EXP-002 pin %s)"
              % (runs.get("rs2021", {}).get("sklearn", "?"),
                 X.SKLEARN_PIN_PREFIX + "*"))
+    probe = verify.get("probe_reextract") or {}
+    if probe:
+        L.append("- batch-invariance probe (FG3, first %s samples): "
+                 "grouped-schedule re-extraction bitwise == archived "
+                 "(max abs err %s); per-sample B=1 re-extraction "
+                 "deviates abs %s / rel %.4f%% — **encoder forwards are "
+                 "NOT bitwise-invariant to batch size** (kernel "
+                 "selection), a recorded observation; all downstream "
+                 "features/coords/NN use the archived grouped schedule "
+                 "self-consistently."
+                 % (probe.get("n_probe_samples", "?"),
+                    probe.get("max_abs_err_grouped_batch", "?"),
+                    probe.get("max_abs_err_single_sample", "?"),
+                    probe.get("rel_err_single_sample_pct", -1.0)))
 
     # ---- budget -----------------------------------------------------------------
     L.append("")

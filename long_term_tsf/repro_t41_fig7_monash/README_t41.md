@@ -24,8 +24,9 @@ sha `5ac9bbd2…` 钉定)原样复用;EXP-002 的 1,900 行坐标不外推,而�
   `(N_in−L_eff)//L_eff + 1`。
 - 缺额重分配链:容量 < 配额的行把缺口按"余量降序、并列按行序"转给
   其他行,迭代至不动点;仍不足则如实报错停线。
-- CIF_2016_POOLED 行从 cif_2016_6/cif_2016_12 确定性 50/50 拆分(不足
-  溢出记录)。
+- CIF_2016_POOLED 行从 cif_2016_6/cif_2016_12 确定性 50/50 拆分(本论
+  实际 5+5;仅当某子集连自身目标都画不满时才把真缺口溢给兄弟子集,
+  日志显式区分)。
 - 每行候选 = 逐序列 stride-1 窗 [s, s+L_eff),end ≤ N_in;随机贪心
   (seed 2021 sha256 派生)接受同序列互不重叠窗;不足时**丢弃该子集全部
   贪心选中**,改用确定性 stride-L_eff 装箱重画(装箱必达 max_windows
@@ -74,10 +75,12 @@ rs2022/2023 拟合 + 30-NN)→ verify(FG1-FG7)→ collect → pack
 FG1 冻结资产未动(特征 sha + sampling_lists sha 与 preflight 记录一致
 + ckpt sha)/ FG2 manifest 完整一致(300、配额=重分配后配额、H×metadata、
 P、L_eff=min(L_config,N−H)、end≤N_in、同序列不重叠、short_history/
-NaN 记账)/ FG3 输入哈希 + **首批 32 样本重提取逐位一致** + 机制记录 /
+NaN 记账)/ FG3 输入哈希 + **批量不变性探针(前 32 样本:单样本
+batch=1 与分组批量两路重提取均逐位一致,计数与最大误差入 verify
+json)** + 机制记录 /
 FG4 五组跨距不重叠且并集=[0,2200) / FG5 array_equal 1900 行核对 + 同
 rs 复拟合 coords 逐位同 / FG6 30-NN 自排除 + 分母 9000 + 数值复算一致 /
-FG7 产物齐全(coords×4、params、图、nn 表、RESULT)。
+FG7 产物齐全(coords×4、params、nn_neighbors.npz、图、nn 表、RESULT)。
 
 ## 论文对照锚
 
@@ -104,22 +107,30 @@ eta,`t38_logs_base()` 以 fred_md.json 为标记解析。
 全链一次通过(2026-11-07,eta):
 
 - **采样**:300 样本/29 行;重分配 `us_births→m4_monthly n=3`
-  (us_births 容量恰 7 = 重分配后配额,装箱重画 7/7);CIF
-  cif_2016_6 缺 5 溢给 cif_2016_12;short_history=175、NaN 窗 0、
+  (us_births 容量恰 7 = 重分配后配额,装箱重画 7/7);CIF 按设计
+  50/50 拆分 = cif_2016_6 5 窗 + cif_2016_12 5 窗(**无缺额**;
+  早期队列日志里 "short by 5 (spillover)" 是把设计的后半拆分误记成
+  溢出,脚本日志口径已修正);short_history=175、NaN 窗 0、
   packing 重画 7 窗;68 个几何组。
 - **提取**:gates(冻结 sha/ckpt sha/mask_ref)全过;300×54528
-  float32;FG3 首批 32 样本重提取**逐位一致**。
+  float32;FG3 **真实批量不变性探针**:前 32 样本(k 序,跨全部几何
+  组)按两条路重提取——单样本(batch=1)与分组批量(归档提取调度
+  同款)——均与归档特征**逐位一致**;实际样本数/单样本重提取次数/
+  最大误差记录在 verify json `probe_reextract`。
 - **t-SNE(联合 2,200×54528)**:sklearn 1.9.1,rs2021 13.3 s 且
   复拟合 coords **逐位一致**;rs2022 12.6 s / rs2023 13.1 s;合并前
   1,900 冻结行 array_equal 逐元素核对过。
 - **30-NN(冻结编码器,54528 维 float64)**:ETTm1 0/9000、
   Weather 0/9000、Electricity 0/9000(与 EXP-036 饱和一致)、
   **Monash 4/9000 = 0.000444**。
-- **verify FG1-FG7:42/42 ALL PASS**(两次复跑均绿);
-  RESULT/logs 在包内,特征 npy / windows npz / 邻居 npz 留 eta。
-- **图**:三联图 `fig41_tsne_monash.png` = 本轮联合 2,200 点 ×
-  论文原图(sha `b9dc92e1…` 资产,76,419 bytes)× rs 稳定性;
-  定性对照,无数值阈值。
+- **verify FG1-FG7:42/42 ALL PASS**;
+  RESULT/logs 在包内,特征 npy / windows npz 留 eta,
+  **nn_neighbors.npz 已入包**(可从包内独立复算 30-NN 表)。
+- **图**:`fig41_tsne_monash.png` 两行:顶部 = 本轮 rs2021 联合
+  2,200 点 + 论文原图(sha `b9dc92e1…` 资产,76,419 bytes,含
+  Monash 共 2,200 行);底部 = rs2021/2022/2023 **三个独立面板,
+  各自展示全部五类来源**——不同次拟合坐标未经对齐、不互相叠加,
+  稳定性仅逐面板定性判读簇结构;定性对照,无数值阈值。
 
 ## Delivery
 

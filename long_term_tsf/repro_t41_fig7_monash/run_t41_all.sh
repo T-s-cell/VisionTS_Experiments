@@ -113,10 +113,12 @@ stage_pack() {
        "$SB"/tsne_params.json "$SB"/nn_summary.json "$SB"/nn_table.csv \
        "$SB"/input_hashes_monash.json "$SB"/groups_monash.npy \
        "$OUT/repro_t41_fig7_monash/job_records/" 2>/dev/null
-    # coords npy are small (~35 KB each) and ARE included
-    cp "$SB"/tsne_coords_2200x2*.npy \
+    # coords npy are small (~35 KB each) and ARE included, together with
+    # nn_neighbors.npz (archived neighbour indices -> the 30-NN table can
+    # be recomputed independently from the pack)
+    cp "$SB"/tsne_coords_2200x2*.npy "$SB"/nn_neighbors.npz \
        "$OUT/repro_t41_fig7_monash/job_records/" 2>/dev/null
-    # features npy / windows npz / neighbours npz stay on eta (NOT packed)
+    # features npy / windows npz stay on eta (NOT packed)
     local tarball
     tarball="${OUT}.tar.gz"
     tar -czf "$tarball" "$OUT"

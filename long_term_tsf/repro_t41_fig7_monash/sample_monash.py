@@ -188,11 +188,13 @@ def main():
         got0 = draw_subset(subsets[ds0], n_first,
                            ("t41", "draw", row, ds0, X.SEED))
         chosen.extend((ds0, si, st, how) for si, st, how in got0)
+        if len(got0) < n_first:
+            X.log("%s/%s short by %d (spillover to %s)"
+                  % (row, ds0, n_first - len(got0),
+                     subsets_row[1] if len(subsets_row) > 1 else "-"))
         remaining = want - len(got0)
         if remaining and len(subsets_row) > 1:
             ds1 = subsets_row[1]
-            X.log("%s/%s short by %d (spillover to %s)"
-                  % (row, ds0, remaining, ds1))
             got1 = draw_subset(subsets[ds1], remaining,
                                ("t41", "draw", row, ds1, X.SEED))
             chosen.extend((ds1, si, st, how) for si, st, how in got1)

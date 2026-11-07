@@ -1,7 +1,10 @@
 """EXP-041 step 5: figures — our joint 2,200-row t-SNE (5 sources), the
-paper's original Fig.7 side-by-side (sha-pinned asset), and the
-rs2022/2023 stability view.  Qualitative only: 2-D overlap makes no
-prediction or causal claim.
+paper's original Fig.7 side-by-side (sha-pinned asset), and the stability
+view as THREE full panels (rs2021/2022/2023), each showing ALL five
+sources.  Different fits are never overlaid: t-SNE embeddings from
+separate runs are not aligned, so cross-seed overlay would be meaningless
+— stability is judged qualitatively per-panel (cluster structure).
+Qualitative only: 2-D overlap makes no prediction or causal claim.
 
 Outputs (logs/): fig41_tsne_monash.png
 """
@@ -33,41 +36,38 @@ def main():
     else:
         X.log("paper Fig.7 asset not found at %s — panel skipped" % paper_img_path)
 
-    n_panel = 3 if paper_ok else 2
-    fig, axes = plt.subplots(1, n_panel, figsize=(5.0 * n_panel, 4.6))
+    fig = plt.figure(figsize=(15.0, 9.2))
+    gs = fig.add_gridspec(2, 3, height_ratios=[1.0, 1.0])
 
-    ax = axes[0]
-    for g in X.GROUPS:
-        s0, s1 = X.SPANS[g]
-        sel = np.arange(s0, s1)
-        ax.scatter(emb[sel, 0], emb[sel, 1], s=6, alpha=0.55,
-                   c=X.PLOT_COLORS[g], label=g,
-                   marker="o" if g != "ImageNet" else "o")
-    ax.legend(fontsize=8, loc="best")
-    ax.set_title("EXP-041 joint t-SNE (2,200; Monash added)")
-    ax.set_xticks([]), ax.set_yticks([])
+    def draw_all(ax, e, title):
+        for g in X.GROUPS:
+            s0, s1 = X.SPANS[g]
+            sel = np.arange(s0, s1)
+            ax.scatter(e[sel, 0], e[sel, 1], s=6, alpha=0.55,
+                       c=X.PLOT_COLORS[g], label=g)
+        ax.legend(fontsize=7, loc="best", markerscale=1.8)
+        ax.set_title(title)
+        ax.set_xticks([]), ax.set_yticks([])
+
+    ax = fig.add_subplot(gs[0, 0])
+    draw_all(ax, emb, "EXP-041 joint t-SNE (rs%d, 2,200; Monash added)"
+             % X.SEED)
 
     if paper_ok:
-        ax = axes[1]
+        ax = fig.add_subplot(gs[0, 1:])
         ax.imshow(mpimg.imread(paper_img_path))
-        ax.set_title("paper Fig.7 (original, 1,900)")
+        ax.set_title("paper Fig.7 (original, 2,200)")
         ax.axis("off")
 
-    ax = axes[n_panel - 1]
-    for rs in X.STABILITY_SEEDS:
-        p = os.path.join(X.SAVE_BASE, "tsne_coords_2200x2_rs%d.npy" % rs)
-        assert os.path.isfile(p), "missing stability coords %s" % p
-        e = np.load(p)
-        sel = np.arange(*X.SPANS["Monash"])
-        ax.scatter(e[sel, 0], e[sel, 1], s=6, alpha=0.55,
-                   c=X.PLOT_COLORS["Monash"],
-                   label="Monash rs%d" % rs)
-    sel = np.arange(0, 1900)
-    ax.scatter(emb[sel, 0], emb[sel, 1], s=4, alpha=0.15, c="#bbbbbb",
-               label="others rs2021")
-    ax.legend(fontsize=8)
-    ax.set_title("stability (Monash rs2022/2023)")
-    ax.set_xticks([]), ax.set_yticks([])
+    for j, rs in enumerate((X.SEED,) + tuple(X.STABILITY_SEEDS)):
+        if rs == X.SEED:
+            e = emb
+        else:
+            p = os.path.join(X.SAVE_BASE, "tsne_coords_2200x2_rs%d.npy" % rs)
+            assert os.path.isfile(p), "missing stability coords %s" % p
+            e = np.load(p)
+        ax = fig.add_subplot(gs[1, j])
+        draw_all(ax, e, "rs%d (all 2,200 rows)" % rs)
 
     fig.tight_layout()
     out = os.path.join(X.LOG_DIR, "fig41_tsne_monash.png")
