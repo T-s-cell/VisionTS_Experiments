@@ -210,7 +210,8 @@ Post-delivery review found the delivered CSV's `*_train_pure_s` columns
 empty (root cause: `build_rows` computed `train_pure(row, arm)` before
 `vali_s` was set; RESULT values were always correct — the report
 recomputes on completed rows). Closing fixes (code head
-**`512073d`**, this README is a docs-only commit on top):
+**`512073dd70a26b3226b5b86174188082f31912a3`**, this README is a
+docs-only commit on top):
 
 1. `collect_t39_fullshot.py`: `vali_s` assigned before `train_pure_s`,
    with a row-level post-condition `pure == train_s − vali_s`.
