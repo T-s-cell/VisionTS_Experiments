@@ -143,10 +143,12 @@ smoke gate passes (docs-only commits afterwards if any).
 
 ## Delivery
 
-- 包(当前版 v3):`temp/temp_t40_pack.tar.gz` + 同名 sidecar
-  `.sha256`(**包 sha 只记 sidecar 与仓库交付记录,不入包内 README**;
-  v3 为纯文档重打包:README 预算行锁定轮次口径修正为实际的 E5–E22,
-  全部实验工件与 v2 逐字节相同,代码冻结头不变)。
+- 包(当前版 v3):`temp/temp_t40_pack.tar.gz`(393,571 bytes,<50MB)
+  + 同名 sidecar `.sha256` =
+  `708d95632509d3b690590b52f5ce77d7f625b853b0287d9cd9c1e41f3f2ac877`
+  (**包 sha 只记 sidecar 与仓库交付记录,不入包内 README**;v3 为纯
+  文档重打包:README 预算行锁定轮次口径修正为实际的 E5–E22,全部
+  实验工件与 v2 相同,代码冻结头不变)。
 - 包内容:9 代码文件 + README + runner、logs(audit/verify/RESULT/
   csv/图/recompute)、job_records(12 任务 × curves/trajectory/phases/
   lock_events/rng_audit/args/fingerprint/SUCCESS)+ **job_records_ctrl

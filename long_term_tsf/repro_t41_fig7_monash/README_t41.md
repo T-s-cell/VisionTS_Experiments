@@ -179,10 +179,13 @@ tsne_coords_2200x2_b1.npy 留 eta。
 
 ## Delivery
 
-- 包(当前版 v3):`temp/temp_t41_pack.tar.gz` + 同名 sidecar
-  `.sha256`(**包 sha 只记 sidecar 与仓库交付记录,不入包内 README**;
-  v3 在 v2 基础上新增 probe_batch_diff.json / fig41_probe_batch_diff.png
-  / nn_table_b1.csv 入包并刷新 RESULT/README,代码与归档工件不变)。
+- 包(当前版 v3):`temp/temp_t41_pack.tar.gz`(2,306,946 bytes,
+  <50MB)+ 同名 sidecar `.sha256` =
+  `974ad773a280c7340efeb1e6e0965231cedbee6e4d7b854aab5fcac33d67ba7a`
+  (**包 sha 只记 sidecar 与仓库交付记录,不入包内 README**;v3 在 v2
+  基础上新增 probe_batch_diff.json / fig41_probe_batch_diff.png /
+  nn_table_b1.csv / nn_neighbors_b1.npz 入包并刷新 RESULT/README,
+  代码与归档工件不变)。
 - 包历史:v1 sha `3655a114…` 作废;v2(评审修正版)sha
   `d0d8a729cc62ec2c5110ba76ef62dd7d39388caf6abadb320fbd5b3375bca682`
   (1,856,990 bytes)被 v3 取代。
