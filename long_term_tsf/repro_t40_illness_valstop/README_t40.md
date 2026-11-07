@@ -142,12 +142,15 @@ smoke gate passes (docs-only commits afterwards if any).
 
 ## Delivery
 
-- 包:`temp/temp_t40_pack.tar.gz`(385,378 bytes,<50MB;9 代码文件 +
-  README + runner、logs(audit/verify/RESULT/csv/图/recompute)、
-  job_records(12 任务 × curves/trajectory/phases/lock_events/
-  rng_audit/args/fingerprint/SUCCESS;**ckpt 留 eta 不入包**)。
+- 包(评审修正版 v2):`temp/temp_t40_pack.tar.gz`(392,729 bytes,
+  <50MB;9 代码文件 + README + runner、logs(audit/verify/RESULT/csv/
+  图/recompute)、job_records(12 任务 × curves/trajectory/phases/
+  lock_events/rng_audit/args/fingerprint/SUCCESS)+ **job_records_ctrl
+  (A-only 对照轮同款 8 件,TG2 证据)**;ckpt 留 eta 不入包)。
 - sidecar:`temp/temp_t40_pack.tar.gz.sha256` =
-  `aff4b4bee3f7c2866dfe183c9721125acf2457dbdfdc7604d687d6cfec1b9fac`
-  (sha 只记 sidecar 与本交付记录,不入包内 README)。
-- 代码冻结头:`e877ed4`(分支 `repro/ltsf-t40-t41`;包内 README 滞后
-  终版文档提交,属已知口径)。
+  `869cacb50a354fa1db0f1f368f53a74b61de87d8b61de58ea14c54f8eff4bcc0`
+  (v1 sha `aff4b4be…` 作废;sha 只记 sidecar 与本交付记录,不入包内
+  README)。
+- 代码冻结头(完整 40 位):`7e7fa5b9146fd2ebca0170c5f4842f13f2e6cb88`
+  (分支 `repro/ltsf-t40-t41`;包内 README 滞后终版文档提交,属已知
+  口径)。

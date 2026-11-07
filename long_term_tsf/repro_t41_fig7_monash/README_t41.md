@@ -134,11 +134,14 @@ eta,`t38_logs_base()` 以 fred_md.json 为标记解析。
 
 ## Delivery
 
-- 包:`temp/temp_t41_pack.tar.gz`(1,276,606 bytes,<50MB;含 9 代码
-  文件 + runner、logs(json/csv/md/png)、job_records(manifest/params/
-  nn 表/coords×4 等;特征 npy / windows npz / 邻居 npz 留 eta))。
+- 包(评审修正版 v2):`temp/temp_t41_pack.tar.gz`(1,856,990 bytes,
+  <50MB;含 9 代码文件 + runner、logs(json/csv/md/png)、job_records
+  (manifest/params/nn 表/**nn_neighbors.npz**/coords×4 等;特征 npy /
+  windows npz 留 eta))。
 - sidecar:`temp/temp_t41_pack.tar.gz.sha256` =
-  `3655a114b7888eddb5e93a3d91371d085da99d798c240d4691c3ff28d1d05325`
-  (sha 只记 sidecar 与本交付记录,不入包内 README)。
-- 代码冻结头:`be5b833`(分支 `repro/ltsf-t40-t41`;包内 README 滞后
-  终版文档提交,属已知口径)。
+  `d0d8a729cc62ec2c5110ba76ef62dd7d39388caf6abadb320fbd5b3375bca682`
+  (v1 sha `3655a114…` 作废;sha 只记 sidecar 与本交付记录,不入包内
+  README)。
+- 代码冻结头(完整 40 位):`ce4e69524819636012bed146b54beaac5435d67d`
+  (分支 `repro/ltsf-t40-t41`;包内 README 滞后终版文档提交,属已知
+  口径)。
