@@ -111,7 +111,9 @@ stage_pack() {
     cp "$PKG_DIR"/logs/*.json "$PKG_DIR"/logs/*.csv \
        "$PKG_DIR"/logs/*.md "$PKG_DIR"/logs/*.png \
        "$OUT/repro_t40_illness_valstop/logs/" 2>/dev/null
-    # curves.npz + small per-job jsons (NO ckpt, NO npy arrays)
+    # curves.npz + small per-job jsons (NO ckpt, NO npy arrays);
+    # the smoke ctrl round (A-only) job_records are included too — they
+    # are the TG2 same-environment trajectory-equivalence evidence
     mkdir -p "$OUT/repro_t40_illness_valstop/job_records"
     local jd
     for h in 24 36 48 60; do
@@ -125,6 +127,14 @@ stage_pack() {
                "$OUT/repro_t40_illness_valstop/job_records/$(task_name "$h" "$s")/" 2>/dev/null
         done
     done
+    local cd_="$(dirname "$PKG_DIR")/save_t40_valstop_ctrl/illness_24_seed2021"
+    if [ -d "$cd_" ]; then
+        mkdir -p "$OUT/repro_t40_illness_valstop/job_records_ctrl/illness_24_seed2021"
+        cp "$cd_"/curves.npz "$cd_"/trajectory.json "$cd_"/phases.json \
+           "$cd_"/lock_events.json "$cd_"/rng_audit.json "$cd_"/args.json \
+           "$cd_"/fingerprint.json "$cd_"/SUCCESS.txt \
+           "$OUT/repro_t40_illness_valstop/job_records_ctrl/illness_24_seed2021/" 2>/dev/null
+    fi
     local tarball
     tarball="${OUT}.tar.gz"
     tar -czf "$tarball" "$OUT"

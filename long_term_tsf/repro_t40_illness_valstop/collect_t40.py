@@ -106,7 +106,7 @@ def main():
     L.append("## T1 per-H test performance (3-seed mean±std, ddof=1)")
     L.append("")
     L.append("| H | A MSE | B MSE | C MSE | A MAE | B MAE | C MAE | "
-             "paper T21 MSE | paper MAE | EXP-003 arch MSE (ref) |")
+             "paper T21 MSE | paper MAE | EXP-003 arch MSE (3-seed mean) |")
     L.append("|---|---|---|---|---|---|---|---|---|---|")
     per_h = {}
     for h in X.HS:
@@ -147,9 +147,21 @@ def main():
                     X.PAPER_T21["avg"][0], X.PAPER_T21["avg"][1]))
     arch_all = np.mean([v["mse"] for v in
                         audit.get("archived_success", {}).values()])
-    L.append("| EXP-003 archive (A-rule selection, seed=2021 only "
-             "reference) | %.4f | — | %.3f | %.3f |"
+    L.append("| EXP-003 archive (A-rule selection, 12-task = 4H×3seed "
+             "mean) | %.4f | — | %.3f | %.3f |"
              % (arch_all, X.PAPER_T21["avg"][0], X.PAPER_T21["avg"][1]))
+    m_a = overall["A"][0]
+    rel = {r: (overall[r][0] - m_a) / m_a * 100.0 for r in X.RULES}
+    spread = (max(overall[r][0] for r in X.RULES) -
+              min(overall[r][0] for r in X.RULES)) / \
+        min(overall[r][0] for r in X.RULES) * 100.0
+    L.append("")
+    L.append("Overall relative to A: B %+.4f%%, C %+.4f%%; **three-rule "
+             "max pairwise spread %.3f%% (B vs C)**.  Direction "
+             "consistency is NO for all pairs (T3): **no rule produced a "
+             "consistent reduction of the paper gap** (observation; no "
+             "causal attribution)."
+             % (rel["B"], rel["C"], spread))
 
     L.append("")
     L.append("## T3 paired rule differences (test MSE; per (H, seed), "
@@ -179,19 +191,22 @@ def main():
                     "yes" if consist else "NO"))
 
     L.append("")
-    L.append("## T4 selection behaviour (best epoch / stop epoch / locked)")
+    L.append("## T4 selection behaviour (best epoch / trigger-stop epoch "
+             "/ run length / locked)")
     L.append("")
-    L.append("| H | rule | best_valid_epoch (3 seeds) | locked (3 seeds) | "
-             "n_epochs run (3 seeds) |")
-    L.append("|---|---|---|---|---|")
+    L.append("| H | rule | best_valid_epoch (3 seeds) | trigger stop epoch "
+             "(3 seeds) | locked (3 seeds) | n_epochs run (3 seeds) |")
+    L.append("|---|---|---|---|---|---|")
     for h in X.HS:
         for r in X.RULES:
             be = [get(h, s, r, "best_valid_epoch") for s in X.SEEDS]
+            tg = [get(h, s, r, "trigger_epoch") for s in X.SEEDS]
             lk = [get(h, s, r, "locked") for s in X.SEEDS]
             ne = [get(h, s, r, "n_epochs") for s in X.SEEDS]
-            L.append("| %d | %s | %s | %s | %s |"
+            L.append("| %d | %s | %s | %s | %s | %s |"
                      % (h, r,
                         "/".join(str(int(b)) for b in be),
+                        "/".join(str(int(t)) for t in tg),
                         "/".join("Y" if x else "n" for x in lk),
                         "/".join(str(n) for n in ne)))
 
@@ -237,8 +252,11 @@ def main():
     L.append("## Reading guide (frozen wording)")
     L.append("")
     L.append("1. Differences between rules measure the SELECTION "
-             "criterion's effect on the frozen recipe — they do not "
-             "identify the cause of the gap to the paper's numbers.")
+             "criterion's effect on the frozen recipe.  This diagnostic "
+             "**did not find an effect that consistently narrows the "
+             "paper gap** (all T3 direction-consistency checks are NO); "
+             "it does not identify the cause of the gap to the paper's "
+             "numbers.")
     L.append("2. Rule C is the documented official counterfactual with a "
              "dedicated permutation stream, not an RNG-exact replay of "
              "the original runs.")
