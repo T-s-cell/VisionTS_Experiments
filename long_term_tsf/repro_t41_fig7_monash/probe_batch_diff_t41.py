@@ -588,13 +588,21 @@ def main():
         del model_cpu
 
     # ---- impact: all 300 at B=1 ---------------------------------------------
-    X.log("extracting all 300 Monash samples at B=1 ...")
-    t0 = time.time()
-    feats_b1 = extract_all_b1(model, samples, wins, ref_noise, ref_ids,
-                              "cuda")
-    X.log("B=1 extraction done (%.1f s)" % (time.time() - t0))
-    np.save(os.path.join(X.SAVE_BASE, "features_monash_b1_300x54528.npy"),
-            feats_b1)
+    b1_path = os.path.join(X.SAVE_BASE, "features_monash_b1_300x54528.npy")
+    if os.path.isfile(b1_path):
+        X.log("reusing existing B=1 features (no re-extraction): %s"
+              % b1_path)
+        feats_b1 = np.load(b1_path)
+        assert feats_b1.shape == (300, X.FEATURE_DIM), feats_b1.shape
+        b1_source = "reused_existing_file"
+    else:
+        X.log("extracting all 300 Monash samples at B=1 ...")
+        t0 = time.time()
+        feats_b1 = extract_all_b1(model, samples, wins, ref_noise, ref_ids,
+                                  "cuda")
+        X.log("B=1 extraction done (%.1f s)" % (time.time() - t0))
+        np.save(b1_path, feats_b1)
+        b1_source = "fresh_extract"
     del model
     torch.cuda.empty_cache()
 
@@ -608,6 +616,7 @@ def main():
     single_rows = ~multi_rows
     rec["impact_b1"] = {
         "features_b1": "features_monash_b1_300x54528.npy",
+        "b1_features_source": b1_source,
         "max_abs": float(d.max()),
         "per_sample_rel_l2_pct": {
             "all": {"median": float(np.median(per)),
