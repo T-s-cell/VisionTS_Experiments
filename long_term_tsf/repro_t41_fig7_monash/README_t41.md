@@ -197,12 +197,15 @@ tsne_coords_2200x2_b1.npy 留 eta。
 
 ## Delivery
 
-- 包(当前版 v4):`temp/temp_t41_pack.tar.gz`(<50MB)+ 同名
-  sidecar `.sha256`(**包 sha 只记 sidecar 与仓库交付记录,不入包内
+- 包(当前版 v4):`temp/temp_t41_pack.tar.gz`(2,309,411 bytes,
+  <50MB)+ 同名 sidecar `.sha256` =
+  `b0293d83c54b354be68c9af0481be6ed2f0310fe6dc911c3c509d4f031edbc16`
+  (**包 sha 只记 sidecar 与仓库交付记录,不入包内
   README**;v4 在 v3 基础上:rel L2 公式修正——compare_rows 漏平方,
   附 norm≡flats 一致性硬门(实测 0.0e+00)——探针/verify/RESULT/
   README 刷新,300 行 B=1 特征**复用**未重提取,原始 v3 探针 JSON
-  留档 `probe_batch_diff_v3_archive.json`;定位与下游结论不变)。
+  留档 `probe_batch_diff_v3_archive.json`;定位与下游结论不变;
+  v3 包留档为 `temp/temp_t41_pack_v3.tar.gz`)。
 - 包历史:v3 sha
   `974ad773a280c7340efeb1e6e0965231cedbee6e4d7b854aab5fcac33d67ba7a`
   (2,306,946 bytes;在 v2 基础上新增 probe_batch_diff.json /
@@ -210,5 +213,6 @@ tsne_coords_2200x2_b1.npy 留 eta。
   入包并刷新 RESULT/README)被 v4 取代;v2 sha
   `d0d8a729cc62ec2c5110ba76ef62dd7d39388caf6abadb320fbd5b3375bca682`
   (1,856,990 bytes);v1 sha `3655a114…` 作废。
-- 代码冻结头(完整 40 位):本分支(P0)终版代码提交 SHA 见仓库交付
-  记录;包内 README 滞后终版交付记录提交,属已知口径。
+- 代码冻结头(完整 40 位):`131576190eb2b8b4b80c9aa68f65772593e224d9`
+  (P0 代码头,分支 `repro/ltsf-t41-relfix`;其后为交付记录文档提交);
+  包内 README 滞后终版交付记录提交,属已知口径。
