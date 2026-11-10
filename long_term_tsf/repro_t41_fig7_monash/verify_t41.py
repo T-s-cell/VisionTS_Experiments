@@ -13,8 +13,8 @@
   FG3  extraction drift: input_hashes match windows.npz byte digests;
        probe the FIRST 32 samples (by k) re-extracted BOTH in grouped
        batches (archived schedule — HARD bitwise gate) and per-sample
-       (batch=1 — deviation recorded as a batch-size kernel effect,
-       abs + RMS-relative); extract_env records the
+       (batch=1 — deviation recorded as a batch-size numeric effect,
+       abs + per-sample rel L2); extract_env records the
        fixed-reference-noise mechanism
   FG4  five group spans disjoint, union == [0, 2200)
   FG5  joint-fit determinism: merged[:1900] element-equal to the frozen
@@ -384,9 +384,13 @@ def reextract_probe(samples, wins, feats):
                 else:
                     d = float(np.max(np.abs(flat1 - want1)))
                     err_single = max(err_single, d)
-                    rms = float(np.sqrt(np.mean(want1 ** 2)))
-                    if rms > 0:
-                        rel_single = max(rel_single, d / rms * 100.0)
+                    num = float(np.sqrt(((flat1.astype(np.float64)
+                                          - want1.astype(np.float64)) ** 2)
+                                        .sum()))
+                    den = float(np.sqrt((want1.astype(np.float64) ** 2)
+                                        .sum()))
+                    if den > 0:
+                        rel_single = max(rel_single, num / den * 100.0)
         info["max_abs_err_grouped_batch"] = err_grouped
         info["bitwise_equal_grouped"] = bool(err_grouped == 0.0)
         info["max_abs_err_single_sample"] = err_single

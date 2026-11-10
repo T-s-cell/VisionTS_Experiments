@@ -28,7 +28,8 @@ schedule itself — full geometry-group chunks, F7.BATCH):
       dependence, NOT run-to-run nondeterminism;
   M4  composition stability at B>=2: the first multi-row probe group
       re-extracted as its small PROBE-SUBSET batch (2-3 rows) must be
-      bitwise == archived (multi-row composition does not matter);
+      bitwise == archived (composition verified on THIS one group only;
+      no general batch-composition-invariance claim beyond it);
   M5  CPU cross-check (probe-subset multi-row batches, same weights/
       code, no rerun) — bitwise there would pin the effect to GPU
       kernel selection; any CPU divergence is also recorded.
@@ -135,10 +136,10 @@ def compare_rows(base, other):
     over rows -> (bitwise_all, max_abs, max_rel_l2_pct)."""
     assert base.shape == other.shape, (base.shape, other.shape)
     bitwise = bool(np.array_equal(base, other))
-    d = np.abs(base - other)
-    max_abs = float(d.max())
+    d = base - other
+    max_abs = float(np.abs(d).max())
     denom = np.sqrt((base ** 2).reshape(base.shape[0], -1).sum(1))
-    diff = np.sqrt(d.reshape(base.shape[0], -1).sum(1))
+    diff = np.sqrt((d ** 2).reshape(base.shape[0], -1).sum(1))
     rel = float(np.max(diff / np.maximum(denom, 1e-30)) * 100.0)
     return bitwise, max_abs, rel
 
@@ -183,6 +184,7 @@ def localize_on_device(model, groups_all, probe_ks, wins, feats,
                     "single_total_groups": {"n_rows": 0, "bitwise_rows": 0,
                                             "max_abs": 0.0}}
     per_sample_final_rel = {}
+    consistency_max = 0.0
     n_groups_used = 0
 
     for key, ss_all in sorted(groups_all.items(),
@@ -251,6 +253,16 @@ def localize_on_device(model, groups_all, probe_ks, wins, feats,
                               else "single_total_groups"]
         for i, s in enumerate(ss_probe):
             ci, ri = row_loc[s["k"]]
+            # consistency gate: the norm-stage capture and the returned
+            # flattened features are tensors from the SAME forward pass
+            # (forward_encoder returns self.norm(x)) — row identity must
+            # hold exactly, else stage-vs-flats numbers are misaligned.
+            assert np.array_equal(caps_g[ci]["norm"][ri].reshape(-1),
+                                  flats_g[ci][ri]), \
+                "norm-stage row != grouped flat row (k=%d)" % s["k"]
+            assert np.array_equal(caps_s[i]["norm"][0].reshape(-1),
+                                  flats_s[i][0]), \
+                "norm-stage row != B1 flat row (k=%d)" % s["k"]
             rows = stage_rows_g_vs_s(caps_g[ci], ri, caps_s[i])
             if multi:
                 agg = merge_stage_rows(agg, rows)
@@ -261,6 +273,10 @@ def localize_on_device(model, groups_all, probe_ks, wins, feats,
             per_sample_final_rel[str(s["k"])] = {
                 "rel_l2_vs_grouped_pct": rel,
                 "group_total_n": len(ss_all)}
+            st_norm_rel = next(r["max_rel_l2_pct"] for r in rows
+                               if r["stage"] == "norm")
+            consistency_max = max(consistency_max,
+                                  abs(st_norm_rel - rel))
             b, ma, _ = compare_rows(feats[s["k"]:s["k"] + 1].astype(np.float64),
                                     flats_g[ci][ri:ri + 1])
             bucket["n_rows"] += 1
@@ -296,6 +312,7 @@ def localize_on_device(model, groups_all, probe_ks, wins, feats,
             1 for v in per_sample_final_rel.values() if v["group_total_n"] >= 2),
         "grouped_vs_archived": grouped_arch,
         "per_sample_final_rel": per_sample_final_rel,
+        "norm_stage_vs_flats_rel_max_abs_diff_pct": consistency_max,
     }
     if rerun:
         out["self_repro"] = self_repro
