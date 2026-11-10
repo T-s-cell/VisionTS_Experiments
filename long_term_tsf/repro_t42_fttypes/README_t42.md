@@ -104,7 +104,10 @@ EXP-003,脚本自带 sys.path 引导)。大件(144 ckpt ≈64GB + results
 
 ## 代码冻结头(冒烟过后回填完整 40 位)
 
-待回填。
+`1cd1805f0920472b3e1fedd460149cfb100440bb`(分支 `repro/ltsf-t42-fttypes`)。
+= 0096521(seed-delta 白名单修正)+ 1cd1805(verify VG4 冻结/可训练 key
+划分修正,纯审计侧);训练代码自 0096521 未变。冒烟 9/9 +
+verify --smoke 143/143 全过后回填(2026-11-10)。
 
 ## Delivery(占位,pack 后回填)
 
