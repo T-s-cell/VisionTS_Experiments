@@ -149,9 +149,12 @@ def main():
         L.append("- batch-invariance probe (FG3, first %s samples): "
                  "grouped-schedule re-extraction bitwise == archived "
                  "(max abs err %s); per-sample B=1 re-extraction "
-                 "deviates abs %s / rel %.4f%% — **encoder forwards are "
-                 "NOT bitwise-invariant to batch size** (kernel "
-                 "selection), a recorded observation; all downstream "
+                 "deviates abs %s / rel %.4f%% (per-sample rel L2) — "
+                 "**encoder forwards are NOT bitwise-invariant to batch "
+                 "size**, a recorded numeric difference (the "
+                 "kernel-selection attribution is a plausible "
+                 "interpretation consistent with the CPU/GPU cross-check, "
+                 "not directly verified); all downstream "
                  "features/coords/NN use the archived grouped schedule "
                  "self-consistently."
                  % (probe.get("n_probe_samples", "?"),
@@ -195,11 +198,11 @@ def main():
         L.append("- **Archive structure**: %d geometry groups, %d "
                  "contain exactly ONE sample -> those %d archived rows "
                  "were THEMSELVES extracted at B=1; the archived matrix "
-                 "mixes multi-row-batch (%d rows) and B=1 kernel "
-                 "products (%d rows).  This reconciles the FG3 probe: "
-                 "the grouped path is bitwise vs archived (composition-"
-                 "stable at B>=2; trivially bitwise for single-total "
-                 "groups) while B=1 deviates."
+                 "mixes multi-row-batch (%d rows) and B=1 products "
+                 "(%d rows).  This reconciles the FG3 probe: the grouped "
+                 "path is bitwise vs archived (trivially bitwise for "
+                 "single-total groups; composition checked only where "
+                 "stated below) while B=1 deviates."
                  % (arch_s.get("n_geometry_groups", "?"),
                      arch_s.get("n_single_total_groups", "?"),
                      arch_s.get("n_rows_from_single_total_groups", "?"),
@@ -208,21 +211,33 @@ def main():
                      arch_s.get("n_rows_from_single_total_groups", "?")))
         L.append("- **Localization (GPU, 32-sample probe)**: input "
                  "images bitwise (%s); first divergence at **%s** "
-                 "(max abs %.2e); grows through the 12 blocks (peak max "
-                 "abs %.4f at %s); final features max abs %.4f — "
-                 "reproduces the verify probe's recorded 0.017219 "
-                 "exactly."
+                 "(max abs %.2e, stage rel L2 %.4f%%); grows through the "
+                 "12 blocks (peak max abs %.4f / rel %.4f%% at %s); "
+                 "final features max abs %.4f / rel %.4f%% — reproduces "
+                 "the verify probe's recorded 0.017219 exactly.  "
+                 "Consistency gate: norm-stage rel == flat-feature rel "
+                 "exactly (max abs diff %.1e pp)."
                  % (concl.get("image_stage_bitwise"),
                      concl.get("first_divergent_stage_gpu", "?"),
                      stage_rows[1].get("max_abs", 0.0)
                      if len(stage_rows) > 1 else 0.0,
-                     peak.get("max_abs", 0.0), peak.get("stage", "?"),
+                     stage_rows[1].get("max_rel_l2_pct", 0.0)
+                     if len(stage_rows) > 1 else 0.0,
+                     peak.get("max_abs", 0.0),
+                     peak.get("max_rel_l2_pct", 0.0),
+                     peak.get("stage", "?"),
                      stage_rows[-1].get("max_abs", 0.0)
-                     if stage_rows else 0.0))
+                     if stage_rows else 0.0,
+                     stage_rows[-1].get("max_rel_l2_pct", 0.0)
+                     if stage_rows else 0.0,
+                     lg.get("norm_stage_vs_flats_rel_max_abs_diff_pct",
+                            -1.0)))
         L.append("- **Internal determinism per shape**: grouped rerun "
                  "bitwise = %s; B=1 rerun bitwise = %s; multi-row "
                  "composition (3-row probe-subset batch) bitwise == "
-                 "archived = %s; grouped-vs-archived bitwise %s/%s "
+                 "archived = %s (composition verified on THIS one probe "
+                 "group only — no general batch-composition claim); "
+                 "grouped-vs-archived bitwise %s/%s "
                  "multi-row + %s/%s single-total probe rows."
                  % (lg.get("self_repro", {}).get("grouped_rerun_bitwise"),
                      lg.get("self_repro", {}).get("single_rerun_bitwise"),
@@ -236,23 +251,29 @@ def main():
                          "single_total_groups", {}).get("bitwise_rows"),
                      lg.get("grouped_vs_archived", {}).get(
                          "single_total_groups", {}).get("n_rows")))
-        L.append("- **Mechanism**: batch-shape-dependent kernel "
-                 "selection (B=1 takes a different GEMM/attention kernel "
-                 "path than B>=2; every shape internally bitwise-"
-                 "reproducible, multi-row compositions mutually "
-                 "bitwise-equal).  CPU cross-check (same weights/code, "
-                 "rank-encoded mask noise): first divergence at **%s**, "
-                 "block max abs ~%.1e (CPU patch_embed is shape-"
-                 "invariant; the effect exists on BOTH devices, "
-                 "magnitude device-dependent) — systematic shape "
-                 "dependence, NOT run-to-run nondeterminism, NOT a GPU "
-                 "fault."
+        L.append("- **Proven vs unverified**: PROVEN — the numeric "
+                 "difference is batch-shape-dependent: every shape is "
+                 "internally bitwise-reproducible, and the CPU "
+                 "cross-check (same weights/code, rank-encoded mask "
+                 "noise) first diverges at **%s** with block max abs "
+                 "~%.1e (CPU patch_embed is shape-invariant; the effect "
+                 "exists on BOTH devices, magnitude device-dependent) — "
+                 "systematic shape dependence, NOT run-to-run "
+                 "nondeterminism, NOT a GPU fault.  UNVERIFIED (plausible "
+                 "interpretation only, kernel paths not directly "
+                 "inspected): attribution to batch-shape-dependent "
+                 "kernel selection (B=1 taking a different GEMM/attention "
+                 "kernel path than B>=2).  Batch-composition invariance "
+                 "is NOT claimed beyond the single 3-row probe-subset "
+                 "check above."
                  % (lc.get("first_divergent_stage", "?"),
                      max((r.get("max_abs", 0.0)
                           for r in lc.get("stage_rows", [])),
                          default=0.0)))
         L.append("- **Error criterion (per-sample rel L2, B=1 vs "
-                 "archived; all 300 re-extracted at B=1)**: median "
+                 "archived; all 300 rows; the B=1 features are REUSED "
+                 "from the archived probe run, not re-extracted)**: "
+                 "median "
                  "%.4f%% / p95 %.4f%% / max %.4f%% (k=%s); multi-row-"
                  "group rows (n=%s) median %.4f%% / max %.4f%%; "
                  "single-total-group rows **bitwise %s/%s**; overall "

@@ -118,8 +118,8 @@ eta,`t38_logs_base()` 以 fred_md.json 为标记解析。
   float32;FG3 **批量不变性探针**:前 32 样本(k 序,跨全部几何组)
   按两条路重提取——分组批量路(归档提取调度同款)与归档特征
   **逐位一致(err 0.0)**;单样本 batch=1 路与分组批量存在形状相关
-  偏差(max abs 0.017219 / RMS 相对 4.16%,记录观察;定位与下游
-  影响见下节);实际样本数/单样本重提取次数/最大误差记录在
+  偏差(max abs 0.017219 / 逐样本 rel L2 0.2052%,记录观察;定位与
+  下游影响见下节);实际样本数/单样本重提取次数/最大误差记录在
   verify json `probe_reextract`。
 - **t-SNE(联合 2,200×54528)**:sklearn 1.9.1,rs2021 13.3 s 且
   复拟合 coords **逐位一致**;rs2022 12.6 s / rs2023 13.1 s;合并前
@@ -136,7 +136,7 @@ eta,`t38_logs_base()` 以 fred_md.json 为标记解析。
   各自展示全部五类来源**——不同次拟合坐标未经对齐、不互相叠加,
   稳定性仅逐面板定性判读簇结构;定性对照,无数值阈值。
 
-## 批量差异定位与影响(评审修正 v3,probe_batch_diff_t41.py)
+## 批量差异定位与影响(评审修正 v3;v4 公式修正,probe_batch_diff_t41.py)
 
 针对评审阻塞项(verify 记录 single_matches_grouped=false 但原文写
 "两路均逐位一致"的矛盾;差异归因缺证据),新增独立探针:比较两条路的
@@ -147,23 +147,41 @@ eta,`t38_logs_base()` 以 fred_md.json 为标记解析。
 `logs/fig41_probe_batch_diff.png`(入包);B=1 特征 / nn_neighbors_b1.npz /
 tsne_coords_2200x2_b1.npy 留 eta。
 
+- **v4 公式修正(2026-11-10)**:v3 阶段表的逐级 rel 数值存在公式
+  缺陷——compare_rows 写成 sqrt(Σ|差值|),漏了平方——其 norm 行
+  5.273% 与展平特征逐样本 rel 0.2052% 数学不相容。v4 修正为
+  sqrt(Σ差值²) 并新增一致性硬门(norm 阶段捕获 ≡ 同一 forward 的
+  展平特征,实测最大差 **0.0e+00**)——**行对齐无误,5.273% 纯系
+  公式缺陷**;定位结论(GPU 首个分歧 patch_embed / CPU blk00)与
+  全部 abs 数值不变,30-NN/2D 下游结论不变(ROBUST)。阶段表 rel
+  现为正确逐样本 rel L2(patch_embed 0.0108% → 峰值 rel blk07
+  0.2929% / 峰值 abs blk10 0.0541 → norm 0.2052%)。verify FG3 的
+  单样本 rel 同步由 max-abs/RMS 口径(4.16%)换为逐样本 rel L2
+  (0.2052%)。v4 重跑**复用** v3 提取的 300 行 B=1 特征(未重提取;
+  原始 v3 JSON 留档 `probe_batch_diff_v3_archive.json` + v3 包)。
 - **结构性事实(调和全部此前观察)**:300 样本分 68 个几何组,其中
   **28 组恰含 1 个样本** → 这 28 行归档特征本身就是 B=1 提取产物;
-  归档矩阵混合了两种核路径(272 行多行批量 + 28 行 B=1)。FG3 探针的
-  分组路之所以逐位:多行组在 B≥2 下组成稳定,单行组平凡逐位。
+  归档矩阵混合了两种批量形状产物(272 行多行批量 + 28 行 B=1)。
+  FG3 探针的分组路之所以逐位:多行组在 B≥2 下与归档批量一致,单行组
+  平凡逐位。
 - **定位(GPU,前 32 样本,k 序)**:输入图像逐位一致;首个分歧在
   **patch_embed**(Conv2d,max abs 1.9e-3),沿 12 个 block 单调增长
   (峰值 max abs 0.0541 @ blk10),最终特征 max abs 0.017219 —— 与
   verify 记录值逐位重复(同形状完全确定)。
 - **每形状内部确定性**:分组路重跑逐位同;B=1 路重跑逐位同;多行
-  小批量组成检查(3 行 probe 子集批)与归档**逐位一致**;分组路 vs
-  归档 = 多行探针行 22/22 + 单行组探针行 10/10 全逐位。
-- **机制**:batch 形状相关的核选择(B=1 与 B≥2 走不同 GEMM/attention
-  核;每个形状内部逐位可复现,多行组成彼此逐位相等)。CPU 交叉核对
-  (同权重同代码,秩编码掩码噪声):patch_embed 形状不变,首个分歧在
-  **blk00**,block 内 max abs ~3.4e-5 —— 效应两种设备都存在、幅度随
-  设备不同:**系统性形状依赖,非运行间不确定,非 GPU 故障**。
-- **误差判据(逐样本 rel L2,B=1 vs 归档;全部 300 行 B=1 重提取)**:
+  小批量组成检查(3 行 probe 子集批)与归档**逐位一致——组成不变性
+  仅在这一个探针组上实测验证,不作一般性"批次组成不影响结果"的
+  声称**;分组路 vs 归档 = 多行探针行 22/22 + 单行组探针行 10/10
+  全逐位。
+- **已证实 vs 未证实**:已证实——数值差异随 batch 形状系统性出现:
+  每个形状内部逐位可复现;CPU 交叉核对(同权重同代码,秩编码掩码
+  噪声):patch_embed 形状不变,首个分歧在 **blk00**,block 内
+  max abs ~3.4e-5,效应两种设备都存在、幅度随设备不同——**系统性
+  形状依赖,非运行间不确定、非 GPU 故障**。未证实(仅为与上述证据
+  相容的合理解释,未直接检查核选择):把差异归因于 batch 形状相关的
+  核选择(B=1 与 B≥2 走不同 GEMM/attention 核)。
+- **误差判据(逐样本 rel L2,B=1 vs 归档;300 行 B=1 特征于 v3 探针
+  提取,v4 复核复用同文件)**:
   中位 0.0609% / p95 0.1405% / 最大 0.2446%(k=203);多行组行
   (272)中位 0.0695% / 最大 0.2446%;**单行组行 28/28 逐位**;
   总体 max abs 0.0228。
@@ -179,16 +197,18 @@ tsne_coords_2200x2_b1.npy 留 eta。
 
 ## Delivery
 
-- 包(当前版 v3):`temp/temp_t41_pack.tar.gz`(2,306,946 bytes,
-  <50MB)+ 同名 sidecar `.sha256` =
+- 包(当前版 v4):`temp/temp_t41_pack.tar.gz`(<50MB)+ 同名
+  sidecar `.sha256`(**包 sha 只记 sidecar 与仓库交付记录,不入包内
+  README**;v4 在 v3 基础上:rel L2 公式修正——compare_rows 漏平方,
+  附 norm≡flats 一致性硬门(实测 0.0e+00)——探针/verify/RESULT/
+  README 刷新,300 行 B=1 特征**复用**未重提取,原始 v3 探针 JSON
+  留档 `probe_batch_diff_v3_archive.json`;定位与下游结论不变)。
+- 包历史:v3 sha
   `974ad773a280c7340efeb1e6e0965231cedbee6e4d7b854aab5fcac33d67ba7a`
-  (**包 sha 只记 sidecar 与仓库交付记录,不入包内 README**;v3 在 v2
-  基础上新增 probe_batch_diff.json / fig41_probe_batch_diff.png /
-  nn_table_b1.csv / nn_neighbors_b1.npz 入包并刷新 RESULT/README,
-  代码与归档工件不变)。
-- 包历史:v1 sha `3655a114…` 作废;v2(评审修正版)sha
+  (2,306,946 bytes;在 v2 基础上新增 probe_batch_diff.json /
+  fig41_probe_batch_diff.png / nn_table_b1.csv / nn_neighbors_b1.npz
+  入包并刷新 RESULT/README)被 v4 取代;v2 sha
   `d0d8a729cc62ec2c5110ba76ef62dd7d39388caf6abadb320fbd5b3375bca682`
-  (1,856,990 bytes)被 v3 取代。
-- 代码冻结头(完整 40 位):`038aa48f5359ccef82a22380d92ac011af1f8641`
-  (分支 `repro/ltsf-t40-t41`;含探针脚本与本文档修正;包内 README
-  滞后终版交付记录提交,属已知口径)。
+  (1,856,990 bytes);v1 sha `3655a114…` 作废。
+- 代码冻结头(完整 40 位):本分支(P0)终版代码提交 SHA 见仓库交付
+  记录;包内 README 滞后终版交付记录提交,属已知口径。
