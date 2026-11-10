@@ -16,7 +16,9 @@ Gates (hard):
                     code_md5/data_sha256/ckpt_sha256 == the config's own
                     EXP-003 fingerprint; args deltas ONLY the t42
                     whitelist {model_id, save_dir, ft_type, gpu, seed}
-                    with {model_id, save_dir, ft_type, seed} present and
+                    with {model_id, save_dir, ft_type} present (seed may
+                    equal EXP-003's base 2021 — it must equal the
+                    requested seed, not necessarily differ) and
                     vm_pretrained == 1 (original pretrained weights);
                     seed pinned 4 ways (requested/fingerprint/
                     fingerprint.args/success)
@@ -130,9 +132,11 @@ def check_vg1_vg3_vg6(ds, h, s, ft, rows, summary, dig):
     deltas = sorted(adv.get("deltas", {}).keys())
     ok_delta = adv.get("verdict") == "ONLY_ALLOWED_DELTAS" and \
         not adv.get("unexpected") and \
-        set(deltas) == set(X.FT_ALLOWED_ARG_DELTA)
+        set(deltas) <= set(X.FT_ALLOWED_ARG_DELTA) and \
+        set(X.FT_MUST_DIFFER) <= set(deltas)
     gate(rows, "VG1_args_delta[%s]" % tag, ok_delta,
-         "deltas %s (whitelist exactly observed)" % deltas)
+         "deltas %s (subset of whitelist; must-differ %s present)"
+         % (deltas, sorted(X.FT_MUST_DIFFER)))
     gate(rows, "VG1_vm_pretrained[%s]" % tag,
          fp.get("args", {}).get("vm_pretrained") == 1,
          "vm_pretrained == 1 (original MAE-base pretrained weights)")

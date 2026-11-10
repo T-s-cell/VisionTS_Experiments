@@ -398,8 +398,9 @@ def compare_args(exp003_args, save_dir, seed, ft, job):
     assert not missing, \
         "keys that must differ did not: %s (deltas %s)" % (missing,
                                                            sorted(deltas))
-    assert deltas.get("seed", {}).get("this") == seed, \
-        "args.json seed delta must be the requested seed"
+    assert got.get("seed") == seed, \
+        "args.json seed must be the requested seed (seed-2021 tasks share " \
+        "EXP-003's base seed, so no delta is expected there)"
     assert deltas.get("ft_type", {}).get("this") == ft, \
         "args.json ft_type delta must be the requested ft"
     assert deltas.get("model_id", {}).get("this") == job, \

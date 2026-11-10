@@ -89,9 +89,11 @@ def train_json(ds, h, s, ft):
 # args delta whitelist vs the config's own EXP-003 args.json: vm_pretrained
 # stays 1 (= EXP-003 value, original pretrained weights) so it is NOT an
 # allowed delta; seed/model_id/save_dir/ft_type/gpu are the only keys that
-# may differ.
+# may differ.  seed MAY be absent from the observed deltas (seed-2021 tasks
+# share EXP-003's base seed) — it must EQUAL the requested seed, not
+# necessarily differ.
 FT_ALLOWED_ARG_DELTA = {"model_id", "save_dir", "ft_type", "gpu", "seed"}
-FT_MUST_DIFFER = {"model_id", "save_dir", "ft_type", "seed"}
+FT_MUST_DIFFER = {"model_id", "save_dir", "ft_type"}
 
 # paper Table 22 anchors (transcribed verbatim from
 # audit_supplement/paper/VisionTS_paper_full.md L549-566; values are the
