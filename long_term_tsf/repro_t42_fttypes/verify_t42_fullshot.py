@@ -205,15 +205,17 @@ def check_vg4(ds, h, s, ft, rows):
     sd = torch.load(ck, map_location="cpu", weights_only=False)
     got = prefix_sd_sha(sd)
     trainable = set(rec["init"]["trainable_names"])
-    frozen_changed = [k for k in dig_shas
-                      if got.get(k) != dig_shas[k]]
-    trainable_changed = [k for k in frozen_changed if k in trainable]
+    changed = [k for k in dig_shas if got.get(k) != dig_shas[k]]
+    trainable_changed = [k for k in changed if k in trainable]
+    frozen_changed = [k for k in changed if k not in trainable]
     pf = rec.get("post_frozen_check", {})
     gate(rows, "VG4_frozen_bitwise[%s]" % tag,
          len(frozen_changed) == 0
          and pf.get("verdict") == "FROZEN_KEYS_BITWISE_UNCHANGED",
-         "frozen keys changed %d/%d; driver post_frozen_check verdict %s"
-         % (len(frozen_changed), len(dig_shas), pf.get("verdict", "?")))
+         "frozen keys changed %d/%d (trainable moved %d); driver "
+         "post_frozen_check verdict %s"
+         % (len(frozen_changed), len(dig_shas) - len(trainable),
+            len(trainable_changed), pf.get("verdict", "?")))
     gate(rows, "VG4_trainable_moved[%s]" % tag,
          len(trainable_changed) >= 1,
          "%d/%d trainable keys differ from frozen (recorded)"
