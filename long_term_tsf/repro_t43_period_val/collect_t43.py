@@ -25,6 +25,10 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 
+# NOT in t43_common.py: that file is md5-bound in every run fingerprint,
+# so collector-local constants must live here (fingerprint hygiene).
+RESULT_MD = os.path.join(X.PKG, "RESULT_t43_period_val.md")
+
 
 def mets_of(path):
     m = np.load(os.path.join(path, "results", "_", "metrics.npy"))

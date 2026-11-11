@@ -219,14 +219,19 @@ def mode_ledger():
 
 # ---- reuse arms ---------------------------------------------------------------
 def parse_fp(path):
+    """SUCCESS.txt lines: config lines carry multiple space-free key=value
+    tokens ('dataset=ETTh1 pred_len=96 ...'); md5 lines are single tokens
+    'md5:<relpath>=<hash>'; ckpt/ledger lines single token."""
     fp = {}
     for ln in X.read_fingerprint(path):
-        if "=" in ln and not ln.startswith("md5:"):
-            k, v = ln.split("=", 1)
-            fp[k] = v
-        elif ln.startswith("md5:"):
+        if ln.startswith("md5:"):
             k, v = ln[4:].rsplit("=", 1)
             fp["md5:" + k] = v
+            continue
+        for tok in ln.split():
+            if "=" in tok:
+                k, v = tok.split("=", 1)
+                fp[k] = v
     return fp
 
 
