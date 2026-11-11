@@ -97,10 +97,14 @@ torch 2.12.0+cu126);GPU_ID=0;repo checkout
 EXP-003,脚本自带 sys.path 引导)。大件(144 ckpt ≈64GB + results
 数组 ≈18GB)留 eta:`long_term_tsf/save_t42_fttypes/`。
 
-## 预算(冒烟后按实测刷新)
+## 预算(实测,2026-11-11 收官刷新)
 
-预估:纯训练 ≈26.2h + vali/test ≈7.8h + 开销 ≈1h → 墙钟 ≈35-36h;
-冒烟 9 组 ≈51-55 min。**待冒烟实测刷新。**
+纯训练 72,456 s ≈ **20.1h**(144 任务均值 503.2 s/任务;ETTh 段
+≈4-5 min/任务,ETTm 段 ≈16-21 min/任务;见 RESULT T8)。冒烟 9 组
+(含 preflight+verify)≈58 min。全流水墙钟 queue→pack =
+**26h37m**(2026-11-10 15:37:55 → 11-11 18:15:14),较预估
+(≈35-36h)快约 9h(冒烟前预估按 1.2 s/batch 高估)。verify
+VG1-VG10 = **2229/2229 全过(0 FAIL)**。
 
 ## 代码冻结头(冒烟过后回填完整 40 位)
 
@@ -109,7 +113,14 @@ EXP-003,脚本自带 sys.path 引导)。大件(144 ckpt ≈64GB + results
 划分修正,纯审计侧);训练代码自 0096521 未变。冒烟 9/9 +
 verify --smoke 143/143 全过后回填(2026-11-10)。
 
-## Delivery(占位,pack 后回填)
+## Delivery
 
-- 包:待回填(命名 `VisionTS_t42_fttypes_<日期>.tar.gz`)+ sidecar。
-- 包历史:无(v1 即首版)。
+- 包:`temp/VisionTS_t42_fttypes_20261111.tar.gz`(≈2.4MB;代码 7 文件
+  + 依赖 3 文件 + 144 train json + verify/recompute/reentry/scope/
+  frozen_digest/RESULT/CSV/图 + LN 96 + t39 64 + t38 30 + t22 csvs +
+  日志 gz;**sha256 只记同名 `.sha256` sidecar 与 git 交付提交,不入
+  本 README**)+ 已拉回本地 `~/MMTS/temp/`。
+- 包历史:同名覆盖两版——初版 2026-11-11 18:15(sha e2071db5…,其包内
+  README 为打包时点版、缺冻结头/预算回填)**作废**;终版为 README
+  回填后重打包(现行 sha 见 sidecar)。大件(144 ckpt + results 数组)
+  留 eta `long_term_tsf/save_t42_fttypes/`。
