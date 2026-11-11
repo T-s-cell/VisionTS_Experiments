@@ -11,13 +11,17 @@
 #       > repro_t42_fttypes/logs/all.out 2>&1 &
 # Stages: preflight | smoke | queue | verify | collect | pack | all
 #
-# Failure policy: preflight and smoke-verify are HARD gates (exit stops
-# everything); a single failed training appends to logs/FAILED.txt and
-# the queue continues.  A task is SKIPPED only when SUCCESS.txt + train
-# json (seed pins + init/frozen verdicts) + pred/true npy + final
-# checkpoint (file sha == delivered) are ALL present; a partial job dir
-# is moved aside (scene preserved) and re-trained.  run_train's native
-# fingerprint-mismatch ABORT (rc=3, dir kept) is never bypassed.
+# Failure policy: preflight, smoke-verify and decide anomalies are HARD
+# gates (exit stops everything, scene preserved); a single failed
+# training appends to logs/FAILED.txt and the queue continues.  A task
+# is SKIPPED only when SUCCESS.txt + train json (seed pins + init/
+# frozen verdicts) + pred/true npy + final checkpoint (file sha ==
+# delivered) are ALL present; a partial job dir (no SUCCESS.txt) is
+# moved aside (scene preserved) and re-trained.  ANY anomaly under an
+# existing SUCCESS.txt (fingerprint/pin mismatch etc., decide verdict
+# ABORT:* or decide rc!=0) stops the pipeline immediately — the runner
+# NEVER falls back to RUN, mirroring run_train's native ABORT (rc=3,
+# dir kept).
 
 set -u
 PYTHON_B=${PYTHON_B:?Set PYTHON_B=/dev_data/wlt/conda/envs/visionts/bin/python}
@@ -67,21 +71,35 @@ job_move_aside() {  # $1 = job dir; preserve the failed scene
 
 run_one() {  # $1 = DS_H, $2 = ft, $3 = seed
   local cfg=$1 ft=$2 seed=$3
-  local decision tag
+  local decision rc tag
   tag="${cfg}_${ft}_s${seed}"
-  decision=$(job_decide "$cfg" "$ft" "$seed") || decision="RUN"
+  decision=$(job_decide "$cfg" "$ft" "$seed")
+  rc=$?
+  if [ $rc -ne 0 ]; then
+    # decide itself failed (non-zero rc incl. ABORT rc=3): hard stop,
+    # scene preserved — never fall back to RUN
+    fail "decide" "$tag decide rc=$rc: $decision — ABORT, scene preserved, pipeline stopped"
+    exit 1
+  fi
   if [[ "$decision" == SKIP* ]]; then
     log "skip-if-done $tag: ${decision#SKIP}"
     return 0
   fi
+  if [[ "$decision" == ABORT:* ]]; then
+    fail "decide" "$tag $decision — scene preserved, pipeline stopped"
+    exit 1
+  fi
   if [[ "$decision" == MOVE:* ]]; then
     local mdir=${decision#MOVE:}
     job_move_aside "${mdir%%$'\t'*}"
+  elif [[ "$decision" != "RUN" ]]; then
+    fail "decide" "$tag unexpected decide verdict '$decision' — pipeline stopped"
+    exit 1
   fi
   log "training $tag..."
   $PYTHON_B "$PKG_DIR/t42_train_driver.py" --config "$cfg" --ft "$ft" \
     --seed "$seed" --gpu 0 > "$LOGS/train_${tag}.log" 2>&1
-  local rc=$?
+  rc=$?
   tail -2 "$LOGS/train_${tag}.log"
   if [ $rc -ne 0 ]; then
     fail "t42" "$cfg $ft s$seed rc=$rc (queue continues)"
@@ -268,12 +286,12 @@ EOF
 # ---------------------------------------------------------------- queue
 queue() {
   log "== queue: remaining tasks (skip-if-done enforced per task) =="
-  local n=0 n_skip=0
+  local n=0 n_skip=0 decision
   while read -r cfg ft seed; do
     [ -z "$cfg" ] && continue
-    decision=$(job_decide "$cfg" "$ft" "$seed") || decision="RUN"
+    decision=$(job_decide "$cfg" "$ft" "$seed") || decision=""
     if [[ "$decision" == SKIP* ]]; then n_skip=$((n_skip + 1)); fi
-    run_one "$cfg" "$ft" "$seed"
+    run_one "$cfg" "$ft" "$seed"   # hard-stops the pipeline on decide failure/ABORT
     n=$((n + 1))
   done < <(job_list all)
   [ "$n" -eq 144 ] || fail "queue" "job count $n != 144 (TASKS assert)"
@@ -342,6 +360,7 @@ pack() {
     done
     [ "$nl" -eq 96 ] || { fail "pack" "LN evidence files = $nl (want 96)"; exit 1; }
     # All/Rand reference evidence: t39 64 train jsons + t38 30 train jsons
+    # + the EXP-037 reuse pair (ETTh1/H96/seed2021 via t38_train_json)
     n39=0
     for f in long_term_tsf/repro_t39_t22seeds/logs/train_*.json; do
       [ -f "$f" ] || continue
@@ -354,6 +373,11 @@ pack() {
       echo "$f" >> "$list"; n38=$((n38 + 1))
     done
     [ "$n38" -eq 30 ] || { fail "pack" "t38 train jsons = $n38 (want 30)"; exit 1; }
+    for f in long_term_tsf/repro_t37_pilot/logs/train_all.json \
+             long_term_tsf/repro_t37_pilot/logs/train_rand.json; do
+      [ -f "$f" ] || { fail "pack" "t37 reuse evidence missing: $f"; exit 1; }
+      echo "$f" >> "$list"
+    done
     for f in long_term_tsf/repro_t22_freeze_ln/aggregate_snapshot.csv \
              long_term_tsf/repro_t22_freeze_ln/summary_t22.csv; do
       [ -f "$f" ] || { fail "pack" "baseline missing: $f"; exit 1; }

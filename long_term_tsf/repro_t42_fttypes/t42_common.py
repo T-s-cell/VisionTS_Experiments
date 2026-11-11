@@ -112,3 +112,17 @@ PAPER_T42 = {
 }
 PAPER_T42_OVERALL = {"bias": (0.337, 0.373), "mlp": (0.417, 0.412),
                      "attn": (0.420, 0.412)}
+
+# EXP-039 published overall stats (cross-seed mean±std ddof=1 over the
+# per-seed 4-dataset means), pinned from
+# repro_t39_t22seeds/logs/RESULT_t39_ett.md T3 (L87-89).  The collector's
+# ln/all/rand overall rows are cross-checked against these (±5e-5, the
+# rounding step of the published 4-decimal values).  The overall std is
+# the THREE-SEED spread of per-seed overalls — never the cross-dataset
+# spread of the per-dataset means.
+EXP039_T3_OVERALL = {
+    "ln":   {"mse": (0.3324, 0.0006), "mae": (0.3699, 0.0003)},
+    "all":  {"mse": (0.4237, 0.0040), "mae": (0.4163, 0.0023)},
+    "rand": {"mse": (0.4733, 0.0030), "mae": (0.4598, 0.0027)},
+}
+EXP039_T3_TOL = 5e-5

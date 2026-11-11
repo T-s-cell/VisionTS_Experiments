@@ -21,7 +21,8 @@ import t38_common as C
 
 METHODS = ["bias", "mlp", "attn", "ln", "all", "rand", "freeze"]
 REF_METHODS = ["ln", "all", "rand"]      # per-seed archives
-PAPER_1ST_COUNTS = {"ln": 7, "bias": 2, "freeze": 1}   # paper Table 22
+PAPER_1ST_COUNTS = {"ln": 7, "bias": 2, "freeze": 1}   # paper Table 22 (10 cells incl. its Average row)
+PAPER_1ST_COUNTS_8 = {"ln": 5, "bias": 2, "freeze": 1}  # unified 8-cell subset (dataset rows only)
 
 
 def fmt(v, nd=4):
@@ -123,6 +124,44 @@ def ref_layer():
     return refs
 
 
+def ref_overall(refs):
+    """refs overall: per-seed 4-dataset mean -> 3-seed mean +/- std
+    (ddof=1) — the SAME pipeline as the t42 arms' agg_ov.  The overall
+    std is the three-seed spread, never the cross-dataset spread."""
+    out = {}
+    for k in REF_METHODS:
+        per_seed = {}
+        for s in X.LN_KEYS_SEEDS:
+            per_seed[s] = (
+                sum(refs[k][ds]["per_seed"][s][0] for ds in C.ETT4) / 4.0,
+                sum(refs[k][ds]["per_seed"][s][1] for ds in C.ETT4) / 4.0)
+        mm, msd = ms([v[0] for v in per_seed.values()])
+        am, asd = ms([v[1] for v in per_seed.values()])
+        out[k] = {"per_seed": per_seed, "mse_mean": mm, "mse_std": msd,
+                  "mae_mean": am, "mae_std": asd}
+    return out
+
+
+def check_exp039_consistency(ref_ov):
+    """Hard gate: recomputed ln/all/rand overall (mean, std) must match
+    the EXP-039 published T3 pins within EXP039_T3_TOL (5e-5 = the
+    rounding step of the published 4-decimal values)."""
+    recs = []
+    for k in REF_METHODS:
+        v = ref_ov[k]
+        for met in ("mse", "mae"):
+            m, sd = v["%s_mean" % met], v["%s_std" % met]
+            pm, psd = X.EXP039_T3_OVERALL[k][met]
+            dm, dsd = abs(m - pm), abs(sd - psd)
+            ok = dm <= X.EXP039_T3_TOL and dsd <= X.EXP039_T3_TOL
+            assert ok, \
+                "EXP-039 T3 consistency FAILED: %s %s ours %.6f+-%.6f " \
+                "vs published %.4f+-%.4f" % (k, met, m, sd, pm, psd)
+            recs.append("%s %s ours %.6f+-%.6f vs t39 %.4f+-%.4f OK"
+                        % (k, met, m, sd, pm, psd))
+    return recs
+
+
 def collect_layer(rows):
     """-> per_seed_ds[ft][s][ds], per_seed_ov[ft][s], agg_ds[ft][ds],
     agg_ov[ft]."""
@@ -172,8 +211,9 @@ def collect_layer(rows):
     return per_seed_ds, per_seed_ov, agg_ds, agg_ov
 
 
-def paired_vs_ln(rows, refs):
-    """paired[ft][ds]: per-seed (ft 4H-mean − LN 4H-mean), mean/std."""
+def paired_vs_ln(rows, refs, per_seed_ov):
+    """paired[ft][ds] (+ 'Overall'): per-seed (ft value − LN value at
+    the same seed; 4H-mean layer per ds, 4-dataset mean for Overall)."""
     paired = {}
     for ft in X.FT_TYPES:
         paired[ft] = {}
@@ -195,6 +235,24 @@ def paired_vs_ln(rows, refs):
                               "mse_std": psd, "mae_mean": pam,
                               "mae_std": pasd,
                               "n_seeds_mse_better": n_better}
+        if ft in per_seed_ov and len(per_seed_ov[ft]) == 3:
+            per_seed = {}
+            for s in X.LN_KEYS_SEEDS:
+                ln_ov = (
+                    sum(refs["ln"][ds]["per_seed"][s][0]
+                        for ds in C.ETT4) / 4.0,
+                    sum(refs["ln"][ds]["per_seed"][s][1]
+                        for ds in C.ETT4) / 4.0)
+                per_seed[s] = {
+                    "mse": per_seed_ov[ft][s]["mse"] - ln_ov[0],
+                    "mae": per_seed_ov[ft][s]["mae"] - ln_ov[1]}
+            pm, psd = ms([v["mse"] for v in per_seed.values()])
+            pam, pasd = ms([v["mae"] for v in per_seed.values()])
+            paired[ft]["Overall"] = {
+                "per_seed": per_seed, "mse_mean": pm, "mse_std": psd,
+                "mae_mean": pam, "mae_std": pasd,
+                "n_seeds_mse_better": sum(
+                    1 for v in per_seed.values() if v["mse"] < 0)}
     return paired
 
 
@@ -216,8 +274,8 @@ def first_counts(agg_ds, refs):
     return counts, table
 
 
-def result_md(rows, refs, per_seed_ds, per_seed_ov, agg_ds, agg_ov,
-              paired, counts, first_table):
+def result_md(rows, refs, ref_ov, cons, per_seed_ds, per_seed_ov,
+              agg_ds, agg_ov, paired, counts, first_table):
     L = []
     L.append("# EXP-042 RESULT: Table 22 remaining finetune types "
              "(Bias / MLP / Attention on the ORIGINAL MAE-base pretrained "
@@ -299,7 +357,8 @@ def result_md(rows, refs, per_seed_ds, per_seed_ov, agg_ds, agg_ov,
 
     # ---- T3 overall -------------------------------------------------------
     L.append("## T3: overall (per-seed 4-dataset mean -> 3-seed mean +/- "
-             "std)\n")
+             "std, ddof=1; the std is the THREE-SEED spread for every "
+             "method, including the LN/All/Rand-VM references)\n")
     L.append("| method | MSE | MAE |")
     L.append("|---|---|---|")
     for ft in X.FT_TYPES:
@@ -308,26 +367,31 @@ def result_md(rows, refs, per_seed_ds, per_seed_ov, agg_ds, agg_ov,
                  (ft, fmt(v["mse_mean"]), fmt(v["mse_std"]),
                   fmt(v["mae_mean"]), fmt(v["mae_std"])))
     for k in REF_METHODS:
-        ds_m = [refs[k][ds]["mean"][0] for ds in C.ETT4]
-        ds_a = [refs[k][ds]["mean"][1] for ds in C.ETT4]
-        mo, so = ms(ds_m)
-        ao, sa = ms(ds_a)
+        v = ref_ov[k]
         L.append("| %s | %s+-%s | %s+-%s |" %
-                 (k, fmt(mo), fmt(so), fmt(ao), fmt(sa)))
+                 (k, fmt(v["mse_mean"]), fmt(v["mse_std"]),
+                  fmt(v["mae_mean"]), fmt(v["mae_std"])))
     L.append("| freeze | %s | %s |" %
              (fmt(sum(refs["freeze"][ds][0] for ds in C.ETT4) / 4.0),
               fmt(sum(refs["freeze"][ds][1] for ds in C.ETT4) / 4.0)))
     L.append("")
+    L.append("- EXP-039 T3 statistical consistency (hard): recomputed "
+             "ln/all/rand overall from the same archives match "
+             "RESULT_t39_ett.md L87-89 within %.0e: %s."
+             % (X.EXP039_T3_TOL, "; ".join(cons)))
 
     # ---- T4 paired diffs vs LN -------------------------------------------
-    L.append("## T4: paired diffs vs LN (same seed, same ds, 4H-mean "
-             "layer; negative = the ft arm is BETTER)\n")
+    L.append("## T4: paired diffs vs LN (same seed; 4H-mean layer per "
+             "ds and 4-dataset mean for Overall; negative = the ft arm "
+             "is BETTER)\n")
     L.append("| ft | ds | dMSE mean +/- std | dMAE mean +/- std | seeds "
              "with MSE better |")
     L.append("|---|---|---|---|---|")
     for ft in X.FT_TYPES:
-        for ds in C.ETT4:
-            p = paired[ft][ds]
+        for ds in C.ETT4 + ["Overall"]:
+            p = paired[ft].get(ds)
+            if p is None:
+                continue
             L.append("| %s | %s | %s+-%s | %s+-%s | %d/3 |" %
                      (ft, ds, fmt(p["mse_mean"]), fmt(p["mse_std"]),
                       fmt(p["mae_mean"]), fmt(p["mae_std"]),
@@ -377,20 +441,27 @@ def result_md(rows, refs, per_seed_ds, per_seed_ov, agg_ds, agg_ov,
              "attribution, no causal claim.\n")
 
     # ---- T7 1st-place counts ------------------------------------------------
-    L.append("## T7: 1st-place counts across the 8 (ds x metric) cells "
-             "(7 methods; paper Table 22 counts: LN 7, Bias 2, Freeze 1 "
-             "over its 7-column set)\n")
+    L.append("## T7: 1st-place counts over the 8 (ds x metric) cells, "
+             "7 methods (paper Table 22 counts over its 10 cells = 8 "
+             "dataset cells + the Average row x {MSE, MAE}; counts "
+             "unified here to the same 8-cell subset)\n")
     L.append("| cell (ds/metric) | best method | best value |")
     L.append("|---|---|---|")
     for cell, v in sorted(first_table.items()):
         L.append("| %s | %s | %s |" % (cell, v["best"],
                                        fmt(min(v["vals"].values()))))
     L.append("")
-    L.append("- ours: %s" % ", ".join("%s %d" % (m, c)
-                                      for m, c in counts.items()
-                                      if c > 0))
-    L.append("- paper (its 7 columns): LN 7, Bias 2, Freeze 1 — different "
-             "column set (no Rand-VM in the count); observation only.\n")
+    L.append("- ours (8 cells): %s" % ", ".join("%s %d" % (m, c)
+                                                for m, c in counts.items()
+                                                if c > 0))
+    L.append("- paper unified to the same 8 cells (its Average-row wins "
+             "removed from LN 7/Bias 2/Freeze 1): %s; paper full "
+             "10-cell: %s — observation only, different column set "
+             "(no Rand-VM in the paper's count)."
+             % (", ".join("%s %d" % (m, c)
+                          for m, c in PAPER_1ST_COUNTS_8.items() if c),
+                ", ".join("%s %d" % (m, c)
+                          for m, c in PAPER_1ST_COUNTS.items() if c)))
 
     # ---- budget / env ---------------------------------------------------------
     L.append("## T8: budget + environment\n")
@@ -424,16 +495,20 @@ def main():
         for r in rows:
             w.writerow(r)
     refs = ref_layer()
+    ref_ov = ref_overall(refs)
+    cons = check_exp039_consistency(ref_ov)
     per_seed_ds, per_seed_ov, agg_ds, agg_ov = collect_layer(rows)
-    paired = paired_vs_ln(rows, refs)
+    paired = paired_vs_ln(rows, refs, per_seed_ov)
     counts, first_table = first_counts(agg_ds, refs)
-    L = result_md(rows, refs, per_seed_ds, per_seed_ov, agg_ds, agg_ov,
-                  paired, counts, first_table)
+    L = result_md(rows, refs, ref_ov, cons, per_seed_ds, per_seed_ov,
+                  agg_ds, agg_ov, paired, counts, first_table)
     with open(X.RESULT_MD, "w") as f:
         f.write("\n".join(L) + "\n")
-    make_figure(agg_ds, agg_ov, refs)
+    make_figure(agg_ds, agg_ov, refs, ref_ov)
     print("[t42-collect] wrote %s (%d rows) and %s" %
           (X.SUMMARY_CSV, len(rows), X.RESULT_MD))
+    for r in cons:
+        print("[t42-collect] EXP-039 consistency: %s" % r)
     for ft in X.FT_TYPES:
         v = agg_ov[ft]
         print("[t42-collect] overall %s: %.4f+-%.4f / %.4f+-%.4f" %
@@ -441,7 +516,7 @@ def main():
                v["mae_std"]))
 
 
-def make_figure(agg_ds, agg_ov, refs):
+def make_figure(agg_ds, agg_ov, refs, ref_ov):
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
@@ -456,8 +531,7 @@ def make_figure(agg_ds, agg_ov, refs):
                     v = src[m]["mse_mean"]
                     e = src[m]["mse_std"]
                 elif m in REF_METHODS:
-                    per = [refs[m][ds]["mean"][0] for ds in C.ETT4]
-                    v, e = ms(per)
+                    v, e = ref_ov[m]["mse_mean"], ref_ov[m]["mse_std"]
                 else:
                     v = sum(refs["freeze"][ds][0] for ds in C.ETT4) / 4.0
                     e = 0.0

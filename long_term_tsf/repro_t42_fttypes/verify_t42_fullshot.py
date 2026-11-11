@@ -9,7 +9,13 @@ writes logs/recompute_f64.json (144 records) + logs/reentry_check_t42.json.
 logs/verify_t42_smoke.json + recompute_f64_smoke.json + reentry over the
 9 smoke tasks; same gate structure (VG8/VG9 skipped).
 --decide DS_H FT SEED: re-entry decide mode for run_t42_all.sh (prints
-SKIP / MOVE:<dir> / RUN; exit 0).
+SKIP / MOVE:<dir> / RUN / ABORT:<dir>; SKIP/MOVE/RUN exit 0, ABORT
+exits 3 with the scene preserved — the runner must stop, never fall
+back to RUN).  MOVE is reserved for a job dir WITHOUT SUCCESS.txt
+(partial, move-aside and retrain); ANY anomaly under an existing
+SUCCESS.txt (unreadable SUCCESS, train-json pin, fingerprint mismatch
+vs job json or vs EXP-003 anchors, config pin, arrays, ckpt sha) is an
+ABORT.
 
 Gates (hard):
   VG1 provenance    per task: train json present; fingerprint
@@ -48,13 +54,20 @@ Gates (hard):
                     args rebuild + arrays actually loaded + checkpoint
                     file sha == delivered); all 144 reported to
                     reentry_check_t42.json
+  VG7N decide neg   negative tests of the decide semantics (in-process,
+                    no real file touched): intact done job -> SKIP;
+                    tampered job fingerprint / EXP-003 anchor mismatch /
+                    unreadable SUCCESS / broken train-json pin under an
+                    existing SUCCESS.txt -> ABORT (never MOVE/RUN);
+                    SUCCESS-less partial dir -> MOVE
   VG8 references    LN48 pins == EXP-003 per-seed archives (48);
                     EXP-039 All/Rand train jsons (64) + EXP-038 seed-2021
                     jsons (30+2 reuse) readable; Freeze16 = 16 rows
   VG9 queue state   after queue: every one of the 144 re-entry decisions
-                    is SKIP (no incomplete/overwritable job); native
-                    run_train ABORT semantics (fingerprint mismatch ->
-                    rc=3, dir kept) pinned by the EXP-003 code md5 in VG1
+                    is SKIP (no incomplete/overwritable job); decide
+                    anomaly semantics: SUCCESS-present anomaly -> ABORT
+                    rc=3 scene kept (runner stops, never re-runs over
+                    it), MOVE only for SUCCESS-less partial dirs
   VG10 artifacts    per task: train json fields (argv/phases/sampler+
                     len check ok/first_batch/init/args_delta_check/
                     final_ckpt_sha256/timing) + job dir files (args.json,
@@ -330,28 +343,34 @@ def reentry_expected_args(ds, h, s, ft, jd):
 
 
 def reentry_check_one(ds, h, s, ft, mode):
-    """mode 'decide': SKIP / MOVE:<dir>\\t<reason> / RUN.
-    mode 'report': PASS / FAIL[<job>]: <reason> / RUN."""
+    """mode 'decide': SKIP / MOVE:<dir>\\t<reason> (NO SUCCESS.txt =
+    partial) / RUN / ABORT:<dir>\\t<reason> (SUCCESS.txt present but ANY
+    check fails — anomaly, hard stop, scene preserved; runner must not
+    re-run over it).
+    mode 'report': PASS / FAIL[<job>]: <reason>."""
     jd = X.job_dir(ds, h, s, ft)
     job = X.job_name(ds, h, s, ft)
 
-    def _why(msg):
+    def _abort(msg):
+        # reached only with SUCCESS.txt present: anomaly, not a partial
         if mode == "decide":
-            return "MOVE:%s\t%s" % (jd, msg)
+            return "ABORT:%s\t%s" % (jd, msg)
         return "FAIL[%s]: %s" % (job, msg)
 
     if not os.path.isdir(jd):
         return "RUN", "no job dir"
     succ = os.path.join(jd, "SUCCESS.txt")
     if not os.path.isfile(succ):
-        return _why("no SUCCESS.txt"), ""
+        if mode == "decide":
+            return "MOVE:%s\tno SUCCESS.txt (partial)" % jd, ""
+        return "FAIL[%s]: no SUCCESS.txt" % job, ""
     try:
         sv = C.load_json(succ)
         assert isinstance(sv.get("mse"), float) and \
             isinstance(sv.get("mae"), float)
         assert sv.get("seed") == s
     except Exception as e:
-        return _why("SUCCESS unreadable: %s" % e), ""
+        return _abort("SUCCESS unreadable: %s" % e), ""
     p = X.train_json(ds, h, s, ft)
     try:
         rec = C.load_json(p)
@@ -364,7 +383,7 @@ def reentry_check_one(ds, h, s, ft, mode):
         assert rec["post_frozen_check"]["verdict"] == \
             "FROZEN_KEYS_BITWISE_UNCHANGED"
     except Exception as e:
-        return _why("train json incomplete: %s" % e), ""
+        return _abort("train json incomplete: %s" % e), ""
     try:
         fpj = C.load_json(os.path.join(jd, "fingerprint.json"))
         assert fpj == rec["fingerprint"], "job fingerprint != train json"
@@ -372,7 +391,7 @@ def reentry_check_one(ds, h, s, ft, mode):
         assert all(fpj.get(k)
                    for k in ("code_md5", "data_sha256", "ckpt_sha256"))
     except Exception as e:
-        return _why("fingerprint incomplete: %s" % e), ""
+        return _abort("fingerprint incomplete: %s" % e), ""
     try:
         fp3 = C.load_json(os.path.join(C.exp003_job(ds, h),
                                        "fingerprint.json"))
@@ -380,14 +399,14 @@ def reentry_check_one(ds, h, s, ft, mode):
         assert fpj["data_sha256"] == fp3.get("data_sha256")
         assert fpj["ckpt_sha256"] == fp3.get("ckpt_sha256")
     except Exception as e:
-        return _why("independent anchors: %s" % e), ""
+        return _abort("independent anchors: %s" % e), ""
     try:
         expected, _ = reentry_expected_args(ds, h, s, ft, jd)
         got_args = C.load_json(os.path.join(jd, "args.json"))
         assert got_args == expected, "job args.json != expected config"
         assert rec["fingerprint"]["args"] == expected
     except Exception as e:
-        return _why("config pin: %s" % e), ""
+        return _abort("config pin: %s" % e), ""
     try:
         rd = os.path.join(jd, "results", "_")
         ref_shapes = {}
@@ -406,7 +425,7 @@ def reentry_check_one(ds, h, s, ft, mode):
             assert np.isfinite(arr).all(), "non-finite in %s" % name
             ref_shapes[name] = list(arr.shape)
     except Exception as e:
-        return _why("array validity: %s" % e), ""
+        return _abort("array validity: %s" % e), ""
     try:
         ck = os.path.join(jd, "checkpoints", "_", "checkpoint.pth")
         if not os.path.isfile(ck):
@@ -415,7 +434,7 @@ def reentry_check_one(ds, h, s, ft, mode):
         assert fsha == rec.get("final_ckpt_sha256"), \
             "ckpt file sha != delivered final_ckpt_sha256"
     except Exception as e:
-        return _why("checkpoint validity: %s" % e), ""
+        return _abort("checkpoint validity: %s" % e), ""
     detail = "mse=%.6f mae=%.6f shape=%s" % (sv["mse"], sv["mae"],
                                              ref_shapes["pred.npy"])
     if mode == "decide":
@@ -498,12 +517,101 @@ def check_vg8(rows):
 
 def check_vg9(rows, tasks):
     records, n_skip, n_move = run_reentry(tasks, "decide")
+    n_abort = sum(1 for r in records if r["verdict"].startswith("ABORT"))
     gate(rows, "VG9_all_complete_after_queue",
-         n_skip == len(tasks) and n_move == 0,
-         "%d/%d re-entry decisions SKIP, %d MOVE (native run_train "
-         "fingerprint-mismatch ABORT rc=3 semantics pinned by the "
-         "EXP-003 code md5 in VG1)" % (n_skip, len(tasks), n_move))
+         n_skip == len(tasks) and n_move == 0 and n_abort == 0,
+         "%d/%d re-entry decisions SKIP, %d MOVE, %d ABORT (decide "
+         "semantics: SUCCESS-present anomaly -> ABORT rc=3 scene kept, "
+         "MOVE only for SUCCESS-less partial dirs; runner has no RUN "
+         "fallback)" % (n_skip, len(tasks), n_move, n_abort))
     return records
+
+
+def negative_decide_tests(rows):
+    """VG7N: decide-semantics negative tests, in-process (no real file
+    modified).  Anomaly under an existing SUCCESS.txt must yield ABORT
+    (never MOVE/RUN); a SUCCESS-less partial dir yields MOVE; an intact
+    done job yields SKIP."""
+    tag = ("ETTh1", 96, 2021, "bias")
+    jd = X.job_dir(*tag)
+    succ = os.path.join(jd, "SUCCESS.txt")
+    fpj = os.path.join(jd, "fingerprint.json")
+    fp3 = os.path.join(C.exp003_job("ETTh1", 96), "fingerprint.json")
+    tj = X.train_json(*tag)
+    real_load = C.load_json
+    real_isfile = os.path.isfile
+
+    def intercept(map_):
+        def patched_load(p, *a, **kw):
+            for k, v in map_.items():
+                if os.path.abspath(p) == os.path.abspath(k):
+                    if isinstance(v, Exception):
+                        raise v
+                    return v
+            return real_load(p, *a, **kw)
+        C.load_json = patched_load
+
+    def restore():
+        C.load_json = real_load
+        os.path.isfile = real_isfile
+
+    # N1 intact done job -> SKIP
+    try:
+        v, _ = reentry_check_one(*tag, "decide")
+        gate(rows, "VG7N_intact_done_skip", v.startswith("SKIP"),
+             v.split("\t")[0])
+    finally:
+        restore()
+    # N2 tampered job fingerprint (seed) -> ABORT
+    try:
+        tam = dict(real_load(fpj))
+        tam["seed"] = 9999
+        intercept({fpj: tam})
+        v, _ = reentry_check_one(*tag, "decide")
+        gate(rows, "VG7N_job_fp_tamper_abort", v.startswith("ABORT:"),
+             v.split("\t")[-1][:90])
+    finally:
+        restore()
+    # N3 EXP-003 anchor mismatch -> ABORT
+    try:
+        tam3 = dict(real_load(fp3))
+        tam3["code_md5"] = "0" * 32
+        intercept({fp3: tam3})
+        v, _ = reentry_check_one(*tag, "decide")
+        gate(rows, "VG7N_anchor_mismatch_abort", v.startswith("ABORT:"),
+             v.split("\t")[-1][:90])
+    finally:
+        restore()
+    # N4 SUCCESS unreadable -> ABORT
+    try:
+        intercept({succ: {"mse": "not-a-float", "mae": 1.0, "seed": 2021}})
+        v, _ = reentry_check_one(*tag, "decide")
+        gate(rows, "VG7N_success_unreadable_abort",
+             v.startswith("ABORT:"), v.split("\t")[-1][:90])
+    finally:
+        restore()
+    # N5 broken train-json seed pin -> ABORT
+    try:
+        rec_t = dict(real_load(tj))
+        rec_t["requested_seed"] = 9999
+        intercept({tj: rec_t})
+        v, _ = reentry_check_one(*tag, "decide")
+        gate(rows, "VG7N_trainjson_pin_abort", v.startswith("ABORT:"),
+             v.split("\t")[-1][:90])
+    finally:
+        restore()
+    # N6 SUCCESS-less partial dir -> MOVE (and only MOVE)
+    try:
+        def isfile_no_succ(p):
+            if os.path.abspath(p) == os.path.abspath(succ):
+                return False
+            return real_isfile(p)
+        os.path.isfile = isfile_no_succ
+        v, _ = reentry_check_one(*tag, "decide")
+        gate(rows, "VG7N_partial_dir_move", v.startswith("MOVE:"),
+             v.split("\t")[-1][:90])
+    finally:
+        restore()
 
 
 def check_vg10(ds, h, s, ft, rows):
@@ -667,6 +775,11 @@ def main():
         verdict, _ = reentry_check_one(ds, int(hh), int(args.decide[2]),
                                        args.decide[1], "decide")
         print(verdict)
+        if verdict.startswith("ABORT:"):
+            sys.stderr.write("[t42][decide] ABORT — anomaly under an "
+                             "existing SUCCESS.txt; scene preserved; "
+                             "runner must stop (rc=3)\n")
+            raise SystemExit(3)
         return
 
     tasks = SMOKE_TASKS if args.smoke else X.TASKS
@@ -691,7 +804,8 @@ def main():
 
     check_vg2(rows, tasks, dig)
 
-    # VG7 re-entry
+    # VG7 re-entry + VG7N decide-semantics negative tests
+    negative_decide_tests(rows)
     if args.smoke:
         recs7, _, _ = run_reentry(tasks, "decide")
         gate(rows, "VG7_smoke_complete", all(
