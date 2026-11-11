@@ -240,9 +240,15 @@ def main():
              "by itself." % (agree or "none", disagree or "none"))
     better = sum(1 for ds in X.ETT4 for h in X.HORIZONS
                  if test[ds][h]["sel"][0] < test[ds][h]["default"][0])
-    L.append("- Selected-vs-default per (ds,H): test MSE improves in %d/16 "
-             "groups, regresses in %d (ties count as regress)."
-             % (better, 16 - better))
+    ties = sum(1 for ds in X.ETT4 for h in X.HORIZONS
+               if test[ds][h]["sel"][0] == test[ds][h]["default"][0])
+    L.append("- Selected-vs-default per (ds,H): test MSE improves in %d/16, "
+             "regresses in %d/16, exactly ties in %d/16 (Δ == 0 bitwise-"
+             "identical archives).  A tie count of 16 means the selected "
+             "arm coincides with the default arm group-by-group (same "
+             "P, same archive) — no new evidence either way beyond the "
+             "selection agreement itself."
+             % (better, 16 - better - ties, ties))
     L.append("- P=1 reference (EXP-030 anchor): overall MSE %.6f vs default "
              "%.6f (%+.2f%%) — consistent with EXP-030's frozen conclusion "
              "that P=1 is substantially worse; shown here only as the "
