@@ -2,7 +2,7 @@
 
 **目标**:检验论文 A.2 的声明——P 从表 5 候选集(Hourly {24,168,1},15T {96,672,1})按**验证集**选出(最终 P=24/96,表 6)。复现世系(EXP-001 默认 P zero-shot、EXP-030 P=1)从未产生过验证分数,本轮补齐:48 个验证配置(4 数据集 × 3 候选 P × 4 H)→ 固定规则选 P → 三臂测试对照(验证选 P / 论文默认 P / P=1)。**验收标准 = 流程与数值自洽;选 P 是否与论文一致、测试是否改善,均如实报告,不是验收标准。**
 
-冻结分支:`repro/ltsf-t43-period-val`,自 e662ed5(t42 已推送头)。代码头 COMMIT_SHA **`b7938f1b1ebbbae40e8d37eda00c8cad0a719986`**(281c6e5 主体 → fdeb67e 冒烟修复 → 5054aca 解析/指纹卫生 → b7938f1 collect 常量;verify_t43/collect_t43 不在任何运行指纹内,t43_common/val_pass/infer_one_t43 与运行时逐字节一致,md5 a4812b52 本地==eta 复核)。
+冻结分支:`repro/ltsf-t43-period-val`,自 e662ed5(t42 已推送头)。代码头 COMMIT_SHA **`781bc86df07a38cb69fa637347bf6d32584c62b0`**(281c6e5 主体 → fdeb67e 冒烟修复 → 5054aca 解析/指纹卫生 → b7938f1 collect 常量 → 781bc86 tie 三计数措辞;verify_t43/collect_t43 不在任何运行指纹内,t43_common/val_pass/infer_one_t43 与运行时逐字节一致,md5 a4812b52 本地==eta 复核)。
 
 ## 1. 配置(与 EXP-001 逐项一致,仅 --periodicity 变动)
 
@@ -103,5 +103,5 @@ stages:S0 env → S1 preflight → S2 冒烟(6 验证单元 crosspath + 测试�
 - **结果**:48 验证配置全部过验收门(valfull 528/528);四个数据集验证选 P = **24/24/96/96,与论文表 6 全部一致**(均唯一 float64 极小值,无并列;余量最小 ETTh2 0.0097,P=168 次之)。选 P 臂与默认 P 臂逐项相同(同归档),总体 16 组 MSE 0.344395/MAE 0.370420;P=1 参照臂 0.570011/0.501725(+65.5% MSE,与 EXP-030 冻结结论一致)。
 - **门禁**:verify --all(VG3-VG13,7 模式)**982/982 ALL PASS**;冒烟 VG13 76/76 + 重入负例 3/3;S5 新组 0(选 P 臂全部复用 EXP-001 归档,复用臂经 VG7 三层再核)。
 - eta 大件:`/dev_data/wlt/VisionTS_Experiments/long_term_tsf/save_t43_period_val_val/`(48 组 arr_val.npz,压缩后 ≪6.05GB 未压缩口径)、`save_t43_period_val_smoke/`(测试路径冒烟,SUCCESS/shape_record/metrics);`save_t43_period_val/` 为空(选 P 与论文全一致,无新测试组)。
-- 审计包:`~/MMTS/temp/VisionTS_t43_period_val_20261112.tar.gz` + `.sha256` sidecar(<50MB:代码+README+logs+selection/ledger+val json+SUCCESS/shape_record/metrics;不含 pred/true npy 与 arr_val.npz)。包 sha 只记 sidecar 与交付记录,不入包内 README。
+- 审计包:`~/MMTS/temp/VisionTS_t43_period_val_20261112.tar.gz` + `.sha256` sidecar(<50MB:代码+README+logs+selection/ledger+val json+SUCCESS/shape_record/metrics;不含 pred/true npy 与 arr_val.npz)。同名 v1 `8e5865b0…` 已被 v2 `845bb577…` 取代并作废(tie 三计数措辞修正);包 sha 只记 sidecar 与交付记录,不入包内 README。
 - 本地提交,不推送。
