@@ -370,9 +370,10 @@ def mode_reentry():
     before = X.read_fingerprint(os.path.join(sandbox, "SUCCESS.txt"))
     script = os.path.join(os.path.dirname(os.path.abspath(__file__)),
                           "run_one_t43.sh")
+    env = dict(os.environ, LEDGER_REQUIRED="0")
     r = subprocess.run(["bash", script, "ETTh1", "96",
                         "save_t43_period_val_smoke/_reentry_neg", "24"],
-                       capture_output=True, text=True)
+                       capture_output=True, text=True, env=env)
     chk("reentry:abort_exit4", r.returncode == 4,
         "exit=%d stdout=%s" % (r.returncode, r.stdout.strip()[:200]))
     chk("reentry:file_untouched",

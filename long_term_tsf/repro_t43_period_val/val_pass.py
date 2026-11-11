@@ -36,6 +36,10 @@ import torch
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 import t43_common as X
 
+for p in (X.PKG, X.ROOT, X.REPO):
+    if p not in sys.path:
+        sys.path.insert(0, p)
+
 AP = argparse.ArgumentParser()
 AP.add_argument("--ds", required=True, choices=X.ETT4)
 AP.add_argument("--P", required=True, type=int)
