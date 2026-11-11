@@ -312,10 +312,10 @@ def main():
     # ---- self-check ----
     assert len(val_rows) == 48
     assert all(os.path.isfile(p) for p in (val_csv, test_csv, fig1, fig2))
-    with open(X.RESULT_MD, "w") as f:
+    with open(RESULT_MD, "w") as f:
         f.write("\n".join(L) + "\n")
     print("[collect] wrote %s, %s, figures, %s"
-          % (val_csv, test_csv, X.RESULT_MD))
+          % (val_csv, test_csv, RESULT_MD))
 
 
 if __name__ == "__main__":
