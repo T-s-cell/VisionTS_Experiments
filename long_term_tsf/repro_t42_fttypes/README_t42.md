@@ -104,7 +104,30 @@ EXP-003,脚本自带 sys.path 引导)。大件(144 ckpt ≈64GB + results
 (含 preflight+verify)≈58 min。全流水墙钟 queue→pack =
 **26h37m**(2026-11-10 15:37:55 → 11-11 18:15:14),较预估
 (≈35-36h)快约 9h(冒烟前预估按 1.2 s/batch 高估)。verify
-VG1-VG10 = **2229/2229 全过(0 FAIL)**。
+VG1-VG10 = **2235/2235 全过(0 FAIL;终版 = 2229 + VG7N 六项 decide
+负例门,2026-11-11 评审修正后重跑)**。
+
+## 评审修正(2026-11-11,不重训;commit d61a73e)
+
+用户评审四项修正,仅统计/脚本/打包侧,144 组训练与预测原样保留:
+
+1. **总体标准差口径**:LN/All/Rand-VM 总体 std 改为"每 seed 四数据集
+   均值的三种子间波动(ddof=1)"(旧版误用数据集间差异)。T3 与 Overall
+   图刷新;加 EXP-039 T3 硬一致性门(±5e-5,钉定 t39 RESULT L87-89)
+   六条全 OK:ln 0.332354±0.000554/0.369860±0.000295,all
+   0.423661±0.004021/0.416343±0.002292,rand 0.473313±0.002991/
+   0.459826±0.002701。
+2. **首名计数口径统一 8 项**(数据集格,不含论文 Average 行):论文
+   8 项 = LN 5/Bias 2/Freeze 1,本轮 = LN 6/Bias 1/Freeze 1;论文全
+   10 项 LN 7/Bias 2/Freeze 1 在案。T4 补总体层相对 LN 配对差:
+   bias +0.0092±0.0021/+0.0046±0.0011,mlp +0.0895±0.0033/
+   +0.0435±0.0027,attn +0.0873±0.0029/+0.0433±0.0004。
+3. **decide 异常语义收紧**:SUCCESS 在场而任何检查失败 → ABORT
+   (rc=3,保留现场);runner 移除 RUN 回退;MOVE 仅限无 SUCCESS 的
+   残目录。VG7N 六项负例(完好→SKIP/指纹篡改→ABORT/锚点失配→ABORT/
+   SUCCESS 不可读→ABORT/train json 破坏→ABORT/残目录→MOVE)全过。
+4. **打包补漏**:纳入复用依赖 EXP-037 `train_all.json`/`train_rand.json`
+   (ETTh1/H96/seed2021,带在位断言)。
 
 ## 代码冻结头(冒烟过后回填完整 40 位)
 
@@ -116,11 +139,14 @@ verify --smoke 143/143 全过后回填(2026-11-10)。
 ## Delivery
 
 - 包:`temp/VisionTS_t42_fttypes_20261111.tar.gz`(≈2.4MB;代码 7 文件
-  + 依赖 3 文件 + 144 train json + verify/recompute/reentry/scope/
-  frozen_digest/RESULT/CSV/图 + LN 96 + t39 64 + t38 30 + t22 csvs +
-  日志 gz;**sha256 只记同名 `.sha256` sidecar 与 git 交付提交,不入
-  本 README**)+ 已拉回本地 `~/MMTS/temp/`。
-- 包历史:同名覆盖两版——初版 2026-11-11 18:15(sha e2071db5…,其包内
-  README 为打包时点版、缺冻结头/预算回填)**作废**;终版为 README
-  回填后重打包(现行 sha 见 sidecar)。大件(144 ckpt + results 数组)
-  留 eta `long_term_tsf/save_t42_fttypes/`。
+  + 依赖 3 文件 + 复用证据 t37 2 文件 + 144 train json +
+  verify/recompute/reentry/scope/frozen_digest/RESULT/CSV/图 + LN 96 +
+  t39 64 + t38 30 + t22 csvs + 日志 gz;**sha256 只记同名 `.sha256`
+  sidecar 与 git 交付提交,不入本 README**)+ 已拉回本地
+  `~/MMTS/temp/`。
+- 包历史:同名覆盖三版——初版 2026-11-11 18:15(sha e2071db5…,其包内
+  README 缺冻结头/预算回填)**作废**;二版同日(sha e1b8fc70…,README
+  已回填、为用户评审所据版本,但缺 t37 复用证据且统计/decide 语义为
+  修正前)**作废**;终版为四项评审修正(commit d61a73e)后重打包
+  (现行 sha 见 sidecar)。大件(144 ckpt + results 数组)留 eta
+  `long_term_tsf/save_t42_fttypes/`。
