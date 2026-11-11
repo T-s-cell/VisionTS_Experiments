@@ -103,5 +103,5 @@ stages:S0 env → S1 preflight → S2 冒烟(6 验证单元 crosspath + 测试�
 - **结果**:48 验证配置全部过验收门(valfull 528/528);四个数据集验证选 P = **24/24/96/96,与论文表 6 全部一致**(均唯一 float64 极小值,无并列;余量最小 ETTh2 0.0097,P=168 次之)。选 P 臂与默认 P 臂逐项相同(同归档),总体 16 组 MSE 0.344395/MAE 0.370420;P=1 参照臂 0.570011/0.501725(+65.5% MSE,与 EXP-030 冻结结论一致)。
 - **门禁**:verify --all(VG3-VG13,7 模式)**982/982 ALL PASS**;冒烟 VG13 76/76 + 重入负例 3/3;S5 新组 0(选 P 臂全部复用 EXP-001 归档,复用臂经 VG7 三层再核)。
 - eta 大件:`/dev_data/wlt/VisionTS_Experiments/long_term_tsf/save_t43_period_val_val/`(48 组 arr_val.npz,压缩后 ≪6.05GB 未压缩口径)、`save_t43_period_val_smoke/`(测试路径冒烟,SUCCESS/shape_record/metrics);`save_t43_period_val/` 为空(选 P 与论文全一致,无新测试组)。
-- 审计包:`~/MMTS/temp/VisionTS_t43_period_val_20261112.tar.gz` + `.sha256` sidecar(<50MB:代码+README+logs+selection/ledger+val json+SUCCESS/shape_record/metrics;不含 pred/true npy 与 arr_val.npz)。同名 v1 `8e5865b0…` 已被 v2 `845bb577…` 取代并作废(tie 三计数措辞修正);包 sha 只记 sidecar 与交付记录,不入包内 README。
+- 审计包:`~/MMTS/temp/VisionTS_t43_period_val_20261112.tar.gz` + `.sha256` sidecar(<50MB:代码+README+logs+selection/ledger+val json+SUCCESS/shape_record/metrics;不含 pred/true npy 与 arr_val.npz)。同名三代:v1 `8e5865b0…`(作废)→ v2 `845bb577…`(作废,tie 三计数措辞修正)→ **现行 v3 `391d001a605293d0cc25e2827af57b33b61e14e4e062f12af90d6b7a2af1d701`**(249,735 B;包内 README 止于 v2 世系行,v3 内容与 v2 仅差该行,其余逐字节同)。包 sha 只记 sidecar 与交付记录,不入包内 README。
 - 本地提交,不推送。
