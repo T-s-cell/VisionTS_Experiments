@@ -11,14 +11,20 @@
                  mtimes precede every new-test SUCCESS  [VG9, VG11]
   --reuse_exp001 16 archived default-P groups: config fingerprint, ckpt sha,
                  framework md5 == current, truth bitwise, shapes, finite,
-                 f64 metric recompute <=1e-6  [VG7]
+                 float64 cast-then-recompute of MSE/MAE vs archived <=1e-6
+                 [VG7]
   --reuse_exp030 16 archived P=1 groups: same + metrics json cross-check
                  [VG8]
   --newtest      selected-arm new runs: fingerprint == live --fingerprint
                  (binds ledger sha), shape_record geometry, truth bitwise,
-                 f64 recompute  [VG6 subset]
+                 float64 cast-then-recompute  [VG6 subset]
   --reentry      negative skip-if-done test: mutated SUCCESS.txt -> ABORT
                  exit 4, file untouched  [VG12]
+  --xcheck       TRUE cross-path check for the 6 smoke configs: official
+                 Exp_Long_Term_Forecast.test entry (run.py inference path)
+                 on the val loader vs archived val_pass arrays; bitwise
+                 pred/true + sha256 + diffs + official-metrics-vs-val-json
+                 <=1e-6  [VG14]
   --all          everything above -> logs/verify_t43.json
 
 NO paper-value comparisons are gates (user correction #4): deviations from
@@ -47,11 +53,12 @@ AP.add_argument("--reuse_exp001", action="store_true")
 AP.add_argument("--reuse_exp030", action="store_true")
 AP.add_argument("--newtest", action="store_true")
 AP.add_argument("--reentry", action="store_true")
+AP.add_argument("--xcheck", action="store_true")
 AP.add_argument("--all", action="store_true")
 A = AP.parse_args()
 if A.all:
     A.valfull = A.smoke = A.ledger = A.reuse_exp001 = \
-        A.reuse_exp030 = A.newtest = A.reentry = True
+        A.reuse_exp030 = A.newtest = A.reentry = A.xcheck = True
 
 SMOKE_UNITS = [("ETTh1", 96, 24), ("ETTh1", 96, 168), ("ETTh1", 96, 1),
                ("ETTm1", 96, 96), ("ETTm1", 96, 672), ("ETTm1", 96, 1)]
@@ -271,12 +278,18 @@ def check_archived_group(arm, ds, h, P):
     chk(tag + ":truth_bitwise", np.array_equal(tr, truth(ds, "test", h)),
         "archived test targets vs truth_from_std [16K,20K)")
     chk(tag + ":finite", bool(np.isfinite(pred).all()))
-    metric = X.load_metric()
-    mae_r, mse_r = metric(pred, tr)[0], metric(pred, tr)[1]
-    chk(tag + ":recompute",
-        abs(float(mse_r) - float(mets[1])) <= 1e-6
-        and abs(float(mae_r) - float(mets[0])) <= 1e-6,
-        "f64 vs archived %.10f/%.10f" % (mse_r, mae_r))
+    # genuine float64 recompute (user correction #2, 2026-11-12): cast the
+    # f32 arrays FIRST, then compute MSE/MAE in f64; gate vs archived
+    p64, t64 = pred.astype(np.float64), tr.astype(np.float64)
+    mse_r = float(np.mean((p64 - t64) ** 2))
+    mae_r = float(np.mean(np.abs(p64 - t64)))
+    chk(tag + ":recompute_f64",
+        abs(mse_r - float(mets[1])) <= 1e-6
+        and abs(mae_r - float(mets[0])) <= 1e-6,
+        "f64 cast-then-recompute vs archived: mse %.10f (diff %.2e), "
+        "mae %.10f (diff %.2e)"
+        % (mse_r, abs(mse_r - float(mets[1])),
+           mae_r, abs(mae_r - float(mets[0]))))
     if arm == "reuse_exp030":
         jj = X.load_json(os.path.join(d, "metrics_%s_%d.json" % (ds, h)))
         chk(tag + ":json_cross",
@@ -347,12 +360,16 @@ def mode_newtest():
         chk(tag + ":truth_bitwise", np.array_equal(tr, truth(ds, "test", h)))
         chk(tag + ":finite", bool(np.isfinite(pred).all()))
         mets = np.load(os.path.join(rdir, "metrics.npy"))
-        metric = X.load_metric()
-        mse_r = metric(pred, tr)[1]
-        mae_r = metric(pred, tr)[0]
-        chk(tag + ":recompute",
-            abs(float(mse_r) - float(mets[1])) <= 1e-6
-            and abs(float(mae_r) - float(mets[0])) <= 1e-6)
+        p64, t64 = pred.astype(np.float64), tr.astype(np.float64)
+        mse_r = float(np.mean((p64 - t64) ** 2))
+        mae_r = float(np.mean(np.abs(p64 - t64)))
+        chk(tag + ":recompute_f64",
+            abs(mse_r - float(mets[1])) <= 1e-6
+            and abs(mae_r - float(mets[0])) <= 1e-6,
+            "f64 cast-then-recompute vs archived mse diff %.2e, "
+            "mae diff %.2e"
+            % (abs(mse_r - float(mets[1])),
+               abs(mae_r - float(mets[0]))))
         lp = os.path.join(X.LOG_DIR, "%s_%d_P%d.log" % (ds, h, P))
         lm = X.parse_log_metrics(open(lp).read()) \
             if os.path.isfile(lp) else None
@@ -360,6 +377,44 @@ def mode_newtest():
             chk(tag + ":log_metrics",
                 abs(lm["mse"] - float(mets[1])) <= 1e-12
                 and abs(lm["mae"] - float(mets[0])) <= 1e-12)
+
+
+# ---- xcheck: official entry vs new validation program ------------------------
+def mode_xcheck():
+    for ds, h, P in SMOKE_UNITS:
+        tag = "xcheck:%s/P%d/H%d" % (ds, P, h)
+        jp = os.path.join(X.LOG_DIR, "xcheck_%s_P%d_H%d.json" % (ds, P, h))
+        if not chk(tag + ":json", os.path.isfile(jp), jp):
+            continue
+        j = X.load_json(jp)
+        n = X.expected_n_windows(ds, h)
+        chk(tag + ":windows", j["n_windows"] == n,
+            "%d vs %d" % (j["n_windows"], n))
+        chk(tag + ":shapes",
+            j["shape_official"] == [n, h, 7]
+            and j["shape_valpass"] == [n, h, 7],
+            str(j["shape_official"]))
+        chk(tag + ":pred_bitwise",
+            j["pred_bitwise"] and j["pred_max_abs_diff"] == 0.0,
+            "official exp.test entry vs val_pass, same val batches "
+            "(diff+hash in xcheck json)")
+        chk(tag + ":true_bitwise",
+            j["true_bitwise"] and j["true_max_abs_diff"] == 0.0,
+            "targets identical through both paths")
+        chk(tag + ":hashes",
+            j["sha256_pred_official"] == j["sha256_pred_valpass"]
+            and j["sha256_true_official"] == j["sha256_true_valpass"],
+            "sha256 pred/true, official vs val_pass")
+        vj = X.load_json(X.vjson_path(ds, P, h))
+        chk(tag + ":mse_vs_valjson",
+            j["abs_diff_mse_official_vs_valjson"]
+            <= 1e-6 * max(1.0, abs(vj["mse_from_sse"]))
+            and j["abs_diff_mae_official_vs_valjson"]
+            <= 1e-6 * max(1.0, abs(vj["mae_from_sae"])),
+            "official-entry metrics vs val_pass f64 SSE/SAE")
+        chk(tag + ":entry_recorded",
+            "Exp_Long_Term_Forecast.test" in j["entry"],
+            j["entry"])
 
 
 # ---- reentry (negative) -------------------------------------------------------
@@ -410,6 +465,9 @@ def main():
     if A.reentry:
         mode_reentry()
         modes.append("reentry")
+    if A.xcheck:
+        mode_xcheck()
+        modes.append("xcheck")
     n_fail = sum(1 for c in CHECKS if not c["ok"])
     summary = {"modes": modes, "n_checks": len(CHECKS), "n_fail": n_fail,
                "all_pass": n_fail == 0, "wall_s": round(time.time() - t0, 1),

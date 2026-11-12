@@ -13,6 +13,7 @@ Reporting discipline (frozen):
     are both reported honestly; neither is a pass/fail criterion.
 """
 import csv
+import glob
 import os
 import sys
 
@@ -151,7 +152,8 @@ def main():
              "recompute on all 48 configs.)")
 
     L.append("")
-    L.append("## S2 selection (ledger, generated BEFORE any test evaluation)")
+    L.append("## S2 selection (ledger, generated BEFORE any NEW FULL test "
+             "evaluation)")
     L.append("")
     L.append("Rule (supplementary setting, frozen in advance): per dataset "
              "argmin of the equal-weight mean of the 4 per-H validation "
@@ -170,7 +172,14 @@ def main():
     L.append("Ledger: `logs/selection.json` + `val_table.csv` + `LEDGER_OK` "
              "(sha256 chain); every new test fingerprint embeds the ledger "
              "sha256; ordering acceptance->ledger->tests is gated "
-             "(VG9/VG11).")
+             "(VG9/VG11).  Scope correction (acceptance round, 2026-11-12): "
+             "the S2-stage test-path smoke run (ETTh1/H96 default P, "
+             "LEDGER_REQUIRED=0) DID precede the ledger -- it was a "
+             "pipeline check, excluded from the three-arm comparison; the "
+             "ledger precedes every new FULL test evaluation (S5) and all "
+             "three-arm groups are frozen-archive reuse or ledger-bound "
+             "new runs.  Original ledger files and their mtimes are kept "
+             "unmodified.")
 
     L.append("")
     L.append("## S3 test comparison: selected-P vs default-P vs P=1")
@@ -279,6 +288,24 @@ def main():
              "recomputation from raw CSV + train-block StandardScaler "
              "([12K,16K) / [16K,20K) target regions, split fields recorded "
              "explicitly per config).")
+    xp = sorted(glob.glob(os.path.join(X.LOG_DIR, "xcheck_*_H96.json")))
+    if xp:
+        L.append("- True cross-path check (acceptance round 2026-11-12): "
+                 "for the 6 smoke configs the OFFICIAL inference entry "
+                 "(Exp_Long_Term_Forecast.test, the method run.py invokes) "
+                 "was run on the validation split under test-loader "
+                 "semantics and compared to the new validation program's "
+                 "arrays: %d/%d configs bitwise-equal pred and true "
+                 "(max-abs diffs and sha256 of both sides in "
+                 "`logs/xcheck_<DS>_P<P>_H96.json`)."
+                 % (sum(1 for p in xp
+                        if X.load_json(p)["pred_bitwise"]
+                        and X.load_json(p)["true_bitwise"]), len(xp)))
+        L.append("- Reused-arm metric recomputation is genuine float64 "
+                 "(cast f32 arrays to f64 first, then MSE/MAE), gated "
+                 "<=1e-6 vs the frozen metrics; per-group diffs recorded "
+                 "in `logs/verify_t43.json` (gates "
+                 "reuse_exp*:*:recompute_f64).")
 
     # ---- figures ----
     fig, axes = plt.subplots(1, 4, figsize=(17, 3.6))
