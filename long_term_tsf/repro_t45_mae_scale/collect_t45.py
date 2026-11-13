@@ -60,9 +60,12 @@ def geometry_ok_of(arch, ds, h):
     recs = [json.loads(ln) for ln in open(srp) if '"update_config"' in ln]
     if not recs:
         return "missing"
+    rec = dict(recs[-1])
+    inits = [json.loads(ln) for ln in open(srp) if '"init"' in ln]
+    if inits:
+        rec["arch"] = inits[0].get("arch")  # arch lives in the init record
     ok, _ = X.geometry_matches(
-        recs[-1], X.expected_geometry(ds, h, X.PAPER_P[ds], X.PAPER_L[ds],
-                                      arch))
+        rec, X.expected_geometry(ds, h, X.PAPER_P[ds], X.PAPER_L[ds], arch))
     return "ok" if ok else "MISMATCH"
 
 

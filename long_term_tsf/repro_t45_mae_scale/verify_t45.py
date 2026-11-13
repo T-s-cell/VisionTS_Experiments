@@ -129,7 +129,9 @@ def check_run_group(arch, ds, h):
             inits[0].get("arch") == arch,
             "constructor received arch=%s" % inits[0].get("arch"))
     if recs:
-        rec = recs[-1]
+        rec = dict(recs[-1])
+        if inits:
+            rec["arch"] = inits[0].get("arch")  # arch lives in the init record
         geo_ok, geo_notes = X.geometry_matches(
             rec, X.expected_geometry(ds, h, X.PAPER_P[ds], X.PAPER_L[ds],
                                      arch))
@@ -378,7 +380,13 @@ def mode_group_accept():
            "t": time.time()}
     with open(GROUP_ACCEPT_JSONL, "a") as f:
         f.write(json.dumps(rec) + "\n")
+    if ok:
+        print("[verify --group] PASS %s %s H%d (%d checks)"
+              % (short, ds, h, rec["n_checks_run"]))
     if not ok:
+        for c in CHECKS:
+            if not c["ok"]:
+                print("  FAIL %s %s" % (c["gate"], c["detail"][:300]))
         raise SystemExit("[verify --group] FAIL %s %s H%s" % (short, ds, h))
 
 
