@@ -23,7 +23,9 @@ if [ "${1:-}" = "--fingerprint" ]; then FPMODE=1; shift; fi
 DS=$1
 PRED=$2
 SHORT=$3
-if [ "$FPMODE" -eq 1 ]; then SAVE_DIR_REL="."; else SAVE_DIR_REL=$4; fi
+# 4th arg: explicit save-dir override -- used ONLY by verify_t45.py --reentry
+# (MG10 sandbox); the driver's 34 real groups always take the default.
+if [ "$FPMODE" -eq 1 ]; then SAVE_DIR_REL="."; else SAVE_DIR_REL=${4:-"$PARENT/${DS}_${PRED}"}; fi
 GPU_ID=${GPU_ID:-0}
 PYTHON=${PYTHON:-python}
 
@@ -80,10 +82,12 @@ if [ "$FPMODE" -eq 1 ]; then
   exit 0
 fi
 
-if [ -n "${SAVE_DIR_REL:-}" ]; then :; else SAVE_DIR_REL="$PARENT/${DS}_${PRED}"; fi
+# isolation guard (correction #2): save dir must live under THIS arch's
+# single-purpose parent and end in <DS>_<PRED>; the MG10 sandbox
+# (<parent>/_reentry_neg/<DS>_<PRED>) is the only allowed extra segment.
 case "$SAVE_DIR_REL" in
-  "$PARENT"/"$DS"_"$PRED") : ;;  # dirname must be <single-purpose parent>/<DS>_<PRED>
-  *) echo "[run_one_t45] ABORT: SAVE_DIR_REL '$SAVE_DIR_REL' does not match '$PARENT/${DS}_${PRED}'"; exit 2 ;;
+  "$PARENT"/"$DS"_"$PRED"|"$PARENT"/*"/$DS"_"$PRED") : ;;
+  *) echo "[run_one_t45] ABORT: SAVE_DIR_REL '$SAVE_DIR_REL' not under $PARENT/<DS>_<PRED>"; exit 2 ;;
 esac
 
 RUN_DIR="$ROOT/$SAVE_DIR_REL"
