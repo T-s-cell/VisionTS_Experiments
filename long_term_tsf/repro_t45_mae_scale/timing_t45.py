@@ -53,6 +53,8 @@ def ns(ds, h):
 def main():
     if X.ROOT not in sys.path:
         sys.path.insert(0, X.ROOT)
+    if X.REPO not in sys.path:
+        sys.path.insert(0, X.REPO)  # visionts/ package lives one level up
     from data_provider.data_factory import data_provider
     from visionts.model import VisionTS
     ckpt_dir = os.path.join(X.REPO, "ckpt")
@@ -70,7 +72,8 @@ def main():
     for ds, h in X.group_ids():
         c = X.DATASETS[ds]
         _, loader = data_provider(ns(ds, h), "test")
-        x, _, _ = next(iter(loader))
+        batch = next(iter(loader))
+        x = batch[0]  # (inputs, batch_y, x_mark, y_mark) -- inputs only
         x = x.float().cuda(A.gpu)
         assert x.shape == (32, c["ctx"], 7), x.shape
         print("[timing] %s/H%d batch %s (loader excluded from timed region)"
@@ -81,7 +84,7 @@ def main():
             model = VisionTS(arch=arch, finetune_type="none",
                              ckpt_dir=ckpt_dir, load_ckpt=True).cuda(A.gpu)
             model.eval()
-            model.update_config(c["ctx"], h, c["periodicity"], 0.4, 0.4,
+            model.update_config(c["ctx"], h, c["period"], 0.4, 0.4,
                                 "bilinear")
             load_s = time.perf_counter() - t_load0
             with torch.inference_mode():

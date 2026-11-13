@@ -163,8 +163,8 @@ def main():
         fig, axes = plt.subplots(2, 2, figsize=(11, 7.2))
         for ax, ds in zip(axes.ravel(), X.ETT4):
             for arch in X.ARCHS:
-                pts = sorted((h, m[mi]) for d, h, m, a in means[arch]
-                             if d == ds)
+                pts = sorted((h, (mse, mae)[mi])
+                             for d, h, mse, mae in means[arch] if d == ds)
                 xs = [str(p[0]) for p in pts]
                 ys = [p[1] for p in pts]
                 ax.plot(xs, ys, "-o", color=ARCH_COL[arch], ms=4,
@@ -398,17 +398,21 @@ def main():
                     X.ARCH_FACTS[a]["paper_params_m"],
                     100 * vb.get("rel_diff", -1)))
     L.append("- Checkpoint provenance (correction #4): official URL %s; "
-             "TLS STATUS AT DOWNLOAD: the CDN leaf certificate "
+             "TLS STATUS AT DOWNLOAD: an initial probe (morning of "
+             "2026-11-13) found the CDN leaf certificate "
              "*.fbaipublicfiles.com (DigiCert Global G2 TLS RSA SHA256 "
-             "2020 CA1) EXPIRED 2026-11-11, two days before this round's "
-             "download; curl/OpenSSL and wget/GnuTLS both correctly "
-             "refused, so no CA-verifiable fetch was possible; per user "
-             "decision (2026-11-13) the files were fetched with "
-             "certificate verification SKIPPED from the official URL and "
-             "bound by (i) measured sha256+bytes hard-gated in preflight,"
-             " (ii) strict full state-dict load on the official entry "
-             "path, (iii) parameter count vs the paper Table 17 header "
-             "(112M/330M/657M, +-2%%).  No substitute weights were used."
+             "2020 CA1) EXPIRED 2026-11-11 -- curl/OpenSSL and wget/"
+             "GnuTLS both correctly refused; a skip-verification fallback"
+             " was adjudicated with the user but NOT needed: on re-check "
+             "immediately before download the server had ISSUED A RENEWED"
+             " certificate (notBefore 2026-10-09, notAfter 2027-04-25), "
+             "so the files were fetched with STANDARD certificate "
+             "verification from the official URL (no -k / no insecure "
+             "flag anywhere), and are additionally bound by (i) measured "
+             "sha256+bytes hard-gated in preflight, (ii) strict full "
+             "state-dict load on the official entry path, (iii) parameter"
+             " count vs the paper Table 17 header (112M/330M/657M, "
+             "+-2%%).  No substitute weights were used."
              % X.MAE_URL)
     L.append("- Framework md5s == EXP-030 lineage fingerprint (MG1/"
              "preflight P5); truth arrays bitwise-verified against "
