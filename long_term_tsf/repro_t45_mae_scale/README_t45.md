@@ -103,21 +103,22 @@ skip-if-done 全队列生效:中断后重跑自动跳过已完成组;SUCCESS.txt
 | large | mae_visualize_vit_large.pth | `d0072183ec21f3b3e50874a957254ea4d03c2d7255d0ad47aebb85a868a6bdb6` | 1,318,315,181 | 官方 URL,2026-11-13,标准 HTTPS 校验(见 §3 披露;与 HTTP content-length 一致) |
 | huge | mae_visualize_vit_huge.pth | `49ca3f48bfde7cd51feb4f6e63fd1b859e5bc11824730426a124bcda301f037e` | 2,628,481,101 | 同上 |
 
-## 11. 预算(冒烟后回填实测)
+## 11. 预算(实测回填 2026-11-13)
 
-- 新跑 32 组 + 2 组 Base 重放;EXP-030 Base 实测 37-151s/组;Large/Huge 未知,冒烟 4 组给实测(轻 ETTh1/H96 + 重 ETTm2/H720)。
-- 磁盘:Large/Huge pred/true npy ≈ 4GB(t44 实测 ~125MB/组均值)+ ckpt ≈ 3.7GiB;预检 ≥50GB free 维持。
-- timing ≈ 15-30min;verify ≈ 10-20min。
+- 逐组 wall_time_s(层 a,SUCCESS.txt):Base 重放 41s(ETTh1/H96)/146s(ETTm1/H96);Large hourly 53-85s、minutely 246-312s/组;Huge hourly 115-220s、minutely 504-734s/组。S2 冒烟 + S3 主队列总墙钟 ≈ 2h40m(12:45→15:25)。
+- S5 timing 实测 ≈ 80min——瓶颈是每配置重建官方 test loader 与首批(H 数据集分钟级 CSV + 万级窗口展开,~5min/配置);前向微基准本身仅 24 次前向/配置。verify --all 36s(669 查);collect ~1min;MG11 <1s。
+- 磁盘实测:save_t45_base_replay 73M + save_t45_large 1.9G + save_t45_huge 1.9G(eta 数组合计 ≈ 3.9G)+ ckpt 3 件 3.9GiB;审计包 572KB。
 
 ## 12. env / commit SHA(回填区)
 
 - eta:wlt@222.201.145.32,L20 46GB,`PYTHON_B=/dev_data/wlt/conda/envs/visionts/bin/python`(torch 2.12.0+cu126),CWD=/dev_data/wlt/VisionTS_Experiments/long_term_tsf;顺序单卡,共租授权 free−4GB>峰值。
-- 本轮完整 commit SHA:(冒烟后回填)。
+- 本轮 commit 世系(本地分支 `repro/ltsf-t45-mae-scale`,自 2660784):脚手架 `a6410f3` → run_one_t45.sh 修复 `6c03e62`/`ea74067` → verify/collect 几何修复 `d08eaf5` → timing/collect 热修 `69dadb5`(运行代码终头);交付记录提交在此之后,不动运行代码。infer_one_t45.py/t45_common.py 自 `a6410f3` 起未再改动(运行指纹稳定);verify/collect/timing/driver/README 按 §12 规则热修。
 - 框架 md5 == EXP-030 世系指纹(与 t43/t44 同一 8 文件);`infer_one_t45.py` / `t45_common.py` 入运行指纹,S1 冻结;verify/collect/timing/driver/README 可热修不触指纹;ckpt 与框架文件只读。
 
-## 13. 交付记录(回填区)
+## 13. 交付记录(2026-11-13 回填)
 
-- 审计包:`temp/VisionTS_t45_mae_scale_<date>.tar.gz`(<50MB;不含 pred/true npy 与权重)+ 外置 `.sha256`。
-- 数组留存 eta:`save_t45_large/`、`save_t45_huge/`、`save_t45_base_replay/`(路径与规模回填)。
-- 结果:三层表 + Δ + 论文锚点差值(report-only)+ 开销两层;RESULT_t45_mae_scale.md;逐配置 `logs/summary_t45.csv`(48 行)。
-- **本地提交,不推送,待复审;memory 更新。**
+- 审计包:`temp/VisionTS_t45_mae_scale_20261113.tar.gz`(572KB,<50MB;不含 pred/true npy 与权重)+ 外置 `.sha256`。**v2 sha256 `dba4e5fdb7ae0aeaa657798cf8e59dc9f0da92437f72de69008154c2650c3b37`(终版)**;v1 `505cd9b0…` 作废(其 RESULT TLS 溯源段为"跳过校验"旧文案,与实际"证书续期后标准校验下载"不符,已由 collect 热修重出)。
+- 数组留存 eta(wlt@222.201.145.32):`/dev_data/wlt/VisionTS_Experiments/long_term_tsf/{save_t45_base_replay(73M), save_t45_large(1.9G), save_t45_huge(1.9G)}`;权重三件 `/dev_data/wlt/VisionTS_Experiments/ckpt/`。
+- 结果已出:三层表 + Δ + 论文表 17 锚点差值(report-only,48/48 格 |Δ_paper|≤0.0005)+ 开销两层(层 a wall_time_s;层 b 同批微基准 base 0.360s/1.63GB、large 0.740s/2.45GB、huge 1.713s/4.09GB);ETT-only 总体 Base 0.34439535/0.37042006(锚点精确复现)、Large +0.00149/+0.00062、Huge +0.00494/+0.00145——与论文"三者相近、更大模型略有下降"方向一致;逐格局部反例按保留(RESULT_t45_mae_scale.md)。
+- 门禁:verify --all 669/669(含 MG10 沙箱负例 exit 4)、verify --mg11 7/7、collect Base 总体锚点硬门 PASS;逐组验收 34/34(group_accept.jsonl)。
+- **本地提交,不推送,待复审;memory 已更新。**
