@@ -23,9 +23,6 @@ if [ "${1:-}" = "--fingerprint" ]; then FPMODE=1; shift; fi
 DS=$1
 PRED=$2
 SHORT=$3
-# 4th arg: explicit save-dir override -- used ONLY by verify_t45.py --reentry
-# (MG10 sandbox); the driver's 34 real groups always take the default.
-if [ "$FPMODE" -eq 1 ]; then SAVE_DIR_REL="."; else SAVE_DIR_REL=${4:-"$PARENT/${DS}_${PRED}"}; fi
 GPU_ID=${GPU_ID:-0}
 PYTHON=${PYTHON:-python}
 
@@ -35,6 +32,18 @@ case "$SHORT" in
   huge)  ARCH=mae_huge;  ARCH_CKPT=mae_visualize_vit_huge.pth ;;
   *) echo "[run_one_t45] Unknown arch short: $SHORT (base|large|huge)"; exit 2 ;;
 esac
+
+# save parent is a FUNCTION OF THE ARCH ONLY (correction #2: single-purpose
+# dirs; base this round == replays only)
+case "$SHORT" in
+  base)  PARENT=save_t45_base_replay ;;
+  large) PARENT=save_t45_large ;;
+  huge)  PARENT=save_t45_huge ;;
+esac
+
+# 4th arg: explicit save-dir override -- used ONLY by verify_t45.py --reentry
+# (MG10 sandbox); the driver's 34 real groups always take the default.
+if [ "$FPMODE" -eq 1 ]; then SAVE_DIR_REL="."; else SAVE_DIR_REL=${4:-"$PARENT/${DS}_${PRED}"}; fi
 
 REPRO_DIR="$(cd "$(dirname "$0")" && pwd)"
 ROOT="$(cd "$REPRO_DIR/.." && pwd)"
@@ -50,14 +59,6 @@ esac
 
 CKPT_DIR="../ckpt/"
 CKPT_FILE="$ROOT/$CKPT_DIR/$ARCH_CKPT"
-
-# save parent is a FUNCTION OF THE ARCH ONLY (correction #2: single-purpose
-# dirs; base this round == replays only)
-case "$SHORT" in
-  base)  PARENT=save_t45_base_replay ;;
-  large) PARENT=save_t45_large ;;
-  huge)  PARENT=save_t45_huge ;;
-esac
 
 fingerprint() {
   {
