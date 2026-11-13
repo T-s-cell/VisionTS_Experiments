@@ -1,6 +1,6 @@
 # EXP-045: VisionTS MAE-Base / Large / Huge 零样本对照(预测效果 + 计算开销)
 
-**状态:执行中(2026-11-13 启动)。** 分支 `repro/ltsf-t45-mae-scale`(自世系推送头 2660784);目录 `long_term_tsf/repro_t45_mae_scale/`;eta 部署,CWD 契约 = `long_term_tsf/`;**本地提交,不推送**;模型源码与既有实验结果只读。
+**状态:已完成(2026-11-13 收官,待复审)。** 分支 `repro/ltsf-t45-mae-scale`(自世系推送头 2660784);目录 `long_term_tsf/repro_t45_mae_scale/`;eta 部署,CWD 契约 = `long_term_tsf/`;**本地提交,不推送**;模型源码与既有实验结果只读。
 
 ## 1. 问题与动机
 
@@ -112,13 +112,14 @@ skip-if-done 全队列生效:中断后重跑自动跳过已完成组;SUCCESS.txt
 ## 12. env / commit SHA(回填区)
 
 - eta:wlt@222.201.145.32,L20 46GB,`PYTHON_B=/dev_data/wlt/conda/envs/visionts/bin/python`(torch 2.12.0+cu126),CWD=/dev_data/wlt/VisionTS_Experiments/long_term_tsf;顺序单卡,共租授权 free−4GB>峰值。
-- 本轮 commit 世系(本地分支 `repro/ltsf-t45-mae-scale`,自 2660784):脚手架 `a6410f3` → run_one_t45.sh 修复 `6c03e62`/`ea74067` → verify/collect 几何修复 `d08eaf5` → timing/collect 热修 `69dadb5`(运行代码终头);交付记录提交在此之后,不动运行代码。infer_one_t45.py/t45_common.py 自 `a6410f3` 起未再改动(运行指纹稳定);verify/collect/timing/driver/README 按 §12 规则热修。
+- 本轮 commit 世系(本地分支 `repro/ltsf-t45-mae-scale`,自 2660784):脚手架 `a6410f3` → run_one_t45.sh 修复 `6c03e62`/`ea74067` → verify/collect 几何修复 `d08eaf5` → timing/collect 热修 `69dadb5`(运行代码终头)→ 交付记录 `2346b9b` → 归档收尾(仅 GB→GiB 标签文案 + README,collect 纯重算,无推理/计时)。infer_one_t45.py/t45_common.py 自 `a6410f3` 起未再改动(运行指纹稳定);verify/collect/timing/driver/README 按 §12 规则热修。
 - 框架 md5 == EXP-030 世系指纹(与 t43/t44 同一 8 文件);`infer_one_t45.py` / `t45_common.py` 入运行指纹,S1 冻结;verify/collect/timing/driver/README 可热修不触指纹;ckpt 与框架文件只读。
 
-## 13. 交付记录(2026-11-13 回填)
+## 13. 交付记录(2026-11-13 回填+收尾)
 
-- 审计包:`temp/VisionTS_t45_mae_scale_20261113.tar.gz`(572KB,<50MB;不含 pred/true npy 与权重)+ 外置 `.sha256`。**v2 sha256 `dba4e5fdb7ae0aeaa657798cf8e59dc9f0da92437f72de69008154c2650c3b37`(终版)**;v1 `505cd9b0…` 作废(其 RESULT TLS 溯源段为"跳过校验"旧文案,与实际"证书续期后标准校验下载"不符,已由 collect 热修重出)。
+- **执行过程说明**:S5 timing 在 driver4.log 中成功(48 行 json/csv/图);S6 首次因图代码解包 bug 报 COLLECT FAIL(driver4.log 原样保留作历史);collect 热修(`69dadb5`)后于 2026-11-13 16:08 **人工顺序完成 S6 collect(锚点硬门 PASS)→ S7 verify --mg11(7/7)→ S8 打包**,未重跑任何推理或计时;logs/verify_t45_mg11.json 为最终成功运行产物。
+- 审计包:`temp/VisionTS_t45_mae_scale_20261113.tar.gz`(<50MB;不含 pred/true npy 与权重)+ 外置 `.sha256`。谱系:v1 `505cd9b0…` 作废(RESULT TLS 溯源段为"跳过校验"旧文案,与实际"证书续期后标准校验下载"不符);v2 `dba4e5fd…` 作废(GB→GiB 标签修正前);**v3 终版,sha256 以外置 `.sha256` sidecar 与交付说明为准**。
 - 数组留存 eta(wlt@222.201.145.32):`/dev_data/wlt/VisionTS_Experiments/long_term_tsf/{save_t45_base_replay(73M), save_t45_large(1.9G), save_t45_huge(1.9G)}`;权重三件 `/dev_data/wlt/VisionTS_Experiments/ckpt/`。
-- 结果已出:三层表 + Δ + 论文表 17 锚点差值(report-only,48/48 格 |Δ_paper|≤0.0005)+ 开销两层(层 a wall_time_s;层 b 同批微基准 base 0.360s/1.63GB、large 0.740s/2.45GB、huge 1.713s/4.09GB);ETT-only 总体 Base 0.34439535/0.37042006(锚点精确复现)、Large +0.00149/+0.00062、Huge +0.00494/+0.00145——与论文"三者相近、更大模型略有下降"方向一致;逐格局部反例按保留(RESULT_t45_mae_scale.md)。
+- 结果已出:三层表 + Δ + 论文表 17 锚点差值(report-only,48/48 格 |Δ_paper|≤0.0005)+ 开销两层(层 a wall_time_s;层 b 同批微基准 base 0.360s/1.63GiB、large 0.740s/2.45GiB、huge 1.713s/4.09GiB);ETT-only 总体 Base 0.34439535/0.37042006(锚点精确复现)、Large +0.00149/+0.00062、Huge +0.00494/+0.00145——与论文"三者相近、更大模型略有下降"方向一致;逐格局部反例按保留(RESULT_t45_mae_scale.md)。
 - 门禁:verify --all 669/669(含 MG10 沙箱负例 exit 4)、verify --mg11 7/7、collect Base 总体锚点硬门 PASS;逐组验收 34/34(group_accept.jsonl)。
 - **本地提交,不推送,待复审;memory 已更新。**

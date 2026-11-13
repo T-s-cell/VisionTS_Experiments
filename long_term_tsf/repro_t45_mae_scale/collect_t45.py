@@ -193,7 +193,7 @@ def main():
                     yerr=float(np.std(vs2)), color=ARCH_COL[arch])
         ax1.set_ylabel("mean forward wall s (bs=32, CUDA-synced)")
         ax1.set_title("per-forward inference time (mean±std over 16 cfgs)")
-        ax2.set_ylabel("peak allocated GB")
+        ax2.set_ylabel("peak allocated GiB")
         ax2.set_title("peak GPU memory (torch allocator)")
         fig.suptitle("EXP-045 cost layer (b): same batch, same bs=32, "
                      "fp32, eval()+inference_mode, sequential release")
@@ -359,7 +359,7 @@ def main():
                  "separately as load_s)." % (meta["warmup"],
                                              meta["repeats"]))
         L.append("")
-        L.append("| arch | mean forward s (avg over 16 cfgs) | mean peak GB |"
+        L.append("| arch | mean forward s (avg over 16 cfgs) | mean peak GiB |"
                  " |")
         L.append("|---|---|---|---|")
         for a in X.ARCHS:

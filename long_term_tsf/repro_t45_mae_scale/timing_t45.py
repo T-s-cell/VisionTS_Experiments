@@ -107,7 +107,7 @@ def main():
                    "repeats_s": [round(t, 4) for t in ts],
                    "peak_gb": peak_gb}
             rows.append(row)
-            print("[timing]   %-5s load=%.1fs mean=%.3fs min=%.3fs peak=%.2fGB"
+            print("[timing]   %-5s load=%.1fs mean=%.3fs min=%.3fs peak=%.2fGiB"
                   % (short, load_s, row["mean_s"], row["min_s"], peak_gb))
             del model
             torch.cuda.empty_cache()
