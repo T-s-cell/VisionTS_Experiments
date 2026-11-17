@@ -17,6 +17,7 @@ import os
 import queue
 import sys
 import time
+from collections import Counter
 
 for _v in ('OMP_NUM_THREADS', 'MKL_NUM_THREADS', 'OPENBLAS_NUM_THREADS',
            'NUMEXPR_NUM_THREADS', 'NUMBA_NUM_THREADS'):
@@ -58,24 +59,34 @@ def worker_main(task_q, result_q, method):
 
 
 class TimeoutPool:
-    """每 worker 单在跑任务;到期真杀;worker_died 视为单样本失败。"""
+    """每 worker 单在跑任务;到期真杀;worker_died 视为单样本失败。
+
+    mp 用 spawn 上下文:主进程已 import statsforecast(numba 已加载),
+    fork 后在继承的 LLVM/JIT 状态上编译是不安全区(冒烟实测 worker 无
+    traceback 静默死亡,池从 32 缩到 8);spawn 全新解释器规避该问题。
+    闲时死亡无任务可归账,定期活性检查 + 重生保并行度,计数入 meta。
+    """
 
     def __init__(self, n_workers, method, timeout_s):
         self.method, self.timeout = method, timeout_s
+        self.ctx = mp.get_context('spawn')
         self.task_qs, self.result_qs, self.procs = [], [], []
+        self.events = Counter()
         for _ in range(n_workers):
             self._spawn()
 
     def _spawn(self):
         w = len(self.task_qs)
-        tq, rq = mp.Queue(), mp.Queue()
-        p = mp.Process(target=worker_main, args=(tq, rq, self.method), daemon=True)
+        tq, rq = self.ctx.Queue(), self.ctx.Queue()
+        p = self.ctx.Process(target=worker_main, args=(tq, rq, self.method), daemon=True)
         p.start()
         self.task_qs.append(tq)
         self.result_qs.append(rq)
         self.procs.append(p)
 
-    def _kill(self, w):
+    def _kill(self, w, reason):
+        self.events[reason] += 1
+        print('[pool] worker %d killed (%s), respawn' % (w, reason), flush=True)
         try:
             self.procs[w].terminate()
             self.procs[w].join(5)
@@ -85,9 +96,9 @@ class TimeoutPool:
             self.procs[w].kill()
             self.procs[w].join(5)
         # 换新队列,避免残留任务串扰
-        self.task_qs[w], self.result_qs[w] = mp.Queue(), mp.Queue()
-        p = mp.Process(target=worker_main, args=(self.task_qs[w], self.result_qs[w], self.method),
-                       daemon=True)
+        self.task_qs[w], self.result_qs[w] = self.ctx.Queue(), self.ctx.Queue()
+        p = self.ctx.Process(target=worker_main, args=(self.task_qs[w], self.result_qs[w], self.method),
+                             daemon=True)
         p.start()
         self.procs[w] = p
 
@@ -105,13 +116,16 @@ class TimeoutPool:
         nxt = 0
         while nxt < len(tasks) or inflight:
             for w in range(len(self.procs)):
-                if w not in inflight and nxt < len(tasks):
-                    sid, y, P, ds = tasks[nxt]
-                    if self._send(w, (sid, y, P)):
-                        inflight[w] = (sid, time.time() + self.timeout, ds)
-                        nxt += 1
-                    else:
-                        self._kill(w)
+                if w not in inflight:
+                    if not self.procs[w].is_alive():
+                        self._kill(w, 'idle_worker_died')  # 闲时死亡无样本可归账,仅重生保并行度
+                    elif nxt < len(tasks):
+                        sid, y, P, ds = tasks[nxt]
+                        if self._send(w, (sid, y, P)):
+                            inflight[w] = (sid, time.time() + self.timeout, ds)
+                            nxt += 1
+                        else:
+                            self._kill(w, 'send_failed')
             for w in list(inflight):
                 sid, deadline, ds = inflight[w]
                 got = None
@@ -127,10 +141,10 @@ class TimeoutPool:
                 elif not self.procs[w].is_alive():
                     results[sid] = ('worker_died', None, float('nan'))
                     ledger.append([sid, ds, self.method, 'worker_died', '', 'process died'])
-                    self._kill(w)
+                    self._kill(w, 'worker_died')
                     del inflight[w]
                 elif time.time() > deadline:
-                    self._kill(w)
+                    self._kill(w, 'timeout')
                     results[sid] = ('timeout', None, float('nan'))
                     ledger.append([sid, ds, self.method, 'timeout', '>%d' % self.timeout, 'killed'])
                     del inflight[w]
@@ -147,6 +161,8 @@ class TimeoutPool:
 
 
 def main(repo_root, save_dir, smoke=False, n_workers=8, timeout_s=300, selftest=False):
+    print('sfdx start: workers=%d timeout=%ss smoke=%s selftest=%s'
+          % (n_workers, timeout_s, smoke, selftest), flush=True)
     from t46_common import DS_CFG, DS_ORDER, load_csv, sample_list_path, std_all, train_scaler
 
     os.makedirs(save_dir, exist_ok=True)
@@ -229,6 +245,7 @@ def main(repo_root, save_dir, smoke=False, n_workers=8, timeout_s=300, selftest=
                                   sample_order=[int(s['sample_id']) for s in ss])
             print(method, ds, {k: v for k, v in per_method[ds].items() if k != 'sample_order'})
         pool.close()
+        per_method['pool_events'] = dict(pool.events)
         meta[method] = per_method
 
     with open(os.path.join(save_dir, f'sfdx_meta{suffix}.json'), 'w') as f:
@@ -240,10 +257,21 @@ def main(repo_root, save_dir, smoke=False, n_workers=8, timeout_s=300, selftest=
     print('sfdx done; ledger rows =', len(all_ledger))
 
 
+def _arg_val(name, default):
+    """支持 '--name value' 与 '--name=value' 两种形式。"""
+    argv = sys.argv
+    for i, a in enumerate(argv):
+        if a == name and i + 1 < len(argv):
+            return argv[i + 1]
+        if a.startswith(name + '='):
+            return a.split('=', 1)[1]
+    return default
+
+
 if __name__ == '__main__':
     args = [a for a in sys.argv[1:] if not a.startswith('--')]
     main(args[0], args[1] if len(args) > 1 else 'save_t46_histdiag',
          smoke='--smoke' in sys.argv,
-         n_workers=int(next((a.split('=')[1] for a in sys.argv if a.startswith('--workers=')), 8)),
-         timeout_s=int(next((a.split('=')[1] for a in sys.argv if a.startswith('--timeout=')), 300)),
+         n_workers=int(_arg_val('--workers', 8)),
+         timeout_s=int(_arg_val('--timeout', 300)),
          selftest='--selftest' in sys.argv)
