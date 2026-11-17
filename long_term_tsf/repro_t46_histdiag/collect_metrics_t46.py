@@ -39,6 +39,9 @@ def main(repo_root, save_dir, smoke=False):
     suffix = '_smoke' if smoke else ''
     all_rows = per_ds_rows(repo_root)
     ds_list = [ds for ds in DS_ORDER if ds in all_rows]
+    if smoke:
+        ds_list = [ds for ds in ds_list if ds in SMOKE_DS]
+        assert ds_list == list(SMOKE_DS), ds_list
     cache = {}
     out_rows = []
     meta = dict(smoke=smoke, truth_tol=TRUTH_TOL, per_ds={})
@@ -55,8 +58,9 @@ def main(repo_root, save_dir, smoke=False):
         full = all_rows[ds]
         pos = {int(s['sample_id']): j for j, s in enumerate(full)}
         ss = full[:8] if (smoke and ds in SMOKE_DS) else full
-        idx = np.array([pos[int(s['sample_id'])] for s in ss], dtype=np.int64)
         n = len(ss)
+        idx_vts = np.array([pos[int(s['sample_id'])] for s in ss], dtype=np.int64)
+        ids_ss = [int(s['sample_id']) for s in ss]
 
         true64 = np.stack([std[int(s['start_row']):int(s['start_row']) + H, int(s['channel'])]
                            for s in ss])  # (n,96) f64
@@ -70,13 +74,13 @@ def main(repo_root, save_dir, smoke=False):
         zv = np.load(os.path.join(save_dir, 'arr_vts_t46.npz'))
         zm = np.load(os.path.join(save_dir, f'arr_moirai{suffix_m}_{ds}.npz'))
         assert sorted(zm.files) == ['item_ids', 'pred', 'start_rows', 'true'], zm.files
-        assert list(zm['item_ids']) == [int(s['sample_id']) for s in full], (ds, 'moirai item_ids')
-        assert list(zm['start_rows']) == [int(s['start_row']) for s in full], (ds, 'moirai start_rows')
+        assert list(zm['item_ids']) == ids_ss, (ds, 'moirai item_ids')
+        assert list(zm['start_rows']) == [int(s['start_row']) for s in ss], (ds, 'moirai start_rows')
         sfdx_arr = {}
         for name in ('AutoETS', 'AutoARIMA'):
             zs = np.load(os.path.join(save_dir, f'{name}{suffix_m}_{ds}.npz'))
             assert sorted(zs.files) == ['item_ids', 'pred', 'status', 'true'], zs.files
-            assert list(zs['item_ids']) == [int(s['sample_id']) for s in full], (ds, name, 'item_ids')
+            assert list(zs['item_ids']) == ids_ss, (ds, name, 'item_ids')
             sfdx_arr[name.lower()] = zs
 
         arrs = {'vts': (zv[f'{ds}_pred'], zv[f'{ds}_true'], None),
@@ -90,8 +94,9 @@ def main(repo_root, save_dir, smoke=False):
         results = {}  # m -> (ok(bool n), mse(f64 n), mae, status list)
         for m in METHODS:
             pred_all, true_all, status = arrs[m]
-            pred = pred_all[idx].astype(np.float64)
-            tstored = true_all[idx].astype(np.float64)
+            take = idx_vts if m == 'vts' else np.arange(n)
+            pred = pred_all[take].astype(np.float64)
+            tstored = true_all[take].astype(np.float64)
             assert pred.shape == true64.shape == (n, H), (m, ds, pred.shape)
             diff = float(np.abs(tstored - true64).max())
             assert diff <= TRUTH_TOL, (m, ds, diff)

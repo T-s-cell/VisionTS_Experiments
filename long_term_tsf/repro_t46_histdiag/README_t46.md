@@ -16,16 +16,19 @@
 
 ```bash
 # 环境:/dev_data/wlt/conda/envs/t46diag(python3.11 + torch 2.4.1+cu121
-#       + uni2ts==1.1.1 + statsforecast==1.7.8;freeze 见 env_freeze_t46diag.txt)
+#       + uni2ts==1.1.1 + statsforecast==1.7.8 + pyarrow 14.0.2(numpy 1.26 pin)
+#       + matplotlib;freeze 见 env_freeze_t46diag.txt)
+# 权重:HF_HOME=/dev_data/wlt/hf_cache(hf-mirror 下载,model.safetensors
+#       sha256 8e3c2451ec14d430bcf45d5d312b68464fed4c654837fa0e76c1ab633fd48a05)
 cd /dev_data/wlt/VisionTS_Experiments/long_term_tsf/repro_t46_histdiag
 HF_HOME=/dev_data/wlt/hf_cache \
-WORKERS=8 TIMEOUT=300 \
+WORKERS=32 TIMEOUT=1800 \
 bash run_t46_all.sh /dev_data/wlt/VisionTS_Experiments/long_term_tsf
 ```
 
 分步等价:`select_t46.py`(冻结清单,重跑 sha 一致)→ `preflight_t46.py`(版本/签名/权重/arr_val 预检)→ `infer_sfdx_t46.py --selftest`(超时真杀+管线存活验证)→ `infer_vts_t46.py`(切片+全 1792 真值核验)→ 冒烟 `--smoke`(ETTh1/ETTm1 各 8;moirai/sfdx/collect)→ 全量(moirai/sfdx)→ `build_features_t46.py` → `collect_metrics_t46.py` → `analyze_t46.py` → `figures_t46.py` → `verify_t46.py`(六门禁)。
 
-CPU 池:持久 worker 进程(默认 8,数值库线程=1/进程);超时(默认 300s)terminate+kill 真杀,该样本记 timeout,池补位继续;个别样本失败入 `failure_ledger.csv` 不中止,管线/对齐错误才中止。
+CPU 池:持久 worker 进程(数值库线程=1/进程);超时 terminate+kill 真杀,该样本记 timeout,池补位继续;个别样本失败入 `failure_ledger.csv` 不中止,管线/对齐错误才中止。**实测调整记录**:冒烟(8 worker/300s)AutoARIMA ETTh1 4/8、ETTm1 7/8 超时(P=96 季节搜索慢,ok 样本耗时 45–284s)→ 全量按"实测后调整"改为 32 worker/1800s;AutoETS 冒烟 8/8 ok(~0.2s/样本)。
 
 ## 分析口径(冻结于 feature_formulas.md,分析前落盘)
 
