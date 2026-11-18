@@ -2,6 +2,8 @@
 
 - 案例图:cases_t46.csv 每案例一 png(压缩历史 + 真值 + 四方法预测);
   历史压缩 stride = ceil(L/720),末 4P 段以原密度叠加高亮;
+  样本按 (ds, sample_id) 查清单(全局行),绘图真值与 arr_vts npz 真值
+  逐案例核对(maxdiff ≤ 1e-5,与 verify G2 同容差),不一致即中止;
 - 汇总图:fig_tertile_summary.png — 5 特征 × 3 对照的逐 (ds×var) rel_gap
   三分位均值条形(单元均值,非样本池化)。
 确定性:案例顺序/配色/抽稀 stride 全由 csv 与常量决定。
@@ -19,6 +21,7 @@ METHODS = ['vts', 'moirai', 'autoets', 'autoarima']
 PAIRS = [('vts', 'moirai'), ('vts', 'autoets'), ('vts', 'autoarima')]
 FEATURES = ['period_corr', 'recent_old', 'trend', 'vol', 'hist_std']
 TERTILE_NAME = ['low', 'mid', 'high']
+TRUE_TOL = 1e-5
 COLORS = dict(vts='tab:red', moirai='tab:blue', autoets='tab:green', autoarima='tab:purple',
               true='black')
 
@@ -40,7 +43,9 @@ def main(repo_root, save_dir):
 
     cache = {}
     arr_cache = {}
+    true_cache = {}
     pos_cache = {}
+    row_cache = {}
     for ds in dict.fromkeys(c['ds'] for c in cases):
         cfg = DS_CFG[ds]
         if ds not in cache:
@@ -49,23 +54,32 @@ def main(repo_root, save_dir):
             cache[ds] = std_all(data, mean, scale)
         full = [s for s in samples if s['ds'] == ds]
         pos_cache[ds] = {int(s['sample_id']): j for j, s in enumerate(full)}
+        row_cache[ds] = {int(s['sample_id']): s for s in full}
         zv = np.load(os.path.join(save_dir, 'arr_vts_t46.npz'))
         zm = np.load(os.path.join(save_dir, f'arr_moirai_{ds}.npz'))
         ze = np.load(os.path.join(save_dir, f'AutoETS_{ds}.npz'))
         za = np.load(os.path.join(save_dir, f'AutoARIMA_{ds}.npz'))
         arr_cache[ds] = {'vts': zv[f'{ds}_pred'], 'moirai': zm['pred'],
                          'autoets': ze['pred'], 'autoarima': za['pred']}
+        true_cache[ds] = zv[f'{ds}_true']
 
+    max_true_diff = 0.0
     for c in cases:
         ds, sid = c['ds'], int(c['sample_id'])
         cfg = DS_CFG[ds]
-        s = samples[pos_cache[ds][sid]]
+        s = row_cache[ds][sid]
         start, ch, L, P = int(s['start_row']), int(s['channel']), cfg['L'], cfg['P']
         std = cache[ds]
         hist = std[start - L:start, ch]
         stride = max(1, math.ceil(L / 720))
         preds = pred_for(ds, sid, arr_cache[ds], pos_cache[ds])
         true = std[start:start + H, ch]
+        j = pos_cache[ds][sid]
+        d = float(np.max(np.abs(true.astype(np.float64) - true_cache[ds][j].astype(np.float64))))
+        if d > TRUE_TOL:
+            raise SystemExit(f'truth mismatch: {ds} sid={sid} start={start} '
+                             f'j={j} maxdiff={d:.3e} > {TRUE_TOL:.0e}')
+        max_true_diff = max(max_true_diff, d)
 
         fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(10, 6), height_ratios=[1.6, 1])
         ax1.plot(np.arange(0, L, stride), hist[::stride], lw=0.7, color='gray', label='history')
@@ -111,7 +125,8 @@ def main(repo_root, save_dir):
     fig.tight_layout()
     fig.savefig(os.path.join(save_dir, 'fig_tertile_summary.png'), dpi=130)
     plt.close(fig)
-    print('figures done: %d case pngs + fig_tertile_summary.png' % len(cases))
+    print('figures done: %d case pngs + fig_tertile_summary.png; truth-vs-npz maxdiff=%.2e (tol %.0e)'
+          % (len(cases), max_true_diff, TRUE_TOL))
 
 
 if __name__ == '__main__':

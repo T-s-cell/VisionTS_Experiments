@@ -37,7 +37,7 @@ CPU 池:持久 worker 进程(数值库线程=1/进程);超时 terminate+kill 真
 - 相对 gap = (MSE_VTS−MSE_B)/(MSE_VTS+MSE_B+1e-12),正 = VisionTS 相对弱势线索;
 - **单元级**方向 = 每 (ds×var) 内 tertile low/mid/high 的 mean rel_gap;
 - **变量级**方向(v2 显式口径)= 每 ds 先取(high 单元 rel_gap − low 单元 rel_gap),再跨 4 个 ds 取中位(`direction_by_var_t46.csv`);
-- **幅度分层**(v2)= 同一 (ds×var) 内按 hist_std 三分位分层,层内按目标特征中位切分,各侧 common-ok mean MSE → rel_gap,差值跨 (ds×var) 单元取中位(`amplitude_strat_t46.csv` / `_summary_`);
+- **幅度分层**(v2)= 同一 (ds×var) 单元内:切分阈值取**该单元全部非近常数样本**的目标特征中位数(先于分层确定,不随幅度层重算),在 hist_std 三分位层内应用该阈值;各侧取 common-ok 样本,rel_gap 由**各侧组均 MSE** 代入 (a−b)/(a+b+1e-12)(非逐样本 gap 的均值);两侧均非空才计 delta,一侧为空的比较丢弃(有效比较 749/1008 行;部分比较一侧仅 **1–4 个样本**),delta 跨 (ds×var) 单元取中位(`amplitude_strat_t46.csv` / `_summary_`);
 - 共同样本:两两比较用双方均成功;四方法排名用四者共同;覆盖率细分到特征组;
 - 共同困难:每 (ds×var×方法) 各自 ok 样本 90 分位阈值,四者共同成功样本全部达标判共同困难,允许空;
 - 案例:明显较好 = VTS 排名 1 且 MSE<0.8×次优;明显较差 = 排名 4 且 MSE>1.25×次差(margin=VTS/次差);每类每 ds margin 前 2,不足则空缺;
