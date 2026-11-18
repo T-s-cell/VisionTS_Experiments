@@ -6,10 +6,13 @@
   table_tertile_t46.csv       (ds×var×特征×三分位) 各方法误差 + 两两绝对/相对 gap
   coverage_by_group_t46.csv   覆盖率细分到特征组
   direction_summary_t46.csv   方向一致性:high−low 符号计数 / 单调计数 / 中位差
+  direction_by_var_t46.csv    per-var 方向:每 ds 取 high−low,再跨 ds 取中位(口径显式)
+  amplitude_strat_t46.csv     幅度分层:hist_std 三分位内特征中位切分的 rel_gap
+  amplitude_strat_summary_t46.csv  分层汇总(每 cell 一 delta,跨 cell 中位)
   joint_hard_t46.csv          共同困难清单(90 分位阈值 per ds×var×method,允许空)
   joint_hard_summary_t46.csv  共同困难 vs 其余:各方法 MSE / gap
   cases_t46.csv               明显较好/较差案例(确定性规则,排除近常数)
-  analyze_meta_t46.json       汇总(近常数/方向计数/ledger 状态统计)
+  analyze_meta_t46.json       汇总(近常数/方向计数/案例候选数/ledger 状态统计)
 
 口径:
 - tertile:每 (ds×var) 内非近常数 64 样本,特征 np.quantile 1/3、2/3 分箱
@@ -33,6 +36,7 @@ import numpy as np
 from t46_common import CHANNELS, DS_ORDER, sample_list_path
 
 FEATURES = ['period_corr', 'recent_old', 'trend', 'vol', 'hist_std']
+AMP_FEATURES = ['period_corr', 'recent_old', 'trend', 'vol']  # 幅度分层内比较的特征(hist_std 自身除外)
 PAIRS = [('vts', 'moirai'), ('vts', 'autoets'), ('vts', 'autoarima')]
 METHODS = ['vts', 'moirai', 'autoets', 'autoarima']
 FEAT_LABEL = dict(period_corr='周期一致性', recent_old='近旧周期差', trend='趋势强度',
@@ -111,6 +115,8 @@ def main(repo_root, save_dir):
 
     # ---------- 三分位表 + 覆盖率 + 方向汇总 ----------
     tert_rows, cov_rows = [], []
+    amp_rows = []
+    amp_acc = {}  # (feat,pair,hist_t) -> [delta across (ds,var)]
     direction = {}  # (feat,pair) -> list of (rel_low, rel_mid, rel_high)
     for (ds, var) in sorted(by_ds_var):
         cell = by_ds_var[(ds, var)]
@@ -157,12 +163,51 @@ def main(repo_root, save_dir):
                                       '%.12g' % hs])
                     if common and mvv is not None:
                         direction.setdefault((feat, (mv, mb)), {})[(ds, var, t)] = rel_gap
+        # 幅度分层:同一 hist_std 三分位内,按特征中位切分比较 rel_gap(相近幅度下检验特征效应)
+        htert = tertile_by_feat['hist_std']
+        for feat in AMP_FEATURES:
+            fv = {sid: feats[sid][feat] for sid in valid}
+            med = float(np.median([fv[sid] for sid in valid]))
+            side = {sid: (0 if fv[sid] < med else 1) for sid in valid}
+            for t in (0, 1, 2):
+                strat = [sid for sid in valid if htert[sid] == t]
+                for (mv, mb) in PAIRS:
+                    per = {}
+                    for s2 in (0, 1):
+                        ids_s = [sid for sid in strat if side[sid] == s2
+                                 and met[sid]['ok'][mv] and met[sid]['ok'][mb]]
+                        if ids_s:
+                            a = float(np.mean([met[sid]['mse'][mv] for sid in ids_s]))
+                            b = float(np.mean([met[sid]['mse'][mb] for sid in ids_s]))
+                            per[s2] = (len(ids_s), (a - b) / (a + b + 1e-12))
+                        else:
+                            per[s2] = None
+                    lo_r, hi_r = per[0], per[1]
+                    delta = (hi_r[1] - lo_r[1]) if (lo_r and hi_r) else None
+                    amp_rows.append([ds, var, feat, FEAT_LABEL[feat], mv + '_vs_' + mb,
+                                     TERTILE_NAME[t],
+                                     lo_r[0] if lo_r else 0, '%.12g' % lo_r[1] if lo_r else '',
+                                     hi_r[0] if hi_r else 0, '%.12g' % hi_r[1] if hi_r else '',
+                                     '%.12g' % delta if delta is not None else ''])
+                    if delta is not None:
+                        amp_acc.setdefault((feat, mv + '_vs_' + mb, t), []).append(delta)
     wr(os.path.join(save_dir, 'table_tertile_t46.csv'),
        ['ds', 'var', 'feature', 'feature_cn', 'tertile', 'pair', 'n_cell', 'n_common',
         'mse_vts', 'mse_base', 'abs_gap', 'rel_gap', 'mae_vts', 'mae_base', 'hist_std_mean'],
        tert_rows)
     wr(os.path.join(save_dir, 'coverage_by_group_t46.csv'),
        ['ds', 'var', 'feature', 'tertile', 'method', 'n_cell', 'n_ok', 'coverage'], cov_rows)
+    wr(os.path.join(save_dir, 'amplitude_strat_t46.csv'),
+       ['ds', 'var', 'feature', 'feature_cn', 'pair', 'hist_tertile',
+        'n_feat_low', 'rel_gap_feat_low', 'n_feat_high', 'rel_gap_feat_high', 'delta'], amp_rows)
+    amp_sum = []
+    for (feat, pair, t), dl in sorted(amp_acc.items()):
+        amp_sum.append([feat, pair, TERTILE_NAME[t], len(dl),
+                        sum(x > 0 for x in dl), sum(x < 0 for x in dl),
+                        '%.12g' % float(np.median(dl))])
+    wr(os.path.join(save_dir, 'amplitude_strat_summary_t46.csv'),
+       ['feature', 'pair', 'hist_tertile', 'n_cells', 'n_delta_pos', 'n_delta_neg',
+        'median_delta'], amp_sum)
 
     dir_rows = []
     for (feat, (mv, mb)), d in sorted(direction.items(), key=lambda kv: (kv[0][0], kv[0][1][0])):
@@ -185,6 +230,25 @@ def main(repo_root, save_dir):
     wr(os.path.join(save_dir, 'direction_summary_t46.csv'),
        ['feature', 'pair', 'n_cells_valid', 'n_high_gt_low', 'n_low_gt_high',
         'n_monotone_nondecreasing', 'median_rel_gap_high_minus_low'], dir_rows)
+
+    # per-var 方向(显式口径:每 ds 先取 high−low,再跨 ds 取中位;正 = VTS 相对弱势线索)
+    dvar_rows = []
+    for (feat, (mv, mb)), d in sorted(direction.items(), key=lambda kv: (kv[0][0], kv[0][1][0])):
+        for var in CHANNELS:
+            deltas = []
+            for ds in DS_ORDER:
+                lo = d.get((ds, var, 0))
+                hi = d.get((ds, var, 2))
+                if lo is None or hi is None:
+                    continue
+                deltas.append(hi - lo)
+            if deltas:
+                dvar_rows.append([feat, mv + '_vs_' + mb, var, len(deltas),
+                                  sum(x > 0 for x in deltas), sum(x < 0 for x in deltas),
+                                  '%.12g' % float(np.median(deltas))])
+    wr(os.path.join(save_dir, 'direction_by_var_t46.csv'),
+       ['feature', 'pair', 'var', 'n_ds_valid', 'n_ds_high_gt_low', 'n_ds_low_gt_high',
+        'median_delta_across_ds'], dvar_rows)
 
     # ---------- 共同困难(90 分位 per ds×var×method;四者共同成功样本) ----------
     jh_rows = []
@@ -234,6 +298,7 @@ def main(repo_root, save_dir):
 
     # ---------- 案例(确定性;四者共同成功、非近常数) ----------
     case_rows = []
+    case_cand = {}
     for ds in DS_ORDER:
         cands = [sid for sid in com4_all
                  if met[sid]['ds'] == ds and not feats[sid]['near_constant']]
@@ -244,8 +309,9 @@ def main(repo_root, save_dir):
             rank_v = int(np.where(order == 0)[0][0])
             if rank_v == 0 and mse4[0] < 0.8 * mse4[order[1]]:
                 better.append((mse4[order[1]] / mse4[0], sid, rank_v))
-            if rank_v == 3 and mse4[3] > 1.25 * mse4[order[2]]:
-                worse.append((mse4[3] / mse4[order[2]], sid, rank_v))
+            if rank_v == 3 and mse4[0] > 1.25 * mse4[order[2]]:
+                worse.append((mse4[0] / mse4[order[2]], sid, rank_v))
+        case_cand[ds] = dict(n_better_cand=len(better), n_worse_cand=len(worse))
         for cls, lst in (('better', better), ('worse', worse)):
             lst.sort(key=lambda x: (-x[0], x[1]))
             for margin, sid, rank_v in lst[:2]:
@@ -261,12 +327,13 @@ def main(repo_root, save_dir):
                 direction_summary=[dict(zip(
                     ['feature', 'pair', 'n_cells_valid', 'n_high_gt_low',
                      'n_low_gt_high', 'n_monotone', 'median_delta'], r)) for r in dir_rows],
-                n_joint_hard=len(jh_ids), n_cases=len(case_rows),
+                n_joint_hard=len(jh_ids), n_cases=len(case_rows), case_candidates=case_cand,
                 ledger=dict([('{}_{}'.format(m, s), c) for (m, s), c in sorted(ledger_stat.items())]))
     with open(os.path.join(save_dir, 'analyze_meta_t46.json'), 'w') as f:
         json.dump(meta, f, indent=1)
-    print('analyze done: nc=%d com4=%d joint_hard=%d cases=%d'
-          % (n_nc, len(com4_all), len(jh_ids), len(case_rows)))
+    print('analyze done: nc=%d com4=%d joint_hard=%d cases=%d cands=%s'
+          % (n_nc, len(com4_all), len(jh_ids), len(case_rows),
+             {d: c['n_worse_cand'] for d, c in case_cand.items()}))
 
 
 if __name__ == '__main__':
