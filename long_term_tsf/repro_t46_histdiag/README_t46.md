@@ -1,5 +1,7 @@
 # EXP-046:VisionTS 历史特征诊断(验证集,H=96,四方法对照)
 
+状态:**已冻结**(2026-11-19 评审通过,v3 终版;冻结分支 `repro/ltsf-t46-histdiag`)| 十门禁 ALL PASS(verify_t46.json,G1–G10)| 审计包 `temp/VisionTS_t46_histdiag_20261118_v3.tar.gz` sha256 `626bacba…c9fbd53`(v1 bc2650d8 / v2 b3118c95 作废)| eta 与本地产物(含 16 张案例 png)md5 全同。
+
 目的:观察 VisionTS 在哪些输入历史特征下相对对照方法变差;区分「VisionTS 相对弱势线索」与「样本本身难(各方法共同变难)」。只发现线索,不支持机制结论;窗口重叠,1792 样本仅描述性分析。
 
 ## 方法
