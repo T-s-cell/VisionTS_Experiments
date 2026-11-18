@@ -13,7 +13,7 @@ import sys
 
 import numpy as np
 
-from t46_common import DS_CFG, DS_ORDER, H, SAMPLE_LIST, load_csv, std_all, train_scaler
+from t46_common import DS_CFG, DS_ORDER, H, load_csv, sample_list_path, std_all, train_scaler
 
 METHODS = ['vts', 'moirai', 'autoets', 'autoarima']
 PAIRS = [('vts', 'moirai'), ('vts', 'autoets'), ('vts', 'autoarima')]
@@ -33,7 +33,7 @@ def main(repo_root, save_dir):
     matplotlib.use('Agg')
     import matplotlib.pyplot as plt
 
-    samples = list(csv.DictReader(open(os.path.join(repo_root, SAMPLE_LIST))))
+    samples = list(csv.DictReader(open(sample_list_path())))
     cases = list(csv.DictReader(open(os.path.join(save_dir, 'cases_t46.csv'))))
     png_dir = os.path.join(save_dir, 'cases_png')
     os.makedirs(png_dir, exist_ok=True)

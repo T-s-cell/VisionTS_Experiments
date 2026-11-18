@@ -1,6 +1,6 @@
 """EXP-046:分析(口径冻结于 feature_formulas.md,分析前落盘)。
 
-输入:features_t46.csv / per_sample_metrics_t46.csv / sample_list_t46.csv / failure_ledger.csv
+输入:features_t46.csv / per_sample_metrics.csv / sample_list_t46.csv / failure_ledger.csv
 输出:
   overall_t46.csv             总体表(各方法 own-ok 与四方法共同样本双口径 + 覆盖率)
   table_tertile_t46.csv       (ds×var×特征×三分位) 各方法误差 + 两两绝对/相对 gap
@@ -56,7 +56,7 @@ def main(repo_root, save_dir):
     samples = read_csv_dict(sample_list_path())
     feats_raw = read_csv_dict(os.path.join(os.path.dirname(os.path.abspath(__file__)),
                                            'features_t46.csv'))
-    mets_raw = read_csv_dict(os.path.join(save_dir, 'per_sample_metrics_t46.csv'))
+    mets_raw = read_csv_dict(os.path.join(save_dir, 'per_sample_metrics.csv'))
     assert len(samples) == 1792 and len(feats_raw) == 1792 and len(mets_raw) == 1792
 
     feats = {}

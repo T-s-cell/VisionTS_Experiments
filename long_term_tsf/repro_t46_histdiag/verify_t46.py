@@ -6,7 +6,7 @@ G2 真值/对齐:四方法各 ds 数组内 true vs csv 标准化 f64 重算 maxd
    覆盖全部 1792 样本;item_ids/start_rows/arr_index 与清单逐行一致;历史窗不越界;
 G3 覆盖率与台账:metrics csv 每方法 n_ok 与 collect_meta 一致;sfdx 两方法
    ledger (sid,status) 多重集 == npz status 数组;ledger 无重复样本行;
-G4 表格重算:overall_t46.csv 由 per_sample_metrics_t46.csv 独立重算,值一致(≤1e-9);
+G4 表格重算:overall_t46.csv 由 per_sample_metrics.csv 独立重算,值一致(≤1e-9);
 G5 有限性:各方法 ok 样本预测全有限;失败样本 pred 行不参与指标(NaN);
 G6 item_id↔起点:moirai item_id↔start_rows 与清单逐行核对(G2 内执行,此处单列报告)。
 输出 verify_t46.json;打印各门禁结果。
@@ -41,7 +41,7 @@ def main(repo_root, save_dir):
     with open(sha_path) as f:
         sha_recorded = f.read().strip().split()[0]
     g1_sha = sha_actual == sha_recorded
-    with open(list_path) as f:
+    with open(list_path, newline='') as f:
         content = f.read()
     buf = io.StringIO()
     w = csv.writer(buf, lineterminator='\r\n')  # 与 select_t46.py csv.writer 默认一致
@@ -101,9 +101,9 @@ def main(repo_root, save_dir):
     assert g6, 'G6 FAIL'
 
     # ---------- G3 ----------
-    mets = rows_of(os.path.join(save_dir, 'per_sample_metrics_t46.csv'))
+    mets = rows_of(os.path.join(save_dir, 'per_sample_metrics.csv'))
     assert len(mets) == 1792
-    with open(os.path.join(save_dir, 'collect_meta_t46.json')) as f:
+    with open(os.path.join(save_dir, 'collect_meta.json')) as f:
         cmeta = json.load(f)
     g3 = dict(per_method={})
     for m in METHODS:
