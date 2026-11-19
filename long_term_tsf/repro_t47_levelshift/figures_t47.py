@@ -3,11 +3,14 @@
 - fig_D_vs_m.png / fig_cost_vs_m.png:D、冲突代价 vs m/P;列 = 幅度(|δ|/s ∈ {0.5,1}),
   线 = 方向(down=δ<0 / up=δ>0),面板 = 方法;实线点 = median,空心点 = mean;
 - fig_method_diff_vs_m.png:ΔD(vts−对照,共同有效窗)vs m/P,直接回答"是否比对照更强";
-- 配对案例图:cases_t47.csv 每 (ds, sid, δ_idx) 一 png — 历史 A/B(压缩 stride=ceil(L/720),
-  末 4P 全密度高亮,B 偏移段橙色)+ 真值 y' + vts/moirai/autoets pred_A(实线)/pred_B(虚线);
-  m 取该配对 |D_vts| 最大的 m_idx(确定性);绘图真值 vs f64 重算恒等、vs npz true_p ≤1e-5,
-  违者中止;
-- fig_data_t47.npz:案例图全部落盘数组(verify G10 复核用)。
+- 配对案例图:cases_t47.csv 每 (ds, sid, δ_idx, m_idx) 一 png — 历史 A 与 B 完整历史
+  (压缩 stride=ceil(L/720),末 4P 全密度高亮,B = 原历史 + 仅末 m 步 +δ,橙色整线)+
+  真值 y' + vts/moirai/autoets pred_A(实线)/pred_B(虚线);
+  选样在 (sid, δ_idx, m_idx) 粒度:三主方法该 m 均有效且 |D_vts| 最大(确定性);
+  标题 D 与所选 (sid,δ,m) 同源(内部断言 ≤1e-9);绘图真值 vs f64 重算恒等、
+  vs npz true_p ≤1e-5,违者中止;
+- fig_data_t47.npz:案例图全部落盘数组 + case meta(sid/di/mi/rgAB/D_vts)
+  (verify G10/G12 复核用)。
 """
 import csv
 import math
@@ -16,7 +19,7 @@ import sys
 
 import numpy as np
 
-from t47_common import METHODS, MAIN_METHODS, DS_CFG, apply_variant, manifest_path
+from t47_common import METHODS, MAIN_METHODS, DS_CFG, M_MULTS, apply_variant, manifest_path
 
 CONTRAST_PAIRS = [('vts', 'moirai'), ('vts', 'autoets'), ('vts', 'autoarima')]
 COLORS = dict(vts='tab:red', moirai='tab:blue', autoets='tab:green', autoarima='tab:purple',
@@ -31,34 +34,36 @@ def read_csv_dicts(path):
 
 
 def select_cases(save_dir):
-    """每 ds 选 1 个 (sid,δ_idx):vts/moirai/autoets 全有效且 |D_vts| 最大(确定性)。"""
+    """每 ds 选 1 个 (sid,δ_idx,m_idx):三主方法该 m 均有效且 |D_vts| 最大(确定性)。"""
     pairs = read_csv_dicts(os.path.join(save_dir, 'pairs_t47.csv'))
     by = {}
     for r in pairs:
-        by.setdefault((r['ds'], int(r['sid_t46']), int(r['delta_idx'])), {})[r['method']] = \
-            (float(r['D']), int(r['ok_A']) and int(r['ok_B']))
+        by.setdefault((r['ds'], int(r['sid_t46']), int(r['delta_idx']), int(r['m_idx'])), {})[
+            r['method']] = (float(r['D']), int(r['ok_A']) and int(r['ok_B']))
     picked = []
     for ds in dict.fromkeys(k[0] for k in sorted(by)):
         cand = []
-        for (d, sid, di), mm in sorted(by.items()):
+        for (d, sid, di, mi), mm in sorted(by.items()):
             if d != ds:
                 continue
             if all(m in mm and mm[m][1] for m in ('vts', 'moirai', 'autoets')):
-                cand.append((abs(mm['vts'][0]), sid, di, mm['vts'][0]))
+                cand.append((abs(mm['vts'][0]), sid, di, mi, mm['vts'][0]))
         if cand:
-            _, sid, di, D = sorted(cand, key=lambda t: (-t[0], t[1], t[2]))[0]
-            picked.append((ds, sid, di, D))
+            _, sid, di, mi, D = sorted(cand, key=lambda t: (-t[0], t[1], t[2], t[3]))[0]
+            picked.append((ds, sid, di, mi, D))
     with open(manifest_path()) as f:
         man_a = {(int(r['sid_t46']), int(r['delta_idx'])): r for r in csv.DictReader(f)
                  if r['group'] == 'A'}
     rows = []
-    for ds, sid, di, D in picked:
+    for ds, sid, di, mi, D in picked:
         a = man_a[(sid, di)]
-        rows.append([ds, sid, di, '%.12g' % D, a['cond_id'], a['var'], a['channel'], a['delta']])
+        rows.append([ds, sid, di, mi, '%.12g' % D, a['cond_id'], a['var'], a['channel'],
+                     a['delta']])
     path = os.path.join(save_dir, 'cases_t47.csv')
     with open(path, 'w', newline='') as f:
         w = csv.writer(f)
-        w.writerow(['ds', 'sid_t46', 'delta_idx', 'D_vts', 'cond_id_A', 'var', 'channel', 'delta'])
+        w.writerow(['ds', 'sid_t46', 'delta_idx', 'm_idx', 'D_vts', 'cond_id_A', 'var',
+                    'channel', 'delta'])
         w.writerows(rows)
     return rows
 
@@ -141,26 +146,31 @@ def main(repo_root, save_dir):
     pr_by = {}
     for r in pairs:
         if r['method'] == 'vts' and int(r['ok_A']) and int(r['ok_B']):
-            pr_by.setdefault((r['ds'], int(r['sid_t46']), int(r['delta_idx'])), []).append(r)
+            pr_by.setdefault((r['ds'], int(r['sid_t46']), int(r['delta_idx'])), {})[
+                int(r['m_idx'])] = float(r['D'])
     base_cache = {}
     figdata = {}
     max_true_diff = 0.0
     H = 96
     png_dir = os.path.join(save_dir, 'cases_png')
     os.makedirs(png_dir, exist_ok=True)
+    for old in os.listdir(png_dir):  # 清理上次运行的 stale 案例图,保证目录只含本次选样
+        if old.startswith('case_') and old.endswith('.png'):
+            os.remove(os.path.join(png_dir, old))
     for ic, c in enumerate(cases):
-        ds, sid, di = c[0], int(c[1]), int(c[2])
+        ds, sid, di, mi = c[0], int(c[1]), int(c[2]), int(c[3])
         cfg = DS_CFG[ds]
         L, P = cfg['L'], cfg['P']
         if ds not in base_cache:
             base_cache[ds] = np.load(os.path.join(save_dir, 'baseline_%s.npz' % ds))
         bz = base_cache[ds]
         w = {int(s): i for i, s in enumerate(bz['sid_t46'])}[sid]
-        delta = float(c[7])
-        mi_row = max(pr_by[(ds, sid, di)], key=lambda r: (abs(float(r['D'])), int(r['m_idx'])))
-        m_idx, m_over_P = int(mi_row['m_idx']), int(mi_row['m_over_P'])
+        delta = float(c[8])
+        D_title = float(c[4])  # 与标题同源:select_cases 选定的 (sid, di, mi) 配对值
+        assert abs(D_title - pr_by[(ds, sid, di)][mi]) <= 1e-9, (ds, sid, di, mi)
+        m_over_P = M_MULTS[mi]
         m_steps = m_over_P * P
-        cid_a, cid_b = di, 4 + 3 * di + m_idx
+        cid_a, cid_b = di, 4 + 3 * di + mi
         rg_a = int(next(r['row_global'] for r in man if int(r['sid_t46']) == sid
                         and int(r['cond_id']) == cid_a))
         rg_b = int(next(r['row_global'] for r in man if int(r['sid_t46']) == sid
@@ -178,13 +188,12 @@ def main(repo_root, save_dir):
         ax1.plot(np.arange(0, L, stride), xa[::stride], lw=0.7, color='gray',
                  label='history A (x+δ)')
         ax1.plot(np.arange(L - 4 * P, L), xa[-4 * P:], lw=1.0, color='gray')
-        bs = np.arange(L)[-m_steps:]
-        ax1.plot(bs, xb[-m_steps:], lw=1.0, color='tab:orange',
-                 label='history B last %dP (+δ only)' % m_over_P)
+        ax1.plot(np.arange(0, L, stride), xb[::stride], lw=0.8, color='tab:orange',
+                 label='history B full (last %dP +δ)' % m_over_P)
         ax1.axvspan(L - 4 * P, L, color='gold', alpha=0.15)
         ax1.set_xlim(0, L)
         ax1.set_title('case %d: %s sid=%d var=%s δ=%.3g m=%dP  D_vts=%.3g'
-                      % (ic, ds, sid, c[5], delta, m_over_P, float(c[3])), fontsize=10)
+                      % (ic, ds, sid, c[6], delta, m_over_P, D_title), fontsize=10)
         ax1.legend(fontsize=8)
         ax2.plot(np.arange(H), yp, color=COLORS['true'], lw=1.8, label="truth y'=y+δ")
         for m in MAIN_METHODS:
@@ -201,6 +210,8 @@ def main(repo_root, save_dir):
         figdata['case%d_true' % ic] = yp
         figdata['case%d_truep_vts_f32' % ic] = arrs['vts']['true_p'][rg_pos['vts'][rg_a]]
         figdata['case%d_rgAB' % ic] = np.array([rg_a, rg_b], dtype=np.int64)
+        figdata['case%d_meta' % ic] = np.array([sid, di, mi, rg_a, rg_b], dtype=np.int64)
+        figdata['case%d_D_vts' % ic] = np.float64(D_title)
         for m in MAIN_METHODS:
             figdata['case%d_predA_%s' % (ic, m)] = arrs[m]['pred'][rg_pos[m][rg_a]]
             figdata['case%d_predB_%s' % (ic, m)] = arrs[m]['pred'][rg_pos[m][rg_b]]

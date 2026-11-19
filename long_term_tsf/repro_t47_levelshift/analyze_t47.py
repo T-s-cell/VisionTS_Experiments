@@ -11,6 +11,7 @@
 - table_D_common_m.csv    "三 m 共同有效窗"子集的 D vs m(问题②口径)
 - s6_recheck_t47.csv      1792 窗 a/b/c/s/类别 + t46 各方法误差复用列
 - table_s6_t47.csv        类别 × (ds×var hist_std 三分位) × method 误差汇总
+                          (scope=class_common = 四方法共同有效窗;各类 n 见该表)
 - analysis_meta_t47.json  头条数字(报告由 gen_report_numbers 自动引用)
 
 口径(variant_formulas.md §4/§5):
@@ -156,15 +157,14 @@ def main(repo_root, save_dir):
        ['pair', 'sid_t46', 'ds', 'var', 'channel', 'delta_idx', 'm_idx', 'delta_mult',
         'm_over_P', 'D_diff', 'cost_diff'], diff_rows)
 
-    # 聚合表
-    def agg_table(rows, get_D, get_cost, extra_fields):
+    # 聚合表(scope key 值一律入聚合键:ds/var/方向/幅度必须真分组,不得塌缩)
+    def agg_table(rows, get_D, get_cost):
         acc = {}
         for r in rows:
             keys = scope_keys(r)
+            meth = r.get('method', r.get('pair'))
             for scope, key in keys.items():
-                k = (scope,) + ((key,) if extra_fields else ()) + \
-                    (r.get('method', r.get('pair')), float(r['m_over_P']))
-                acc.setdefault(k, []).append(r)
+                acc.setdefault((scope, key, meth, float(r['m_over_P'])), []).append(r)
         out = []
         for k, rs in sorted(acc.items()):
             ds_v = agg_stats([get_D(r) for r in rs])
@@ -182,13 +182,13 @@ def main(repo_root, save_dir):
          'm_over_P', 'D_diff', 'cost_diff'], map(str, row))},
         'D_diff': float(row[9]), 'cost_diff': float(row[10])} for row in diff_rows]
 
-    rows1 = agg_table(pr, lambda r: r['D'], lambda r: r['cost'], extra_fields=True)
+    rows1 = agg_table(pr, lambda r: r['D'], lambda r: r['cost'])
     wr(os.path.join(save_dir, 'table_D_cost_t47.csv'),
        ['scope', 'key', 'method', 'm_over_P', 'n', 'D_mean', 'D_median', 'D_pos_rate',
         'cost_mean', 'cost_median'], rows1)
-    rows2 = agg_table(dr, lambda r: r['D_diff'], lambda r: r['cost_diff'], extra_fields=False)
+    rows2 = agg_table(dr, lambda r: r['D_diff'], lambda r: r['cost_diff'])
     wr(os.path.join(save_dir, 'table_method_diff_t47.csv'),
-       ['scope', 'pair', 'm_over_P', 'n', 'Ddiff_mean', 'Ddiff_median', 'pos_rate',
+       ['scope', 'key', 'pair', 'm_over_P', 'n', 'Ddiff_mean', 'Ddiff_median', 'pos_rate',
         'costdiff_mean', 'costdiff_median'], rows2)
 
     # 问题②口径:每方法"三个 m 全部有效"的基准窗子集上 D vs m
@@ -266,21 +266,26 @@ def main(repo_root, save_dir):
 
     acc = {}
     for r in s6_rows:
+        keys = (('overall', '', ''), ('ds', r[1], ''), ('class', r[11], ''),
+                ('class_tert', r[11], tert[r[0]]))
+        vals = {}
         for m in METHODS:
             try:
                 ok = int(r[12 + 3 * METHODS.index(m)]) == 1
                 mse = float(r[13 + 3 * METHODS.index(m)])
             except (ValueError, IndexError):
                 continue
-            if not ok or not np.isfinite(mse):
-                continue
-            for key in (('overall', '', ''), ('ds', r[1], ''), ('class', r[11], ''),
-                        ('class_tert', r[11], tert[r[0]])):
-                acc.setdefault((m,) + key, []).append(mse)
+            if ok and np.isfinite(mse):
+                vals[m] = mse
+                for key in keys:
+                    acc.setdefault((m,) + key, []).append(mse)
+        if len(vals) == len(METHODS):  # 四方法共同有效窗(类级公平对比,ARIMA 覆盖少于全类)
+            for m, mse in vals.items():
+                acc.setdefault((m, 'class_common', r[11], ''), []).append(mse)
     s6_tab = []
     for key in sorted(acc):
         v = acc[key]
-        s6_tab.append([key[0], key[1], key[2], len(v),
+        s6_tab.append([key[0], key[1], key[2], key[3], len(v),
                        '%.12g' % float(np.mean(v)), '%.12g' % float(np.median(v))])
     wr(os.path.join(save_dir, 'table_s6_t47.csv'),
        ['method', 'scope', 'key1', 'key2', 'n_ok', 'mse_mean', 'mse_median'], s6_tab)

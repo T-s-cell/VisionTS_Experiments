@@ -1,8 +1,10 @@
-"""EXP-047 门禁(G1–G10),仿 t46 十门禁。任何 FAIL → 汇总 verify_t47.json + 退出码 1。
+"""EXP-047 门禁(G1–G12),仿 t46 十门禁 + v2 修订。任何 FAIL → 汇总 verify_t47.json + 退出码 1。
 
 G1  基准清单重放:subprocess 重跑 select_t47.py → sha 与 baseline_list_sha_t47.txt 一致
 G2  manifest 重放 + 构造恒等式:重跑 build_variants_t47.py → manifest sha 不变;
     s↔features 448 全量 ≤1e-8;抽样 64 行在线重建 A/B 逐位恒等
+    (v2 修订:按 cond_id 分层,每条件 4 行,覆盖全部 16 条件 = 全部 δ×m×组;
+    原 stride 抽样步长 112 ≡ 0 (mod 16),实际只覆盖 cond_id=0,已修正)
 G3  真值:各方法 npz true_p vs baseline y+δ(f64)maxdiff ≤1e-5
 G4  覆盖率:主方法各 7168 行;autoarima 448 行(ETTh1/ETTh2 rank≤1);
     ledger 行数与 ok 计数 ↔ npz status 一致
@@ -13,6 +15,13 @@ G8  D/cost/ΔD/Δcost 重算 ≤1e-9(pairs_t47.csv / method_diff_t47.csv)
 G9  §6 复核:a/b/c/类别 1792 全量重算一致(值 ≤1e-9)
 G10 图真值:fig_data_t47.npz 真值 vs f64 重算恒等、vs npz true_p ≤1e-5、
     各方法 pred 数组与 npz 逐位一致
+G11 汇总表一致性(v2 新增):四张表(table_D_cost / table_method_diff / table_D_common_m /
+    table_s6,含 hist_std 三分位与 class_common)从原始 CSV 独立重算,
+    n/mean/median/pos_rate ≤1e-9;表头列数 = 每数据行列数(v1 曾出现 s6 表 7 列表头
+    6 列数据、method_diff 分组塌缩,本门禁防回归)
+G12 案例图一致性(v2 新增):cases_t47.csv 的 (ds,sid,δ,m,D) ↔ pairs 有效行 ≤1e-9;
+    fig_data case meta(sid/di/mi/rgAB/D_vts)↔ manifest rg 公式与 B 行 m_steps 逐项一致;
+    案例数 = 4(每 ds 1 例,选样含 m 维,标题与绘制条件同源)
 
 用法:python verify_t47.py <repo_root> [save_dir]
 """
@@ -25,7 +34,7 @@ import sys
 
 import numpy as np
 
-from t47_common import (METHODS, S_TOL, SCRIPT_DIR, T46_DIR, apply_variant,
+from t47_common import (M_MULTS, METHODS, S_TOL, SCRIPT_DIR, T46_DIR, apply_variant,
                         baseline_list_path, manifest_path)
 
 TRUE_TOL = 1e-5
@@ -85,7 +94,16 @@ def main(repo_root, save_dir):
                 if d > S_TOL:
                     g2, detail = False, 's mismatch ds=%s sid=%d diff=%.2e' % (ds, sid, d)
     if g2:
-        for k in range(0, 7168, 7168 // 64):  # 64 行,固定 stride 覆盖各 ds/group/m
+        by_cid = {}
+        for i, r_ in enumerate(man):
+            by_cid.setdefault(int(r_['cond_id']), []).append(i)
+        sample_rows = []
+        for cid in sorted(by_cid):
+            glist = by_cid[cid]
+            step = max(1, len(glist) // 4)
+            sample_rows.extend(glist[::step][:4])
+        assert len(sample_rows) == 64 and len({man[k]['cond_id'] for k in sample_rows}) == 16
+        for k in sample_rows:  # 64 行 = 16 条件 × 各 4 行,覆盖全部 δ×m×组
             r_ = man[k]
             x = base[r_['ds']]['x'][sid_row[r_['ds']][int(r_['sid_t46'])]]
             delta, g_, m_steps = float(r_['delta']), r_['group'], int(r_['m_steps'] or 0)
@@ -257,6 +275,165 @@ def main(repo_root, save_dir):
     if worst10 > TRUE_TOL:
         g10 = False
     ok('G10', g10, 'cases=%d truep diff=%.3e' % (ncase, worst10))
+
+    # G11 汇总表一致性(从原始 CSV 独立重算;表头列数 = 每数据行列数)
+    g11 = True
+    d11 = []
+
+    def stats_v(vals):
+        a = np.asarray([x for x in vals if np.isfinite(x)], dtype=np.float64)
+        return (int(len(a)), float(a.mean()), float(np.median(a)), float((a > 0).mean()))
+
+    def scope_keys_v(r):
+        direction = 'down' if float(r['delta_mult']) < 0 else 'up'
+        return {'overall': 'all', 'ds': r['ds'], 'var': r['var'], 'direction': direction,
+                'amplitude': '%.1f' % abs(float(r['delta_mult']))}
+
+    def tbl_check(name, path, fields, rows_expect):
+        nonlocal g11
+        bad = None
+        try:
+            with open(path) as f:
+                rd = list(csv.reader(f))
+        except OSError as e:
+            bad, rd = str(e), []
+        if bad is None:
+            if not rd or rd[0] != fields:
+                bad = 'header=%s' % (rd[0] if rd else 'empty')
+            elif any(len(r) != len(fields) for r in rd[1:]):
+                bad = 'row width != header'
+            elif len(rd) - 1 != len(rows_expect):
+                bad = 'n_rows %d != %d' % (len(rd) - 1, len(rows_expect))
+            else:
+                for got, want in zip(rd[1:], rows_expect):
+                    for gv, wv in zip(got, want):
+                        if isinstance(wv, float):
+                            if abs(float(gv) - wv) > RECOMP_TOL:
+                                bad = '%s!=%s' % (gv, wv)
+                                break
+                        elif isinstance(wv, int):
+                            if int(gv) != wv:
+                                bad = '%s!=%s' % (gv, wv)
+                                break
+                        elif gv != str(wv):
+                            bad = '%s!=%s' % (gv, wv)
+                            break
+                    if bad:
+                        break
+        if bad:
+            g11 = False
+        d11.append('%s=%s' % (name, bad or 'ok'))
+
+    def agg_v(rows, val_of, id_of, cost_of):
+        accd, accc = {}, {}
+        for r in rows:
+            for scope, key in scope_keys_v(r).items():
+                k = (scope, key, id_of(r), float(r['m_over_P']))
+                accd.setdefault(k, []).append(val_of(r))
+                accc.setdefault(k, []).append(cost_of(r))
+        out = []
+        for k in sorted(accd):
+            dv, cv = stats_v(accd[k]), stats_v(accc[k])
+            out.append([k[0], k[1], k[2], k[3], dv[0], dv[1], dv[2], dv[3], cv[1], cv[2]])
+        return out
+
+    tbl_check('D_cost', os.path.join(save_dir, 'table_D_cost_t47.csv'),
+              ['scope', 'key', 'method', 'm_over_P', 'n', 'D_mean', 'D_median', 'D_pos_rate',
+               'cost_mean', 'cost_median'],
+              agg_v(pairs, lambda r: float(r['D']), lambda r: r['method'],
+                    lambda r: float(r['cost'])))
+    tbl_check('method_diff', os.path.join(save_dir, 'table_method_diff_t47.csv'),
+              ['scope', 'key', 'pair', 'm_over_P', 'n', 'Ddiff_mean', 'Ddiff_median',
+               'pos_rate', 'costdiff_mean', 'costdiff_median'],
+              agg_v(diffs, lambda r: float(r['D_diff']), lambda r: r['pair'],
+                    lambda r: float(r['cost_diff'])))
+    have = {}
+    for r in pairs:
+        if float(r['D']) == float(r['D']):
+            have.setdefault((r['method'], int(r['sid_t46']), int(r['delta_idx']),
+                             int(r['m_idx'])), (float(r['D']), float(r['cost'])))
+    common_expect = []
+    for m in METHODS:
+        ks = sorted({k[1:] for k in have if k[0] == m and k[3] == 0})
+        keep = [k for k in ks if all((m, k[0], k[1], mi) in have for mi in range(3))]
+        for mi in range(3):
+            dv = stats_v([have[(m, k[0], k[1], mi)][0] for k in keep])
+            cv = stats_v([have[(m, k[0], k[1], mi)][1] for k in keep])
+            common_expect.append([m, M_MULTS[mi], dv[0], dv[1], dv[2], dv[3], cv[1], cv[2]])
+    tbl_check('D_common_m', os.path.join(save_dir, 'table_D_common_m.csv'),
+              ['method', 'm_over_P', 'n_common_windows', 'D_mean', 'D_median', 'D_pos_rate',
+               'cost_mean', 'cost_median'], common_expect)
+    from t46_common import DS_ORDER as DS_ORDER_V
+    featsv = {int(x['sample_id']): x for x in read_csv_dicts(
+        os.path.join(T46_DIR, 'features_t46.csv'))}
+    s6r = read_csv_dicts(os.path.join(save_dir, 's6_recheck_t47.csv'))
+    tertv = {}
+    for ds in DS_ORDER_V:
+        for v_ in dict.fromkeys(r['var'] for r in s6r if r['ds'] == ds):
+            grp = [r for r in s6r if r['ds'] == ds and r['var'] == v_
+                   and featsv[int(r['sample_id'])]['near_constant'] == 'False']
+            vals = [float(r['s']) for r in grp]
+            q1, q2 = float(np.quantile(vals, 1 / 3)), float(np.quantile(vals, 2 / 3))
+            for r in grp:
+                sv = float(r['s'])
+                tertv[int(r['sample_id'])] = ('low' if sv <= q1 else
+                                              ('mid' if sv <= q2 else 'high'))
+    accv = {}
+    for r in s6r:
+        keys = (('overall', '', ''), ('ds', r['ds'], ''), ('class', r['class'], ''),
+                ('class_tert', r['class'], tertv[int(r['sample_id'])]))
+        vals = {}
+        for m in METHODS:
+            if r['ok_%s' % m] == '1':
+                mse = float(r['mse_%s' % m])
+                if np.isfinite(mse):
+                    vals[m] = mse
+                    for key in keys:
+                        accv.setdefault((m,) + key, []).append(mse)
+        if len(vals) == len(METHODS):
+            for m, mse in vals.items():
+                accv.setdefault((m, 'class_common', r['class'], ''), []).append(mse)
+    s6_expect = [[k[0], k[1], k[2], k[3], len(accv[k]), float(np.mean(accv[k])),
+                  float(np.median(accv[k]))] for k in sorted(accv)]
+    tbl_check('s6', os.path.join(save_dir, 'table_s6_t47.csv'),
+              ['method', 'scope', 'key1', 'key2', 'n_ok', 'mse_mean', 'mse_median'], s6_expect)
+    ok('G11', g11, '; '.join(d11)[:300])
+
+    # G12 案例图一致性(cases ↔ pairs ↔ fig_data meta ↔ manifest)
+    g12 = True
+    d12 = []
+    with open(os.path.join(save_dir, 'cases_t47.csv')) as f:
+        cases = list(csv.DictReader(f))
+    man_rg = {(int(r['sid_t46']), int(r['cond_id'])): int(r['row_global']) for r in man}
+    if len(cases) != 4:
+        g12 = False
+        d12.append('n_cases=%d expect 4' % len(cases))
+    for i, c in enumerate(cases):
+        sid, di, mi = int(c['sid_t46']), int(c['delta_idx']), int(c['m_idx'])
+        pv = pp.get(('vts', sid, di, mi))
+        bad = None
+        if pv is None or pv['D'] != pv['D'] or \
+                abs(float(c['D_vts']) - float(pv['D'])) > RECOMP_TOL:
+            bad = 'D vs pairs'
+        elif not (int(pv['ok_A']) == 1 and int(pv['ok_B']) == 1):
+            bad = 'pair not ok'
+        else:
+            rg_a, rg_b = man_rg[(sid, di)], man_rg[(sid, 4 + 3 * di + mi)]
+            rb = man[rg_b]
+            if int(rb['m_steps']) != M_MULTS[mi] * int(rb['P']):
+                bad = 'm_steps vs manifest'
+            elif not np.array_equal(figd['case%d_meta' % i],
+                                    np.array([sid, di, mi, rg_a, rg_b], dtype=np.int64)):
+                bad = 'meta vs manifest'
+            elif not np.array_equal(figd['case%d_rgAB' % i],
+                                    np.array([rg_a, rg_b], dtype=np.int64)):
+                bad = 'rgAB vs manifest'
+            elif abs(float(figd['case%d_D_vts' % i]) - float(c['D_vts'])) > 0.0:
+                bad = 'fig D vs cases'
+        if bad:
+            g12 = False
+            d12.append('case%d(%s sid%d) %s' % (i, c['ds'], sid, bad))
+    ok('G12', g12, '; '.join(d12)[:300] if d12 else '4 cases ok')
 
     all_pass = all(v['pass_'] for v in gates.values())
     with open(os.path.join(save_dir, 'verify_t47.json'), 'w') as f:

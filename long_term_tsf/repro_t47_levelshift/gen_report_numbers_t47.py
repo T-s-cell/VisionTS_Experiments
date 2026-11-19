@@ -136,8 +136,11 @@ def main(repo_root, save_dir):
         for part, doc in num['smoke'].get('parts', {}).items():
             if isinstance(doc, dict) and 'checks' in doc:
                 for name, c in doc['checks'].items():
-                    L.append('- %s / %s: pass=%s detail=%s' % (part, name, c['pass'], {
-                        k: v for k, v in c.items() if k not in ('name', 'pass')}))
+                    detail = {k: v for k, v in c.items() if k not in ('name', 'pass', 'rows')}
+                    if 'rows' in c:
+                        detail['n_rows'] = len(c['rows'])
+                        detail['rows'] = 'see smoke_report_t47.json'
+                    L.append('- %s / %s: pass=%s detail=%s' % (part, name, c['pass'], detail))
         L.append('')
 
     with open(os.path.join(save_dir, 'report_tables_t47.md'), 'w') as f:

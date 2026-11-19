@@ -12,9 +12,11 @@ S1-b 新组织核对:同批输入走 t47 单变量 [32,L,1] 路径 vs S1-a ≤1e
 (两项实测差值入 json;超限先排查,不自动放宽);
 S2 δ=0:A/B 构造输入逐位相同,两次实际推理(每次前重置种子 2021)预测逐位一致;
 S3 配对恒等式:A/B 末 m 步逐位相同、B 末点 = x[-1]+δ、真值 y'=y+δ 共享,
-manifest δ 与 s·delta_mult 一致(rtol 1e-11,%.12g 落盘精度);
+manifest δ 与 s·delta_mult 一致(rtol 1e-11,%.12g 落盘精度);逐行明细(64 行
+delta_ok/identity)写入 smoke_report_t47.json;
 S4 对齐:npz item/cond/row_global ↔ manifest 冒烟子集逐行一致,
-true_p vs f64 重算(y+δ)≤1e-5,sfdx ok 行有限/失败行 NaN。
+true_p vs f64 重算(y+δ)≤1e-5,sfdx ok 行有限/失败行 NaN;逐行明细
+(item/cond/rg 一致布尔 + true_p 差值)写入 smoke_report_t47.json。
 """
 import csv
 import json
@@ -267,37 +269,43 @@ def part_finalize(save_dir):
     smoke = smoke_subset(man)
     checks = {}
 
-    # S3:构造恒等式(全部 64 冒烟行;按 (sid, delta_idx) 配 A 与 3 个 B)
+    # S3:构造恒等式(全部 64 冒烟行;按 (sid, delta_idx) 配 A 与 3 个 B;逐行明细入报告)
     by_sid_di = {}
     for r in smoke:
         by_sid_di.setdefault((r['ds'], int(r['sid_t46']), int(r['delta_idx'])), {})[
             int(r['cond_id'])] = r
-    n_ident = 0
+    s3_rows, n_ident = [], 0
     for (ds, sid, di), grp in sorted(by_sid_di.items()):
         bz = base_npz(save_dir, ds)
         sid_row = {int(s): i for i, s in enumerate(bz['sid_t46'])}
         x, y = bz['x'][sid_row[sid]], bz['y'][sid_row[sid]]
         P = int(next(iter(grp.values()))['P'])
         delta = float(next(iter(grp.values()))['delta'])
-        assert abs(delta - float(bz['s'][sid_row[sid]]) * DELTA_MULTS[di]) <= 1e-11 * max(1.0, abs(delta))
-        for cid, r in grp.items():
-            assert abs(float(r['delta']) - delta) == 0.0
+        delta_ok = abs(delta - float(bz['s'][sid_row[sid]]) * DELTA_MULTS[di]) \
+            <= 1e-11 * max(1.0, abs(delta))
+        for cid in sorted(grp):
+            r = grp[cid]
+            m_idx = int(r['m_idx']) if r['group'] == 'B' else None
+            ident = abs(float(r['delta']) - delta) == 0.0
             if r['group'] == 'A':
-                m_steps, xa = 0, apply_variant(x, delta, 0, 'A')
-                assert np.array_equal(xa, x + delta)
+                ident = ident and np.array_equal(apply_variant(x, delta, 0, 'A'), x + delta)
             else:
                 m_steps = int(r['m_steps'])
-                assert m_steps == M_MULTS[int(r['m_idx'])] * P
                 xb = apply_variant(x, delta, m_steps, 'B')
-                assert np.array_equal(xb[-m_steps:], (x + delta)[-m_steps:])
-                assert xb[-1] == x[-1] + delta
-                assert np.array_equal(xb[:-m_steps], x[:-m_steps])
+                ident = ident and m_steps == M_MULTS[m_idx] * P
+                ident = ident and np.array_equal(xb[-m_steps:], (x + delta)[-m_steps:])
+                ident = ident and xb[-1] == x[-1] + delta
+                ident = ident and np.array_equal(xb[:-m_steps], x[:-m_steps])
             yp = y + delta
-            assert np.isfinite(yp).all() and np.isfinite(x).all()
-            n_ident += 1
-    checks['S3_pair_identity'] = chk('S3', n_ident == 64, dict(n=n_ident, expect=64))
+            ident = ident and bool(np.isfinite(yp).all() and np.isfinite(x).all())
+            s3_rows.append(dict(row_global=int(r['row_global']), ds=ds, sid=sid,
+                                cond_id=cid, group=r['group'], delta_idx=di, m_idx=m_idx,
+                                delta_ok=bool(delta_ok), identity=bool(ident)))
+            n_ident += int(delta_ok and ident)
+    checks['S3_pair_identity'] = chk('S3', n_ident == 64, dict(n=n_ident, expect=64,
+                                                               rows=s3_rows))
 
-    # S4:npz ↔ manifest 对齐 + true_p vs f64 重算
+    # S4:npz ↔ manifest 对齐 + true_p vs f64 重算(逐行明细入报告)
     expected = dict(item=np.array([int(r['sid_t46']) for r in smoke], dtype=np.int64),
                     cond=np.array([int(r['cond_id']) for r in smoke], dtype=np.int64),
                     rg=np.array([int(r['row_global']) for r in smoke], dtype=np.int64))
@@ -309,17 +317,26 @@ def part_finalize(save_dir):
         p = os.path.join(save_dir, fn)
         z = np.load(p)
         emask = np.isin(expected['rg'], z['row_globals'])
-        ok = (np.array_equal(z['item_ids'], expected['item'][emask])
-              and np.array_equal(z['cond_ids'], expected['cond'][emask])
-              and np.array_equal(z['row_globals'], expected['rg'][emask]))
-        # true_p vs f64 重算
+        exp_item, exp_cond, exp_rg = expected['item'][emask], expected['cond'][emask], \
+            expected['rg'][emask]
+        ok = (np.array_equal(z['item_ids'], exp_item)
+              and np.array_equal(z['cond_ids'], exp_cond)
+              and np.array_equal(z['row_globals'], exp_rg))
+        rowdet = []
         dmax = 0.0
         for j, rg in enumerate(z['row_globals']):
             r = next(q for q in smoke if int(q['row_global']) == int(rg))
             bz = base_npz(save_dir, r['ds'])
             sid_row = {int(s): i for i, s in enumerate(bz['sid_t46'])}
             yp = (bz['y'][sid_row[int(r['sid_t46'])]] + float(r['delta'])).astype(np.float64)
-            dmax = max(dmax, float(np.max(np.abs(z['true_p'][j].astype(np.float64) - yp))))
+            dj = float(np.max(np.abs(z['true_p'][j].astype(np.float64) - yp)))
+            dmax = max(dmax, dj)
+            rowdet.append(dict(
+                row_global=int(rg),
+                item_ok=bool(z['item_ids'][j] == exp_item[j]),
+                cond_ok=bool(z['cond_ids'][j] == exp_cond[j]),
+                rg_ok=bool(z['row_globals'][j] == exp_rg[j]),
+                true_p_diff=dj))
         ok = ok and dmax <= TOL_TRUE
         if 'status' in z.files:
             st = z['status']
@@ -331,11 +348,16 @@ def part_finalize(save_dir):
         else:
             ok = ok and bool(np.isfinite(z['pred']).all())
         checks['S4_align_%s' % name] = chk('S4_%s' % name, ok,
-                                           dict(true_p_maxdiff=dmax, n=int(len(z['row_globals'])),
+                                           dict(true_p_maxdiff=dmax,
+                                                n=int(len(z['row_globals'])),
+                                                rows=rowdet,
                                                 **sfdx_status.get(name, {})))
 
-    # 汇总
+    # 汇总(含 finalize 自身的 S3/S4;此前 ALL_PARTS 不含 finalize,S3/S4 结果从未入报告)
     report = dict(parts={}, all_pass=all(c['pass'] for c in checks.values()))
+    report['parts']['finalize'] = dict(part='finalize', checks=checks,
+                                       all_pass=all(c['pass'] for c in checks.values()),
+                                       ts=time.strftime('%F %T'))
     for part in ALL_PARTS:
         p = os.path.join(SCRIPT_DIR, 'smoke_t47_%s.json' % part)
         if os.path.exists(p):
