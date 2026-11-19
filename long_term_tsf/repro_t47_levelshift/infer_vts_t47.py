@@ -15,7 +15,7 @@ import numpy as np
 import torch
 
 from t47_common import (CKPT_SHA, DS_CFG, DS_ORDER, N_CONDS, SCRIPT_DIR, T46_DIR,
-                        apply_variant, manifest_path, smoke_subset)
+                        apply_variant, manifest_path, pos46_map, smoke_subset)
 import random
 
 
@@ -67,6 +67,8 @@ def main(repo_root, save_dir, smoke=False):
     for ds in DS_ORDER:
         t0 = time.time()
         rows = [r for r in man if r['ds'] == ds]
+        if not rows:  # 冒烟模式仅含部分数据集
+            continue
         L, P = int(rows[0]['L']), int(rows[0]['P'])
         vm = load_vm(repo_root, L, P)
         bz = np.load(os.path.join(save_dir, 'baseline_%s.npz' % ds))
@@ -87,10 +89,10 @@ def main(repo_root, save_dir, smoke=False):
         # A 组等变性(事后核验,非门禁):pred_A vs t46 pred + δ
         t46 = np.load(os.path.join(T46_DIR, 'save_t46_histdiag', 'arr_vts_t46.npz'))
         t46_pred = t46['%s_pred' % ds]
-        sid_pos = {int(s): i for i, s in enumerate(sid_arr)}
+        pos46 = pos46_map()[ds]   # t46 arr 行 = 清单 ds 块序,非基准 npz 序
         for k, r in enumerate(rows):
             if r['group'] == 'A':
-                j = sid_pos[int(r['sid_t46'])]
+                j = pos46[int(r['sid_t46'])]
                 a_dev.append(float(np.max(np.abs(
                     pred_rows[k].astype(np.float64) - (t46_pred[j].astype(np.float64) + float(r['delta']))))))
         per_ds[ds] = dict(n=len(rows), seconds=round(time.time() - t0, 1))

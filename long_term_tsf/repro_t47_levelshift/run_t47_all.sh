@@ -11,6 +11,7 @@ SAVE_DIR="$SCRIPT_DIR/save_t47_levelshift"
 VTS_PY=${VTS_PY:-/dev_data/wlt/conda/envs/visionts/bin/python}
 T46_PY=${T46_PY:-/dev_data/wlt/conda/envs/t46diag/bin/python}
 export CUDA_VISIBLE_DEVICES=${GPU_ID:-0}
+export HF_HOME=${HF_HOME:-/dev_data/wlt/hf_cache}   # moirai-1.0-R-base 缓存(同 t46 约定)
 cd "$SCRIPT_DIR"
 
 echo "== [0/7] 冻结链(select + build;sha 必须与本地冻结值一致)"

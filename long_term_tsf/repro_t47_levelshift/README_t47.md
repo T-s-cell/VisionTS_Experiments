@@ -61,8 +61,18 @@ bash run_t47_all.sh /dev_data/wlt/VisionTS_Experiments/long_term_tsf
 
 冒烟(ETTh1+ETTm1 各 2 基准窗 ×16 条件 = 64 行):
 S1-a t43 原组织 [32,L,7] 复现 vs arr_vts_t46 ≤**1e-5**;
-S1-b t47 单变量 [bs,L,1] vs S1-a ≤**5e-4**(超限排查,不放宽);
+S1-b t47 单变量 [bs,L,1] vs S1-a ≤**1e-3**(修订记录见下节);
 S2 δ=0 A/B 逐位相同 + 两次实际推理逐位一致;S3 配对恒等式;S4 id 对齐 + true_p ≤1e-5。
+
+## S1-b 容差修订记录(2026-11-19,用户批准)
+
+- **原门禁失败**:2026-11-19 04:15 冒烟 S1-b 实测 max=8.242e-4 > 原 5e-4,流水线按 `set -e` 中止(smoke_t47_vts.json;失败现场存档 `smoke_t47_vts_FAIL_5e-4_20261119.json`)。同轮 S1-a(t43 原组织 [32,L,7] vs arr_vts_t46)= **0.0 逐位**,S2 δ=0 逐位 0。
+- **排查证据**(`diag_s1b_t47.py`/`diag_s1b2_t47.py`,JSON 随审计包):
+  1. 出处:实际运行类 = `VisionTS`(`visionts.model.VisionTS`;eta 源码 `model.py` sha `2ce8c017…` = 本地 HEAD 40475fde 提交版逐字节一致,ckpt sha 核验);
+  2. 通道独立:VisionTS.forward 将通道并入 batch(`b s n -> b n s` → `(b n) 1 f p`,model.py L115/119),**逐通道独立重建,无跨通道依赖**(初判"跨通道 attention"有误,已更正);实验证伪:仅改其他 6 通道内容、目标通道逐位不动 → 8/8 窗目标通道预测**逐位相同**;
+  3. 组织差([32,L,7] 有效 batch 224 vs [32,L,1] batch 32)为数值效应:实例归一化 mean/stdev 与 resize 渲染逐位为 0,首个差异步骤 = **patch_embed**(第一个卷积/GEMM,1.07e-3),沿 encoder 放大(~2.8e-2 激活尺度)decoder 收缩至 8.24e-4;同输入同种子两次前向逐位一致(确定性);
+  4. 影响量化(仅覆盖已测窗口:4 ds × 8 基准窗 × δ=±1.0·s × m=P,每 ds 16 对):换组织 |ΔD| max ≤ 2.4e-5、|Δcost| max ≤ 3.2e-5;表中"相对值" = 最大绝对差 ÷ 该组效应量中位数(≤ 9.2e-5 / ≤ 3.9e-4),**不是逐窗相对误差上限**。
+- **修订决定**:S1-b 容差 5e-4 → **1e-3**;单变量路径保留,不改 7 通道推理;S1-a ≤1e-5 与其他规格不变。重跑仅 VisionTS 门禁,其余三方法冒烟推理与门禁结果复用。
 
 ## 结论措辞纪律
 

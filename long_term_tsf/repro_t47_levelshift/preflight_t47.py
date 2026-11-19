@@ -57,7 +57,7 @@ def main(repo_root, save_dir, env):
 
     for rel in ('features_t46.csv', 'sample_list_t46.csv',
                 os.path.join('save_t46_histdiag', 'arr_vts_t46.npz'),
-                os.path.join('save_t46_histdiag', 'per_sample_metrics_t46.csv')):
+                os.path.join('save_t46_histdiag', 'per_sample_metrics.csv')):
         need(os.path.exists(os.path.join(T46_DIR, rel)), 't46 asset %s' % rel)
 
     if env == 'vts':

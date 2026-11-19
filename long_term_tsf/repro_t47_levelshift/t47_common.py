@@ -35,7 +35,13 @@ METHODS = ['vts', 'moirai', 'autoets', 'autoarima']
 MAIN_METHODS = ['vts', 'moirai', 'autoets']  # 全 7168 条件
 S_TOL = 1e-8       # 构造重算 s vs features_t46.csv hist_std
 SMOKE_TOL_T43 = 1e-5   # 冒烟 S1-a:t43 原组织复现 vs arr_vts_t46
-SMOKE_TOL_NEW = 5e-4   # 冒烟 S1-b:t47 单变量路径 vs S1-a 结果
+# 冒烟 S1-b:t47 单变量路径 vs S1-a 结果。
+# 修订记录(用户批准 2026-11-19):原 5e-4;首轮实测 8.242e-4 超限。核查(diag_s1b_t47/
+# diag_s1b2):VisionTS 通道独立(model.py L115/119 通道并入 batch),仅改其他 6 通道
+# 目标通道预测逐位不变;组织差首个差异步骤 = patch_embed(首个 GEMM,batch 224 vs 32
+# 数值效应);实测窗口(4ds×8窗,δ=±1.0s,m=P)换组织对 D 影响 ≤2.4e-5、cost ≤3.2e-5。
+# 修订为 1e-3,单变量路径不变;S1-a 仍 1e-5。
+SMOKE_TOL_NEW = 1e-3
 
 
 def cond_table():
@@ -73,6 +79,21 @@ def baseline_list_path():
 
 def manifest_path():
     return os.path.join(SCRIPT_DIR, 'manifest_t47.csv')
+
+
+def pos46_map():
+    """sample_id → t46 清单该 ds 块内位置 j(arr_vts_t46 行序)。
+
+    infer_vts_t46.py:pred[j] = pred_all[arr_index, :, ch],j 为 sample_list_t46.csv
+    中该 ds 448 行的枚举序;arr_index 是完整验证集窗口序号,不能直接索引 arr_vts_t46。
+    """
+    import csv
+    pos = {}
+    with open(sample_list_path()) as f:
+        for s in csv.DictReader(f):
+            d = pos.setdefault(s['ds'], {})
+            d[int(s['sample_id'])] = len(d)
+    return pos
 
 
 SMOKE_DS = ('ETTh1', 'ETTm1')  # 冒烟数据集:各取前 2 个基准窗口(清单行序)

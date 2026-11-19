@@ -7,7 +7,8 @@ finalize 汇总 smoke_report_t47.json,任一检查 FAIL 或缺部 → 退出码 
 S1-a t43 原组织复现:batch32×7通道 [32,L,7] forward(t43 同 env/权重/配置:
 mae_base/ln/ckpt sha 核验/bilinear/norm=align=0.4/periodicity=P/seed 2021),
 冒烟窗通道输出 vs arr_vts_t46.npz 切片 ≤1e-5;
-S1-b 新组织核对:同批输入走 t47 单变量 [32,L,1] 路径 vs S1-a ≤5e-4
+S1-b 新组织核对:同批输入走 t47 单变量 [32,L,1] 路径 vs S1-a ≤1e-3
+(修订记录见 t47_common.SMOKE_TOL_NEW;原 5e-4,2026-11-19 排查后批准修订)
 (两项实测差值入 json;超限先排查,不自动放宽);
 S2 δ=0:A/B 构造输入逐位相同,两次实际推理(每次前重置种子 2021)预测逐位一致;
 S3 配对恒等式:A/B 末 m 步逐位相同、B 末点 = x[-1]+δ、真值 y'=y+δ 共享,
@@ -73,7 +74,7 @@ def chk(name, ok, detail):
 def part_vts(repo_root, save_dir):
     import torch
     from t47_common import (DS_CFG, DELTA_MULTS, M_MULTS, SMOKE_TOL_NEW, SMOKE_TOL_T43,
-                            T46_DIR, apply_variant)
+                            T46_DIR, apply_variant, pos46_map)
     from t46_common import load_csv, std_all, train_scaler
 
     man, smoke, base = load_smoke(save_dir)
@@ -99,6 +100,7 @@ def part_vts(repo_root, save_dir):
         std = std_cache[ds]
         arr46 = np.load(os.path.join(T46_DIR, 'save_t46_histdiag', 'arr_vts_t46.npz'))
         ref_pred = arr46['%s_pred' % ds]
+        pos46 = pos46_map()[ds]
 
         # 该 ds 冒烟窗所在固定 batch(32 连续 val 窗;两窗同 batch 时只推理一次)
         batches = {}
@@ -125,10 +127,11 @@ def part_vts(repo_root, save_dir):
             out43[bstart], out1v[bstart] = o43, o1v
         for r in rows:
             ai, ch = int(r['arr_index']), int(r['channel'])
+            j46 = pos46[int(r['sid_t46'])]   # arr_vts_t46 行 = t46 清单 ds 块序,非 arr_index
             bstart = (ai // 32) * 32
             loc = ai - bstart
             d_1a_all.append(float(np.max(np.abs(
-                out43[bstart][loc, :, ch].astype(np.float64) - ref_pred[ai].astype(np.float64)))))
+                out43[bstart][loc, :, ch].astype(np.float64) - ref_pred[j46].astype(np.float64)))))
             d_1b_all.append(float(np.max(np.abs(
                 out1v[bstart][loc, :, 0].astype(np.float64) - out43[bstart][loc, :, ch].astype(np.float64)))))
 
@@ -196,7 +199,7 @@ def part_moirai(save_dir):
             assert np.array_equal(xa, xb0) and np.array_equal(xa, x)
             entries.append(dict(target=xa.astype(np.float32),
                                 start=pd.Period('2020-01-01', freq=cfg['freq']),
-                                feat_static_cat=[0], item_id=int(r['sid_t46'])))
+                                feat_static_cat=[0], item_id=int(sid)))
         gds = ListDataset(entries, freq=cfg['freq'])
         preds = []
         for _ in range(2):  # 两次实际推理,各前重置种子
@@ -369,7 +372,8 @@ def main():
     assert part in ('vts', 'moirai', 'sfdx', 'finalize'), part
     repo_root = args[0]
     save_dir = args[1] if len(args) > 1 else os.path.join(SCRIPT_DIR, 'save_t47_levelshift')
-    fn = dict(vts=part_vts, moirai=part_moirai, sfdx=part_sfdx,
+    fn = dict(vts=part_vts, moirai=lambda r, s: part_moirai(s),
+              sfdx=lambda r, s: part_sfdx(s),
               finalize=lambda r, s: part_finalize(s))[part]
     ok = fn(repo_root, save_dir)
     sys.exit(0 if ok else 1)

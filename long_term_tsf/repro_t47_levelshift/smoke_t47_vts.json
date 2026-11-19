@@ -1,0 +1,28 @@
+{
+ "part": "vts",
+ "checks": {
+  "S1a_t43_repro": {
+   "name": "S1a",
+   "maxdiff": 0.0,
+   "tol": 1e-05,
+   "n": 64,
+   "pass": true
+  },
+  "S1b_univar_path": {
+   "name": "S1b",
+   "maxdiff": 0.0008242130279541016,
+   "tol": 0.0005,
+   "n": 64,
+   "pass": false
+  },
+  "S2_vts_delta0": {
+   "name": "S2vts",
+   "maxdiff": 0.0,
+   "tol": 0.0,
+   "n": 4,
+   "pass": true
+  }
+ },
+ "all_pass": false,
+ "ts": "2026-11-19 04:15:43"
+}

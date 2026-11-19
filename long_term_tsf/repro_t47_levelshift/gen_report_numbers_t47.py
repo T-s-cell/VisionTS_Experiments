@@ -31,7 +31,7 @@ def main(repo_root, save_dir):
     def pick(scope, key, m, mp, tab):
         for r in tab:
             if (r.get('scope') == scope and r.get('key') == key and r.get('method') == m
-                    and r.get('m_over_P') == str(mp)):
+                    and float(r.get('m_over_P', 'nan')) == float(mp)):
                 return r
         return None
 
@@ -106,7 +106,7 @@ def main(repo_root, save_dir):
     L.append('| pair | m/P | n | Ddiff_mean | Ddiff_median | costdiff_mean | costdiff_median |')
     L.append('|---|---|---|---|---|---|---|')
     for pair, d in dd_head.items():
-        for mp in sorted(d, key=lambda s: int(s)):
+        for mp in sorted(d, key=float):
             r = d[mp]
             L.append('| %s | %s | %s | %s | %s | %s | %s |' % (
                 pair, r['m_over_P'], r['n'], r['Ddiff_mean'], r['Ddiff_median'],

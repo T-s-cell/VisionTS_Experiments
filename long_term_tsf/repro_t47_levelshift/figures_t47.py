@@ -16,7 +16,7 @@ import sys
 
 import numpy as np
 
-from t47_common import DS_CFG, MAIN_METHODS, apply_variant, manifest_path
+from t47_common import METHODS, MAIN_METHODS, DS_CFG, apply_variant, manifest_path
 
 CONTRAST_PAIRS = [('vts', 'moirai'), ('vts', 'autoets'), ('vts', 'autoarima')]
 COLORS = dict(vts='tab:red', moirai='tab:blue', autoets='tab:green', autoarima='tab:purple',

@@ -70,7 +70,6 @@ def scope_keys(r):
 
 
 def main(repo_root, save_dir):
-    del repo_root
     with open(manifest_path()) as f:
         man = list(csv.DictReader(f))
     met = {int(r['row_global']): r for r in read_csv_dicts(
@@ -216,7 +215,7 @@ def main(repo_root, save_dir):
     samples = {int(r['sample_id']): r for r in read_csv_dicts(sample_list_path())}
     feats = {int(r['sample_id']): r for r in read_csv_dicts(os.path.join(T46_DIR, 'features_t46.csv'))}
     t46m = {int(r['sample_id']): r for r in read_csv_dicts(
-        os.path.join(T46_DIR, 'save_t46_histdiag', 'per_sample_metrics_t46.csv'))}
+        os.path.join(T46_DIR, 'save_t46_histdiag', 'per_sample_metrics.csv'))}
     assert len(samples) == len(feats) == len(t46m) == 1792
 
     s6_rows, cache = [], {}

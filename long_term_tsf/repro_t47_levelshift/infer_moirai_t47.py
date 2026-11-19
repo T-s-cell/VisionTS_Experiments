@@ -43,8 +43,8 @@ def main(repo_root, save_dir, smoke=False):
     import torch
     from gluonts.dataset.common import ListDataset
     from uni2ts.model.moirai import MoiraiForecast, MoiraiModule
+    from t47_common import M_MULTS, apply_variant, cond_params  # 先于 t46_common(其导入会挂 t46 路径)
     from t46_common import DS_CFG, DS_ORDER
-    from t47_common import M_MULTS, apply_variant, cond_params
 
     import inspect
     sig = str(inspect.signature(MoiraiForecast.__init__))
