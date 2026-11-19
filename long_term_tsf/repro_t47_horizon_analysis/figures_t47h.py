@@ -13,7 +13,7 @@ import sys
 
 import numpy as np
 
-from t47h_common import BAND_IDS, DS_CFG, DIFF_H, read_csv_dicts
+from t47h_common import BAND_IDS, DIFF_H, DS_P, read_csv_dicts
 
 PAIR = 'vts_vs_moirai'
 MPS = (1, 2, 4)
@@ -44,7 +44,7 @@ def panel_vals(rows, ds, mp, q):
 
 
 def draw(ax, rows, ds, q):
-    note = ('each band = 1P' if DS_CFG[ds]['P'] == 24 else 'each band = 0.25P')
+    note = ('each band = 1P' if DS_P[ds] == 24 else 'each band = 0.25P')
     for mp in MPS:
         col = MCOLOR[mp]
         med_b, med_f, _, nf = panel_vals(rows, ds, mp, q)

@@ -10,6 +10,9 @@
   (sha256 `46ad7eb1ca975060cf8d2ad4b9f8b45394f80cc87cc8ded130858bdf3fd86801`)。
   本轮零推理,全部输入为 EXP-047 冻结产物;13 个输入文件的 SHA256 见
   `results/input_shas_t47h.json`(compute 第一步记录,先于一切输入读取)。
+- **本目录自包含**:`t47h_common.py` 不 import t47_common/t46_common(常量逐字内联自
+  冻结 t47_common@21e2fa3,一致性由 load_manifest 逐行断言兜底);所有输入一律从
+  命令行传入的 repo_root 读取(`load_manifest(repo_root)` 亦走传入路径)。
 - 输入根:`long_term_tsf/repro_t47_levelshift/`(`baseline_list_t47.csv`、`manifest_t47.csv`、
   `save_t47_levelshift/baseline_<DS>.npz`、`save_t47_levelshift/pred_<m>_t47.npz`、
   `per_sample_metrics_t47.csv`、`pairs_t47.csv`、`method_diff_t47.csv`)。
@@ -78,13 +81,13 @@ $PY gen_report_numbers_t47h.py results
 | V5 | cost_diff = gap_B−gap_A 逐行;gap vs 重算 | PASS |
 | V6 | 五张表 + fig_data 独立复算 | PASS(max_stat=5.00e-12, max_fig=0) |
 
-## 一页结论摘要(详见 report_t47h.md)
+## 一页结论摘要(详见 report_t47h.md;汇总口径修正版:均值/中位并报、组统计另附逐配对联合比例)
 
-- 背景:D(牵引)随预测距离**增大**,Moirai 增长更快(ETTh1 m=1 b1→b4:VTS 0.278→0.489、Moirai 0.195→0.545)→ m=1 早期(b1)VTS 牵引更强、后期(b3/b4)Moirai 更强。
-- Q1 早期 vs 全程不同:ETTh1 m=1 符号翻转(b1 +0.106/72% → full −0.005/48%);ETTm2 m=1 大幅衰减(b1 +0.132 → full +0.037,b4 −0.031);ETTh2 m=1 全程反向。
-- Q2 同时正仅 13/60 格;cost_only 15 格(含 ETTh2 m=1 全部 5 格)= 牵引不更强但代价更大的反例。
-- Q3 误差增量主要是水平项(bias²):|cost_level_diff|≥|cost_centered_diff| 的格 55/60。
-- Q4 口径区分:无条件 full gap_B 中位前三 ds 为负(VTS 优势来自参照条件 A 领先);但 cost_diff>0 的配对子集内 gap_B 中位转正(+0.06/+0.01/+0.16,gap_B<0 仅 11–46%)。
-- Q5 方向 down>up、幅度 1.0>0.5;变量级反例 = ETTh2 全部 7 var;AutoETS 对照 D_diff 几乎处处正;AutoARIMA 仅原子集单独汇报。
+- 背景:D(牵引)随预测距离**增大**,Moirai 增长更快(ETTh1 m=1 b1→b4:VTS 0.278→0.489、Moirai 0.195→0.545)。时段分解**须按 ds 限定**:m=1 早期(b1)VTS 牵引更强见于 ETTh1/ETTm1/ETTm2;"后期转 Moirai 更强"仅 ETTh1 与 ETTm2(b4 转负);**ETTm1 后期仍为正(b4 +0.054)**;ETTh2 全程为负。
+- Q1 早期 vs 全程不同:ETTh1 m=1 符号翻转(b1 +0.106/72% → full −0.005/48%);ETTm2 m=1 大幅衰减(b1 +0.132 → full +0.037,b4 −0.031);ETTh2 m=1 全程反向。均值与中位可反向:ETTm1 m=1 b1 cost_diff 中位 +0.0126 / 均值 −0.0063,一律并报。
+- Q2 同时正仅 13/60 格(**格点中位数口径的组统计**);逐配对两差值同时>0 的窗口占比在这 13 格仅 33.5%–53.6%、仅 2/13 格过半(最低 ETTm2 m=1 b3 33.5%;ETTm2 m=1 b1 47.5%)。cost_only 15 格(含 ETTh2 m=1 全部 5 格)= 牵引不更强但代价更大的反例。
+- Q3 分解对象 = **方法间代价差**;逐配对恒等式 ⇒ 均值严格可加、中位数不可加。同配对集均值分解,例 ETTh2 m=1 full:0.17345 = 水平项 0.16195 + 去均值项 0.01150;主导计数(均值口径)55/60 → 误差增量主要是 bias²。
+- Q4 口径区分:无条件 full gap_B 中位前三 ds 为负(VTS 优势来自参照条件 A 领先)、ETTh2 为正。条件统计(cost_diff>0 子集)跨格方向不一、不能概括:ETTh2 m=1 各 band gap_B<0 仅 9–13%、ETTh1 m=1 b1 22%、ETTm1 m=1 full 46%;**反例 ETTm1 m=2 full 62.4%、m=4 full 66.1%——多数配对 VTS 最终误差仍更低**。
+- Q5 方向"δ 向下 D_diff 更大"四个 ds 一致(ETTh2 两方向均负但向下 −0.294 > 向上 −0.559,仍"向下更大");幅度 ETTh1/ETTm1/ETTm2 同向、ETTh2 按绝对值反向;变量级反例 = ETTh2 全部 7 var;AutoETS 对照 D_diff 几乎处处正;AutoARIMA 仅原子集单独汇报。
 
 以上均为线索级(构造变体非独立样本、无显著性检验),四种解读的对应与限定见 report_t47h.md。

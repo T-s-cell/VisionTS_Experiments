@@ -3,27 +3,38 @@
 只读复用 EXP-047 v2 冻结产物(分支 repro/ltsf-t47-levelshift HEAD 45b7e0c,
 审计包 temp/VisionTS_t47_levelshift_20261119_v2.tar.gz sha 46ad7eb1…);
 不重新推理/训练/筛窗。协议见 protocol_t47h.md。
+本目录自包含:不 import t47_common/t46_common;下方常量逐字取自冻结
+t47_common(21e2fa3,其 DS_CFG/DS_ORDER 又来自 t46_common),一致性由
+load_manifest 对 manifest 的逐行断言兜底。所有输入一律从传入 repo_root 读。
 
 固定区间:b1–b4 各 24 步(同一 H=96 预测的切片);full=[0,96) 仅原结果核对与
 单列汇报。ETTh(P=24)每区间 1P;ETTm(P=96)每区间 0.25P、full 1P。
 容差:atol=1e-9、rtol=1e-10(|a−b| ≤ atol + rtol·|b|);真值核对 1e-5。
 """
 import csv
+import hashlib
 import json
 import os
-import sys
-
-_T47 = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)),
-                                    '..', 'repro_t47_levelshift'))
-sys.path.insert(0, _T47)
-from t47_common import (DELTA_MULTS, DS_CFG, DS_ORDER, M_MULTS, METHODS,  # noqa: F401
-                        baseline_list_path, cond_params, manifest_path, sha256_file)
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 H = 96
 BANDS = [('b1', 0, 24), ('b2', 24, 48), ('b3', 48, 72), ('b4', 72, 96)]
 INTERVALS = BANDS + [('full', 0, H)]  # full 仅核对/单列,不作第五时段解释
 BAND_IDS = [b[0] for b in BANDS]
+# 以下常量逐字取自冻结 t47_common@21e2fa3(t46_common 同值),仅保留本目录用到的
+DELTA_MULTS = [-1.0, -0.5, 0.5, 1.0]
+M_MULTS = [1, 2, 4]
+METHODS = ['vts', 'moirai', 'autoets', 'autoarima']
+DS_ORDER = ['ETTh1', 'ETTh2', 'ETTm1', 'ETTm2']
+DS_P = {'ETTh1': 24, 'ETTh2': 24, 'ETTm1': 96, 'ETTm2': 96}
+
+
+def sha256_file(path):
+    h = hashlib.sha256()
+    with open(path, 'rb') as f:
+        for chunk in iter(lambda: f.read(1 << 20), b''):
+            h.update(chunk)
+    return h.hexdigest()
 TOL_ATOL = 1e-9
 TOL_RTOL = 1e-10
 TRUE_TOL = 1e-5
@@ -77,7 +88,7 @@ def read_csv_dicts(path):
 
 
 def load_manifest(repo_root):
-    man = read_csv_dicts(manifest_path())
+    man = read_csv_dicts(input_path(repo_root, 'manifest_t47.csv'))
     assert len(man) == 7168, len(man)
     rgs = [int(r['row_global']) for r in man]
     assert len(set(rgs)) == 7168
@@ -129,6 +140,6 @@ def pair_index(man):
 
 def band_period_note(ds):
     """区间周期比例标注:ETTh(P=24)每 band=1P;ETTm(P=96)每 band=0.25P。"""
-    P = DS_CFG[ds]['P']
+    P = DS_P[ds]
     ratio = 24.0 / P
     return '%gP' % ratio if ratio != int(ratio) else '%dP' % int(ratio)

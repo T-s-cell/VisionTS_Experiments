@@ -64,7 +64,7 @@ def main(out_dir):
 
     # ---- Q2:牵引更强与代价更大是否同时(逐格符号组合,b1–b4+full,60 格)----
     combo = {'both_pos': 0, 'pull_only': 0, 'cost_only': 0, 'both_neg': 0}
-    cost_only_cells = []
+    cost_only_cells, both_pos_keys = [], []
     for ds in DSS:
         for mp in MPS:
             for b in BANDS5:
@@ -75,49 +75,58 @@ def main(out_dir):
                 combo[k] += 1
                 if k == 'cost_only':
                     cost_only_cells.append('%s m=%s %s (Dd=%.3f cd=%.3f)' % (ds, mp, b, dd, cd))
+                if k == 'both_pos':
+                    both_pos_keys.append('%s|%s|%s' % (ds, mp, b))
     num['q2_sign_combo'] = {'counts': combo, 'cost_only_cells': cost_only_cells,
                             'note': 'both_pos=牵引更强且代价更大同时;cost_only=牵引不更强'
-                                    '但代价更大(不能解释为更依赖旧水平)'}
+                                    '但代价更大(不能解释为更依赖旧水平);按格点中位数判定,'
+                                    '属组统计,另见 q2_joint_pos_rate 的逐配对联合比例'}
 
     # ---- Q3:代价增量主要来自水平项还是去均值后误差 ----
-    n_lvl = n_cen = n_tot = 0
+    # 分解对象 = 方法间代价差 cost_diff;逐配对恒等式 cost_diff = cost_level_diff +
+    # cost_centered_diff ⇒ 均值严格可加、中位数不可加,故分解示例一律用同配对集均值。
+    n_tot = n_lvl_med = n_lvl_mean = 0
     for ds in DSS:
         for mp in MPS:
             for b in BANDS5:
-                cd = cell('vts_vs_moirai', ds, mp, b, 'cost_diff_median')
-                cl = cell('vts_vs_moirai', ds, mp, b, 'cost_level_diff_median')
-                cc = cell('vts_vs_moirai', ds, mp, b, 'cost_centered_diff_median')
                 n_tot += 1
-                if abs(cl) >= abs(cc):
-                    n_lvl += 1
-                else:
-                    n_cen += 1
+                if abs(cell('vts_vs_moirai', ds, mp, b, 'cost_level_diff_median')) >= \
+                        abs(cell('vts_vs_moirai', ds, mp, b, 'cost_centered_diff_median')):
+                    n_lvl_med += 1
+                if abs(cell('vts_vs_moirai', ds, mp, b, 'cost_level_diff_mean')) >= \
+                        abs(cell('vts_vs_moirai', ds, mp, b, 'cost_centered_diff_mean')):
+                    n_lvl_mean += 1
+    mean_ex = {q: cell('vts_vs_moirai', 'ETTh2', '1', 'full', q + '_mean')
+               for q in ('cost_diff', 'cost_level_diff', 'cost_centered_diff')}
     num['q3_level_vs_centered'] = {
-        'n_cells': n_tot, 'level_dominant_cells': n_lvl, 'centered_dominant_cells': n_cen,
-        'examples': {'ETTh2_m1_full': {'cost_diff': cell('vts_vs_moirai', 'ETTh2', '1', 'full', 'cost_diff_median'),
-                                       'cost_level': cell('vts_vs_moirai', 'ETTh2', '1', 'full', 'cost_level_diff_median'),
-                                       'cost_centered': cell('vts_vs_moirai', 'ETTh2', '1', 'full', 'cost_centered_diff_median')},
-                     'ETTh1_m1_b1': {'cost_diff': cell('vts_vs_moirai', 'ETTh1', '1', 'b1', 'cost_diff_median'),
-                                     'cost_level': cell('vts_vs_moirai', 'ETTh1', '1', 'b1', 'cost_level_diff_median'),
-                                     'cost_centered': cell('vts_vs_moirai', 'ETTh1', '1', 'b1', 'cost_centered_diff_median')}},
-        'note': 'centered_error 不能解释为旧形状依赖'}
+        'n_cells': n_tot, 'level_dominant_cells_median': n_lvl_med,
+        'level_dominant_cells_mean': n_lvl_mean, 'mean_example_ETTh2_m1_full': mean_ex,
+        'note': '分解对象=方法间代价差;逐配对恒等式 ⇒ 均值可加、中位数不可加;'
+                'centered_error 不能解释为旧形状依赖'}
 
     # ---- Q4:代价更大的配对子集中,VTS 最终误差是否仍低于 Moirai(逐配对条件统计)----
+    # 同一遍循环兼算 Q2 的逐配对联合比例(D_diff>0 且 cost_diff>0 的窗口占比)。
     dh = read_csv_dicts(os.path.join(out_dir, 'method_diff_horizon_t47h.csv'))
     q4 = {}
+    joint = {}
     for r in dh:
         if r['pair'] != 'vts_vs_moirai' or r['ok'] != '1':
             continue
-        cd, gb = float(r['cost_diff']), float(r['gap_B'])
-        if cd != cd or gb != gb:
+        dd, cd, gb = float(r['D_diff']), float(r['cost_diff']), float(r['gap_B'])
+        if dd != dd or cd != cd or gb != gb:
             continue
         key = (r['ds'], r['m_over_P'], r['band'])
         d = q4.setdefault(key, {'n_cost_pos': 0, 'n_cost_pos_gapB_neg': 0, 'gapB_med_in_costpos': []})
+        j = joint.setdefault(key, [0, 0])
+        j[1] += 1
+        if dd > 0 and cd > 0:
+            j[0] += 1
         if cd > 0:
             d['n_cost_pos'] += 1
             d['gapB_med_in_costpos'].append(gb)
             if gb < 0:
                 d['n_cost_pos_gapB_neg'] += 1
+    num['q2_joint_pos_rate'] = {'%s|%s|%s' % k: v[0] / v[1] for k, v in sorted(joint.items())}
     q4_out = {}
     for key, d in q4.items():
         n = d['n_cost_pos']
@@ -187,8 +196,14 @@ def main(out_dir):
              % (r['vts_ETTh1_m1']['b1']['D_median'], r['vts_ETTh1_m1']['b4']['D_median'],
                 r['moirai_ETTh1_m1']['b1']['D_median'], r['moirai_ETTh1_m1']['b4']['D_median'],
                 r['vts_ETTh1_m4']['b1']['D_median'], r['vts_ETTh1_m4']['b4']['D_median']))
-    L.append('- 因此时段分解的回答与 full-96 平均不同:**m=1 早期(b1)VTS 牵引更强,'
-             '后期(b3/b4)Moirai 牵引更强**——不是“VTS 随距离缓解更慢”,而是 Moirai 随距离加深更快。\n')
+    dd13 = {ds: [cell('vts_vs_moirai', ds, '1', b, 'D_diff_median') for b in ('b1', 'b3', 'b4')]
+            for ds in DSS}
+    L.append('- 时段分解的回答与 full-96 平均不同,且**须按 ds 限定**(m=1 D_diff 中位 '
+             'b1→b3→b4,逐 ds):%s。"早期(b1)VTS 牵引更强"见于 ETTh1/ETTm1/ETTm2;'
+             '"后期(b3/b4)转为 Moirai 牵引更强"仅 ETTh1(b4 转负)与 ETTm2(b4 转负);'
+             '**ETTm1 后期仍为正(b4 %+.3f,VTS 牵引更强)**,ETTh2 全程为负。\n'
+             % (';'.join('%s %+.3f→%+.3f→%+.3f' % (ds, dd13[ds][0], dd13[ds][1], dd13[ds][2])
+                         for ds in DSS), dd13['ETTm1'][2]))
 
     L.append('## 五问(逐配对差值,正值 = VTS 牵引更强/代价更大/误差更大)\n')
     L.append('**Q1 哪些 ds×m 的早期(b1)与全程(full)结论不同**\n')
@@ -209,6 +224,10 @@ def main(out_dir):
                 ';'.join('%s m=%s(b1 %+.4f→full %+.4f)'
                          % (e['ds'], e['m'], e['b1_median'], e['full_median']) for e in cd_q1) or '无',
                 ';'.join('%s m=%s(b1 %+.4f)' % (e['ds'], e['m'], e['b1_median']) for e in cd_sub) or '无'))
+    L.append('- 均值与中位可反向:ETTm1 m=1 b1 的 cost_diff 中位 %+.4f、均值 %+.4f'
+             '(少量大幅负值配对拉低均值)——正/负解读以中位+均值并报为准,全表两列均有。'
+             % (cell('vts_vs_moirai', 'ETTm1', '1', 'b1', 'cost_diff_median'),
+                cell('vts_vs_moirai', 'ETTm1', '1', 'b1', 'cost_diff_mean')))
     L.append('')
     L.append('**Q2 牵引更强与代价更大是否同时**\n')
     c = num['q2_sign_combo']['counts']
@@ -226,15 +245,29 @@ def main(out_dir):
     L.append('- **关键反例(仅代价正,共 %d 格,含 ETTh2 m=1 全部 5 格)**:%s → '
              '牵引不更强但代价更大,**不能解释为更依赖旧水平**。'
              % (c['cost_only'], ';'.join(num['q2_sign_combo']['cost_only_cells'][:4])))
+    jp = num['q2_joint_pos_rate']
+    frs = sorted((jp[k], k) for k in both_pos_keys if k in jp)
+    j_ex = jp.get('ETTm2|1|b1')
+    L.append('- 组统计≠窗口同时成立:"同时正 %d 格"按**格点中位数**判定;逐配对两差值'
+             '(D_diff 与 cost_diff)同时>0 的窗口占比在这 %d 格仅 %.1f%%–%.1f%%、'
+             '%d/%d 格过半(最低 %s %.1f%%;如 ETTm2 m=1 b1 %.1f%%)——两中位为正'
+             '不代表多数窗口两指标同时为正。'
+             % (c['both_pos'], len(frs), 100 * frs[0][0], 100 * frs[-1][0],
+                sum(1 for f, _ in frs if f > 0.5), len(frs),
+                frs[0][1], 100 * frs[0][0], 100 * j_ex if j_ex is not None else float('nan')))
     L.append('')
     L.append('**Q3 误差增量主要是水平项还是去均值后误差**\n')
     q3 = num['q3_level_vs_centered']
-    L.append('- |cost_level_diff| 中位 ≥ |cost_centered_diff| 中位的格点:%d/%d;'
-             'cost_centered_diff 中位普遍小一个量级(如 ETTh2 m=1 full:cost_diff %+.4f = '
-             'level %+.4f + centered %+.4f)。' % (q3['level_dominant_cells'], q3['n_cells'],
-                                                  q3['examples']['ETTh2_m1_full']['cost_diff'],
-                                                  q3['examples']['ETTh2_m1_full']['cost_level'],
-                                                  q3['examples']['ETTh2_m1_full']['cost_centered']))
+    ex = q3['mean_example_ETTh2_m1_full']
+    L.append('- 分解对象是**方法间代价差** cost_diff = (MSE_B−MSE_A)_vts − (MSE_B−MSE_A)_moirai。'
+             '逐配对恒等式 cost_diff = cost_level_diff + cost_centered_diff ⇒ **均值严格可加'
+             '(中位数不可加,不得按中位相加)**。以同配对集均值分解,例 ETTh2 m=1 full:'
+             'cost_diff 均值 %.5f = 水平项 %.5f + 去均值项 %.5f。'
+             % (ex['cost_diff'], ex['cost_level_diff'], ex['cost_centered_diff']))
+    L.append('- 主导项计数(按格点):|cost_level_diff| ≥ |cost_centered_diff| 的格点'
+             '均值口径 %d/%d、中位数口径 %d/%d(中位数口径仅作稳健性描述,不参与相加)。'
+             % (q3['level_dominant_cells_mean'], q3['n_cells'],
+                q3['level_dominant_cells_median'], q3['n_cells']))
     L.append('- 即历史冲突的误差增量主要是**预测整体水平偏移(bias²)**;'
              'centered_error 不解释为旧形状依赖。\n')
     L.append('**Q4 冲突代价增量更大的配对,VTS 最终误差是否仍低于 Moirai(条件逐配对)**\n')
@@ -253,26 +286,34 @@ def main(out_dir):
              % (cell('vts_vs_moirai', 'ETTh1', '1', 'full', 'gap_B_median'),
                 cell('vts_vs_moirai', 'ETTm1', '1', 'full', 'gap_B_median'),
                 cell('vts_vs_moirai', 'ETTm2', '1', 'full', 'gap_B_median'), g21))
-    L.append('- 但在“冲突代价增量更大”(cost_diff>0)的配对子集内,gap_B 中位转正'
-             '(%s,gap_B<0 仅 %d–%d%%):凡 VTS 冲突代价增量超过 Moirai 的窗口,'
-             '其冲突条件最终误差大多也超过 Moirai;ETTh2 m=1/m=2 则无条件即为正(full %+.4f / %+.4f)。'
-             % ('/'.join('%+.2f' % q4_out[k]['gapB_median_in_costpos']
-                         for k in ('ETTh1|1|b1', 'ETTm1|1|full', 'ETTh2|1|full')),
-                round(100 * min(q4_out[k]['frac_gapB_neg']
-                                for k in ('ETTh1|1|b1', 'ETTm1|1|full', 'ETTh2|1|full'))),
-                round(100 * max(q4_out[k]['frac_gapB_neg']
-                                for k in ('ETTh1|1|b1', 'ETTm1|1|full', 'ETTh2|1|full'))),
-                g21, g22))
+    h2m1 = [q4_out['ETTh2|1|%s' % b] for b in BANDS5]
+    f_h1b1, f_m1f = q4_out['ETTh1|1|b1'], q4_out['ETTm1|1|full']
+    f_m2f, f_m4f = q4_out['ETTm1|2|full'], q4_out['ETTm1|4|full']
+    L.append('- 但条件统计**跨格方向不一,不能概括为单一结论**:ETTh2 m=1 各 band 的 '
+             'cost_diff>0 子集 gap_B<0 仅 %.0f–%.0f%%;上述 ETTh1 m=1 b1 %.0f%%、'
+             'ETTm1 m=1 full %.0f%%——这些格多数配对 VTS 最终误差更高。**反例:'
+             'ETTm1 m=2 full %.1f%%、ETTm1 m=4 full %.1f%%**(子集 gap_B 中位 %+.4f / %+.4f)'
+             '——多数配对 VTS 最终误差仍更低;ETTh2 m=1/m=2 无条件 gap_B 中位即为正'
+             '(full %+.4f / %+.4f)。60 格逐格数值全列 report_numbers_t47h.json q4_conditional。'
+             % (100 * min(h['frac_gapB_neg'] for h in h2m1),
+                100 * max(h['frac_gapB_neg'] for h in h2m1),
+                100 * f_h1b1['frac_gapB_neg'], 100 * f_m1f['frac_gapB_neg'],
+                100 * f_m2f['frac_gapB_neg'], 100 * f_m4f['frac_gapB_neg'],
+                f_m2f['gapB_median_in_costpos'], f_m4f['gapB_median_in_costpos'], g21, g22))
     L.append('')
     L.append('**Q5 方向 / 幅度 / 变量一致性 + 反例**\n')
     d5 = num['q5']['direction_b1_m1_Ddiff_median']
     a5 = num['q5']['amplitude_b1_m1_Ddiff_median']
-    L.append('- 方向:δ 向下时 m=1 b1 的 D_diff 更大(%s);ETTh2 相反(两方向均为负)。'
-             % ';'.join('%s down %+.3f vs up %+.3f' % (ds, d5['%s|down' % ds], d5['%s|up' % ds])
-                        for ds in ('ETTh1', 'ETTm1')))
-    L.append('- 幅度:|δ|/s=1.0 比 0.5 更大(%s)。'
-             % ';'.join('%s 1.0 %+.3f vs 0.5 %+.3f' % (ds, a5['%s|1.0' % ds], a5['%s|0.5' % ds])
-                        for ds in ('ETTh1', 'ETTm1')))
+    L.append('- 方向:δ 向下时 m=1 b1 的 D_diff 更大,**四个 ds 一致**(%s)。ETTh2 两方向'
+             '均为负(Moirai 牵引更强),但向下 %+.3f > 向上 %+.3f,仍为“向下更大”。'
+             % (';'.join('%s down %+.3f vs up %+.3f' % (ds, d5['%s|down' % ds], d5['%s|up' % ds])
+                         for ds in ('ETTh1', 'ETTm1', 'ETTm2')),
+                d5['ETTh2|down'], d5['ETTh2|up']))
+    L.append('- 幅度:|δ|/s=1.0 比 0.5 的 D_diff 更大(%s);ETTh2 两档均为负(Moirai 牵引更强),'
+             '且 1.0 档绝对值更小(%+.3f vs %+.3f,按绝对值反向)。'
+             % (';'.join('%s 1.0 %+.3f vs 0.5 %+.3f' % (ds, a5['%s|1.0' % ds], a5['%s|0.5' % ds])
+                         for ds in ('ETTh1', 'ETTm1', 'ETTm2')),
+                a5['ETTh2|1.0'], a5['ETTh2|0.5']))
     vn = num['q5']['var_neg_b1_m1']
     L.append('- 变量级反例(m=1 b1 D_diff 中位<0 的 var):%s。'
              % (';'.join('%s: %s' % (ds, ','.join(v)) for ds, v in sorted(vn.items())) or '无'))

@@ -46,7 +46,11 @@ centered_error 称"去均值后的误差",**不能解释为旧形状依赖**。
 
 同一 (sid, δ, m, 区间) 内:D_diff、cost_diff、gap_A = MSE_A_VTS−MSE_A_对照、gap_B、
 cost_level_diff、cost_centered_diff;正值 = VTS 牵引更强/代价更大/误差更大。
-恒等式 cost_diff = gap_B − gap_A。
+恒等式 cost_diff = gap_B − gap_A;分解恒等式 cost_diff = cost_level_diff + cost_centered_diff
+⇒ **均值严格可加、中位数不可加**——凡涉及分解相加的示例一律用同一配对集的均值,
+并注明分解对象是方法间代价差。均值与中位数可能反向,一律并报。
+两指标格点中位数同为正属**组统计**,须另报逐配对联合比例(两差值同时>0 的窗口占比),
+不得据此宣称"多数窗口两指标同时成立"。
 汇总一律基于逐配对差值(mean/median/正值比例),**禁止"两组中位数之差"**;
 报 n_base(不同基准窗数)、n_pairs、coverage(有效配对/可能配对)。
 主表:数据集 × m/P × 区间 × 对照方法;附表同口径加 ds×变量、δ 方向、|δ|/s 幅度
